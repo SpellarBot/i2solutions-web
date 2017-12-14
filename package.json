@@ -1,0 +1,17 @@
+{
+  "name": "I2Solutions_Web_App",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongodb": "^3.0.0-rc0",
+    "winston": "^2.4.0"
+  },
+  "scripts": {
+  	"start": "node server.js"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
+  }
+}
