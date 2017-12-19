@@ -12,8 +12,7 @@
     "winston": "^2.4.0"
   },
   "scripts": {
-    "start": "nodemon server.js",
-    "dev": "npm run start",
+    "dev": "nodemon server.js",
     "nodemon": "nodemon"
   },
   "devDependencies": {
