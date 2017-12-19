@@ -1,8 +1,16 @@
+<!-- https://blog.risingstack.com/
+  node-js-project-structure-tutorial-node-js-at-scale/ -->
+
+
+<!-- development
+testing
+production -->
+
 # I2Solutions Web
 
 
 ## Documentación
-[I2Solutions Documentación] https://www.gitbook.com/read/book/joelerll95/i2solutions-documentacion
+[I2Solutions Documentación] (https://www.gitbook.com/read/book/joelerll95/i2solutions-documentacion)
 
 ## Prerrequisitos
 
