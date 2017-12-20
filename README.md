@@ -32,7 +32,7 @@ Nodejs >= 7.0.0
 2. Correr la aplicacion servidor
 
 ```sh
-> npm run start
+> npm run dev
 ```
 
 #### Aplicacion cliente

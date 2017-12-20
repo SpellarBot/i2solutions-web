@@ -7,15 +7,18 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "winston": "^2.4.0"
   },
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "cross-env NODE_ENV=development env-cmd .env nodemon server.js",
     "nodemon": "nodemon"
   },
   "devDependencies": {
+    "cross-env": "^5.1.1",
+    "env-cmd": "^7.0.0",
     "faker": "^4.1.0",
     "nodemon": "^1.13.3"
   }
