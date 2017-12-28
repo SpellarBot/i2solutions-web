@@ -5,21 +5,29 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "chalk": "^2.3.0",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
+    "knex": "^0.14.2",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "schema-inspector": "^1.6.8",
+    "validator": "^9.2.0",
     "winston": "^2.4.0"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development env-cmd .env nodemon server.js",
+    "prueba": "cross-env NODE_ENV=development env-cmd .env nodemon prueba.js",
+    "db:create": "cross-env NODE_ENV=development env-cmd .env node app_api/config/database/scripts/create_database.js",
     "nodemon": "nodemon"
   },
   "devDependencies": {
     "cross-env": "^5.1.1",
     "env-cmd": "^7.0.0",
     "faker": "^4.1.0",
+    "mongodb": "^3.0.1",
     "nodemon": "^1.13.3"
   }
 }
