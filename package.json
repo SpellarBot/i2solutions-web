@@ -3,6 +3,22 @@
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development env-cmd .env nodemon server.js --config nodemon.js",
+    "prueba": "cross-env NODE_ENV=development env-cmd .env nodemon prueba.js",
+    "db:create": "cross-env NODE_ENV=development env-cmd .env node app_api/config/database/scripts/create_database.js",
+    "db:mongo:test": "",
+    "pretest": "cross-env NODE_ENV=testing env-cmd .env node scripts/database/setup_database_mysql.js",
+    "test": "npm-run-all migrate:latest:testing seed:run:testing test:integration",
+    "test:standard": "",
+    "test:coverage": "",
+    "test:api": "",
+    "test:integration": "yarn cross-env NODE_ENV=testing env-cmd .env nyc --reporter=html --reporter=text mocha --opts app_api/test/integration/mocha.opts app_api/test/integration/**/*.test.js --exit",
+    "test:integration:watch": "yarn cross-env NODE_ENV=testing env-cmd .env  mocha --opts app_api/test/integration/mocha.opts app_api/test/**/**/*.test.js --watch --recursive",
+    "nodemon": "nodemon",
+    "cross-env": "cross-env",
+    "eslint": "eslint"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "chalk": "^2.3.0",
@@ -17,17 +33,21 @@
     "validator": "^9.2.0",
     "winston": "^2.4.0"
   },
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development env-cmd .env nodemon server.js",
-    "prueba": "cross-env NODE_ENV=development env-cmd .env nodemon prueba.js",
-    "db:create": "cross-env NODE_ENV=development env-cmd .env node app_api/config/database/scripts/create_database.js",
-    "nodemon": "nodemon"
-  },
   "devDependencies": {
+    "codecov": "^3.0.0",
+    "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
     "env-cmd": "^7.0.0",
+    "eslint": "^4.14.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-standard": "^3.0.1",
     "faker": "^4.1.0",
+    "mocha": "^4.1.0",
     "mongodb": "^3.0.1",
-    "nodemon": "^1.13.3"
+    "nodemon": "^1.13.3",
+    "nyc": "^11.4.1",
+    "standard": "^10.0.3"
   }
 }

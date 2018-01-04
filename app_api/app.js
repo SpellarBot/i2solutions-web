@@ -1,24 +1,23 @@
 const logger = require('./logger')
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', err => {
   logger.error('Caught exception: ' + err)
   logger.error(err.stack)
 })
 
-function ignoreFavicon(req, res, next) {
+function ignoreFavicon (req, res, next) {
   if (req.originalUrl === '/favicon.ico') {
-    res.status(204).json({nope: true});
+    res.status(204).json({nope: true})
   } else {
-    next();
+    next()
   }
 }
 
 const express = require('express')
-const bodyParser  = require('body-parser')
+const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))

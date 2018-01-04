@@ -10,6 +10,8 @@
    "docs/"
  ],
  "events": {
+    "start": "yarn eslint server.js app_api/**",
+    "restart": "yarn eslint server.js app_api/**"
   },
   "watch": [
     "server.js",
@@ -20,3 +22,5 @@
   },
   "ext": "js json"
 }
+
+ 

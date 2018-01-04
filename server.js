@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000
 const server = http.createServer(app)
 app.set('port', port)
 
-function onError(error) {
+function onError (error) {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -16,17 +16,15 @@ function onError(error) {
     case 'EACCES':
       console.error(`${bind} correr en otro puerto, este puerto requiere permisos de root`)
       process.exit(1)
-      break
     case 'EADDRINUSE':
       console.error(`${bind} el puerto ya esta en uso client`)
       process.exit(1)
-      break
     default:
       throw error
   }
 }
 
-function onListening() {
+function onListening () {
   const addr = server.address()
   const bind = typeof addr === 'string'
     ? `Pipe ${addr}`

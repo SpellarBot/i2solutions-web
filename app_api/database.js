@@ -21,5 +21,4 @@
 // }
 // var knex = require('knex')(config)
 // module.exports = knex
-
 require('./config/mongodb/db')

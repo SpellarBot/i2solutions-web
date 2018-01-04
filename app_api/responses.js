@@ -8,18 +8,17 @@
 // 406 noJson
 // 400 malRequest dd
 
+const ERROR_SERVIDOR = { datos: { mensaje_error: 'Error en el servidor' }, codigo_estado: 500, estado: false }
 
-const ERROR_SERVIDOR = { datos: { mensaje_error: 'Error en el servidor' }, codigo_estado: 500, estado: false, }
+const NO_AUTORIZADO = { datos: { mensaje_error: 'No autorizado' }, codigo_estado: 401, estado: false }
 
-const NO_AUTORIZADO = { datos: {  mensaje_error: 'No autorizado' }, codigo_estado: 401, estado: false }
-
-const URL_NO_VALIDO = { datos: { mensaje_error: 'Url no valido' }, codigo_estado: 404, estado: false }
+// const URL_NO_VALIDO = { datos: { mensaje_error: 'Url no valido' }, codigo_estado: 404, estado: false }
 
 const CREADO = { datos: { mensaje: 'Creado Correctamente' }, codigo_estado: 201, estado: true }
 
 const ERROR_VALIDACION = (dato) => {
- const resp = { datos: { mensaje_error: `Error en ${dato}` }, codigo_estado: 400, estado: false }
- return resp
+  const resp = { datos: { mensaje_error: `Error en ${dato}` }, codigo_estado: 400, estado: false }
+  return resp
 }
 
 const OK = (datos) => {
@@ -32,5 +31,5 @@ module.exports = {
   NO_AUTORIZADO,
   OK,
   ERROR_VALIDACION,
-  CREADO,
+  CREADO
 }
