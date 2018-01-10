@@ -1,3 +1,5 @@
 build/*.js
 config/*.js
 app_client/*.js
+*.test.js
+helpers.js

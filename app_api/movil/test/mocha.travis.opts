@@ -1,0 +1,2 @@
+--require app_api/movil/test/helpers.js
+--slow 5000

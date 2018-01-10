@@ -11,12 +11,15 @@
     "test": "npm-run-all test:standard:api",
     "test:standard:api": "eslint server.js app_api/**",
     "test:standard:web": "",
-    "test:coverage": "",
-    "test:api": "",
-    "test:integration": "yarn cross-env NODE_ENV=testing env-cmd .env nyc --reporter=html --reporter=text mocha --opts app_api/test/integration/mocha.opts app_api/test/integration/**/*.test.js --exit",
-    "test:integration:watch": "yarn cross-env NODE_ENV=testing env-cmd .env  mocha --opts app_api/test/integration/mocha.opts app_api/test/**/**/*.test.js --watch --recursive",
+    "test:unit:local": "yarn cross-env NODE_ENV=testing env-cmd .env nyc --reporter=html --reporter=text --report-dir=reports/nyc mocha --opts app_api/movil/test/mocha.opts app_api/movil/test/unit/*.test.js --exit",
+    "test:unit:local:watch": "yarn cross-env NODE_ENV=testing env-cmd .env mocha --opts app_api/movil/test/mocha.travis.opts app_api/movil/test/*.test.js  --watch --recursive",
+    "test:unit:travis": "yarn cross-env NODE_ENV=testing env-cmd .env mocha --opts app_api/movil/test/mocha.travis.opts app_api/movil/test/*.test.js --exit",
+    "test:integration:local": "yarn cross-env NODE_ENV=testing env-cmd .env nyc --reporter=html --reporter=text --report-dir=reports/nyc mocha --opts app_api/movil/test/mocha.opts app_api/movil/test/*.test.js --exit",
+    "test:integration:local:watch": "yarn cross-env NODE_ENV=testing env-cmd .env mocha --opts app_api/movil/test/mocha.travis.opts app_api/movil/test/*.test.js  --watch --recursive",
+    "test:integration:travis": "yarn cross-env NODE_ENV=testing env-cmd .env mocha --opts app_api/movil/test/mocha.travis.opts app_api/movil/test/*.test.js --exit",
+    "test:coverage:coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "test:coverage:codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "nodemon": "nodemon",
-    "cross-env": "cross-env",
     "eslint": "eslint"
   },
   "dependencies": {
@@ -31,9 +34,12 @@
     "mysql": "^2.15.0",
     "schema-inspector": "^1.6.8",
     "validator": "^9.2.0",
+    "mongodb": "^3.0.1",
     "winston": "^2.4.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "chai": "^4.1.2",
     "codecov": "^3.0.0",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
@@ -45,10 +51,11 @@
     "eslint-plugin-standard": "^3.0.1",
     "faker": "^4.1.0",
     "mocha": "^4.1.0",
-    "mongodb": "^3.0.1",
+    "mochawesome": "^3.0.1",
     "nodemon": "^1.13.3",
     "npm-run-all": "^4.1.2",
     "nyc": "^11.4.1",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
   }
 }

@@ -7,8 +7,8 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
           MovilDAL.ObtenerPuestoTrabajoPorAreaId({ areaId }).then((puestos) => {
             resolve(responses.OK(puestos))
           }).catch(err => {
-            // throw new Error('Error movil controller: ', err)
-            reject(err)
+            console.error(err)
+            reject(responses.ERROR_SERVIDOR)
           })
         } else {
           reject(responses.ERROR_VALIDACION('area_id no es un numero'))
@@ -22,8 +22,8 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
           MovilDAL.ObtenerPuestoPorId({ puestoTrabajoId }).then((puesto) => {
             resolve(responses.OK(puesto))
           }).catch(err => {
-            // throw new Error('Error movil controller: ', err)
-            reject(err)
+            console.error(err)
+            reject(responses.ERROR_SERVIDOR)
           })
         } else {
           reject(responses.ERROR_VALIDACION('puesto_trabajo_id no es un numero'))
@@ -35,8 +35,8 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
         MovilDAL.ObtenerTodasNovedades().then((novedades) => {
           resolve(responses.OK(novedades))
         }).catch(err => {
-          // throw new Error('Error movil controller: ', err)
-          reject(err)
+          console.error(err)
+          reject(responses.ERROR_SERVIDOR)
         })
       })
     },
@@ -46,13 +46,14 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
         const descripcion = body.descripcion || ''
         const prioridad = body.prioridad || ''
         const fotoUrl = body.foto_url || ''
-        if (validator.isInt(body.puesto_trabajo_id)) {
+        const valor = true
+        if (valor) {
           MovilDAL.CrearNovedad({ puestoTrabajoId, descripcion, prioridad, fotoUrl })
             .then((estado) => {
               resolve(responses.CREADO)
             }).catch(err => {
-              // throw new Error('Error movil controller: ', err)
-              reject(err)
+              console.error(err)
+              reject(responses.ERROR_SERVIDOR)
             })
         } else {
           reject(responses.ERROR_VALIDACION('id_puesto_trabajo no es un numero'))

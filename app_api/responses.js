@@ -17,7 +17,7 @@ const NO_AUTORIZADO = { datos: { mensaje_error: 'No autorizado' }, codigo_estado
 const CREADO = { datos: { mensaje: 'Creado Correctamente' }, codigo_estado: 201, estado: true }
 
 const ERROR_VALIDACION = (dato) => {
-  const resp = { datos: { mensaje_error: `Error en ${dato}` }, codigo_estado: 400, estado: false }
+  const resp = { datos: { mensaje_error: `Error en ${dato}` }, codigo_estado: 404, estado: false }
   return resp
 }
 

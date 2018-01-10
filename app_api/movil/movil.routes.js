@@ -23,7 +23,6 @@ app.route('/puesto_trabajo/area_trabajo/:area_id')
     Movil.PuestosDeAreaTrabajo({ params }).then(resp => {
       res.status(resp.codigo_estado)
       res.json(resp)
-      // delete params
     }).catch(resp => {
       res.status(resp.codigo_estado)
       res.json(resp)
@@ -36,9 +35,7 @@ app.route('/puesto_trabajo/:puesto_trabajo_id')
     Movil.PuestoDeTrabajo({ params }).then(resp => {
       res.status(resp.codigo_estado)
       res.json(resp)
-      // delete params
     }).catch(resp => {
-      // throw new Error('Error movil router ', err)
       res.status(resp.codigo_estado)
       res.json(resp)
     })
@@ -50,7 +47,6 @@ app.route('/novedad')
       res.status(resp.codigo_estado)
       res.json(resp)
     }).catch(resp => {
-      // throw new Error('Error movil router ', err)
       res.status(resp.codigo_estado)
       res.json(resp)
     })
@@ -61,7 +57,6 @@ app.route('/novedad')
       res.status(resp.codigo_estado)
       res.json(resp)
     }).catch(resp => {
-      // throw new Error('Error movil router ', err)
       res.status(resp.codigo_estado)
       res.json(resp)
     })

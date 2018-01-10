@@ -5,7 +5,6 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
         PuestoModel.ObtenerPuestoTrabajoPorAreaId(areaId).then((puestos) => {
           resolve(puestos)
         }).catch(err => {
-          // throw new Error('Error en crear novedad DAL: ', err)
           reject(err)
         })
       })
@@ -15,7 +14,6 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
         PuestoDetalleModel.ObtenerPuestoPorId(puestoTrabajoId).then((puesto) => {
           resolve(puesto)
         }).catch(err => {
-          // throw new Error('Error en crear novedad DAL: ', err)
           reject(err)
         })
       })
@@ -29,7 +27,7 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
       })
       return new Promise((resolve, reject) => {
         novedad.CrearNovedad(novedad).then((estado) => {
-          novedad({})
+          resolve({})
         }).catch(err => {
           reject(err)
         })
