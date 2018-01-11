@@ -56,8 +56,10 @@ const NovedadesSchema = mongoose.Schema({
   },
   foto_url: {
     type: String
+  },
+  atendida: {
+    type: Boolean
   }
-
 }, {versionKey: false, timestamps: false, collection: 'novedades'})
 
 NovedadesSchema.pre('save', function (next) {
@@ -85,6 +87,24 @@ NovedadesSchema.statics.ObtenerTodasNovedades = function () {
   const schema = this
   return new Promise((resolve, reject) => {
     resolve(schema.find({}, { '_id': 0 }))
+  })
+}
+
+NovedadesSchema.statics.ObtenerTodasNovedadesSinAtender = function (puestoTrabajoId, atendida) {
+  const schema = this
+  var findJson = { puesto_trabajo_id: puestoTrabajoId }
+  if (atendida !== null) {
+    findJson['atendida'] = atendida
+  }
+  return new Promise((resolve, reject) => {
+    resolve(schema.find(findJson, { '_id': 0 }))
+  })
+}
+
+NovedadesSchema.statics.ActualizarEstadoNovedad = function (puestoTrabajoId, novedadId, atendida) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId, id: novedadId}, {atendida: atendida}))
   })
 }
 

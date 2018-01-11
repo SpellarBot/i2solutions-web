@@ -1,5 +1,27 @@
 module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel }) => {
   const proto = {
+    ObtenerTodasNovedadesSinAtender ({ puestoTrabajoId, atendida }) {
+      return new Promise((resolve, reject) => {
+        NovedadesModel.ObtenerTodasNovedadesSinAtender(puestoTrabajoId, atendida).then((puestosSinAtender) => {
+          resolve(puestosSinAtender)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    ActualizarEstadoNovedad ({ puestoTrabajoId, novedadId, atendida }) {
+      return new Promise((resolve, reject) => {
+        NovedadesModel.ActualizarEstadoNovedad(puestoTrabajoId, novedadId, atendida).then((puestoActualizado) => {
+          if (!puestoActualizado.nModified) {
+            resolve({estado: false, mensaje: 'La novedad no fue actualizada correctamente'})
+          } else {
+            resolve({estado: true, mensaje: 'La novedad fue actualizada correctamente'})
+          }
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
     ObtenerPuestoTrabajoPorAreaId ({ areaId }) {
       return new Promise((resolve, reject) => {
         PuestoModel.ObtenerPuestoTrabajoPorAreaId(areaId).then((puestos) => {
@@ -23,7 +45,8 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
         puesto_trabajo_id: puestoTrabajoId,
         descripcion,
         prioridad,
-        foto_url: fotoUrl
+        foto_url: fotoUrl,
+        atendida: false
       })
       return new Promise((resolve, reject) => {
         novedad.CrearNovedad(novedad).then((estado) => {

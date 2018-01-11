@@ -23,35 +23,40 @@ const insertDocuments = function (db, callback) {
       'puesto_trabajo_id': 1,
       'descripcion': 'github',
       'prioridad': 'urgente',
-      'foto_url': 'https://i.imgur.com/YrQ2Aqz.jpg'
+      'foto_url': 'https://i.imgur.com/YrQ2Aqz.jpg',
+      'atendida': false
     },
     {
       'id': 2,
       'puesto_trabajo_id': 1,
       'descripcion': 'nuevo proyecto',
       'prioridad': 'urgente',
-      'foto_url': 'https://i.imgur.com/E4S80tP.jpg'
+      'foto_url': 'https://i.imgur.com/E4S80tP.jpg',
+      'atendida': false
     },
     {
       'id': 3,
       'puesto_trabajo_id': 1,
       'descripcion': 'el ojo seco',
       'prioridad': 'urgente',
-      'foto_url': 'https://i.imgur.com/U0ueJED.jpg'
+      'foto_url': 'https://i.imgur.com/U0ueJED.jpg',
+      'atendida': false
     },
     {
       'id': 4,
       'puesto_trabajo_id': 1,
       'descripcion': 'el ojo seco',
       'prioridad': 'urgente',
-      'foto_url': 'https://i.imgur.com/LIeiUjD.jpg'
+      'foto_url': 'https://i.imgur.com/LIeiUjD.jpg',
+      'atendida': false
     },
     {
       'id': 5,
       'puesto_trabajo_id': 1,
       'descripcion': 'el ojo seco',
       'prioridad': 'urgente',
-      'foto_url': 'https://i.imgur.com/OHruhgi.jpg'
+      'foto_url': 'https://i.imgur.com/OHruhgi.jpg',
+      'atendida': false
     }
   ], function (err, result) {
     console.log('Inserted 3 documents into the collection')

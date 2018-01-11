@@ -62,6 +62,38 @@ app.route('/novedad')
     })
   })
 
+/*
+  params:
+    puesto_trabajo_id: number
+  query:
+    atendido: boolean
+*/
+app.route('/novedad/puesto_trabajo/:puesto_trabajo_id')
+  .get((req, res) => {
+    const params = req.params
+    const query = req.query
+    Movil.ObtenerTodasNovedadesSinAtender({ params, query }).then(resp => {
+      res.status(resp.codigo_estado)
+      res.json(resp)
+    }).catch(resp => {
+      res.status(resp.codigo_estado)
+      res.json(resp)
+    })
+  })
+
+app.route('/novedad/:novedad_id/puesto_trabajo/:puesto_trabajo_id')
+  .post((req, res) => {
+    const params = req.params
+    const body = req.body
+    Movil.ActualizarEstadoNovedad({ params, body }).then(resp => {
+      res.status(resp.codigo_estado)
+      res.json(resp)
+    }).catch(resp => {
+      res.status(resp.codigo_estado)
+      res.json(resp)
+    })
+  })
+
 app.route('*')
   .get((req, res) => {
     res.json({datos: {mensaje: 'Url no valido'}, estado: false})

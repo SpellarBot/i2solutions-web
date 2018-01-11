@@ -1,8 +1,46 @@
 module.exports = ({ responses, validator, inspector, MovilDAL }) => {
   const proto = {
+    ObtenerTodasNovedadesSinAtender ({ params, query }) {
+      return new Promise((resolve, reject) => {
+        const puestoTrabajoId = params.puesto_trabajo_id
+        let atendida = query.atendida
+        if (atendida === 'false') {
+          atendida = false
+        } else if (atendida === 'true') {
+          atendida = true
+        } else {
+          atendida = null
+        }
+        MovilDAL.ObtenerTodasNovedadesSinAtender({ puestoTrabajoId, atendida }).then((puestosSinAntender) => {
+          resolve(responses.OK(puestosSinAntender))
+        }).catch(err => {
+          console.error(err)
+          reject(responses.ERROR_SERVIDOR)
+        })
+      })
+    },
+    // TODO: no existe la novedad con ese id, no existe un puesto con ese Id, error al actualizar
+    ActualizarEstadoNovedad ({ params, body }) {
+      return new Promise((resolve, reject) => {
+        const puestoTrabajoId = params.puesto_trabajo_id
+        const novedadId = params.novedad_id
+        let atendida = body.atendida
+        MovilDAL.ActualizarEstadoNovedad({ puestoTrabajoId, novedadId, atendida }).then((novedadEstado) => {
+          if (novedadEstado.estado) {
+            resolve(responses.OK({mensaje: novedadEstado.mensaje}))
+          } else {
+            resolve(responses.NO_ACTUALIZADO({mensaje: novedadEstado.mensaje}))
+          }
+        }).catch(err => {
+          console.error(err)
+          reject(responses.ERROR_SERVIDOR)
+        })
+      })
+    },
     PuestosDeAreaTrabajo ({ params }) {
       return new Promise((resolve, reject) => {
-        if (validator.isInt(params.area_id)) {
+        const meBorras = true
+        if (meBorras) {
           const areaId = params.area_id
           MovilDAL.ObtenerPuestoTrabajoPorAreaId({ areaId }).then((puestos) => {
             resolve(responses.OK(puestos))
