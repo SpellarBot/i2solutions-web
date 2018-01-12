@@ -60,7 +60,7 @@ const NovedadesSchema = mongoose.Schema({
   atendida: {
     type: Boolean
   }
-}, {versionKey: false, timestamps: false, collection: 'novedades'})
+}, {versionKey: false, timestamps: true, collection: 'novedades'})
 
 NovedadesSchema.pre('save', function (next) {
   var doc = this
@@ -97,7 +97,7 @@ NovedadesSchema.statics.ObtenerTodasNovedadesSinAtender = function (puestoTrabaj
     findJson['atendida'] = atendida
   }
   return new Promise((resolve, reject) => {
-    resolve(schema.find(findJson, { '_id': 0 }))
+    resolve(schema.find(findJson, { '_id': 0 }).select('-updatedAt'))
   })
 }
 

@@ -2,8 +2,12 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
   const proto = {
     ObtenerTodasNovedadesSinAtender ({ puestoTrabajoId, atendida }) {
       return new Promise((resolve, reject) => {
-        NovedadesModel.ObtenerTodasNovedadesSinAtender(puestoTrabajoId, atendida).then((puestosSinAtender) => {
-          resolve(puestosSinAtender)
+        NovedadesModel.ObtenerTodasNovedadesSinAtender(puestoTrabajoId, atendida).then((novedades) => {
+          const NOVEDADES_CLEAN = novedades.reduce((novedad, resp) => {
+            novedad.push({id: resp.id, puesto_trabajo_id: resp.puesto_trabajo_id, descripcion: resp.descripcion, prioridad: resp.prioridad, foto_url: resp.foto_url, atendida: resp.atendida, fechaCreacion: resp.createdAt})
+            return novedad
+          }, [])
+          resolve(NOVEDADES_CLEAN)
         }).catch(err => {
           reject(err)
         })
