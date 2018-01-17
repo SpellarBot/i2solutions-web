@@ -1,8 +1,9 @@
 const MongoClient = require('mongodb').MongoClient
 
-const url = 'mongodb://localhost:27017'
+const url = process.env.MONGO_DB_URL;
 
-const dbName = 'i2solutions'
+// Database Name
+const dbName = process.env.MONGO_DB_NAME;
 
 MongoClient.connect(url, function (err, client) {
   console.log('Connected successfully to server')
@@ -17,6 +18,7 @@ MongoClient.connect(url, function (err, client) {
 
 const insertDocuments = function (db, callback) {
   const collection = db.collection('novedades')
+  var date = new Date();
   collection.insertMany([ // SI SE CAMBIA ALGO AQUI DEBE SER ACTUALIZADO EL CREATE_COUNTERS.JS
     {
       'id': 1,
@@ -24,7 +26,9 @@ const insertDocuments = function (db, callback) {
       'descripcion': 'github',
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/YrQ2Aqz.jpg',
-      'atendida': false
+      'atendida': false,
+      'createdAt': date.toISOString(),
+      'updatedAt': date.toISOString()
     },
     {
       'id': 2,
@@ -32,7 +36,9 @@ const insertDocuments = function (db, callback) {
       'descripcion': 'nuevo proyecto',
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/E4S80tP.jpg',
-      'atendida': false
+      'atendida': false,
+      'createdAt': date.toISOString(),
+      'updatedAt': date.toISOString()
     },
     {
       'id': 3,
@@ -40,7 +46,9 @@ const insertDocuments = function (db, callback) {
       'descripcion': 'el ojo seco',
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/U0ueJED.jpg',
-      'atendida': false
+      'atendida': false,
+      'createdAt': date.toISOString(),
+      'updatedAt': date.toISOString()
     },
     {
       'id': 4,
@@ -48,7 +56,9 @@ const insertDocuments = function (db, callback) {
       'descripcion': 'el ojo seco',
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/LIeiUjD.jpg',
-      'atendida': false
+      'atendida': false,
+      'createdAt': date.toISOString(),
+      'updatedAt': date.toISOString()
     },
     {
       'id': 5,
@@ -56,7 +66,9 @@ const insertDocuments = function (db, callback) {
       'descripcion': 'el ojo seco',
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/OHruhgi.jpg',
-      'atendida': false
+      'atendida': false,
+      'createdAt': date.toISOString(),
+      'updatedAt': date.toISOString()
     }
   ], function (err, result) {
     console.log('Inserted 3 documents into the collection')

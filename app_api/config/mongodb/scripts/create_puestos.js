@@ -1,8 +1,9 @@
 const MongoClient = require('mongodb').MongoClient
 
-const url = 'mongodb://localhost:27017'
+const url = process.env.MONGO_DB_URL;
 
-const dbName = 'i2solutions'
+// Database Name
+const dbName = process.env.MONGO_DB_NAME;
 
 MongoClient.connect(url, function (err, client) {
   console.log('Connected successfully to server')

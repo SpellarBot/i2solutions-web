@@ -12,5 +12,7 @@ db.on('error', function (err) {
   console.error(`error ${err}`)
 })
 db.once('open', function () {
-  console.log('conectada la base de datos')
+  if (process.env.NODE_ENV !== 'testing') {
+    console.log('conectada la base de datos')
+  }
 })

@@ -1,18 +1,15 @@
-describe('Profesores', () => {
+describe('MOVIL TEST', () => {
   after(() => {
-    //1process.exit(0)
+    process.exit(0)
   })
-  it('GET todos los profesores', (done) => {
+  it('GET puesto de trabajo por area', (done) => {
     request(app)
-      .get('/api/movil/novedad')
+      .get('/api/movil/puesto_trabajo/area_trabajo/1')
       .end(function(err, res) {
-        console.log(res.body)
-        // assert.equal(Array.isArray(res.body),true, 'foo is a string')
-        done()
-      })
-  })
-  it('GET todos los profesores', done => {
-    // assert.equal('sad','sad', 'foo is a string')
-    done()
+      assert.equal(Array.isArray(res.body.datos),true, 'debe ser un array')
+      assert.equal(res.body.estado, true, 'El estado debe ser true')
+      assert.equal(res.body.codigo_estado, 200, 'El codigo debe ser 200')
+      done()
+    })
   })
 })
