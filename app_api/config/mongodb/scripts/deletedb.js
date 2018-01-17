@@ -13,8 +13,7 @@ MongoClient.connect(url, (err, client) => {
     LimpiarColeccion('novedades', db),
     LimpiarColeccion('puestos', db),
     LimpiarColeccion('puestos_detalle', db),
-    LimpiarColeccion('counters', db)
-    ])
+    LimpiarColeccion('counters', db)])
     .then((values) => {
       console.log(values)
       client.close()
@@ -23,14 +22,13 @@ MongoClient.connect(url, (err, client) => {
     })
 })
 
-
-function LimpiarColeccion(nombreColeccion, db) {
+function LimpiarColeccion (nombreColeccion, db) {
   return new Promise((resolve, reject) => {
     db.collection(nombreColeccion).remove({}, function (err, numberRemoved) {
       console.log('inside remove call back' + numberRemoved)
       if (err) {
-        throw new Error(`Ha ocurrido un error ${err}`)
         reject(nombreColeccion)
+        throw new Error(`Ha ocurrido un error ${err}`)
       } else {
         resolve(nombreColeccion)
       }
