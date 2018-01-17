@@ -54,7 +54,9 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
       })
       return new Promise((resolve, reject) => {
         novedad.CrearNovedad(novedad).then((estado) => {
-          resolve({})
+          PuestoDetalleModel.ActualizarCantidadPuestoDeTrabajo(puestoTrabajoId).then((estado) => {
+            resolve({})
+          })
         }).catch(err => {
           reject(err)
         })

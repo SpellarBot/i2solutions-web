@@ -78,6 +78,7 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
         })
       })
     },
+    // ademas de crear la novedad debe actualizar la cantidad de novedades
     CrearNovedad ({ body }) {
       return new Promise((resolve, reject) => {
         const puestoTrabajoId = body.puesto_trabajo_id

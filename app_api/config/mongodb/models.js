@@ -122,6 +122,13 @@ PuestosDetalleSchema.statics.ObtenerPuestoPorId = function (puestoTrabajoId) {
   })
 }
 
+PuestosDetalleSchema.statics.ActualizarCantidadPuestoDeTrabajo = function (puestoTrabajoId) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId}, {$inc: {num_novedades: 1}}))
+  })
+}
+
 module.exports = {
   PuestoModel: mongoose.model('Puestos', PuestosSchema),
   PuestoDetalleModel: mongoose.model('PuestosDetalle', PuestosDetalleSchema),
