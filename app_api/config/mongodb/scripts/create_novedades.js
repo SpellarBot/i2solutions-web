@@ -1,9 +1,9 @@
 const MongoClient = require('mongodb').MongoClient
 
-const url = process.env.MONGO_DB_URL;
+const url = process.env.MONGO_DB_URL
 
 // Database Name
-const dbName = process.env.MONGO_DB_NAME;
+const dbName = process.env.MONGO_DB_NAME
 
 MongoClient.connect(url, function (err, client) {
   console.log('Connected successfully to server')
@@ -18,7 +18,7 @@ MongoClient.connect(url, function (err, client) {
 
 const insertDocuments = function (db, callback) {
   const collection = db.collection('novedades')
-  var date = new Date();
+  var date = new Date()
   collection.insertMany([ // SI SE CAMBIA ALGO AQUI DEBE SER ACTUALIZADO EL CREATE_COUNTERS.JS
     {
       'id': 1,
