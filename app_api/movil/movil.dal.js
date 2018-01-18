@@ -13,9 +13,9 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
         })
       })
     },
-    ActualizarEstadoNovedad ({ puestoTrabajoId, novedadId, atendida }) {
+    ActualizarEstadoNovedad ({ puestoTrabajoId, novedadId, atendida, descripcionAtendida }) {
       return new Promise((resolve, reject) => {
-        NovedadesModel.ActualizarEstadoNovedad(puestoTrabajoId, novedadId, atendida).then((puestoActualizado) => {
+        NovedadesModel.ActualizarEstadoNovedad(puestoTrabajoId, novedadId, atendida, descripcionAtendida).then((puestoActualizado) => {
           if (!puestoActualizado.nModified) {
             resolve({estado: false, mensaje: 'La novedad no fue actualizada correctamente'})
           } else {

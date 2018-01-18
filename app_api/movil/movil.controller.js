@@ -25,7 +25,8 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
         const puestoTrabajoId = params.puesto_trabajo_id
         const novedadId = params.novedad_id
         let atendida = body.atendida
-        MovilDAL.ActualizarEstadoNovedad({ puestoTrabajoId, novedadId, atendida }).then((novedadEstado) => {
+        let descripcionAtendida = body.descripcionAtendida
+        MovilDAL.ActualizarEstadoNovedad({ puestoTrabajoId, novedadId, atendida, descripcionAtendida }).then((novedadEstado) => {
           if (novedadEstado.estado) {
             resolve(responses.OK({mensaje: novedadEstado.mensaje}))
           } else {

@@ -59,6 +59,9 @@ const NovedadesSchema = mongoose.Schema({
   },
   atendida: {
     type: Boolean
+  },
+  descripcionAtendida: {
+    type: String
   }
 }, {versionKey: false, timestamps: true, collection: 'novedades'})
 
@@ -101,10 +104,10 @@ NovedadesSchema.statics.ObtenerTodasNovedadesSinAtender = function (puestoTrabaj
   })
 }
 
-NovedadesSchema.statics.ActualizarEstadoNovedad = function (puestoTrabajoId, novedadId, atendida) {
+NovedadesSchema.statics.ActualizarEstadoNovedad = function (puestoTrabajoId, novedadId, atendida, descripcionAtendida) {
   const schema = this
   return new Promise((resolve, reject) => {
-    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId, id: novedadId}, {atendida: atendida}))
+    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId, id: novedadId}, {atendida: atendida, descripcionAtendida: descripcionAtendida}))
   })
 }
 
