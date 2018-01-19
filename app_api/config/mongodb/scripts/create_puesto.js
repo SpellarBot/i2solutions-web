@@ -27,8 +27,8 @@ const insertDocuments = function (db, callback) {
         nombre_riesgo: 'Riesgo 12',
         porcentaje: 0.0
       }],
-      num_empleados: 0,
-      num_novedades: 0,
+      num_empleados: 3,
+      num_novedades: 5,
       puesto_trabajo_id: 1
     },
     {
@@ -38,7 +38,7 @@ const insertDocuments = function (db, callback) {
       }, {nombre_riesgo: 'Riesgo 22',
         porcentaje: 0.0
       }],
-      num_empleados: 0,
+      num_empleados: 9,
       num_novedades: 0,
       puesto_trabajo_id: 2
     },
@@ -49,7 +49,7 @@ const insertDocuments = function (db, callback) {
       }, {nombre_riesgo: 'Riesgo 32',
         porcentaje: 0.0
       }],
-      num_empleados: 0,
+      num_empleados: 2,
       num_novedades: 0,
       puesto_trabajo_id: 3
     }

@@ -132,6 +132,20 @@ PuestosDetalleSchema.statics.ActualizarCantidadPuestoDeTrabajo = function (puest
   })
 }
 
+NovedadesSchema.statics.NovedadesNoAtendidasEnPuestoTrabajo = function (puestoTrabajoId) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.find({'puesto_trabajo_id': puestoTrabajoId, atendida: false}))
+  })
+}
+
+PuestosDetalleSchema.statics.ActualizarCantidadPuestoDeTrabajoPorNumeroNovedades = function (puestoTrabajoId, numeroNovedades) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId}, {$set: {num_novedades: numeroNovedades}}))
+  })
+}
+
 module.exports = {
   PuestoModel: mongoose.model('Puestos', PuestosSchema),
   PuestoDetalleModel: mongoose.model('PuestosDetalle', PuestosDetalleSchema),

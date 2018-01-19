@@ -19,7 +19,14 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
           if (!puestoActualizado.nModified) {
             resolve({estado: false, mensaje: 'La novedad no fue actualizada correctamente'})
           } else {
-            resolve({estado: true, mensaje: 'La novedad fue actualizada correctamente'})
+            if (atendida) {
+              NovedadesModel.NovedadesNoAtendidasEnPuestoTrabajo(puestoTrabajoId).then((novedades) => {
+                let cantidadNovedades = novedades.length
+                PuestoDetalleModel.ActualizarCantidadPuestoDeTrabajoPorNumeroNovedades(puestoTrabajoId, cantidadNovedades).then((puestoActualizado) => {
+                  resolve({estado: true, mensaje: 'La novedad fue actualizada correctamente'})
+                })
+              })
+            }
           }
         }).catch(err => {
           reject(err)
