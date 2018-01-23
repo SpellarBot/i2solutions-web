@@ -21,33 +21,33 @@ const insertDocuments = function (db, callback) {
   collection.insertMany([
     {
       valoracion_puesto_trabajo: [{
-        nombre_riesgo: 'Riesgo 11',
-        porcentaje: 0.0
+        nombre_riesgo: 'Incendio',
+        porcentaje: 2.0
       }, {
-        nombre_riesgo: 'Riesgo 12',
-        porcentaje: 0.0
+        nombre_riesgo: 'Químico',
+        porcentaje: 6.0
       }],
-      num_empleados: 3,
-      num_novedades: 5,
+      num_empleados: 4,
+      num_novedades: 3,
       puesto_trabajo_id: 1
     },
     {
       valoracion_puesto_trabajo: [{
-        nombre_riesgo: 'Riesgo 21',
-        porcentaje: 0.0
-      }, {nombre_riesgo: 'Riesgo 22',
-        porcentaje: 0.0
+        nombre_riesgo: 'Caída de objeto',
+        porcentaje: 50.0
+      }, {nombre_riesgo: 'Químico',
+        porcentaje: 10.0
       }],
-      num_empleados: 9,
-      num_novedades: 0,
+      num_empleados: 10,
+      num_novedades: 2,
       puesto_trabajo_id: 2
     },
     {
       valoracion_puesto_trabajo: [{
-        nombre_riesgo: 'Riesgo 31',
-        porcentaje: 0.0
-      }, {nombre_riesgo: 'Riesgo 32',
-        porcentaje: 0.0
+        nombre_riesgo: 'Corte',
+        porcentaje: 3.0
+      }, {nombre_riesgo: 'Caída de objeto',
+        porcentaje: 4.0
       }],
       num_empleados: 2,
       num_novedades: 0,

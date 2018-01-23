@@ -21,32 +21,32 @@ const insertDocuments = function (db, callback) {
   collection.insertMany([
     {
       area_id: 1,
-      nombre: 'Puesto 1',
+      nombre: 'Oficinas',
       id: 1
     },
     {
       area_id: 1,
-      nombre: 'Puesto 2',
+      nombre: 'Tesoreria',
       id: 2
     },
     {
       area_id: 1,
-      nombre: 'Puesto 3',
+      nombre: 'Laboratorios',
       id: 3
     },
     {
       area_id: 2,
-      nombre: 'Puesto 1',
+      nombre: 'Tornos',
       id: 4
     },
     {
       area_id: 2,
-      nombre: 'Puesto 2',
+      nombre: 'Servidores',
       id: 5
     },
     {
       area_id: 2,
-      nombre: 'Puesto 3',
+      nombre: 'PCs',
       id: 6
     }
   ], function (err, result) {

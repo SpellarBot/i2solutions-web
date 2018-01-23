@@ -100,7 +100,7 @@ NovedadesSchema.statics.ObtenerTodasNovedadesSinAtender = function (puestoTrabaj
     findJson['atendida'] = atendida
   }
   return new Promise((resolve, reject) => {
-    resolve(schema.find(findJson, { '_id': 0 }).select('-updatedAt'))
+    resolve(schema.find(findJson, { '_id': 0 }).sort({ atendida: 1 }).select('-updatedAt'))
   })
 }
 
