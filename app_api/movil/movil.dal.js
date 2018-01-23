@@ -2,11 +2,22 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
   const proto = {
     ObtenerTodasNovedadesSinAtender ({ puestoTrabajoId, atendida }) {
       return new Promise((resolve, reject) => {
+        function sortfunction (a, b) {
+          if (a.prioridad === 'urgente' && b.prioridad === 'alto') {
+            return true
+          } else if (a.prioridad === 'alto' && b.prioridad === 'medio') {
+            return true
+          } else if (a.prioridad === 'alto' && b.prioridad === 'bajo') {
+            return true
+          }
+          return false
+        }
         NovedadesModel.ObtenerTodasNovedadesSinAtender(puestoTrabajoId, atendida).then((novedades) => {
-          const NOVEDADES_CLEAN = novedades.reduce((novedad, resp) => {
-            novedad.push({id: resp.id, puesto_trabajo_id: resp.puesto_trabajo_id, descripcion: resp.descripcion, prioridad: resp.prioridad, foto_url: resp.foto_url, atendida: resp.atendida, fechaCreacion: resp.createdAt})
+          let NOVEDADES_CLEAN = novedades.reduce((novedad, resp) => {
+            novedad.push({id: resp.id, puesto_trabajo_id: resp.puesto_trabajo_id, descripcion: resp.descripcion, prioridad: resp.prioridad, foto_url: resp.foto_url, atendida: resp.atendida, fechaCreacion: resp.createdAt, descripcionAtendida: resp.descripcionAtendida})
             return novedad
           }, [])
+          NOVEDADES_CLEAN.sort(sortfunction)
           resolve(NOVEDADES_CLEAN)
         }).catch(err => {
           reject(err)

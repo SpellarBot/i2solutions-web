@@ -27,6 +27,7 @@ const insertDocuments = function (db, callback) {
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/YrQ2Aqz.jpg',
       'atendida': false,
+      'descripcionAtendida': '',
       'createdAt': date.toISOString(),
       'updatedAt': date.toISOString()
     },
@@ -37,6 +38,7 @@ const insertDocuments = function (db, callback) {
       'prioridad': 'media',
       'foto_url': 'https://i.imgur.com/E4S80tP.jpg',
       'atendida': false,
+      'descripcionAtendida': '',
       'createdAt': date.toISOString(),
       'updatedAt': date.toISOString()
     },
@@ -47,6 +49,7 @@ const insertDocuments = function (db, callback) {
       'prioridad': 'baja',
       'foto_url': 'https://i.imgur.com/U0ueJED.jpg',
       'atendida': false,
+      'descripcionAtendida': '',
       'createdAt': date.toISOString(),
       'updatedAt': date.toISOString()
     },
@@ -57,6 +60,7 @@ const insertDocuments = function (db, callback) {
       'prioridad': 'urgente',
       'foto_url': 'https://i.imgur.com/LIeiUjD.jpg',
       'atendida': false,
+      'descripcionAtendida': '',
       'createdAt': date.toISOString(),
       'updatedAt': date.toISOString()
     },
@@ -67,6 +71,7 @@ const insertDocuments = function (db, callback) {
       'prioridad': 'baja',
       'foto_url': 'https://i.imgur.com/OHruhgi.jpg',
       'atendida': false,
+      'descripcionAtendida': '',
       'createdAt': date.toISOString(),
       'updatedAt': date.toISOString()
     }
