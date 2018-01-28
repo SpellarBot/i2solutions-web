@@ -21,17 +21,20 @@ const insertDocuments = function (db, callback) {
   var date = new Date()
   collection.insertMany([ // SI SE CAMBIA ALGO AQUI DEBE SER ACTUALIZADO EL CREATE_COUNTERS.JS
     {
+      '_id': 1,
       'id': 1,
       'puesto_trabajo_id': 1,
-      'descripcion': 'No esta bien aislado el cable',
-      'prioridad': 'urgente',
+      'descripcion': 'No cuenta con equipos',
+      'prioridad': 'alta',
       'foto_url': 'https://i.imgur.com/YrQ2Aqz.jpg',
       'atendida': false,
       'descripcionAtendida': '',
       'createdAt': date.toISOString(),
-      'updatedAt': date.toISOString()
+      'updatedAt': date.toISOString(),
+      'fechaCreacion': date.toISOString()
     },
     {
+      '_id': 2,
       'id': 2,
       'puesto_trabajo_id': 1,
       'descripcion': 'El operario no usa guantes',
@@ -40,9 +43,11 @@ const insertDocuments = function (db, callback) {
       'atendida': false,
       'descripcionAtendida': '',
       'createdAt': date.toISOString(),
-      'updatedAt': date.toISOString()
+      'updatedAt': date.toISOString(),
+      'fechaCreacion': date.toISOString()
     },
     {
+      '_id': 3,
       'id': 3,
       'puesto_trabajo_id': 1,
       'descripcion': 'Las sillas no estan pintadas',
@@ -51,20 +56,24 @@ const insertDocuments = function (db, callback) {
       'atendida': false,
       'descripcionAtendida': '',
       'createdAt': date.toISOString(),
-      'updatedAt': date.toISOString()
+      'updatedAt': date.toISOString(),
+      'fechaCreacion': date.toISOString()
     },
     {
+      '_id': 4,
       'id': 4,
       'puesto_trabajo_id': 2,
       'descripcion': 'No tiene buses transespol',
-      'prioridad': 'urgente',
+      'prioridad': 'media',
       'foto_url': 'https://i.imgur.com/LIeiUjD.jpg',
       'atendida': false,
       'descripcionAtendida': '',
       'createdAt': date.toISOString(),
-      'updatedAt': date.toISOString()
+      'updatedAt': date.toISOString(),
+      'fechaCreacion': date.toISOString()
     },
     {
+      '_id': 5,
       'id': 5,
       'puesto_trabajo_id': 2,
       'descripcion': 'No se tienen muchos comedores',
@@ -73,7 +82,8 @@ const insertDocuments = function (db, callback) {
       'atendida': false,
       'descripcionAtendida': '',
       'createdAt': date.toISOString(),
-      'updatedAt': date.toISOString()
+      'updatedAt': date.toISOString(),
+      'fechaCreacion': date.toISOString()
     }
   ], function (err, result) {
     console.log('Inserted 3 documents into the collection')

@@ -13,6 +13,9 @@ MongoClient.connect(url, (err, client) => {
     LimpiarColeccion('novedades', db),
     LimpiarColeccion('puestos', db),
     LimpiarColeccion('puestos_detalle', db),
+    LimpiarColeccion('areas', db),
+    LimpiarColeccion('equipos', db),
+    LimpiarColeccion('riesgos', db),
     LimpiarColeccion('counters', db)])
     .then((values) => {
       console.log(values)

@@ -1,5 +1,31 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
+var autoIncrement = require('mongoose-auto-increment')
+
+const RiesgosSchema = mongoose.Schema({
+  nombre: {
+    type: String
+  },
+  id: {
+    type: Number
+  },
+  porcentaje: {
+    type: Number
+  }
+}, {versionKey: false, timestamps: false, collection: 'riesgos'})
+
+const EquiposSchema = mongoose.Schema({
+  nombre: {
+    type: String
+  },
+  id: {
+    type: Number
+  },
+  cantidad: {
+    type: Number
+  }
+}, {versionKey: false, timestamps: false, collection: 'equipos'})
+
 const PuestosSchema = mongoose.Schema({
   nombre: {
     type: String
@@ -9,7 +35,36 @@ const PuestosSchema = mongoose.Schema({
   },
   area_id: {
     type: Number
-  }
+  },
+  cantidadEmpleados: {
+    type: Number
+  },
+  fechaUltimaCapacitacion: {
+    type: Date
+  },
+  fechaUltimoAccidente: {
+    type: Date
+  },
+  riesgos: [{
+    type: Number,
+    ref: 'Riesgo',
+    field: 'id'
+  }],
+  equiposProteccion: [{
+    type: Number,
+    ref: 'Equipo',
+    field: 'id'
+  }],
+  novedadesSinAtender: [{ // agruparlas por alta, media, baja
+    type: Number,
+    ref: 'Novedad',
+    field: 'id'
+  }],
+  novedadesAtendidas: [{
+    type: Number,
+    ref: 'Novedad',
+    field: 'id'
+  }]
 })
 
 const PuestosDetalleSchema = mongoose.Schema({
@@ -62,6 +117,12 @@ const NovedadesSchema = mongoose.Schema({
   },
   descripcionAtendida: {
     type: String
+  },
+  fechaAtendida: {
+    type: Date
+  },
+  fechaCreacion: {
+    type: Date
   }
 }, {versionKey: false, timestamps: true, collection: 'novedades'})
 
@@ -93,6 +154,13 @@ NovedadesSchema.statics.ObtenerTodasNovedades = function () {
   })
 }
 
+NovedadesSchema.statics.ObtenerPorId = function (id) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.findOne({_id: id}))
+  })
+}
+
 NovedadesSchema.statics.ObtenerTodasNovedadesSinAtender = function (puestoTrabajoId, atendida) {
   const schema = this
   var findJson = { puesto_trabajo_id: puestoTrabajoId }
@@ -106,8 +174,9 @@ NovedadesSchema.statics.ObtenerTodasNovedadesSinAtender = function (puestoTrabaj
 
 NovedadesSchema.statics.ActualizarEstadoNovedad = function (puestoTrabajoId, novedadId, atendida, descripcionAtendida) {
   const schema = this
+  var date = new Date()
   return new Promise((resolve, reject) => {
-    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId, id: novedadId}, {atendida: atendida, descripcionAtendida: descripcionAtendida}))
+    resolve(schema.update({puesto_trabajo_id: puestoTrabajoId, id: novedadId}, {atendida: atendida, descripcionAtendida: descripcionAtendida, fechaAtendida: date.toISOString()}))
   })
 }
 
@@ -115,6 +184,34 @@ PuestosSchema.statics.ObtenerPuestoTrabajoPorAreaId = function (areaId) {
   const schema = this
   return new Promise((resolve, reject) => {
     resolve(schema.find({area_id: areaId}, { '_id': 0 }).select('id nombre area_id'))
+  })
+}
+
+PuestosSchema.statics.CargarDatos = function (areaId, puestoId) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.findOne({area_id: areaId, id: puestoId}, { '_id': 0 }).populate({path: 'riesgos equiposProteccion novedadesSinAtender novedadesAtendidas'}))
+  })
+}
+
+PuestosSchema.statics.AnadirNovedad = function (puestoTrabajoId, novedadGuardadaId) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.update({id: puestoTrabajoId}, {$addToSet: {novedadesSinAtender: novedadGuardadaId}}))
+  })
+}
+
+PuestosSchema.statics.NovedadAtendida = function (puestoTrabajoId, novedadId) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.update({id: puestoTrabajoId}, {$pull: {novedadesSinAtender: novedadId}}))
+  })
+}
+
+PuestosSchema.statics.NovedadAtender = function (puestoTrabajoId, novedadId) {
+  const schema = this
+  return new Promise((resolve, reject) => {
+    resolve(schema.update({id: puestoTrabajoId}, {$addToSet: {novedadesAtendidas: novedadId}}))
   })
 }
 
@@ -146,8 +243,28 @@ PuestosDetalleSchema.statics.ActualizarCantidadPuestoDeTrabajoPorNumeroNovedades
   })
 }
 
+RiesgosSchema.plugin(autoIncrement.plugin, 'Riesgo', {
+  startAt: 5
+})
+EquiposSchema.plugin(autoIncrement.plugin, 'Equipo', {
+  startAt: 4
+})
+PuestosSchema.plugin(autoIncrement.plugin, 'Puesto', {
+  startAt: 8
+})
+PuestosDetalleSchema.plugin(autoIncrement.plugin, 'PuestosDetalle', {
+  startAt: 100
+})
+NovedadesSchema.plugin(autoIncrement.plugin, {
+  model: 'Novedad',
+  startAt: 6
+})
+
+mongoose.model('Riesgo', RiesgosSchema)
+mongoose.model('Equipo', EquiposSchema)
+
 module.exports = {
-  PuestoModel: mongoose.model('Puestos', PuestosSchema),
+  PuestoModel: mongoose.model('Puesto', PuestosSchema),
   PuestoDetalleModel: mongoose.model('PuestosDetalle', PuestosDetalleSchema),
-  NovedadesModel: mongoose.model('Novedades', NovedadesSchema)
+  NovedadesModel: mongoose.model('Novedad', NovedadesSchema)
 }

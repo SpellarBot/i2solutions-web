@@ -1,5 +1,14 @@
 module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel }) => {
   const proto = {
+    CargarDatos ({ areaId, puestoId }) {
+      return new Promise((resolve, reject) => {
+        PuestoModel.CargarDatos(areaId, puestoId).then((datos) => {
+          resolve(datos)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
     ObtenerTodasNovedadesSinAtender ({ puestoTrabajoId, atendida }) {
       return new Promise((resolve, reject) => {
         function sortfunction (a, b) {
@@ -34,7 +43,13 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
               NovedadesModel.NovedadesNoAtendidasEnPuestoTrabajo(puestoTrabajoId).then((novedades) => {
                 let cantidadNovedades = novedades.length
                 PuestoDetalleModel.ActualizarCantidadPuestoDeTrabajoPorNumeroNovedades(puestoTrabajoId, cantidadNovedades).then((puestoActualizado) => {
-                  resolve({estado: true, mensaje: 'La novedad fue actualizada correctamente'})
+                  PuestoModel.NovedadAtendida(puestoTrabajoId, novedadId).then((puestoActualizado) => {
+                    PuestoModel.NovedadAtender(puestoTrabajoId, novedadId).then((puestoActualizado) => {
+                      NovedadesModel.ObtenerPorId(novedadId).then((novedad) => {
+                        resolve({estado: true, datos: novedad})
+                      })
+                    })
+                  })
                 })
               })
             }
@@ -63,17 +78,21 @@ module.exports = ({ database, PuestoModel, PuestoDetalleModel, NovedadesModel })
       })
     },
     CrearNovedad ({ puestoTrabajoId, descripcion, prioridad, fotoUrl }) {
+      var date = new Date()
       var novedad = new NovedadesModel({
         puesto_trabajo_id: puestoTrabajoId,
         descripcion,
         prioridad,
         foto_url: fotoUrl,
-        atendida: false
+        atendida: false,
+        fechaCreacion: date.toISOString()
       })
       return new Promise((resolve, reject) => {
-        novedad.CrearNovedad(novedad).then((estado) => {
+        novedad.CrearNovedad(novedad).then((novedadGuardada) => {
           PuestoDetalleModel.ActualizarCantidadPuestoDeTrabajo(puestoTrabajoId).then((estado) => {
-            resolve({})
+            PuestoModel.AnadirNovedad(puestoTrabajoId, novedadGuardada._id).then((estado) => {
+              resolve(novedadGuardada)
+            })
           })
         }).catch(err => {
           reject(err)

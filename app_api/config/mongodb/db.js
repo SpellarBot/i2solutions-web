@@ -4,10 +4,12 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   dbURL = process.env.MONGO_DB_LOCAL
 }
-
+var autoIncrement = require('mongoose-auto-increment')
 var mongoose = require('mongoose')
 mongoose.connect(dbURL, { useMongoClient: true })
+
 var db = mongoose.connection
+autoIncrement.initialize(mongoose)
 db.on('error', function (err) {
   console.error(`error ${err}`)
 })

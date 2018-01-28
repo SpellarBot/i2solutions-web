@@ -18,39 +18,101 @@ MongoClient.connect(url, function (err, client) {
 
 const insertDocuments = function (db, callback) {
   const collection = db.collection('puestos')
+  var date = new Date()
   collection.insertMany([
     {
+      _id: 1,
+      id: 1,
       area_id: 1,
-      nombre: 'Oficinas',
-      id: 1
+      nombre: 'Gerente',
+      cantidadEmpleados: 1,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [1, 2],
+      equiposProteccion: [1, 2],
+      novedadesSinAtender: [1, 2, 3],
+      novedadesAtendidas: []
     },
     {
+      _id: 2,
       area_id: 1,
-      nombre: 'Tesoreria',
-      id: 2
+      nombre: 'Secretaria',
+      id: 2,
+      cantidadEmpleados: 0,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [],
+      equiposProteccion: [],
+      novedadesSinAtender: [],
+      novedadesAtendidas: []
     },
     {
+      _id: 3,
       area_id: 1,
-      nombre: 'Laboratorios',
-      id: 3
+      nombre: 'Contadora',
+      id: 3,
+      cantidadEmpleados: 0,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [],
+      equiposProteccion: [],
+      novedadesSinAtender: [],
+      novedadesAtendidas: []
     },
     {
+      _id: 4,
       area_id: 2,
-      nombre: 'Tornos',
-      id: 4
+      nombre: 'Jefe de Matricería',
+      id: 4,
+      cantidadEmpleados: 5,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [],
+      equiposProteccion: [],
+      novedadesSinAtender: [],
+      novedadesAtendidas: []
     },
     {
+      _id: 5,
       area_id: 2,
-      nombre: 'Servidores',
-      id: 5
+      nombre: 'Maticero',
+      id: 5,
+      cantidadEmpleados: 3,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [],
+      equiposProteccion: [],
+      novedadesSinAtender: [],
+      novedadesAtendidas: []
     },
     {
-      area_id: 2,
-      nombre: 'PCs',
-      id: 6
+      _id: 6,
+      area_id: 3,
+      nombre: 'Jefe de Inyección',
+      id: 6,
+      cantidadEmpleados: 4,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [],
+      equiposProteccion: [],
+      novedadesSinAtender: [],
+      novedadesAtendidas: []
+    },
+    {
+      _id: 7,
+      area_id: 3,
+      nombre: 'Operador de máquina de inyección',
+      id: 7,
+      cantidadEmpleados: 1,
+      fechaUltimaCapacitacion: date.toISOString(),
+      fechaUltimoAccidente: date.toISOString(),
+      riesgos: [],
+      equiposProteccion: [],
+      novedadesSinAtender: [],
+      novedadesAtendidas: []
     }
   ], function (err, result) {
-    console.log('Inserted 3 documents into the collection')
+    console.log('Insertado puestos')
     if (err) {
       throw new Error(`Ha ocurrido un error ${err}`)
     }

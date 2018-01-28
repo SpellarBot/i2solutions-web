@@ -94,6 +94,18 @@ app.route('/novedad/:novedad_id/puesto_trabajo/:puesto_trabajo_id')
     })
   })
 
+app.route('/area/:areaId/puesto/:puestoId')
+  .get((req, res) => {
+    const params = req.params
+    Movil.CargarDatos({ params }).then(resp => {
+      res.status(resp.codigo_estado)
+      res.json(resp)
+    }).catch(resp => {
+      res.status(resp.codigo_estado)
+      res.json(resp)
+    })
+  })
+
 app.route('*')
   .get((req, res) => {
     res.json({datos: {mensaje: 'Url no valido'}, estado: false})

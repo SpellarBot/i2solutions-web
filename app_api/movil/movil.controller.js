@@ -1,5 +1,17 @@
 module.exports = ({ responses, validator, inspector, MovilDAL }) => {
   const proto = {
+    CargarDatos ({ params }) {
+      return new Promise((resolve, reject) => {
+        const areaId = params.areaId
+        const puestoId = params.puestoId
+        MovilDAL.CargarDatos({ areaId, puestoId }).then((datos) => {
+          resolve(responses.OK(datos))
+        }).catch(err => {
+          console.error(err)
+          reject(responses.ERROR_SERVIDOR)
+        })
+      })
+    },
     ObtenerTodasNovedadesSinAtender ({ params, query }) {
       return new Promise((resolve, reject) => {
         const puestoTrabajoId = params.puesto_trabajo_id
@@ -28,7 +40,7 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
         let descripcionAtendida = body.descripcionAtendida
         MovilDAL.ActualizarEstadoNovedad({ puestoTrabajoId, novedadId, atendida, descripcionAtendida }).then((novedadEstado) => {
           if (novedadEstado.estado) {
-            resolve(responses.OK({mensaje: novedadEstado.mensaje}))
+            resolve(responses.OK(novedadEstado.datos))
           } else {
             resolve(responses.NO_ACTUALIZADO({mensaje: novedadEstado.mensaje}))
           }
@@ -89,8 +101,8 @@ module.exports = ({ responses, validator, inspector, MovilDAL }) => {
         const valor = true
         if (valor) {
           MovilDAL.CrearNovedad({ puestoTrabajoId, descripcion, prioridad, fotoUrl })
-            .then((estado) => {
-              resolve(responses.CREADO)
+            .then((novedadNueva) => {
+              resolve(responses.OK(novedadNueva))
             }).catch(err => {
               console.error(err)
               reject(responses.ERROR_SERVIDOR)
