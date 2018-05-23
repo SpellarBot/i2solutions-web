@@ -82,7 +82,7 @@ db.Sequelize = Sequelize
 
 const Conectar = () => {
   return new Promise(function(resolve, reject) {
-    if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'development') {
+    if (process.env.NODE_ENV !== 'production') {
       const sql = `CREATE DATABASE IF NOT EXISTS ${database}`
       if (process.env.NODE_ENV !== 'testing') {
         let mysqlConnection = mysql.createConnection({
@@ -92,6 +92,8 @@ const Conectar = () => {
         })
         mysqlConnection.query(sql)
       }
+      sequelize.sync()
+    } else {
       sequelize.sync()
     }
     sequelize
