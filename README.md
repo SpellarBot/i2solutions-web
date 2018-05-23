@@ -29,7 +29,7 @@ Ubuntu 16.04 LTS
 
 ## Development
 
-#### Aplicacion server
+#### Aplicación server
 
 1. En la carpeta root del proyecto hacer
 
@@ -48,5 +48,9 @@ Ubuntu 16.04 LTS
 
 ## Production
 
+Establecer la variables de entorno:
 
-## Ayuda
+1. HEROKU=true
+2. DATABASE_HOST
+3. DATABASE_USER
+4. DATABASE_PASSWORD

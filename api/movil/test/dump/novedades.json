@@ -1,0 +1,14 @@
+[
+	{
+		"nombre": "mi novedad 1", 
+		"descripcion": "descripcion de mi novedad 1", 
+		"prioridad": "alta", 
+		"foto_url": "foto/url"
+	},
+	{
+		"nombre": "mi novedad 2", 
+		"descripcion": "descripcion de mi novedad 2", 
+		"prioridad": "media",
+		"foto_url": "foto/url"
+	}
+]

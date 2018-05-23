@@ -1,0 +1,18 @@
+{
+  "root": "./docs",
+  "title": "att",
+  "author": "Joel Rodriguez",
+  "language": "es",
+  "variables": {
+  },
+  "structure": {
+    "glossary": "GLOSSARY.md"
+  },
+  "plugins" : [
+  ],
+  "pluginsConfig": {
+    "fontSettings": {
+      "theme": "night"
+    }
+  }
+}

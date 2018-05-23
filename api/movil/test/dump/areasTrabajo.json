@@ -1,0 +1,16 @@
+[
+	{
+		"actividad": "actividad area 1", 
+		"nombre": "area 1", 
+		"foto_url": "fotor area 1", 
+		"metros_cuadrados": "1x1", 
+		"descripcion_lugar": "descripcion 1"
+	},
+	{
+		"actividad": "actividad area 2", 
+		"nombre": "area 2", 
+		"foto_url": "fotor area 2", 
+		"metros_cuadrados": "2x2", 
+		"descripcion_lugar": "descripcion 2"
+	}
+]

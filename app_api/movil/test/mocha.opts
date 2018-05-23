@@ -1,4 +1,0 @@
---require app_api/movil/test/helpers.js
---reporter mochawesome
---reporter-options reportDir=reports/mocha,reportFilename=index
---slow 5000
