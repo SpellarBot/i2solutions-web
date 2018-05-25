@@ -30,6 +30,12 @@ Ubuntu 16.04 LTS
 
 ## Development
 
+Commits 
+
+[Sprint #] "nombre_historia_usuario" Tarea(s) #
+
+Ej: [Sprint 3] “Consultar Plan Nutricional (paciente)” Tarea #105, #106
+
 #### Aplicación server
 
 1. En la carpeta root del proyecto hacer

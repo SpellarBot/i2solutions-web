@@ -1,10 +1,11 @@
-# Api DOCS
 
+## Casa {#profesores}
+
+[F](#profesores)
 ## Crear pregunta estudiante
+------
 
-__POST__
-
-__/api/att/estudiante/preguntar__
+> POST /api/att/estudiante/preguntar
 
 El estudiante crea una pregunta
 ### Body:

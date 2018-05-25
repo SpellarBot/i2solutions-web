@@ -22,3 +22,16 @@
 
      "start": "yarn eslint server.js app_api/**",
     "restart": "yarn eslint server.js app_api/**"
+
+    
+    [Sprint 2] "Como usuario de la aplicación móvil quiero poder revisar los detalles de un accidente" Tarea #61
+
+    [Sprint 2] "Como usuario de la aplicación móvil quiero revisar la lista de capacitaciones" Tarea #62
+
+    [Sprint 2] "Como usuario de la aplicación móvil quiero revisar los detalles de una capacitación específica" Tarea #63
+
+    [Sprint 2] "Como usuario de la aplicación móvil quiero poder revisar los equipos existentes" Tarea #64
+
+    [Sprint 2] "Como usuario de la aplicación móvil quiero poder revisar la lista de accidentes en el área" Tarea #65
+
+    [Sprint 2] "Como usuario de la aplicación móvil quiero poder escanear el código QR de un área de trabajo" Tarea #46, #49, #47, #48
