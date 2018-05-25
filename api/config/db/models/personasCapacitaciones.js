@@ -1,11 +1,10 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'equipos_puestos'
-  let plural = 'equipos_puestos'
-  let tableName = 'equipos_puestos'
+  let singular = 'personasCapacitaciones'
+  let plural = 'personasCapacitaciones'
+  let tableName = 'personasCapacitaciones'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
-    cantidad: { type: DataTypes.INTEGER }
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false }
   },{
   name :{
     singular,
@@ -22,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }
 
-  define.Crear = function ({ cantidad, puestos_id, equipos_id }) {
+  define.Crear = function ({ personasId, capacitacionesId }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)

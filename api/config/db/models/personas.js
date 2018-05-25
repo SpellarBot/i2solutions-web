@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     cedula: { type: DataTypes.STRING },
     clave: { type: DataTypes.STRING },
     telefono: { type: DataTypes.STRING },
-    fecha_nacimiento: { type: DataTypes.STRING },
-    perfil_ocupacional: { type: DataTypes.STRING },
+    fechaNacimiento: { type: DataTypes.STRING },
+    perfilOcupacional: { type: DataTypes.STRING },
     usuario: { type: DataTypes.STRING },
     rol: { type: DataTypes.STRING }
   },{
@@ -28,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.puestos, { through: 'personas_puestos', foreignKey: `personas_id` })
-    define.belongsToMany(models.establecimientos, { through: 'personas_establecimientos', foreignKey: `personas_id` })
-    define.belongsToMany(models.capacitaciones, { through: 'personas_capacitaciones', foreignKey: `personas_id` })
+    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: `personasId` })
+    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: `personasId` })
+    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: `personasId` })
   }
 
   define.Crear = function ({
@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     cedula,
     clave,
     telefono,
-    fecha_nacimiento,
-    perfil_ocupacional,
+    fechaNacimiento,
+    perfilOcupacional,
     usuario,
     rol,
   }) {

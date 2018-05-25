@@ -43,9 +43,9 @@ app.route('/area/:areaId/puesto/:puestoId/:establecimientoId')
     })
   })
 
-app.route('/novedad/:novedades_id/puesto_trabajo/:puesto_trabajo_id')
+app.route('/novedad/:novedadId/puesto_trabajo/:puestoId')
   .post((req, res) => {
-    const id = req.params['novedades_id']
+    const id = req.params['novedadId']
     const { atendida, descripcionAtendida, nombre } = req.body
     Controller.ActualizarEstadoNovedad({ id, atendida, descripcionAtendida, nombre }).then(resp => {
       res.status(resp.codigoEstado)

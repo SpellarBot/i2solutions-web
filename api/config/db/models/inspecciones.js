@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombre: { type: DataTypes.STRING },
-    fecha_inicio: { type: DataTypes.DATE },
-    tipo_inspeccion: { type: DataTypes.STRING },
-    fecha_fin: { type: DataTypes.DATE }
+    fechaInicio: { type: DataTypes.DATE },
+    tipoInspeccion: { type: DataTypes.STRING },
+    fechaFin: { type: DataTypes.DATE }
   },{
   name :{
     singular,
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }
 
-  define.Crear = function ({ nombre, fecha_inicio, tipo_inspeccion, fecha_fin }) {
+  define.Crear = function ({ nombre, fechaInicio, tipoInspeccion, fechaFin }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)

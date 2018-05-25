@@ -8,8 +8,8 @@ module.exports = {
       "cedula": "09365823447",
       "clave": "1234",
       "telefono": "2033698",
-      "fecha_nacimiento": "1995-05-21T19:27:28.576Z",
-      "perfil_ocupacional": "espol",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+      "perfilOcupacional": "espol",
       "usuario": "joelerll",
       "rol": "inspector"
     },
@@ -20,8 +20,8 @@ module.exports = {
       "cedula": "0931823447",
       "clave": "123",
       "telefono": "20336",
-      "fecha_nacimiento": "1995-05-21T19:27:28.576Z",
-      "perfil_ocupacional": "espol",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+      "perfilOcupacional": "espol",
       "usuario": "joelerll",
       "rol": "jefe"
     },
@@ -32,8 +32,8 @@ module.exports = {
       "cedula": "09365823447",
       "clave": "1123456",
       "telefono": "2033698",
-      "fecha_nacimiento": "1995-05-21T19:27:28.576Z",
-      "perfil_ocupacional": "espol",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+      "perfilOcupacional": "espol",
       "usuario": "joelerll",
       "rol": "admin"
     },
@@ -44,8 +44,8 @@ module.exports = {
       "cedula": "09365823447",
       "clave": "123396",
       "telefono": "2033698",
-      "fecha_nacimiento": "1995-05-21T19:27:28.576Z",
-      "perfil_ocupacional": "espol",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+      "perfilOcupacional": "espol",
       "usuario": "joelerll",
       "rol": "empleado"
     },
@@ -56,8 +56,8 @@ module.exports = {
       "cedula": "09365823447",
       "clave": "123396",
       "telefono": "2033698",
-      "fecha_nacimiento": "1995-05-21T19:27:28.576Z",
-      "perfil_ocupacional": "espol",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+      "perfilOcupacional": "espol",
       "usuario": "joelerll",
       "rol": "empleado"
     }

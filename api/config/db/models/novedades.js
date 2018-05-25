@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     nombre: { type: DataTypes.STRING },
     prioridad: { type: DataTypes.ENUM('alta', 'media', 'baja') },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    foto_url: { type: DataTypes.STRING },
-    fue_atendida: { type: DataTypes.STRING, defaultValue: false },
+    fotoUrl: { type: DataTypes.STRING },
+    fueAtendida: { type: DataTypes.STRING, defaultValue: false },
 
     // FK
-    puestos_id: { type: DataTypes.INTEGER.UNSIGNED }
+    puestosId: { type: DataTypes.INTEGER.UNSIGNED }
   },{
   name :{
     singular,
@@ -30,17 +30,17 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: 'puestos_id', targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' })
   }
 
-  define.Crear = function ({ nombre, descripcion, prioridad, foto_url, puestos_id }) {
+  define.Crear = function ({ nombre, descripcion, prioridad, fotoUrl, puestosId }) {
     return new Promise( (resolve, reject) => {
       return this.create({
         nombre,
         descripcion,
         prioridad,
-        foto_url,
-        puestos_id
+        fotoUrl,
+        puestosId
       })
       .then((resp) => {
         return resolve(resp.get({ plain: true }))
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll({
         raw: true,
         where: {
-          puestos_id: id
+          puestosId: id
         }
       })
       .then((novedades) => {
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
   define.Atender = function ({ id, atendida, descripcionAtendida, nombre }) {
     return new Promise((resolve, reject) => {
       return this.update(
-        { fue_atendida: atendida, descripcion: descripcionAtendida, nombre },
+        { fueAtendida: atendida, descripcion: descripcionAtendida, nombre },
         {where: { id: id } })
       .then((resp) => {
         return resolve(resp)

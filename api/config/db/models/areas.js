@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     actividad: { type: DataTypes.STRING },
     nombre: { type: DataTypes.STRING },
-    foto_url: { type: DataTypes.STRING },
-    metros_cuadrados: { type: DataTypes.STRING },
-    descripcion_lugar: { type: DataTypes.STRING }
+    fotoUrl: { type: DataTypes.STRING },
+    metrosCuadrados: { type: DataTypes.STRING },
+    descripcionLugar: { type: DataTypes.STRING }
   }, {
     name : {
       singular,
@@ -23,20 +23,20 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientos_id', targetKey: 'id' })
-    define.belongsToMany(models.puestos , { through: 'areas_puestos', foreignKey: `areas_id` })
-    define.belongsToMany(models.equipos, { through: 'equipos_areas', foreignKey: `areas_id` })
+    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientosId', targetKey: 'id' })
+    define.belongsToMany(models.puestos , { through: 'areasPuestos', foreignKey: `areasId` })
+    define.belongsToMany(models.equipos, { through: 'equiposAreas', foreignKey: `areasId` })
   }
 
-  define.Crear = function ({ actividad, nombre, foto_url, metros_cuadrados, descripcion_lugar, establecimientos_id }) {
+  define.Crear = function ({ actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }) {
     return new Promise((resolve, reject) => {
       return this.create({
         actividad,
         nombre,
-        foto_url,
-        metros_cuadrados,
-        descripcion_lugar,
-        establecimientos_id
+        fotoUrl,
+        metrosCuadrados,
+        descripcionLugar,
+        establecimientosId
       })
       .then((area) => {
         return resolve(area.get({ plain: true }))

@@ -3,8 +3,8 @@ module.exports = {
     [
       {
         "nombre": "El Barata",
-        "actividad_comercial": "Ventas de telas y otros",
-        "razon_social": "09326545654"
+        "actividadComercial": "Ventas de telas y otros",
+        "razonSocial": "09326545654"
       }
     ]
   ]

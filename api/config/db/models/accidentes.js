@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: `puestos_id`,  targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: `puestosId`,  targetKey: 'id' })
   }
 
-  define.Crear = function ({ descripcion, nombre, heridos, atendido_en_empresa, muertos ,fecha, puestos_id }) {
+  define.Crear = function ({ descripcion, nombre, heridos, atendidoEnEmpresa, muertos ,fecha, puestosId }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll({
         raw: true,
         where: {
-          puestos_id: id
+          puestosId: id
         }
       })
       .then((resp) => {

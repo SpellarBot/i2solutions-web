@@ -3,23 +3,23 @@ module.exports = {
     {
       "actividad": "gerencia",
       "nombre": "Gerente General",
-      "foto_url": "",
-      "metros_cuadrados": "1x1",
-      "descripcion_lugar": ""
+      "fotoUrl": "",
+      "metrosCuadrados": "1x1",
+      "descripcionLugar": ""
     },
     {
       "actividad": "recursos humanos",
       "nombre": "Jefe TTHH",
-      "foto_url": "",
-      "metros_cuadrados": "2x2",
-      "descripcion_lugar": ""
+      "fotoUrl": "",
+      "metrosCuadrados": "2x2",
+      "descripcionLugar": ""
     },
     {
       "actividad": "subgerencia",
       "nombre": "Subgerente",
-      "foto_url": "",
-      "metros_cuadrados": "2x2",
-      "descripcion_lugar": ""
+      "fotoUrl": "",
+      "metrosCuadrados": "2x2",
+      "descripcionLugar": ""
     }
   ]
 }

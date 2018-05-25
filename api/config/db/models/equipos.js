@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     descripcion: { type: DataTypes.STRING },
     nombre: { type: DataTypes.STRING },
-    foto_url: { type: DataTypes.STRING }
+    fotoUrl: { type: DataTypes.STRING }
 
   },{
   name :{
@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.areas , { through: 'equipos_areas', foreignKey: `equipos_id` })
-    define.belongsToMany(models.puestos , { through: 'equipos_puestos', foreignKey: `equipos_id` })
+    define.belongsToMany(models.areas , { through: 'equiposAreas', foreignKey: `equiposId` })
+    define.belongsToMany(models.puestos , { through: 'equiposPuestos', foreignKey: `equiposId` })
   }
 
-  define.Crear = function ({ descripcion, nombre, foto_url }) {
+  define.Crear = function ({ descripcion, nombre, fotoUrl }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)

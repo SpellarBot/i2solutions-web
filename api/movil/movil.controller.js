@@ -12,8 +12,8 @@ module.exports = ({ responses, MovilDAL }) => {
           })
       })
     },
-    CrearNovedad ({ nombre, descripcion, prioridad, fotoUrl, puesto_id }) {
-      let datos = { nombre, descripcion, prioridad, fotoUrl, puesto_id }
+    CrearNovedad ({ nombre, descripcion, prioridad, fotoUrl, puestoId }) {
+      let datos = { nombre, descripcion, prioridad, fotoUrl, puestoId }
       return new Promise((resolve, reject) => {
         MovilDAL.CrearNovedad(datos)
         .then((novedadNueva) => {

@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 
   define.associate = function (models) {
     // define.hasMany(models.EquiposSeguridad, {as : 'Equipos'})
-    define.belongsToMany(models.areas, { through: 'areas_puestos', foreignKey: `puestos_id` })
-    define.belongsToMany(models.personas, { through: 'personas_puestos', foreignKey: `puestos_id` })
-    define.belongsToMany(models.equipos, { through: 'equipos_puestos', foreignKey: `puestos_id` })
+    define.belongsToMany(models.areas, { through: 'areasPuestos', foreignKey: `puestosId` })
+    define.belongsToMany(models.personas, { through: 'personasPuestos', foreignKey: `puestosId` })
+    define.belongsToMany(models.equipos, { through: 'equiposPuestos', foreignKey: `puestosId` })
   }
 
   define.Crear = function ({ nombre, descripcion }) {
@@ -54,7 +54,6 @@ module.exports = (sequelize, DataTypes) => {
         ]
       })
       .then((puesto) => {
-        // console.log(puesto)
         return resolve(puesto)
       })
       .catch((err) => {

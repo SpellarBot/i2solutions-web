@@ -1,8 +1,8 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'personas_capacitaciones'
-  let plural = 'personas_capacitaciones'
-  let tableName = 'personas_capacitaciones'
+  let singular = 'personasPuestos'
+  let plural = 'personasPuestos'
+  let tableName = 'personasPuestos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false }
   },{
@@ -21,12 +21,32 @@ module.exports = (sequelize, DataTypes) => {
 
   }
 
-  define.Crear = function ({ personas_id, capacitaciones_id }) {
+  define.Crear = function ({ personasId, puestosId }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)
       .then((resp) => {
         return resolve(resp.get({ plain: true }))
+      })
+      .catch((err) => {
+        return reject(err)
+      })
+    })
+  }
+
+  define.ObtenerPorPuesto = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      return this.findOne({
+        raw: true,
+        where: {
+          id
+        },
+        include: [{
+          model: sequelize.models['personas']
+        }]
+      })
+      .then((puesto) => {
+        return resolve(puesto)
       })
       .catch((err) => {
         return reject(err)

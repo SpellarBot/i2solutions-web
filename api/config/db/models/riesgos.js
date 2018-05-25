@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
   let tableName = 'riesgos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
-    tipo_riesgo: { type: DataTypes.STRING },
-    personas_expuestas: { type: DataTypes.INTEGER },
+    tipoRiesgo: { type: DataTypes.STRING },
+    personasExpuestas: { type: DataTypes.INTEGER },
     valoracion: { type: DataTypes.STRING },
-    valoracion_literal: { type: DataTypes.STRING },
+    valoracionLiteral: { type: DataTypes.STRING },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    porcentaje_riesgo: { type: DataTypes.INTEGER }
+    porcentajeRiesgo: { type: DataTypes.INTEGER }
   },{
   name :{
     singular,
@@ -24,16 +24,16 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: 'puestos_id', targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' })
   }
 
   define.Crear = function ({
-    tipo_riesgo,
-    personas_expuestas,
+    tipoRiesgo,
+    personasExpuestas,
     valoracion,
-    valoracion_literal,
+    valoracionLiteral,
     fecha,
-    porcentaje_riesgo
+    porcentajeRiesgo
     }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {

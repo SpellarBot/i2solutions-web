@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.empresas, { foreignKey: `empresas_id`,  targetKey: 'id' })
-    define.belongsToMany(models.personas , { through: 'personas_establecimientos', foreignKey: `establecimientos_id` })
+    define.belongsTo(models.empresas, { foreignKey: `empresasId`,  targetKey: 'id' })
+    define.belongsToMany(models.personas , { through: 'personasEstablecimientos', foreignKey: `establecimientosId` })
   }
 
-  define.Crear = function ({ nombres, direccion, ruc, empresas_id }) {
+  define.Crear = function ({ nombres, direccion, ruc, empresasId }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)

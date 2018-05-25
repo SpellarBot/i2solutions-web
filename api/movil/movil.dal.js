@@ -1,16 +1,8 @@
 module.exports = ({ db }) => {
-  let AreasTrabajo = db.areas
-  let Areas_PuestosTrabajo = db.areas_puestos
-  let PuestosTrabajo = db.puestos
-  let Personas_PuestosTrabajo = db.personas_puestos
-  let Novedad = db.novedades
-  let Riesgo = db.riesgos
-  let Accidente = db.accidentes
-  let Capacitacion = db.capacitaciones
   const proto = {
     ObtenerPuestoTrabajoPorAreaId ({ areaId }) {
       return new Promise((resolve, reject) => {
-        AreasTrabajo.ObtenerPuestos({ id: areaId }).then((puestos) => {
+        db.areas.ObtenerPuestos({ id: areaId }).then((puestos) => {
           resolve(puestos)
         }).catch(err => {
           reject(err)
@@ -19,7 +11,7 @@ module.exports = ({ db }) => {
     },
     CrearNovedad (datos) {
       return new Promise((resolve, reject) => {
-        Novedad.Crear(datos).then((novedad) => {
+        db.novedades.Crear(datos).then((novedad) => {
           resolve(novedad)
         }).catch(err => {
           reject(err)
@@ -29,12 +21,12 @@ module.exports = ({ db }) => {
     CargarDatos ({ puestoId }) {
       return new Promise((resolve, reject) => {
         Promise.all([
-            PuestosTrabajo.obtenerPorId({ id: puestoId }),
-            Novedad.ObtenerPorPuesto({ id: puestoId }),
-            Riesgo.ObtenerPorPuesto({ id: puestoId }),
-            PuestosTrabajo.obtenerEquipos({ id: puestoId }),
-            Accidente.obtenerPorPuestoTrabajo({ id: puestoId }),
-            Capacitacion.ObtenerPorEstablecimiento({ id: puestoId })
+            db.puestos.obtenerPorId({ id: puestoId }),
+            db.novedades.ObtenerPorPuesto({ id: puestoId }),
+            db.riesgos.ObtenerPorPuesto({ id: puestoId }),
+            db.puestos.obtenerEquipos({ id: puestoId }),
+            db.accidentes.obtenerPorPuestoTrabajo({ id: puestoId }),
+            db.capacitaciones.ObtenerPorEstablecimiento({ id: puestoId })
           ])
         .then((datos) => {
           let puesto = datos[0]
@@ -47,17 +39,17 @@ module.exports = ({ db }) => {
             return {
               descripcion: equipo['equipos.descripcion'],
               nombre: equipo['equipos.nombre'],
-              foto_url: equipo['equipos.foto_url'],
+              foto_url: equipo['equipos.fotoUrl'],
 
             }
           })
           let novedadesSinAtender = novedades.filter((novedad) => {
-            if (novedad['fue_atendida'] === '0') {
+            if (novedad['fueAtendida'] === '0') {
               return novedad
             }
           })
           let novedadesAtendidas = novedades.filter((novedad) => {
-            if (novedad['fue_atendida'] === '1') {
+            if (novedad['fueAtendida'] === '1') {
               return novedad
             }
           })
@@ -69,7 +61,7 @@ module.exports = ({ db }) => {
               id: puestoTmp['id'],
               nombre: puestoTmp['nombre'],
               descripcion: puestoTmp['descripcion'],
-              area_id: puestoTmp['areas.id']
+              areaId: puestoTmp['areas.id']
             }
           }
 
@@ -91,7 +83,7 @@ module.exports = ({ db }) => {
     ActualizarEstadoNovedad ({ nombre, id, atendida, descripcionAtendida }) {
       return new Promise((resolve, reject) => {
         let datos = arguments['0']
-        Novedad.Atender(datos)
+        db.novedades.Atender(datos)
         .then((resp) => {
           resolve(resp)
         }).catch(err => {
