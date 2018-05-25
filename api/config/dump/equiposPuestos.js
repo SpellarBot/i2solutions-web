@@ -1,13 +1,13 @@
 module.exports = {
   VALIDOS: [
     {
-      "cantidad": 1
+      'cantidad': 1
     },
     {
-      "cantidad": 3
+      'cantidad': 3
     },
     {
-      "cantidad": 4
+      'cantidad': 4
     }
   ]
 }

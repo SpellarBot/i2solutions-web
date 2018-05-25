@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 
     // PROPERTIES
     descripcion: { type: DataTypes.STRING },
+    // descripcionAtendida: { type: DataTypes.STRING }, AGREGADA EN MIGRACION
     nombre: { type: DataTypes.STRING },
     prioridad: { type: DataTypes.ENUM('alta', 'media', 'baja') },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
@@ -17,11 +18,11 @@ module.exports = (sequelize, DataTypes) => {
 
     // FK
     puestosId: { type: DataTypes.INTEGER.UNSIGNED }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -34,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   define.Crear = function ({ nombre, descripcion, prioridad, fotoUrl, puestosId }) {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create({
         nombre,
         descripcion,
@@ -42,12 +43,12 @@ module.exports = (sequelize, DataTypes) => {
         fotoUrl,
         puestosId
       })
-      .then((resp) => {
-        return resolve(resp.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -59,26 +60,26 @@ module.exports = (sequelize, DataTypes) => {
           puestosId: id
         }
       })
-      .then((novedades) => {
-        return resolve(novedades)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((novedades) => {
+          return resolve(novedades)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
   define.Atender = function ({ id, atendida, descripcionAtendida, nombre }) {
     return new Promise((resolve, reject) => {
       return this.update(
-        { fueAtendida: atendida, descripcion: descripcionAtendida, nombre },
-        {where: { id: id } })
-      .then((resp) => {
-        return resolve(resp)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        { fueAtendida: atendida, descripcionAtendida, nombre },
+        { where: { id: id } })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

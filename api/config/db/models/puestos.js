@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombre: { type: DataTypes.STRING },
     descripcion: { type: DataTypes.STRING }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 
   define.associate = function (models) {
     // define.hasMany(models.EquiposSeguridad, {as : 'Equipos'})
-    define.belongsToMany(models.areas, { through: 'areasPuestos', foreignKey: `puestosId` })
-    define.belongsToMany(models.personas, { through: 'personasPuestos', foreignKey: `puestosId` })
-    define.belongsToMany(models.equipos, { through: 'equiposPuestos', foreignKey: `puestosId` })
+    define.belongsToMany(models.areas, { through: 'areasPuestos', foreignKey: 'puestosId' })
+    define.belongsToMany(models.personas, { through: 'personasPuestos', foreignKey: 'puestosId' })
+    define.belongsToMany(models.equipos, { through: 'equiposPuestos', foreignKey: 'puestosId' })
   }
 
   define.Crear = function ({ nombre, descripcion }) {
@@ -32,12 +32,12 @@ module.exports = (sequelize, DataTypes) => {
         nombre,
         descripcion
       })
-      .then((areas) => {
-        return resolve(areas.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((areas) => {
+          return resolve(areas.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -49,16 +49,16 @@ module.exports = (sequelize, DataTypes) => {
           id
         },
         include: [
-        { model: sequelize.models['areas'],attributes: ['id'] },
-        { model: sequelize.models['personas'] }
+          { model: sequelize.models['areas'], attributes: ['id'] },
+          { model: sequelize.models['personas'] }
         ]
       })
-      .then((puesto) => {
-        return resolve(puesto)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((puesto) => {
+          return resolve(puesto)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -73,12 +73,12 @@ module.exports = (sequelize, DataTypes) => {
           { model: sequelize.models['equipos'] }
         ]
       })
-      .then((resp) => {
-        return resolve(resp)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     nombre: { type: DataTypes.STRING },
     actividadComercial: { type: DataTypes.STRING },
     razonSocial: { type: DataTypes.STRING }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -26,14 +26,14 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Crear = function ({ nombres, actividadComercial, razonSocial }) {
     let datos = arguments['0']
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create(datos)
-      .then((resp) => {
-        return resolve(resp.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

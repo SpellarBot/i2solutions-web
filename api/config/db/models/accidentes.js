@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     atendido_en_empresa: { type: DataTypes.BOOLEAN },
     muertos: { type: DataTypes.INTEGER },
     fecha: { type: DataTypes.DATE }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -24,19 +24,19 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: `puestosId`,  targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' })
   }
 
-  define.Crear = function ({ descripcion, nombre, heridos, atendidoEnEmpresa, muertos ,fecha, puestosId }) {
+  define.Crear = function ({ descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId }) {
     let datos = arguments['0']
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create(datos)
-      .then((resp) => {
-        return resolve(resp.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -48,12 +48,12 @@ module.exports = (sequelize, DataTypes) => {
           puestosId: id
         }
       })
-      .then((resp) => {
-        return resolve(resp)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

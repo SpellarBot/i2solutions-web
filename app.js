@@ -22,10 +22,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const app = express()
+const cors = require('cors')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(ignoreFavicon)
+app.use(cors())
+
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('tiny'))

@@ -1,16 +1,16 @@
 module.exports = {
   VALIDOS: [
     {
-      "rol": "inspector"
+      'rol': 'inspector'
     },
     {
-      "rol": "jefe"
+      'rol': 'jefe'
     },
     {
-      "rol": "empleado"
+      'rol': 'empleado'
     },
     {
-      "rol": "empleado"
+      'rol': 'empleado'
     }
   ]
 }

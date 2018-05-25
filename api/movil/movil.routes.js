@@ -9,7 +9,7 @@ const app = express()
 const MovilDAL = require('./movil.dal')({ db })
 const Controller = controller({ responses, MovilDAL })
 
-app.route('/puesto_trabajo/area_trabajo/:areaId')
+app.route('/puestosDeUnArea/:areaId')
   .get((req, res) => {
     Controller.PuestosDeAreaTrabajo(req.params).then(resp => {
       res.status(resp.codigoEstado)
@@ -31,7 +31,6 @@ app.route('/novedad')
     })
   })
 
-
 app.route('/area/:areaId/puesto/:puestoId/:establecimientoId')
   .get((req, res) => {
     Controller.CargarDatos(req.params).then(resp => {
@@ -43,7 +42,7 @@ app.route('/area/:areaId/puesto/:puestoId/:establecimientoId')
     })
   })
 
-app.route('/novedad/:novedadId/puesto_trabajo/:puestoId')
+app.route('/novedad/:novedadId/puesto/:puestoId')
   .post((req, res) => {
     const id = req.params['novedadId']
     const { atendida, descripcionAtendida, nombre } = req.body
@@ -55,7 +54,6 @@ app.route('/novedad/:novedadId/puesto_trabajo/:puestoId')
       res.json(resp)
     })
   })
-
 
 app.route('*')
   .get((req, res) => {

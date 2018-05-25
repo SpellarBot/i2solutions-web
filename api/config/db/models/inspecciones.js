@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     fechaInicio: { type: DataTypes.DATE },
     tipoInspeccion: { type: DataTypes.STRING },
     fechaFin: { type: DataTypes.DATE }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -27,14 +27,14 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Crear = function ({ nombre, fechaInicio, tipoInspeccion, fechaFin }) {
     let datos = arguments['0']
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create(datos)
-      .then((resp) => {
-        return resolve(resp.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

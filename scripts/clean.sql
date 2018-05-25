@@ -1,20 +1,20 @@
 -- mysql -u USERNAME -p DATABASE_NAME < scripts.sql
+
 set FOREIGN_KEY_CHECKS=0;
 DROP TABLE accidentes;
 DROP TABLE areas;
-DROP TABLE areas_puestos;
+DROP TABLE areasPuestos;
 DROP TABLE capacitaciones;
 DROP TABLE empresas;
 DROP TABLE equipos;
-DROP TABLE equipos_areas;
+DROP TABLE equiposAreas;
+DROP TABLE equiposPuestos;
 DROP TABLE establecimientos;
 DROP TABLE inspecciones;
 DROP TABLE novedades;
 DROP TABLE personas;
-DROP TABLE personas_capacitaciones;
-DROP TABLE personas_establecimientos;
-DROP TABLE personas_puestos;
+DROP TABLE personasCapacitaciones;
+DROP TABLE personasEstablecimientos;
+DROP TABLE personasPuestos;
 DROP TABLE puestos;
-DROP TABLE puestos_equipos;
 DROP TABLE riesgos;
-DROP TABLE equipos_puestos;

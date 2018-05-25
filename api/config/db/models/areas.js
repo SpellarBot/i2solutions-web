@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     metrosCuadrados: { type: DataTypes.STRING },
     descripcionLugar: { type: DataTypes.STRING }
   }, {
-    name : {
+    name: {
       singular,
       plural
     },
@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
 
   define.associate = function (models) {
     define.belongsTo(models.establecimientos, { foreignKey: 'establecimientosId', targetKey: 'id' })
-    define.belongsToMany(models.puestos , { through: 'areasPuestos', foreignKey: `areasId` })
-    define.belongsToMany(models.equipos, { through: 'equiposAreas', foreignKey: `areasId` })
+    define.belongsToMany(models.puestos, { through: 'areasPuestos', foreignKey: 'areasId' })
+    define.belongsToMany(models.equipos, { through: 'equiposAreas', foreignKey: 'areasId' })
   }
 
   define.Crear = function ({ actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }) {
@@ -38,12 +38,12 @@ module.exports = (sequelize, DataTypes) => {
         descripcionLugar,
         establecimientosId
       })
-      .then((area) => {
-        return resolve(area.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((area) => {
+          return resolve(area.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -61,19 +61,19 @@ module.exports = (sequelize, DataTypes) => {
           }
         }]
       })
-      .then((puestos) => {
-        let resp = puestos.map(puesto => {
-          return {
-            id: puesto['puestos.id'],
-            nombre: puesto['puestos.nombre'],
-            descripcion: puesto['puestos.descripcion'],
-          }
+        .then((puestos) => {
+          let resp = puestos.map(puesto => {
+            return {
+              id: puesto['puestos.id'],
+              nombre: puesto['puestos.nombre'],
+              descripcion: puesto['puestos.descripcion']
+            }
+          })
+          return resolve(resp)
         })
-        return resolve(resp)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 

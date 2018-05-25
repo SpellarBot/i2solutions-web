@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     nombre: { type: DataTypes.STRING },
     fotoUrl: { type: DataTypes.STRING }
 
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -22,20 +22,20 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.areas , { through: 'equiposAreas', foreignKey: `equiposId` })
-    define.belongsToMany(models.puestos , { through: 'equiposPuestos', foreignKey: `equiposId` })
+    define.belongsToMany(models.areas, { through: 'equiposAreas', foreignKey: 'equiposId' })
+    define.belongsToMany(models.puestos, { through: 'equiposPuestos', foreignKey: 'equiposId' })
   }
 
   define.Crear = function ({ descripcion, nombre, fotoUrl }) {
     let datos = arguments['0']
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create(datos)
-      .then((resp) => {
-        return resolve(resp.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

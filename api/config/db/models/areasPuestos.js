@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
   let tableName = 'areasPuestos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -22,17 +22,17 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   define.Crear = function ({ areasId, puestosId }) {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create({
         areasId,
         puestosId
       })
-      .then((areas) => {
-        return resolve(areas.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((areas) => {
+          return resolve(areas.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define

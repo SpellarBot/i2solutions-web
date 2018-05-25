@@ -30,11 +30,45 @@ Ubuntu 16.04 LTS
 
 ## Development
 
-Commits 
+#### Si se corre por primera vez
+
+1. Cargar el sql de prueba inicial
+
+2. Cargar las migraciones
+```
+yarn db:migrate
+```
+
+
+##### Commits 
 
 [Sprint #] "nombre_historia_usuario" Tarea(s) #
 
 Ej: [Sprint 3] “Consultar Plan Nutricional (paciente)” Tarea #105, #106
+
+__squash commits__
+
+1. Para subir a github se tiene que hacer squash
+```sh
+```
+
+2. Para subir a heroku hay que forzarlo por el squash si es que se necesite
+
+```sh
+git push heroku master --force
+```
+
+#### Generar modelos
+
+```sh
+node_modules/.bin/sequelize model:generate --name User --attributes firstName:string
+```
+
+#### Corre las migraciones
+
+```
+yarn db:migrate
+```
 
 #### Aplicación server
 

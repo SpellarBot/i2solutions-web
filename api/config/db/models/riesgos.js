@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     valoracionLiteral: { type: DataTypes.STRING },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     porcentajeRiesgo: { type: DataTypes.INTEGER }
-  },{
-  name :{
-    singular,
-    plural
-  },
+  }, {
+    name: {
+      singular,
+      plural
+    },
     tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
@@ -34,16 +34,16 @@ module.exports = (sequelize, DataTypes) => {
     valoracionLiteral,
     fecha,
     porcentajeRiesgo
-    }) {
+  }) {
     let datos = arguments['0']
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return this.create(datos)
-      .then((resp) => {
-        return resolve(resp.get({ plain: true }))
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((resp) => {
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -55,12 +55,12 @@ module.exports = (sequelize, DataTypes) => {
           id
         }
       })
-      .then((res) => {
-        return resolve(res)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
+        .then((res) => {
+          return resolve(res)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
   return define
