@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.associate = function (models) {
     define.belongsToMany(models.areas , { through: 'equipos_areas', foreignKey: `equipos_id` })
-    define.belongsToMany(models.puestos , { through: 'puestos_equipos', foreignKey: `equipos_id` })
+    define.belongsToMany(models.puestos , { through: 'equipos_puestos', foreignKey: `equipos_id` })
   }
 
   define.Crear = function ({ descripcion, nombre, foto_url }) {

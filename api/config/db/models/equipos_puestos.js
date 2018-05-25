@@ -1,8 +1,8 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'puestos_equipos'
-  let plural = 'puestos_equipos'
-  let tableName = 'puestos_equipos'
+  let singular = 'equipos_puestos'
+  let plural = 'equipos_puestos'
+  let tableName = 'equipos_puestos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     cantidad: { type: DataTypes.INTEGER }

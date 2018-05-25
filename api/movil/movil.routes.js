@@ -9,9 +9,6 @@ const app = express()
 const MovilDAL = require('./movil.dal')({ db })
 const Controller = controller({ responses, MovilDAL })
 
-// Los 3 endpoints primeros estan en orden de uso
-
-// Obtener todas los puestos de una area
 app.route('/puesto_trabajo/area_trabajo/:areaId')
   .get((req, res) => {
     Controller.PuestosDeAreaTrabajo(req.params).then(resp => {
@@ -46,11 +43,9 @@ app.route('/area/:areaId/puesto/:puestoId/:establecimientoId')
     })
   })
 
-// atender una novedad
 app.route('/novedad/:novedades_id/puesto_trabajo/:puesto_trabajo_id')
   .post((req, res) => {
-    const { novedades_id } = req.params
-    const id = novedades_id
+    const id = req.params['novedades_id']
     const { atendida, descripcionAtendida, nombre } = req.body
     Controller.ActualizarEstadoNovedad({ id, atendida, descripcionAtendida, nombre }).then(resp => {
       res.status(resp.codigoEstado)

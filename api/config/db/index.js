@@ -91,6 +91,7 @@ const Conectar = () => {
           password: process.env.DATABASE_PASSWORD
         })
         mysqlConnection.query(sql)
+        mysqlConnection.end()
       }
       // sequelize.sync()
     } else {
@@ -103,11 +104,11 @@ const Conectar = () => {
         sequelize.query('set FOREIGN_KEY_CHECKS=0').then((resp) => { // para mysql
           if (process.env.NODE_ENV === 'development')
             console.log('Connection has been established successfully.')
-          resolve(db)
+          return resolve(db)
         })
       } else {
         sequelize.query('PRAGMA foreign_keys = OFF') // para sqlite
-        resolve()
+        return resolve()
       }
     })
     .catch(err => {

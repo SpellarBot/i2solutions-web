@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     fecha_nacimiento: { type: DataTypes.STRING },
     perfil_ocupacional: { type: DataTypes.STRING },
     usuario: { type: DataTypes.STRING },
-    rol: { type: DataTypes.STRING } // inspector, jefe, empleado
+    rol: { type: DataTypes.STRING }
   },{
   name :{
     singular,

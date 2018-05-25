@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     // define.hasMany(models.EquiposSeguridad, {as : 'Equipos'})
     define.belongsToMany(models.areas, { through: 'areas_puestos', foreignKey: `puestos_id` })
     define.belongsToMany(models.personas, { through: 'personas_puestos', foreignKey: `puestos_id` })
-    define.belongsToMany(models.equipos, { through: 'puestos_equipos', foreignKey: `puestos_id` })
+    define.belongsToMany(models.equipos, { through: 'equipos_puestos', foreignKey: `puestos_id` })
   }
 
   define.Crear = function ({ nombre, descripcion }) {

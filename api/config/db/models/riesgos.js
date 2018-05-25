@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     tipo_riesgo: { type: DataTypes.STRING },
-    personas_expuestas: { type: DataTypes.STRING },
+    personas_expuestas: { type: DataTypes.INTEGER },
     valoracion: { type: DataTypes.STRING },
     valoracion_literal: { type: DataTypes.STRING },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    porcentaje_riesgo: { type: DataTypes.STRING }
+    porcentaje_riesgo: { type: DataTypes.INTEGER }
   },{
   name :{
     singular,

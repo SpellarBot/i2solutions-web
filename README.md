@@ -11,6 +11,7 @@ production -->
 [![Coverage Status](https://codecov.io/gh/joelerll/ppl_app_lab/branch/develop_v2/graph/badge.svg)](https://codecov.io/gh/joelerll/ppl_app_lab/branch/develop_v2) -->
 
 # I2Solutions Web
+
 https://i2s-app.herokuapp.com/
 
 ## Documentación

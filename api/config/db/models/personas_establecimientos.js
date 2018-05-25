@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   let tableName = 'personas_establecimientos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
-    rol: { type: DataTypes.STRING }
+    rol: { type: DataTypes.ENUM('inspector', 'jefe', 'empleado') }
   },{
   name :{
     singular,
