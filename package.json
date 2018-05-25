@@ -12,7 +12,7 @@
     "test": "npm-run-all lint test:m:r",
     "lint": "eslint app.js server.js api/** scripts/**",
     "docs": "gitbook build .",
-    "docs:s": "gitbook serve ."
+    "docs:s": "gitbook serve . "
   },
   "dependencies": {
     "ajv": "^6.5.0",
