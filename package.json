@@ -6,6 +6,7 @@
   "scripts": {
     "prueba": "cross-env NODE_ENV=development env-cmd .env  node prueba.js",
     "dev": "cross-env NODE_ENV=development env-cmd .env nodemon server.js --config nodemon.js",
+    "db:init": "cross-env NODE_ENV=development env-cmd .env node scripts/init.js",
     "test:m:r": "cross-env NODE_ENV=testing env-cmd .env mocha --opts api/movil/test/mocha.opts api/movil/test/movil.routes.test.js"
   },
   "dependencies": {

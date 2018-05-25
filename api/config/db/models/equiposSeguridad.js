@@ -1,8 +1,8 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'EquiposSeguridad'
-  let plural = 'EquiposSeguridades'
-  let tableName = 'equiposSeguridad'
+  let singular = 'equipos'
+  let plural = 'equipos'
+  let tableName = 'equipos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     descripcion: { type: DataTypes.STRING },
@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
   },{
   name :{
     singular,
-    plural,
-    tableName
+    plural
   },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.AreasTrabajo , { through: 'EquiposSeguridad_AreasTrabajo', foreignKey: `equipos_id` })
-    define.belongsToMany(models.PuestosTrabajo , { through: 'PuestosTrabajo_Equipo', foreignKey: `equipos_id` })
+    define.belongsToMany(models.areas , { through: 'equipos_areas', foreignKey: `equipos_id` })
+    define.belongsToMany(models.puestos , { through: 'puestos_equipos', foreignKey: `equipos_id` })
   }
 
   define.Crear = function ({ descripcion, nombre, foto_url }) {

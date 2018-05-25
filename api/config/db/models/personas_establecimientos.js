@@ -1,7 +1,7 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'Personas_Establecimiento'
-  let plural = 'Personas_Establecimientos'
+  let singular = 'personas_establecimientos'
+  let plural = 'personas_establecimientos'
   let tableName = 'personas_establecimientos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   },{
   name :{
     singular,
-    plural,
-    tableName
+    plural
   },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',

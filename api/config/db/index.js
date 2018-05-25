@@ -14,7 +14,7 @@ let database = `i2solutions_${process.env.NODE_ENV}`
 if (process.env.HEROKU) {
   database = process.env.DB_NAME
 }
-
+// console.log(process.env.DATABASE_HOST)
 let logging = true
 if (process.env.NODE_ENV === 'testing')
   logging = false
@@ -79,7 +79,7 @@ Object.keys(db).forEach(function(modelName) {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
-
+// https://gist.github.com/JoeKarlsson/ebb1c714466ae3de88ae565fa9ba4779
 const Conectar = () => {
   return new Promise(function(resolve, reject) {
     if (process.env.NODE_ENV !== 'production') {
@@ -92,18 +92,18 @@ const Conectar = () => {
         })
         mysqlConnection.query(sql)
       }
-      sequelize.sync()
+      // sequelize.sync()
     } else {
-      sequelize.sync()
+      // sequelize.sync()
     }
     sequelize
-    .authenticate()
+    .sync()
     .then(() => {
       if (process.env.NODE_ENV !== 'testing') {
         sequelize.query('set FOREIGN_KEY_CHECKS=0').then((resp) => { // para mysql
           if (process.env.NODE_ENV === 'development')
             console.log('Connection has been established successfully.')
-          resolve()
+          resolve(db)
         })
       } else {
         sequelize.query('PRAGMA foreign_keys = OFF') // para sqlite

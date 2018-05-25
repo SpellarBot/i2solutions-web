@@ -1,8 +1,8 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'PuestosTrabajo'
-  let plural = 'PuestosTrabajos'
-  let tableName = 'puestosTrabajo'
+  let singular = 'puestos'
+  let plural = 'puestos'
+  let tableName = 'puestos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombre: { type: DataTypes.STRING },
@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
   },{
   name :{
     singular,
-    plural,
-    tableName
+    plural
   },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',
@@ -20,11 +20,10 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.hasMany(models.EquiposSeguridad, {as : 'Equipos'})
-    define.belongsToMany(models.AreasTrabajo , { through: 'AreasTrabajo_PuestosTrabajo', foreignKey: `puestos_trabajo_id` })
-    define.belongsToMany(models.Persona, { through: 'Personas_PuestosTrabajo', foreignKey: `puestos_trabajo_id` })
-    define.belongsToMany(models.EquiposSeguridad , { through: 'PuestosTrabajo_Equipo', foreignKey: `puestos_trabajo_id` })
-
+    // define.hasMany(models.EquiposSeguridad, {as : 'Equipos'})
+    define.belongsToMany(models.areas, { through: 'areas_puestos', foreignKey: `puestos_id` })
+    define.belongsToMany(models.personas, { through: 'personas_puestos', foreignKey: `puestos_id` })
+    define.belongsToMany(models.equipos, { through: 'puestos_equipos', foreignKey: `puestos_id` })
   }
 
   define.Crear = function ({ nombre, descripcion }) {
@@ -50,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
           id
         },
         include: [
-        { model: sequelize.models['AreasTrabajo'],attributes: ['id'] },
-        { model: sequelize.models['Persona'] }
+        { model: sequelize.models['areas'],attributes: ['id'] },
+        { model: sequelize.models['personas'] }
         ]
       })
       .then((puesto) => {
@@ -72,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
           id
         },
         include: [
-        { model: sequelize.models['EquiposSeguridad'] }
+          { model: sequelize.models['equipos'] }
         ]
       })
       .then((resp) => {

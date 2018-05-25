@@ -1,8 +1,8 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'Riesgo'
-  let plural = 'Riesgos'
-  let tableName = 'valoracionRiesgo'
+  let singular = 'riesgos'
+  let plural = 'riesgos'
+  let tableName = 'riesgos'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     tipo_riesgo: { type: DataTypes.STRING },
@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   },{
   name :{
     singular,
-    plural,
-    tableName
+    plural
   },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.PuestosTrabajo, { foreignKey: 'puestos_trabajo_id', targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: 'puestos_id', targetKey: 'id' })
   }
 
   define.Crear = function ({

@@ -1,8 +1,8 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  const singular = 'AreasTrabajo'
-  const plural = 'AreasTrabajos'
-  const tableName = 'areasTrabajo'
+  const singular = 'areas'
+  const plural = 'areas'
+  const tableName = 'areas'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     actividad: { type: DataTypes.STRING },
@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     name : {
       singular,
-      plural,
-      tableName
+      plural
     },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',
@@ -23,19 +23,20 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.Establecimiento, { foreignKey: 'establecimientos_id', targetKey: 'id' })
-    define.belongsToMany(models.PuestosTrabajo , { through: 'AreasTrabajo_PuestosTrabajo', foreignKey: `areas_trabajo_id` })
-    define.belongsToMany(models.EquiposSeguridad , { through: 'EquiposSeguridad_AreasTrabajo', foreignKey: `areas_trabajo_id` })
+    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientos_id', targetKey: 'id' })
+    define.belongsToMany(models.puestos , { through: 'areas_puestos', foreignKey: `areas_id` })
+    define.belongsToMany(models.equipos, { through: 'equipos_areas', foreignKey: `areas_id` })
   }
 
-  define.Crear = function ({ actividad, nombre, foto_url, metros_cuadrados, descripcion_lugar }) {
+  define.Crear = function ({ actividad, nombre, foto_url, metros_cuadrados, descripcion_lugar, establecimientos_id }) {
     return new Promise((resolve, reject) => {
       return this.create({
         actividad,
         nombre,
         foto_url,
         metros_cuadrados,
-        descripcion_lugar
+        descripcion_lugar,
+        establecimientos_id
       })
       .then((area) => {
         return resolve(area.get({ plain: true }))
@@ -54,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
           id
         },
         include: [{
-          model: sequelize.models['PuestosTrabajo'],
+          model: sequelize.models['puestos'],
           through: {
             attributes: ['nombre', 'descripcion']
           }
@@ -63,9 +64,9 @@ module.exports = (sequelize, DataTypes) => {
       .then((puestos) => {
         let resp = puestos.map(puesto => {
           return {
-            id: puesto['PuestosTrabajos.id'],
-            nombre: puesto['PuestosTrabajos.nombre'],
-            descripcion: puesto['PuestosTrabajos.descripcion'],
+            id: puesto['puestos.id'],
+            nombre: puesto['puestos.nombre'],
+            descripcion: puesto['puestos.descripcion'],
           }
         })
         return resolve(resp)

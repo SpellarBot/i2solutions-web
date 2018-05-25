@@ -1,12 +1,12 @@
 module.exports = ({ db }) => {
-  let AreasTrabajo = db.AreasTrabajo
-  let AreasTrabajo_PuestosTrabajo = db.AreasTrabajo_PuestosTrabajo
-  let PuestosTrabajo = db.PuestosTrabajo
-  let Personas_PuestosTrabajo = db.Personas_PuestosTrabajo
-  let Novedad = db.Novedad
-  let Riesgo = db.Riesgo
-  let Accidente = db.Accidente
-  let Capacitacion = db.Capacitacion
+  let AreasTrabajo = db.areas
+  let Areas_PuestosTrabajo = db.areas_puestos
+  let PuestosTrabajo = db.puestos
+  let Personas_PuestosTrabajo = db.personas_puestos
+  let Novedad = db.novedades
+  let Riesgo = db.riesgos
+  let Accidente = db.accidentes
+  let Capacitacion = db.capacitaciones
   const proto = {
     ObtenerPuestoTrabajoPorAreaId ({ areaId }) {
       return new Promise((resolve, reject) => {
@@ -39,14 +39,15 @@ module.exports = ({ db }) => {
         .then((datos) => {
           let puesto = datos[0]
           let novedades = datos[1]
+          // let novedades = []
           let riesgos = datos[2]
           let detallesCapacitaciones = datos[5]
           let detallesAccidentes = datos[4]
           let equiposProteccion = datos[3].map((equipo) => {
             return {
-              descripcion: equipo['EquiposSeguridades.descripcion'],
-              nombre: equipo['EquiposSeguridades.nombre'],
-              foto_url: equipo['EquiposSeguridades.foto_url'],
+              descripcion: equipo['equipos.descripcion'],
+              nombre: equipo['equipos.nombre'],
+              foto_url: equipo['equipos.foto_url'],
 
             }
           })
@@ -68,7 +69,7 @@ module.exports = ({ db }) => {
               id: puestoTmp['id'],
               nombre: puestoTmp['nombre'],
               descripcion: puestoTmp['descripcion'],
-              area_id: puestoTmp['AreasTrabajos.id']
+              area_id: puestoTmp['areas.id']
             }
           }
 

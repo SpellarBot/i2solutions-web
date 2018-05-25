@@ -1,7 +1,7 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'Accidente'
-  let plural = 'Accidentes'
+  let singular = 'accidentes'
+  let plural = 'accidentes'
   let tableName = 'accidentes'
   let define = sequelize.define(singular, {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   },{
   name :{
     singular,
-    plural,
-    tableName
+    plural
   },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',
@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.PuestosTrabajo, { foreignKey: `puestos_trabajo_id`,  targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: `puestos_id`,  targetKey: 'id' })
   }
 
-  define.Crear = function ({ descripcion, nombre, heridos, atendido_en_empresa, muertos ,fecha, puestos_trabajo_id }) {
+  define.Crear = function ({ descripcion, nombre, heridos, atendido_en_empresa, muertos ,fecha, puestos_id }) {
     let datos = arguments['0']
     return new Promise( (resolve, reject) => {
       return this.create(datos)
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll({
         raw: true,
         where: {
-          puestos_trabajo_id: id
+          puestos_id: id
         }
       })
       .then((resp) => {

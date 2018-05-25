@@ -1,7 +1,7 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'Novedad'
-  let plural = 'Novedades'
+  let singular = 'novedades'
+  let plural = 'novedades'
   let tableName = 'novedades'
   let define = sequelize.define(singular, {
     // PK
@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     fue_atendida: { type: DataTypes.STRING, defaultValue: false },
 
     // FK
-    puestos_trabajo_id: { type: DataTypes.INTEGER.UNSIGNED }
+    puestos_id: { type: DataTypes.INTEGER.UNSIGNED }
   },{
   name :{
     singular,
-    plural,
-    tableName
+    plural
   },
+    tableName,
     timestamps: true,
     updatedAt: 'fechaActualizacion',
     createdAt: 'fechaCreacion',
@@ -30,17 +30,17 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.PuestosTrabajo, { foreignKey: 'puestos_trabajo_id', targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: 'puestos_id', targetKey: 'id' })
   }
 
-  define.Crear = function ({ nombre, descripcion, prioridad, foto_url, puestos_trabajo_id }) {
+  define.Crear = function ({ nombre, descripcion, prioridad, foto_url, puestos_id }) {
     return new Promise( (resolve, reject) => {
       return this.create({
         nombre,
         descripcion,
         prioridad,
         foto_url,
-        puestos_trabajo_id
+        puestos_id
       })
       .then((resp) => {
         return resolve(resp.get({ plain: true }))
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll({
         raw: true,
         where: {
-          puestos_trabajo_id: id
+          puestos_id: id
         }
       })
       .then((novedades) => {
