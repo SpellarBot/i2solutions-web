@@ -3,7 +3,7 @@ const DB = require('./schema.db')
 const MOVIL = {
   API_1: {
     'type': 'array',
-    'items' : {
+    'items': {
       'type': 'object',
       ...DB.NOVEDADES
     },
@@ -14,4 +14,3 @@ const MOVIL = {
 module.exports = {
   MOVIL
 }
-
