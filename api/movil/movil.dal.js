@@ -91,6 +91,22 @@ module.exports = ({ db }) => {
             reject(err)
           })
       })
+    },
+    ObtenerNovedadesSinAtender ({ puestosId }) {
+      return new Promise((resolve, reject) => {
+        db.novedades.ObtenerPorPuesto({ id: puestosId })
+          .then((resp) => {
+            let novedadesSinAtender = resp.filter((novedad) => {
+              if (novedad['fueAtendida'] === '0') {
+                return novedad
+              }
+            })
+            console.log(novedadesSinAtender)
+            resolve(novedadesSinAtender)
+          }).catch(err => {
+            reject(err)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

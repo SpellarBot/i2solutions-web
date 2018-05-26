@@ -45,6 +45,18 @@ module.exports = ({ responses, MovilDAL }) => {
             reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    ObtenerNovedadesSinAtender ({ puestoId }) {
+      return new Promise((resolve, reject) => {
+        let datos = arguments['0']
+        MovilDAL.ObtenerNovedadesSinAtender(datos)
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch(err => {
+            console.error(err)
+            reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

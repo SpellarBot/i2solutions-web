@@ -52,6 +52,7 @@ __squash commits__
 ```sh
 ```
 
+
 2. Para subir a heroku hay que forzarlo por el squash si es que se necesite
 
 ```sh
@@ -99,3 +100,9 @@ Establecer la variables de entorno:
 ## Authors
 
 Joel Rodriguez
+
+## Links útiles
+
+https://codeburst.io/sequelize-migrations-setting-up-associations-985d29b61ee7
+
+http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html

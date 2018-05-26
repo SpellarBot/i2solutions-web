@@ -5,12 +5,19 @@ const assert = require('assert')
 const _ = require('lodash')
 const expect = require('chai').expect
 const models = require('../../config/db').db
+const generatorDocs = require('../../config/documentacion')
+const schema = require('../../config/schema.request.js')
+let docs = []
+const Ajv = require('ajv')
+const ajv = new Ajv({ allErrors: true, jsonPointers: true })
+require('ajv-errors')(ajv /*, {singleError: true} */);
 
 describe('MOVIL TEST', () => {
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
+    generatorDocs.generateAPI({ docs })
     db.Desconectar()
   })
   afterEach('Limpiar la base de datos', async () => {
@@ -18,7 +25,59 @@ describe('MOVIL TEST', () => {
   })
 
   describe('@t1 OBTENER AREAS TRABAJO', () => {
-    // const puestoTrabajo = require('./dump/puestosTrabajo.json')[0]
+    const novedad = require('../../config/dump/novedades.js').VALIDOS[0]
+    let doc = {
+      nombre: 'Crear pregunta estudiante',
+      metodo: 'POST',
+      // url: '/api/att/estudiante/preguntar',
+      // params: []
+      // { nombre: 'texto', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: 'paraleloId', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: 'creador', tipo: 'Object', descripcion: ' --- ' },
+      //   { nombre: ' correo', margen: 'center', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: ' tipo', margen: 'center', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: ' nombres', margen: 'center', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: ' apellidos', margen: 'center', tipo: 'String', descripcion: ' --- '},
+      // descripcion: 'El estudiante crea una pregunta',
+      // body: [
+      //   { nombre: 'texto', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: 'paraleloId', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: 'creador', tipo: 'Object', descripcion: ' --- ' },
+      //   { nombre: ' correo', margen: 'center', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: ' matricula', margen: 'center', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: ' nombres', margen: 'center', tipo: 'String', descripcion: ' --- ' },
+      //   { nombre: ' apellidos', margen: 'center', tipo: 'String', descripcion: ' --- '},
+      // ],
+      // errors: []
+    }
+    it('@t1.1 OK', async () => {
+      // expect(ajv.validate(schema.MOVIL.API_1, {})).to.equal(true)
+      var validate = ajv.compile(schema.MOVIL.API_1)
+      var valid = validate([{ id: '1', descripcion: 'aa', nombre: 'aa'}])
+      // console.log(schema.MOVIL.API_1)
+      console.log(validate.errors)
+      // expect(valid, `${validate.errors}`).to.equal(true)
+      let n = await models.novedades.Crear(novedad)
+      let res = {}
+      let req = {}
+      req['body'] = [{ id: 'aa'}]
+      generatorDocs.OK({ docs, doc, res, req })
+      // console.log(n)
+    })
+    for (let foo of ['nl', 'fr', 'de']) {
+      it('This thing should behave like this', function(done) {
+        // foo.should.be.a.String()
+        // console.log(foo)
+        done()
+      })
+    }
+    // .forEach(function(arrElement) {
+
+    //   it('That thing should behave like that', function(done) {
+    //     foo.should.have.length(3)
+    //     done()
+    //   });
+    // });
     // const areaTrabajo = require('./dump/areasTrabajo.json')[0]
     // const areaTrabajo2 = require('./dump/areasTrabajo.json')[1]
     // it('@t1.1 OK', async () => {
@@ -117,18 +176,7 @@ describe('MOVIL TEST', () => {
 // context() is just an alias for describe(), and behaves the same way; it just provides a way to keep tests easier to read and organized. Similarly, specify() is an alias for it().
 
 
-// ['nl', 'fr', 'de'].forEach(function(arrElement) {
-//   describe(arrElement + ' suite', function() {
-//     it('This thing should behave like this', function(done) {
-//       foo.should.be.a.String();
-//       done();
-//     });
-//     it('That thing should behave like that', function(done) {
-//       foo.should.have.length(3);
-//       done();
-//     });
-//   });
-// });
+
 // var assert = require('assert');
 // function add() {
 //   return Array.prototype.slice.call(arguments).reduce(function(prev, curr) {

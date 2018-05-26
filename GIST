@@ -1,3 +1,7 @@
+https://codeburst.io/sequelize-migrations-setting-up-associations-985d29b61ee7
+
+
+
     "test": "npm-run-all test:standard:api",
     "test:standard:api": "eslint server.js app_api/**",
     "test:standard:web": "",
