@@ -1,3 +1,20 @@
+const DB = require('./db')
+
+const MOVIL = {
+  API_1: {
+    'type': 'array',
+    'items': {
+      'type': 'object',
+      ...DB.NOVEDADES
+    },
+    'errorMessage': DB.NOVEDADES_ERRORES
+  }
+}
+
+module.exports = {
+  MOVIL
+}
+
 // const PROFESOR_DATOS__PARALELOS = {
 //   'minProperties': 4,
 //   'additionalProperties': false,

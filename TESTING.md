@@ -5,3 +5,6 @@
 ```
 
 # Template testing describe
+
+it() = specify()
+describe() = context()

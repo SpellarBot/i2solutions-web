@@ -10,5 +10,12 @@ module.exports = {
       })
   },
   down: (queryInterface, Sequelize) => {
+    return queryInterface.describeTable('novedades')
+      .then((resp) => {
+        if (resp['descripcionAtendida']) {
+          return queryInterface.removeColumn('novedades', 'descripcionAtendida')
+        }
+        return ''
+      })
   }
 }

@@ -40,7 +40,8 @@ module.exports = ({ db }) => {
               return {
                 descripcion: equipo['equipos.descripcion'],
                 nombre: equipo['equipos.nombre'],
-                fotoUrl: equipo['equipos.fotoUrl']
+                fotoUrl: equipo['equipos.fotoUrl'],
+                cantidad: equipo['equipos.equiposPuestos.cantidad']
               }
             })
             let novedadesSinAtender = novedades.filter((novedad) => {

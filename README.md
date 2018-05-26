@@ -65,6 +65,12 @@ git push heroku master --force
 node_modules/.bin/sequelize model:generate --name User --attributes firstName:string
 ```
 
+#### Generar migrate
+
+```sh
+sequelize migration:create --name add-email-to-user
+```
+
 #### Corre las migraciones
 
 ```
@@ -106,3 +112,7 @@ Joel Rodriguez
 https://codeburst.io/sequelize-migrations-setting-up-associations-985d29b61ee7
 
 http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
+
+https://gist.github.com/JoeKarlsson/ebb1c714466ae3de88ae565fa9ba4779
+
+https://spacetelescope.github.io/understanding-json-schema/

@@ -6,18 +6,18 @@ module.exports = {
     'minProperties': 3,
     'additionalProperties': false,
     'properties': {
-      'id': { 'type': 'number' },
-      'nombre': { 'type': 'string' },
+      'id': { 'type': 'integer', minimum: 1 },
+      'nombre': { 'type': 'string', minLength: 1 },
       'descripcion': { 'type': 'string' }
     }
   },
   NOVEDADES_ERRORES: {
-    type: 'should be an array a',
+    type: 'debe ser un array',
     properties: {
-      nombre: 'should have an integer property "foo"',
-      descripcion: 'should have a string property "bar"'
+      id: 'debe ser un numero',
+      nombre: 'debe ser un string no vacio',
+      descripcion: 'debe ser un string no vacio'
     },
-    minProperties: 'should not have properties other than foo',
-    _: 'data should have properties "foo" and "bar" only'
+    minProperties: 'minimo 3 propiedades'
   }
 }
