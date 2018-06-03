@@ -56,5 +56,25 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.Login = function ({ usuario, clave }) {
+    return new Promise((resolve, reject) => {
+      return this.findOne({
+        raw: true,
+        where: {
+          usuario,
+          clave
+        },
+        attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id']
+      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

@@ -38,4 +38,9 @@ const api = express()
 require('./api/server.api')(api)
 app.use('/api', api)
 
+// montar cliente
+const client = express()
+require('./client/client.server')(client)
+app.use('/', client)
+
 module.exports = app

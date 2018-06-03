@@ -1,4 +1,4 @@
-# app_client
+# i2solutions
 
 > A Vue.js project
 

@@ -18,6 +18,13 @@ const MOVIL = {
   }
 }
 
+const AUTH = {
+  CP1: {
+
+  }
+}
+
 module.exports = {
-  MOVIL
+  MOVIL,
+  AUTH
 }

@@ -4,7 +4,7 @@ const _ = require('lodash')
 const expect = require('chai').expect
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-require('ajv-errors')(ajv /*, {singleError: true} */);
+require('ajv-errors')(ajv /*, {singleError: true} */)
 
 const db = require('../../config/db')
 const app = require('../../../app')
@@ -24,7 +24,7 @@ describe('MOVIL TEST', () => {
   })
   after('Desconectar la base de datos', function() {
     generatorDocs.generateAPI({ docs })
-    db.Desconectar()
+    // db.Desconectar()
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
@@ -83,8 +83,8 @@ describe('MOVIL TEST', () => {
     it('@CP1 OK', async () => {
       let areaId = 1
       let res = await request(app).get(`/api/movil/puestosDeUnArea/${areaId}`)
-      console.log(sreq.MOVIL.API_1)
-      console.log(sres.MOVIL.API_1)
+      // console.log(sreq.MOVIL.API_1)
+      // console.log(sres.MOVIL.API_1)
       // let datos = [{ id: 1, descripcion: 'aa', nombre: 'aa'}]
       // const validate = ajv.compile(sres.MOVIL.API_1)
       // expect(validate(datos), e(validate)).to.equal(true)

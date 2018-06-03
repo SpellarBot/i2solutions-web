@@ -12,6 +12,8 @@ const ERROR_SERVIDOR = { datos: { mensaje_error: 'Error en el servidor' }, codig
 
 const NO_AUTORIZADO = { datos: { mensaje_error: 'No autorizado' }, codigoEstado: 401, estado: false }
 
+const NO_ENVIO_JWT = { datos: { mensaje_error: 'No envio el jwt en el Bearer' }, codigoEstado: 401, estado: false }
+
 // const URL_NO_VALIDO = { datos: { mensaje_error: 'Url no valido' }, codigo_estado: 404, estado: false }
 
 const CREADO = { datos: { mensaje: 'Creado Correctamente' }, codigoEstado: 201, estado: true }
@@ -26,6 +28,11 @@ const OK = (datos) => {
   return resp
 }
 
+const NO_OK = (datos) => {
+  const resp = { estado: false, datos, codigoEstado: 200 }
+  return resp
+}
+
 const NO_ACTUALIZADO = (datos) => {
   const resp = { estado: false, datos, codigoEstado: 200 }
   return resp
@@ -35,7 +42,9 @@ module.exports = {
   ERROR_SERVIDOR,
   NO_AUTORIZADO,
   OK,
+  NO_OK,
   ERROR_VALIDACION,
   CREADO,
-  NO_ACTUALIZADO
+  NO_ACTUALIZADO,
+  NO_ENVIO_JWT
 }

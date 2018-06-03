@@ -11,8 +11,20 @@ const MOVIL = {
   }
 }
 
+const AUTH = {
+  CP1: {
+    'minProperties': 1,
+    'additionalProperties': false,
+    'type': 'object',
+    'properties': {
+      'token': { 'type': 'string' }
+    }
+  }
+}
+
 module.exports = {
-  MOVIL
+  MOVIL,
+  AUTH
 }
 
 // const PROFESOR_DATOS__PARALELOS = {

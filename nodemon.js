@@ -14,7 +14,8 @@
   "watch": [
     "server.js",
     "app.js",
-    "api/**"
+    "api/***",
+    "client/client.server"
   ],
   "env": {
     "NODE_ENV": "development"

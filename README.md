@@ -39,6 +39,28 @@ Ubuntu 16.04 LTS
 yarn db:migrate
 ```
 
+### Aplicación server
+
+1. En la carpeta root del proyecto hacer
+
+```sh
+> npm install
+```
+
+2. Correr la aplicacion servidor
+
+```sh
+> npm run dev #correra en el puerto 3001
+```
+
+3. Correr el cliente
+
+```sh
+> cd client
+> yarn dev # correra en el puerto 3002
+```
+
+
 
 ##### Commits 
 
@@ -77,20 +99,6 @@ sequelize migration:create --name add-email-to-user
 yarn db:migrate
 ```
 
-#### Aplicación server
-
-1. En la carpeta root del proyecto hacer
-
-```sh
-> npm install
-```
-
-2. Correr la aplicacion servidor
-
-```sh
-> npm run dev
-```
-
 ## Testing
 
 
@@ -116,3 +124,13 @@ http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 https://gist.github.com/JoeKarlsson/ebb1c714466ae3de88ae565fa9ba4779
 
 https://spacetelescope.github.io/understanding-json-schema/
+
+http://corpus.hubwiz.com/2/node.js/21105748.html
+
+http://docs.sequelizejs.com/manual/tutorial/migrations.html
+
+https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
+
+https://github.com/sequelize/cli/blob/master/docs/README.md
+
+https://gist.github.com/JoeKarlsson/ebb1c714466ae3de88ae565fa9ba4779

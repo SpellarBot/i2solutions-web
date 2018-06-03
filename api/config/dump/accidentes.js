@@ -23,6 +23,14 @@ module.exports = {
       'atendidoEnEmpresa': false,
       'muertos': 0,
       'fecha': '2016-05-21T19:27:28.576Z'
+    },
+    {
+      'descripcion': 'Hubo un error en la casa',
+      'nombre': 'Casa sin validación',
+      'heridos': 1,
+      'atendidoEnEmpresa': false,
+      'muertos': 0,
+      'fecha': '2016-05-21T19:27:28.576Z'
     }
   ]
 }
