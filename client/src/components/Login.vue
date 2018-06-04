@@ -21,6 +21,7 @@
           >
             submit
           </v-btn>
+
         </v-card>
       </v-flex>
     </v-layout>
@@ -37,12 +38,13 @@
 </template>
 
 <script>
+import router from '../router'
 export default {
   data () {
     return {
       valid: false,
-      usuario: '',
-      clave: '',
+      usuario: 'joelerll',
+      clave: '1234',
       mensajeSnackbar: '',
       color: '',
       snackbar: false
@@ -57,6 +59,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'El usuario ingresado correctamente'
           this.color = 'success'
+          router.push('dashboard')
         })
         .catch((err) => {
           this.color = 'error'

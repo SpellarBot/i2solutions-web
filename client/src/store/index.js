@@ -11,7 +11,8 @@ Vue.use(VueResource)
 
 export const store = new Vuex.Store({
   state: {
-    usuario: null
+    usuario: null,
+    loggeado: false
   },
   mutations,
   actions,

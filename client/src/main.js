@@ -4,7 +4,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import VueLocalStorage from 'vue-localstorage'
-import App from './App'
+import App from '@/components/App'
 import router from './router'
 import { store } from './store'
 
