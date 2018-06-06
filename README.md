@@ -32,7 +32,18 @@ Ubuntu 16.04 LTS
 
 #### Si se corre por primera vez
 
-1. Cambiar el config file ubicado en __api/db/config.js__ para que reconozca la base de datos de development, agregar el username y password de acuerdo a su configuración
+1. Instalar las depedencias
+
+```sh
+yarn install
+```
+2. Instalar las depedencias en el cliente. Ir a la carpeta __client__ y ejecutar
+
+```sh
+yarn install
+```
+
+3. Cambiar el config file ubicado en __api/config/db/config.js__ para que reconozca la base de datos de development, agregar el username y password de acuerdo a su configuración
 
 ```js
 else if (usuario === 'ALEX-PC') {
@@ -46,7 +57,7 @@ else if (usuario === 'ALEX-PC') {
     }
 ```
 
-2. Cargar con data inicial
+4. Cargar con data inicial
 
 ```sh
 yarn db:init
