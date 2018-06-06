@@ -37,16 +37,33 @@ Ubuntu 16.04 LTS
 ```sh
 yarn install
 ```
+
 2. Instalar las depedencias en el cliente. Ir a la carpeta __client__ y ejecutar
 
 ```sh
 yarn install
 ```
 
-3. Cambiar el config file ubicado en __api/config/db/config.js__ para que reconozca la base de datos de development, agregar el username y password de acuerdo a su configuración
+3. Sacar su usuario de node. Para eso abrir el cmd y ejecutar el comando
+
+```sh
+node
+```
+
+Luego hacer lo siguiente
+
+```sh
+const os = require('os')
+os.hostname()
+'mi-usuario'
+```
+
+Esto de devolverá su usario que lo usará en el siguiente paso
+
+4. Cambiar el config file ubicado en __api/config/db/config.js__ para que reconozca la base de datos de development, agregar el username y password de acuerdo a su configuración. Hacer un nuevo __else if__ si es necesario
 
 ```js
-else if (usuario === 'ALEX-PC') {
+else if (usuario === 'mi-usuario') {
     return {
       'username': '',
       'password': '',
@@ -57,7 +74,7 @@ else if (usuario === 'ALEX-PC') {
     }
 ```
 
-4. Cargar con data inicial
+5. Cargar con data inicial
 
 ```sh
 yarn db:init
