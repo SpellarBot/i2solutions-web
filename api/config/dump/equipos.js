@@ -3,19 +3,19 @@
 module.exports = {
   VALIDOS: [
     {
-      'descripcion': 'Uso personal',
-      'nombre': 'Computadora',
-      'fotoUrl': 'http://www.solutekcolombia.com/images/computadores_escritorio_hp.jpeg'
+      'descripcion': '',
+      'nombre': 'Extintor',
+      'fotoUrl': 'http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg'
     },
     {
-      'descripcion': 'Uso personal',
-      'nombre': 'Computadora 2',
-      'fotoUrl': 'http://www.solutekcolombia.com/images/computadores_escritorio_hp.jpeg'
+      'descripcion': 'Siempre usar',
+      'nombre': 'Guantes',
+      'fotoUrl': 'http://www.wermax.com.uy/wp-content/uploads/2015/03/Guantes.jpg'
     },
     {
-      'descripcion': 'Uso personal',
-      'nombre': 'Computadora 3',
-      'fotoUrl': 'http://www.solutekcolombia.com/images/computadores_escritorio_hp.jpeg'
+      'descripcion': '',
+      'nombre': 'Protector Ruido',
+      'fotoUrl': 'https://thumbs.dreamstime.com/z/protectores-contra-el-ruido-20939463.jpg'
     }
   ]
 }

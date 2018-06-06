@@ -1,6 +1,6 @@
 -- mysql -u USERNAME -p DATABASE_NAME < scripts.sql
-
-set FOREIGN_KEY_CHECKS=0;
+-- source /home/joelerll/espol/software2/i2solutions/web/scripts/clean.sql
+SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE accidentes;
 DROP TABLE areas;
 DROP TABLE areasPuestos;
@@ -18,3 +18,4 @@ DROP TABLE personasEstablecimientos;
 DROP TABLE personasPuestos;
 DROP TABLE puestos;
 DROP TABLE riesgos;
+DROP TABLE sequelizemeta;

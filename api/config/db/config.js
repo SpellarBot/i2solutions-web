@@ -1,12 +1,47 @@
+const os = require('os')
+const datos = () => {
+  const usuario = os.hostname()
+  if (usuario === 'joelerll-laptop') {
+    return {
+      'username': 'root',
+      'password': 'joelerll',
+      'database': 'i2solutions_development',
+      'host': '127.0.0.1',
+      'logging': false,
+      'dialect': 'mysql'
+    }
+  } else if (usuario === 'ALEX-PC') {
+    return {
+      'username': '',
+      'password': '',
+      'database': 'i2solutions_development',
+      'host': '127.0.0.1',
+      'logging': false,
+      'dialect': 'mysql'
+    }
+  } else if (usuario === 'robeth') {
+    return {
+      'username': '',
+      'password': '',
+      'database': 'i2solutions_development',
+      'host': '127.0.0.1',
+      'logging': false,
+      'dialect': 'mysql'
+    }
+  } else if (usuario === 'idrovo') {
+    return {
+      'username': '',
+      'password': '',
+      'database': 'i2solutions_development',
+      'host': '127.0.0.1',
+      'logging': false,
+      'dialect': 'mysql'
+    }
+  }
+}
+
 module.exports = {
-  'development': {
-    'username': 'root',
-    'password': 'joelerll',
-    'database': 'i2solutions_development',
-    'host': '127.0.0.1',
-    'logging': false,
-    'dialect': 'mysql'
-  },
+  'development': datos(),
   'testing': {
     'dialect': 'sqlite',
     'storage': ':memory:',

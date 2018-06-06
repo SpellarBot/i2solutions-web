@@ -32,11 +32,24 @@ Ubuntu 16.04 LTS
 
 #### Si se corre por primera vez
 
-1. Cargar el sql de prueba inicial
+1. Cambiar el config file ubicado en __api/db/config.js__ para que reconozca la base de datos de development, agregar el username y password de acuerdo a su configuración
 
-2. Cargar las migraciones
+```js
+else if (usuario === 'ALEX-PC') {
+    return {
+      'username': '',
+      'password': '',
+      'database': 'i2solutions_development',
+      'host': '127.0.0.1',
+      'logging': false,
+      'dialect': 'mysql'
+    }
 ```
-yarn db:migrate
+
+2. Cargar con data inicial
+
+```sh
+yarn db:init
 ```
 
 ### Aplicación server
@@ -60,6 +73,10 @@ yarn db:migrate
 > yarn dev # correra en el puerto 3002
 ```
 
+4. Cargar las migraciones si hubo un cambio
+```
+yarn db:migrate
+```
 
 
 ##### Commits 
