@@ -101,12 +101,6 @@ yarn db:init
 > yarn dev # correra en el puerto 3002
 ```
 
-4. Cargar las migraciones si hubo un cambio
-```
-yarn db:migrate
-```
-
-
 ##### Commits 
 
 [Sprint #] "nombre_historia_usuario" Tarea(s) #
@@ -138,7 +132,7 @@ node_modules/.bin/sequelize model:generate --name User --attributes firstName:st
 sequelize migration:create --name add-email-to-user
 ```
 
-#### Corre las migraciones
+#### Correr las migraciones
 
 ```
 yarn db:migrate
@@ -146,6 +140,11 @@ yarn db:migrate
 
 ## Testing
 
+Tener instalado sqlite
+
+```sh
+yarn test
+```
 
 ## Production
 

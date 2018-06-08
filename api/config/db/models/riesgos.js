@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll({
         raw: true,
         where: {
-          id
+          puestosId: id
         }
       })
         .then((res) => {

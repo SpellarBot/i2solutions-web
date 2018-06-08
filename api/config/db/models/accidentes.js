@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     descripcion: { type: DataTypes.STRING },
     nombre: { type: DataTypes.STRING },
     heridos: { type: DataTypes.STRING },
-    atendido_en_empresa: { type: DataTypes.BOOLEAN },
+    atendidoEnEmpresa: { type: DataTypes.BOOLEAN },
     muertos: { type: DataTypes.INTEGER },
     fecha: { type: DataTypes.DATE }
   }, {

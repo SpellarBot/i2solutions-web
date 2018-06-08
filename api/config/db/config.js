@@ -8,7 +8,13 @@ const datos = () => {
       'database': 'i2solutions_development',
       'host': '127.0.0.1',
       'logging': false,
-      'dialect': 'mysql'
+      'dialect': 'mysql',
+      'pool': {
+        'max': 5,
+        'min': 0,
+        'acquire': 30000,
+        'idle': 10000
+      }
     }
   } else if (usuario === 'ALEX-PC') {
     return {

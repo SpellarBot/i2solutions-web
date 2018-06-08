@@ -9,15 +9,16 @@ module.exports = (sequelize, DataTypes) => {
 
     // PROPERTIES
     descripcion: { type: DataTypes.STRING },
-    descripcionAtendida: { type: DataTypes.STRING }, // MIGRACION
-    nombre: { type: DataTypes.STRING },
+    descripcionAtendida: { type: DataTypes.STRING, defaultValue: '' }, // MIGRACION
+    // nombre: { type: DataTypes.STRING },
     prioridad: { type: DataTypes.ENUM('alta', 'media', 'baja') },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    fotoUrl: { type: DataTypes.STRING },
+    fotoUrl: { type: DataTypes.STRING, defaultValue: '' },
     fueAtendida: { type: DataTypes.STRING, defaultValue: false },
 
     // FK
-    puestosId: { type: DataTypes.INTEGER.UNSIGNED }
+    puestosId: { type: DataTypes.INTEGER.UNSIGNED },
+    inspeccionesId: { type: DataTypes.INTEGER.UNSIGNED }
   }, {
     name: {
       singular,
@@ -32,16 +33,19 @@ module.exports = (sequelize, DataTypes) => {
 
   define.associate = function (models) {
     define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' })
+    define.belongsTo(models.inspecciones, { foreignKey: 'inspeccionesId', targetKey: 'id' })
   }
 
-  define.Crear = function ({ nombre, descripcion, prioridad, fotoUrl, puestosId }) {
+  define.Crear = function ({ nombre, descripcion, prioridad, fotoUrl, puestosId, fueAtendida, inspeccionesId }) {
     return new Promise((resolve, reject) => {
       return this.create({
         nombre,
         descripcion,
         prioridad,
         fotoUrl,
-        puestosId
+        puestosId,
+        fueAtendida,
+        inspeccionesId
       })
         .then((resp) => {
           return resolve(resp.get({ plain: true }))

@@ -3,9 +3,9 @@ const mysql = require('mysql')
 const fs = require('fs')
 const path = require('path')
 const config = require('./config')[process.env.NODE_ENV]
+
 const basename = path.basename(module.filename)
 const db = {}
-
 let sequelize = new Sequelize(config)
 
 // leer todos los modelos

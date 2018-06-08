@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombre: { type: DataTypes.STRING },
     descripcion: { type: DataTypes.STRING },
-    tema: { type: DataTypes.STRING }
+    tema: { type: DataTypes.STRING },
+    fechaCapacitacion: { type: DataTypes.DATE }
   }, {
     name: {
       singular,
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     define.belongsToMany(models.personas, { through: 'personasCapacitaciones', foreignKey: 'capacitacionesId' })
   }
 
-  define.Crear = function ({ nombre, descripcion, tema, establecimientosId }) {
+  define.Crear = function ({ nombre, descripcion, tema, establecimientosId, fechaCapacitacion }) {
     let datos = arguments['0']
     return new Promise((resolve, reject) => {
       return this.create(datos)
