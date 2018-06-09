@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 
     // PROPERTIES
     descripcion: { type: DataTypes.STRING },
-    descripcionAtendida: { type: DataTypes.STRING, defaultValue: '' }, // MIGRACION
+    descripcionAtendida: { type: DataTypes.STRING }, // MIGRACION
     // nombre: { type: DataTypes.STRING },
     prioridad: { type: DataTypes.ENUM('alta', 'media', 'baja') },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },

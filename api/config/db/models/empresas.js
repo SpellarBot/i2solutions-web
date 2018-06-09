@@ -36,5 +36,19 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.ObtenerTodos = function () {
+    return new Promise((resolve, reject) => {
+      return this.findAll({
+        raw: true
+      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
   return define
 }

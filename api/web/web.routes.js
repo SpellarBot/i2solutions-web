@@ -5,6 +5,7 @@ const express = require('express')
 
 const app = express()
 
+require('./empresas/empresas.router')(app)
 // const controller = require('./movil.controller.js')
 // const MovilDAL = require('./movil.dal')({ db })
 // const Controller = controller({ responses, MovilDAL })

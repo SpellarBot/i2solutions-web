@@ -105,7 +105,7 @@ yarn db:init
 
 [Sprint #] "nombre_historia_usuario" Tarea(s) #
 
-Ej: [Sprint 3] “Consultar Plan Nutricional (paciente)” Tarea #105, #106
+Ej: [Sprint 2] “Consultar Plan Nutricional (paciente)” Tarea #105, #106
 
 __squash commits__
 

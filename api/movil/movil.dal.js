@@ -46,11 +46,13 @@ module.exports = ({ db }) => {
             })
             let novedadesSinAtender = novedades.filter((novedad) => {
               if (novedad['fueAtendida'] === '0') {
+                novedad['fueAtendida'] = false
                 return novedad
               }
             })
             let novedadesAtendidas = novedades.filter((novedad) => {
               if (novedad['fueAtendida'] === '1') {
+                novedad['fueAtendida'] = true
                 return novedad
               }
             })

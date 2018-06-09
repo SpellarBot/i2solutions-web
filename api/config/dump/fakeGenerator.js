@@ -1,19 +1,18 @@
 // https://github.com/marak/Faker.js/
 const faker = require('faker')
-const jsonfile = require('jsonfile')
-const path = require('path')
+// const jsonfile = require('jsonfile')
+// const path = require('path')
 faker.locale = 'es'
-const conexion = require(`../db`)
+const conexion = require('../db')
 const random = () => {
-  var text = "";
-  var possible = "0123456789"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ
-  for( var i=0; i < 10; i++ )
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-  return text;
+  var text = ''
+  var possible = '0123456789' // ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  for (var i = 0; i < 10; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+  return text
 }
 
-function randomIntFromInterval(min,max) {
-  return Math.floor(Math.random()*(max-min+1)+min);
+function randomIntFromInterval (min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 let areasDatos = [
   {
@@ -77,7 +76,7 @@ let equiposDatos = [
 
 const capacitacionesCantidad = 5
 let prioridades = ['alta', 'media', 'baja']
-let tiposRiesgos = [ 'tipoRiesgo', 'Caida de objetos']
+let tiposRiesgos = ['tipoRiesgo', 'Caida de objetos']
 let empresas = []
 let personas = []
 let establecimientos = []
@@ -91,7 +90,7 @@ let accidentes = []
 let equipos = []
 conexion.Conectar().then(async (db) => {
   await conexion.Limpiar()
-  //1. empresas
+  // 1. empresas
   for (let i = 0; i < 5; i++) {
     let empresa = {
       nombre: faker.company.companyName(),
@@ -102,7 +101,7 @@ conexion.Conectar().then(async (db) => {
     let empresaCreada = await db.empresas.Crear(empresa)
     let empresasId = empresaCreada['id']
 
-    //2. establecimientos
+    // 2. establecimientos
     for (let i = 0; i < 3; i++) {
       let establecimiento = {
         nombres: faker.company.companyName(),
@@ -114,7 +113,7 @@ conexion.Conectar().then(async (db) => {
       let establecimientosId = establecimientoCreada['id']
       establecimientos.push(establecimiento)
 
-      //3. personas
+      // 3. personas
       for (let i = 0; i < 10; i++) {
         let persona = {
           nombres: faker.name.firstName(),
@@ -131,7 +130,7 @@ conexion.Conectar().then(async (db) => {
         personas.push(persona)
         let personasCreada = await db.personas.Crear(persona)
         let personasId = personasCreada['id']
-        //4. personasEstablecimientos
+        // 4. personasEstablecimientos
         if (i === 1) {
           await db.personasEstablecimientos.Crear({
             personasId,
@@ -152,22 +151,21 @@ conexion.Conectar().then(async (db) => {
           })
         }
 
-        //5. personasPuestos
+        // 5. personasPuestos
         await db.personasPuestos.Crear({
           personasId,
           puestosId: randomIntFromInterval(1, puestosDatos.length - 1)
         })
 
-        //6. personasCapacitaciones
+        // 6. personasCapacitaciones
         await db.personasCapacitaciones.Crear({
           capacitacionesId: randomIntFromInterval(1, capacitacionesCantidad),
           personasId
         })
       }
       console.log('personas')
-      //7. areas
+      // 7. areas
       for (let i = 0; i < areasDatos.length; i++) {
-
         let area = {
           actividad: areasDatos[i]['actividad'],
           nombre: areasDatos[i]['nombre'],
@@ -183,7 +181,7 @@ conexion.Conectar().then(async (db) => {
         })
         let areasId = areaCreada['id']
 
-        //8. capacitaciones
+        // 8. capacitaciones
         for (let i = 0; i < capacitacionesCantidad; i++) {
           let capacitacion = {
             nombre: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -197,16 +195,16 @@ conexion.Conectar().then(async (db) => {
         }
         console.log('capacitaciones')
 
-        //9. puestos
+        // 9. puestos
         for (let i = 0; i < puestosDatos.length; i++) {
           let puesto = {
             nombre: puestosDatos[i]['nombre'],
-            descripcion: puestosDatos[i]['descripcion'],
+            descripcion: puestosDatos[i]['descripcion']
           }
           puestos.push(puesto)
           let puestoCreada = await db.puestos.Crear(puesto)
           let puestosId = puestoCreada['id']
-          //10. areasPuestos
+          // 10. areasPuestos
           await db.areasPuestos.Crear({
             areasId,
             puestosId
@@ -220,34 +218,34 @@ conexion.Conectar().then(async (db) => {
             }
             equipos.push(equipo)
 
-            //11. equipos
+            // 11. equipos
             let equipoCreada = await db.equipos.Crear(equipo)
             let equiposId = equipoCreada['id']
 
-            //12. equiposAreas
+            // 12. equiposAreas
             await db.equiposAreas.Crear({
-              cantidad: randomIntFromInterval(0,10),
+              cantidad: randomIntFromInterval(0, 10),
               equiposId,
               areasId
             })
 
-            //13. equiposPuestos
+            // 13. equiposPuestos
             await db.equiposPuestos.Crear({
-              cantidad: randomIntFromInterval(0,10),
+              cantidad: randomIntFromInterval(0, 10),
               equiposId,
               puestosId
             })
           }
           // console.log('equipos')
 
-          //15. accidentes
+          // 15. accidentes
           for (let i = 0; i < 10; i++) {
             let accidente = {
               descripcion: faker.lorem.sentence(),
               nombre: faker.lorem.words(),
-              heridos: randomIntFromInterval(0,2),
+              heridos: randomIntFromInterval(0, 2),
               atendidoEnEmpresa: false,
-              muertos: randomIntFromInterval(0,2),
+              muertos: randomIntFromInterval(0, 2),
               fecha: `${faker.date.past()}`,
               puestosId
             }
@@ -256,15 +254,15 @@ conexion.Conectar().then(async (db) => {
           }
           // console.log('accidentes')
 
-          //18. riesgos
+          // 18. riesgos
           for (let i = 0; i < 10; i++) {
             let riesgo = {
-              tipoRiesgo: tiposRiesgos[randomIntFromInterval(0,tiposRiesgos.length -1)],
-              personasExpuestas: randomIntFromInterval(0,2),
+              tipoRiesgo: tiposRiesgos[randomIntFromInterval(0, tiposRiesgos.length - 1)],
+              personasExpuestas: randomIntFromInterval(0, 2),
               valoracion: faker.lorem.words(),
               valoracionLiteral: faker.lorem.sentence(),
               fecha: `${faker.date.past()}`,
-              porcentajeRiesgo: randomIntFromInterval(0,99),
+              porcentajeRiesgo: randomIntFromInterval(0, 99),
               puestosId
             }
             riesgos.push(riesgos)
@@ -272,7 +270,7 @@ conexion.Conectar().then(async (db) => {
           }
           // console.log('riesgos')
 
-          //14. inspecciones
+          // 14. inspecciones
           for (let i = 0; i < 2; i++) {
             let inspeccion = {
               nombre: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -283,7 +281,7 @@ conexion.Conectar().then(async (db) => {
             inspecciones.push(inspeccion)
             let inspeccionCreada = await db.inspecciones.Crear(inspeccion)
             let inspeccionesId = inspeccionCreada['id']
-            //16. novedades
+            // 16. novedades
             for (let i = 0; i < 10; i++) {
               let novedad = {
                 descripcion: faker.lorem.words(),
@@ -305,7 +303,7 @@ conexion.Conectar().then(async (db) => {
                 descripcion: faker.lorem.words(),
                 descripcionAtendida: faker.lorem.sentence(),
                 // nombre: faker.lorem.words(),
-                prioridad:  prioridades[randomIntFromInterval(0,2)],
+                prioridad: prioridades[randomIntFromInterval(0, 2)],
                 fecha: faker.date.past(),
                 fotoUrl: faker.image.imageUrl(),
                 fueAtendida: true,
@@ -323,38 +321,45 @@ conexion.Conectar().then(async (db) => {
     }
     console.log(`xxxxxxxx empresa ${i} xxxxxxx`)
   }
+  /*
+  +++++++++++++
+  SALIDA
+  +++++++++++++
+  */
+
+  // let tablas = [
+  //   { nombre: 'empresas', data: empresas },
+  //   { nombre: 'personas', data: personas },
+  //   { nombre: 'establecimientos', data: establecimientos }
+  // ]
+  // // empresas
+  // // personas
+  // // establecimientos
+  // // areas
+  // // puestos
+  // // riesgos
+  // // capacitaciones
+  // // inspecciones
+  // // novedades
+  // // accidentes
+  // // equipos
+  // for (tabla of tablas) {
+  //   jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
+  //     console.error(err)
+  //   })
+  // }
+
   await conexion.Desconectar()
 }).catch((err) => {
   console.log(err)
 })
 
+// 18. controles
+// let control = {
 
+// }
 
+// 19. matrices
+// let matriz = {
 
-
-//18. controles
-let control = {
-
-}
-
-//19. matrices
-let matriz = {
-
-}
-/*
-+++++++++++++
-SALIDA
-+++++++++++++
-*/
-
-// let tablas = [
-//   { nombre: 'empresas', data: empresas },
-//   { nombre: 'personas', data: personas },
-//   { nombre: 'establecimientos', data: establecimientos }
-// ]
-
-// for (tabla of tablas) {
-//   jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
-//     console.error(err)
-//   })
 // }
