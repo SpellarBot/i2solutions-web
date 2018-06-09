@@ -82,7 +82,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Empresa creada exitosamente.'
           this.color = 'success'
-          //router.push('dashboard')
+          // router.push('dashboard')
         })
         .catch((err) => {
           this.color = 'error'

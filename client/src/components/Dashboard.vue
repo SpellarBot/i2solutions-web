@@ -54,14 +54,14 @@ export default {
     },
     verEmpresas () {
       this.$store.dispatch('getEmpresas')
-      .then((resp) => {
-        router.push('empresas')
-      })
-      .catch((err) => {
-        this.color = 'error'
-        this.snackbar = true
-        this.mensajeSnackbar = err
-      })
+        .then((resp) => {
+          router.push('empresas')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

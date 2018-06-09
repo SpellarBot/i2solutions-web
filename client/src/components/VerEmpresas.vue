@@ -15,7 +15,7 @@
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <h1 class='mb-4'>Empresas:</h1>
-        <v-card class='mb-4' v-for="empresa in this.$store.getters.empresas">
+        <v-card class='mb-4' v-for="empresa in this.$store.getters.empresas" :key="empresa.id">
           <h3>{{ empresa.nombre }}</h3>
           <div>{{ empresa.actividadComercial }}</div>
           <div>{{ empresa.razonSocial }}</div>
@@ -70,18 +70,18 @@ export default {
     },
     editarEmpresa (empresa) {
       let empresaId = empresa.id
-      this.$store.dispatch('getEmpresaSola', empresaId )
-      .then((resp) => {
-        this.snackbar = true
+      this.$store.dispatch('getEmpresaSola', empresaId)
+        .then((resp) => {
+          this.snackbar = true
           this.mensajeSnackbar = 'Empresa Encontrada.'
           this.color = 'success'
           router.push('editarEmpresa')
-      })
-      .catch((err) => {
-        this.color = 'error'
-        this.snackbar = true
-        this.mensajeSnackbar = err
-      })
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }
