@@ -1,14 +1,22 @@
+const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
-    Crear (empresa) {
+    Crear (datos) {
       return new Promise((resolve, reject) => {
-        db.empresas.Crear(empresa)
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            resolve(responses.NO_OK('Hubo al crear la empresas'))
-            return reject(err)
+        co(function * () {
+          let empresaCreada = yield db.empresas.Crear(datos)
+          let establecimientoCreada = yield db.establecimientos.Crear({
+            nombres: empresaCreada['nombre'],
+            direccion: datos['direccion'],
+            ruc: datos['ruc'],
+            empresasId: empresaCreada['id']
           })
+          empresaCreada['establecimiento'] = establecimientoCreada
+          resolve(responses.OK(empresaCreada))
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     ObtenerTodos () {
@@ -17,8 +25,26 @@ module.exports = ({ responses, db }) => {
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
-            resolve(responses.NO_OK('Hubo un error al encontrar empresas'))
-            return reject(err)
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    Obtener ({ id }) {
+      return new Promise((resolve, reject) => {
+        Promise.all([
+          db.establecimientos.ObtenerPorEmpresas({ empresasId: id }),
+          db.empresas.Obtener({ id })
+        ])
+          .then((resp) => {
+            let empresa = resp[1]
+            let establecimientos = resp[0]
+            let datos = JSON.parse(JSON.stringify(empresa))
+            datos['establecimientos'] = establecimientos
+            resolve(responses.OK(datos))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
           })
       })
     }

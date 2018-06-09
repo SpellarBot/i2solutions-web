@@ -1,4 +1,16 @@
 'use strict'
+// let knex = {}
+// if (process.env.NODE_ENV === 'testing') {
+//   knex = require('knex')({
+//     client: 'sqlite',
+//     useNullAsDefault: true
+//   })
+// } else {
+//   knex = require('knex')({
+//     client: 'mysql',
+//     useNullAsDefault: true
+//   })
+// }
 module.exports = (sequelize, DataTypes) => {
   let singular = 'empresas'
   let plural = 'empresas'
@@ -46,6 +58,17 @@ module.exports = (sequelize, DataTypes) => {
           return resolve(resp)
         })
         .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Obtener = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findById(id)
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
           return reject(err)
         })
     })

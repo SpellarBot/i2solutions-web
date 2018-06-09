@@ -1,4 +1,4 @@
 // actualizar tambien personas_establecimientos
 module.exports = {
-  VALIDOS: []
+  VALIDOS: require('./faker/personas.json')
 }
