@@ -7,6 +7,18 @@ const config = require('./config')[process.env.NODE_ENV]
 const basename = path.basename(module.filename)
 const db = {}
 let sequelize = new Sequelize(config)
+let knex = {}
+if (process.env.NODE_ENV === 'testing') {
+  knex = require('knex')({
+    client: 'sqlite',
+    useNullAsDefault: true
+  })
+} else {
+  knex = require('knex')({
+    client: 'mysql',
+    useNullAsDefault: true
+  })
+}
 
 // leer todos los modelos
 fs
@@ -27,6 +39,7 @@ Object.keys(db).forEach(function (modelName) {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
+db.knex = knex
 
 const Conectar = () => {
   return new Promise(function (resolve, reject) {
@@ -84,5 +97,6 @@ module.exports = {
   Conectar,
   Desconectar,
   Limpiar,
-  db
+  db,
+  knex
 }

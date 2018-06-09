@@ -17,7 +17,14 @@ module.exports = (app) => {
   // GET ONE
   app.route('/empresas/:empresasId')
     .get((req, res) => {
-      res.send('empresas')
+      let { empresasId } = req.params
+      Controller.Obtener({ id: empresasId }).then((resp) => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
     })
 
   // CREATE
