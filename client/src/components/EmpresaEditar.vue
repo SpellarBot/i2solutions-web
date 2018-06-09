@@ -1,23 +1,35 @@
 <template>
-  <main id='login'>
+  <main id='crearEmpresa'>
     <div class = 'imageLogo'>
     <span class='i2s-name'>i2Solutions Cía. Ltda.</span>
+    <v-btn flat color="white"
+    @click="logout"
+    >
+    <v-icon>exit_to_app</v-icon>
+      Cerrar Sesión
+
+    </v-btn>
   </div>
-  <div class="login">
+  <div class="EditarEmpresa">
 
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <v-card>
-          <h2>Iniciar Sesión</h2>
+          <h2>Edición datos de empresa</h2>
           <v-form v-model="valid">
             <v-text-field
-              v-model="usuario"
-              label="Usuario"
+              v-model="nombre"
+              label="Nombre"
               required
             ></v-text-field>
             <v-text-field
-              v-model="clave"
-              label="Clave"
+              v-model="actividadComercial"
+              label="Actividad Comercial"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="razonSocial"
+              label="Razon Social"
               required
             ></v-text-field>
           </v-form>
@@ -25,7 +37,7 @@
             :disabled="!valid"
             @click="submit"
           >
-            Iniciar Sesión
+            Editar Empresa
           </v-btn>
 
         </v-card>
@@ -49,9 +61,10 @@ import router from '../router'
 export default {
   data () {
     return {
-      valid: false,
-      usuario: 'Cecilia_Cotto',
-      clave: 'J0Oh243XReH3maF',
+      valid: true,
+      nombre: this.$store.getters.empresaSelected.nombre,
+      actividadComercial: this.$store.getters.empresaSelected.actividadComercial,
+      razonSocial: this.$store.getters.empresaSelected.razonSocial,
       mensajeSnackbar: '',
       color: '',
       snackbar: false
@@ -59,20 +72,27 @@ export default {
   },
   methods: {
     submit () {
-      let usuario = this.$data.usuario
-      let clave = this.$data.clave
-      this.$store.dispatch('login', { usuario, clave })
+      let nombre = this.$data.nombre
+      let actividadComercial = this.$data.actividadComercial
+      let razonSocial = this.$data.razonSocial
+      let direccion = this.$data.direccion
+      let ruc = this.$data.ruc
+      this.$store.dispatch('crearEmpresa', { nombre, actividadComercial, razonSocial, direccion, ruc })
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'El usuario ingresado correctamente'
+          this.mensajeSnackbar = 'Empresa creada exitosamente.'
           this.color = 'success'
-          router.push('dashboard')
+          //router.push('dashboard')
         })
         .catch((err) => {
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    logout () {
+      this.$store.dispatch('logout')
+      router.push('/')
     }
   }
 }
