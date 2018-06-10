@@ -21,16 +21,17 @@ const app = rfr('app')
 const dump = rfr('api/config/dump')
 const API = require('./API_DOCS')
 const models = db.db
+let docs = []
 describe('TEST', () => {
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
-    db.Desconectar()
+    // db.Desconectar()
+    generatorDocs.generateAPI({ docs, archivo: '', nombre: '' })
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
-    generatorDocs.generateAPI({ docs, archivo: '', nombre: '' })
   })
   describe('@API_1 ', () => {
     it('@CP1 OK', async () => {
@@ -69,6 +70,31 @@ module.exports = {
     body: [],
     errors: []
   }
+}
+
+```
+
+# Controller
+
+```js
+const co = require('co')
+module.exports = (app) => {
+  const proto = {
+
+  }
+  return Object.assign(Object.create(proto), {})
+}
+
+```
+
+# Router
+
+```js
+const responses = require('../../responses')
+const db = require('../../config/db').db
+const Controller = require('./empresas.controller')({ responses, db })
+module.exports = (app) => {
+
 }
 
 ```
