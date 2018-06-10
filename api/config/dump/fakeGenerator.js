@@ -351,7 +351,7 @@ conexion.Conectar().then(async (db) => {
   // novedades
   // accidentes
   // equipos
-  for (tabla of tablas) {
+  for (let tabla of tablas) {
     jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
       console.error(err)
     })

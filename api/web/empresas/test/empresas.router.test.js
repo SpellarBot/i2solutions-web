@@ -23,7 +23,7 @@ describe('EMPRESAS', () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function () {
-    db.Desconectar()
+    // db.Desconectar()
     generatorDocs.generateAPI({ docs, archivo: 'api.empresas.md', nombre: 'Empresas' })
   })
   afterEach('Limpiar la base de datos', async () => {

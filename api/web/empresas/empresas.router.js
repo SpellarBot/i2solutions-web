@@ -42,7 +42,7 @@ module.exports = (app) => {
   // UPDATE
   app.route('/empresas/:empresasId')
     .put((req, res) => {
-      let { empresasId } =  req.params
+      let { empresasId } = req.params
       let id = empresasId
       let { nombre, actividadComercial, razonSocial } = req.body
       Controller.Actualizar({ id, nombre, actividadComercial, razonSocial }).then((resp) => {
