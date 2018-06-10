@@ -11,5 +11,11 @@ export default {
   },
   deleteDataLogout (state) {
     state.usuario = null
+  },
+  setEmpresas (state, empresas) {
+    state.empresas = empresas
+  },
+  setEmpresaSelected (state, empresaSelected) {
+    state.empresaSelected = empresaSelected
   }
 }

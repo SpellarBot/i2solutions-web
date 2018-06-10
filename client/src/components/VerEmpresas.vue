@@ -1,37 +1,44 @@
 <template>
-  <main id='login'>
+  <main id='Empresas'>
     <div class = 'imageLogo'>
     <span class='i2s-name'>i2Solutions Cía. Ltda.</span>
+    <v-btn flat color="white"
+    @click="logout"
+    >
+    <v-icon>exit_to_app</v-icon>
+      Cerrar Sesión
+
+    </v-btn>
   </div>
-  <div class="login">
+  <div class="empresas in this.$store.getters.empresas">
 
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
-        <v-card>
-          <h2>Iniciar Sesión</h2>
-          <v-form v-model="valid">
-            <v-text-field
-              v-model="usuario"
-              label="Usuario"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="clave"
-              label="Clave"
-              required
-            ></v-text-field>
-          </v-form>
+        <h1 class='mb-4'>Empresas:</h1>
+        <v-card class='mb-4' v-for="empresa in this.$store.getters.empresas" :key="empresa.id">
+          <h3>{{ empresa.nombre }}</h3>
+          <div>{{ empresa.actividadComercial }}</div>
+          <div>{{ empresa.razonSocial }}</div>
           <v-btn
-            :disabled="!valid"
-            @click="submit"
+            @click="editarEmpresa(empresa)"
           >
-            Iniciar Sesión
+            Editar
           </v-btn>
-
+          <v-btn
+            @click="dashboard"
+          >
+            Eliminar
+          </v-btn>
         </v-card>
+        <v-btn
+            @click="dashboard"
+          >
+            Regresar
+          </v-btn>
       </v-flex>
     </v-layout>
-    <v-snackbar
+  </div>
+  <v-snackbar
       :timeout="3000"
       :multi-line="true"
       :color="color"
@@ -40,7 +47,6 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
-  </div>
 </main>
 </template>
 
@@ -49,24 +55,27 @@ import router from '../router'
 export default {
   data () {
     return {
-      valid: false,
-      usuario: 'Cecilia_Cotto',
-      clave: 'J0Oh243XReH3maF',
       mensajeSnackbar: '',
       color: '',
       snackbar: false
     }
   },
   methods: {
-    submit () {
-      let usuario = this.$data.usuario
-      let clave = this.$data.clave
-      this.$store.dispatch('login', { usuario, clave })
+    logout () {
+      this.$store.dispatch('logout')
+      router.push('/')
+    },
+    dashboard () {
+      router.push('dashboard')
+    },
+    editarEmpresa (empresa) {
+      let empresaId = empresa.id
+      this.$store.dispatch('getEmpresaSola', empresaId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'El usuario ingresado correctamente'
+          this.mensajeSnackbar = 'Empresa Encontrada.'
           this.color = 'success'
-          router.push('dashboard')
+          router.push('editarEmpresa')
         })
         .catch((err) => {
           this.color = 'error'
