@@ -72,3 +72,28 @@ module.exports = {
 }
 
 ```
+
+# Controller
+
+```js
+const co = require('co')
+module.exports = (app) => {
+  const proto = {
+
+  }
+  return Object.assign(Object.create(proto), {})
+}
+
+```
+
+# Router
+
+```js
+const responses = require('../../responses')
+const db = require('../../config/db').db
+const Controller = require('./empresas.controller')({ responses, db })
+module.exports = (app) => {
+
+}
+
+```

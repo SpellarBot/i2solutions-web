@@ -1,7 +1,7 @@
 // https://github.com/marak/Faker.js/
 const faker = require('faker')
-// const jsonfile = require('jsonfile')
-// const path = require('path')
+const jsonfile = require('jsonfile')
+const path = require('path')
 faker.locale = 'es'
 const conexion = require('../db')
 const random = () => {
@@ -109,7 +109,13 @@ conexion.Conectar().then(async (db) => {
         ruc: random(),
         empresasId
       }
-      let establecimientoCreada = await db.establecimientos.Crear(establecimiento)
+      let establecimientoCreada = {}
+      if (i === 0) {
+        establecimiento['nombres'] = 'matriz'
+        establecimientoCreada = await db.establecimientos.Crear(establecimiento)
+      } else {
+        establecimientoCreada = await db.establecimientos.Crear(establecimiento)
+      }
       let establecimientosId = establecimientoCreada['id']
       establecimientos.push(establecimiento)
 
@@ -327,27 +333,29 @@ conexion.Conectar().then(async (db) => {
   +++++++++++++
   */
 
-  // let tablas = [
-  //   { nombre: 'empresas', data: empresas },
-  //   { nombre: 'personas', data: personas },
-  //   { nombre: 'establecimientos', data: establecimientos }
-  // ]
-  // // empresas
-  // // personas
-  // // establecimientos
-  // // areas
-  // // puestos
-  // // riesgos
-  // // capacitaciones
-  // // inspecciones
-  // // novedades
-  // // accidentes
-  // // equipos
-  // for (tabla of tablas) {
-  //   jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
-  //     console.error(err)
-  //   })
-  // }
+  let tablas = [
+    { nombre: 'empresas', data: empresas },
+    { nombre: 'personas', data: personas },
+    { nombre: 'establecimientos', data: establecimientos },
+    { nombre: 'areas', data: areas },
+    { nombre: 'puestos', data: puestos }
+  ]
+  // empresas
+  // personas
+  // establecimientos
+  // areas
+  // puestos
+  // riesgos
+  // capacitaciones
+  // inspecciones
+  // novedades
+  // accidentes
+  // equipos
+  for (tabla of tablas) {
+    jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
+      console.error(err)
+    })
+  }
 
   await conexion.Desconectar()
 }).catch((err) => {

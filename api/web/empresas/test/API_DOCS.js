@@ -17,12 +17,14 @@ module.exports = {
     body: [],
     errors: []
   },
-  API_3: {
+  API_3: { // empresa no existe?
     nombre: 'Actualizar Empresa',
     metodo: 'PUT',
     descripcion: '',
     url: '/api/web/empresas/:empresasId',
-    params: [],
+    params: [
+      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   },

@@ -6,7 +6,7 @@ module.exports = ({ responses, db }) => {
         co(function * () {
           let empresaCreada = yield db.empresas.Crear(datos)
           let establecimientoCreada = yield db.establecimientos.Crear({
-            nombres: empresaCreada['nombre'],
+            nombres: 'matriz',
             direccion: datos['direccion'],
             ruc: datos['ruc'],
             empresasId: empresaCreada['id']
@@ -42,6 +42,21 @@ module.exports = ({ responses, db }) => {
             let datos = JSON.parse(JSON.stringify(empresa))
             datos['establecimientos'] = establecimientos
             resolve(responses.OK(datos))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    Actualizar (datos) {
+      return new Promise((resolve, reject) => {
+        db.empresas.Actualizar(datos)
+          .then((resp) => {
+            if (resp[0].toString() === datos['id']) {
+              resolve(responses.OK(true))
+            } else {
+              resolve(responses.NO_OK('La empresa con ese id no existe'))
+            }
           }).catch((err) => {
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)

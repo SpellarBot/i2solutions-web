@@ -2,7 +2,7 @@ const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./empresas.controller')({ responses, db })
 module.exports = (app) => {
-  // GET ALL
+  // GET ALL API_1
   app.route('/empresas')
     .get((req, res) => {
       Controller.ObtenerTodos({}).then((resp) => {
@@ -42,7 +42,10 @@ module.exports = (app) => {
   // UPDATE
   app.route('/empresas/:empresasId')
     .put((req, res) => {
-      Controller.Crear(req.body).then((resp) => {
+      let { empresasId } =  req.params
+      let id = empresasId
+      let { nombre, actividadComercial, razonSocial } = req.body
+      Controller.Actualizar({ id, nombre, actividadComercial, razonSocial }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {

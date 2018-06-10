@@ -13,11 +13,11 @@ Obtener todas las empresas de i2Solutions
   "datos": [
     {
       "id": 1,
-      "nombre": "Villareal - Deleón",
-      "actividadComercial": "Exclusivo basado en el contexto arquitectura abierta",
+      "nombre": "Zapata S.A.",
+      "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "1235468789",
-      "fechaCreacion": "2018-06-09 18:31:12.835 +00:00",
-      "fechaActualizacion": "2018-06-09 18:31:12.835 +00:00"
+      "fechaCreacion": "2018-06-10 03:19:50.275 +00:00",
+      "fechaActualizacion": "2018-06-10 03:19:50.275 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -38,11 +38,11 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
 
 ```json
 {
-  "nombre": "Villareal - Deleón",
-  "actividadComercial": "Exclusivo basado en el contexto arquitectura abierta",
+  "nombre": "Zapata S.A.",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "1235468789",
-  "direccion": "8260 Sara Quinta",
-  "ruc": "3401822014"
+  "direccion": "22050 Felipe Rampa",
+  "ruc": "3245547449"
 }
 ```
 
@@ -53,24 +53,94 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
   "estado": true,
   "datos": {
     "id": 1,
-    "nombre": "Villareal - Deleón",
-    "actividadComercial": "Exclusivo basado en el contexto arquitectura abierta",
+    "nombre": "Zapata S.A.",
+    "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "1235468789",
-    "fechaActualizacion": "2018-06-09T18:31:12.965Z",
-    "fechaCreacion": "2018-06-09T18:31:12.965Z",
+    "fechaActualizacion": "2018-06-10T03:19:50.422Z",
+    "fechaCreacion": "2018-06-10T03:19:50.422Z",
     "establecimiento": {
       "id": 1,
-      "nombres": "Villareal - Deleón",
-      "direccion": "8260 Sara Quinta",
-      "ruc": "3401822014",
+      "nombres": "matriz",
+      "direccion": "22050 Felipe Rampa",
+      "ruc": "3245547449",
       "empresasId": 1,
-      "fechaActualizacion": "2018-06-09T18:31:12.967Z",
-      "fechaCreacion": "2018-06-09T18:31:12.967Z"
+      "fechaActualizacion": "2018-06-10T03:19:50.425Z",
+      "fechaCreacion": "2018-06-10T03:19:50.425Z"
     }
   },
   "codigoEstado": 200
 }
 ```
+
+
+___
+
+
+
+## Actualizar Empresa
+
+__PUT__ __/api/web/empresas/:empresasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| empresasId | Number |   ---   |
+	
+
+#### Request:
+
+```json
+{
+  "id": 1,
+  "nombre": "Nombre cambiado",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
+  "razonSocial": "1235468789",
+  "fechaActualizacion": "2018-06-10T03:19:50.469Z",
+  "fechaCreacion": "2018-06-10T03:19:50.469Z"
+}
+```
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": true,
+  "codigoEstado": 200
+}
+```
+
+#### ERRORS:
+__El Id de la empresa no existe__
+
+
+
+
+_request_
+
+```js
+{
+  "id": 1,
+  "nombre": "Nombre cambiado",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
+  "razonSocial": "1235468789",
+  "fechaActualizacion": "2018-06-10T03:19:50.515Z",
+  "fechaCreacion": "2018-06-10T03:19:50.515Z"
+}
+```
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "La empresa con ese id no existe",
+  "codigoEstado": 200
+}
+```
+	
+	
 
 
 ___
@@ -95,28 +165,28 @@ __GET__ __/api/web/empresas/:empresasId__
   "estado": true,
   "datos": {
     "id": 1,
-    "nombre": "Villareal - Deleón",
-    "actividadComercial": "Exclusivo basado en el contexto arquitectura abierta",
+    "nombre": "Zapata S.A.",
+    "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "1235468789",
-    "fechaCreacion": "2018-06-09T18:31:13.017Z",
-    "fechaActualizacion": "2018-06-09T18:31:13.017Z",
+    "fechaCreacion": "2018-06-10T03:19:50.559Z",
+    "fechaActualizacion": "2018-06-10T03:19:50.559Z",
     "establecimientos": [
       {
         "id": 1,
-        "nombres": "Galván S.L.",
-        "direccion": "8260 Sara Quinta",
-        "ruc": "3401822014",
-        "fechaCreacion": "2018-06-09 18:31:13.019 +00:00",
-        "fechaActualizacion": "2018-06-09 18:31:13.019 +00:00",
+        "nombres": "matriz",
+        "direccion": "22050 Felipe Rampa",
+        "ruc": "3245547449",
+        "fechaCreacion": "2018-06-10 03:19:50.561 +00:00",
+        "fechaActualizacion": "2018-06-10 03:19:50.561 +00:00",
         "empresasId": 1
       },
       {
         "id": 2,
-        "nombres": "Sanches, Gallegos and Robles",
-        "direccion": "60223 Beatriz Colegio",
-        "ruc": "8046678813",
-        "fechaCreacion": "2018-06-09 18:31:13.021 +00:00",
-        "fechaActualizacion": "2018-06-09 18:31:13.021 +00:00",
+        "nombres": "Lira - Barajas",
+        "direccion": "0119 Laboy Mercado",
+        "ruc": "6886107230",
+        "fechaCreacion": "2018-06-10 03:19:50.563 +00:00",
+        "fechaActualizacion": "2018-06-10 03:19:50.563 +00:00",
         "empresasId": 1
       }
     ]

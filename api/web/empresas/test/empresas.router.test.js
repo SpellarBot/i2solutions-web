@@ -1,10 +1,7 @@
 const request = require('supertest')
 const expect = require('chai').expect
-// const moment = require('moment')
-// const sinon = require('sinon')
 // const Ajv = require('ajv')
 const rfr = require('rfr')
-
 // const ajv = new Ajv({ allErrors: true, jsonPointers: true })
 // function e (validate) {
 //   return `${JSON.stringify(validate.errors, null, 2)}`
@@ -32,6 +29,7 @@ describe('EMPRESAS', () => {
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
+
   describe('Obtener todos', () => {
     const { API_1 } = API
     it('@CP1 una empresa creada', async () => {
@@ -49,6 +47,9 @@ describe('EMPRESAS', () => {
       expect(res.body.datos.length).to.equal(0)
     })
   })
+
+  // al crear una empresa se debe crear el establecimiento
+  // el establecimientos debe tener como nombre 'matriz'
   describe('Crear', () => {
     const { API_2 } = API
     it('@CP3 una empresa creada', async () => {
@@ -58,18 +59,39 @@ describe('EMPRESAS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.datos['id']).to.equal(1)
       expect(res.body.datos['establecimiento']['id']).to.equal(1)
-      expect(res.body.datos['establecimiento']['nombres']).to.equal(res.body.datos['nombre'])
+      expect(res.body.datos['establecimiento']['nombres']).to.equal('matriz')
       generatorDocs.OK({ docs, doc: API_2, res, req })
     })
   })
+
   describe('Actualizar', () => {
     const { API_3 } = API
-    it('@CP4 actualizar datos de empresa')
+    it('@CP4 actualizar datos de empresa', async () => {
+      let empresaCreada = await models.empresas.Crear(empresa)
+      empresaCreada['nombre'] = 'Nombre cambiado'
+      let req = empresaCreada
+      let res = await request(app).put(`/api/web/empresas/${empresaCreada['id']}`).send(req)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_3, res, req })
+    })
+    it('@CP4.1 id empresa no existe', async () => {
+      let empresaCreada = await models.empresas.Crear(empresa)
+      empresaCreada['nombre'] = 'Nombre cambiado'
+      let req = empresaCreada
+      let res = await request(app).put(`/api/web/empresas/6`).send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ERROR({ nombre: 'El Id de la empresa no existe', docs, doc: API_3, res, req })
+    })
   })
+
   describe('Eliminar', () => {
     const { API_4 } = API
     it('@CP5 eliminar por id')
   })
+
   describe('Obtener una empresa', () => {
     const { API_5 } = API
     it('@CP6 obtener por id', async () => {
