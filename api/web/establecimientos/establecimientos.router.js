@@ -1,24 +1,12 @@
 const responses = require('../../responses')
 const db = require('../../config/db').db
-const Controller = require('./empresas.controller')({ responses, db })
+const Controller = require('./establecimientos.controller')({ responses, db })
 module.exports = (app) => {
   // GET ALL API_1
-  app.route('/personas')
-    .get((req, res) => {
-      Controller.ObtenerTodos({}).then((resp) => {
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      }).catch(resp => {
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      })
-    })
-
-  // GET ONE
-  app.route('/personas/:personasId')
+  app.route('/establecimientos/:empresasId')
     .get((req, res) => {
       let { empresasId } = req.params
-      Controller.Obtener({ id: empresasId }).then((resp) => {
+      Controller.ObtenerTodos({ empresasId }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {
@@ -28,7 +16,7 @@ module.exports = (app) => {
     })
 
   // CREATE
-  app.route('/personas')
+  app.route('/establecimientos')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
         res.status(resp.codigoEstado)
@@ -39,13 +27,25 @@ module.exports = (app) => {
       })
     })
 
+  // GET ONE
+  app.route('/establecimientos/:establecimientosId')
+    .get((req, res) => {
+      let { establecimientosId } = req.params
+      Controller.Obtener({ id: establecimientosId }).then((resp) => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
+    })
+
   // UPDATE
-  app.route('/personas/:personasId')
+  app.route('/establecimientos/:establecimientosId')
     .put((req, res) => {
-      let { empresasId } = req.params
-      let id = empresasId
-      let { nombre, actividadComercial, razonSocial } = req.body
-      Controller.Actualizar({ id, nombre, actividadComercial, razonSocial }).then((resp) => {
+      let { establecimientosId } = req.params
+      delete req.body['empresasId']
+      Controller.Actualizar({ ...req.body, id: establecimientosId }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {
@@ -56,7 +56,7 @@ module.exports = (app) => {
 
   // DELETE
   // borrar todos los datos dependientes
-  app.route('/personas/:personasId')
+  app.route('/establecimientos/:establecimientosId')
     .delete((req, res) => {
       res.send('empresas')
     })

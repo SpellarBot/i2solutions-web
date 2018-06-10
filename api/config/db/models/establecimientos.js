@@ -48,5 +48,22 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.Actualizar = function () {
+    let datos = JSON.parse(JSON.stringify(arguments['0']))
+    let id = datos['id']
+    delete datos['id']
+    return new Promise((resolve, reject) => {
+      return this.update(
+        { datos },
+        { where: { id } })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
   return define
 }
