@@ -7,6 +7,7 @@ import VerEmpresas from '@/components/VerEmpresas'
 import AuthGuard from './auth'
 import AuthLogin from './authLogin'
 import EmpresaEditar from '@/components/EmpresaEditar'
+import EstablecimientoCrearDialog from '@/components/EstablecimientoCrear'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/editarEmpresa',
       name: 'EditarEmpresa',
       component: EmpresaEditar,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/crearEstablecimiento',
+      name: 'crearEstablecimiento',
+      component: EstablecimientoCrearDialog,
       beforeEnter: AuthGuard
     }
   ]

@@ -1,26 +1,36 @@
 <template>
   <main id='crearEmpresa'>
     <app-navbar></app-navbar>
-  <div class="EditarEmpresa">
-
+    <div class="empresas in this.$store.getters.empresas">
+    <div>
+    </div>
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <v-card>
-          <h2>Edición datos de empresa</h2>
+          <h2>Ingreso datos de establecimiento</h2>
           <v-form v-model="valid">
             <v-text-field
               v-model="nombre"
               label="Nombre"
               required
             ></v-text-field>
+            <v-select
+              :items = "empresas"
+              item-text = "nombre"
+              item-value = "id"
+              v-model = "idEmpresaMatriz"
+              label="Empresa matriz"
+              @change="prueba"
+              single-line
+            ></v-select>
             <v-text-field
-              v-model="actividadComercial"
-              label="Actividad Comercial"
+              v-model="direccion"
+              label="Dirección"
               required
             ></v-text-field>
             <v-text-field
-              v-model="razonSocial"
-              label="Razon Social"
+              v-model="ruc"
+              label="RUC"
               required
             ></v-text-field>
           </v-form>
@@ -28,7 +38,7 @@
             :disabled="!valid"
             @click="submit"
           >
-            Editar Empresa
+            Crear establecimiento
           </v-btn>
 
         </v-card>
@@ -52,26 +62,31 @@ import router from '../router'
 export default {
   data () {
     return {
-      valid: true,
-      nombre: this.$store.getters.empresaSelected.nombre,
-      actividadComercial: this.$store.getters.empresaSelected.actividadComercial,
-      razonSocial: this.$store.getters.empresaSelected.razonSocial,
+      valid: false,
+      nombre: '',
       mensajeSnackbar: '',
+      direccion: '',
+      ruc: '',
       color: '',
-      snackbar: false
+      idEmpresaMatriz: '',
+      snackbar: false,
+      empresas: this.$store.getters.empresas
+      // razonSocial: '',
+      // actividadComercial: ''
+
     }
   },
   methods: {
     submit () {
       let nombre = this.$data.nombre
-      let actividadComercial = this.$data.actividadComercial
-      let razonSocial = this.$data.razonSocial
       let direccion = this.$data.direccion
       let ruc = this.$data.ruc
-      this.$store.dispatch('crearEmpresa', { nombre, actividadComercial, razonSocial, direccion, ruc })
+      let id = this.$data.idEmpresaMatriz
+      console.log(id)
+      this.$store.dispatch('crearEstablecimento', { nombre, direccion, ruc, id })
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Empresa creada exitosamente.'
+          this.mensajeSnackbar = 'establecimiento creado exitosamente.'
           this.color = 'success'
           // router.push('dashboard')
         })
@@ -84,23 +99,12 @@ export default {
     logout () {
       this.$store.dispatch('logout')
       router.push('/')
+    },
+    prueba () {
+      console.log(this.$data.idEmpresaMatriz)
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.imageLogo {
-  background-color: #1394CE;
-  padding: 10px;
-  margin-bottom: 30px;
-  text-align: left !important;
-}
-.i2s-name {
-  text-align: left !important;
-  padding: 20px;
-  color: white;
-  font-size: 40px;
-}
+<style>
 </style>

@@ -84,5 +84,21 @@ export default {
           return reject(err)
         })
     })
+  },
+  crearEstablecimento ({commit}, {nombres, direccion, ruc, empresasId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/establecimientos', {nombres, direccion, ruc, empresasId})
+        .then((resp) => {
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
   }
 }

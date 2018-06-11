@@ -1,15 +1,6 @@
 <template>
   <main id='crearEmpresa'>
-    <div class = 'imageLogo'>
-    <span class='i2s-name'>i2Solutions Cía. Ltda.</span>
-    <v-btn flat color="white"
-    @click="logout"
-    >
-    <v-icon>exit_to_app</v-icon>
-      Cerrar Sesión
-
-    </v-btn>
-  </div>
+    <app-navbar></app-navbar>
   <div class="crearEmpresa">
 
     <v-layout>
@@ -112,16 +103,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.imageLogo {
-  background-color: #1394CE;
-  padding: 10px;
-  margin-bottom: 30px;
-  text-align: left !important;
-}
-.i2s-name {
-  text-align: left !important;
-  padding: 20px;
-  color: white;
-  font-size: 40px;
-}
+
 </style>

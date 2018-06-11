@@ -1,0 +1,72 @@
+<template>
+  <div id='navbar'>
+  <v-toolbar color="blue darken-2">
+    <v-toolbar-side-icon></v-toolbar-side-icon>
+    <v-toolbar-title color="white" id="title"
+    @click="ToDashboard" >
+      i2Solutions Cía. Ltda.
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat color="white" @click.stop="dialog = true">Open Dialog 1</v-btn>
+      <v-btn flat color="white"
+      @click="crearEstablecimiento" >
+        Agregar establecimiento
+      </v-btn>
+      <v-btn flat color="white"
+      @click="logout" >
+        <v-icon>exit_to_app</v-icon>
+        Cerrar Sesión
+      </v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+  </div>
+</template>
+
+<script>
+import router from '../router'
+export default {
+  data () {
+    return {
+      valid: true,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
+      dialog: false
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+      router.push('/')
+    },
+    crearEstablecimiento () {
+      this.$store.dispatch('empresas')
+      router.push('/crearEstablecimiento')
+    },
+    ToDashboard () {
+      router.push('/dashboard')
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.imageLogo {
+  background-color: #1394CE;
+  padding: 10px;
+  margin-bottom: 30px;
+  text-align: left !important;
+}
+.i2s-name {
+  text-align: left !important;
+  padding: 20px;
+  color: white;
+  font-size: 40px;
+}
+#title{
+  cursor: pointer;
+  color: white;
+}
+</style>
