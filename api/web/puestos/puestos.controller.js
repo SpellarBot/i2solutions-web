@@ -1,5 +1,5 @@
 // const co = require('co')
-module.exports = (app) => {
+module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
       return new Promise((resolve, reject) => {

@@ -51,11 +51,12 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
+    let { nombres, direccion, ruc } = datos
     let id = datos['id']
     delete datos['id']
     return new Promise((resolve, reject) => {
       return this.update(
-        { datos },
+        { nombres, direccion, ruc },
         { where: { id } })
         .then((resp) => {
           return resolve(resp)

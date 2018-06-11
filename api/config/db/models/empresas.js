@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
     delete datos['id']
     return new Promise((resolve, reject) => {
       return this.update(
-        { datos },
+        { nombre, actividadComercial, razonSocial },
         { where: { id } })
         .then((resp) => {
           return resolve(resp)
