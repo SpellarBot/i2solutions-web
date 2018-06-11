@@ -1,12 +1,26 @@
 // const co = require('co')
-module.exports = (app) => {
+module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
       return new Promise((resolve, reject) => {
+        db.establecimientos.Crear(datos)
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
       })
     },
-    ObtenerTodos () {
+    ObtenerTodos ({ empresasId }) {
       return new Promise((resolve, reject) => {
+        db.establecimientos.ObtenerPorEmpresas({ empresasId })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
       })
     },
     Obtener ({ id }) {
@@ -15,6 +29,17 @@ module.exports = (app) => {
     },
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
+        db.establecimientos.Actualizar(datos)
+          .then((resp) => {
+            if (resp[0].toString() === datos['id']) {
+              resolve(responses.OK(true))
+            } else {
+              resolve(responses.NO_OK('El id del establecimento no existe'))
+            }
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
       })
     }
   }

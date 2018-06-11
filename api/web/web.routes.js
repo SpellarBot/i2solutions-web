@@ -7,6 +7,7 @@ const app = express()
 
 require('./empresas/empresas.router')(app)
 require('./personas/personas.router')(app)
+require('./establecimientos/establecimientos.router')(app)
 // const controller = require('./movil.controller.js')
 // const MovilDAL = require('./movil.dal')({ db })
 // const Controller = controller({ responses, MovilDAL })
