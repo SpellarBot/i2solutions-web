@@ -75,14 +75,21 @@ export default {
       let nombre = this.$data.nombre
       let actividadComercial = this.$data.actividadComercial
       let razonSocial = this.$data.razonSocial
-      let direccion = this.$data.direccion
-      let ruc = this.$data.ruc
-      this.$store.dispatch('crearEmpresa', { nombre, actividadComercial, razonSocial, direccion, ruc })
+      let empresaId = this.$store.getters.empresaSelected.id
+      this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial })
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Empresa creada exitosamente.'
+          this.mensajeSnackbar = 'Empresa editada exitosamente.'
           this.color = 'success'
-          // router.push('dashboard')
+          this.$store.dispatch('getEmpresas')
+            .then((resp) => {
+              router.push('empresas')
+            })
+            .catch((err) => {
+              this.color = 'error'
+              this.snackbar = true
+              this.mensajeSnackbar = err
+            })
         })
         .catch((err) => {
           this.color = 'error'

@@ -69,11 +69,27 @@ export default {
   },
   getEmpresaSola ({commit}, empresaId) {
     return new Promise((resolve, reject) => {
-      console.log('/api/web/empresas/' + empresaId)
       Vue.http.get('/api/web/empresas/' + empresaId)
         .then((resp) => {
           if (resp.body.estado) {
             commit('setEmpresaSelected', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  updateEmpresa ({commit}, {empresaId, nombre, actividadComercial, razonSocial}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial})
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
             return resolve()
           } else {
             commit('setError', resp.body.datos)
