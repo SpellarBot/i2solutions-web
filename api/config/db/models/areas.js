@@ -77,5 +77,50 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorEstablecimiento = function ({ establecimientosId }) {
+    return new Promise((resolve, reject) => {
+      return this.findAll({
+        raw: true,
+        where: {
+          establecimientosId
+        }
+      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Actualizar = function () {
+    let datos = JSON.parse(JSON.stringify(arguments['0']))
+    let id = datos['id']
+    delete datos['id']
+    return new Promise((resolve, reject) => {
+      return this.update(
+        { ...datos },
+        { where: { id } })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Obtener = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findById(id)
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

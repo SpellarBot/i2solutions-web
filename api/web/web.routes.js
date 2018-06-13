@@ -1,19 +1,13 @@
 const express = require('express')
-
-// const responses = require('../responses')
-// const { db } = require('../config/db')
-
 const app = express()
 
 require('./empresas/empresas.router')(app)
 require('./personas/personas.router')(app)
 require('./establecimientos/establecimientos.router')(app)
-// const controller = require('./movil.controller.js')
-// const MovilDAL = require('./movil.dal')({ db })
-// const Controller = controller({ responses, MovilDAL })
+require('./areas/areas.router')(app)
 
-app.route('/ping')
-  .get((req, res) => {
-    res.send({ hello: 'hello' })
-  })
+// app.route('*')
+//   .get((req, res) => {
+//     res.json({ hello: 'Esta ruta no existe' })
+//   })
 module.exports = app
