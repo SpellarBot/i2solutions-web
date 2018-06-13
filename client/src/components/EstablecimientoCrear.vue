@@ -3,6 +3,8 @@
     <app-navbar></app-navbar>
     <div class="empresas in this.$store.getters.empresas">
     <div>
+      <v-btn @click="prueba">
+      pruebas</v-btn>
     </div>
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
@@ -78,12 +80,13 @@ export default {
   },
   methods: {
     submit () {
-      let nombre = this.$data.nombre
+      let nombres = this.$data.nombre
       let direccion = this.$data.direccion
       let ruc = this.$data.ruc
-      let id = this.$data.idEmpresaMatriz
-      console.log(id)
-      this.$store.dispatch('crearEstablecimento', { nombre, direccion, ruc, id })
+      let empresasId = this.$data.idEmpresaMatriz
+      let datos = { nombres, direccion, ruc, empresasId }
+      console.log(datos)
+      this.$store.dispatch('crearEstablecimento', datos)
         .then((resp) => {
           this.snackbar = true
           this.mensajeSnackbar = 'establecimiento creado exitosamente.'
@@ -102,6 +105,7 @@ export default {
     },
     prueba () {
       console.log(this.$data.idEmpresaMatriz)
+      console.log('nombre:'  + this.$data.nombre)
     }
   }
 }

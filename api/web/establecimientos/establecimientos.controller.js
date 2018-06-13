@@ -2,6 +2,7 @@
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
+      // console.log(datos)
       return new Promise((resolve, reject) => {
         db.establecimientos.Crear(datos)
           .then((resp) => {
