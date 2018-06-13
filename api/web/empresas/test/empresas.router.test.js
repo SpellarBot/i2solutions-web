@@ -16,6 +16,7 @@ let docs = []
 describe('EMPRESAS', () => {
   let { empresas, establecimientos } = dump
   let empresa = empresas.VALIDOS[0]
+  let empresa2 = empresas.VALIDOS[1]
   let establecimiento = establecimientos.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
   let establecimiento3 = establecimientos.VALIDOS[2]
@@ -68,9 +69,10 @@ describe('EMPRESAS', () => {
     const { API_3 } = API
     it('@CP4 actualizar datos de empresa', async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
+      let empresaCreada2 = await models.empresas.Crear(empresa2)
       empresaCreada['nombre'] = 'Nombre cambiado'
       let req = empresaCreada
-      let res = await request(app).put(`/api/web/empresas/${empresaCreada['id']}`).send(req)
+      let res = await request(app).put(`/api/web/empresas/${empresaCreada2['id']}`).send(req)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.datos).to.equal(true)

@@ -1,11 +1,12 @@
 const responses = require('../../responses')
 const db = require('../../config/db').db
-const Controller = require('./empresas.controller')({ responses, db })
+const Controller = require('./areas.controller')({ responses, db })
 module.exports = (app) => {
   // GET ALL API_1
-  app.route('/personas')
+  app.route('/areas/establecimientos/:establecimientosId')
     .get((req, res) => {
-      Controller.ObtenerTodos({}).then((resp) => {
+      let { establecimientosId } = req.params
+      Controller.ObtenerPorEstablecimiento({ establecimientosId }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {
@@ -15,10 +16,10 @@ module.exports = (app) => {
     })
 
   // GET ONE
-  app.route('/personas/:personasId')
+  app.route('/areas/:areasId')
     .get((req, res) => {
-      let { empresasId } = req.params
-      Controller.Obtener({ id: empresasId }).then((resp) => {
+      let { areasId } = req.params
+      Controller.Obtener({ id: areasId }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {
@@ -28,7 +29,7 @@ module.exports = (app) => {
     })
 
   // CREATE
-  app.route('/personas')
+  app.route('/areas')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
         res.status(resp.codigoEstado)
@@ -40,12 +41,12 @@ module.exports = (app) => {
     })
 
   // UPDATE
-  app.route('/personas/:personasId')
+  app.route('/areas/:areasId')
     .put((req, res) => {
-      let { empresasId } = req.params
-      let id = empresasId
-      let { nombre, actividadComercial, razonSocial } = req.body
-      Controller.Actualizar({ id, nombre, actividadComercial, razonSocial }).then((resp) => {
+      let { areasId } = req.params
+      let id = areasId
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = req.body
+      Controller.Actualizar({ actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, id }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {

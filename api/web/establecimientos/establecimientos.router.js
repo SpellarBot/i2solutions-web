@@ -28,17 +28,17 @@ module.exports = (app) => {
     })
 
   // GET ONE
-  app.route('/establecimientos/:establecimientosId')
-    .get((req, res) => {
-      let { establecimientosId } = req.params
-      Controller.Obtener({ id: establecimientosId }).then((resp) => {
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      }).catch(resp => {
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      })
-    })
+  // app.route('/establecimientos/:establecimientosId')
+  //   .get((req, res) => {
+  //     let { establecimientosId } = req.params
+  //     Controller.Obtener({ id: establecimientosId }).then((resp) => {
+  //       res.status(resp.codigoEstado)
+  //       res.json(resp)
+  //     }).catch(resp => {
+  //       res.status(resp.codigoEstado)
+  //       res.json(resp)
+  //     })
+  //   })
 
   // UPDATE
   app.route('/establecimientos/:establecimientosId')

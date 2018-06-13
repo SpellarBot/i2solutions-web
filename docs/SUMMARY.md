@@ -5,4 +5,5 @@
 	* [Empresas](api.empresas.md)
 	* [Personas](api.personas.md)
 	* [Establecimientos](api.establecimientos.md)
+	* [Areas](api.areas.md)
 <!-- * [Db tablas](db.table.md) -->

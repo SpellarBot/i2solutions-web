@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import EmpresaCrear from '@/components/EmpresaCrear'
+import PersonasCrear from '@/components/PersonaCrear'
 import VerEmpresas from '@/components/VerEmpresas'
+import VerPersonas from '@/components/VerPersonas'
 import AuthGuard from './auth'
 import AuthLogin from './authLogin'
 import EmpresaEditar from '@/components/EmpresaEditar'
+import PersonaEditar from '@/components/PersonaEditar'
 
 Vue.use(Router)
 
@@ -33,9 +36,24 @@ export default new Router({
       component: VerEmpresas,
       beforeEnter: AuthGuard
     }, {
+      path: '/personas',
+      name: 'Personas',
+      component: VerPersonas,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/crearPersona',
+      name: 'CrearPersona',
+      component: PersonasCrear,
+      beforeEnter: AuthGuard
+    }, {
       path: '/editarEmpresa',
       name: 'EditarEmpresa',
       component: EmpresaEditar,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/editarPersona',
+      name: 'EditarPersona',
+      component: PersonaEditar,
       beforeEnter: AuthGuard
     }
   ]

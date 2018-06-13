@@ -31,7 +31,7 @@ module.exports = ({ responses, db }) => {
       return new Promise((resolve, reject) => {
         db.personas.Actualizar(datos)
           .then((resp) => {
-            if (resp[0].toString() === datos['id']) {
+            if (resp[0].toString() === '1') {
               resolve(responses.OK(true))
             } else {
               resolve(responses.NO_OK('Persona con ese id no existe'))

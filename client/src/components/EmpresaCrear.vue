@@ -94,7 +94,15 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Empresa creada exitosamente.'
           this.color = 'success'
-          // router.push('dashboard')
+          this.$store.dispatch('getEmpresas')
+            .then((resp) => {
+              router.push('empresas')
+            })
+            .catch((err) => {
+              this.color = 'error'
+              this.snackbar = true
+              this.mensajeSnackbar = err
+            })
         })
         .catch((err) => {
           this.color = 'error'

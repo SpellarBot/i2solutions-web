@@ -40,7 +40,6 @@ describe('Establecimientos', () => {
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.datos.length).to.equal(2)
-      // expect(validate(datos), e(validate)).to.equal(true)
       generatorDocs.OK({ docs, doc: API_1, res })
     })
   })
