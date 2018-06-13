@@ -21,6 +21,18 @@
     >
       Ver Empresas
     </v-btn>
+
+    <v-btn
+      @click=" verPersonas"
+    >
+      Ver Personas
+    </v-btn>
+
+    <v-btn
+      @click=" crearPersona"
+    >
+      Crear Personas
+    </v-btn>
     <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -52,10 +64,24 @@ export default {
     crearEmpresa () {
       router.push('crearEmpresa')
     },
+    crearPersona () {
+      router.push('crearPersona')
+    },
     verEmpresas () {
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
           router.push('empresas')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    verPersonas () {
+      this.$store.dispatch('getPersonas')
+        .then((resp) => {
+          router.push('personas')
         })
         .catch((err) => {
           this.color = 'error'
