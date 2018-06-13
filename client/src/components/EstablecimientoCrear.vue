@@ -1,28 +1,30 @@
 <template>
   <main id='crearEmpresa'>
     <app-navbar></app-navbar>
-  <div class="crearEmpresa">
-
+    <div class="empresas in this.$store.getters.empresas">
+    <div>
+      <v-btn @click="prueba">
+      pruebas</v-btn>
+    </div>
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <v-card>
-          <h2>Ingreso datos de empresa</h2>
+          <h2>Ingreso datos de establecimiento</h2>
           <v-form v-model="valid">
             <v-text-field
               v-model="nombre"
               label="Nombre"
               required
             ></v-text-field>
-            <v-text-field
-              v-model="actividadComercial"
-              label="Actividad Comercial"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="razonSocial"
-              label="Razon Social"
-              required
-            ></v-text-field>
+            <v-select
+              :items = "empresas"
+              item-text = "nombre"
+              item-value = "id"
+              v-model = "idEmpresaMatriz"
+              label="Empresa matriz"
+              @change="prueba"
+              single-line
+            ></v-select>
             <v-text-field
               v-model="direccion"
               label="Dirección"
@@ -38,7 +40,7 @@
             :disabled="!valid"
             @click="submit"
           >
-            Crear Empresa
+            Crear establecimiento
           </v-btn>
 
         </v-card>
@@ -64,36 +66,32 @@ export default {
     return {
       valid: false,
       nombre: '',
-      actividadComercial: '',
-      razonSocial: '',
       mensajeSnackbar: '',
       direccion: '',
       ruc: '',
       color: '',
-      snackbar: false
+      idEmpresaMatriz: '',
+      snackbar: false,
+      empresas: this.$store.getters.empresas
+      // razonSocial: '',
+      // actividadComercial: ''
+
     }
   },
   methods: {
     submit () {
-      let nombre = this.$data.nombre
-      let actividadComercial = this.$data.actividadComercial
-      let razonSocial = this.$data.razonSocial
+      let nombres = this.$data.nombre
       let direccion = this.$data.direccion
       let ruc = this.$data.ruc
-      this.$store.dispatch('crearEmpresa', { nombre, actividadComercial, razonSocial, direccion, ruc })
+      let empresasId = this.$data.idEmpresaMatriz
+      let datos = { nombres, direccion, ruc, empresasId }
+      console.log(datos)
+      this.$store.dispatch('crearEstablecimento', datos)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Empresa creada exitosamente.'
+          this.mensajeSnackbar = 'establecimiento creado exitosamente.'
           this.color = 'success'
-          this.$store.dispatch('getEmpresas')
-            .then((resp) => {
-              router.push('empresas')
-            })
-            .catch((err) => {
-              this.color = 'error'
-              this.snackbar = true
-              this.mensajeSnackbar = err
-            })
+          // router.push('dashboard')
         })
         .catch((err) => {
           this.color = 'error'
@@ -104,12 +102,13 @@ export default {
     logout () {
       this.$store.dispatch('logout')
       router.push('/')
+    },
+    prueba () {
+      console.log(this.$data.idEmpresaMatriz)
+      console.log('nombre:' + this.$data.nombre)
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style>
 </style>

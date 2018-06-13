@@ -18,6 +18,7 @@ module.exports = (app) => {
   // CREATE
   app.route('/establecimientos')
     .post((req, res) => {
+      console.log(req.body)
       Controller.Crear(req.body).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)

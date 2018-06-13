@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Crear = function ({ nombres, direccion, ruc, empresasId }) {
     let datos = arguments['0']
+    // console.log(datos)
     return new Promise((resolve, reject) => {
       return this.create(datos)
         .then((resp) => {

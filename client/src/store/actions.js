@@ -151,6 +151,24 @@ export default {
         })
     })
   },
+  crearEstablecimento ({commit}, datos) {
+    return new Promise((resolve, reject) => {
+      console.log(datos)
+      Vue.http.post('/api/web/establecimientos', datos)
+        .then((resp) => {
+          console.log(resp.body)
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   updatePersona ({commit}, {personaId, correo, telefono, clave, usuario, rol}) {
     return new Promise((resolve, reject) => {
       Vue.http.put('/api/web/personas/' + personaId, {correo, telefono, clave, usuario, rol})
