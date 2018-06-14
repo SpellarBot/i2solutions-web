@@ -7207,6 +7207,10 @@ vue-localstorage@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/vue-localstorage/-/vue-localstorage-0.6.2.tgz#7f84c99f4ce0b6be23b16c1fab194d4d67182456"
 
+vue-picture-input@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/vue-picture-input/-/vue-picture-input-2.1.6.tgz#6a47af68d19c9122cdd20de980d3b113b0a614be"
+
 vue-resource@^1.5.0:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/vue-resource/-/vue-resource-1.5.1.tgz#0f3d685e3254d21800bebd966edcf56c34b3b6e4"

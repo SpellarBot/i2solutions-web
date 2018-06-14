@@ -11,10 +11,16 @@ export default {
   personas (state) {
     return state.personas
   },
+  areas (state) {
+    return state.areas
+  },
   empresaSelected (state) {
     return state.empresaSelected
   },
   personaSelected (state) {
     return state.personaSelected
+  },
+  areaSelected (state) {
+    return state.areaSelected
   }
 }

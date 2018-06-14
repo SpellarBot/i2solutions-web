@@ -4,12 +4,15 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import EmpresaCrear from '@/components/EmpresaCrear'
 import PersonasCrear from '@/components/PersonaCrear'
+import AreaCrear from '@/components/AreaCrear'
 import VerEmpresas from '@/components/VerEmpresas'
 import VerPersonas from '@/components/VerPersonas'
+import verAreas from '@/components/verAreas'
 import AuthGuard from './auth'
 import AuthLogin from './authLogin'
 import EmpresaEditar from '@/components/EmpresaEditar'
 import PersonaEditar from '@/components/PersonaEditar'
+import AreaEditar from '@/components/AreaEditar'
 import EstablecimientoCrearDialog from '@/components/EstablecimientoCrear'
 
 Vue.use(Router)
@@ -42,6 +45,11 @@ export default new Router({
       component: VerPersonas,
       beforeEnter: AuthGuard
     }, {
+      path: '/areas',
+      name: 'Areas',
+      component: verAreas,
+      beforeEnter: AuthGuard
+    }, {
       path: '/crearPersona',
       name: 'CrearPersona',
       component: PersonasCrear,
@@ -52,6 +60,11 @@ export default new Router({
       component: EmpresaEditar,
       beforeEnter: AuthGuard
     }, {
+      path: '/editarArea',
+      name: 'EditarArea',
+      component: AreaEditar,
+      beforeEnter: AuthGuard
+    }, {
       path: '/editarPersona',
       name: 'EditarPersona',
       component: PersonaEditar,
@@ -60,6 +73,12 @@ export default new Router({
       path: '/crearEstablecimiento',
       name: 'crearEstablecimiento',
       component: EstablecimientoCrearDialog,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/crearArea',
+      name: 'crearArea',
+      component: AreaCrear,
       beforeEnter: AuthGuard
     }
   ]
