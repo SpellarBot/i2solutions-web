@@ -25,6 +25,13 @@ module.exports = ({ responses, db }) => {
     },
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
+        db.personas.Obtener({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
       })
     },
     Actualizar (datos) {

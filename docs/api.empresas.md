@@ -16,8 +16,8 @@ Obtener todas las empresas de i2Solutions
       "nombre": "Zapata S.A.",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "1235468789",
-      "fechaCreacion": "2018-06-13 02:26:43.245 +00:00",
-      "fechaActualizacion": "2018-06-13 02:26:43.245 +00:00"
+      "fechaCreacion": "2018-06-14 23:57:50.994 +00:00",
+      "fechaActualizacion": "2018-06-14 23:57:50.994 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -56,16 +56,16 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "1235468789",
-    "fechaActualizacion": "2018-06-13T02:26:43.333Z",
-    "fechaCreacion": "2018-06-13T02:26:43.333Z",
+    "fechaActualizacion": "2018-06-14T23:57:51.073Z",
+    "fechaCreacion": "2018-06-14T23:57:51.073Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "22050 Felipe Rampa",
       "ruc": "3245547449",
       "empresasId": 1,
-      "fechaActualizacion": "2018-06-13T02:26:43.335Z",
-      "fechaCreacion": "2018-06-13T02:26:43.335Z"
+      "fechaActualizacion": "2018-06-14T23:57:51.075Z",
+      "fechaCreacion": "2018-06-14T23:57:51.075Z"
     }
   },
   "codigoEstado": 200
@@ -96,8 +96,8 @@ __PUT__ __/api/web/empresas/:empresasId__
   "nombre": "Nombre cambiado",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "1235468789",
-  "fechaActualizacion": "2018-06-13T02:26:43.375Z",
-  "fechaCreacion": "2018-06-13T02:26:43.375Z"
+  "fechaActualizacion": "2018-06-14T23:57:51.115Z",
+  "fechaCreacion": "2018-06-14T23:57:51.115Z"
 }
 ```
 
@@ -125,8 +125,8 @@ _request_
   "nombre": "Nombre cambiado",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "1235468789",
-  "fechaActualizacion": "2018-06-13T02:26:43.414Z",
-  "fechaCreacion": "2018-06-13T02:26:43.414Z"
+  "fechaActualizacion": "2018-06-14T23:57:51.167Z",
+  "fechaCreacion": "2018-06-14T23:57:51.167Z"
 }
 ```
 
@@ -168,16 +168,16 @@ __GET__ __/api/web/empresas/:empresasId__
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "1235468789",
-    "fechaCreacion": "2018-06-13T02:26:43.454Z",
-    "fechaActualizacion": "2018-06-13T02:26:43.454Z",
+    "fechaCreacion": "2018-06-14T23:57:51.221Z",
+    "fechaActualizacion": "2018-06-14T23:57:51.221Z",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "3245547449",
-        "fechaCreacion": "2018-06-13 02:26:43.456 +00:00",
-        "fechaActualizacion": "2018-06-13 02:26:43.456 +00:00",
+        "fechaCreacion": "2018-06-14 23:57:51.223 +00:00",
+        "fechaActualizacion": "2018-06-14 23:57:51.223 +00:00",
         "empresasId": 1
       },
       {
@@ -185,8 +185,8 @@ __GET__ __/api/web/empresas/:empresasId__
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "6886107230",
-        "fechaCreacion": "2018-06-13 02:26:43.458 +00:00",
-        "fechaActualizacion": "2018-06-13 02:26:43.458 +00:00",
+        "fechaCreacion": "2018-06-14 23:57:51.224 +00:00",
+        "fechaActualizacion": "2018-06-14 23:57:51.224 +00:00",
         "empresasId": 1
       }
     ]

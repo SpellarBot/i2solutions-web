@@ -1,63 +1,60 @@
 module.exports = {
   API_1: {
-    nombre: 'Obtener todos los establecimientos de una empresa',
+    nombre: 'Obtener todos los puestos de un area',
     metodo: 'GET',
     descripcion: '',
-    url: '/api/web/establecimientos/:empresasId',
+    url: '/api/web/puestos/areas/:areasId',
     params: [
-      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []
   },
   API_2: {
-    nombre: 'Crear un establecimiento',
+    nombre: 'Crear un puesto',
     metodo: 'POST',
     descripcion: '',
-    url: '/api/web/establecimientos',
+    url: '/api/web/puestos',
     params: [
     ],
     body: [
       { nombre: 'nombres', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'direccion', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'ruc', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'descripcion', tipo: 'String', descripcion: ' --- ' },
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     errors: []
   },
   API_3: {
-    nombre: 'Actualizar un establecimiento',
+    nombre: 'Actualizar un puesto',
     metodo: 'PUT',
     descripcion: '',
-    url: '/api/web/establecimientos/:establecimientosId',
+    url: '/api/web/puestos/:puestosId',
     params: [
-      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [
       { nombre: 'nombres', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'direccion', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'ruc', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'descripcion', tipo: 'String', descripcion: ' --- ' }
     ],
     errors: []
   },
   API_4: {
+    nombre: 'Obtener un puesto',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_5: {
     nombre: 'Eliminar Empresa',
     metodo: 'DELETE',
     descripcion: '',
     url: '/api/web/empresas/:empresasId',
     params: [],
-    body: [],
-    errors: []
-  },
-  API_5: {
-    nombre: 'Obtener un establecimiento',
-    metodo: 'GET',
-    descripcion: '',
-    url: '/api/web/establecimientos/:establecimientosId',
-    params: [
-      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
-    ],
     body: [],
     errors: []
   }

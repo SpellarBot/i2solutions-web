@@ -58,12 +58,12 @@ module.exports = {
     errors: []
   },
   API_5: {
-    nombre: 'Obtener una empresa',
+    nombre: 'Obtener una persona',
     metodo: 'GET',
     descripcion: '',
-    url: '/api/web/empresas/:empresasId',
+    url: '/api/web/personas/:personasId',
     params: [
-      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'personasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

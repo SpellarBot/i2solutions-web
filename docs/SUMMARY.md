@@ -6,4 +6,5 @@
 	* [Personas](api.personas.md)
 	* [Establecimientos](api.establecimientos.md)
 	* [Areas](api.areas.md)
+	* [Puestos](api.puestos.md)
 <!-- * [Db tablas](db.table.md) -->

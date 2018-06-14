@@ -23,8 +23,8 @@ Obtener todas las personas
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-06-13 02:26:43.749 +00:00",
-      "fechaActualizacion": "2018-06-13 02:26:43.749 +00:00"
+      "fechaCreacion": "2018-06-14 23:57:51.542 +00:00",
+      "fechaActualizacion": "2018-06-14 23:57:51.542 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -88,8 +88,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-06-13T02:26:43.786Z",
-    "fechaCreacion": "2018-06-13T02:26:43.786Z"
+    "fechaActualizacion": "2018-06-14T23:57:51.583Z",
+    "fechaCreacion": "2018-06-14T23:57:51.583Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +139,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-06-13T02:26:43.821Z",
-  "fechaCreacion": "2018-06-13T02:26:43.821Z"
+  "fechaActualizacion": "2018-06-14T23:57:51.619Z",
+  "fechaCreacion": "2018-06-14T23:57:51.619Z"
 }
 ```
 
@@ -188,6 +188,46 @@ _response_
 ```
 	
 	
+
+
+___
+
+
+
+## Obtener una persona
+
+__GET__ __/api/web/personas/:personasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| personasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombres": "Elsa",
+    "apellidos": "Vega",
+    "correo": "vctor_daz@hotmail.com",
+    "cedula": "9992332599",
+    "clave": "tggQK3M3L__1KRO",
+    "telefono": "966.155.986",
+    "fechaNacimiento": "Mon Mar 26 2018 23:40:21 GMT-0500 (-05)",
+    "perfilOcupacional": "",
+    "usuario": "Antonio69",
+    "rol": "",
+    "fechaCreacion": "2018-06-14T23:57:51.735Z",
+    "fechaActualizacion": "2018-06-14T23:57:51.735Z"
+  },
+  "codigoEstado": 200
+}
+```
 
 
 ___

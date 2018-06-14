@@ -73,4 +73,16 @@ describe('Personas', () => {
       generatorDocs.ERROR({ nombre: 'El id de la persona no existe', docs, doc: API_3, res, req })
     })
   })
+
+  describe('Obtener una persona', () => {
+    let { API_5 } = API
+    it('@CP5 obtener una persona', async () => {
+      let personaCreada = await models.personas.Crear(persona)
+      let res = await request(app).get(`/api/web/personas/${personaCreada['id']}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos['nombres']).to.equal(personaCreada['nombres'])
+      generatorDocs.OK({ docs, doc: API_5, res })
+    })
+  })
 })
