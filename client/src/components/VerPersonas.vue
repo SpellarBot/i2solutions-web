@@ -1,17 +1,27 @@
 <template>
-  <main id='Empresas'>
+  <main id='Personas'>
     <app-navbar></app-navbar>
-  <div class="empresas in this.$store.getters.empresas">
+  <div class="personas in this.$store.getters.personas">
 
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
-        <h1 class='mb-4'>Empresas:</h1>
-        <v-card class='mb-4' v-for="empresa in this.$store.getters.empresas" :key="empresa.id">
-          <h3>{{ empresa.nombre }}</h3>
-          <div>{{ empresa.actividadComercial }}</div>
-          <div>{{ empresa.razonSocial }}</div>
+        <h1 class='mb-4'>Personas:</h1>
+        <div><label >Buscar</label> <input type="text" ><v-btn
+            @click="buscar"
+          >
+            Buscar
+          </v-btn></div>
+        <v-card class='mb-4' v-for="personas in this.$store.getters.personas" :key="personas.id">
+          <div><b>Nombres y Apellido: </b> {{ personas.nombres }} {{personas.apellidos}}</div>
+          <div><b>Rol: </b> {{ personas.rol}}</div>
+          <div><b>Correo:</b> {{ personas.correo }}</div>
+          <div><b>Cédula:</b> {{ personas.cedula }}</div>
+          <div><b>Telefono:</b> {{ personas.telefono }}</div>
+          <div><b>Fecha de Nacimiento: </b>{{ fecha(personas.fechaDeNaciemieno) }}</div>
+          <div><b>Perfil Ocupacional:</b> {{ personas.perfilOcupacional }}</div>
+          <div><b>usuario:</b> {{ personas.usuario }}</div>
           <v-btn
-            @click="editarEmpresa(empresa)"
+            @click="editarPersona(personas)"
           >
             Editar
           </v-btn>
@@ -43,6 +53,8 @@
 
 <script>
 import router from '../router'
+const moment = require('moment')
+
 export default {
   data () {
     return {
@@ -51,6 +63,13 @@ export default {
       snackbar: false
     }
   },
+  /* computed: {
+    personasOrdenadas: function () {
+      return this.$store.getters.personas.filter(function (persona) {
+        return persona.fechaNacimiento
+      })
+    }
+  }, */
   methods: {
     logout () {
       this.$store.dispatch('logout')
@@ -59,14 +78,17 @@ export default {
     dashboard () {
       router.push('dashboard')
     },
-    editarEmpresa (empresa) {
-      let empresaId = empresa.id
-      this.$store.dispatch('getEmpresaSola', empresaId)
+    fecha: function (date) {
+      return moment(date).format('L')
+    },
+    editarPersona (persona) {
+      let personasId = persona.id
+      this.$store.dispatch('getPersonaSola', personasId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Empresa Encontrada.'
+          this.mensajeSnackbar = 'Persona Encontrada.'
           this.color = 'success'
-          router.push('editarEmpresa')
+          router.push('editarPersona')
         })
         .catch((err) => {
           this.color = 'error'

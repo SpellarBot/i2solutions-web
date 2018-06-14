@@ -1,15 +1,6 @@
 <template>
   <main id="dashboard">
-    <div class = 'imageLogo'>
-    <span class='i2s-name'>i2Solutions Cía. Ltda.</span>
-    <v-btn flat color="white"
-    @click="logout"
-    >
-    <v-icon>exit_to_app</v-icon>
-      Cerrar Sesión
-
-    </v-btn>
-  </div>
+    <app-navbar></app-navbar>
     <h1>Dashboard</h1>
     <v-btn
       @click=" crearEmpresa"
@@ -20,6 +11,18 @@
       @click=" verEmpresas"
     >
       Ver Empresas
+    </v-btn>
+
+    <v-btn
+      @click=" verPersonas"
+    >
+      Ver Personas
+    </v-btn>
+
+    <v-btn
+      @click=" crearPersona"
+    >
+      Crear Personas
     </v-btn>
     <v-snackbar
       :timeout="3000"
@@ -52,10 +55,24 @@ export default {
     crearEmpresa () {
       router.push('crearEmpresa')
     },
+    crearPersona () {
+      router.push('crearPersona')
+    },
     verEmpresas () {
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
           router.push('empresas')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    verPersonas () {
+      this.$store.dispatch('getPersonas')
+        .then((resp) => {
+          router.push('personas')
         })
         .catch((err) => {
           this.color = 'error'

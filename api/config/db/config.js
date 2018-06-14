@@ -25,19 +25,19 @@ const datos = () => {
       'logging': false,
       'dialect': 'mysql'
     }
-  } else if (usuario === 'robeth') {
+  } else if (usuario === 'Roberth-PC') {
     return {
-      'username': '',
-      'password': '',
+      'username': 'root',
+      'password': '1234',
       'database': 'i2solutions_development',
       'host': '127.0.0.1',
       'logging': false,
       'dialect': 'mysql'
     }
-  } else if (usuario === 'idrovo') {
+  } else if (usuario === 'DESKTOP-FJ6A4I5') {
     return {
-      'username': '',
-      'password': '',
+      'username': 'root',
+      'password': 'root',
       'database': 'i2solutions_development',
       'host': '127.0.0.1',
       'logging': false,
