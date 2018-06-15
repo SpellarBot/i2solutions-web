@@ -67,8 +67,8 @@ __POST__ __/api/web/puestos__
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "",
-    "fechaActualizacion": "2018-06-14T23:57:51.877Z",
-    "fechaCreacion": "2018-06-14T23:57:51.877Z"
+    "fechaActualizacion": "2018-06-15T02:51:02.338Z",
+    "fechaCreacion": "2018-06-15T02:51:02.338Z"
   },
   "codigoEstado": 200
 }
@@ -167,12 +167,56 @@ __GET__ __/api/web/puestos/:puestosId__
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "",
-    "fechaCreacion": "2018-06-14T23:57:52.012Z",
-    "fechaActualizacion": "2018-06-14T23:57:52.012Z"
+    "fechaCreacion": "2018-06-15T02:51:02.440Z",
+    "fechaActualizacion": "2018-06-15T02:51:02.440Z"
   },
   "codigoEstado": 200
 }
 ```
+
+
+___
+
+
+
+## Eliminar puesto
+
+__DELETE__ __/api/web/puestos/:puestosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| puestosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": true,
+  "codigoEstado": 200
+}
+```
+
+#### ERRORS:
+__El id del puestos no existe__
+
+
+
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "puesto con es id no existe",
+  "codigoEstado": 200
+}
+```
+	
+	
 
 
 ___

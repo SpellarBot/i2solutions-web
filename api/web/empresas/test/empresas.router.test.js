@@ -91,7 +91,20 @@ describe('EMPRESAS', () => {
 
   describe('Eliminar', () => {
     const { API_4 } = API
-    it('@CP5 eliminar por id')
+    it('@CP5 eliminar por id', async () => {
+      let empresaCreada = await models.empresas.Crear(empresa)
+      let res = await request(app).delete(`/api/web/empresas/${empresaCreada['id']}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_4, res })
+    })
+    it('@CP5.1 empresaId no existe', async () => {
+      let res = await request(app).delete(`/api/web/empresas/50`)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ERROR({ nombre: 'El Id de la empresa no existe', docs, doc: API_4, res })
+    })
   })
 
   describe('Obtener una empresa', () => {

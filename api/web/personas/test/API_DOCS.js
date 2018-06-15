@@ -49,11 +49,13 @@ module.exports = {
     errors: []
   },
   API_4: {
-    nombre: 'Eliminar Empresa',
+    nombre: 'Eliminar persona',
     metodo: 'DELETE',
     descripcion: '',
-    url: '/api/web/empresas/:empresasId',
-    params: [],
+    url: '/api/web/personas/:personasId',
+    params: [
+      { nombre: 'personasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   },

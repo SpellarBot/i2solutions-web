@@ -93,4 +93,22 @@ describe('Areas', () => {
       generatorDocs.OK({ docs, doc: API_4, res})
     })
   })
+
+  describe('Borrar un area', () => {
+    let { API_5 } = API
+    it('@CP5 OK', async () => {
+      let areasCreada = await models.areas.Crear(area)
+      let res = await request(app).delete(`/api/web/areas/${areasCreada['id']}`)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_5, res})
+    })
+    it('@CP5.1 area no existe', async () => {
+      let res = await request(app).delete(`/api/web/areas/55`)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ERROR({ nombre: 'El id del area no existe', docs, doc: API_5, res })
+    })
+  })
 })

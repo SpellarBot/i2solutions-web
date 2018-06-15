@@ -1,4 +1,3 @@
-// const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
@@ -42,6 +41,21 @@ module.exports = ({ responses, db }) => {
               resolve(responses.OK(true))
             } else {
               resolve(responses.NO_OK('Persona con ese id no existe'))
+            }
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    Borrar ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.personas.Borrar({ id })
+          .then((resp) => {
+            if (!resp) {
+              resolve(responses.NO_OK('persona con es id no existe'))
+            } else {
+              resolve(responses.OK(resp))
             }
           }).catch((err) => {
             console.error(err)

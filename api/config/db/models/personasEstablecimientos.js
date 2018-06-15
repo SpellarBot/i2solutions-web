@@ -34,5 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
   return define
 }

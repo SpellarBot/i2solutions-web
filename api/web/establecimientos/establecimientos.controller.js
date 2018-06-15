@@ -2,7 +2,6 @@
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
-      // console.log(datos)
       return new Promise((resolve, reject) => {
         db.establecimientos.Crear(datos)
           .then((resp) => {
@@ -36,6 +35,21 @@ module.exports = ({ responses, db }) => {
               resolve(responses.OK(true))
             } else {
               resolve(responses.NO_OK('El id del establecimento no existe'))
+            }
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    Borrar ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.establecimientos.Borrar({ id })
+          .then((resp) => {
+            if (!resp) {
+              resolve(responses.NO_OK('establecimientos con es id no existe'))
+            } else {
+              resolve(responses.OK(resp))
             }
           }).catch((err) => {
             console.error(err)

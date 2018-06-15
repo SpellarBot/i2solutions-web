@@ -22,8 +22,8 @@ __GET__ __/api/web/establecimientos/:empresasId__
       "nombres": "matriz",
       "direccion": "22050 Felipe Rampa",
       "ruc": "3245547449",
-      "fechaCreacion": "2018-06-14 23:57:51.335 +00:00",
-      "fechaActualizacion": "2018-06-14 23:57:51.335 +00:00",
+      "fechaCreacion": "2018-06-15 02:51:01.688 +00:00",
+      "fechaActualizacion": "2018-06-15 02:51:01.688 +00:00",
       "empresasId": 1
     },
     {
@@ -31,8 +31,8 @@ __GET__ __/api/web/establecimientos/:empresasId__
       "nombres": "Lira - Barajas",
       "direccion": "0119 Laboy Mercado",
       "ruc": "6886107230",
-      "fechaCreacion": "2018-06-14 23:57:51.337 +00:00",
-      "fechaActualizacion": "2018-06-14 23:57:51.337 +00:00",
+      "fechaCreacion": "2018-06-15 02:51:01.690 +00:00",
+      "fechaActualizacion": "2018-06-15 02:51:01.690 +00:00",
       "empresasId": 1
     }
   ],
@@ -80,8 +80,8 @@ __POST__ __/api/web/establecimientos__
     "direccion": "22050 Felipe Rampa",
     "ruc": "3245547449",
     "empresasId": 1,
-    "fechaActualizacion": "2018-06-14T23:57:51.382Z",
-    "fechaCreacion": "2018-06-14T23:57:51.382Z"
+    "fechaActualizacion": "2018-06-15T02:51:01.754Z",
+    "fechaCreacion": "2018-06-15T02:51:01.754Z"
   },
   "codigoEstado": 200
 }
@@ -154,6 +154,50 @@ _response_
 {
   "estado": false,
   "datos": "El id del establecimento no existe",
+  "codigoEstado": 200
+}
+```
+	
+	
+
+
+___
+
+
+
+## Eliminar Establecimiento
+
+__DELETE__ __/api/web/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": true,
+  "codigoEstado": 200
+}
+```
+
+#### ERRORS:
+__El id del establecimiento no exite__
+
+
+
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "establecimientos con es id no existe",
   "codigoEstado": 200
 }
 ```

@@ -140,11 +140,13 @@ yarn db:migrate
 
 ## Testing
 
-Tener instalado sqlite
+Tener instalado sqlite porque los test usan esta base de datos para por su rápidez
 
 ```sh
 yarn test
 ```
+
+Este comando verificará el standard de código y ademas generara la documentación de la api
 
 ## Production
 

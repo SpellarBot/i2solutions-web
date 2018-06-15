@@ -50,11 +50,13 @@ module.exports = {
     errors: []
   },
   API_5: {
-    nombre: 'Eliminar Empresa',
+    nombre: 'Eliminar puesto',
     metodo: 'DELETE',
     descripcion: '',
-    url: '/api/web/empresas/:empresasId',
-    params: [],
+    url: '/api/web/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   }

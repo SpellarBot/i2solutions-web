@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' })
+    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' }, {onDelete: 'CASCADE'})
   }
 
   define.Crear = function ({

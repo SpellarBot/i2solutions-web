@@ -23,8 +23,8 @@ Obtener todas las personas
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-06-14 23:57:51.542 +00:00",
-      "fechaActualizacion": "2018-06-14 23:57:51.542 +00:00"
+      "fechaCreacion": "2018-06-15 02:51:01.987 +00:00",
+      "fechaActualizacion": "2018-06-15 02:51:01.987 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -88,8 +88,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-06-14T23:57:51.583Z",
-    "fechaCreacion": "2018-06-14T23:57:51.583Z"
+    "fechaActualizacion": "2018-06-15T02:51:02.025Z",
+    "fechaCreacion": "2018-06-15T02:51:02.025Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +139,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-06-14T23:57:51.619Z",
-  "fechaCreacion": "2018-06-14T23:57:51.619Z"
+  "fechaActualizacion": "2018-06-15T02:51:02.058Z",
+  "fechaCreacion": "2018-06-15T02:51:02.058Z"
 }
 ```
 
@@ -194,6 +194,50 @@ ___
 
 
 
+## Eliminar persona
+
+__DELETE__ __/api/web/personas/:personasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| personasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": true,
+  "codigoEstado": 200
+}
+```
+
+#### ERRORS:
+__El id de la persona no existe__
+
+
+
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "persona con es id no existe",
+  "codigoEstado": 200
+}
+```
+	
+	
+
+
+___
+
+
+
 ## Obtener una persona
 
 __GET__ __/api/web/personas/:personasId__
@@ -222,8 +266,8 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-06-14T23:57:51.735Z",
-    "fechaActualizacion": "2018-06-14T23:57:51.735Z"
+    "fechaCreacion": "2018-06-15T02:51:02.207Z",
+    "fechaActualizacion": "2018-06-15T02:51:02.207Z"
   },
   "codigoEstado": 200
 }

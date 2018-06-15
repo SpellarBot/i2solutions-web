@@ -5,7 +5,6 @@ module.exports = (app) => {
   // personas por establecimientos
   // personas por empresas
 
-  // GET ALL API_1
   app.route('/personas')
     .get((req, res) => {
       Controller.ObtenerTodos().then((resp) => {
@@ -17,7 +16,6 @@ module.exports = (app) => {
       })
     })
 
-  // GET ONE
   app.route('/personas/:personasId')
     .get((req, res) => {
       let { personasId } = req.params
@@ -30,7 +28,6 @@ module.exports = (app) => {
       })
     })
 
-  // CREATE
   app.route('/personas')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
@@ -42,7 +39,6 @@ module.exports = (app) => {
       })
     })
 
-  // UPDATE
   app.route('/personas/:personasId')
     .put((req, res) => {
       let { personasId } = req.params
@@ -55,10 +51,15 @@ module.exports = (app) => {
       })
     })
 
-  // DELETE
-  // borrar todos los datos dependientes
   app.route('/personas/:personasId')
     .delete((req, res) => {
-      res.send('empresas')
+      let { personasId } = req.params
+      Controller.Borrar({ id: personasId }).then((resp) => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
     })
 }

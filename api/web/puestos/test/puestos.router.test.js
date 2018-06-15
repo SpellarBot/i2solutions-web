@@ -96,4 +96,22 @@ describe('Puestos', () => {
       generatorDocs.OK({ docs, doc: API_4, res })
     })
   })
+
+  describe('Borrar', () => {
+    let { API_5 } = API
+    it('@CP5 OK', async () => {
+      let puestosCreada = await models.puestos.Crear(puesto)
+      let res = await request(app).delete(`/api/web/puestos/${puestosCreada['id']}`)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_5, res })
+    })
+    it('@CP5 puesto no existe', async () => {
+      let res = await request(app).delete(`/api/web/puestos/55`)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ERROR({ nombre: 'El id del puestos no existe', docs, doc: API_5, res })
+    })
+  })
 })
