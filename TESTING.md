@@ -36,11 +36,23 @@ describe('TEST', () => {
   describe('@API_1 ', () => {
     it('@CP1 OK', async () => {
       let res = await request(app).get(`/api/movil/puestosDeUnArea/${areaId}`)
+      const validate = ajv.compile(sres.MOVIL.API_1)
       expect(validate(datos), e(validate)).to.equal(true)
       generatorDocs.OK({ docs, doc: API_1, res })
+      // const validate = ajv.compile(AUTH.CP1)
+    // expect(validate(res.body.datos), e(validate)).to.equal(true)
+    // const decoded = jwtDecode(res.body.datos.token)
     })
   })
 })
+```
+
+```js
+for (let foo of ['nl', 'fr', 'de']) {
+      it('This thing should behave like this', function(done) {
+        done()
+      })
+    }
 ```
 
 # Template testing describe
@@ -98,3 +110,4 @@ module.exports = (app) => {
 }
 
 ```
+

@@ -23,10 +23,6 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    Obtener ({ id }) {
-      return new Promise((resolve, reject) => {
-      })
-    },
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.establecimientos.Actualizar(datos)

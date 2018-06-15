@@ -3,9 +3,6 @@ const expect = require('chai').expect
 const Ajv = require('ajv')
 const rfr = require('rfr')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-function e(validate) {
-  return `${JSON.stringify(validate.errors, null, 2)}`
-}
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')

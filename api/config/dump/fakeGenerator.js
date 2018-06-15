@@ -1,7 +1,7 @@
 // https://github.com/marak/Faker.js/
 const faker = require('faker')
-const jsonfile = require('jsonfile')
-const path = require('path')
+// const jsonfile = require('jsonfile')
+// const path = require('path')
 faker.locale = 'es'
 const conexion = require('../db')
 const random = () => {
@@ -333,13 +333,13 @@ conexion.Conectar().then(async (db) => {
   +++++++++++++
   */
 
-  let tablas = [
-    { nombre: 'empresas', data: empresas },
-    { nombre: 'personas', data: personas },
-    { nombre: 'establecimientos', data: establecimientos },
-    { nombre: 'areas', data: areas },
-    { nombre: 'puestos', data: puestos }
-  ]
+  // let tablas = [
+  //   { nombre: 'empresas', data: empresas },
+  //   { nombre: 'personas', data: personas },
+  //   { nombre: 'establecimientos', data: establecimientos },
+  //   { nombre: 'areas', data: areas },
+  //   { nombre: 'puestos', data: puestos }
+  // ]
   // empresas
   // personas
   // establecimientos
@@ -351,11 +351,11 @@ conexion.Conectar().then(async (db) => {
   // novedades
   // accidentes
   // equipos
-  for (let tabla of tablas) {
-    jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
-      console.error(err)
-    })
-  }
+  // for (let tabla of tablas) {
+  //   jsonfile.writeFile(path.join(__dirname, `faker/${tabla['nombre']}.json`), tabla['data'], function (err) {
+  //     console.error(err)
+  //   })
+  // }
 
   await conexion.Desconectar()
 }).catch((err) => {

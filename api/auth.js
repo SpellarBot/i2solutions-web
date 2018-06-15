@@ -9,7 +9,7 @@ const db = require('./config/db').db
 function createAccessToken (user) {
   return jwt.sign({
     data: user
-  }, 'secret', { expiresIn: '1d' })
+  }, 'secret') // , { expiresIn: '1d' }
 }
 
 app.route('/login')

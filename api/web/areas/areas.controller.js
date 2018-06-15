@@ -12,10 +12,6 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerTodos () {
-      return new Promise((resolve, reject) => {
-      })
-    },
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.areas.Obtener({ id })

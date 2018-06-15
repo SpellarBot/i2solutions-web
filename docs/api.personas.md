@@ -23,8 +23,8 @@ Obtener todas las personas
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-06-15 02:51:01.987 +00:00",
-      "fechaActualizacion": "2018-06-15 02:51:01.987 +00:00"
+      "fechaCreacion": "2018-06-15 23:30:27.449 +00:00",
+      "fechaActualizacion": "2018-06-15 23:30:27.449 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -88,8 +88,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-06-15T02:51:02.025Z",
-    "fechaCreacion": "2018-06-15T02:51:02.025Z"
+    "fechaActualizacion": "2018-06-15T23:30:27.487Z",
+    "fechaCreacion": "2018-06-15T23:30:27.487Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +139,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-06-15T02:51:02.058Z",
-  "fechaCreacion": "2018-06-15T02:51:02.058Z"
+  "fechaActualizacion": "2018-06-15T23:30:27.526Z",
+  "fechaCreacion": "2018-06-15T23:30:27.526Z"
 }
 ```
 
@@ -266,8 +266,8 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-06-15T02:51:02.207Z",
-    "fechaActualizacion": "2018-06-15T02:51:02.207Z"
+    "fechaCreacion": "2018-06-15T23:30:27.684Z",
+    "fechaActualizacion": "2018-06-15T23:30:27.684Z"
   },
   "codigoEstado": 200
 }

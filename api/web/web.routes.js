@@ -6,8 +6,8 @@ require('./personas/personas.router')(app)
 require('./establecimientos/establecimientos.router')(app)
 require('./areas/areas.router')(app)
 require('./puestos/puestos.router')(app)
-// app.route('*')
-//   .get((req, res) => {
-//     res.json({ hello: 'Esta ruta no existe' })
-//   })
+app.route('*')
+  .get((req, res) => {
+    res.json({ mensaje: 'Esta ruta no existe' })
+  })
 module.exports = app
