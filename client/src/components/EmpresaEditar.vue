@@ -67,6 +67,7 @@ export default {
       let actividadComercial = this.$data.actividadComercial
       let razonSocial = this.$data.razonSocial
       let empresaId = this.$store.getters.empresaSelected.id
+      console.log(empresaId)
       this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial })
         .then((resp) => {
           this.snackbar = true

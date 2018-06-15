@@ -150,6 +150,23 @@ export default {
         })
     })
   },
+  deleteEmpresa ({commit}, empresaId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/empresas/' + empresaId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('entre')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getAreaSola ({commit}, areaId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/areas/' + areaId)
@@ -184,9 +201,10 @@ export default {
         })
     })
   },
-  updateEmpresa ({commit}, {empresasId, nombre, actividadComercial, razonSocial}) {
+  updateEmpresa ({commit}, {empresaId, nombre, actividadComercial, razonSocial}) {
+    console.log({ empresaId, nombre })
     return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/empresas/' + empresasId, {nombre, actividadComercial, razonSocial})
+      Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial})
         .then((resp) => {
           if (resp.body.estado) {
             console.log('done')
