@@ -15,11 +15,13 @@
           >
             Editar
           </v-btn>
-          <v-btn
-            @click="dashboard"
-          >
-            Eliminar
-          </v-btn>
+          <md-dialog-confirm
+          :md-active.sync="active"
+          md-title="¿Está seguro que quiere eliminar esta empresa?"
+          md-confirm-text="Sí"
+          md-cancel-text="No"
+          @md-confirm="onConfirm(empresa)" />
+          <md-button class="md-primary md-raised" @click="active = true">Eliminar</md-button>
         </v-card>
         <v-btn
             @click="dashboard"
@@ -46,6 +48,7 @@ import router from '../router'
 export default {
   data () {
     return {
+      active: false,
       mensajeSnackbar: '',
       color: '',
       snackbar: false
@@ -69,6 +72,32 @@ export default {
           router.push('editarEmpresa')
         })
         .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    onConfirm (empresa) {
+      let empresaId = empresa.id
+      this.$store.dispatch('deleteEmpresa', empresaId)
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'Empresa Eliminada.'
+          this.color = 'success'
+          this.$store.dispatch('getEmpresas')
+            .then((resp) => {
+              console.log('no error')
+              router.push('empresas')
+            })
+            .catch((err) => {
+              this.color = 'error'
+              this.snackbar = true
+              this.mensajeSnackbar = err
+              console.log('error 1')
+            })
+        })
+        .catch((err) => {
+          console.log(err)
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
