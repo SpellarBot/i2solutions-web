@@ -69,5 +69,16 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_6: {
+    nombre: 'Obtener una personas por establecimiento',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/personas/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
   }
 }

@@ -180,3 +180,5 @@ https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-
 https://github.com/sequelize/cli/blob/master/docs/README.md
 
 https://gist.github.com/JoeKarlsson/ebb1c714466ae3de88ae565fa9ba4779
+
+https://github.com/sequelize/sequelize/issues/4074

@@ -136,5 +136,26 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorEstablecimientos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findAll({
+        include: [{
+          model: sequelize.models['establecimientos'],
+          where: {
+            id
+          }
+        }],
+        attributes: {
+          exclude: ['establecimientos']
+        }
+      })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

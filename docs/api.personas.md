@@ -23,8 +23,8 @@ Obtener todas las personas
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-06-15 23:30:27.449 +00:00",
-      "fechaActualizacion": "2018-06-15 23:30:27.449 +00:00"
+      "fechaCreacion": "2018-06-16 17:54:04.699 +00:00",
+      "fechaActualizacion": "2018-06-16 17:54:04.699 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -88,8 +88,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-06-15T23:30:27.487Z",
-    "fechaCreacion": "2018-06-15T23:30:27.487Z"
+    "fechaActualizacion": "2018-06-16T17:54:04.740Z",
+    "fechaCreacion": "2018-06-16T17:54:04.740Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +139,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-06-15T23:30:27.526Z",
-  "fechaCreacion": "2018-06-15T23:30:27.526Z"
+  "fechaActualizacion": "2018-06-16T17:54:04.773Z",
+  "fechaCreacion": "2018-06-16T17:54:04.773Z"
 }
 ```
 
@@ -266,9 +266,104 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-06-15T23:30:27.684Z",
-    "fechaActualizacion": "2018-06-15T23:30:27.684Z"
+    "fechaCreacion": "2018-06-16T17:54:04.943Z",
+    "fechaActualizacion": "2018-06-16T17:54:04.943Z"
   },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener una personas por establecimiento
+
+__GET__ __/api/web/personas/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "nombres": "Benjamín",
+      "apellidos": "Esquibel",
+      "correo": "cristina.ferrer@yahoo.com",
+      "cedula": "9758314659",
+      "clave": "EcL1oCaneOr5ZbF",
+      "telefono": "985-612-994",
+      "fechaNacimiento": "Sat Aug 05 2017 15:30:55 GMT-0500 (-05)",
+      "perfilOcupacional": "",
+      "usuario": "Jaime_Solís",
+      "rol": "",
+      "fechaCreacion": "2018-06-16T17:54:04.986Z",
+      "fechaActualizacion": "2018-06-16T17:54:04.986Z",
+      "establecimientos": [
+        {
+          "id": 1,
+          "nombres": "matriz",
+          "direccion": "22050 Felipe Rampa",
+          "ruc": "3245547449",
+          "fechaCreacion": "2018-06-16T17:54:04.984Z",
+          "fechaActualizacion": "2018-06-16T17:54:04.984Z",
+          "empresasId": 1,
+          "personasEstablecimientos": {
+            "id": 2,
+            "rol": "empleado",
+            "fechaCreacion": "2018-06-16T17:54:04.991Z",
+            "fechaActualizacion": "2018-06-16T17:54:04.991Z",
+            "establecimientosId": 1,
+            "personasId": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombres": "Elsa",
+      "apellidos": "Vega",
+      "correo": "vctor_daz@hotmail.com",
+      "cedula": "9992332599",
+      "clave": "tggQK3M3L__1KRO",
+      "telefono": "966.155.986",
+      "fechaNacimiento": "Mon Mar 26 2018 23:40:21 GMT-0500 (-05)",
+      "perfilOcupacional": "",
+      "usuario": "Antonio69",
+      "rol": "",
+      "fechaCreacion": "2018-06-16T17:54:04.988Z",
+      "fechaActualizacion": "2018-06-16T17:54:04.988Z",
+      "establecimientos": [
+        {
+          "id": 1,
+          "nombres": "matriz",
+          "direccion": "22050 Felipe Rampa",
+          "ruc": "3245547449",
+          "fechaCreacion": "2018-06-16T17:54:04.984Z",
+          "fechaActualizacion": "2018-06-16T17:54:04.984Z",
+          "empresasId": 1,
+          "personasEstablecimientos": {
+            "id": 1,
+            "rol": "jefe",
+            "fechaCreacion": "2018-06-16T17:54:04.990Z",
+            "fechaActualizacion": "2018-06-16T17:54:04.990Z",
+            "establecimientosId": 1,
+            "personasId": 2
+          }
+        }
+      ]
+    }
+  ],
   "codigoEstado": 200
 }
 ```

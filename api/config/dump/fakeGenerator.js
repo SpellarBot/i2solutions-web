@@ -292,7 +292,7 @@ conexion.Conectar().then(async (db) => {
               let novedad = {
                 descripcion: faker.lorem.words(),
                 // descripcionAtendida: faker.lorem.paragraph(),
-                prioridad:  prioridades[randomIntFromInterval(0,2)],
+                prioridad: prioridades[randomIntFromInterval(0, 2)],
                 fecha: faker.date.past(),
                 // fotoUrl: faker.image.imageUrl(),
                 fueAtendida: false,

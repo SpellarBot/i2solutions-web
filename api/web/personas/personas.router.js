@@ -2,9 +2,6 @@ const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./personas.controller')({ responses, db })
 module.exports = (app) => {
-  // personas por establecimientos
-  // personas por empresas
-
   app.route('/personas')
     .get((req, res) => {
       Controller.ObtenerTodos().then((resp) => {
@@ -55,6 +52,18 @@ module.exports = (app) => {
     .delete((req, res) => {
       let { personasId } = req.params
       Controller.Borrar({ id: personasId }).then((resp) => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
+    })
+
+  app.route('/personas/establecimientos/:establecimientosId')
+    .get((req, res) => {
+      let { establecimientosId } = req.params
+      Controller.ObtenerTodosPorEstablecimiento({ establecimientosId }).then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
       }).catch(resp => {
