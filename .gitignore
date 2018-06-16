@@ -10,3 +10,5 @@ TODO
 prueba.js
 _book
 coverage
+yarn.lock
+package-lock.json
