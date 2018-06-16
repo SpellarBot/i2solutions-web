@@ -20,6 +20,10 @@
     "docs": "gitbook build .",
     "docs:s": "gitbook serve . "
   },
+  "engines": {
+    "node": "^9.3.0",
+    "yarn": "^1.0.0"
+  },
   "dependencies": {
     "ajv": "^6.5.0",
     "ajv-errors": "^1.0.0",

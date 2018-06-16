@@ -2,6 +2,6 @@
 node_modules/.bin/sequelize db:migrate
 export NODE_ENV=development
 cd client
-npm install
+npm install --development
 npm run build
 cd ..
