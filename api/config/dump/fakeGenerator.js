@@ -292,8 +292,7 @@ conexion.Conectar().then(async (db) => {
               let novedad = {
                 descripcion: faker.lorem.words(),
                 // descripcionAtendida: faker.lorem.paragraph(),
-                // nombre: faker.lorem.words(),
-                // prioridad:  prioridades[randomIntFromInterval(0,2)],
+                prioridad:  prioridades[randomIntFromInterval(0,2)],
                 fecha: faker.date.past(),
                 // fotoUrl: faker.image.imageUrl(),
                 fueAtendida: false,
@@ -307,8 +306,7 @@ conexion.Conectar().then(async (db) => {
             for (let i = 0; i < 10; i++) {
               let novedad = {
                 descripcion: faker.lorem.words(),
-                descripcionAtendida: faker.lorem.sentence(),
-                // nombre: faker.lorem.words(),
+                descripcionAtendida: faker.lorem.words(),
                 prioridad: prioridades[randomIntFromInterval(0, 2)],
                 fecha: faker.date.past(),
                 fotoUrl: faker.image.imageUrl(),
