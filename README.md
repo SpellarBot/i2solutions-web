@@ -156,7 +156,7 @@ Establecer la variables de entorno:
 2. DATABASE_HOST
 3. DATABASE_USER
 4. DATABASE_PASSWORD
-
+5.  heroku config:set NPM_CONFIG_PRODUCTION=false
 ## Authors
 
 Joel Rodriguez
