@@ -11,16 +11,19 @@
             <v-text-field
               v-model="nombre"
               label="Nombre"
+              :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
               v-model="actividadComercial"
               label="Actividad Comercial"
+              :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
               v-model="razonSocial"
               label="Razon Social"
+              :rules="[rules.required]"
               required
             ></v-text-field>
           </v-form>
@@ -58,7 +61,11 @@ export default {
       razonSocial: this.$store.getters.empresaSelected.razonSocial,
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
     }
   },
   methods: {
