@@ -16,5 +16,11 @@ export default {
   },
   personaSelected (state) {
     return state.personaSelected
+  },
+  establecimientos (state) {
+    return state.establecimientos
+  },
+  establecimientoSelected (state) {
+    return state.establecimientoSelected
   }
 }

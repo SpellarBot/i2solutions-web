@@ -1,15 +1,6 @@
 <template>
   <main id='Personas'>
-    <div class = 'imageLogo'>
-    <span class='i2s-name'>i2Solutions Cía. Ltda.</span>
-    <v-btn flat color="white"
-    @click="logout"
-    >
-    <v-icon>exit_to_app</v-icon>
-      Cerrar Sesión
-
-    </v-btn>
-  </div>
+    <app-navbar></app-navbar>
   <div class="personas in this.$store.getters.personas">
 
     <v-layout>

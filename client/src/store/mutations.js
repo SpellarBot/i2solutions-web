@@ -23,5 +23,11 @@ export default {
   },
   setPersonaSelected (state, personaSelected) {
     state.personaSelected = personaSelected
+  },
+  setEstablecimientos (state, establecimientos) {
+    state.establecimientos = establecimientos
+  },
+  setEstablecimientoSelected (state, establecimientoSelected) {
+    state.establecimientos = establecimientoSelected
   }
 }

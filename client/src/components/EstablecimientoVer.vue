@@ -2,15 +2,15 @@
   <main id='Empresas'>
     <app-navbar></app-navbar>
   <div class="empresas in this.$store.getters.empresas">
+
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
-        <h1 class='mb-4'>Empresas:</h1>
-        <v-card class='mb-4' v-for="empresa in this.$store.getters.empresas" :key="empresa.id">
-          <h3>{{ empresa.nombre }}</h3>
-          <div>{{ empresa.actividadComercial }}</div>
-          <div>{{ empresa.razonSocial }}</div>
+        <h1 class='mb-4'>{{empresa.nombre}}</h1>
+        <v-card class='mb-4' v-for="establecimientos in this.$store.getters.establecimientos" :key="establecimientos.id">
+          <h3 v-bind:id="'nombre' + establecimientos.id">{{ establecimientos.nombres }}</h3>
+          <div v-bind:id="'direccion' + establecimientos.id">{{establecimientos.direccion}}</div>
+          <div v-bind:id="'ruc' + establecimientos.id">{{establecimientos.ruc}}</div>
           <v-btn
-            @click="editarEmpresa(empresa)"
           >
             Editar
           </v-btn>
@@ -18,11 +18,6 @@
             @click="dashboard"
           >
             Eliminar
-          </v-btn>
-          <v-btn
-            @click="verEstablecimientos(empresa)"
-          >
-            ver establecimientos
           </v-btn>
         </v-card>
         <v-btn
@@ -52,7 +47,8 @@ export default {
     return {
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      empresa: this.$store.getters.empresaSelected
     }
   },
   methods: {
@@ -71,22 +67,6 @@ export default {
           this.mensajeSnackbar = 'Empresa Encontrada.'
           this.color = 'success'
           router.push('editarEmpresa')
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
-    },
-    verEstablecimientos (empresa) {
-      let empresaId = empresa.id
-      this.$store.dispatch('getEstablecimientos', empresaId)
-      this.$store.dispatch('getEmpresaSola', empresaId)
-        .then((resp) => {
-          this.snackbar = true
-          this.mensajeSnackbar = 'Establecimientos Encontrados.'
-          this.color = 'success'
-          router.push('EstablecimientoVer')
         })
         .catch((err) => {
           this.color = 'error'
