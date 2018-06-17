@@ -4,12 +4,15 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import EmpresaCrear from '@/components/EmpresaCrear'
 import PersonasCrear from '@/components/PersonaCrear'
+import AreaCrear from '@/components/AreaCrear'
 import VerEmpresas from '@/components/VerEmpresas'
 import VerPersonas from '@/components/VerPersonas'
+import verAreas from '@/components/verAreas'
 import AuthGuard from './auth'
 import AuthLogin from './authLogin'
 import EmpresaEditar from '@/components/EmpresaEditar'
 import PersonaEditar from '@/components/PersonaEditar'
+import AreaEditar from '@/components/AreaEditar'
 import EstablecimientoCrearDialog from '@/components/EstablecimientoCrear'
 import EstablecimientoVer from '@/components/EstablecimientoVer'
 
@@ -43,6 +46,11 @@ export default new Router({
       component: VerPersonas,
       beforeEnter: AuthGuard
     }, {
+      path: '/areas',
+      name: 'Areas',
+      component: verAreas,
+      beforeEnter: AuthGuard
+    }, {
       path: '/crearPersona',
       name: 'CrearPersona',
       component: PersonasCrear,
@@ -51,6 +59,11 @@ export default new Router({
       path: '/editarEmpresa',
       name: 'EditarEmpresa',
       component: EmpresaEditar,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/editarArea',
+      name: 'EditarArea',
+      component: AreaEditar,
       beforeEnter: AuthGuard
     }, {
       path: '/editarPersona',
@@ -62,10 +75,18 @@ export default new Router({
       name: 'crearEstablecimiento',
       component: EstablecimientoCrearDialog,
       beforeEnter: AuthGuard
+<<<<<<< HEAD
     }, {
       path: '/EstablecimientoVer',
       name: 'EstablecimientoVer',
       component: EstablecimientoVer,
+=======
+    },
+    {
+      path: '/crearArea',
+      name: 'crearArea',
+      component: AreaCrear,
+>>>>>>> 134c2bd88b45412bb83923c7a1d14db269006429
       beforeEnter: AuthGuard
     }
   ]

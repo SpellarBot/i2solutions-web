@@ -6,13 +6,14 @@ const { db } = require('../config/db')
 
 const app = express()
 
-const MovilDAL = require('./movil.dal')({ db })
-const Controller = controller({ responses, MovilDAL })
+const Controller = controller({ responses, db })
 
 // id: API_1
-app.route('/puestosDeUnArea/:areaId')
+app.route('/puestosDeUnArea/:areasId')
   .get((req, res) => {
-    Controller.PuestosDeAreaTrabajo(req.params).then(resp => {
+    let { areasId } = req.params
+    let id = areasId
+    Controller.PuestosDeAreaTrabajo({ id }).then(resp => {
       res.status(resp.codigoEstado)
       res.json(resp)
     }).catch(resp => {
@@ -24,7 +25,8 @@ app.route('/puestosDeUnArea/:areaId')
 // id: API_2
 app.route('/novedad')
   .post((req, res) => {
-    Controller.CrearNovedad(req.body).then(resp => {
+    let { descripcion, prioridad, fotoUrl, puestosId, inspeccionId } = req.body
+    Controller.CrearNovedad({ descripcion, prioridad, fotoUrl, puestosId, inspeccionId }).then(resp => {
       res.status(resp.codigoEstado)
       res.json(resp)
     }).catch(resp => {
@@ -34,9 +36,10 @@ app.route('/novedad')
   })
 
 // id: API_3
-app.route('/area/:areaId/puesto/:puestoId/:establecimientoId')
+app.route('/area/:areasId/puesto/:puestosId/:establecimientosId')
   .get((req, res) => {
-    Controller.CargarDatos(req.params).then(resp => {
+    let { areasId, puestosId, establecimientosId } = req.params
+    Controller.CargarDatos({ areasId, puestosId, establecimientosId }).then(resp => {
       res.status(resp.codigoEstado)
       res.json(resp)
     }).catch(resp => {
@@ -46,11 +49,11 @@ app.route('/area/:areaId/puesto/:puestoId/:establecimientoId')
   })
 
 // id: API_4
-app.route('/novedad/:novedadId/puesto/:puestoId')
-  .post((req, res) => {
+app.route('/novedad/:novedadId')
+  .put((req, res) => {
     const id = req.params['novedadId']
-    const { atendida, descripcionAtendida, nombre } = req.body
-    Controller.ActualizarEstadoNovedad({ id, atendida, descripcionAtendida, nombre }).then(resp => {
+    const { atendida, descripcionAtendida } = req.body
+    Controller.ActualizarEstadoNovedad({ id, atendida, descripcionAtendida }).then(resp => {
       res.status(resp.codigoEstado)
       res.json(resp)
     }).catch(resp => {
@@ -74,7 +77,7 @@ app.route('/novedadesSinAtender/:puestosId')
 
 app.route('*')
   .get((req, res) => {
-    res.json({datos: {mensaje: 'Url no valido'}, estado: false})
+    res.json({datos: { mensaje: 'Url no valido' }, estado: false})
   })
 
 module.exports = app

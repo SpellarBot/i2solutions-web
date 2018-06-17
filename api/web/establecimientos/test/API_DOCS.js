@@ -42,11 +42,13 @@ module.exports = {
     errors: []
   },
   API_4: {
-    nombre: 'Eliminar Empresa',
+    nombre: 'Eliminar Establecimiento',
     metodo: 'DELETE',
     descripcion: '',
-    url: '/api/web/empresas/:empresasId',
-    params: [],
+    url: '/api/web/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   },

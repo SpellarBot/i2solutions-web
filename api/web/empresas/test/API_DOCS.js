@@ -33,7 +33,9 @@ module.exports = {
     metodo: 'DELETE',
     descripcion: '',
     url: '/api/web/empresas/:empresasId',
-    params: [],
+    params: [
+      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   },

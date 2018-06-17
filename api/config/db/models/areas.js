@@ -23,9 +23,9 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientosId', targetKey: 'id' })
-    define.belongsToMany(models.puestos, { through: 'areasPuestos', foreignKey: 'areasId' })
-    define.belongsToMany(models.equipos, { through: 'equiposAreas', foreignKey: 'areasId' })
+    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientosId', targetKey: 'id' }, {onDelete: 'CASCADE'})
+    define.belongsToMany(models.puestos, { through: 'areasPuestos', foreignKey: 'areasId' }, {onDelete: 'CASCADE'})
+    define.belongsToMany(models.equipos, { through: 'equiposAreas', foreignKey: 'areasId' }, {onDelete: 'CASCADE'})
   }
 
   define.Crear = function ({ actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }) {
@@ -116,6 +116,24 @@ module.exports = (sequelize, DataTypes) => {
       this.findById(id)
         .then((project) => {
           resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Borrar = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.destroy({
+        where: {
+          id
+        }})
+        .then((rowDeleted) => {
+          if (rowDeleted > 0) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
         }).catch((err) => {
           return reject(err)
         })

@@ -62,6 +62,21 @@ module.exports = ({ responses, db }) => {
             return reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    Borrar ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.empresas.Borrar({ id })
+          .then((resp) => {
+            if (!resp) {
+              resolve(responses.NO_OK('empresa con es id no existe'))
+            } else {
+              resolve(responses.OK(resp))
+            }
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

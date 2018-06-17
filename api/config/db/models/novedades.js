@@ -36,16 +36,16 @@ module.exports = (sequelize, DataTypes) => {
     define.belongsTo(models.inspecciones, { foreignKey: 'inspeccionesId', targetKey: 'id' })
   }
 
-  define.Crear = function ({ nombre, descripcion, prioridad, fotoUrl, puestosId, fueAtendida, inspeccionesId }) {
+  define.Crear = function ({ descripcion, prioridad, fotoUrl, puestosId, fueAtendida, inspeccionesId, descripcionAtendida }) {
     return new Promise((resolve, reject) => {
       return this.create({
-        nombre,
         descripcion,
         prioridad,
         fotoUrl,
         puestosId,
         fueAtendida,
-        inspeccionesId
+        inspeccionesId,
+        descripcionAtendida
       })
         .then((resp) => {
           return resolve(resp.get({ plain: true }))
@@ -73,13 +73,17 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.Atender = function ({ id, atendida, descripcionAtendida, nombre }) {
+  define.Atender = function ({ id, atendida, descripcionAtendida }) {
     return new Promise((resolve, reject) => {
       return this.update(
-        { fueAtendida: atendida, descripcionAtendida, nombre },
+        { fueAtendida: atendida, descripcionAtendida },
         { where: { id: id } })
         .then((resp) => {
-          return resolve(resp)
+          if (resp[0] > 0) {
+            return resolve(true)
+          } else {
+            return resolve(false)
+          }
         })
         .catch((err) => {
           return reject(err)

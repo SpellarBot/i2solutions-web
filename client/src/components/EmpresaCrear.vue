@@ -11,27 +11,33 @@
             <v-text-field
               v-model="nombre"
               label="Nombre"
+              :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
               v-model="actividadComercial"
               label="Actividad Comercial"
+              :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
               v-model="razonSocial"
               label="Razon Social"
+              :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
               v-model="direccion"
               label="Dirección"
+              :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
               v-model="ruc"
               label="RUC"
+              :rules="[rules.required]"
               required
+              mask="#############"
             ></v-text-field>
           </v-form>
           <v-btn
@@ -70,7 +76,11 @@ export default {
       direccion: '',
       ruc: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
     }
   },
   methods: {
@@ -80,26 +90,32 @@ export default {
       let razonSocial = this.$data.razonSocial
       let direccion = this.$data.direccion
       let ruc = this.$data.ruc
-      this.$store.dispatch('crearEmpresa', { nombre, actividadComercial, razonSocial, direccion, ruc })
-        .then((resp) => {
-          this.snackbar = true
-          this.mensajeSnackbar = 'Empresa creada exitosamente.'
-          this.color = 'success'
-          this.$store.dispatch('getEmpresas')
-            .then((resp) => {
-              router.push('empresas')
-            })
-            .catch((err) => {
-              this.color = 'error'
-              this.snackbar = true
-              this.mensajeSnackbar = err
-            })
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
+      if (ruc.length < 13) {
+        this.color = 'error'
+        this.snackbar = true
+        this.mensajeSnackbar = 'El RUC debe contener 13 dígitos.'
+      } else {
+        this.$store.dispatch('crearEmpresa', { nombre, actividadComercial, razonSocial, direccion, ruc })
+          .then((resp) => {
+            this.snackbar = true
+            this.mensajeSnackbar = 'Empresa creada exitosamente.'
+            this.color = 'success'
+            this.$store.dispatch('getEmpresas')
+              .then((resp) => {
+                router.push('empresas')
+              })
+              .catch((err) => {
+                this.color = 'error'
+                this.snackbar = true
+                this.mensajeSnackbar = err
+              })
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      }
     },
     logout () {
       this.$store.dispatch('logout')

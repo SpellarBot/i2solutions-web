@@ -5,9 +5,7 @@ const sinon = require('sinon')
 const Ajv = require('ajv')
 const rfr = require('rfr')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-function e(validate) {
-  return `${JSON.stringify(validate.errors, null, 2)}`
-}
+
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')
@@ -15,7 +13,7 @@ const dump = rfr('api/config/dump')
 const API = require('./API_DOCS')
 const models = db.db
 let docs = []
-describe('TEST', () => {
+describe('Areas', () => {
   let { establecimientos, areas } = dump
   let establecimiento = establecimientos.VALIDOS[0]
   let area = areas.VALIDOS[0]
@@ -91,6 +89,24 @@ describe('TEST', () => {
       expect(res.body.estado).to.equal(true)
       expect(res.body.datos['nombre']).to.equal(areasCreada['nombre'])
       generatorDocs.OK({ docs, doc: API_4, res})
+    })
+  })
+
+  describe('Borrar un area', () => {
+    let { API_5 } = API
+    it('@CP5 OK', async () => {
+      let areasCreada = await models.areas.Crear(area)
+      let res = await request(app).delete(`/api/web/areas/${areasCreada['id']}`)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_5, res})
+    })
+    it('@CP5.1 area no existe', async () => {
+      let res = await request(app).delete(`/api/web/areas/55`)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ERROR({ nombre: 'El id del area no existe', docs, doc: API_5, res })
     })
   })
 })

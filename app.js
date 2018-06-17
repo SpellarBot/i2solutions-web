@@ -23,13 +23,14 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
+const path = require('path')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(ignoreFavicon)
 app.use(cors())
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
   app.use(morgan('tiny'))
 }
 
@@ -39,8 +40,9 @@ require('./api/server.api')(api)
 app.use('/api', api)
 
 // montar cliente
-const client = express()
-require('./client/client.server')(client)
-app.use('/', client)
+app.use('/', express.static(path.join(__dirname, 'client/dist')))
+// const client = express()
+// require('./client/client.server')(client)
+// app.use('/', client)
 
 module.exports = app

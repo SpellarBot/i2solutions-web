@@ -3,9 +3,6 @@ const expect = require('chai').expect
 const Ajv = require('ajv')
 const rfr = require('rfr')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-function e(validate) {
-  return `${JSON.stringify(validate.errors, null, 2)}`
-}
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')
@@ -14,8 +11,12 @@ const API = require('./API_DOCS')
 const models = db.db
 let docs = []
 describe('Personas', () => {
-  let { personas } = dump
+  let { personas, establecimientos, capacitaciones, empresas } = dump
   let persona = personas.VALIDOS[0]
+  let persona2 = personas.VALIDOS[1]
+  let establecimiento = establecimientos.VALIDOS[0]
+  let capacitacion = capacitaciones.VALIDOS[0]
+  let empresa = empresas.VALIDOS[0]
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
@@ -37,7 +38,6 @@ describe('Personas', () => {
       generatorDocs.OK({ docs, doc: API_1, res })
     })
     it('@CP1.1 por empresa')
-    it('@CP1.2 por establecimiento')
   })
 
   describe('Crear una persona', () => { // como se manejara las claves?
@@ -71,6 +71,54 @@ describe('Personas', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ERROR({ nombre: 'El id de la persona no existe', docs, doc: API_3, res, req })
+    })
+  })
+
+  describe('Borrar una persona', () => {
+    let { API_4 } = API
+    it('@CP4 OK', async () => {
+      let personaCreada = await models.personas.Crear(persona)
+      let personaCreada2 = await models.personas.Crear(persona2)
+      await models.personasEstablecimientos.Crear({ personasId: personaCreada['id'], establecimientosId: 1})
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada['id'], capacitacionesId: 1})
+      let res = await request(app).delete(`/api/web/personas/${personaCreada['id']}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_4, res })
+    })
+    it('@CP4.1 la persona no existe persona', async () => {
+      let res = await request(app).delete(`/api/web/personas/50`)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ERROR({ nombre: 'El id de la persona no existe', docs, doc: API_4, res })
+    })
+  })
+
+  describe('Obtener una persona', () => {
+    let { API_5 } = API
+    it('@CP5 obtener una persona', async () => {
+      let personaCreada = await models.personas.Crear(persona)
+      let res = await request(app).get(`/api/web/personas/${personaCreada['id']}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos['nombres']).to.equal(personaCreada['nombres'])
+      generatorDocs.OK({ docs, doc: API_5, res })
+    })
+  })
+
+  describe('Obtener una personas por establecimiento', () => {
+    let { API_6 } = API
+    it('@CP6 OK', async () => {
+      let establecimientoCreada = await models.establecimientos.Crear(establecimiento)
+      let personaCreada2 = await models.personas.Crear(persona2)
+      let personaCreada = await models.personas.Crear(persona)
+      await models.personasEstablecimientos.Crear({ personasId: personaCreada['id'], establecimientosId: establecimientoCreada['id'], rol: 'jefe' })
+      await models.personasEstablecimientos.Crear({ personasId: personaCreada2['id'], establecimientosId: establecimientoCreada['id'], rol: 'empleado' })
+      let res = await request(app).get(`/api/web/personas/establecimientos/${establecimientoCreada['id']}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(2)
+      generatorDocs.OK({ docs, doc: API_6, res })
     })
   })
 })

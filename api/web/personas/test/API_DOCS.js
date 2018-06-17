@@ -49,21 +49,34 @@ module.exports = {
     errors: []
   },
   API_4: {
-    nombre: 'Eliminar Empresa',
+    nombre: 'Eliminar persona',
     metodo: 'DELETE',
     descripcion: '',
-    url: '/api/web/empresas/:empresasId',
-    params: [],
+    url: '/api/web/personas/:personasId',
+    params: [
+      { nombre: 'personasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   },
   API_5: {
-    nombre: 'Obtener una empresa',
+    nombre: 'Obtener una persona',
     metodo: 'GET',
     descripcion: '',
-    url: '/api/web/empresas/:empresasId',
+    url: '/api/web/personas/:personasId',
     params: [
-      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'personasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_6: {
+    nombre: 'Obtener una personas por establecimiento',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/personas/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

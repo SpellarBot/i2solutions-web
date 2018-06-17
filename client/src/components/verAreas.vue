@@ -1,27 +1,30 @@
 <template>
-  <main id='Personas'>
+  <main id='Areas'>
     <app-navbar></app-navbar>
-  <div class="personas in this.$store.getters.personas">
+     <div class="areas in this.$store.getters.areas">
+       <br><br><b></b>
 
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
-        <h1 class='mb-4'>Personas:</h1>
-        <div><label >Buscar</label> <input type="text" ><v-btn
-            @click="buscar"
+        <h1 class='mb-4'>Areas:</h1>
+        <v-spacer></v-spacer>
+        <v-card class='mb-4' v-for="areas in this.$store.getters.areas" :key="areas.id">
+          <v-container
+          fluid
+          style="min-height: 0;"
+          grid-list-lg
           >
-            Buscar
-          </v-btn></div>
-        <v-card class='mb-4' v-for="personas in this.$store.getters.personas" :key="personas.id">
-          <div><b>Nombres y Apellido: </b> {{ personas.nombres }} {{personas.apellidos}}</div>
-          <div><b>Rol: </b> {{ personas.rol}}</div>
-          <div><b>Correo:</b> {{ personas.correo }}</div>
-          <div><b>Cédula:</b> {{ personas.cedula }}</div>
-          <div><b>Telefono:</b> {{ personas.telefono }}</div>
-          <div><b>Fecha de Nacimiento: </b>{{ fecha(personas.fechaDeNaciemieno) }}</div>
-          <div><b>Perfil Ocupacional:</b> {{ personas.perfilOcupacional }}</div>
-          <div><b>usuario:</b> {{ personas.usuario }}</div>
+          <v-card-media class="white--text"
+                  :src="areas.fotoUrl"
+                  height="240px"
+                  width="320px"
+          >{{ areas.metrosCuadrados }}m²</v-card-media>
+          <v-spacer></v-spacer>
+          <div class="headline"><b>Area: </b> {{ areas.nombre}}</div>
+          <div><b>actividad:</b> {{ areas.actividad }}</div>
+          <div><span class="grey--text"><b>Descripción:</b> {{ areas.descripcionLugar }}</span></div>
           <v-btn
-            @click="editarPersona(personas)"
+            @click="editarArea(areas)"
           >
             Editar
           </v-btn>
@@ -30,6 +33,8 @@
           >
             Eliminar
           </v-btn>
+          </v-container>
+
         </v-card>
         <v-btn
             @click="dashboard"
@@ -39,16 +44,16 @@
       </v-flex>
     </v-layout>
   </div>
-  <v-snackbar
+    <v-snackbar
       :timeout="3000"
       :multi-line="true"
       :color="color"
       :top="true"
       v-model="snackbar"
-    >
+      >
       {{mensajeSnackbar}}
     </v-snackbar>
-</main>
+  </main>
 </template>
 
 <script>
@@ -79,16 +84,16 @@ export default {
       router.push('dashboard')
     },
     fecha: function (date) {
-      return moment(date).format('L')
+      return moment().format('L')
     },
-    editarPersona (persona) {
-      let personasId = persona.id
-      this.$store.dispatch('getPersonaSola', personasId)
+    editarArea (area) {
+      let areaId = area.id
+      this.$store.dispatch('getAreaSola', areaId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Persona Encontrada.'
+          this.mensajeSnackbar = 'Area Encontrada.'
           this.color = 'success'
-          router.push('editarPersona')
+          router.push('editarArea')
         })
         .catch((err) => {
           this.color = 'error'

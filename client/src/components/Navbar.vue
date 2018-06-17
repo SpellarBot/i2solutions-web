@@ -14,6 +14,14 @@
         Agregar establecimiento
       </v-btn>
       <v-btn flat color="white"
+      @click="crearArea" >
+        Agregar Area
+      </v-btn>
+      <v-btn flat color="white"
+      @click="verAreas">
+        Ver Areas Por establecimiento
+      </v-btn>
+      <v-btn flat color="white"
       @click="logout" >
         <v-icon>exit_to_app</v-icon>
         Cerrar Sesión
@@ -44,8 +52,22 @@ export default {
       this.$store.dispatch('empresas')
       router.push('/crearEstablecimiento')
     },
+    crearArea () {
+      router.push('/crearArea')
+    },
     ToDashboard () {
       router.push('/dashboard')
+    },
+    verAreas () {
+      this.$store.dispatch('getAreas')
+        .then((resp) => {
+          router.push('areas')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

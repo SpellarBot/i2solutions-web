@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.empresas, { foreignKey: 'empresasId', targetKey: 'id' })
-    define.belongsToMany(models.personas, { through: 'personasEstablecimientos', foreignKey: 'establecimientosId' })
+    define.belongsTo(models.empresas, { foreignKey: 'empresasId', targetKey: 'id' }, {onDelete: 'CASCADE'})
+    define.belongsToMany(models.personas, { through: 'personasEstablecimientos', foreignKey: 'establecimientosId' }, {onDelete: 'CASCADE'})
   }
 
   define.Crear = function ({ nombres, direccion, ruc, empresasId }) {
@@ -63,6 +63,24 @@ module.exports = (sequelize, DataTypes) => {
           return resolve(resp)
         })
         .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Borrar = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.destroy({
+        where: {
+          id
+        }})
+        .then((rowDeleted) => {
+          if (rowDeleted > 0) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch((err) => {
           return reject(err)
         })
     })

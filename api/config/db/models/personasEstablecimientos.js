@@ -34,5 +34,20 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.CantidaPersonasEstablecimiento = function ({ establecimientosId }) {
+    return new Promise((resolve, reject) => {
+      return this.count({
+        where: { establecimientosId }
+      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

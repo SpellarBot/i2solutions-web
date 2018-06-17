@@ -140,11 +140,13 @@ yarn db:migrate
 
 ## Testing
 
-Tener instalado sqlite
+Tener instalado sqlite porque los test usan esta base de datos para por su rápidez
 
 ```sh
 yarn test
 ```
+
+Este comando verificará el standard de código y ademas generara la documentación de la api
 
 ## Production
 
@@ -154,7 +156,7 @@ Establecer la variables de entorno:
 2. DATABASE_HOST
 3. DATABASE_USER
 4. DATABASE_PASSWORD
-
+5.  heroku config:set NPM_CONFIG_PRODUCTION=false
 ## Authors
 
 Joel Rodriguez
@@ -178,3 +180,5 @@ https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-
 https://github.com/sequelize/cli/blob/master/docs/README.md
 
 https://gist.github.com/JoeKarlsson/ebb1c714466ae3de88ae565fa9ba4779
+
+https://github.com/sequelize/sequelize/issues/4074

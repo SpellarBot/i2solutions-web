@@ -1,0 +1,179 @@
+<template>
+  <main id='crearArea'>
+    <app-navbar></app-navbar>
+    <br><br><br>
+  <div class="crearArea">
+    <v-layout>
+      <v-flex xs12 sm4 offset-sm4>
+        <v-card>
+          <h2 class="titulo">Ingreso datos del Area</h2>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <!--nombre inicio-->
+          <v-container
+          fluid
+          style="min-height: 0;"
+          grid-list-lg class="contenedor"
+          grid-list-md>
+            <v-text-field
+              v-model="nombre"
+              label="Nombre del Area"
+              prepend-icon="rowing"
+              required
+            ></v-text-field>
+            <!--Fin-->
+            <v-text-field
+              v-model="actividad"
+              label="Actividad"
+              prepend-icon="rowing"
+              required
+            ></v-text-field>
+              <!--Fin-->
+            <v-text-field
+              v-model="dimension"
+              label="Dimensión del Area (30 x 20)"
+              prepend-icon="rowing"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="descripcion"
+              label="descripcion"
+              prepend-icon="vpn_key"
+              required
+            ></v-text-field>
+            <div>
+              <br>
+            <!--picture-input
+              ref="PictureInput"
+              @change="onChange"
+              width="600"
+              height="600"
+              margin="16"
+              accept="image/jpeg,image/png"
+              size="10"
+              :removable="true"
+              :customStrings="{
+                upload: '<h1>Bummer!</h1>',
+                drag: 'Drag a 😺 GIF or GTFO'
+              }">
+            </picture-input-->
+            </div>
+
+        </v-container>
+      </v-form>
+          <v-btn
+            :disabled="!valid"
+            @click="crear"
+          >
+            Crear Area
+          </v-btn>
+          <v-btn
+            @click="limpiar"
+          >
+            Limpiar
+          </v-btn>
+        </v-card>
+      </v-flex>
+    </v-layout>
+      <v-snackbar
+        :timeout="3000"
+        :multi-line="true"
+        :color="color"
+        :top="true"
+        v-model="snackbar"
+        >
+        {{mensajeSnackbar}}
+      </v-snackbar>
+    </div>
+  </main>
+</template>
+
+<script>
+import router from '../router'
+import PictureInput from 'vue-picture-input'
+export default {
+  data () {
+    return {
+      valid: false,
+      nombre: '',
+      actividad: '',
+      imagen: '',
+      descripcion: '',
+      dimension: '',
+      imagenURl: '',
+      color: '',
+      snackbar: false
+
+    }
+  },
+  Componetns: {
+    PictureInput
+  },
+  methods: {
+    limpiar () {
+      this.$refs.form.reset()
+    },
+    onChange (image) {
+      console.log('Nueva Imagen seleccionada!')
+      if (image) {
+        console.log('Imagen Cargada')
+        this.image = image
+      } else {
+        console.log('FileReader API not supported: use the <form>, Luke!')
+      }
+    },
+    crear () {
+      if (this.$refs.form.validate()) {
+        let nombre = this.$store.nombre
+        let actividad = this.$data.actividad
+        let metrosCuadrados = this.$data.dimension
+        let descripcionLugar = this.$data.descripcion
+        let fotoUrl = 'http://lorempixel.com/640/480'
+        let establecimientosId = 1
+
+        this.$store.dispatch('crearArea', { nombre, actividad, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId })
+          .then((resp) => {
+            this.snackbar = true
+            this.mensajeSnackbar = 'Area creada exitosamente.'
+            this.color = 'success'
+            router.push('dashboard')
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      }
+    },
+    logout () {
+      this.$store.dispatch('logout')
+      router.push('/')
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.imageLogo {
+  background-color: #1394CE;
+  padding: 10px;
+  margin-bottom: 30px;
+  text-align: left !important;
+}
+.i2s-name {
+  text-align: left !important;
+  padding: 20px;
+  color: white;
+  font-size: 40px;
+}
+
+.titulo{
+  color:blue;
+}
+.contenedor{
+  padding-left: 3%;
+}
+v-text-field{
+  padding: 10px;
+}
+</style>

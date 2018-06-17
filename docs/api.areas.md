@@ -24,8 +24,8 @@ __GET__ __/api/web/areas/establecimientos/:establecimientosId__
       "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-      "fechaCreacion": "2018-06-13 02:26:42.864 +00:00",
-      "fechaActualizacion": "2018-06-13 02:26:42.864 +00:00",
+      "fechaCreacion": "2018-06-16 17:54:03.496 +00:00",
+      "fechaActualizacion": "2018-06-16 17:54:03.496 +00:00",
       "establecimientosId": 1
     }
   ],
@@ -79,8 +79,8 @@ __POST__ __/api/web/areas__
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
-    "fechaActualizacion": "2018-06-13T02:26:42.980Z",
-    "fechaCreacion": "2018-06-13T02:26:42.980Z"
+    "fechaActualizacion": "2018-06-16T17:54:03.598Z",
+    "fechaCreacion": "2018-06-16T17:54:03.598Z"
   },
   "codigoEstado": 200
 }
@@ -193,13 +193,57 @@ __GET__ __/api/web/areas/:areasId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-06-13T02:26:43.132Z",
-    "fechaActualizacion": "2018-06-13T02:26:43.132Z",
+    "fechaCreacion": "2018-06-16T17:54:03.752Z",
+    "fechaActualizacion": "2018-06-16T17:54:03.752Z",
     "establecimientosId": 1
   },
   "codigoEstado": 200
 }
 ```
+
+
+___
+
+
+
+## Eliminar area
+
+__DELETE__ __/api/web/areas/:areasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| areasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": true,
+  "codigoEstado": 200
+}
+```
+
+#### ERRORS:
+__El id del area no existe__
+
+
+
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "areas con es id no existe",
+  "codigoEstado": 200
+}
+```
+	
+	
 
 
 ___

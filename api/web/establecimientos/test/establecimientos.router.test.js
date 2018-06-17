@@ -5,9 +5,6 @@ const sinon = require('sinon')
 const Ajv = require('ajv')
 const rfr = require('rfr')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-function e(validate) {
-  return `${JSON.stringify(validate.errors, null, 2)}`
-}
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')
@@ -77,6 +74,24 @@ describe('Establecimientos', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ERROR({ nombre: 'El id del establecimiento no exite', docs, doc: API_3, res, req })
+    })
+  })
+
+  describe('Borrar', () => {
+    let { API_4 } = API
+    it('@CP4 OK', async () => {
+      let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+      let res = await request(app).delete(`/api/web/establecimientos/${establecimientosCreada['id']}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_4, res })
+    })
+    it('@CP4.1 establecimiento id no existe', async () => {
+      let res = await request(app).delete(`/api/web/establecimientos/50`)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ERROR({ nombre: 'El id del establecimiento no exite', docs, doc: API_4, res })
     })
   })
 })

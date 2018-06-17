@@ -2,7 +2,6 @@ const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./areas.controller')({ responses, db })
 module.exports = (app) => {
-  // GET ALL API_1
   app.route('/areas/establecimientos/:establecimientosId')
     .get((req, res) => {
       let { establecimientosId } = req.params
@@ -15,7 +14,6 @@ module.exports = (app) => {
       })
     })
 
-  // GET ONE
   app.route('/areas/:areasId')
     .get((req, res) => {
       let { areasId } = req.params
@@ -28,7 +26,6 @@ module.exports = (app) => {
       })
     })
 
-  // CREATE
   app.route('/areas')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
@@ -40,7 +37,6 @@ module.exports = (app) => {
       })
     })
 
-  // UPDATE
   app.route('/areas/:areasId')
     .put((req, res) => {
       let { areasId } = req.params
@@ -55,10 +51,15 @@ module.exports = (app) => {
       })
     })
 
-  // DELETE
-  // borrar todos los datos dependientes
-  app.route('/personas/:personasId')
+  app.route('/areas/:areasId')
     .delete((req, res) => {
-      res.send('empresas')
+      let { areasId } = req.params
+      Controller.Borrar({ id: areasId }).then((resp) => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
     })
 }

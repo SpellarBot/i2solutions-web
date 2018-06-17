@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientosId', targetKey: 'id' })
-    define.belongsToMany(models.personas, { through: 'personasCapacitaciones', foreignKey: 'capacitacionesId' })
+    define.belongsTo(models.areas, { foreignKey: 'areasId', targetKey: 'id' }, {onDelete: 'CASCADE'})
+    define.belongsToMany(models.personas, { through: 'personasCapacitaciones', foreignKey: 'capacitacionesId' }, {onDelete: 'CASCADE'})
   }
 
-  define.Crear = function ({ nombre, descripcion, tema, establecimientosId, fechaCapacitacion }) {
+  define.Crear = function ({ nombre, descripcion, tema, areasId, fechaCapacitacion }) {
     let datos = arguments['0']
     return new Promise((resolve, reject) => {
       return this.create(datos)
@@ -39,12 +39,12 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.ObtenerPorEstablecimiento = function ({ id }) {
+  define.ObtenerPorAreas = function ({ id }) {
     return new Promise((resolve, reject) => {
       return this.findAll({
         raw: true,
         where: {
-          id
+          areasId: id
         }
       })
         .then((resp) => {
