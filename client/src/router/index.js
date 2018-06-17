@@ -75,18 +75,16 @@ export default new Router({
       name: 'crearEstablecimiento',
       component: EstablecimientoCrearDialog,
       beforeEnter: AuthGuard
-<<<<<<< HEAD
     }, {
       path: '/EstablecimientoVer',
       name: 'EstablecimientoVer',
       component: EstablecimientoVer,
-=======
+      beforeEnter: AuthGuard
     },
     {
       path: '/crearArea',
       name: 'crearArea',
       component: AreaCrear,
->>>>>>> 134c2bd88b45412bb83923c7a1d14db269006429
       beforeEnter: AuthGuard
     }
   ]

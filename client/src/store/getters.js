@@ -20,15 +20,13 @@ export default {
   personaSelected (state) {
     return state.personaSelected
   },
-<<<<<<< HEAD
   establecimientos (state) {
     return state.establecimientos
   },
   establecimientoSelected (state) {
     return state.establecimientoSelected
-=======
+  },
   areaSelected (state) {
     return state.areaSelected
->>>>>>> 134c2bd88b45412bb83923c7a1d14db269006429
   }
 }

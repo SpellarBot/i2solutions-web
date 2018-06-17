@@ -14,7 +14,6 @@
           >
             Editar
           </v-btn>
-<<<<<<< HEAD
           <v-btn
             @click="dashboard"
           >
@@ -25,7 +24,6 @@
           >
             ver establecimientos
           </v-btn>
-=======
           <md-dialog-confirm
           :md-active.sync="active"
           md-title="¿Está seguro que quiere eliminar esta empresa?"
@@ -33,7 +31,6 @@
           md-cancel-text="No"
           @md-confirm="onConfirm(empresa)" />
           <md-button class="md-primary md-raised" @click="active = true">Eliminar</md-button>
->>>>>>> 134c2bd88b45412bb83923c7a1d14db269006429
         </v-card>
         <v-btn
             @click="dashboard"
@@ -89,7 +86,6 @@ export default {
           this.mensajeSnackbar = err
         })
     },
-<<<<<<< HEAD
     verEstablecimientos (empresa) {
       let empresaId = empresa.id
       this.$store.dispatch('getEstablecimientos', empresaId)
@@ -101,7 +97,11 @@ export default {
           router.push('EstablecimientoVer')
         })
         .catch((err) => {
-=======
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     onConfirm (empresa) {
       let empresaId = empresa.id
       this.$store.dispatch('deleteEmpresa', empresaId)
@@ -123,16 +123,11 @@ export default {
         })
         .catch((err) => {
           console.log(err)
->>>>>>> 134c2bd88b45412bb83923c7a1d14db269006429
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
         })
     }
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .imageLogo {
