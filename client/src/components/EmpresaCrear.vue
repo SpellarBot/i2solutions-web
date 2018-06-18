@@ -9,30 +9,35 @@
           <h2>Ingreso datos de empresa</h2>
           <v-form v-model="valid">
             <v-text-field
+            class="nombre"
               v-model="nombre"
               label="Nombre"
               :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
+            class="actividad"
               v-model="actividadComercial"
               label="Actividad Comercial"
               :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
+            class="razon"
               v-model="razonSocial"
               label="Razon Social"
               :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
+            class="direccion"
               v-model="direccion"
               label="Dirección"
               :rules="[rules.required]"
               required
             ></v-text-field>
             <v-text-field
+            class="ruc"
               v-model="ruc"
               label="RUC"
               :rules="[rules.required]"

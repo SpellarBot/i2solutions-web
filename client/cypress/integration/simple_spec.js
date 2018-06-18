@@ -1,0 +1,47 @@
+describe('Crear Empresa', function () {
+  it('Desde login hasta crear empresa y verla en la lista de empresas', function () {
+    cy.visit('http://localhost:3002')
+    cy.get('.user').find('input').type('Cecilia_Cotto')
+    cy.get('.password').find('input').type('J0Oh243XReH3maF')
+    cy.get('button').contains('Iniciar Sesión').click()
+    cy.get('button').contains('Crear Empresa').click()
+    cy.get('.nombre').find('input').type('AX-Productions')
+    cy.get('.actividad').find('input').type('Creación de juegos de video')
+    cy.get('.razon').find('input').type('Productores AX3')
+    cy.get('.direccion').find('input').type('Kennedy Nueva. Av. Orión Llaguno Márquez')
+    cy.get('.ruc').find('input').type('1300752559001')
+    cy.get('button').contains('Crear Empresa').click()
+    cy.url().should('include', '/empresas')
+    cy.wait(600)
+  })
+})
+
+describe('Editar Empresa', function () {
+  it('Desde login hasta editar empresa y ver la info actualizada', function () {
+    cy.visit('http://localhost:3002')
+    cy.get('.user').find('input').type('Cecilia_Cotto')
+    cy.get('.password').find('input').type('J0Oh243XReH3maF')
+    cy.get('button').contains('Iniciar Sesión').click()
+    cy.get('button').contains('Ver Empresas').click()
+    cy.get('.AX-Productions').contains('Editar').click()
+    cy.get('.nombre').find('input').type('{selectall}{del}Producciones-AX')
+    cy.get('.actividad').find('input').type('{selectall}{del}Creación de videojuegos')
+    cy.get('.razon').find('input').type('{selectall}{del}Productores AX5')
+    cy.get('button').contains('Editar Empresa').click()
+    cy.url().should('include', '/empresas')
+    cy.wait(600)
+  })
+})
+
+describe('Eliminar Empresa', function () {
+  it('Desde login hasta eliminar empresa y ver la info actualizada', function () {
+    cy.visit('http://localhost:3002')
+    cy.get('.user').find('input').type('Cecilia_Cotto')
+    cy.get('.password').find('input').type('J0Oh243XReH3maF')
+    cy.get('button').contains('Iniciar Sesión').click()
+    cy.get('button').contains('Ver Empresas').click()
+    cy.get('.Producciones-AX').contains('Eliminar').click()
+    cy.get('.Producciones-AX').contains('Sí').click({force: true})
+    cy.wait(600)
+  })
+})
