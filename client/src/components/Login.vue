@@ -11,14 +11,17 @@
           <h2>Iniciar Sesión</h2>
           <v-form v-model="valid">
             <v-text-field
+            class="user"
               v-model="usuario"
               label="Usuario"
               required
             ></v-text-field>
             <v-text-field
+            class="password"
               v-model="clave"
               label="Clave"
               required
+              type="password"
             ></v-text-field>
           </v-form>
           <v-btn
@@ -50,8 +53,8 @@ export default {
   data () {
     return {
       valid: false,
-      usuario: 'Cecilia_Cotto',
-      clave: 'J0Oh243XReH3maF',
+      usuario: '',
+      clave: '',
       mensajeSnackbar: '',
       color: '',
       snackbar: false

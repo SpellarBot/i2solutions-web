@@ -10,23 +10,25 @@
           <div>{{ empresa.actividadComercial }}</div>
           <div>{{ empresa.razonSocial }}</div>
           <v-btn
+          :class="empresa.nombre"
             @click="editarEmpresa(empresa)"
           >
             Editar
           </v-btn>
           <v-btn
+          :class="empresa.nombre"
             @click="verEstablecimientos(empresa)"
           >
             ver establecimientos
           </v-btn>
 
           <v-dialog v-model="dialog" persistent max-width="500">
-            <v-btn slot=activator color="primary" dark @click="setId(empresa)">Eliminar</v-btn>
+            <v-btn :class="empresa.nombre" slot=activator color="primary" dark @click="setId(empresa)">Eliminar</v-btn>
             <v-card>
               <v-card-title class="headline">¿Está seguro que quiere eliminar esta empresa?"</v-card-title>
               <v-card-actions>
                 <v-btn flat @click.native="dialog = false">No</v-btn>
-                <v-btn color= blue  flat @click = "onConfirm(empresa)">Sí</v-btn>
+                <v-btn :class="empresa.nombre" color= blue  flat @click = "onConfirm(empresa)">Sí</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
