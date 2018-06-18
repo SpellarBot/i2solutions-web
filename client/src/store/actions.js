@@ -66,6 +66,22 @@ export default {
         })
     })
   },
+  crearPuesto ({commit}, {nombre, descripcionLugar, areaId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/puestos', {nombre, descripcionLugar, areaId})
+        .then((resp) => {
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   crearPersona ({commit}, {nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol}) {
     return new Promise((resolve, reject) => {
       Vue.http.post('/api/web/personas', {nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol})
