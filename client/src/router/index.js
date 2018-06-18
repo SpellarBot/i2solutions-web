@@ -14,6 +14,8 @@ import PersonaEditar from '@/components/PersonaEditar'
 import AreaEditar from '@/components/AreaEditar'
 import EstablecimientoCrearDialog from '@/components/EstablecimientoCrear'
 import EstablecimientoVer from '@/components/EstablecimientoVer'
+import VerPuestos from '@/components/VerPuestos'
+import PuestoEditar from '@/components/PuestoEditar'
 
 Vue.use(Router)
 
@@ -78,6 +80,16 @@ export default new Router({
       path: '/EstablecimientoVer',
       name: 'EstablecimientoVer',
       component: EstablecimientoVer,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/puestos',
+      name: 'Puestos',
+      component: VerPuestos,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/editarPuesto',
+      name: 'EditarPuesto',
+      component: PuestoEditar,
       beforeEnter: AuthGuard
     }
   ]

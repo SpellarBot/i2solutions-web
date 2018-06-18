@@ -1,37 +1,30 @@
 <template>
-  <main id='Personas'>
+  <main id='Puestos'>
     <app-navbar></app-navbar>
-  <div class="personas in this.$store.getters.personas">
-
+  <div class="puesto in this.$store.getters.puestos">
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
-        <h1 class='mb-4'>Personas:</h1>
-        <v-card class='mb-4' v-for="personas in this.$store.getters.personas" :key="personas.id">
-          <div><b>Nombres y Apellido: </b> {{ personas.nombres }} {{personas.apellidos}}</div>
-          <div><b>Rol: </b> {{ personas.rol}}</div>
-          <div><b>Correo:</b> {{ personas.correo }}</div>
-          <div><b>Cédula:</b> {{ personas.cedula }}</div>
-          <div><b>Telefono:</b> {{ personas.telefono }}</div>
-          <div><b>Fecha de Nacimiento: </b>{{ fecha(personas.fechaDeNaciemieno) }}</div>
-          <div><b>Perfil Ocupacional:</b> {{ personas.perfilOcupacional }}</div>
-          <div><b>usuario:</b> {{ personas.usuario }}</div>
+        <h1 class='mb-4'>Empresas:</h1>
+        <v-card class='mb-4' v-for="puesto in this.$store.getters.puestos" :key="puesto.id">
+          <h3>{{ puesto.nombre }}</h3>
+          <div>{{ puesto.descripcion }}</div>
           <v-btn
-            @click="editarPersona(personas)"
+          :class="puesto.nombre"
+            @click="editarPuesto(puesto)"
           >
             Editar
           </v-btn>
-          <v-btn color="primary" dark @click="onConfirm(personas)">Eliminar</v-btn>
-          <v-dialog v-model="dialog" persistent max-width="500">
 
+          <v-dialog v-model="dialog" persistent max-width="500">
+            <v-btn :class="puesto.nombre" slot=activator color="primary" dark @click="setId(puesto)">Eliminar</v-btn>
             <v-card>
-              <v-card-title class="headline">¿Está seguro que quiere eliminar esta persona?"</v-card-title>
+              <v-card-title class="headline">¿Está seguro que quiere eliminar este puesto?"</v-card-title>
               <v-card-actions>
                 <v-btn flat @click.native="dialog = false">No</v-btn>
-                <v-btn :class="personas.nombre" color= blue  flat @click = "onConfirm(personas)">Sí</v-btn>
+                <v-btn :class="puesto.nombre" color= blue  flat @click = "onConfirm(puesto)">Sí</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
-          </v-btn>
         </v-card>
         <v-btn
             @click="dashboard"
@@ -55,8 +48,6 @@
 
 <script>
 import router from '../router'
-const moment = require('moment')
-
 export default {
   data () {
     return {
@@ -67,13 +58,6 @@ export default {
       id_eliminar: null
     }
   },
-  /* computed: {
-    personasOrdenadas: function () {
-      return this.$store.getters.personas.filter(function (persona) {
-        return persona.fechaNacimiento
-      })
-    }
-  }, */
   methods: {
     logout () {
       this.$store.dispatch('logout')
@@ -82,17 +66,14 @@ export default {
     dashboard () {
       router.push('dashboard')
     },
-    fecha: function (date) {
-      return moment(date).format('L')
-    },
-    editarPersona (persona) {
-      let personasId = persona.id
-      this.$store.dispatch('getPersonaSola', personasId)
+    editarPuesto (puesto) {
+      let puestoId = puesto.id
+      this.$store.dispatch('getPuestoSolo', puestoId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Persona Encontrada.'
+          this.mensajeSnackbar = 'Puesto Encontrado.'
           this.color = 'success'
-          router.push('editarPersona')
+          router.push('editarPuesto')
         })
         .catch((err) => {
           this.color = 'error'
@@ -100,23 +81,22 @@ export default {
           this.mensajeSnackbar = err
         })
     },
-    setId (personas) {
-      this.id_eliminar = personas.id
-      this.$data.dialog = true
+    setId (puesto) {
+      this.id_eliminar = puesto.id
     },
-    onConfirm (personas) {
+    onConfirm (puesto) {
       this.dialog = false
-      let personaId = personas.id
-      console.log(personaId)
-      this.$store.dispatch('deletePersona', personaId)
+      let puestoId = this.id_eliminar
+      console.log(puestoId)
+      this.$store.dispatch('deletePuesto', puestoId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'Persona Eliminada.'
+          this.mensajeSnackbar = 'Puesto Eliminado.'
           this.color = 'success'
-          this.$store.dispatch('getPersonas')
+          this.$store.dispatch('getPuestos',this.$store.getters.areaSelected.id)
             .then((resp) => {
               console.log('no error')
-              router.push('personas')
+              router.push('puestos')
             })
             .catch((err) => {
               this.color = 'error'
@@ -132,7 +112,6 @@ export default {
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .imageLogo {

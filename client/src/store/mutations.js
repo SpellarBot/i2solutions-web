@@ -35,5 +35,11 @@ export default {
   },
   setAreaSelected (state, areaSelected) {
     state.areaSelected = areaSelected
+  },
+  setPuestos (state, puestos) {
+    state.puestos = puestos
+  },
+  setPuestoSelected (state, puestoSelected) {
+    state.puestoSelected = puestoSelected
   }
 }

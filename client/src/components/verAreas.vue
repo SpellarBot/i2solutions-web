@@ -28,6 +28,11 @@
             Editar
           </v-btn>
           <v-btn
+            @click="verPuestos(areas)"
+          >
+            Ver Puestos
+          </v-btn>
+          <v-btn
           color="primary" dark
             @click = "eliminarTrigger(areas.id)"
           >
@@ -93,8 +98,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="crearArea = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Save</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="crearArea = false">Cerrar</v-btn>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Crear</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -219,6 +224,19 @@ export default {
       this.$store.dispatch('getAreas', establecimientoId)
         .then((resp) => {
           router.push('Areas')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    verPuestos (areas) {
+      this.$store.dispatch('getAreaSelected',areas)
+      let areaId = areas.id
+      this.$store.dispatch('getPuestos', areaId)
+        .then((resp) => {
+          router.push('puestos')
         })
         .catch((err) => {
           this.color = 'error'

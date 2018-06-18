@@ -28,5 +28,11 @@ export default {
   },
   areaSelected (state) {
     return state.areaSelected
+  },
+  puestos (state) {
+    return state.puestos
+  },
+  puestoSelected (state) {
+    return state.puestoSelected
   }
 }
