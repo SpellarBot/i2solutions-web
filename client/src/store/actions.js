@@ -133,9 +133,9 @@ export default {
         })
     })
   },
-  getAreas ({commit}) {
+  getAreas ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/web/areas/establecimientos/' + 1)
+      Vue.http.get('/api/web/areas/establecimientos/' + establecimientoId)
         .then((resp) => {
           if (resp.body.estado) {
             commit('setAreas', resp.body.datos)
@@ -166,6 +166,10 @@ export default {
           return reject(err)
         })
     })
+  },
+  getEstablecimientoSoloID ({commit}, establecimientoId) {
+      console.log(establecimientoId)
+      commit('setEstablecimientoSelected', establecimientoId)
   },
   deleteEmpresa ({commit}, empresaId) {
     return new Promise((resolve, reject) => {

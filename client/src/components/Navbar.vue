@@ -8,7 +8,6 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat color="white" @click.stop="dialog = true">Open Dialog 1</v-btn>
       <v-btn flat color="white"
       @click="crearEstablecimiento" >
         Agregar establecimiento
@@ -16,10 +15,6 @@
       <v-btn flat color="white"
       @click="crearArea" >
         Agregar Area
-      </v-btn>
-      <v-btn flat color="white"
-      @click="verAreas">
-        Ver Areas Por establecimiento
       </v-btn>
       <v-btn flat color="white"
       @click="logout" >

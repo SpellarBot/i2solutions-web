@@ -37,7 +37,14 @@
           md-confirm-text="Sí"
           md-cancel-text="No"
           @md-confirm="borrarEstablecimiento (establecimientos.id)" />
-          <md-button class="md-primary md-raised" @click="active = true">Eliminar</md-button>
+          <md-button class="md-primary md-raised" @click="active = true">
+            Eliminar
+          </md-button>
+          <v-btn
+              @click="verArea(establecimientos.id)"
+            >
+              Ver Areas
+          </v-btn>
         </v-card>
         <v-btn
             @click="dashboard"
@@ -137,6 +144,18 @@ export default {
       this.$store.dispatch('getEmpresaSola', empresaId)
         .then((resp) => {
           router.push('EstablecimientoVer')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    verArea (establecimientoId) {
+      this.$store.dispatch('getEstablecimientoSoloID', establecimientoId)
+      this.$store.dispatch('getAreas', establecimientoId)
+        .then((resp) => {
+          router.push('areas')
         })
         .catch((err) => {
           this.color = 'error'

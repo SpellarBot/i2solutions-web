@@ -43,6 +43,7 @@
             <v-text-field
             v-model="areaId"
             label="area"
+            disabled
             >
             </v-text-field>
             <div>
