@@ -161,6 +161,7 @@ export default {
       rol: '',
       color: '',
       snackbar: false,
+      mensajeSnackbar: '',
       roles: [{
         value: 'Jefe de Seguridad',
         text: 'Jefe de Seguridad'
@@ -216,18 +217,33 @@ export default {
         let usuario = this.$data.usuario
         let perfilOcupacional = this.$data.perfilOcupacional
         let rol = this.$data.rol
-        this.$store.dispatch('crearPersona', { nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol })
-          .then((resp) => {
-            this.snackbar = true
-            this.mensajeSnackbar = 'Persona creada exitosamente.'
-            this.color = 'success'
-            router.push('dashboard')
-          })
-          .catch((err) => {
-            this.color = 'error'
-            this.snackbar = true
-            this.mensajeSnackbar = err
-          })
+        let re = /^[A-Za-z ]+$/
+        if (!re.test(nombres) || !re.test(apellidos)) {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = 'Nombre o Apellidos Inválidos.'
+        } else {
+          this.$store.dispatch('crearPersona', { nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol })
+            .then((resp) => {
+              this.snackbar = true
+              this.mensajeSnackbar = 'Persona creada exitosamente.'
+              this.color = 'success'
+              this.$store.dispatch('getPersonas')
+                .then((resp) => {
+                  setTimeout(function () { router.push('personas') }, 2000)
+                })
+                .catch((err) => {
+                  this.color = 'error'
+                  this.snackbar = true
+                  this.mensajeSnackbar = err
+                })
+            })
+            .catch((err) => {
+              this.color = 'error'
+              this.snackbar = true
+              this.mensajeSnackbar = err
+            })
+        }
       }
     },
     logout () {
