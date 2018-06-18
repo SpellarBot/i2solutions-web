@@ -54,7 +54,7 @@ describe('Puestos', () => {
   describe('Crear puesto', () => {
     let { API_2 } = API
     it('@CP2 OK', async () => {
-      let req = puesto
+      let req = { ...puesto, areasId: 1 }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)

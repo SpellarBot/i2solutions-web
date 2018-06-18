@@ -2,10 +2,18 @@
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
+      let { areasId } = datos
       return new Promise((resolve, reject) => {
         db.puestos.Crear(datos)
           .then((resp) => {
-            resolve(responses.OK(resp))
+            let puestosId = resp['id']
+            db.areasPuestos.Crear({ puestosId, areasId })
+              .then((respPuestos) => {
+                resolve(responses.OK(resp))
+              }).catch((err) => {
+                console.error(err)
+                return reject(responses.ERROR_SERVIDOR)
+              })
           }).catch((err) => {
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)

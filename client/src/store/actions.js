@@ -68,7 +68,7 @@ export default {
   },
   crearPuesto ({commit}, {nombre, descripcionLugar, areaId}) {
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/web/puestos', {nombre, descripcionLugar, areaId})
+      Vue.http.post('/api/web/puestos', { nombre, descripcionLugar, areasId: areaId })
         .then((resp) => {
           if (resp.body.estado) {
             return resolve()
