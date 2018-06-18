@@ -28,6 +28,7 @@
             Editar
           </v-btn>
           <v-btn
+          color="primary" dark
             @click = "eliminarTrigger(areas.id)"
           >
             Eliminar
@@ -54,52 +55,46 @@
   </v-snackbar>
 
   <v-layout row justify-center>
-    <v-dialog v-model="crearArea" persistent max-width="500px">
+    <v-dialog v-model="crearArea" persistent max-width="600px">
       <v-card>
         <v-card-title>
           <span class="headline">Agregar nueva área</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex>
+              <v-form v-model="valid">
                 <v-text-field
                   v-model = "nombre"
                   label="Nombre del área" required
+                  :rules="[rules.required]"
                 ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
                 <v-text-field
                   v-model = "actividad"
                   label="Actividad" required
+                  :rules="[rules.required]"
                 ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
                 <v-text-field
                   v-model = "dimension"
                   label="Metros cuadrados"
                   hint = "20x40m"
                   persistent-hint
                   required
+                  :rules="[rules.required]"
                   >
                 </v-text-field>
-              </v-flex>
-              <v-flex xs12>
                 <v-text-field
                   v-model = "descripcion"
                   label = "Descripción"
                   required
                   multi-line
+                  :rules="[rules.required]"
                   >
                   </v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
+            </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="crearArea = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click = "crear ()">Save</v-btn>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -111,8 +106,8 @@
         <v-card-text>¿Está seguro que quiere eliminar esta Área?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
-          <v-btn color="green darken-1" flat @click = "eliminarArea()">Sí</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
+          <v-btn color="blue darken-1" flat @click = "eliminarArea()">Sí</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -127,6 +122,7 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      valid: false,
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
@@ -137,7 +133,11 @@ export default {
       actividad: '',
       dimension: '',
       descripcion: '',
-      establecimiento: this.$store.getters.establecimientoSelected
+      establecimiento: this.$store.getters.establecimientoSelected,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
     }
   },
   /* computed: {
@@ -206,7 +206,7 @@ export default {
           this.mensajeSnackbar = 'Area creada exitosamente.'
           this.color = 'success'
           this.$data.crearArea = false
-          this.reloadArea()          
+          this.reloadArea()
         })
         .catch((err) => {
           this.color = 'error'

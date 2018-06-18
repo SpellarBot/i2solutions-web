@@ -6,11 +6,6 @@
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <h1 class='mb-4'>Personas:</h1>
-        <div><label >Buscar</label> <input type="text" ><v-btn
-            @click="buscar"
-          >
-            Buscar
-          </v-btn></div>
         <v-card class='mb-4' v-for="personas in this.$store.getters.personas" :key="personas.id">
           <div><b>Nombres y Apellido: </b> {{ personas.nombres }} {{personas.apellidos}}</div>
           <div><b>Rol: </b> {{ personas.rol}}</div>
@@ -27,6 +22,7 @@
           </v-btn>
           <v-btn
             @click="dashboard"
+            color="primary" dark
           >
             Eliminar
           </v-btn>

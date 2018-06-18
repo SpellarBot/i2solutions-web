@@ -19,6 +19,7 @@
               label="Nombre del Area"
               prepend-icon="rowing"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <!--Fin-->
             <v-text-field
@@ -26,6 +27,7 @@
               label="Actividad"
               prepend-icon="rowing"
               required
+              :rules="[rules.required]"
             ></v-text-field>
               <!--Fin-->
             <v-text-field
@@ -33,12 +35,14 @@
               label="Dimensión del Area (30 x 20)"
               prepend-icon="rowing"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <v-text-field
               v-model="descripcion"
               label="descripcion"
               prepend-icon="vpn_key"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <v-text-field
             v-model="areaId"
@@ -72,11 +76,6 @@
           >
             Editar Area
           </v-btn>
-          <v-btn
-            @click="limpiar"
-          >
-            Limpiar
-          </v-btn>
         </v-card>
       </v-flex>
     </v-layout>
@@ -107,16 +106,17 @@ export default {
       fotoUrl: this.$store.getters.areaSelected.fotoUrl,
       areaId: this.$store.getters.areaSelected.id,
       color: '',
-      snackbar: false
+      snackbar: false,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
     }
   },
   Componetns: {
     PictureInput
   },
   methods: {
-    limpiar () {
-      this.$refs.form.reset()
-    },
     onChange (image) {
       console.log('Nueva Imagen seleccionada!')
       if (image) {
@@ -134,12 +134,13 @@ export default {
       let descripcionLugar = this.$data.descripcion
       let fotoUrl = this.$data.fotoUrl
       let areasId = this.$data.areaId
+      let establecimientoId = this.$store.getters.establecimientoSelected
       this.$store.dispatch('updateArea', { areasId, nombre, actividad, fotoUrl, metrosCuadrados, descripcionLugar })
         .then((resp) => {
           this.snackbar = true
           this.mensajeSnackbar = 'Area editada exitosamente.'
           this.color = 'success'
-          this.$store.dispatch('getAreas')
+          this.$store.dispatch('getAreas', establecimientoId)
             .then((resp) => {
               router.push('areas')
             })

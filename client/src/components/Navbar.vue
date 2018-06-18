@@ -9,10 +9,6 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat color="white"
-      @click="crearEstablecimiento" >
-        Agregar establecimiento
-      </v-btn>
-      <v-btn flat color="white"
       @click="logout" >
         <v-icon>exit_to_app</v-icon>
         Cerrar Sesión

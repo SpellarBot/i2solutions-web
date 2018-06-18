@@ -12,6 +12,11 @@
     >
       Ver Empresas
     </v-btn>
+    <v-btn
+      @click="crearEstablecimiento"
+    >
+      Agregar Establecimiento
+    </v-btn>
 
     <v-btn
       @click=" verPersonas"
@@ -79,6 +84,10 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    crearEstablecimiento () {
+      this.$store.dispatch('empresas')
+      router.push('/crearEstablecimiento')
     }
   }
 }

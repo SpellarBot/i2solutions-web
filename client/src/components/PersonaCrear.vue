@@ -14,6 +14,7 @@
               label="Nombre"
               prepend-icon="account_circle"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <!--Fin-->
             <v-text-field
@@ -21,6 +22,7 @@
               label="Apellido"
               prepend-icon="account_circle"
               required
+              :rules="[rules.required]"
             ></v-text-field>
               <!--Fin-->
             <v-text-field
@@ -46,6 +48,7 @@
               label="Clave"
               prepend-icon="vpn_key"
               required
+              :rules="[rules.required]"
             ></v-text-field>
 
             <v-text-field
@@ -78,6 +81,7 @@
                   prepend-icon="event"
                   readonly
                   required
+                  :rules="[rules.required]"
                 ></v-text-field>
                 <v-date-picker
                   ref="picker"
@@ -85,6 +89,7 @@
                   :max="new Date().toISOString().substr(0, 10)"
                   min="1950-01-01"
                   @change="save"
+                  :rules="[rules.required]"
                 ></v-date-picker>
               </v-menu>
 
@@ -94,6 +99,7 @@
               prepend-icon="vpn_key"
               hint="Ingrese perfil Ocupacional"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <v-text-field
               v-model="usuario"
@@ -101,6 +107,7 @@
               prepend-icon="account_circle"
               hint="Ingrese el usuario"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <v-select
               :items="roles"
@@ -108,6 +115,7 @@
               prepend-icon="vpn_key"
               label="Rol"
               required=""
+              :rules="[rules.required]"
             ></v-select>
           </v-container>
           </v-form>
@@ -116,11 +124,6 @@
             @click="enviar"
           >
             Crear Persona
-          </v-btn>
-          <v-btn
-            @click="limpiar"
-          >
-            Limpiar
           </v-btn>
         </v-card>
       </v-flex>
@@ -172,6 +175,10 @@ export default {
       }
       ],
       correo: '',
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      },
       emailRules: [
         v => !!v || 'El campo correo es obligatorio',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Ingrese correo válido'
@@ -194,9 +201,6 @@ export default {
     }
   },
   methods: {
-    limpiar () {
-      this.$refs.form.reset()
-    },
     save (date) {
       this.$refs.menu.save(date)
     },

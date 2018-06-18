@@ -32,14 +32,15 @@
             </v-btn>
           </span>
           <v-btn
-              @click = "eliminarTrigger(establecimientos.id)"
-          >
-              Eliminar
-          </v-btn>
-          <v-btn
               @click="verArea(establecimientos.id)"
             >
               Ver Areas
+          </v-btn>
+          <v-btn
+          color="primary" dark
+              @click = "eliminarTrigger(establecimientos.id)"
+          >
+              Eliminar
           </v-btn>
         </v-card>
         <v-btn
@@ -57,8 +58,8 @@
         <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
-          <v-btn color="green darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
+          <v-btn color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

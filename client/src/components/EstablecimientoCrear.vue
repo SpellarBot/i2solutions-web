@@ -2,10 +2,6 @@
   <main id='crearEmpresa'>
     <app-navbar></app-navbar>
     <div class="empresas in this.$store.getters.empresas">
-    <div>
-      <v-btn @click="prueba">
-      pruebas</v-btn>
-    </div>
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <v-card>
@@ -15,6 +11,7 @@
               v-model="nombre"
               label="Nombre"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <v-select
               :items = "empresas"
@@ -24,11 +21,13 @@
               label="Empresa matriz"
               @change="prueba"
               single-line
+              :rules="[rules.required]"
             ></v-select>
             <v-text-field
               v-model="direccion"
               label="Dirección"
               required
+              :rules="[rules.required]"
             ></v-text-field>
             <v-text-field
               v-model="ruc"
@@ -76,6 +75,7 @@ export default {
       snackbar: false,
       empresas: this.$store.getters.empresas,
       rules: {
+        required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
 
@@ -93,18 +93,18 @@ export default {
         this.snackbar = true
         this.mensajeSnackbar = 'El RUC debe contener 13 dígitos.'
       } else {
-      this.$store.dispatch('crearEstablecimento', datos)
-        .then((resp) => {
-          this.snackbar = true
-          this.mensajeSnackbar = 'establecimiento creado exitosamente.'
-          this.color = 'success'
-          router.push('dashboard')
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
+        this.$store.dispatch('crearEstablecimento', datos)
+          .then((resp) => {
+            this.snackbar = true
+            this.mensajeSnackbar = 'establecimiento creado exitosamente.'
+            this.color = 'success'
+            router.push('dashboard')
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       }
     },
     logout () {
