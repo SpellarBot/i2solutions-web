@@ -109,7 +109,7 @@ export default {
       this.dialog = false
       let empresaId = this.id_eliminar
       console.log(empresaId)
-     this.$store.dispatch('deleteEmpresa', empresaId)
+      this.$store.dispatch('deleteEmpresa', empresaId)
         .then((resp) => {
           this.snackbar = true
           this.mensajeSnackbar = 'Empresa Eliminada.'
