@@ -3,7 +3,6 @@
     <app-navbar></app-navbar>
      <div class="areas in this.$store.getters.areas">
        <br><br><b></b>
-
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
         <h1 class='mb-4'>Areas:</h1>
@@ -44,6 +43,11 @@
       </v-flex>
     </v-layout>
   </div>
+  <v-btn
+    v-on:click="crearArea = true"
+  >
+    Agregar nueva área
+  </v-btn>
     <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -53,7 +57,59 @@
       >
       {{mensajeSnackbar}}
     </v-snackbar>
-  </main>
+
+  <v-layout row justify-center>
+    <v-dialog v-model="crearArea" persistent max-width="500px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Agregar nueva área</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex>
+                <v-text-field 
+                  v-model = "nombre"
+                  label="Nombre del área" required
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field 
+                  v-model = "actividad"
+                  label="Actividad" required
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field 
+                  v-model = "dimension"
+                  label="Metros cuadrados"
+                  hint = "20x40m"
+                  persistent-hint
+                  required
+                  >
+                </v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field 
+                  v-model = "descripcion"
+                  label = "Descripción"
+                  required
+                  multi-line
+                  >
+                  </v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="crearArea = false">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click = "crear ()">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+</main>
 </template>
 
 <script>
@@ -65,7 +121,13 @@ export default {
     return {
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      crearArea: false,
+      nombre: '',
+      actividad: '',
+      dimension: '',
+      descripcion: '',
+      establecimiento: this.$store.getters.establecimientoSelected
     }
   },
   /* computed: {
@@ -100,6 +162,35 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    crear () {
+      let nombre = this.$data.nombre
+      let actividad = this.$data.actividad
+      let metrosCuadrados = this.$data.dimension
+      let descripcionLugar = this.$data.descripcion
+      let fotoUrl = 'http://lorempixel.com/640/480'
+      let establecimientosId = this.$store.getters.establecimientoSelected
+      this.$store.dispatch('crearArea', { nombre, actividad, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId })
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'Area creada exitosamente.'
+          this.color = 'success'
+          router.push('dashboard')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    prueba () {
+      let nombre = this.$data.nombre
+      let actividad = this.$data.actividad
+      let metrosCuadrados = this.$data.dimension
+      let descripcionLugar = this.$data.descripcion
+      let fotoUrl = 'http://lorempixel.com/640/480'
+      let establecimientosId = this.$data.establecimiento
+      console.log( {nombre, actividad, metrosCuadrados, descripcionLugar, establecimientosId} )
     }
   }
 }

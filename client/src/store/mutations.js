@@ -31,7 +31,7 @@ export default {
     state.establecimientos = establecimientos
   },
   setEstablecimientoSelected (state, establecimientoSelected) {
-    state.establecimientos = establecimientoSelected
+    state.establecimientoSelected = establecimientoSelected
   },
   setAreaSelected (state, areaSelected) {
     state.areaSelected = areaSelected

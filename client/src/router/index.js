@@ -4,7 +4,6 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import EmpresaCrear from '@/components/EmpresaCrear'
 import PersonasCrear from '@/components/PersonaCrear'
-import AreaCrear from '@/components/AreaCrear'
 import VerEmpresas from '@/components/VerEmpresas'
 import VerPersonas from '@/components/VerPersonas'
 import verAreas from '@/components/verAreas'
@@ -79,12 +78,6 @@ export default new Router({
       path: '/EstablecimientoVer',
       name: 'EstablecimientoVer',
       component: EstablecimientoVer,
-      beforeEnter: AuthGuard
-    },
-    {
-      path: '/crearArea',
-      name: 'crearArea',
-      component: AreaCrear,
       beforeEnter: AuthGuard
     }
   ]
