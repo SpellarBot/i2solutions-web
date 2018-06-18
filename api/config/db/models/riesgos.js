@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     valoracion,
     valoracionLiteral,
     fecha,
-    porcentajeRiesgo
+    porcentajeRiesgo,
+    puestosId
   }) {
     let datos = arguments['0']
     return new Promise((resolve, reject) => {
@@ -59,6 +60,24 @@ module.exports = (sequelize, DataTypes) => {
           return resolve(res)
         })
         .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.BorrarPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.destroy({
+        where: {
+          puestosId: id
+        }})
+        .then((rowDeleted) => {
+          if (rowDeleted > 0) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch((err) => {
           return reject(err)
         })
     })

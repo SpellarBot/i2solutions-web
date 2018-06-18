@@ -93,7 +93,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Puesto Eliminado.'
           this.color = 'success'
-          this.$store.dispatch('getPuestos',this.$store.getters.areaSelected.id)
+          this.$store.dispatch('getPuestos', this.$store.getters.areaSelected.id)
             .then((resp) => {
               console.log('no error')
               router.push('puestos')

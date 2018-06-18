@@ -13,12 +13,15 @@ const API = require('./API_DOCS')
 const models = db.db
 let docs = []
 describe('Puestos', () => {
-  let { puestos, areas } = dump
+  let { puestos, areas, novedades, riesgos, accidentes } = dump
   let puesto = puestos.VALIDOS[0]
   let puesto2 = puestos.VALIDOS[1]
   let puesto3 = puestos.VALIDOS[6]
   let area = areas.VALIDOS[0]
   let area2 = areas.VALIDOS[1]
+  let novedad = novedades.VALIDOS[0]
+  let riesgo = riesgos.VALIDOS[0]
+  let accidente = accidentes.VALIDOS[0]
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
@@ -98,6 +101,10 @@ describe('Puestos', () => {
     let { API_5 } = API
     it('@CP5 OK', async () => {
       let puestosCreada = await models.puestos.Crear(puesto)
+      let puestosId = puestosCreada['id']
+      let novedadCreada = await models.novedades.Crear({ ...novedad, puestosId })
+      let riesgoCreada = await models.riesgos.Crear({ ...riesgo, puestosId })
+      let accidenteCreada = await models.accidentes.Crear({ ...accidente, puestosId })
       let res = await request(app).delete(`/api/web/puestos/${puestosCreada['id']}`)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)

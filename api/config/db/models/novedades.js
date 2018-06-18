@@ -90,5 +90,23 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.BorrarPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.destroy({
+        where: {
+          puestosId: id
+        }})
+        .then((rowDeleted) => {
+          if (rowDeleted > 0) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
   return define
 }
