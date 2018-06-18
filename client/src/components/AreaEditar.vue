@@ -107,6 +107,7 @@ export default {
       areaId: this.$store.getters.areaSelected.id,
       color: '',
       snackbar: false,
+      mensajeSnackbar: '',
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -142,7 +143,7 @@ export default {
           this.color = 'success'
           this.$store.dispatch('getAreas', establecimientoId)
             .then((resp) => {
-              router.push('areas')
+              setTimeout(function () { router.push('areas') }, 2000)
             })
             .catch((err) => {
               this.color = 'error'

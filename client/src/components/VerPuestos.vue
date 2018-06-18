@@ -4,7 +4,7 @@
   <div class="puesto in this.$store.getters.puestos">
     <v-layout>
       <v-flex xs12 sm4 offset-sm4>
-        <h1 class='mb-4'>Empresas:</h1>
+        <h1 class='mb-4'>Puestos de trabajo:</h1>
         <v-card class='mb-4' v-for="puesto in this.$store.getters.puestos" :key="puesto.id">
           <h3>{{ puesto.nombre }}</h3>
           <div>{{ puesto.descripcion }}</div>

@@ -105,9 +105,10 @@ export default {
             this.snackbar = true
             this.mensajeSnackbar = 'Empresa creada exitosamente.'
             this.color = 'success'
+
             this.$store.dispatch('getEmpresas')
               .then((resp) => {
-                router.push('empresas')
+                setTimeout(function () { router.push('empresas') }, 2000)
               })
               .catch((err) => {
                 this.color = 'error'

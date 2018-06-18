@@ -8,9 +8,30 @@
         <h1 class='mb-4'>{{empresa.nombre}}</h1>
         <v-card class='mb-4' v-for="establecimientos in this.$store.getters.establecimientos" :key="establecimientos.id">
           <span v-if="establecimientos.editmode">
-            <input v-model="establecimientos.nombres"/> <br>
-            <input v-model="establecimientos.direccion"/> <br>
-            <input v-model="establecimientos.ruc"/> <br>
+            <v-form v-model="valid">
+            <v-text-field
+              v-model="establecimientos.nombres"
+              label="Nombre"
+              required
+              :rules="[rules.required]"
+            ></v-text-field>
+            <!--input v-model="establecimientos.nombres"/> <br-->
+            <v-text-field
+              v-model="establecimientos.direccion"
+              label="Dirección"
+              required
+              :rules="[rules.required]"
+            ></v-text-field>
+            <!--input v-model="establecimientos.direccion"/> <br-->
+            <v-text-field
+              v-model="establecimientos.ruc"
+              label="RUC"
+              required
+              :rules="[rules.required]"
+              mask="#############"
+            ></v-text-field>
+            <!--input v-model="establecimientos.ruc"/> <br-->
+          </v-form>
           </span>
           <span v-else>
             <h3 v-bind:id="'nombre' + establecimientos.id">{{ establecimientos.nombres }}</h3>
@@ -19,6 +40,7 @@
           </span>
           <span v-if="establecimientos.editmode">
             <v-btn
+            :disabled="!valid"
               @click="save(establecimientos)"
             >
               Guardar
@@ -30,8 +52,7 @@
             >
               Editar
             </v-btn>
-          </span>
-          <v-btn
+            <v-btn
               @click="verArea(establecimientos.id)"
             >
               Ver Areas
@@ -42,6 +63,7 @@
           >
               Eliminar
           </v-btn>
+          </span>
         </v-card>
         <v-btn
             @click="dashboard"
@@ -81,13 +103,18 @@ import router from '../router'
 export default {
   data () {
     return {
+      valid: true,
       active: false,
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
       eliminarDialog: false,
       establecimientoSelectedId: 0,
-      empresa: this.$store.getters.empresaSelected
+      empresa: this.$store.getters.empresaSelected,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
     }
   },
   methods: {
@@ -121,19 +148,24 @@ export default {
       let direccion = establecimiento.direccion
       let ruc = establecimiento.ruc
       let empresasId = establecimiento.id
-      this.$store.dispatch('updateEstablecimiento', { nombres, direccion, ruc, empresasId })
-        .then((resp) => {
-          this.snackbar = true
-          this.mensajeSnackbar = 'establecimiento editado exitosamente.'
-          this.color = 'success'
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
-
-      this.$set(establecimiento, 'editmode', false)
+      if (ruc.length < 13) {
+        this.color = 'error'
+        this.snackbar = true
+        this.mensajeSnackbar = 'El RUC debe contener 13 dígitos.'
+      } else {
+        this.$store.dispatch('updateEstablecimiento', { nombres, direccion, ruc, empresasId })
+          .then((resp) => {
+            this.snackbar = true
+            this.mensajeSnackbar = 'establecimiento editado exitosamente.'
+            this.color = 'success'
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+        this.$set(establecimiento, 'editmode', false)
+      }
     },
     eliminarTrigger (establecimientoId) {
       this.$data.establecimientoSelectedId = establecimientoId
