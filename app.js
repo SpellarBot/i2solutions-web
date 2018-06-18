@@ -23,7 +23,6 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
-const path = require('path')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -40,9 +39,8 @@ require('./api/server.api')(api)
 app.use('/api', api)
 
 // montar cliente
-app.use('/', express.static(path.join(__dirname, 'client/dist')))
-// const client = express()
-// require('./client/client.server')(client)
-// app.use('/', client)
+const client = express()
+require('./client/client.server')(client)
+app.use('/', client)
 
 module.exports = app

@@ -16,6 +16,7 @@ import EstablecimientoCrearDialog from '@/components/EstablecimientoCrear'
 import EstablecimientoVer from '@/components/EstablecimientoVer'
 import VerPuestos from '@/components/VerPuestos'
 import PuestoEditar from '@/components/PuestoEditar'
+import PuestoCrear from '@/components/PuestoCrear'
 
 Vue.use(Router)
 
@@ -90,6 +91,11 @@ export default new Router({
       path: '/editarPuesto',
       name: 'EditarPuesto',
       component: PuestoEditar,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/crearPuesto',
+      name: 'CrearPuesto',
+      component: PuestoCrear,
       beforeEnter: AuthGuard
     }
   ]

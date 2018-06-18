@@ -27,12 +27,18 @@
           </v-dialog>
         </v-card>
         <v-btn
+    v-on:click="crearPuesto = true"
+  >
+    Agregar nuevo puesto
+  </v-btn>
+        <v-btn
             @click="dashboard"
           >
             Regresar
           </v-btn>
       </v-flex>
     </v-layout>
+
   </div>
   <v-snackbar
       :timeout="3000"
@@ -43,19 +49,56 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+    <v-layout row justify-center>
+    <v-dialog v-model="crearPuesto" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Agregar nuevo puesto</span>
+        </v-card-title>
+        <v-card-text>
+              <v-form v-model="valid">
+                <v-text-field
+                  v-model = "nombre"
+                  label="Nombre" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-text-field
+                  v-model = "descripcion"
+                  label="Descripción" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+            </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="crearPuesto = false">Cerrar</v-btn>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Crear</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
 </main>
 </template>
 
 <script>
 import router from '../router'
+
 export default {
   data () {
     return {
+      valid: false,
+      crearPuesto: false,
       dialog: false,
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      id_eliminar: null
+      id_eliminar: null,
+      nombre: '',
+      descripcion: '',
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
     }
   },
   methods: {
@@ -93,6 +136,32 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Puesto Eliminado.'
           this.color = 'success'
+          this.$store.dispatch('getPuestos', this.$store.getters.areaSelected.id)
+            .then((resp) => {
+              console.log('no error')
+              router.push('puestos')
+            })
+            .catch((err) => {
+              this.color = 'error'
+              this.snackbar = true
+              this.mensajeSnackbar = err
+              console.log('error 1')
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    crear () {
+      let nombre = this.$data.nombre
+      let descripcionLugar = this.$data.descripcion
+      let areaId = this.$store.getters.areaSelected.id
+      this.$store.dispatch('crearPuesto', { nombre, descripcionLugar, areaId })
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'Puesto Creado.'
+          this.color = 'success'
+          this.$data.crearPuesto = false
           this.$store.dispatch('getPuestos', this.$store.getters.areaSelected.id)
             .then((resp) => {
               console.log('no error')
