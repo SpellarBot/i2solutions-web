@@ -15,22 +15,21 @@
             Editar
           </v-btn>
           <v-btn
-            @click="dashboard"
-          >
-            Eliminar
-          </v-btn>
-          <v-btn
             @click="verEstablecimientos(empresa)"
           >
             ver establecimientos
           </v-btn>
-          <md-dialog-confirm
-          :md-active.sync="active"
-          md-title="¿Está seguro que quiere eliminar esta empresa?"
-          md-confirm-text="Sí"
-          md-cancel-text="No"
-          @md-confirm="onConfirm(empresa)" />
-          <md-button class="md-primary md-raised" @click="active = true">Eliminar</md-button>
+
+          <v-dialog v-model="dialog" persistent max-width="500">
+            <v-btn slot=activator color="primary" dark @click="setId(empresa)">Eliminar</v-btn>
+            <v-card>
+              <v-card-title class="headline">¿Está seguro que quiere eliminar esta empresa?"</v-card-title>
+              <v-card-actions>
+                <v-btn color= blue flat @click.native="dialog = false">No</v-btn>
+                <v-btn flat @click = "onConfirm(empresa)">Sí</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card>
         <v-btn
             @click="dashboard"
@@ -57,10 +56,11 @@ import router from '../router'
 export default {
   data () {
     return {
-      active: false,
+      dialog: false,
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      id_eliminar: null
     }
   },
   methods: {
@@ -102,9 +102,14 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    setId (empresa) {
+      this.id_eliminar = empresa.id
+    },
     onConfirm (empresa) {
-      let empresaId = empresa.id
-      this.$store.dispatch('deleteEmpresa', empresaId)
+      this.dialog = false
+      let empresaId = this.id_eliminar
+      console.log(empresaId)
+     this.$store.dispatch('deleteEmpresa', empresaId)
         .then((resp) => {
           this.snackbar = true
           this.mensajeSnackbar = 'Empresa Eliminada.'
