@@ -232,7 +232,7 @@ export default {
         })
     },
     verPuestos (areas) {
-      this.$store.dispatch('getAreaSelected',areas)
+      this.$store.dispatch('getAreaSelected', areas)
       let areaId = areas.id
       this.$store.dispatch('getPuestos', areaId)
         .then((resp) => {

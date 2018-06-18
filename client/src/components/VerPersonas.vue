@@ -31,7 +31,6 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          </v-btn>
         </v-card>
         <v-btn
             @click="dashboard"
