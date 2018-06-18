@@ -13,10 +13,6 @@
         Agregar establecimiento
       </v-btn>
       <v-btn flat color="white"
-      @click="crearArea" >
-        Agregar Area
-      </v-btn>
-      <v-btn flat color="white"
       @click="logout" >
         <v-icon>exit_to_app</v-icon>
         Cerrar Sesión

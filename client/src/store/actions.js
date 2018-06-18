@@ -168,11 +168,9 @@ export default {
     })
   },
   getEstablecimientoSoloID ({commit}, establecimientoId) {
-      console.log(establecimientoId)
-      commit('setEstablecimientoSelected', establecimientoId)
+    commit('setEstablecimientoSelected', establecimientoId)
   },
   deleteEmpresa ({commit}, empresaId) {
-    console.log({ empresaId })
     return new Promise((resolve, reject) => {
       Vue.http.delete('/api/web/empresas/' + empresaId)
         .then((resp) => {
@@ -190,9 +188,24 @@ export default {
     })
   },
   deleteEstablecimiento ({commit}, datos) {
-    console.log(datos.datos.establecimientoId)
     return new Promise((resolve, reject) => {
       Vue.http.delete('/api/web/establecimientos/' + datos.datos.establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  deleteArea ({commit}, areasId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/areas/' + areasId)
         .then((resp) => {
           if (resp.body.estado) {
             return resolve()
@@ -277,7 +290,6 @@ export default {
   },
   crearEstablecimento ({commit}, datos) {
     return new Promise((resolve, reject) => {
-      console.log(datos)
       Vue.http.post('/api/web/establecimientos', datos)
         .then((resp) => {
           console.log(resp.body)

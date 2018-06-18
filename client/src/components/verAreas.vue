@@ -28,18 +28,13 @@
             Editar
           </v-btn>
           <v-btn
-            @click="dashboard"
+            @click = "eliminarTrigger(areas.id)"
           >
             Eliminar
           </v-btn>
           </v-container>
 
         </v-card>
-        <v-btn
-            @click="dashboard"
-          >
-            Regresar
-          </v-btn>
       </v-flex>
     </v-layout>
   </div>
@@ -48,15 +43,15 @@
   >
     Agregar nueva área
   </v-btn>
-    <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-      >
+  <v-snackbar
+    :timeout="3000"
+    :multi-line="true"
+    :color="color"
+    :top="true"
+    v-model="snackbar"
+    >
       {{mensajeSnackbar}}
-    </v-snackbar>
+  </v-snackbar>
 
   <v-layout row justify-center>
     <v-dialog v-model="crearArea" persistent max-width="500px">
@@ -68,19 +63,19 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex>
-                <v-text-field 
+                <v-text-field
                   v-model = "nombre"
                   label="Nombre del área" required
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field 
+                <v-text-field
                   v-model = "actividad"
                   label="Actividad" required
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field 
+                <v-text-field
                   v-model = "dimension"
                   label="Metros cuadrados"
                   hint = "20x40m"
@@ -90,7 +85,7 @@
                 </v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field 
+                <v-text-field
                   v-model = "descripcion"
                   label = "Descripción"
                   required
@@ -109,6 +104,19 @@
       </v-card>
     </v-dialog>
   </v-layout>
+  <v-layout row justify-center>
+    <v-dialog v-model="eliminarDialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">Eliminar</v-card-title>
+        <v-card-text>¿Está seguro que quiere eliminar esta Área?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
+          <v-btn color="green darken-1" flat @click = "eliminarArea()">Sí</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
 </main>
 </template>
 
@@ -123,6 +131,8 @@ export default {
       color: '',
       snackbar: false,
       crearArea: false,
+      eliminarDialog: false,
+      AreaIdSelected: 0,
       nombre: '',
       actividad: '',
       dimension: '',
@@ -163,6 +173,26 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    eliminarTrigger (areaId) {
+      this.$data.AreaIdSelected = areaId
+      this.$data.eliminarDialog = true
+    },
+    eliminarArea () {
+      let areasId = this.$data.AreaIdSelected
+      this.$store.dispatch('deleteArea', areasId)
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'Area eliminada exitosamente.'
+          this.color = 'success'
+          this.reloadArea()
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+      this.$data.eliminarDialog = false
+    },
     crear () {
       let nombre = this.$data.nombre
       let actividad = this.$data.actividad
@@ -175,7 +205,8 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Area creada exitosamente.'
           this.color = 'success'
-          router.push('dashboard')
+          this.$data.crearArea = false
+          this.reloadArea()          
         })
         .catch((err) => {
           this.color = 'error'
@@ -183,14 +214,17 @@ export default {
           this.mensajeSnackbar = err
         })
     },
-    prueba () {
-      let nombre = this.$data.nombre
-      let actividad = this.$data.actividad
-      let metrosCuadrados = this.$data.dimension
-      let descripcionLugar = this.$data.descripcion
-      let fotoUrl = 'http://lorempixel.com/640/480'
-      let establecimientosId = this.$data.establecimiento
-      console.log( {nombre, actividad, metrosCuadrados, descripcionLugar, establecimientosId} )
+    reloadArea () {
+      let establecimientoId = this.$data.establecimiento
+      this.$store.dispatch('getAreas', establecimientoId)
+        .then((resp) => {
+          router.push('Areas')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

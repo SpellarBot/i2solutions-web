@@ -31,15 +31,11 @@
               Editar
             </v-btn>
           </span>
-          <md-dialog-confirm
-          :md-active.sync="active"
-          md-title="¿Está seguro que quiere eliminar este establecimiento?"
-          md-confirm-text="Sí"
-          md-cancel-text="No"
-          @md-confirm="borrarEstablecimiento (establecimientos.id)" />
-          <md-button class="md-primary md-raised" @click="active = true">
-            Eliminar
-          </md-button>
+          <v-btn
+              @click = "eliminarTrigger(establecimientos.id)"
+          >
+              Eliminar
+          </v-btn>
           <v-btn
               @click="verArea(establecimientos.id)"
             >
@@ -54,6 +50,19 @@
       </v-flex>
     </v-layout>
   </div>
+  <v-layout row justify-center>
+    <v-dialog v-model="eliminarDialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">Eliminar</v-card-title>
+        <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
+          <v-btn color="green darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
   <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -75,6 +84,8 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
+      eliminarDialog: false,
+      establecimientoSelectedId: 0,
       empresa: this.$store.getters.empresaSelected
     }
   },
@@ -123,7 +134,13 @@ export default {
 
       this.$set(establecimiento, 'editmode', false)
     },
-    borrarEstablecimiento (establecimientoId) {
+    eliminarTrigger (establecimientoId) {
+      this.$data.establecimientoSelectedId = establecimientoId
+      this.$data.eliminarDialog = true
+    },
+    borrarEstablecimiento () {
+      this.$data.eliminarDialog = false
+      let establecimientoId = this.$data.establecimientoSelectedId
       let datos = { establecimientoId }
       this.$store.dispatch('deleteEstablecimiento', { datos })
         .then((resp) => {
