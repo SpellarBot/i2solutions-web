@@ -25,8 +25,8 @@
             <v-card>
               <v-card-title class="headline">¿Está seguro que quiere eliminar esta empresa?"</v-card-title>
               <v-card-actions>
-                <v-btn color= blue flat @click.native="dialog = false">No</v-btn>
-                <v-btn flat @click = "onConfirm(empresa)">Sí</v-btn>
+                <v-btn flat @click.native="dialog = false">No</v-btn>
+                <v-btn color= blue  flat @click = "onConfirm(empresa)">Sí</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
