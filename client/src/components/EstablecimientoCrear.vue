@@ -33,7 +33,9 @@
             <v-text-field
               v-model="ruc"
               label="RUC"
+              :rules="[rules.required]"
               required
+              mask="#############"
             ></v-text-field>
           </v-form>
           <v-btn
@@ -72,9 +74,10 @@ export default {
       color: '',
       idEmpresaMatriz: '',
       snackbar: false,
-      empresas: this.$store.getters.empresas
-      // razonSocial: '',
-      // actividadComercial: ''
+      empresas: this.$store.getters.empresas,
+      rules: {
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      }
 
     }
   },
@@ -85,7 +88,11 @@ export default {
       let ruc = this.$data.ruc
       let empresasId = this.$data.idEmpresaMatriz
       let datos = { nombres, direccion, ruc, empresasId }
-      console.log(datos)
+      if (ruc.length < 13) {
+        this.color = 'error'
+        this.snackbar = true
+        this.mensajeSnackbar = 'El RUC debe contener 13 dígitos.'
+      } else {
       this.$store.dispatch('crearEstablecimento', datos)
         .then((resp) => {
           this.snackbar = true
@@ -98,6 +105,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+      }
     },
     logout () {
       this.$store.dispatch('logout')
