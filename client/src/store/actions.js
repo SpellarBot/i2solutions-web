@@ -172,6 +172,7 @@ export default {
       commit('setEstablecimientoSelected', establecimientoId)
   },
   deleteEmpresa ({commit}, empresaId) {
+    console.log({ empresaId })
     return new Promise((resolve, reject) => {
       Vue.http.delete('/api/web/empresas/' + empresaId)
         .then((resp) => {
