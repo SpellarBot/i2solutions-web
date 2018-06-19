@@ -2,6 +2,7 @@ const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./areas.controller')({ responses, db })
 module.exports = (app) => {
+  // obtener las areas de un establecimiento
   app.route('/areas/establecimientos/:establecimientosId')
     .get((req, res) => {
       let { establecimientosId } = req.params
@@ -14,6 +15,7 @@ module.exports = (app) => {
       })
     })
 
+  // obtener un area
   app.route('/areas/:areasId')
     .get((req, res) => {
       let { areasId } = req.params
@@ -26,6 +28,7 @@ module.exports = (app) => {
       })
     })
 
+  // crear un area
   app.route('/areas')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
@@ -37,6 +40,7 @@ module.exports = (app) => {
       })
     })
 
+  // actualizar un area
   app.route('/areas/:areasId')
     .put((req, res) => {
       let { areasId } = req.params
@@ -51,6 +55,7 @@ module.exports = (app) => {
       })
     })
 
+  // eliminar un area
   app.route('/areas/:areasId')
     .delete((req, res) => {
       let { areasId } = req.params

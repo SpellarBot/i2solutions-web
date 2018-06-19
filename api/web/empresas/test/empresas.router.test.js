@@ -1,13 +1,20 @@
 const request = require('supertest')
 const expect = require('chai').expect
 const rfr = require('rfr')
+const Ajv = require('ajv')
+const ajv = new Ajv({ allErrors: true, jsonPointers: true })
+require('ajv-errors')(ajv)
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')
 const dump = rfr('api/config/dump')
+const utils = rfr('api/utils')
 const API = require('./API_DOCS')
+const SCHEMA = require('../API_SCHEMA')
 const models = db.db
 let docs = []
+const schema = utils.schemaFormato
+
 describe('EMPRESAS', () => {
   let { empresas, establecimientos } = dump
   let empresa = empresas.VALIDOS[0]
@@ -46,10 +53,19 @@ describe('EMPRESAS', () => {
 
   // al crear una empresa se debe crear el establecimiento
   // el establecimientos debe tener como nombre 'matriz'
-  describe('Crear', () => {
+  describe('API_2 Crear una empresa', () => {
     const { API_2 } = API
-    it('@CP3 una empresa creada', async () => {
-      let req = { ...empresa, direccion: establecimiento['direccion'], ruc: establecimiento['ruc'] }
+    const { API_2_SCHEMA } = SCHEMA
+    // clases de equivalencia
+    // nombre
+    // actividadComercial
+    // razonSocial
+    // direccion
+    // ruc
+
+    // intersecciones de clases de equivalencia
+    it('@ICE_API_2[0] Crea una empresa exitosamente', async () => {
+      let req = { ...empresa, direccion: 'Plaza Mayor', ruc: '1702365486001' }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
@@ -57,6 +73,46 @@ describe('EMPRESAS', () => {
       expect(res.body.datos['establecimiento']['id']).to.equal(1)
       expect(res.body.datos['establecimiento']['nombres']).to.equal('matriz')
       generatorDocs.OK({ docs, doc: API_2, res, req })
+    })
+
+    it('@ICE_API_2[1] nombre no valido', async () => {
+      let { nombre, actividadComercial, razonSocial } = empresa
+      let req = { nombre: '', actividadComercial, razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001' }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+    })
+
+    it('@ICE_API_2[2] actividadComercial no valido', async () => {
+      let { nombre, actividadComercial, razonSocial } = empresa
+      let req = { nombre, actividadComercial: '', razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001' }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+    })
+
+    it('@ICE_API_2[3] razonSocial no valido', async () => {
+      let { nombre, actividadComercial, razonSocial } = empresa
+      let req = { nombre, actividadComercial, razonSocial: '', direccion: 'Plaza Mayor', ruc: '1702365486001' }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+    })
+
+    it('@ICE_API_2[4] direccion no valido', async () => {
+      let { nombre, actividadComercial, razonSocial } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: '', ruc: '1702365486001' }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+    })
+
+    it('@ICE_API_2[5] ruc no valido', async () => {
+      let { nombre, actividadComercial, razonSocial } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: '', ruc: '172365486001' }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
     })
   })
 

@@ -2,6 +2,7 @@ const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./establecimientos.controller')({ responses, db })
 module.exports = (app) => {
+  // obtener establecimientos por empresa
   app.route('/establecimientos/:empresasId')
     .get((req, res) => {
       let { empresasId } = req.params
@@ -14,6 +15,7 @@ module.exports = (app) => {
       })
     })
 
+  // crear una empresa
   app.route('/establecimientos')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
@@ -25,19 +27,7 @@ module.exports = (app) => {
       })
     })
 
-  // GET ONE
-  // app.route('/establecimientos/:establecimientosId')
-  //   .get((req, res) => {
-  //     let { establecimientosId } = req.params
-  //     Controller.Obtener({ id: establecimientosId }).then((resp) => {
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     }).catch(resp => {
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     })
-  //   })
-
+  // obtener un establecimiento
   app.route('/establecimientos/:establecimientosId')
     .put((req, res) => {
       let { establecimientosId } = req.params
@@ -51,6 +41,7 @@ module.exports = (app) => {
       })
     })
 
+  // eliminar un establecimiento
   app.route('/establecimientos/:establecimientosId')
     .delete((req, res) => {
       let { establecimientosId } = req.params

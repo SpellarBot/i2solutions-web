@@ -1,6 +1,8 @@
 const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./empresas.controller')({ responses, db })
+const schema = require('./API_SCHEMA')
+const validar = require('../../utils').schemaFormato
 module.exports = (app) => {
   // identificador: API_1
   // obtener todas las empresas
@@ -32,13 +34,21 @@ module.exports = (app) => {
   // crear una empresa
   app.route('/empresas')
     .post((req, res) => {
-      Controller.Crear(req.body).then((resp) => {
+      let { BODY } = schema.API_2_SCHEMA
+      let { err, mensaje } = validar(BODY, req.body)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
         res.status(resp.codigoEstado)
         res.json(resp)
-      }).catch(resp => {
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      })
+      } else {
+        Controller.Crear(req.body).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
     })
 
   // identificador: API_4

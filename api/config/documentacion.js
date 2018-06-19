@@ -20,11 +20,17 @@ function OK ({ docs, doc, res, req }) {
   docs.push(doc)
 }
 
-function EQUI ({ archivo, nombre, datos }) {
-  // del.sync([path.join(__dirname, `../../docs/${nombre}/${archivo}`)], { force: true })
+// function OKEQUI ({ descripcion, equivalencia, interseccion, res, req }) {
+//   doc['interseccion'].push({ descripcion, response: toString(res.body), request: toString(req), descripcion })
+// }
+
+function EQUI ({ nombre, datos }) {
+  let ruta = path.join(__dirname, `../../docs/${nombre.toLowerCase()}/${nombre.toLowerCase()}.equivalencia.md`)
+  del.sync([ruta], { force: true })
   nunjucks.configure(path.join(__dirname, 'templates'), { autoescape: false })
   const res = nunjucks.render(path.join(__dirname, 'templates/equivalencia.template.md'), { datos, nombre, blockInicio: '{%', blockFin: '%}' })
   console.log(res)
+  // fs.appendFileSync(ruta, res)
 }
 
 function ERROR ({docs, doc, res, req, nombre, descripcion}) {

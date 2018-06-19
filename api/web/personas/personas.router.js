@@ -2,6 +2,7 @@ const responses = require('../../responses')
 const db = require('../../config/db').db
 const Controller = require('./personas.controller')({ responses, db })
 module.exports = (app) => {
+  // obtener todas las personas
   app.route('/personas')
     .get((req, res) => {
       Controller.ObtenerTodos().then((resp) => {
@@ -13,6 +14,7 @@ module.exports = (app) => {
       })
     })
 
+  // obtener una persona
   app.route('/personas/:personasId')
     .get((req, res) => {
       let { personasId } = req.params
@@ -25,6 +27,7 @@ module.exports = (app) => {
       })
     })
 
+  // crear una persona
   app.route('/personas')
     .post((req, res) => {
       Controller.Crear(req.body).then((resp) => {
@@ -36,6 +39,7 @@ module.exports = (app) => {
       })
     })
 
+  // actualizar una persona
   app.route('/personas/:personasId')
     .put((req, res) => {
       let { personasId } = req.params
@@ -48,6 +52,7 @@ module.exports = (app) => {
       })
     })
 
+  // borrar una persona
   app.route('/personas/:personasId')
     .delete((req, res) => {
       let { personasId } = req.params
@@ -60,6 +65,7 @@ module.exports = (app) => {
       })
     })
 
+  // obtener personas por establecimiento
   app.route('/personas/establecimientos/:establecimientosId')
     .get((req, res) => {
       let { establecimientosId } = req.params

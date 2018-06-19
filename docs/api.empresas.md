@@ -15,9 +15,9 @@ Obtener todas las empresas de i2Solutions
       "id": 1,
       "nombre": "Zapata S.A.",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
-      "razonSocial": "1235468789",
-      "fechaCreacion": "2018-06-18 21:57:32.401 +00:00",
-      "fechaActualizacion": "2018-06-18 21:57:32.401 +00:00"
+      "razonSocial": "La casa",
+      "fechaCreacion": "2018-06-19 04:30:45.474 +00:00",
+      "fechaActualizacion": "2018-06-19 04:30:45.474 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -40,9 +40,9 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "1235468789",
-  "direccion": "22050 Felipe Rampa",
-  "ruc": "3245547449"
+  "razonSocial": "La casa",
+  "direccion": "Plaza Mayor",
+  "ruc": "1702365486001"
 }
 ```
 
@@ -55,17 +55,17 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
     "id": 1,
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
-    "razonSocial": "1235468789",
-    "fechaActualizacion": "2018-06-18T21:57:32.529Z",
-    "fechaCreacion": "2018-06-18T21:57:32.529Z",
+    "razonSocial": "La casa",
+    "fechaActualizacion": "2018-06-19T04:30:45.554Z",
+    "fechaCreacion": "2018-06-19T04:30:45.554Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
-      "direccion": "22050 Felipe Rampa",
-      "ruc": "3245547449",
+      "direccion": "Plaza Mayor",
+      "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-06-18T21:57:32.533Z",
-      "fechaCreacion": "2018-06-18T21:57:32.533Z"
+      "fechaActualizacion": "2018-06-19T04:30:45.556Z",
+      "fechaCreacion": "2018-06-19T04:30:45.556Z"
     }
   },
   "codigoEstado": 200
@@ -95,9 +95,9 @@ __PUT__ __/api/web/empresas/:empresasId__
   "id": 1,
   "nombre": "Nombre cambiado",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "1235468789",
-  "fechaActualizacion": "2018-06-18T21:57:32.593Z",
-  "fechaCreacion": "2018-06-18T21:57:32.593Z"
+  "razonSocial": "La casa",
+  "fechaActualizacion": "2018-06-19T04:30:45.770Z",
+  "fechaCreacion": "2018-06-19T04:30:45.770Z"
 }
 ```
 
@@ -124,9 +124,9 @@ _request_
   "id": 1,
   "nombre": "Nombre cambiado",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "1235468789",
-  "fechaActualizacion": "2018-06-18T21:57:32.648Z",
-  "fechaCreacion": "2018-06-18T21:57:32.648Z"
+  "razonSocial": "La casa",
+  "fechaActualizacion": "2018-06-19T04:30:45.814Z",
+  "fechaCreacion": "2018-06-19T04:30:45.814Z"
 }
 ```
 
@@ -211,17 +211,17 @@ __GET__ __/api/web/empresas/:empresasId__
     "id": 1,
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
-    "razonSocial": "1235468789",
-    "fechaCreacion": "2018-06-18T21:57:32.811Z",
-    "fechaActualizacion": "2018-06-18T21:57:32.811Z",
+    "razonSocial": "La casa",
+    "fechaCreacion": "2018-06-19T04:30:45.924Z",
+    "fechaActualizacion": "2018-06-19T04:30:45.924Z",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
-        "ruc": "3245547449",
-        "fechaCreacion": "2018-06-18 21:57:32.813 +00:00",
-        "fechaActualizacion": "2018-06-18 21:57:32.813 +00:00",
+        "ruc": "0923651688001",
+        "fechaCreacion": "2018-06-19 04:30:45.926 +00:00",
+        "fechaActualizacion": "2018-06-19 04:30:45.926 +00:00",
         "empresasId": 1
       },
       {
@@ -229,8 +229,8 @@ __GET__ __/api/web/empresas/:empresasId__
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "6886107230",
-        "fechaCreacion": "2018-06-18 21:57:32.817 +00:00",
-        "fechaActualizacion": "2018-06-18 21:57:32.817 +00:00",
+        "fechaCreacion": "2018-06-19 04:30:45.927 +00:00",
+        "fechaActualizacion": "2018-06-19 04:30:45.927 +00:00",
         "empresasId": 1
       }
     ]
