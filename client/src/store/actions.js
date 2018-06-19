@@ -234,9 +234,9 @@ export default {
         })
     })
   },
-  getEmpresaSola ({commit}, empresaId) {
+  getEmpresaSola ({commit}, empresasId) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/web/empresas/' + empresaId)
+      Vue.http.get('/api/web/empresas/' + empresasId)
         .then((resp) => {
           if (resp.body.estado) {
             commit('setEmpresaSelected', resp.body.datos)
@@ -345,7 +345,7 @@ export default {
       Vue.http.get('/api/web/personas/' + personasId)
         .then((resp) => {
           if (resp.body.estado) {
-            commit('setPersoaSelected', resp.body.datos)
+            commit('setPersonaSelected', resp.body.datos)
             return resolve()
           } else {
             commit('setError', resp.body.datos)
