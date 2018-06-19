@@ -43,7 +43,7 @@
               required
             ></v-text-field>
             <v-select
-              :items="roles1"
+              :items="roles"
               v-model="rol"
               prepend-icon="vpn_key"
               label="Rol"
@@ -80,7 +80,6 @@
 
 <script>
 import router from '../router'
-
 // import { throws } from 'assert'
 export default {
   data () {
@@ -94,6 +93,7 @@ export default {
       correo: this.$store.getters.personaSelected.correo,
       color: '',
       snackbar: false,
+      mensajeSnackbar: '',
       roles: [{
         value: 'Jefe de Seguridad',
         text: 'Jefe de Seguridad'
@@ -118,18 +118,18 @@ export default {
       ]
     }
   },
-  watch: {
+  /* watch: {
     menu (val) {
       val && this.$nextTick(() => (this.$refs.picker.activePicker = 'Año'))
     }
-  },
+  }, */
   methods: {
     limpiar () {
       this.$refs.form.reset()
     },
-    save (date) {
+    /* save (date) {
       this.$refs.menu.save(date)
-    },
+    }, */
     enviar () {
       if (this.$refs.form.validate()) {
         let correo = this.$data.correo
@@ -138,12 +138,21 @@ export default {
         let usuario = this.$data.usuario
         let rol = this.$data.rol
         let personasId = this.$store.getters.personaSelected.id
+        console.log(personasId)
         this.$store.dispatch('updatePersona', { personasId, correo, telefono, clave, usuario, rol })
           .then((resp) => {
             this.snackbar = true
             this.mensajeSnackbar = 'Persona editada exitosamente.'
             this.color = 'success'
-            router.push('dashboard')
+            this.$store.dispatch('getPersonas')
+              .then((resp) => {
+                setTimeout(function () { router.push('personas') }, 2000)
+              })
+              .catch((err) => {
+                this.color = 'error'
+                this.snackbar = true
+                this.mensajeSnackbar = err
+              })
           })
           .catch((err) => {
             this.color = 'error'

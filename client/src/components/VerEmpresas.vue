@@ -9,7 +9,6 @@
           <h3>{{ empresa.nombre }}</h3>
           <div>{{ empresa.actividadComercial }}</div>
           <div>{{ empresa.razonSocial }}</div>
-          <div>{{ empresa.ruc }}</div>
           <v-btn
           :class="empresa.nombre"
             @click="editarEmpresa(empresa)"

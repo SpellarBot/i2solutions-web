@@ -345,7 +345,7 @@ export default {
       Vue.http.get('/api/web/personas/' + personasId)
         .then((resp) => {
           if (resp.body.estado) {
-            commit('setPersoaSelected', resp.body.datos)
+            commit('setPersonaSelected', resp.body.datos)
             return resolve()
           } else {
             commit('setError', resp.body.datos)
