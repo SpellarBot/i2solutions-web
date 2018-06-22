@@ -92,7 +92,7 @@ export default {
         this.color = 'error'
         this.snackbar = true
         this.mensajeSnackbar = 'El RUC debe contener 13 dígitos.'
-      } if (this.validadorRuc(ruc)) {
+      } if (this.validador_ruc_y_cedula(ruc)) {
         this.$store.dispatch('crearEstablecimento', datos)
           .then((resp) => {
             this.snackbar = true
@@ -116,7 +116,7 @@ export default {
       console.log('nombre:' + this.$data.nombre)
     },
     // Validador de cédula y ruc
-    validadorRuc (ruc) {
+    validador_ruc_y_cedula (identificacion) {
       let suma = 0
       let residuo = 0
       let pri = false
@@ -128,52 +128,42 @@ export default {
       let i
       let p1, p2, p3, p4, p5, p6, p7, p8, p9
 
-      for (i = 0; i < ruc.length && ok === 1; i++) {
-        let n = parseInt(ruc.charAt(i))
+      for (i = 0; i < identificacion.length && ok === 1; i++) {
+        let n = parseInt(identificacion.charAt(i))
         if (isNaN(n)) ok = 0
       }
       if (ok === 0) {
         this.color = 'error'
-        this.mensajeSnackbar = 'No puede ingresar caracteres en el número'
+        this.mensajeSnackbar = 'No puede ingresar caracteres en cédula'
         return false
       }
 
-      if (ruc.length < 10) {
+      if (identificacion.length < 10) {
         this.color = 'error'
-        this.mensajeSnackbar = 'El número ingresado no es válido'
+        this.mensajeSnackbar = 'Dato ingresado no es válido'
         return false
       }
 
       /* Los primeros dos digitos corresponden al codigo de la provincia */
-      let provincia = +ruc.substring(0, 2)
+      let provincia = +identificacion.substring(0, 2)
       console.log(provincia > numeroProvincias)
       if (provincia < 1 || provincia > numeroProvincias) {
         this.color = 'error'
-        this.mensajeSnackbar = 'El código de la provincia (dos primeros dígitos) es inválido'
+        this.mensajeSnackbar = 'El código de la provincia (dos primeros dígitos)(cédula o ruc)  es inválido'
         this.snackbar = true
         return false
       }
       /* Aqui almacenamos los digitos de la cedula en variables. */
-      let d1 = +ruc.substring(0, 1)
-      let d2 = +ruc.substring(1, 2)
-      let d3 = +ruc.substring(2, 3)
-      let d4 = +ruc.substring(3, 4)
-      let d5 = +ruc.substring(4, 5)
-      let d6 = +ruc.substring(5, 6)
-      let d7 = +ruc.substring(6, 7)
-      let d8 = +ruc.substring(7, 8)
-      let d9 = +ruc.substring(8, 9)
-      let d10 = +ruc.substring(9, 10)
-      console.log(d1)
-      console.log(d2)
-      console.log(d3)
-      console.log(d4)
-      console.log(d5)
-      console.log(d6)
-      console.log(d7)
-      console.log(d8)
-      console.log(d9)
-      console.log(d10)
+      let d1 = +identificacion.substring(0, 1)
+      let d2 = +identificacion.substring(1, 2)
+      let d3 = +identificacion.substring(2, 3)
+      let d4 = +identificacion.substring(3, 4)
+      let d5 = +identificacion.substring(4, 5)
+      let d6 = +identificacion.substring(5, 6)
+      let d7 = +identificacion.substring(6, 7)
+      let d8 = +identificacion.substring(7, 8)
+      let d9 = +identificacion.substring(8, 9)
+      let d10 = +identificacion.substring(9, 10)
       /* El tercer digito es: */
       /* 9 para sociedades privadas y extranjeros   */
       /* 6 para sociedades publicas */
@@ -197,7 +187,7 @@ export default {
         p9 = d9 * 2; if (p9 >= 10) p9 -= 9
         modulo = 10
       }
-      /* Solo para sociedades publicas (modulo 11) */
+      /* Solo para sociedades públicas (modulo 11) */
       /* Aqui el digito verficador esta en la posicion 9, en las otras 2 en la pos. 10 */
       if (d3 === 6) {
         pub = true
@@ -233,14 +223,14 @@ export default {
 
       /* ahora comparamos el elemento de la posicion 10 con el dig. ver. */
       if (pub === true) {
-        if (digitoVerificador !== d9) {
+        if (digitoVerificador !== d9 && identificacion.length === 13) {
           this.color = 'error'
           this.mensajeSnackbar = 'El ruc de la empresa del sector público es incorrecto.'
           this.snackbar = true
           return false
         }
         /* El ruc de las empresas del sector publico terminan con 0001 */
-        if (ruc.substr(9, 14) !== '0001') {
+        if (identificacion.substr(9, 14) !== '0001' && identificacion.length === 13) {
           this.color = 'error'
           this.mensajeSnackbar = 'El ruc de la empresa del sector público debe terminar con 0001'
           this.snackbar = true
@@ -249,13 +239,13 @@ export default {
       }
 
       if (pri === true) {
-        if (digitoVerificador !== d10) {
+        if (digitoVerificador !== d10 && identificacion.length === 13) {
           this.color = 'error'
           this.mensajeSnackbar = 'El ruc de la empresa del sector privado es incorrecto.'
           this.snackbar = true
           return false
         }
-        if (ruc.substr(10, 14) !== '001') {
+        if (identificacion.substr(10, 14) !== '001' && identificacion.length === 13) {
           this.color = 'error'
           this.mensajeSnackbar = 'El ruc de la empresa del sector privado debe terminar con 001'
           this.snackbar = true
@@ -263,13 +253,13 @@ export default {
         }
       }
       if (nat === true) {
-        if (digitoVerificador !== d10) {
+        if (digitoVerificador !== d10 && identificacion.length === 10) {
           this.color = 'error'
           this.mensajeSnackbar = 'El número de cédula de la persona natural es incorrecto.'
           this.snackbar = true
           return false
         }
-        if (ruc.length > 10 && ruc.substr(10, 14) !== '001') {
+        if (identificacion.length > 10 && identificacion.substr(10, 14) !== '001') {
           this.color = 'error'
           this.mensajeSnackbar = 'El ruc de la persona natural debe terminar con 001'
           this.snackbar = true
