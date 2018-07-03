@@ -411,7 +411,7 @@ export default {
   },
   updatePersona ({commit}, {personasId, correo, telefono, clave, usuario, rol}) {
     return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/personas/' + personasId, {correo, telefono, clave, usuario, rol})
+      Vue.http.put('/api/web/personas/' + personasId, { correo, telefono, clave, usuario, rol })
         .then((resp) => {
           if (resp.body.estado) {
             console.log('done')

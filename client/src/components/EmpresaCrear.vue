@@ -70,7 +70,7 @@
 
 <script>
 import router from '../router'
-// import { error } from 'util';
+
 export default {
   data () {
     return {
