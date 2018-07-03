@@ -1,63 +1,98 @@
 # Api {{nombre}}
 
-{%- for ed in datos %}
-## {{ ed.nombre }}[{{ ed.codigo }}]
+{%- for nombre, ed in datos %}
+## {{ ed.nombre }}
 
-__{{ ed.metodo }}__ __{{ ed.url }}__
+> Código: {{ ed.codigo }}
 
-{{ ed.descripcion }}
+> Descripción: {{ ed.descripcion }}
 
-### Clases de equivalencia
-{%- set index = 0 %}
-|        | CE        | Descripcion | Validez  |
-|--------|-----------|-------------|----------|
+> Url : {{ed.url}}
 
+{%- if ed.body or ed.params %}
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
 {%- for body in ed.body %}
-| {{body.nombre}} | CE_{{ed.codigo}}[{{index}}]|{{body.descripcion}}| valido |
-{%- set index = index + 1 %}
-|   | CE_{{ed.codigo}}[{{index}}]|!{{body.descripcion}}| <span style="color: red;">invalido</span> |
-{%- set index = index + 1 %}
-{% endfor %}
-
+	{%- if body.casos and body.casos.length != 0 %}
+		{%- for caso in body.casos %}
+			<tr {%- if not caso.valido %} style='background-color: #EC7063' {% else %} style='background-color: #82E0AA' {% endif %}>
+				<td> {{body.nombre}}</td>
+				<td> <a id='CE_{{ed.codigo}}[{{caso.codigo}}]'>CE_{{ed.codigo}}[{{caso.codigo}}]</a> </td>
+				<td> {{caso.descripcion}}</td>
+				<td>{%- if caso.valido %} válido {% else %} invalido {% endif %}</td>
+			</tr>
+			{%- set index = index + 1 %}
+		{%- endfor %}
+	{%- endif %}
+{%- endfor %}
 {%- for param in ed.params %}
-| {{param.nombre}} | CE_{{ed.codigo}}[{{index}}]|{{param.descripcion}}| valido |
-{%- set index = index + 1 %}
-|   | CE_{{ed.codigo}}[{{index}}]|!{{param.descripcion}}| <span style="color: red;">invalido</span> |
-{%- set index = index + 1 %}
-{% endfor %}
+	{%- if param.casos and param.casos.length != 0 %}
+		{%- for caso in param.casos %}
+			<tr {%- if not caso.valido %} style='background-color: #EC7063' {% else %} style='background-color: #82E0AA' {% endif %}>
+				<td>  {{param.nombre}} </td>
+				<td> <a id='CE_{{ed.codigo}}[{{caso.codigo}}]'>CE_{{ed.codigo}}[{{caso.codigo}}]</a> </td>
+				<td>{{caso.descripcion}}</td>
+				<td> {%- if caso.valido %} válido {% else %} invalido {% endif %} </td>
+			</tr>
+		{%- endfor %}
+	{%- endif %}
+{%- endfor %}
+</table>
 
-### Intersección de clases de equivalencia
-{%- set index = 0 %}
-{%- for interseccion in ed.intersecciones %}
-##### ICE_{{ed.codigo}}[{{index}}]
+{%- endif %}
 
-* Clases de equivalencia
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+{%- for codigo, interseccion in ed.intersecciones %}
+
+__ICE_{{ed.codigo}}[{{codigo}}]__
 
 {{ interseccion.descripcion }}
 
-|  CE      |  Codigo       | tipo |
-|--------|-----------|
-| nombre | CE_API_2[1] | body |
-| actividadComercial| CE_API_2[1] | body |
-| razonSocial | CE_API_2[1] | body |
-| direccion | CE_API_2[1] | body |
-| ruc |CE_API_2[1] | body |
-| empresasId | CE_API_2[1] | params |
+{%- if interseccion.body and interseccion.params %}
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+{%- for nombre, body in interseccion.body %}
+  <tr>
+    <td>{{nombre}}</td>
+    <td><a href="#CE_{{ed.codigo}}[{{body.codigo}}]"> CE_{{ed.codigo}}[{{body.codigo}}]</a></td>
+    <td>{{body.valor}}</td>
+  </tr>
+{%- endfor %}
+{%- for nombre, param in interseccion.params %}
+  <tr>
+    <td>{{nombre}}</td>
+    <td><a href="#CE_{{ed.codigo}}[{{body.codigo}}]"> CE_{{ed.codigo}}[{{param.codigo}}]</a></td>
+    <td>{{param.valor}}</td>
+  </tr>
+{%- endfor %}
+</table>
+
+{%- endif %}
 
 __Datos prueba__
 
+_url_ 
 
-_url_ {{interseccion.url}}
+> {{ed.url}}
 
-_params_ 
+{{ ed.metodo }} {{interseccion.url}}
 
-| Nombre       | Prueba    |
-| :--------- | :------ |
-    {%- for params in interseccion.params %}
-| {{params.nombre}} | {{params.valor}} |
-    {% endfor %}
-
-_request_
+_request o body_
 ```js
 {{interseccion.request}}
 ```
@@ -73,5 +108,6 @@ _response_
 {%- set index = index + 1 %}
 {% endfor %}
 
+___
 
 {% endfor %}

@@ -33,6 +33,7 @@
     "body-parser": "^1.18.2",
     "co": "^4.6.0",
     "cors": "^2.8.4",
+    "exceljs": "^1.4.13",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
     "knex": "^0.14.6",
@@ -51,7 +52,8 @@
     "vue-resource": "^1.5.1",
     "vuetify": "^1.0.18",
     "vuex": "^3.0.1",
-    "winston": "^2.4.0"
+    "winston": "^2.4.0",
+    "xlsx": "^0.13.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -68,21 +70,25 @@
     "eslint-plugin-standard": "^3.0.1",
     "faker": "^4.1.0",
     "gitbook-cli": "^2.3.2",
+    "html-pdf": "^2.2.0",
     "json-schema-faker": "^0.5.0-rc15",
     "jsonfile": "^4.0.0",
     "jwt-decode": "^2.2.0",
     "lolex": "^2.7.0",
+    "markdown-pdf": "^8.1.1",
     "mocha": "^4.1.0",
     "mochawesome": "^3.0.1",
     "nodemon": "^1.13.3",
     "npm-run-all": "^4.1.2",
     "nunjucks": "^3.1.2",
     "nyc": "^11.4.1",
+    "remarkable": "^1.7.1",
     "sequelize-cli": "^4.0.0",
     "sinon": "^5.0.10",
     "sqlite3": "^4.0.0",
     "standard": "^10.0.3",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "wkhtmltopdf": "^0.3.4"
   },
   "nyc": {
     "exclude": [

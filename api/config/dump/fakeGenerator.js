@@ -2,6 +2,7 @@
 const faker = require('faker')
 // const jsonfile = require('jsonfile')
 // const path = require('path')
+faker.seed(123)
 faker.locale = 'es'
 const conexion = require('../db')
 const random = () => {

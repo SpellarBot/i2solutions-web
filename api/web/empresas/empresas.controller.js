@@ -40,8 +40,12 @@ module.exports = ({ responses, db }) => {
             let empresa = resp[1]
             let establecimientos = resp[0]
             let datos = JSON.parse(JSON.stringify(empresa))
-            datos['establecimientos'] = establecimientos
-            resolve(responses.OK(datos))
+            if (datos !== null) {
+              datos['establecimientos'] = establecimientos
+              return resolve(responses.OK(datos))
+            } else {
+              return resolve(responses.NO_OK('La empresa no existe'))
+            }
           }).catch((err) => {
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)
