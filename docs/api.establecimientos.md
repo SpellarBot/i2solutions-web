@@ -1,50 +1,5 @@
 # Api Establecimientos
 
-## Obtener todos los establecimientos de una empresa
-
-__GET__ __/api/web/establecimientos/:empresasId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| empresasId | Number |   ---   |
-	
-
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": [
-    {
-      "id": 1,
-      "nombres": "matriz",
-      "direccion": "22050 Felipe Rampa",
-      "ruc": "0923651688001",
-      "fechaCreacion": "2018-07-03 00:40:13.504 +00:00",
-      "fechaActualizacion": "2018-07-03 00:40:13.504 +00:00",
-      "empresasId": 1
-    },
-    {
-      "id": 2,
-      "nombres": "Lira - Barajas",
-      "direccion": "0119 Laboy Mercado",
-      "ruc": "6886107230",
-      "fechaCreacion": "2018-07-03 00:40:13.506 +00:00",
-      "fechaActualizacion": "2018-07-03 00:40:13.506 +00:00",
-      "empresasId": 1
-    }
-  ],
-  "codigoEstado": 200
-}
-```
-
-
-___
-
-
-
 ## Crear un establecimiento
 
 __POST__ __/api/web/establecimientos__
@@ -80,8 +35,8 @@ __POST__ __/api/web/establecimientos__
     "direccion": "22050 Felipe Rampa",
     "ruc": "0923651688001",
     "empresasId": 1,
-    "fechaActualizacion": "2018-07-03T00:40:13.596Z",
-    "fechaCreacion": "2018-07-03T00:40:13.596Z"
+    "fechaActualizacion": "2018-07-04T01:53:04.392Z",
+    "fechaCreacion": "2018-07-04T01:53:04.392Z"
   },
   "codigoEstado": 200
 }
@@ -115,9 +70,10 @@ __PUT__ __/api/web/establecimientos/:establecimientosId__
 
 ```json
 {
-  "nombres": "matriz",
+  "nombres": "Empresa editada",
   "direccion": "22050 Felipe Rampa",
-  "ruc": "0923651688001"
+  "ruc": "0923651688001",
+  "empresasId": 1
 }
 ```
 

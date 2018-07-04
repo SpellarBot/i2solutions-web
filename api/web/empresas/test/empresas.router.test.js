@@ -37,7 +37,7 @@ describe('EMPRESAS', () => {
     await db.Limpiar()
   })
 
-  describe('API_1 Obtener todas las empresas', () => {
+  describe('API_1 OBTENER TODAS', () => {
     const { API_1 } = API
     let { API_1_EQUI } = EQUI
     let codigoApi = 'API_1'
@@ -59,7 +59,7 @@ describe('EMPRESAS', () => {
     })
   })
 
-  describe('API_2 Crear una empresa', () => {
+  describe('API_2 CREAR', () => {
     const { API_2 } = API
     let { API_2_EQUI } = EQUI
     const codigoApi = 'API_2'
@@ -197,7 +197,7 @@ describe('EMPRESAS', () => {
 
   })
 
-  describe('API_3 Actualizar', () => {
+  describe('API_3 ACTUALIZAR', () => {
     const { API_3 } = API
     let { API_3_EQUI } = EQUI
     const codigoApi = 'API_3'
@@ -350,7 +350,7 @@ describe('EMPRESAS', () => {
     })
   })
 
-  describe('API_4 Eliminar', () => {
+  describe('API_4 ELIMINAR', () => {
     const { API_4 } = API
     let { API_4_EQUI } = EQUI
     const codigoApi = 'API_4'
@@ -399,7 +399,7 @@ describe('EMPRESAS', () => {
     })
   })
 
-  describe('API_5 Obtener una empresa', () => {
+  describe('API_5 OBTENER UNA', () => {
     const { API_5 } = API
     let { API_5_EQUI } = EQUI
     const codigoApi = 'API_5'

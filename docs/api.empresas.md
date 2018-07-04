@@ -16,8 +16,8 @@ Obtener todas las empresas de i2Solutions
       "nombre": "Zapata S.A.",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
-      "fechaCreacion": "2018-07-03 00:40:12.178 +00:00",
-      "fechaActualizacion": "2018-07-03 00:40:12.178 +00:00"
+      "fechaCreacion": "2018-07-04 01:53:02.951 +00:00",
+      "fechaActualizacion": "2018-07-04 01:53:02.951 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -56,16 +56,16 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
-    "fechaActualizacion": "2018-07-03T00:40:12.265Z",
-    "fechaCreacion": "2018-07-03T00:40:12.265Z",
+    "fechaActualizacion": "2018-07-04T01:53:03.036Z",
+    "fechaCreacion": "2018-07-04T01:53:03.036Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-03T00:40:12.268Z",
-      "fechaCreacion": "2018-07-03T00:40:12.268Z"
+      "fechaActualizacion": "2018-07-04T01:53:03.038Z",
+      "fechaCreacion": "2018-07-04T01:53:03.038Z"
     }
   },
   "codigoEstado": 200
@@ -206,16 +206,16 @@ __GET__ __/api/web/empresas/:empresasId__
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
-    "fechaCreacion": "2018-07-03T00:40:13.300Z",
-    "fechaActualizacion": "2018-07-03T00:40:13.300Z",
+    "fechaCreacion": "2018-07-04T01:53:04.076Z",
+    "fechaActualizacion": "2018-07-04T01:53:04.076Z",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-03 00:40:13.301 +00:00",
-        "fechaActualizacion": "2018-07-03 00:40:13.301 +00:00",
+        "fechaCreacion": "2018-07-04 01:53:04.078 +00:00",
+        "fechaActualizacion": "2018-07-04 01:53:04.078 +00:00",
         "empresasId": 1
       },
       {
@@ -223,8 +223,8 @@ __GET__ __/api/web/empresas/:empresasId__
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "6886107230",
-        "fechaCreacion": "2018-07-03 00:40:13.302 +00:00",
-        "fechaActualizacion": "2018-07-03 00:40:13.302 +00:00",
+        "fechaCreacion": "2018-07-04 01:53:04.079 +00:00",
+        "fechaActualizacion": "2018-07-04 01:53:04.079 +00:00",
         "empresasId": 1
       }
     ]

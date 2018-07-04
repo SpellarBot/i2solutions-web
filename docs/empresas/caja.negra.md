@@ -1,1 +1,0 @@
-id | Caso de prueba |  Datos usados para la prueba | Resultado esperado | resultado

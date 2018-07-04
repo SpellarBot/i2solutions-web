@@ -23,8 +23,8 @@ Obtener todas las personas
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-07-03 00:40:13.802 +00:00",
-      "fechaActualizacion": "2018-07-03 00:40:13.802 +00:00"
+      "fechaCreacion": "2018-07-04 01:53:05.615 +00:00",
+      "fechaActualizacion": "2018-07-04 01:53:05.615 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -88,8 +88,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-07-03T00:40:13.843Z",
-    "fechaCreacion": "2018-07-03T00:40:13.843Z"
+    "fechaActualizacion": "2018-07-04T01:53:05.660Z",
+    "fechaCreacion": "2018-07-04T01:53:05.660Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +139,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-07-03T00:40:13.876Z",
-  "fechaCreacion": "2018-07-03T00:40:13.876Z"
+  "fechaActualizacion": "2018-07-04T01:53:05.750Z",
+  "fechaCreacion": "2018-07-04T01:53:05.750Z"
 }
 ```
 
@@ -266,8 +266,8 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-07-03T00:40:14.023Z",
-    "fechaActualizacion": "2018-07-03T00:40:14.023Z"
+    "fechaCreacion": "2018-07-04T01:53:05.902Z",
+    "fechaActualizacion": "2018-07-04T01:53:05.902Z"
   },
   "codigoEstado": 200
 }
@@ -307,22 +307,22 @@ __GET__ __/api/web/personas/establecimientos/:establecimientosId__
       "perfilOcupacional": "",
       "usuario": "Jaime_Solís",
       "rol": "",
-      "fechaCreacion": "2018-07-03T00:40:14.058Z",
-      "fechaActualizacion": "2018-07-03T00:40:14.058Z",
+      "fechaCreacion": "2018-07-04T01:53:05.940Z",
+      "fechaActualizacion": "2018-07-04T01:53:05.940Z",
       "establecimientos": [
         {
           "id": 1,
           "nombres": "matriz",
           "direccion": "22050 Felipe Rampa",
           "ruc": "0923651688001",
-          "fechaCreacion": "2018-07-03T00:40:14.057Z",
-          "fechaActualizacion": "2018-07-03T00:40:14.057Z",
+          "fechaCreacion": "2018-07-04T01:53:05.939Z",
+          "fechaActualizacion": "2018-07-04T01:53:05.939Z",
           "empresasId": 1,
           "personasEstablecimientos": {
             "id": 2,
             "rol": "empleado",
-            "fechaCreacion": "2018-07-03T00:40:14.062Z",
-            "fechaActualizacion": "2018-07-03T00:40:14.062Z",
+            "fechaCreacion": "2018-07-04T01:53:05.945Z",
+            "fechaActualizacion": "2018-07-04T01:53:05.945Z",
             "establecimientosId": 1,
             "personasId": 1
           }
@@ -341,22 +341,22 @@ __GET__ __/api/web/personas/establecimientos/:establecimientosId__
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-07-03T00:40:14.059Z",
-      "fechaActualizacion": "2018-07-03T00:40:14.059Z",
+      "fechaCreacion": "2018-07-04T01:53:05.942Z",
+      "fechaActualizacion": "2018-07-04T01:53:05.942Z",
       "establecimientos": [
         {
           "id": 1,
           "nombres": "matriz",
           "direccion": "22050 Felipe Rampa",
           "ruc": "0923651688001",
-          "fechaCreacion": "2018-07-03T00:40:14.057Z",
-          "fechaActualizacion": "2018-07-03T00:40:14.057Z",
+          "fechaCreacion": "2018-07-04T01:53:05.939Z",
+          "fechaActualizacion": "2018-07-04T01:53:05.939Z",
           "empresasId": 1,
           "personasEstablecimientos": {
             "id": 1,
             "rol": "jefe",
-            "fechaCreacion": "2018-07-03T00:40:14.061Z",
-            "fechaActualizacion": "2018-07-03T00:40:14.061Z",
+            "fechaCreacion": "2018-07-04T01:53:05.943Z",
+            "fechaActualizacion": "2018-07-04T01:53:05.943Z",
             "establecimientosId": 1,
             "personasId": 2
           }
