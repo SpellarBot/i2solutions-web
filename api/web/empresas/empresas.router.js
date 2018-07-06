@@ -56,8 +56,8 @@ module.exports = (app) => {
       } else {
         let { empresasId } = req.params
         let id = empresasId
-        let { nombre, actividadComercial, razonSocial } = req.body
-        Controller.Actualizar({ id, nombre, actividadComercial, razonSocial }).then((resp) => {
+        let { nombre, actividadComercial, razonSocial, urlFoto } = req.body
+        Controller.Actualizar({ id, nombre, actividadComercial, razonSocial, urlFoto }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {

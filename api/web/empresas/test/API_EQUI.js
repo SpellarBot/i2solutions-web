@@ -54,12 +54,19 @@ module.exports = {
       {
         nombre: 'ruc',
         casos: [
-          { codigo: '13', descripcion: '1-2 digitos 00<valor<=24 and 3er digito valor={0,1,2,3,4,5,6,9} and 11-13 digitos 001=<valor<=999', valido: true },
-          { codigo: '14', descripcion: '1-2 digitos valor>24', valido: false },
-          { codigo: '15', descripcion: '1-2 digitos valor=00', valido: false },
+          { codigo: '13', descripcion: 'ruc valido', valido: true },
+          { codigo: '14', descripcion: 'digitos 1-2  valor>24', valido: false },
+          { codigo: '15', descripcion: 'digitos 1-2  valor=00', valido: false },
           { codigo: '16', descripcion: '3er digito valor={7,8}', valido: false },
-          { codigo: '17', descripcion: '11-13 digitos valor<001', valido: false },
+          { codigo: '17', descripcion: 'digitos 11-13 valor<001', valido: false },
           { codigo: '18', descripcion: 'minLength: !13, maxLength: !13', valido: false }
+        ]
+      },
+      { nombre: 'urlFoto',
+        casos: [
+          { codigo: '19', descripcion: '\'type\': \'string\', \'format\': \'url\'', valido: true },
+          { codigo: '20', descripcion: '\'type\': !\'string\'', valido: false },
+          { codigo: '21', descripcion: 'format: !url ', valido: false }
         ]
       }
     ],
@@ -74,7 +81,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '2': {
@@ -85,7 +93,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '3': {
@@ -96,7 +105,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '4': {
@@ -107,7 +117,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '9' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '5': {
@@ -118,7 +129,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '12' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '6': {
@@ -129,7 +141,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '18' }
+          'ruc': { codigo: '18' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '7': {
@@ -140,7 +153,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '8': {
@@ -151,7 +165,8 @@ module.exports = {
           'actividadComercial': { codigo: '5' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '9': {
@@ -162,7 +177,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '8' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '10': {
@@ -173,7 +189,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '11' },
-          'ruc': { codigo: '13' }
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '11': {
@@ -184,7 +201,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '14' }
+          'ruc': { codigo: '14' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '12': {
@@ -195,7 +213,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '15' }
+          'ruc': { codigo: '15' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '13': {
@@ -206,7 +225,8 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '16' }
+          'ruc': { codigo: '16' },
+          'urlFoto': { codigo: '19' }
         }
       },
       '14': {
@@ -217,7 +237,32 @@ module.exports = {
           'actividadComercial': { codigo: '4' },
           'razonSocial': { codigo: '7' },
           'direccion': { codigo: '10' },
-          'ruc': { codigo: '17' }
+          'ruc': { codigo: '17' },
+          'urlFoto': { codigo: '19' }
+        }
+      },
+      '15': {
+        descripcion: 'urlFoto tipo no válido',
+        url: '/api/web/empresas',
+        body: {
+          'nombre': { codigo: '1' },
+          'actividadComercial': { codigo: '4' },
+          'razonSocial': { codigo: '7' },
+          'direccion': { codigo: '10' },
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '20' }
+        }
+      },
+      '16': {
+        descripcion: 'urlFoto formato no válido',
+        url: '/api/web/empresas',
+        body: {
+          'nombre': { codigo: '1' },
+          'actividadComercial': { codigo: '4' },
+          'razonSocial': { codigo: '7' },
+          'direccion': { codigo: '10' },
+          'ruc': { codigo: '13' },
+          'urlFoto': { codigo: '21' }
         }
       }
     }
@@ -249,14 +294,21 @@ module.exports = {
           { codigo: '8', descripcion: '\'type\': !\'string\'', valido: false },
           { codigo: '9', descripcion: 'minLength: !2 ', valido: false }
         ]
+      },
+      { nombre: 'urlFoto',
+        casos: [
+          { codigo: '10', descripcion: '\'type\': \'string\', \'format\': \'url\'', valido: true },
+          { codigo: '11', descripcion: '\'type\': !\'string\'', valido: false },
+          { codigo: '12', descripcion: 'format: !url ', valido: false }
+        ]
       }
     ],
     params: [
       { nombre: 'empresasId',
         casos: [
-          { codigo: '10', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
-          { codigo: '11', descripcion: '\'type\': !\'number\'', valido: false },
-          { codigo: '12', descripcion: 'minimum: !1 ', valido: false }
+          { codigo: '13', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: '14', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: '15', descripcion: 'minimum: !1 ', valido: false }
         ]
       }
     ],
@@ -267,10 +319,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '4' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '2': {
@@ -279,10 +332,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '2' },
           'actividadComercial': { codigo: '4' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '3': {
@@ -291,10 +345,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '3' },
           'actividadComercial': { codigo: '4' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '4': {
@@ -303,10 +358,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '5' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '5': {
@@ -315,10 +371,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '6' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '6': {
@@ -327,10 +384,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '3' },
-          'razonSocial': { codigo: '8' }
+          'razonSocial': { codigo: '8' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '7': {
@@ -339,10 +397,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '3' },
-          'razonSocial': { codigo: '9' }
+          'razonSocial': { codigo: '9' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
         }
       },
       '8': {
@@ -351,10 +410,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '4' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '11' }
+          'empresasId': { codigo: '14' }
         }
       },
       '9': {
@@ -363,10 +423,11 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '4' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '12' }
+          'empresasId': { codigo: '15' }
         }
       },
       '10': {
@@ -375,10 +436,37 @@ module.exports = {
         body: {
           'nombre': { codigo: '1' },
           'actividadComercial': { codigo: '4' },
-          'razonSocial': { codigo: '7' }
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '10' }
         },
         params: {
-          'empresasId': { codigo: '10' }
+          'empresasId': { codigo: '13' }
+        }
+      },
+      '11': {
+        descripcion: 'urlFoto tipo no válido',
+        url: '/api/web/empresas',
+        body: {
+          'nombre': { codigo: '1' },
+          'actividadComercial': { codigo: '4' },
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '11' }
+        },
+        params: {
+          'empresasId': { codigo: '13' }
+        }
+      },
+      '12': {
+        descripcion: 'urlFoto formato no válido',
+        url: '/api/web/empresas',
+        body: {
+          'nombre': { codigo: '1' },
+          'actividadComercial': { codigo: '4' },
+          'razonSocial': { codigo: '7' },
+          'urlFoto': { codigo: '12' }
+        },
+        params: {
+          'empresasId': { codigo: '13' }
         }
       }
     }

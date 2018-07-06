@@ -40,8 +40,9 @@ _response_
       "nombre": "Zapata S.A.",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
-      "fechaCreacion": "2018-07-04 01:53:02.951 +00:00",
-      "fechaActualizacion": "2018-07-04 01:53:02.951 +00:00"
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "fechaCreacion": "2018-07-06 00:07:28.110 +00:00",
+      "fechaActualizacion": "2018-07-06 00:07:28.110 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -174,19 +175,19 @@ ___
 			<tr style='background-color: #82E0AA' >
 				<td> ruc</td>
 				<td> <a id='CE_API_2[13]'>CE_API_2[13]</a> </td>
-				<td> 1-2 digitos 00<valor<=24 and 3er digito valor={0,1,2,3,4,5,6,9} and 11-13 digitos 001=<valor<=999</td>
+				<td> ruc valido</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> ruc</td>
 				<td> <a id='CE_API_2[14]'>CE_API_2[14]</a> </td>
-				<td> 1-2 digitos valor>24</td>
+				<td> digitos 1-2  valor>24</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> ruc</td>
 				<td> <a id='CE_API_2[15]'>CE_API_2[15]</a> </td>
-				<td> 1-2 digitos valor=00</td>
+				<td> digitos 1-2  valor=00</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
@@ -198,13 +199,31 @@ ___
 			<tr style='background-color: #EC7063' >
 				<td> ruc</td>
 				<td> <a id='CE_API_2[17]'>CE_API_2[17]</a> </td>
-				<td> 11-13 digitos valor<001</td>
+				<td> digitos 11-13 valor<001</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> ruc</td>
 				<td> <a id='CE_API_2[18]'>CE_API_2[18]</a> </td>
 				<td> minLength: !13, maxLength: !13</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> urlFoto</td>
+				<td> <a id='CE_API_2[19]'>CE_API_2[19]</a> </td>
+				<td> 'type': 'string', 'format': 'url'</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> urlFoto</td>
+				<td> <a id='CE_API_2[20]'>CE_API_2[20]</a> </td>
+				<td> 'type': !'string'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> urlFoto</td>
+				<td> <a id='CE_API_2[21]'>CE_API_2[21]</a> </td>
+				<td> format: !url </td>
 				<td> invalido </td>
 			</tr>
 </table>
@@ -230,6 +249,7 @@ _request o body_
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
   "direccion": "Plaza Mayor",
   "ruc": "1702365486001"
 }
@@ -247,16 +267,17 @@ _response_
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
-    "fechaActualizacion": "2018-07-04T01:53:03.036Z",
-    "fechaCreacion": "2018-07-04T01:53:03.036Z",
+    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+    "fechaActualizacion": "2018-07-06T00:07:28.210Z",
+    "fechaCreacion": "2018-07-06T00:07:28.210Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-04T01:53:03.038Z",
-      "fechaCreacion": "2018-07-04T01:53:03.038Z"
+      "fechaActualizacion": "2018-07-06T00:07:28.212Z",
+      "fechaCreacion": "2018-07-06T00:07:28.212Z"
     }
   },
   "codigoEstado": 200
@@ -283,7 +304,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "Plaza Mayor",
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -321,7 +343,8 @@ _request o body_
   "actividadComercial": "",
   "razonSocial": "La casa",
   "direccion": "Plaza Mayor",
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -359,7 +382,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "",
   "direccion": "Plaza Mayor",
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -397,7 +421,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "",
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -435,7 +460,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "Plaza Mayor",
-  "ruc": "17236548600"
+  "ruc": "17236548600",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -473,7 +499,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "",
-  "ruc": "172365486001"
+  "ruc": "172365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -513,7 +540,8 @@ _request o body_
   "actividadComercial": 1,
   "razonSocial": "La casa",
   "direccion": "Plaza Mayor",
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -551,7 +579,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": 1,
   "direccion": "Plaza Mayor",
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -589,7 +618,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": 1,
-  "ruc": "1702365486001"
+  "ruc": "1702365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -627,7 +657,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "ab",
-  "ruc": "2502365486001"
+  "ruc": "2502365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -665,7 +696,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "ab",
-  "ruc": "0002365486001"
+  "ruc": "0002365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -703,7 +735,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "ab",
-  "ruc": "1772365486001"
+  "ruc": "1772365486001",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -741,7 +774,8 @@ _request o body_
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "direccion": "ab",
-  "ruc": "1762365486000"
+  "ruc": "1762365486000",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -754,6 +788,84 @@ _response_
   "estado": false,
   "datos": {
     "ruc": "El ruc de la empresa del sector público es incorrecto"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[15]__
+
+urlFoto tipo no válido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas
+
+POST /api/web/empresas
+
+_request o body_
+```js
+{
+  "nombre": "Zapata S.A.",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
+  "razonSocial": "La casa",
+  "direccion": "ab",
+  "ruc": "1702365486001",
+  "urlFoto": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "urlFoto": "debe ser string"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[16]__
+
+urlFoto formato no válido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas
+
+POST /api/web/empresas
+
+_request o body_
+```js
+{
+  "nombre": "Zapata S.A.",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
+  "razonSocial": "La casa",
+  "direccion": "ab",
+  "ruc": "1702365486001",
+  "urlFoto": "http://"
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "urlFoto": "debe coincidir con el formato \"url\""
   },
   "codigoEstado": 200
 }
@@ -835,20 +947,38 @@ ___
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td>  empresasId </td>
+				<td> urlFoto</td>
 				<td> <a id='CE_API_3[10]'>CE_API_3[10]</a> </td>
+				<td> 'type': 'string', 'format': 'url'</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> urlFoto</td>
+				<td> <a id='CE_API_3[11]'>CE_API_3[11]</a> </td>
+				<td> 'type': !'string'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> urlFoto</td>
+				<td> <a id='CE_API_3[12]'>CE_API_3[12]</a> </td>
+				<td> format: !url </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_3[13]'>CE_API_3[13]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td>  empresasId </td>
-				<td> <a id='CE_API_3[11]'>CE_API_3[11]</a> </td>
+				<td> <a id='CE_API_3[14]'>CE_API_3[14]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td>  empresasId </td>
-				<td> <a id='CE_API_3[12]'>CE_API_3[12]</a> </td>
+				<td> <a id='CE_API_3[15]'>CE_API_3[15]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
 			</tr>
@@ -883,8 +1013,13 @@ Actualizar una empresa de forma correcta
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -902,7 +1037,8 @@ _request o body_
 {
   "nombre": "Nombre cambiado",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -945,8 +1081,13 @@ nombre no valido tipo de dato
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -964,7 +1105,8 @@ _request o body_
 {
   "nombre": 1,
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1009,8 +1151,13 @@ nombre no valido tamaño
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1028,7 +1175,8 @@ _request o body_
 {
   "nombre": "",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1073,8 +1221,13 @@ actividadComercial no valido tipo de dato
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1092,7 +1245,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": 1,
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1137,8 +1291,13 @@ actividadComercial no valido tamaño
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1156,7 +1315,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1201,8 +1361,13 @@ razonSocial no valido tipo de dato
     <td>1</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1220,7 +1385,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": 1
+  "razonSocial": 1,
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1265,8 +1431,13 @@ razonSocial no valido tamaño
     <td></td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1284,7 +1455,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": ""
+  "razonSocial": "",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1329,8 +1501,13 @@ empresasId no valido tipo de dato
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[11]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[14]</a></td>
     <td>a</td>
   </tr>
 </table>
@@ -1348,7 +1525,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1393,8 +1571,13 @@ empresasId no valido numero
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[12]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[15]</a></td>
     <td>0</td>
   </tr>
 </table>
@@ -1412,7 +1595,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1457,8 +1641,13 @@ empresasId no exite
     <td>La casa</td>
   </tr>
   <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[10]"> CE_API_3[10]</a></td>
+    <td>https://www.seoclerk.com/pics/558390-11FO8A1505384509.png</td>
+  </tr>
+  <tr>
     <td>empresasId</td>
-    <td><a href="#CE_API_3[]"> CE_API_3[10]</a></td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
     <td>500</td>
   </tr>
 </table>
@@ -1476,7 +1665,8 @@ _request o body_
 {
   "nombre": "Zapata S.A.",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa"
+  "razonSocial": "La casa",
+  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
@@ -1488,6 +1678,146 @@ _response_
 {
   "estado": false,
   "datos": "La empresa con ese id no existe",
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_3[11]__
+
+urlFoto tipo no válido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_3[1]"> CE_API_3[1]</a></td>
+    <td>Zapata S.A.</td>
+  </tr>
+  <tr>
+    <td>actividadComercial</td>
+    <td><a href="#CE_API_3[4]"> CE_API_3[4]</a></td>
+    <td>Integrado sensible al contexto sistema abierto</td>
+  </tr>
+  <tr>
+    <td>razonSocial</td>
+    <td><a href="#CE_API_3[7]"> CE_API_3[7]</a></td>
+    <td>La casa</td>
+  </tr>
+  <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[11]"> CE_API_3[11]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>empresasId</td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+PUT /api/web/empresas/1
+
+_request o body_
+```js
+{
+  "nombre": "Zapata S.A.",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
+  "razonSocial": "La casa",
+  "urlFoto": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "urlFoto": "debe ser string"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_3[12]__
+
+urlFoto formato no válido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_3[1]"> CE_API_3[1]</a></td>
+    <td>Zapata S.A.</td>
+  </tr>
+  <tr>
+    <td>actividadComercial</td>
+    <td><a href="#CE_API_3[4]"> CE_API_3[4]</a></td>
+    <td>Integrado sensible al contexto sistema abierto</td>
+  </tr>
+  <tr>
+    <td>razonSocial</td>
+    <td><a href="#CE_API_3[7]"> CE_API_3[7]</a></td>
+    <td>La casa</td>
+  </tr>
+  <tr>
+    <td>urlFoto</td>
+    <td><a href="#CE_API_3[12]"> CE_API_3[12]</a></td>
+    <td>http://</td>
+  </tr>
+  <tr>
+    <td>empresasId</td>
+    <td><a href="#CE_API_3[]"> CE_API_3[13]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+PUT /api/web/empresas/1
+
+_request o body_
+```js
+{
+  "nombre": "Zapata S.A.",
+  "actividadComercial": "Integrado sensible al contexto sistema abierto",
+  "razonSocial": "La casa",
+  "urlFoto": "http://"
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "urlFoto": "debe coincidir con el formato \"url\""
+  },
   "codigoEstado": 200
 }
 ```
@@ -1732,16 +2062,17 @@ _response_
     "nombre": "Zapata S.A.",
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
-    "fechaCreacion": "2018-07-04T01:53:04.076Z",
-    "fechaActualizacion": "2018-07-04T01:53:04.076Z",
+    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+    "fechaCreacion": "2018-07-06T00:07:29.381Z",
+    "fechaActualizacion": "2018-07-06T00:07:29.381Z",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-04 01:53:04.078 +00:00",
-        "fechaActualizacion": "2018-07-04 01:53:04.078 +00:00",
+        "fechaCreacion": "2018-07-06 00:07:29.383 +00:00",
+        "fechaActualizacion": "2018-07-06 00:07:29.383 +00:00",
         "empresasId": 1
       },
       {
@@ -1749,8 +2080,8 @@ _response_
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "6886107230",
-        "fechaCreacion": "2018-07-04 01:53:04.079 +00:00",
-        "fechaActualizacion": "2018-07-04 01:53:04.079 +00:00",
+        "fechaCreacion": "2018-07-06 00:07:29.384 +00:00",
+        "fechaActualizacion": "2018-07-06 00:07:29.384 +00:00",
         "empresasId": 1
       }
     ]

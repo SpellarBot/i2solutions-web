@@ -66,7 +66,7 @@ module.exports = {
       {
         nombre: 'ruc',
         casos: [
-          { codigo: '10', descripcion: '1-2 digitos 00<valor<=24 and 3er digito valor={0,1,2,3,4,5,6,9} and 11-13 digitos 001=<valor<=999', valido: true },
+          { codigo: '10', descripcion: 'ruc valido', valido: true },
           { codigo: '11', descripcion: '1-2 digitos valor>24', valido: false },
           { codigo: '12', descripcion: '1-2 digitos valor=00', valido: false },
           { codigo: '13', descripcion: '3er digito valor={7,8}', valido: false },
@@ -231,7 +231,7 @@ module.exports = {
       {
         nombre: 'ruc',
         casos: [
-          { codigo: '10', descripcion: '1-2 digitos 00<valor<=24 and 3er digito valor={0,1,2,3,4,5,6,9} and 11-13 digitos 001=<valor<=999', valido: true },
+          { codigo: '10', descripcion: 'ruc valido', valido: true },
           { codigo: '11', descripcion: '1-2 digitos valor>24', valido: false },
           { codigo: '12', descripcion: '1-2 digitos valor=00', valido: false },
           { codigo: '13', descripcion: '3er digito valor={7,8}', valido: false },

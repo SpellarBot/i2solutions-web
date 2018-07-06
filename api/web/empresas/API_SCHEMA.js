@@ -2,13 +2,14 @@ module.exports = {
   API_2_SCHEMA: {
     BODY: {
       'minProperties': 5,
-      'additionalProperties': false,
+      // 'additionalProperties': false, // porque el urlFoto no se enviara si la empresa no tiene logo
       'type': 'object',
       'properties': {
         'nombre': { 'type': 'string', minLength: 2 },
         'actividadComercial': { 'type': 'string', minLength: 2 },
         'razonSocial': { 'type': 'string', minLength: 2 },
         'direccion': { 'type': 'string', minLength: 2 },
+        'urlFoto': { 'type': 'string', 'format': 'url' },
         'ruc': { 'cedula': false } // validar que sean solo numero y http://www.sri.gob.ec/web/guest/RUC
       }
     }
@@ -16,11 +17,12 @@ module.exports = {
   API_3_SCHEMA: {
     BODY: {
       'minProperties': 3,
-      'additionalProperties': false,
+      // 'additionalProperties': false,  // porque el urlFoto no se enviara si la empresa no tiene logo
       'type': 'object',
       'properties': {
         'nombre': { 'type': 'string', minLength: 2 },
         'actividadComercial': { 'type': 'string', minLength: 2 },
+        'urlFoto': { 'type': 'string', 'format': 'url' },
         'razonSocial': { 'type': 'string', minLength: 2 }
       }
     },

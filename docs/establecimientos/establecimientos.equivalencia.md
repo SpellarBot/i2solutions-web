@@ -69,8 +69,8 @@ _response_
       "nombres": "matriz",
       "direccion": "22050 Felipe Rampa",
       "ruc": "0923651688001",
-      "fechaCreacion": "2018-07-04 01:53:04.277 +00:00",
-      "fechaActualizacion": "2018-07-04 01:53:04.277 +00:00",
+      "fechaCreacion": "2018-07-06 00:07:29.642 +00:00",
+      "fechaActualizacion": "2018-07-06 00:07:29.642 +00:00",
       "empresasId": 1
     },
     {
@@ -78,8 +78,8 @@ _response_
       "nombres": "Lira - Barajas",
       "direccion": "0119 Laboy Mercado",
       "ruc": "6886107230",
-      "fechaCreacion": "2018-07-04 01:53:04.278 +00:00",
-      "fechaActualizacion": "2018-07-04 01:53:04.278 +00:00",
+      "fechaCreacion": "2018-07-06 00:07:29.644 +00:00",
+      "fechaActualizacion": "2018-07-06 00:07:29.644 +00:00",
       "empresasId": 1
     }
   ],
@@ -229,7 +229,7 @@ ___
 			<tr style='background-color: #82E0AA' >
 				<td> ruc</td>
 				<td> <a id='CE_API_2[10]'>CE_API_2[10]</a> </td>
-				<td> 1-2 digitos 00<valor<=24 and 3er digito valor={0,1,2,3,4,5,6,9} and 11-13 digitos 001=<valor<=999</td>
+				<td> ruc valido</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
@@ -302,8 +302,8 @@ _response_
     "direccion": "22050 Felipe Rampa",
     "ruc": "0923651688001",
     "empresasId": 1,
-    "fechaActualizacion": "2018-07-04T01:53:04.392Z",
-    "fechaCreacion": "2018-07-04T01:53:04.392Z"
+    "fechaActualizacion": "2018-07-06T00:07:29.771Z",
+    "fechaCreacion": "2018-07-06T00:07:29.771Z"
   },
   "codigoEstado": 200
 }
@@ -794,7 +794,7 @@ ___
 			<tr style='background-color: #82E0AA' >
 				<td> ruc</td>
 				<td> <a id='CE_API_3[10]'>CE_API_3[10]</a> </td>
-				<td> 1-2 digitos 00<valor<=24 and 3er digito valor={0,1,2,3,4,5,6,9} and 11-13 digitos 001=<valor<=999</td>
+				<td> ruc valido</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >

@@ -96,7 +96,8 @@ conexion.Conectar().then(async (db) => {
     let empresa = {
       nombre: faker.company.companyName(),
       actividadComercial: faker.company.catchPhrase(),
-      razonSocial: '1235468789'
+      razonSocial: faker.company.catchPhrase(),
+      urlFoto: 'https://www.seoclerk.com/pics/558390-11FO8A1505384509.png'
     }
     empresas.push(empresa)
     let empresaCreada = await db.empresas.Crear(empresa)
@@ -107,7 +108,7 @@ conexion.Conectar().then(async (db) => {
       let establecimiento = {
         nombres: faker.company.companyName(),
         direccion: faker.address.streetAddress(),
-        ruc: random(),
+        ruc: '0931823448001', // <= fix
         empresasId
       }
       let establecimientoCreada = {}

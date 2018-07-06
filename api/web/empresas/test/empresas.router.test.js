@@ -65,7 +65,7 @@ describe('EMPRESAS', () => {
     const codigoApi = 'API_2'
 
     // VALIDAS
-    it(`@ICE_${codigoApi}_1 Crea una empresa exitosamente`, async () => {
+    it(`@ICE_API_2_01 Crea una empresa exitosamente`, async () => {
       let req = { ...empresa, direccion: 'Plaza Mayor', ruc: '1702365486001' }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(true)
@@ -78,72 +78,72 @@ describe('EMPRESAS', () => {
     })
 
     // NO VALIDAS
-    it('@ICE_API_2_2 nombre tamaño no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre: '', actividadComercial, razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001' }
+    it('@ICE_API_2_02 nombre tamaño no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre: '', actividadComercial, razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_2_EQUI, req, res,  codigoApi })
     })
 
-    it('@ICE_API_2_3 actividadComercial tamaño no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial: '', razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001' }
+    it('@ICE_API_2_03 actividadComercial tamaño no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial: '', razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_4 razonSocial tamaño no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial: '', direccion: 'Plaza Mayor', ruc: '1702365486001' }
+    it('@ICE_API_2_04 razonSocial tamaño no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial: '', direccion: 'Plaza Mayor', ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_5 direccion tamaño no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: '', ruc: '1702365486001' }
+    it('@ICE_API_2_05 direccion tamaño no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: '', ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_6 ruc tamaño no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: 'Plaza Mayor', ruc: '17236548600' }
+    it('@ICE_API_2_06 ruc tamaño no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'Plaza Mayor', ruc: '17236548600', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_7 nombre tipo no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre: 1, actividadComercial, razonSocial, direccion: '', ruc: '172365486001' }
+    it('@ICE_API_2_07 nombre tipo no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre: 1, actividadComercial, razonSocial, direccion: '', ruc: '172365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_8 actividadComercial tipo no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial: 1, razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001' }
+    it('@ICE_API_2_08 actividadComercial tipo no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial: 1, razonSocial, direccion: 'Plaza Mayor', ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '8', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_9 razonSocial tipo no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial: 1, direccion: 'Plaza Mayor', ruc: '1702365486001' }
+    it('@ICE_API_2_09 razonSocial tipo no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial: 1, direccion: 'Plaza Mayor', ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -151,8 +151,8 @@ describe('EMPRESAS', () => {
     })
 
     it('@ICE_API_2_10 direccion tipo no válido', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: 1, ruc: '1702365486001' }
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 1, ruc: '1702365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -160,8 +160,8 @@ describe('EMPRESAS', () => {
     })
 
     it('@ICE_API_2_11 ruc 1-2 digitos valor>24', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '2502365486001' }
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '2502365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -169,8 +169,8 @@ describe('EMPRESAS', () => {
     })
 
     it('@ICE_API_2_12 ruc 1-2 digitos valor=00', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '0002365486001' }
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '0002365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -178,8 +178,8 @@ describe('EMPRESAS', () => {
     })
 
     it('@ICE_API_2_13 ruc 3er digito valor={7,8}', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '1772365486001' }
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '1772365486001', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -187,12 +187,30 @@ describe('EMPRESAS', () => {
     })
 
     it('@ICE_API_2_14 ruc 11-13 digitos valor<001', async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '1762365486000' }
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '1762365486000', urlFoto }
       let res = await request(app).post('/api/web/empresas').send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '14', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_15 urlFoto tipo no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '1702365486001', urlFoto: 1 }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '15', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_16 urlFoto formato no válido', async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let req = { nombre, actividadComercial, razonSocial, direccion: 'ab', ruc: '1702365486001', urlFoto: 'http://' }
+      let res = await request(app).post('/api/web/empresas').send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '16', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
   })
@@ -203,9 +221,9 @@ describe('EMPRESAS', () => {
     const codigoApi = 'API_3'
 
     // VALIDOS
-    it(`@ICE_${codigoApi}_1 actualizar datos de empresa`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_01 actualizar datos de empresa`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['nombre'] = 'Nombre cambiado'
 
@@ -220,9 +238,9 @@ describe('EMPRESAS', () => {
     })
 
     // NO VALIDOS
-    it(`@ICE_${codigoApi}_2 nombre no valido tipo de dato`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_02 nombre no valido tipo de dato`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['nombre'] = 1
 
@@ -235,9 +253,9 @@ describe('EMPRESAS', () => {
     })
 
     // nombres
-    it(`@ICE_${codigoApi}_3 nombre no valido tamaño`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_03 nombre no valido tamaño`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['nombre'] = ''
 
@@ -250,9 +268,9 @@ describe('EMPRESAS', () => {
     })
 
     // actividadComercial
-    it(`@ICE_${codigoApi}_4 actividadComercial no valido tipo de dato`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_04 actividadComercial no valido tipo de dato`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['actividadComercial'] = 1
 
@@ -265,9 +283,9 @@ describe('EMPRESAS', () => {
     })
 
 
-    it(`@ICE_${codigoApi}_5 actividadComercial no valido tamaño`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_05 actividadComercial no valido tamaño`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['actividadComercial'] = ''
 
@@ -280,9 +298,9 @@ describe('EMPRESAS', () => {
     })
 
     // razonSocial
-    it(`@ICE_${codigoApi}_6 razonSocial no valido tipo de dato`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_06 razonSocial no valido tipo de dato`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['razonSocial'] = 1
 
@@ -294,9 +312,9 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_7 razonSocial no valido tamaño`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_07 razonSocial no valido tamaño`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
       req['razonSocial'] = ''
 
@@ -309,9 +327,9 @@ describe('EMPRESAS', () => {
     })
 
     // empresasId
-    it(`@ICE_${codigoApi}_8 empresasId no valido tipo de dato`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_08 empresasId no valido tipo de dato`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
 
       let params = { empresasId: 'a' }
@@ -322,9 +340,9 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '8', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_9 empresasId no valido tamaño`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_09 empresasId no valido tamaño`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
 
       let params = { empresasId: 0 }
@@ -335,9 +353,9 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '9', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_10 empresasId no existe`, async () => {
-      let { nombre, actividadComercial, razonSocial } = empresa
-      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial })
+    it(`@ICE_API_3_10 empresasId no existe`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
       let req = JSON.parse(JSON.stringify(empresa))
 
       let params = { empresasId: 500 }
@@ -347,6 +365,36 @@ describe('EMPRESAS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '10', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
       generatorDocs.ERROR({ nombre: 'El Id de la empresa no existe', docs, doc: API_3, res, req })
+    })
+
+    it(`@ICE_API_3_11 urlFoto tipo no válido`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto })
+      let req = JSON.parse(JSON.stringify(empresa))
+      req['urlFoto'] = 1
+
+      let params = { empresasId: empresaCreada['id'] }
+      let url = `/api/web/empresas/${empresaCreada['id']}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '11', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_3, res, req })
+    })
+
+    it(`@ICE_API_3_12 urlFoto formato no válido`, async () => {
+      let { nombre, actividadComercial, razonSocial, urlFoto } = empresa
+      let empresaCreada = await models.empresas.Crear({ nombre, actividadComercial, razonSocial, urlFoto: '' })
+      let req = JSON.parse(JSON.stringify(empresa))
+      req['urlFoto'] = 'http://'
+
+      let params = { empresasId: empresaCreada['id'] }
+      let url = `/api/web/empresas/${empresaCreada['id']}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '12', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_3, res, req })
     })
   })
 
