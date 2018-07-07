@@ -26,7 +26,7 @@ __POST__ __/api/auth/login__
 {
   "estado": true,
   "datos": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzdWFyaW8iOiJBbnRvbmlvNjkiLCJjb3JyZW8iOiJ2Y3Rvcl9kYXpAaG90bWFpbC5jb20iLCJub21icmVzIjoiRWxzYSIsImFwZWxsaWRvcyI6IlZlZ2EiLCJpZCI6MX0sImlhdCI6MTUzMDk5MDYyMX0.yEi5TvayFHNxM2yqhi5j34vXeGJsNMykzFMEfnbCA_I"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzdWFyaW8iOiJBbnRvbmlvNjkiLCJjb3JyZW8iOiJ2Y3Rvcl9kYXpAaG90bWFpbC5jb20iLCJub21icmVzIjoiRWxzYSIsImFwZWxsaWRvcyI6IlZlZ2EiLCJpZCI6MX0sImlhdCI6MTUzMTAwMTU0N30.YuaaWFkMpVnRE3z5jr3c1GooQg7jF1Rxzg0pYF53jWI"
   },
   "codigoEstado": 200
 }

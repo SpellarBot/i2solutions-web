@@ -20,7 +20,7 @@ __GET__ __/api/movil/puestosDeUnArea/:areasId__
     {
       "id": 1,
       "nombre": "Oficina de gerente general",
-      "descripcion": ""
+      "descripcion": "AA"
     }
   ],
   "codigoEstado": 200
@@ -65,15 +65,15 @@ __POST__ __/api/movil/novedad__
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-07T19:10:21.244Z",
+    "fecha": "2018-07-07T22:12:27.196Z",
     "fueAtendida": false,
     "id": 1,
     "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
     "prioridad": "media",
     "fotoUrl": "",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-07T19:10:21.244Z",
-    "fechaCreacion": "2018-07-07T19:10:21.244Z"
+    "fechaActualizacion": "2018-07-07T22:12:27.198Z",
+    "fechaCreacion": "2018-07-07T22:12:27.198Z"
   },
   "codigoEstado": 200
 }
@@ -107,7 +107,7 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
   "datos": {
     "id": 1,
     "nombre": "Oficina de gerente general",
-    "descripcion": "",
+    "descripcion": "AA",
     "areaId": 1,
     "cantidadEmpleados": 2,
     "novedadesSinAtender": [
@@ -116,13 +116,13 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
         "descripcionAtendida": null,
         "prioridad": "baja",
-        "fecha": "2018-07-07 19:10:21.304 +00:00",
+        "fecha": "2018-07-07 22:12:27.261 +00:00",
         "fotoUrl": "",
         "fueAtendida": false,
         "puestosId": 1,
         "inspeccionesId": null,
-        "fechaCreacion": "2018-07-07 19:10:21.304 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:21.304 +00:00"
+        "fechaCreacion": "2018-07-07 22:12:27.261 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:27.261 +00:00"
       }
     ],
     "novedadesAtendidas": [
@@ -131,13 +131,13 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
         "descripcionAtendida": "Fue atendida",
         "prioridad": "media",
-        "fecha": "2018-07-07 19:10:21.302 +00:00",
+        "fecha": "2018-07-07 22:12:27.259 +00:00",
         "fotoUrl": "",
         "fueAtendida": true,
         "puestosId": 1,
         "inspeccionesId": null,
-        "fechaCreacion": "2018-07-07 19:10:21.302 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:21.307 +00:00"
+        "fechaCreacion": "2018-07-07 22:12:27.259 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:27.264 +00:00"
       }
     ],
     "riesgos": [
@@ -147,10 +147,10 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "personasExpuestas": 15,
         "valoracion": "1524",
         "valoracionLiteral": "aa",
-        "fecha": "2018-07-07 19:10:21.289 +00:00",
+        "fecha": "2018-07-07 22:12:27.244 +00:00",
         "porcentajeRiesgo": 2,
-        "fechaCreacion": "2018-07-07 19:10:21.289 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:21.289 +00:00",
+        "fechaCreacion": "2018-07-07 22:12:27.244 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:27.244 +00:00",
         "puestosId": 1
       }
     ],
@@ -171,8 +171,8 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "atendidoEnEmpresa": 1,
         "muertos": 0,
         "fecha": "2014-05-21 19:27:28.576 +00:00",
-        "fechaCreacion": "2018-07-07 19:10:21.290 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:21.290 +00:00",
+        "fechaCreacion": "2018-07-07 22:12:27.246 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:27.246 +00:00",
         "puestosId": 1
       }
     ],
@@ -183,8 +183,8 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "descripcion": "La capacitación fue un éxito",
         "tema": "Como hacer que todo valga",
         "fechaCapacitacion": null,
-        "fechaCreacion": "2018-07-07 19:10:21.300 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:21.300 +00:00",
+        "fechaCreacion": "2018-07-07 22:12:27.258 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:27.258 +00:00",
         "areasId": 1
       }
     ]

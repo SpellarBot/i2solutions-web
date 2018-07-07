@@ -4,7 +4,7 @@ module.exports = {
     codigo: 'API_1',
     descripcion: 'obtiene todas las areas de un establecimiento',
     metodo: 'GET',
-    url: '/api/web/areas/:establecimientosId',
+    url: '/api/web/areas/establecimientos/:establecimientosId',
     params: [
       { nombre: 'establecimientosId',
         casos: [

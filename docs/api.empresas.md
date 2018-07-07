@@ -17,8 +17,8 @@ Obtener todas las empresas de i2Solutions
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-07 19:10:17.713 +00:00",
-      "fechaActualizacion": "2018-07-07 19:10:17.713 +00:00"
+      "fechaCreacion": "2018-07-07 22:12:19.684 +00:00",
+      "fechaActualizacion": "2018-07-07 22:12:19.684 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -59,16 +59,16 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-07T19:10:17.805Z",
-    "fechaCreacion": "2018-07-07T19:10:17.805Z",
+    "fechaActualizacion": "2018-07-07T22:12:19.766Z",
+    "fechaCreacion": "2018-07-07T22:12:19.766Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-07T19:10:17.807Z",
-      "fechaCreacion": "2018-07-07T19:10:17.807Z"
+      "fechaActualizacion": "2018-07-07T22:12:19.768Z",
+      "fechaCreacion": "2018-07-07T22:12:19.768Z"
     }
   },
   "codigoEstado": 200
@@ -350,16 +350,16 @@ __GET__ __/api/web/empresas/:empresasId__
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-07T19:10:18.933Z",
-    "fechaActualizacion": "2018-07-07T19:10:18.933Z",
+    "fechaCreacion": "2018-07-07T22:12:21.858Z",
+    "fechaActualizacion": "2018-07-07T22:12:21.858Z",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-07 19:10:18.934 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:18.934 +00:00",
+        "fechaCreacion": "2018-07-07 22:12:21.860 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:21.860 +00:00",
         "empresasId": 1
       },
       {
@@ -367,8 +367,8 @@ __GET__ __/api/web/empresas/:empresasId__
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-07 19:10:18.936 +00:00",
-        "fechaActualizacion": "2018-07-07 19:10:18.936 +00:00",
+        "fechaCreacion": "2018-07-07 22:12:21.863 +00:00",
+        "fechaActualizacion": "2018-07-07 22:12:21.863 +00:00",
         "empresasId": 1
       }
     ]

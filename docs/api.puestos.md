@@ -20,12 +20,12 @@ __GET__ __/api/web/puestos/areas/:areasId__
     {
       "id": 1,
       "nombre": "Oficina de gerente general",
-      "descripcion": ""
+      "descripcion": "AA"
     },
     {
       "id": 2,
       "nombre": "Oficina de jefe de TTHH",
-      "descripcion": ""
+      "descripcion": "AA"
     }
   ],
   "codigoEstado": 200
@@ -54,7 +54,7 @@ __POST__ __/api/web/puestos__
 ```json
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": "",
+  "descripcion": "AA",
   "areasId": 1
 }
 ```
@@ -65,11 +65,11 @@ __POST__ __/api/web/puestos__
 {
   "estado": true,
   "datos": {
-    "id": 1,
+    "id": 4,
     "nombre": "Oficina de gerente general",
-    "descripcion": "",
-    "fechaActualizacion": "2018-07-07T19:10:20.945Z",
-    "fechaCreacion": "2018-07-07T19:10:20.945Z"
+    "descripcion": "AA",
+    "fechaActualizacion": "2018-07-07T22:12:25.576Z",
+    "fechaCreacion": "2018-07-07T22:12:25.576Z"
   },
   "codigoEstado": 200
 }
@@ -101,8 +101,8 @@ __PUT__ __/api/web/puestos/:puestosId__
 
 ```json
 {
-  "nombre": "Mi nombre editado",
-  "descripcion": ""
+  "nombre": "AAA",
+  "descripcion": "AAA"
 }
 ```
 
@@ -126,8 +126,8 @@ _request_
 
 ```js
 {
-  "nombre": "Mi nombre editado",
-  "descripcion": ""
+  "nombre": "Oficina de gerente general",
+  "descripcion": "AA"
 }
 ```
 
@@ -142,38 +142,6 @@ _response_
 ```
 	
 	
-
-
-___
-
-
-
-## Obtener un puesto
-
-__GET__ __/api/web/puestos/:puestosId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| puestosId | Number |   ---   |
-	
-
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": {
-    "id": 1,
-    "nombre": "Oficina de gerente general",
-    "descripcion": "",
-    "fechaCreacion": "2018-07-07T19:10:21.059Z",
-    "fechaActualizacion": "2018-07-07T19:10:21.059Z"
-  },
-  "codigoEstado": 200
-}
-```
 
 
 ___
@@ -201,23 +169,37 @@ __DELETE__ __/api/web/puestos/:puestosId__
 }
 ```
 
-#### ERRORS:
-__El id del puestos no existe__
+
+___
 
 
 
+## Obtener un puesto
 
-_response_
+__GET__ __/api/web/puestos/:puestosId__
 
-```js
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| puestosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
 {
-  "estado": false,
-  "datos": "puesto con es id no existe",
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Oficina de gerente general",
+    "descripcion": "AA",
+    "fechaCreacion": "2018-07-07T22:12:26.980Z",
+    "fechaActualizacion": "2018-07-07T22:12:26.980Z"
+  },
   "codigoEstado": 200
 }
 ```
-	
-	
 
 
 ___

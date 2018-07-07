@@ -5,7 +5,7 @@
 
 > Descripción: obtiene todas las areas de un establecimiento
 
-> Url : /api/web/areas/:establecimientosId
+> Url : /api/web/areas/establecimientos/:establecimientosId
 
 #### Clases de equivalencia
 
@@ -47,7 +47,7 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/areas/:establecimientosId
+> /api/web/areas/establecimientos/:establecimientosId
 
 GET /api/web/areas/establecimientos/1
 
@@ -71,8 +71,8 @@ _response_
       "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-      "fechaCreacion": "2018-07-07 19:10:16.051 +00:00",
-      "fechaActualizacion": "2018-07-07 19:10:16.051 +00:00",
+      "fechaCreacion": "2018-07-07 22:12:18.048 +00:00",
+      "fechaActualizacion": "2018-07-07 22:12:18.048 +00:00",
       "establecimientosId": 1
     }
   ],
@@ -89,7 +89,7 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/areas/:establecimientosId
+> /api/web/areas/establecimientos/:establecimientosId
 
 GET /api/web/areas/establecimientos/a
 
@@ -121,7 +121,7 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/areas/:establecimientosId
+> /api/web/areas/establecimientos/:establecimientosId
 
 GET /api/web/areas/establecimientos/0
 
@@ -317,8 +317,8 @@ _response_
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
-    "fechaActualizacion": "2018-07-07T19:10:16.255Z",
-    "fechaCreacion": "2018-07-07T19:10:16.255Z"
+    "fechaActualizacion": "2018-07-07T22:12:18.255Z",
+    "fechaCreacion": "2018-07-07T22:12:18.255Z"
   },
   "codigoEstado": 200
 }
@@ -2135,8 +2135,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-07T19:10:17.515Z",
-    "fechaActualizacion": "2018-07-07T19:10:17.515Z",
+    "fechaCreacion": "2018-07-07T22:12:19.489Z",
+    "fechaActualizacion": "2018-07-07T22:12:19.489Z",
     "establecimientosId": null
   },
   "codigoEstado": 200
