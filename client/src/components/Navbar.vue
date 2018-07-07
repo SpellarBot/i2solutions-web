@@ -20,7 +20,7 @@
 
 <script>
 import router from '../router'
-import MyModule from './MyModule.js'
+// import MyModule from './MyModule.js'
 export default {
   data () {
     return {
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     logout () {
-      console.log(MyModule('1310539760'))
+      // console.log(MyModule('1310539752002'))
       this.$store.dispatch('logout')
       router.push('/')
     },

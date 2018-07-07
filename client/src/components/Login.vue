@@ -1,36 +1,22 @@
 <template>
-  <main id='login'>
-    <div class = 'imageLogo'>
-    <span class='i2s-name'>i2Solutions Cía. Ltda.</span>
-  </div>
-  <div class="login">
-
-    <v-layout>
-      <v-flex xs12 sm4 offset-sm4>
-        <v-card>
-          <h2>Iniciar Sesión</h2>
-          <v-form v-model="valid">
-            <v-text-field
-            class="user"
-              v-model="usuario"
-              label="Usuario"
-              required
-            ></v-text-field>
-            <v-text-field
-            class="password"
-              v-model="clave"
-              label="Clave"
-              required
-              type="password"
-            ></v-text-field>
-          </v-form>
-          <v-btn
-            :disabled="!valid"
-            @click="submit"
-          >
-            Iniciar Sesión
-          </v-btn>
-
+  <v-container fluid fill-height @keydown.enter="submit">
+    <v-layout align-center justify-center>
+      <v-flex xs12 sm8 md4>
+        <v-card class="elevation-12">
+          <v-toolbar dark color="primary">
+            <v-toolbar-title>i2solutions Cía. Ltda.</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-card-text>
+            <v-form>
+              <v-text-field prepend-icon="person" name="login" v-model="usuario" label="Usario" type="text"></v-text-field>
+              <v-text-field prepend-icon="lock" name="password" v-model= "clave" label="Password" id="password" type="password"></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="submit" type="submit">Login</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -43,8 +29,7 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
-  </div>
-</main>
+  </v-container>
 </template>
 
 <script>
