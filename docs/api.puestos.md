@@ -68,8 +68,8 @@ __POST__ __/api/web/puestos__
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "",
-    "fechaActualizacion": "2018-07-06T00:07:31.436Z",
-    "fechaCreacion": "2018-07-06T00:07:31.436Z"
+    "fechaActualizacion": "2018-07-07T19:10:20.945Z",
+    "fechaCreacion": "2018-07-07T19:10:20.945Z"
   },
   "codigoEstado": 200
 }
@@ -168,8 +168,8 @@ __GET__ __/api/web/puestos/:puestosId__
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "",
-    "fechaCreacion": "2018-07-06T00:07:31.617Z",
-    "fechaActualizacion": "2018-07-06T00:07:31.617Z"
+    "fechaCreacion": "2018-07-07T19:10:21.059Z",
+    "fechaActualizacion": "2018-07-07T19:10:21.059Z"
   },
   "codigoEstado": 200
 }

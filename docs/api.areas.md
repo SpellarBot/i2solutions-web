@@ -24,8 +24,8 @@ __GET__ __/api/web/areas/establecimientos/:establecimientosId__
       "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-      "fechaCreacion": "2018-07-06 00:07:27.663 +00:00",
-      "fechaActualizacion": "2018-07-06 00:07:27.663 +00:00",
+      "fechaCreacion": "2018-07-07 19:10:16.051 +00:00",
+      "fechaActualizacion": "2018-07-07 19:10:16.051 +00:00",
       "establecimientosId": 1
     }
   ],
@@ -79,8 +79,8 @@ __POST__ __/api/web/areas__
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
-    "fechaActualizacion": "2018-07-06T00:07:27.762Z",
-    "fechaCreacion": "2018-07-06T00:07:27.762Z"
+    "fechaActualizacion": "2018-07-07T19:10:16.255Z",
+    "fechaCreacion": "2018-07-07T19:10:16.255Z"
   },
   "codigoEstado": 200
 }
@@ -115,12 +115,11 @@ __PUT__ __/api/web/areas/:areasId__
 
 ```json
 {
-  "actividad": "gerencia",
+  "actividad": "AA",
   "nombre": "Mi nombre editado",
-  "fotoUrl": "http://lorempixel.com/640/480",
-  "metrosCuadrados": "20x20",
-  "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-  "establecimientosId": 1
+  "fotoUrl": "https://image.png",
+  "metrosCuadrados": "50",
+  "descripcionLugar": "AA"
 }
 ```
 
@@ -130,73 +129,6 @@ __PUT__ __/api/web/areas/:areasId__
 {
   "estado": true,
   "datos": true,
-  "codigoEstado": 200
-}
-```
-
-#### ERRORS:
-__El id del area no existe__
-
-
-
-
-_request_
-
-```js
-{
-  "actividad": "gerencia",
-  "nombre": "Mi nombre editado",
-  "fotoUrl": "http://lorempixel.com/640/480",
-  "metrosCuadrados": "20x20",
-  "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-  "establecimientosId": 1
-}
-```
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "El id del area no existe",
-  "codigoEstado": 200
-}
-```
-	
-	
-
-
-___
-
-
-
-## Obtener una area
-
-__GET__ __/api/web/areas/:areasId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| areasId | Number |   ---   |
-	
-
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": {
-    "id": 1,
-    "actividad": "gerencia",
-    "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
-    "metrosCuadrados": "20x20",
-    "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-06T00:07:27.921Z",
-    "fechaActualizacion": "2018-07-06T00:07:27.921Z",
-    "establecimientosId": 1
-  },
   "codigoEstado": 200
 }
 ```
@@ -227,23 +159,41 @@ __DELETE__ __/api/web/areas/:areasId__
 }
 ```
 
-#### ERRORS:
-__El id del area no existe__
+
+___
 
 
 
+## Obtener una area
 
-_response_
+__GET__ __/api/web/areas/:areasId__
 
-```js
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| areasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
 {
-  "estado": false,
-  "datos": "areas con es id no existe",
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "actividad": "gerencia",
+    "nombre": "Gerente General",
+    "fotoUrl": "http://lorempixel.com/640/480",
+    "metrosCuadrados": "20x20",
+    "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+    "fechaCreacion": "2018-07-07T19:10:17.515Z",
+    "fechaActualizacion": "2018-07-07T19:10:17.515Z",
+    "establecimientosId": null
+  },
   "codigoEstado": 200
 }
 ```
-	
-	
 
 
 ___

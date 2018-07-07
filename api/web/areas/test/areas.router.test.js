@@ -1,112 +1,465 @@
 const request = require('supertest')
 const expect = require('chai').expect
-const moment = require('moment')
-const sinon = require('sinon')
-const Ajv = require('ajv')
 const rfr = require('rfr')
+const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
 
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')
 const dump = rfr('api/config/dump')
+const utils = rfr('api/utils')
+
+const SCHEMA = require('../API_SCHEMA')
 const API = require('./API_DOCS')
+const EQUI = require('./API_EQUI')
 const models = db.db
 let docs = []
-describe('Areas', () => {
+let equivalencias = {}
+
+const schema = utils.schemaFormato
+
+describe('AREAS', () => {
   let { establecimientos, areas } = dump
   let establecimiento = establecimientos.VALIDOS[0]
   let area = areas.VALIDOS[0]
-  let area2 = areas.VALIDOS[10]
+  let area2 = areas.VALIDOS[1]
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
     generatorDocs.generateAPI({ docs, archivo: 'api.areas.md', nombre: 'Areas' })
+    generatorDocs.EQUI({ equivalencias, nombre: 'Areas' })
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
-  describe('Obtener todas las areas por establecimientos', () => {
-    let { API_1 } = API
-    it('@CP1 OK', async () => {
-      let areasCreada = await models.areas.Crear(area)
-      let areasCreada2 = await models.areas.Crear(area2)
-      let establecimientosId = area['establecimientosId']
-      let res = await request(app).get(`/api/web/areas/establecimientos/${establecimientosId}`)
+  describe('API_1 Obtener todas las areas por establecimientos', () => {
+    const { API_1 } = API
+    let { API_1_EQUI } = EQUI
+    let codigoApi = 'API_1'
+    let areasCreada, areasCreada2 = {}
+    beforeEach(async () => {
+      areasCreada = await models.areas.Crear({ ...area, establecimientosId: 1 })
+      areasCreada2 = await models.areas.Crear({ ...area2, establecimientosId: 2 })
+    })
+    it(`@ICE_API_1_1 areas con los establecimientos`, async () => {
+      let establecimientosId = areasCreada['establecimientosId']
+      let params = { establecimientosId }
+      let url = `/api/web/areas/establecimientos/${establecimientosId}`
+      let res = await request(app).get(url)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)
       expect(res.body.datos.length).to.equal(1)
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, res, codigoApi, url, params })
       generatorDocs.OK({ docs, doc: API_1, res })
+    })
+
+    it(`@ICE_API_1_2 establecimientosId no es un numero`, async () => {
+      let establecimientosId = 'a'
+      let params = { establecimientosId }
+      let url = `/api/web/areas/establecimientos/${establecimientosId}`
+      let res = await request(app).get(url)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_1_EQUI, res, codigoApi, url, params })
+    })
+
+    it(`@ICE_API_1_3 establecimientosId debe ser minimo 1`, async () => {
+      let establecimientosId = 0
+      let params = { establecimientosId }
+      let url = `/api/web/areas/establecimientos/${establecimientosId}`
+      let res = await request(app).get(url)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_1_EQUI, res, codigoApi, url, params })
     })
   })
 
-  describe('Crear un area', () => {
-    let { API_2 } = API
-    it('@CP2 OK', async () => {
-      let req = area
+  describe('API_2 Crear un area', () => {
+    const { API_2 } = API
+    let { API_2_EQUI } = EQUI
+    let codigoApi = 'API_2'
+
+    beforeEach(async () => {
+    })
+
+    it('@ICE_API_2_01 area creado existosamente', async () => {
+      let req = { ...area, establecimientosId: 1 }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)
       expect(res.body.datos['nombre']).to.equal(area['nombre'])
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
       generatorDocs.OK({ docs, doc: API_2, res, req })
     })
-    it('@CP2.1 El establecimiento no existe')
+
+    it('@ICE_API_2_02 actividad tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad: 1, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_03 actividad tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad: '', nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_04 nombre tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre: 1, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_05 nombre tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre: 0, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_06 fotoUrl tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, fotoUrl: 1, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_07 fotoUrl formato no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, fotoUrl: 'https//', metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_08 metrosCuadrados tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, metrosCuadrados: 1, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '8', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_09 metrosCuadrados tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, metrosCuadrados: 0, descripcionLugar, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '9', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_10 descripcionLugar tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 1, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '10', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_11 descripcionLugar tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 0, establecimientosId: 1 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '11', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_12 establecimientosId tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId: 'a' }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '12', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
+
+    it('@ICE_API_2_13 establecimientosId tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId: 0 }
+      let res = await request(app).post(`/api/web/areas`).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '13', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
+    })
   })
 
-  describe('Actualizar un area', () => {
-    let { API_3 } = API
-    it('@CP3 OK', async () => {
-      let areasCreada = await models.areas.Crear(area)
-      let areaEditada = JSON.parse(JSON.stringify(area))
-      areaEditada['nombre'] = 'Mi nombre editado'
+  describe('API_3 Actualizar un area', () => {
+    const { API_3 } = API
+    let { API_3_EQUI } = EQUI
+    let codigoApi = 'API_3'
+    let areasId, areasCreada = {}
+    beforeEach(async () => {
+      areasCreada = await models.areas.Crear(area)
+      areasId = areasCreada['id']
+    })
+
+    it('@ICE_API_3_01 area actualizada existosamente', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad: 'AA', nombre: 'Mi nombre editado', fotoUrl: 'https://image.png', metrosCuadrados: '50', descripcionLugar: 'AA' }
       let req = areaEditada
-      let res = await request(app).put(`/api/web/areas/${areasCreada['id']}`).send(req)
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)
       expect(res.body.datos).to.equal(true)
       generatorDocs.OK({ docs, doc: API_3, res, req })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
     })
-    it('@CP3.1 No existe area con ese id', async () => {
-      let areaEditada = JSON.parse(JSON.stringify(area))
-      areaEditada['nombre'] = 'Mi nombre editado'
+
+    it('@ICE_API_3_02 actividad tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad: 1, nombre, fotoUrl, metrosCuadrados, descripcionLugar }
       let req = areaEditada
-      let res = await request(app).put(`/api/web/areas/50`).send(req)
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
-      generatorDocs.ERROR({ nombre: 'El id del area no existe', docs, doc: API_3, res, req })
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_03 actividad tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad: '', nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_04 nombre tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre: 1, fotoUrl, metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_05 nombre tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre: '', fotoUrl, metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_06 fotoUrl tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl: 1, metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_07 fotoUrl formato no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl: 'https://', metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_08 metrosCuadrados tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados: 1, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_09 metrosCuadrados tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados: '', descripcionLugar }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '9', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_10 descripcionLugar tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar: 1 }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '10', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_11 descripcionLugar tamano no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar: '' }
+      let req = areaEditada
+      let params = { areasId }
+      let url = `/api/web/areas/${areasId}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '11', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_12 areasId tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId: 'a' }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '12', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
+    })
+
+    it('@ICE_API_3_13 areasId tipo no valido', async () => {
+      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let req = areaEditada
+      let params = { areasId: 0 }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).put(url).send(req)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '13', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
     })
   })
 
-  describe('Obtener un area', () => {
-    let { API_4 } = API
-    it('@CP4 OK', async () => {
-       let areasCreada = await models.areas.Crear(area)
-       let areasCreada2 = await models.areas.Crear(area2)
-       let areasId = areasCreada['id']
-      let res = await request(app).get(`/api/web/areas/${areasId}`)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.datos['nombre']).to.equal(areasCreada['nombre'])
-      generatorDocs.OK({ docs, doc: API_4, res})
-    })
-  })
 
-  describe('Borrar un area', () => {
-    let { API_5 } = API
-    it('@CP5 OK', async () => {
-      let areasCreada = await models.areas.Crear(area)
-      let res = await request(app).delete(`/api/web/areas/${areasCreada['id']}`)
-      expect(res.body.codigoEstado).to.equal(200)
+  describe('API_4 Borrar un area', () => {
+    const { API_4 } = API
+    let { API_4_EQUI } = EQUI
+    let codigoApi = 'API_4'
+
+    let areasId, areasCreada = {}
+    beforeEach(async () => {
+      areasCreada = await models.areas.Crear(area)
+      areasId = areasCreada['id']
+    })
+
+    it('@ICE_API_4_1 Eliminada una area de forma correcta', async () => {
+      let params = { areasId }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).delete(url)
       expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.datos).to.equal(true)
-      generatorDocs.OK({ docs, doc: API_5, res})
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_4, res })
     })
-    it('@CP5.1 area no existe', async () => {
-      let res = await request(app).delete(`/api/web/areas/55`)
-      expect(res.body.codigoEstado).to.equal(200)
+
+    it('@ICE_API_4_2 areasId no valido numero', async () => {
+      let params = { areasId: 0 }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).delete(url)
       expect(res.body.estado).to.equal(false)
-      generatorDocs.ERROR({ nombre: 'El id del area no existe', docs, doc: API_5, res })
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
+    })
+
+    it('@ICE_API_4_3 areasId no valido tipo de dato', async () => {
+      let params = { areasId: 'a' }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).delete(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
+    })
+
+    it('@ICE_API_4_4 areasId no exite', async () => {
+      let params = { areasId: 50 }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).delete(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
+    })
+  })
+
+  describe('API_5 Obtener un area', () => {
+    const { API_5 } = API
+    let { API_5_EQUI } = EQUI
+    let codigoApi = 'API_5'
+
+    let areasId, areasCreada = {}
+    beforeEach(async () => {
+      areasCreada = await models.areas.Crear(area)
+      areasId = areasCreada['id']
+    })
+
+    it('@ICE_API_5_1 Eliminada una area de forma correcta', async () => {
+      let params = { areasId }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_5, res })
+    })
+
+    it('@ICE_API_5_2 areasId no valido numero', async () => {
+      let params = { areasId: 0 }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
+    })
+
+    it('@ICE_API_5_3 areasId no valido tipo de dato', async () => {
+      let params = { areasId: 'a' }
+      let url = `/api/web/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
     })
   })
 })

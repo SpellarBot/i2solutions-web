@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     actividad: { type: DataTypes.STRING },
     nombre: { type: DataTypes.STRING },
     fotoUrl: { type: DataTypes.STRING },
-    metrosCuadrados: { type: DataTypes.STRING },
+    metrosCuadrados: { type: DataTypes.STRING }, // revisar
     descripcionLugar: { type: DataTypes.STRING }
   }, {
     name: {
