@@ -17,6 +17,7 @@ import EstablecimientoVer from '@/components/EstablecimientoVer'
 import VerPuestos from '@/components/VerPuestos'
 import PuestoEditar from '@/components/PuestoEditar'
 import PuestoCrear from '@/components/PuestoCrear'
+import DashboardEstablecimiento from '@/components/DashboardEstablecimiento'
 
 Vue.use(Router)
 
@@ -96,6 +97,11 @@ export default new Router({
       path: '/crearPuesto',
       name: 'CrearPuesto',
       component: PuestoCrear,
+      beforeEnter: AuthGuard
+    }, {
+      path: '/dashboard/:empresaId',
+      name: 'DashboardEstablecimiento',
+      component: DashboardEstablecimiento,
       beforeEnter: AuthGuard
     }
   ]

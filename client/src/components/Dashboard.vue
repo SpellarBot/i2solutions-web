@@ -1,8 +1,63 @@
 <template>
   <main id="dashboard">
     <app-navbar></app-navbar>
-    <h1>Dashboard</h1>
-    <v-btn
+    <h1>Empresas</h1>
+    <v-container grid-list-md>
+      <v-layout row wrap>
+        <!--v-flex xs12 md6 lg4 v-for="i in 9" :key="i">
+          <v-card>
+            <v-card-media class="white--text"
+            src="http://lorempixel.com/640/480"
+            height="240px"
+            width="320px"
+            >
+          </v-card-media>
+          Los Pollos Hermanos 2
+        </v-card>
+      </v-flex-->
+      <v-flex xs12 md6 lg4>
+        <v-card
+        hover
+        @click.native="dashboardEstablecimientos(0)">
+          <v-card-media class="white--text"
+            src="https://www.dondevive.org/wp-content/uploads/2016/05/donde-viven-el-pollo.jpg"
+            height="240px"
+            width="320px"
+            >
+          </v-card-media>
+          <h3>Los Pollos Hermanos 2</h3>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 md6 lg4>
+        <v-card
+        hover
+        @click.native="dashboardEstablecimientos(1)">
+          <v-card-media class="white--text"
+            src="http://mudanzasdiagonal.com/img/empaquetado-de-enseres.jpg"
+            height="240px"
+            width="320px"
+            >
+          </v-card-media>
+          <h3>Empaquetados Mendoza</h3>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 md6 lg4>
+        <v-card
+        hover
+        @click.native="dashboardEstablecimientos(2)">
+          <v-card-media class="white--text"
+            src="https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg"
+            height="240px"
+            width="320px"
+            >
+          </v-card-media>
+          <h3>Encotech</h3>
+        </v-card>
+      </v-flex>
+
+    </v-layout>
+  </v-container>
+    <!--v-btn
       @click=" crearEmpresa"
     >
       Crear Empresa
@@ -37,7 +92,7 @@
       v-model="snackbar"
     >
       {{mensajeSnackbar}}
-    </v-snackbar>
+    </v-snackbar-->
   </main>
 </template>
 
@@ -88,6 +143,10 @@ export default {
     crearEstablecimiento () {
       this.$store.dispatch('empresas')
       router.push('/crearEstablecimiento')
+    },
+    dashboardEstablecimientos (empresaId) {
+      console.log(empresaId)
+      router.push({ name: 'DashboardEstablecimiento', params: { empresaId: empresaId } })
     }
   }
 }
