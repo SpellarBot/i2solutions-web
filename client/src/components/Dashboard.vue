@@ -1,8 +1,10 @@
 <template>
   <main id="dashboard">
     <app-navbar></app-navbar>
-    <h1>Empresas</h1>
     <v-container grid-list-md>
+      <br>
+      <h2 class="text-md-left">Empresas</h2>
+      <br>
       <v-layout row wrap>
         <!--v-flex xs12 md6 lg4 v-for="i in 9" :key="i">
           <v-card>
@@ -15,46 +17,30 @@
           Los Pollos Hermanos 2
         </v-card>
       </v-flex-->
-      <v-flex xs12 md6 lg4>
-        <v-card
-        hover
-        @click.native="dashboardEstablecimientos(0)">
-          <v-card-media class="white--text"
-            src="https://www.dondevive.org/wp-content/uploads/2016/05/donde-viven-el-pollo.jpg"
-            height="240px"
-            width="320px"
-            >
-          </v-card-media>
-          <h3>Los Pollos Hermanos 2</h3>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 md6 lg4>
-        <v-card
-        hover
-        @click.native="dashboardEstablecimientos(1)">
-          <v-card-media class="white--text"
-            src="http://mudanzasdiagonal.com/img/empaquetado-de-enseres.jpg"
-            height="240px"
-            width="320px"
-            >
-          </v-card-media>
-          <h3>Empaquetados Mendoza</h3>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 md6 lg4>
-        <v-card
-        hover
-        @click.native="dashboardEstablecimientos(2)">
-          <v-card-media class="white--text"
-            src="https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg"
-            height="240px"
-            width="320px"
-            >
-          </v-card-media>
-          <h3>Encotech</h3>
-        </v-card>
-      </v-flex>
-
+        <v-flex
+          v-for="(empresa,index) in empresas" :key="empresa.id"
+          xs10 offset-xs1
+          md4 offset-md0
+        >
+          <div v-if="index%3 == 0 && index > 0"> <br><br> </div>
+            <v-card
+            height="100%"
+            raised
+            hover
+            @click.native="dashboardEstablecimientos(empresa.id)">
+            <div v-if="empresa.novedad">
+              !
+            </div>
+            <v-card-title  class="justify-center">
+              <p class="headline" >{{empresa.nombre}}</p>
+            </v-card-title>
+            <v-card-media class="white--text"
+              :src=empresa.imagen
+              height="240px"
+              >
+            </v-card-media>
+          </v-card>
+        </v-flex>
     </v-layout>
   </v-container>
     <!--v-btn
@@ -104,7 +90,34 @@ export default {
     return {
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      empresas: [
+        {
+          nombre: 'Los pollos hermanos 2',
+          imagen: 'https://www.dondevive.org/wp-content/uploads/2016/05/donde-viven-el-pollo.jpg',
+          novedad: true,
+          id: 1
+        },
+        {
+          nombre: 'Empaquetados Mendoza',
+          imagen: 'http://mudanzasdiagonal.com/img/empaquetado-de-enseres.jpg',
+          novedad: false,
+          id: 2
+        },
+        {
+          nombre: 'Encotech',
+          imagen: 'https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg',
+          novedad: false,
+          id: 3
+        },
+        {
+          nombre: 'Encotech',
+          imagen: 'https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg',
+          novedad: false,
+          id: 3
+        }
+
+      ]
     }
   },
   methods: {
