@@ -449,7 +449,7 @@ module.exports = {
     ],
     intersecciones: {
       '1': {
-        descripcion: 'Eliminada una empresa de forma correcta',
+        descripcion: 'Eliminada un establecimiento de forma correcta',
         params: {
           'establecimientosId': { codigo: '1' }
         }

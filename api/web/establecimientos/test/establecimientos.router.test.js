@@ -17,7 +17,7 @@ const models = db.db
 let docs = []
 let equivalencias = {}
 
-describe('Establecimientos', () => {
+describe('ESTABLECIMIENTOS', () => {
   let { establecimientos, empresas } = dump
   let empresa = empresas.VALIDOS[0]
   let establecimiento = establecimientos.VALIDOS[0]
