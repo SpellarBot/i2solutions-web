@@ -29,9 +29,9 @@ module.exports = {
       },
       { nombre: 'fechaCapacitacion',
         casos: [
-          { codigo: 'C31', descripcion: `{ \'type\': \'string\', type: 'date-time' EJ: 2018-04-25T04:27:34Z }`, valido: true },
+          { codigo: 'C31', descripcion: '{ \'type\': \'string\', type: \'date-time\' EJ: 2018-04-25T04:27:34Z }', valido: true },
           { codigo: 'C32', descripcion: 'type: !string', valido: false },
-          { codigo: 'C33', descripcion: 'type: !date-time', valido: false },
+          { codigo: 'C33', descripcion: 'type: !date-time', valido: false }
         ]
       },
       { nombre: 'areasId',
@@ -165,7 +165,7 @@ module.exports = {
           'fechaCapacitacion': { codigo: 'C31' },
           'areasId': { codigo: 'C43' }
         }
-      },
+      }
     }
   },
   API_2_EQUI: {
@@ -198,9 +198,9 @@ module.exports = {
       },
       { nombre: 'fechaCapacitacion',
         casos: [
-          { codigo: 'C31', descripcion: `{ \'type\': \'string\', type: 'date-time' EJ: 2018-04-25T04:27:34Z }`, valido: true },
+          { codigo: 'C31', descripcion: '{ \'type\': \'string\', type: \'date-time\' EJ: 2018-04-25T04:27:34Z }', valido: true },
           { codigo: 'C32', descripcion: 'type: !string', valido: false },
-          { codigo: 'C33', descripcion: 'type: !date-time', valido: false },
+          { codigo: 'C33', descripcion: 'type: !date-time', valido: false }
         ]
       }
     ],

@@ -160,30 +160,30 @@ ajv.addKeyword('cedula', {
   },
   errors: true
 })
-const validator = require('validator')
+// const validator = require('validator')
 
-ajv.addKeyword('date-custom', function (data) {
-  validate: function xyz (schema, data) {
-    xyz.errors = []
-    let type = 'cedula'
-    if (!schema) {
-      type = 'ruc'
-    }
-    let [ err, mensaje ] = verificadorCedulaRuc(`${data}`, type)
-    if (err) {
-      xyz.errors.push({
-        keyword: type,
-        message: mensaje,
-        params: {
-          keyword: type
-        }
-      })
-    }
-    return !err
-    // return validator.isRFC3339(data)
-  }
-  errors: true
-})
+// ajv.addKeyword('date-custom', function (data) {
+//   validate: function xyz (schema, data) {
+//     xyz.errors = []
+//     let type = 'cedula'
+//     if (!schema) {
+//       type = 'ruc'
+//     }
+//     let [ err, mensaje ] = verificadorCedulaRuc(`${data}`, type)
+//     if (err) {
+//       xyz.errors.push({
+//         keyword: type,
+//         message: mensaje,
+//         params: {
+//           keyword: type
+//         }
+//       })
+//     }
+//     return !err
+//     // return validator.isRFC3339(data)
+//   }
+//   errors: true
+// })
 
 module.exports = {
   jsonToInt (json, propiedades) {

@@ -69,8 +69,8 @@ _response_
       "nombres": "matriz",
       "direccion": "22050 Felipe Rampa",
       "ruc": "0923651688001",
-      "fechaCreacion": "2018-07-07 22:12:22.211 +00:00",
-      "fechaActualizacion": "2018-07-07 22:12:22.211 +00:00",
+      "fechaCreacion": "2018-07-08 22:15:09.045 +00:00",
+      "fechaActualizacion": "2018-07-08 22:15:09.045 +00:00",
       "empresasId": 1
     },
     {
@@ -78,8 +78,8 @@ _response_
       "nombres": "Lira - Barajas",
       "direccion": "0119 Laboy Mercado",
       "ruc": "2023651688001",
-      "fechaCreacion": "2018-07-07 22:12:22.214 +00:00",
-      "fechaActualizacion": "2018-07-07 22:12:22.214 +00:00",
+      "fechaCreacion": "2018-07-08 22:15:09.046 +00:00",
+      "fechaActualizacion": "2018-07-08 22:15:09.046 +00:00",
       "empresasId": 1
     }
   ],
@@ -302,8 +302,8 @@ _response_
     "direccion": "22050 Felipe Rampa",
     "ruc": "0923651688001",
     "empresasId": 1,
-    "fechaActualizacion": "2018-07-07T22:12:22.410Z",
-    "fechaCreacion": "2018-07-07T22:12:22.410Z"
+    "fechaActualizacion": "2018-07-08T22:15:09.165Z",
+    "fechaCreacion": "2018-07-08T22:15:09.165Z"
   },
   "codigoEstado": 200
 }
@@ -1941,7 +1941,7 @@ ___
 
 __ICE_API_4[1]__
 
-Eliminada una empresa de forma correcta
+Eliminada un establecimiento de forma correcta
 
 __Datos prueba__
 

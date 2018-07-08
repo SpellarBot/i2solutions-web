@@ -41,8 +41,8 @@ _response_
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-07 22:12:19.684 +00:00",
-      "fechaActualizacion": "2018-07-07 22:12:19.684 +00:00"
+      "fechaCreacion": "2018-07-08 22:15:07.589 +00:00",
+      "fechaActualizacion": "2018-07-08 22:15:07.589 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -268,16 +268,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-07T22:12:19.766Z",
-    "fechaCreacion": "2018-07-07T22:12:19.766Z",
+    "fechaActualizacion": "2018-07-08T22:15:07.663Z",
+    "fechaCreacion": "2018-07-08T22:15:07.663Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-07T22:12:19.768Z",
-      "fechaCreacion": "2018-07-07T22:12:19.768Z"
+      "fechaActualizacion": "2018-07-08T22:15:07.665Z",
+      "fechaCreacion": "2018-07-08T22:15:07.665Z"
     }
   },
   "codigoEstado": 200
@@ -2063,16 +2063,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-07T22:12:21.858Z",
-    "fechaActualizacion": "2018-07-07T22:12:21.858Z",
+    "fechaCreacion": "2018-07-08T22:15:08.853Z",
+    "fechaActualizacion": "2018-07-08T22:15:08.853Z",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-07 22:12:21.860 +00:00",
-        "fechaActualizacion": "2018-07-07 22:12:21.860 +00:00",
+        "fechaCreacion": "2018-07-08 22:15:08.855 +00:00",
+        "fechaActualizacion": "2018-07-08 22:15:08.855 +00:00",
         "empresasId": 1
       },
       {
@@ -2080,8 +2080,8 @@ _response_
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-07 22:12:21.863 +00:00",
-        "fechaActualizacion": "2018-07-07 22:12:21.863 +00:00",
+        "fechaCreacion": "2018-07-08 22:15:08.856 +00:00",
+        "fechaActualizacion": "2018-07-08 22:15:08.856 +00:00",
         "empresasId": 1
       }
     ]
