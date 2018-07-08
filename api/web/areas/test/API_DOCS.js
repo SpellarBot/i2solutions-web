@@ -43,7 +43,7 @@ module.exports = {
     ],
     errors: []
   },
-  API_4: {
+  API_5: {
     nombre: 'Obtener una area',
     metodo: 'GET',
     descripcion: '',
@@ -54,7 +54,7 @@ module.exports = {
     body: [],
     errors: []
   },
-  API_5: {
+  API_4: {
     nombre: 'Eliminar area',
     metodo: 'DELETE',
     descripcion: '',

@@ -31,10 +31,10 @@
           <p> RUC: 1310539752001</p>
           <span class="link"> Número Áreas: 2</span>
           <span class="link" v-on:click="visualizarPuestos"> Número Puestos: 2</span>
-          <span class="link" v-on:click="crearEmpresa"> Número Personas: 3</span>
-          <span class="link" v-on:click="crearEmpresa"> Número Accidentes: 1</span>
-          <span class="link" v-on:click="crearEmpresa"> Número Capacitaciones: 0</span>
-          <span class="link"> Novedades sin arender: 1</span>
+          <span class="link" v-on:click="visualizarPersonas"> Número Personas: 2</span>
+          <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: 2</span>
+          <span class="link" v-on:click="visualizarCapacitaciones"> Número Capacitaciones: 2</span>
+          <span class="link"> Novedades sin arender: 2</span>
         </v-card>
       </v-flex>
       <v-flex xs12 md6 lg4 v-if="this.id === 1">
@@ -69,10 +69,22 @@
 
   </template>
     <footer>
-    <DialogPuestos
+    <DialogPuestosFromEstablecimientos
     :visible="visiblePuestos"
     @close="visiblePuestos=false"
-    ></DialogPuestos>
+    ></DialogPuestosFromEstablecimientos>
+    <DialogPersonasFromEstablecimientos
+    :visible="visiblePersonas"
+    @close="visiblePersonas=false"
+    ></DialogPersonasFromEstablecimientos>
+    <DialogAccidentesFromEstablecimientos
+    :visible="visibleAccidentes"
+    @close="visibleAccidentes=false"
+    ></DialogAccidentesFromEstablecimientos>
+    <DialogCapacitacionesFromEstablecimientos
+    :visible="visibleCapacitaciones"
+    @close="visibleCapacitaciones=false"
+    ></DialogCapacitacionesFromEstablecimientos>
   </footer>
   </main>
 
@@ -80,9 +92,17 @@
 
 <script>
 import router from '../router'
-import DialogPuestos from './DialogPuestos'
+import DialogPuestosFromEstablecimientos from './DialogPuestosFromEstablecimientos'
+import DialogPersonasFromEstablecimientos from './DialogPersonasFromEstablecimientos'
+import DialogAccidentesFromEstablecimientos from './DialogAccidentesFromEstablecimientos'
+import DialogCapacitacionesFromEstablecimientos from './DialogCapacitacionesFromEstablecimientos'
 export default {
-  components: { DialogPuestos },
+  components: {
+    DialogPuestosFromEstablecimientos,
+    DialogPersonasFromEstablecimientos,
+    DialogAccidentesFromEstablecimientos,
+    DialogCapacitacionesFromEstablecimientos
+  },
   data () {
     return {
       loading: false,
@@ -92,7 +112,10 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      visiblePuestos: false
+      visiblePuestos: false,
+      visiblePersonas: false,
+      visibleAccidentes: false,
+      visibleCapacitaciones: false
     }
   },
   created () {
@@ -124,6 +147,15 @@ export default {
     },
     visualizarPuestos () {
       this.visiblePuestos = true
+    },
+    visualizarPersonas () {
+      this.visiblePersonas = true
+    },
+    visualizarAccidentes () {
+      this.visibleAccidentes = true
+    },
+    visualizarCapacitaciones () {
+      this.visibleCapacitaciones = true
     },
     logout () {
       this.$store.dispatch('logout')
