@@ -54,10 +54,10 @@
                       <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.numPersonas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visibleAccidentes">#Accidentes: {{establecimiento.numAccidentes}}</span>
+                      <span class="link" v-on:click="visualizarAccidentes">#Accidentes: {{establecimiento.numAccidentes}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visibleCapacitaciones">#Capacitaciones: {{establecimiento.numCapacitaciones}}</span>
+                      <span class="link" v-on:click="visualizarCapacitaciones">#Capacitaciones: {{establecimiento.numCapacitaciones}}</span>
                     </v-flex>
                   </v-layout>
                 </v-container>
