@@ -5,6 +5,8 @@ const schema = require('./API_SCHEMA')
 const validar = require('../../utils').schemaFormato
 const utils = require('../../utils')
 module.exports = (app) => {
+  // TODO: anadir un puestos a un area por bulk
+
   // identificador: API_1
   // obtener las areas de un establecimiento
   app.route('/areas/establecimientos/:establecimientosId')

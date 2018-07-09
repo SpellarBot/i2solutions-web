@@ -1,11 +1,11 @@
-# Api Capacitaciones
-## Crear una capacitacion
+# Api Equipos
+## Crear un equipo
 
 > Código: API_1
 
-> Descripción: Crear una capacitacion
+> Descripción: Crear un equipo
 
-> Url : /api/web/capacitaciones
+> Url : /api/web/equipos
 
 #### Clases de equivalencia
 
@@ -53,56 +53,38 @@
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> tema</td>
+				<td> fotoUrl</td>
 				<td> <a id='CE_API_1[C21]'>CE_API_1[C21]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> 'type': 'string', 'format': 'url'</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> tema</td>
+				<td> fotoUrl</td>
 				<td> <a id='CE_API_1[C22]'>CE_API_1[C22]</a> </td>
 				<td> 'type': !'string'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> tema</td>
+				<td> fotoUrl</td>
 				<td> <a id='CE_API_1[C23]'>CE_API_1[C23]</a> </td>
-				<td> minLength: !2 </td>
+				<td> format: !url </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> fechaCapacitacion</td>
+				<td> cantidad</td>
 				<td> <a id='CE_API_1[C31]'>CE_API_1[C31]</a> </td>
-				<td> { 'type': 'string', type: 'date-time' EJ: 2018-04-25T04:27:34Z }</td>
-				<td> válido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fechaCapacitacion</td>
-				<td> <a id='CE_API_1[C32]'>CE_API_1[C32]</a> </td>
-				<td> type: !string</td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fechaCapacitacion</td>
-				<td> <a id='CE_API_1[C33]'>CE_API_1[C33]</a> </td>
-				<td> type: !date-time</td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #82E0AA' >
-				<td> areasId</td>
-				<td> <a id='CE_API_1[C41]'>CE_API_1[C41]</a> </td>
 				<td> { 'type': 'number', minimum: 1 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> areasId</td>
-				<td> <a id='CE_API_1[C42]'>CE_API_1[C42]</a> </td>
+				<td> cantidad</td>
+				<td> <a id='CE_API_1[C32]'>CE_API_1[C32]</a> </td>
 				<td> 'type': !'number'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> areasId</td>
-				<td> <a id='CE_API_1[C43]'>CE_API_1[C43]</a> </td>
+				<td> cantidad</td>
+				<td> <a id='CE_API_1[C33]'>CE_API_1[C33]</a> </td>
 				<td> minimum: !1 </td>
 				<td> invalido </td>
 			</tr>
@@ -113,24 +95,23 @@
 
 __ICE_API_1[1]__
 
-Crear un capacitacion de forma correcta
+Crear un equipo de forma correcta
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -143,13 +124,12 @@ _response_
   "estado": true,
   "datos": {
     "id": 1,
-    "nombre": "Joel Rodriguez",
-    "descripcion": "La capacitación fue un éxito",
-    "tema": "Como hacer que todo valga",
-    "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
-    "areasId": 1,
-    "fechaActualizacion": "2018-07-09T21:15:25.285Z",
-    "fechaCreacion": "2018-07-09T21:15:25.285Z"
+    "nombre": "Extintor",
+    "descripcion": "esta hecho",
+    "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+    "cantidad": 1,
+    "fechaActualizacion": "2018-07-09T21:15:27.702Z",
+    "fechaCreacion": "2018-07-09T21:15:27.702Z"
   },
   "codigoEstado": 200
 }
@@ -164,18 +144,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
   "nombre": 1,
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -202,18 +181,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
   "nombre": "",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -240,18 +218,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
+  "nombre": "Extintor",
   "descripcion": 1,
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -278,18 +255,16 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
+  "nombre": "Extintor",
   "descripcion": "",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "cantidad": 1
 }
 ```
 
@@ -310,24 +285,23 @@ _response_
 
 __ICE_API_1[6]__
 
-tema tipo no valido
+fotoUrl tipo no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": 1,
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": 1,
+  "cantidad": 1
 }
 ```
 
@@ -339,7 +313,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "tema": "debe ser string"
+    "fotoUrl": "debe ser string"
   },
   "codigoEstado": 200
 }
@@ -348,24 +322,23 @@ _response_
 
 __ICE_API_1[7]__
 
-tema tamano no valido
+fotoUrl formato no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 1
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "https://",
+  "cantidad": 1
 }
 ```
 
@@ -377,7 +350,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "tema": "no debe contener menos de 2 caracteres"
+    "fotoUrl": "debe coincidir con el formato \"url\""
   },
   "codigoEstado": 200
 }
@@ -386,24 +359,23 @@ _response_
 
 __ICE_API_1[8]__
 
-fechaCapacitacion tipo no valido
+cantidad tipo no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": 1,
-  "areasId": 1
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": "a"
 }
 ```
 
@@ -415,7 +387,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe ser string"
+    "cantidad": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -424,24 +396,23 @@ _response_
 
 __ICE_API_1[9]__
 
-fechaCapacitacion formato no valido
+cantidad tamano no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones
+> /api/web/equipos
 
-POST /api/web/capacitaciones
+POST /api/web/equipos
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2017-08-09",
-  "areasId": 1
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": -1
 }
 ```
 
@@ -453,83 +424,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe coincidir con el formato \"date-time\""
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_1[10]__
-
-areasId tipo no valido
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/capacitaciones
-
-POST /api/web/capacitaciones
-
-_request o body_
-```js
-{
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": "a"
-}
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "areasId": "debe ser number"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_1[11]__
-
-areasId tamano no valido
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/capacitaciones
-
-POST /api/web/capacitaciones
-
-_request o body_
-```js
-{
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z",
-  "areasId": 0
-}
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "areasId": "debe ser >= 1"
+    "cantidad": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
@@ -539,13 +434,13 @@ _response_
 ___
 
 
-## Actualizar una capacitacion
+## Actualizar una equipo
 
 > Código: API_2
 
-> Descripción: Actualizar una capacitacion
+> Descripción: Actualizar un equipo
 
-> Url : /api/web/capacitaciones/:capacitacionesId
+> Url : /api/web/equipos/:equiposId
 
 #### Clases de equivalencia
 
@@ -593,55 +488,55 @@ ___
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> tema</td>
+				<td> fotoUrl</td>
 				<td> <a id='CE_API_2[C21]'>CE_API_2[C21]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> 'type': 'string', 'format': 'url'</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> tema</td>
+				<td> fotoUrl</td>
 				<td> <a id='CE_API_2[C22]'>CE_API_2[C22]</a> </td>
 				<td> 'type': !'string'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> tema</td>
+				<td> fotoUrl</td>
 				<td> <a id='CE_API_2[C23]'>CE_API_2[C23]</a> </td>
-				<td> minLength: !2 </td>
+				<td> format: !url </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> fechaCapacitacion</td>
+				<td> cantidad</td>
 				<td> <a id='CE_API_2[C31]'>CE_API_2[C31]</a> </td>
-				<td> { 'type': 'string', type: 'date-time' EJ: 2018-04-25T04:27:34Z }</td>
+				<td> { 'type': 'number', minimum: 1 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> fechaCapacitacion</td>
+				<td> cantidad</td>
 				<td> <a id='CE_API_2[C32]'>CE_API_2[C32]</a> </td>
-				<td> type: !string</td>
+				<td> 'type': !'number'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> fechaCapacitacion</td>
+				<td> cantidad</td>
 				<td> <a id='CE_API_2[C33]'>CE_API_2[C33]</a> </td>
-				<td> type: !date-time</td>
+				<td> minimum: !1 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td>  capacitacionesId </td>
+				<td>  equiposId </td>
 				<td> <a id='CE_API_2[C41]'>CE_API_2[C41]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  capacitacionesId </td>
+				<td>  equiposId </td>
 				<td> <a id='CE_API_2[C42]'>CE_API_2[C42]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  capacitacionesId </td>
+				<td>  equiposId </td>
 				<td> <a id='CE_API_2[C43]'>CE_API_2[C43]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
@@ -653,7 +548,7 @@ ___
 
 __ICE_API_2[1]__
 
-Actualizar capacitacion de forma correcta
+Actualizar equipo de forma correcta
 
 <table border="1">
   <tr>
@@ -669,20 +564,20 @@ Actualizar capacitacion de forma correcta
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>aaa</td>
-  </tr>
-  <tr>
-    <td>tema</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
     <td>aa</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>https://image.png</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>cantidad</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -692,17 +587,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
   "nombre": "aa",
-  "descripcion": "aaa",
-  "tema": "aa",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "descripcion": "aa",
+  "fotoUrl": "https://image.png",
+  "cantidad": 1
 }
 ```
 
@@ -737,20 +632,20 @@ nombre tipo no valido
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -760,17 +655,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
   "nombre": 1,
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -807,20 +702,20 @@ nombre tamano no valido
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -830,17 +725,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
   "nombre": "",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -872,7 +767,7 @@ descripcion tipo no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
@@ -880,17 +775,17 @@ descripcion tipo no valido
     <td>1</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -900,17 +795,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
+  "nombre": "Extintor",
   "descripcion": 1,
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -942,7 +837,7 @@ descripcion tamano no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
@@ -950,17 +845,17 @@ descripcion tamano no valido
     <td></td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -970,17 +865,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
+  "nombre": "Extintor",
   "descripcion": "",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -1001,7 +896,7 @@ _response_
 
 __ICE_API_2[6]__
 
-tema tipo no valido
+fotoUrl tipo no valido
 
 <table border="1">
   <tr>
@@ -1012,25 +907,25 @@ tema tipo no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C22]"> CE_API_2[C22]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -1040,17 +935,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": 1,
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": 1,
+  "cantidad": 1
 }
 ```
 
@@ -1062,7 +957,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "tema": "debe ser string"
+    "fotoUrl": "debe ser string"
   },
   "codigoEstado": 200
 }
@@ -1071,7 +966,7 @@ _response_
 
 __ICE_API_2[7]__
 
-tema tamano no valido
+fotoUrl formato no valido
 
 <table border="1">
   <tr>
@@ -1082,25 +977,25 @@ tema tamano no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C23]"> CE_API_2[C23]</a></td>
-    <td></td>
+    <td>https://</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -1110,17 +1005,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "https://",
+  "cantidad": 1
 }
 ```
 
@@ -1132,7 +1027,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "tema": "no debe contener menos de 2 caracteres"
+    "fotoUrl": "debe coincidir con el formato \"url\""
   },
   "codigoEstado": 200
 }
@@ -1141,7 +1036,7 @@ _response_
 
 __ICE_API_2[8]__
 
-fechaCapacitacion tipo no valido
+cantidad tipo no valido
 
 <table border="1">
   <tr>
@@ -1152,25 +1047,25 @@ fechaCapacitacion tipo no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C32]"> CE_API_2[C32]</a></td>
-    <td>1</td>
+    <td>a</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -1180,17 +1075,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": 1
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": "a"
 }
 ```
 
@@ -1202,7 +1097,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe ser string"
+    "cantidad": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -1211,7 +1106,7 @@ _response_
 
 __ICE_API_2[9]__
 
-fechaCapacitacion formato no valido
+cantidad tamano no valido
 
 <table border="1">
   <tr>
@@ -1222,25 +1117,25 @@ fechaCapacitacion formato no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C33]"> CE_API_2[C33]</a></td>
-    <td>2018-18-02</td>
+    <td>0</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
@@ -1250,17 +1145,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/1
+PUT /api/web/equipos/1
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-18-02"
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 0
 }
 ```
 
@@ -1272,7 +1167,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe coincidir con el formato \"date-time\""
+    "cantidad": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
@@ -1281,7 +1176,7 @@ _response_
 
 __ICE_API_2[10]__
 
-capacitacionesId tipo no valido
+equiposId tipo no valido
 
 <table border="1">
   <tr>
@@ -1292,25 +1187,25 @@ capacitacionesId tipo no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C42]</a></td>
     <td>a</td>
   </tr>
@@ -1320,17 +1215,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/a
+PUT /api/web/equipos/a
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -1342,7 +1237,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "capacitacionesId": "debe ser number"
+    "equiposId": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -1351,7 +1246,7 @@ _response_
 
 __ICE_API_2[11]__
 
-capacitacionesId tamano no valido
+equiposId tamano no valido
 
 <table border="1">
   <tr>
@@ -1362,25 +1257,25 @@ capacitacionesId tamano no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>Joel Rodriguez</td>
+    <td>Extintor</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>La capacitación fue un éxito</td>
+    <td>esta hecho</td>
   </tr>
   <tr>
-    <td>tema</td>
+    <td>fotoUrl</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>Como hacer que todo valga</td>
+    <td>http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg</td>
   </tr>
   <tr>
-    <td>fechaCapacitacion</td>
+    <td>cantidad</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>capacitacionesId</td>
+    <td>equiposId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C43]</a></td>
     <td>0</td>
   </tr>
@@ -1390,17 +1285,17 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-PUT /api/web/capacitaciones/0
+PUT /api/web/equipos/0
 
 _request o body_
 ```js
 {
-  "nombre": "Joel Rodriguez",
-  "descripcion": "La capacitación fue un éxito",
-  "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2018-04-25T04:27:34Z"
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1
 }
 ```
 
@@ -1412,7 +1307,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "capacitacionesId": "debe ser >= 1"
+    "equiposId": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
@@ -1422,13 +1317,13 @@ _response_
 ___
 
 
-## Eliminar una capacitacion
+## Eliminar un equipo
 
 > Código: API_3
 
-> Descripción: Eliminar una capacitacion
+> Descripción: Eliminar un equipo
 
-> Url : /api/web/capacitaciones/:capacitacionesId
+> Url : /api/web/equipos/:equiposId
 
 #### Clases de equivalencia
 
@@ -1440,19 +1335,19 @@ ___
     <th>Validez</th>
   </tr>
 			<tr style='background-color: #82E0AA' >
-				<td>  capacitacionesId </td>
+				<td>  equiposId </td>
 				<td> <a id='CE_API_3[C01]'>CE_API_3[C01]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  capacitacionesId </td>
+				<td>  equiposId </td>
 				<td> <a id='CE_API_3[C02]'>CE_API_3[C02]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  capacitacionesId </td>
+				<td>  equiposId </td>
 				<td> <a id='CE_API_3[C03]'>CE_API_3[C03]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
@@ -1464,15 +1359,15 @@ ___
 
 __ICE_API_3[1]__
 
-Eliminada una capacitacion de forma correcta
+Eliminar un equipo de forma correcta
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-DELETE /api/web/capacitaciones/1
+DELETE /api/web/equipos/1
 
 _request o body_
 ```js
@@ -1494,15 +1389,15 @@ _response_
 
 __ICE_API_3[2]__
 
-capacitacionesId no valido tipo de dato
+equiposId no valido tipo de dato
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-DELETE /api/web/capacitaciones/a
+DELETE /api/web/equipos/a
 
 _request o body_
 ```js
@@ -1517,7 +1412,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "capacitacionesId": "debe ser number"
+    "equiposId": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -1526,15 +1421,15 @@ _response_
 
 __ICE_API_3[3]__
 
-capacitacionesId  no valido numero
+equiposId  no valido numero
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-DELETE /api/web/capacitaciones/0
+DELETE /api/web/equipos/0
 
 _request o body_
 ```js
@@ -1549,7 +1444,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "capacitacionesId": "debe ser >= 1"
+    "equiposId": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
@@ -1558,15 +1453,15 @@ _response_
 
 __ICE_API_3[4]__
 
-capacitacionesId no exite
+equiposId no exite
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/capacitaciones/:capacitacionesId
+> /api/web/equipos/:equiposId
 
-DELETE /api/web/capacitaciones/50
+DELETE /api/web/equipos/50
 
 _request o body_
 ```js
@@ -1580,7 +1475,577 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "capacitacion con es id no existe",
+  "datos": "equipos con es id no existe",
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Anadir equipo a un puesto
+
+> Código: API_4
+
+> Descripción: Anadir equipo a un puesto
+
+> Url : /api/web/equipos/:equiposId/puestos/:puestosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_4[C01]'>CE_API_4[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_4[C02]'>CE_API_4[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_4[C03]'>CE_API_4[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_4[C11]'>CE_API_4[C11]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_4[C12]'>CE_API_4[C12]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_4[C13]'>CE_API_4[C13]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_4[1]__
+
+Anadir equipo a un puesto de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/1/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "equiposId": "1",
+    "puestosId": "1",
+    "fechaActualizacion": "2018-07-09T21:15:28.676Z",
+    "fechaCreacion": "2018-07-09T21:15:28.676Z"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[2]__
+
+equiposId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/a/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "equiposId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[3]__
+
+equiposId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/0/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "equiposId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[4]__
+
+puestosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/1/puestos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[5]__
+
+puestosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/1/puestos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[6]__
+
+equipo no existe
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/50/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "El equipo no existe",
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[7]__
+
+puesto no existe
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/puestos/:puestosId
+
+PUT /api/web/equipos/1/puestos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "El puesto no existe",
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Anadir equipo a un area
+
+> Código: API_5
+
+> Descripción: Anadir equipo a un area
+
+> Url : /api/web/equipos/:equiposId/areas/:areasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_5[C01]'>CE_API_5[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_5[C02]'>CE_API_5[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_5[C03]'>CE_API_5[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_5[C11]'>CE_API_5[C11]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_5[C12]'>CE_API_5[C12]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_5[C13]'>CE_API_5[C13]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_5[1]__
+
+Anadir equipo a un puesto de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/1/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "equiposId": "1",
+    "areasId": "1",
+    "fechaActualizacion": "2018-07-09T21:15:29.016Z",
+    "fechaCreacion": "2018-07-09T21:15:29.016Z"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[2]__
+
+equiposId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/a/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "equiposId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[3]__
+
+equiposId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/0/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "equiposId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[4]__
+
+areasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/1/areas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[5]__
+
+areasId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/1/areas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[6]__
+
+equiposId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/50/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "El equipo no existe",
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[7]__
+
+areasId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId/areas/:areasId
+
+PUT /api/web/equipos/1/areas/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "El area no existe",
   "codigoEstado": 200
 }
 ```
