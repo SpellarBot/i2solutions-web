@@ -31,7 +31,7 @@
 import CardPersonas from './CardPersonas'
 export default {
   components: { CardPersonas },
-  name: 'DialogPuestos',
+  name: 'DialogPersonas',
   props: ['visible'],
   computed: {
     show: {
