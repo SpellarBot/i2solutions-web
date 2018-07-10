@@ -24,9 +24,11 @@
           Los Pollos Hermanos 2
         </v-card>
       </v-flex-->
-        <v-flex xs12 md5 lg4 v-for="(establecimiento, index) in establecimientos" :key="establecimiento.ruc">
+        <v-flex xs12 md5 lg4
+        v-for="(establecimiento, index) in establecimientos"
+        :key="establecimiento.ruc"
+        v-if="establecimiento.idEmpresa === id">
           <v-card
-          v-if="establecimiento.idEmpresa === id"
           raised
           >
           <div v-if="index%3 == 0 && index > 0"> <br><br> </div>
