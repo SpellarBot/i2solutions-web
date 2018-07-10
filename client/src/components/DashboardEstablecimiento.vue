@@ -8,9 +8,38 @@
       {{ error }}
     </template>
     <template class="content" v-if="valid">
+      <v-layout row wrap>
+        <v-flex xs4 offset-xs4 style="position: relative;">
     <h1>Empresa: "{{ nombreEmpresa() }}"</h1>
+    <v-btn
+              absolute
+              dark
+              fab
+              right
+              color="blue"
+              small
+              @click="visualizarEdicion()"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+              absolute
+              dark
+              fab
+              right
+              color="blue"
+              small
+              class="offseted"
+            >
+              <v-icon>delete</v-icon>
+            </v-btn>
+    <p>Actividad Social: Venta y Distribución de Pollo</p>
+    <p>Razón Social: Vendedora SA</p>
+
+          </v-flex>
+  </v-layout>
     <br>
-    <h2>Establecimientos</h2>
+    <h3>Establecimientos</h3>
     <v-container grid-list-md>
       <v-layout row wrap>
         <!--v-flex xs12 md6 lg4 v-for="i in 9" :key="i">
@@ -91,6 +120,10 @@
     :nombreEstablecimiento="nombreEstablecimiento"
     @close="visibleAreas=false"
     ></DialogAreas>
+    <DialogEditarEmpresas
+    :visible="visibleEdicion"
+    @close="visibleEdicion=false"
+    ></DialogEditarEmpresas>
   </footer>
   </main>
 
@@ -103,13 +136,15 @@ import DialogPersonasFromEstablecimientos from './DialogPersonasFromEstablecimie
 import DialogAccidentesFromEstablecimientos from './DialogAccidentesFromEstablecimientos'
 import DialogCapacitacionesFromEstablecimientos from './DialogCapacitacionesFromEstablecimientos'
 import DialogAreas from './Areas/verAreasDialog'
+import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 export default {
   components: {
     DialogPuestosFromEstablecimientos,
     DialogPersonasFromEstablecimientos,
     DialogAccidentesFromEstablecimientos,
     DialogCapacitacionesFromEstablecimientos,
-    DialogAreas
+    DialogAreas,
+    DialogEditarEmpresas
   },
   data () {
     return {
@@ -125,6 +160,7 @@ export default {
       visibleAccidentes: false,
       visibleCapacitaciones: false,
       visibleAreas: false,
+      visibleEdicion: false,
       establecimientoId: '',
       nombreEstablecimiento: '',
       establecimientos: [
@@ -202,6 +238,10 @@ export default {
     visualizarCapacitaciones () {
       this.visibleCapacitaciones = true
     },
+    visualizarEdicion () {
+      // aqui luego cargare los datos :v
+      this.visibleEdicion = true
+    },
     visualizarAreas (ruc, nombre) {
       this.establecimientoId = ruc
       this.nombreEstablecimiento = nombre
@@ -272,5 +312,8 @@ export default {
 }
 .link:focus {
   outline: -webkit-focus-ring-color auto 5px;
+}
+.offseted {
+  top: 7em;
 }
 </style>
