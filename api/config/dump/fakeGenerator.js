@@ -222,7 +222,8 @@ conexion.Conectar().then(async (db) => {
             let equipo = {
               nombre: equiposDatos[i]['nombre'],
               descripcion: equiposDatos[i]['descripcion'],
-              fotoUrl: equiposDatos[i]['fotoUrl']
+              fotoUrl: equiposDatos[i]['fotoUrl'],
+              cantidad: randomIntFromInterval(0, 10)
             }
             equipos.push(equipo)
 
@@ -232,14 +233,12 @@ conexion.Conectar().then(async (db) => {
 
             // 12. equiposAreas
             await db.equiposAreas.Crear({
-              cantidad: randomIntFromInterval(0, 10),
               equiposId,
               areasId
             })
 
             // 13. equiposPuestos
             await db.equiposPuestos.Crear({
-              cantidad: randomIntFromInterval(0, 10),
               equiposId,
               puestosId
             })

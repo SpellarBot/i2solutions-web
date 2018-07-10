@@ -160,6 +160,24 @@ ajv.addKeyword('cedula', {
   },
   errors: true
 })
+const moment = require('moment')
+ajv.addKeyword('fecha', {
+  validate: function xyz (schema, data) {
+    xyz.errors = []
+    let esValido = moment(data).isValid()
+    if (!esValido) {
+      xyz.errors.push({
+        keyword: 'fecha',
+        message: 'La fecha no es valida',
+        params: {
+          keyword: 'fecha'
+        }
+      })
+    }
+    return esValido
+  },
+  errors: true
+})
 // const validator = require('validator')
 
 // ajv.addKeyword('date-custom', function (data) {

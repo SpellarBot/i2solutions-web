@@ -5,30 +5,7 @@ const schema = require('./API_SCHEMA')
 const validar = require('../../utils').schemaFormato
 const utils = require('../../utils')
 module.exports = (app) => {
-  // obtener capacitaciones por establecimiento
-  // obtener capacitaciones por empresa
-  // anadir personas a capacitaciones por bulk
-
-  // app.route('/capacitaciones/:capacitacionesId')
-  //   .get((req, res) => {
-  //     let params = utils.jsonToInt(req.params, ['empresasId'])
-  //     let { PARAMS } = schema.API_1_SCHEMA
-  //     let [errParams, mensajeParams] = validar(PARAMS, params)
-  //     if (errParams) {
-  //       let resp = responses.NO_OK({ ...mensajeParams })
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     } else {
-  //       let { empresasId } = req.params
-  //       Controller.ObtenerTodos({ empresasId }).then((resp) => {
-  //         res.status(resp.codigoEstado)
-  //         res.json(resp)
-  //       }).catch(resp => {
-  //         res.status(resp.codigoEstado)
-  //         res.json(resp)
-  //       })
-  //     }
-  //   })
+  // TODO: anadir personas a capacitaciones por bulk o individual personasCapacitaciones
 
   // identificador: API_1
   // crear un establecimiento
