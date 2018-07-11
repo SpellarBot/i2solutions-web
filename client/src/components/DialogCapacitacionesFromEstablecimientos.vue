@@ -29,7 +29,7 @@
 import CardCapacitaciones from './CardCapacitaciones'
 export default {
   components: { CardCapacitaciones },
-  name: 'DialogPuestos',
+  name: 'DialogCapacitaciones',
   props: ['visible'],
   computed: {
     show: {
