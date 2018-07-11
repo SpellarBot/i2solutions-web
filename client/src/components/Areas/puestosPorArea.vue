@@ -32,6 +32,9 @@
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarEquipos">#Equipos: {{puesto.numEquipos}}</span>
                         </v-flex>
+                        <v-flex xs6 md6>
+                          <span class="link" v-on:click="visualizarRiesgos">#Pool de Riesgos: </span>
+                        </v-flex>
                       </v-layout>
                     </v-container>
                 </v-card-text>
@@ -48,6 +51,10 @@
     :visible ="visibleEquipos"
     @close ="visibleEquipos=false">
     </DialogEquiposFromPuestos>
+    <DialogRiesgosFromPuestos
+    :visible ="visibleRiesgos"
+    @close ="visibleRiesgos=false">
+    </DialogRiesgosFromPuestos>
   </footer>
   </main>
 </template>
@@ -55,8 +62,9 @@
 <script>
 import DialogNovedadesFromPuestos from '../Novedades/DialogNovedadesFromPuestos'
 import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
+import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 export default{
-  components: {DialogNovedadesFromPuestos, DialogEquiposFromPuestos},
+  components: {DialogNovedadesFromPuestos, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
   name: 'puestosPorArea',
   props: ['idArea'],
   data () {
@@ -64,6 +72,7 @@ export default{
       dumb: false,
       visibleNovedades: false,
       visibleEquipos: false,
+      visibleRiesgos: false,
       puestos:
       [
         {
@@ -105,6 +114,9 @@ export default{
     },
     visualizarEquipos () {
       this.visibleEquipos = true
+    },
+    visualizarRiesgos () {
+      this.visibleRiesgos = true
     }
   }
 }

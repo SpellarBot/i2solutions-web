@@ -48,7 +48,7 @@ export default {
       nombreArea: 'Administrativa',
       novedades: [
         {
-          'idNovedad': 1,
+          'id': 1,
           'descripcion': 'Extintores en deshuso, algunos caducados y con falta de mantenimiento',
           'prioridad': 'Alta',
           'fecha': '17/09/2017',
@@ -56,7 +56,7 @@ export default {
           'puesto': 'Empacadora de Pollos'
         },
         {
-          'idNovedad': 2,
+          'id': 2,
           'descripcion': 'Mal Olor en puestos específicos del area de trabajo, poca operabilidad',
           'prioridad': 'Media',
           'fecha': '17/09/2015',
@@ -64,7 +64,7 @@ export default {
           'puesto': 'Empacadora de Carnes'
         },
         {
-          'idNovedad': 3,
+          'id': 3,
           'descripcion': 'Piso Mojado debido a la reciente limpieza, ocaciona inconvenientes',
           'prioridad': 'Baja',
           'fecha': '17/09/1997',
