@@ -53,9 +53,11 @@
           Los Pollos Hermanos 2
         </v-card>
       </v-flex-->
-        <v-flex xs12 md5 lg4 v-for="(establecimiento, index) in establecimientos" :key="establecimiento.ruc">
+        <v-flex xs12 md5 lg4
+        v-for="(establecimiento, index) in establecimientos"
+        :key="establecimiento.ruc"
+        v-if="establecimiento.idEmpresa === id">
           <v-card
-          v-if="establecimiento.idEmpresa === id"
           raised
           >
           <div v-if="index%3 == 0 && index > 0"> <br><br> </div>
@@ -88,6 +90,9 @@
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarCapacitaciones">#Capacitaciones: {{establecimiento.numCapacitaciones}}</span>
                     </v-flex>
+                    <v-flex xs6 md6>
+                      <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento">#Novedades: {{establecimiento.numNovedades}}</span>
+                    </v-flex>
                   </v-layout>
                 </v-container>
             </v-card-text>
@@ -114,6 +119,10 @@
     :visible="visibleCapacitaciones"
     @close="visibleCapacitaciones=false"
     ></DialogCapacitacionesFromEstablecimientos>
+    <DialogNovedadesFromEstablecimientos
+    :visible="visibleNovedades"
+    @close="visibleNovedades=false"
+    ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
     :visible="visibleAreas"
     :EstablecimientoId="establecimientoId"
@@ -135,6 +144,7 @@ import DialogPuestosFromEstablecimientos from './DialogPuestosFromEstablecimient
 import DialogPersonasFromEstablecimientos from './DialogPersonasFromEstablecimientos'
 import DialogAccidentesFromEstablecimientos from './DialogAccidentesFromEstablecimientos'
 import DialogCapacitacionesFromEstablecimientos from './DialogCapacitacionesFromEstablecimientos'
+import DialogNovedadesFromEstablecimientos from './Novedades/DialogNovedadesFromEstablecimientos'
 import DialogAreas from './Areas/verAreasDialog'
 import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 export default {
@@ -143,6 +153,7 @@ export default {
     DialogPersonasFromEstablecimientos,
     DialogAccidentesFromEstablecimientos,
     DialogCapacitacionesFromEstablecimientos,
+    DialogNovedadesFromEstablecimientos,
     DialogAreas,
     DialogEditarEmpresas
   },
@@ -161,6 +172,7 @@ export default {
       visibleCapacitaciones: false,
       visibleAreas: false,
       visibleEdicion: false,
+      visibleNovedades: false,
       establecimientoId: '',
       nombreEstablecimiento: '',
       establecimientos: [
@@ -237,6 +249,9 @@ export default {
     },
     visualizarCapacitaciones () {
       this.visibleCapacitaciones = true
+    },
+    visualizarNovedadesFromEstablecimiento () {
+      this.visibleNovedades = true
     },
     visualizarEdicion () {
       // aqui luego cargare los datos :v

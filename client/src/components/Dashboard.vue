@@ -19,17 +19,27 @@
       </v-flex-->
         <v-flex
           v-for="(empresa,index) in empresas" :key="empresa.id"
-          xs10 offset-xs1
-          md4 offset-md0
+          xs10
+          md4
         >
           <div v-if="index%3 == 0 && index > 0"> <br><br> </div>
             <v-card
             height="100%"
             raised
             hover
-            @click.native="dashboardEstablecimientos(empresa.id)">
+            @click.native="dashboardEstablecimientos(empresa.id)"
+            >
             <div v-if="empresa.novedad">
-              !
+              <v-btn
+                absolute
+                top
+                right
+                icon
+                depressed
+                class = "btn--plain"
+                >
+                <v-icon color="orange darken-1">priority_high</v-icon>
+              </v-btn>
             </div>
             <v-card-title  class="justify-center">
               <p class="headline" >{{empresa.nombre}}</p>
@@ -79,18 +89,38 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar-->
+    <footer class="clearer">
+      <v-btn
+        top
+        right
+        relative
+        fab
+        @click.native="agregarDialog=true; console.log(agregarDialog)"
+        >
+        <v-icon>add</v-icon>
+      </v-btn>
+      <agregarEmpresa
+      :visible="agregarDialog"
+      @close="agregarDialog=false"
+      ></agregarEmpresa>
+    </footer>
   </main>
 </template>
 
 <script>
 import router from '../router'
+import agregarEmpresa from './Agregar/agregarEmpresa'
 export default {
   name: 'dashboard',
+  components: {
+    agregarEmpresa
+  },
   data () {
     return {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
+      agregarDialog: false,
       empresas: [
         {
           nombre: 'Los pollos hermanos 2',
@@ -158,7 +188,6 @@ export default {
       router.push('/crearEstablecimiento')
     },
     dashboardEstablecimientos (empresaId) {
-      console.log(empresaId)
       router.push({ name: 'DashboardEstablecimiento', params: { empresaId: empresaId } })
     }
   }
@@ -178,5 +207,28 @@ export default {
   color: white;
   font-size: 40px;
   margin-right: 55%;
+}
+.clearer {
+  clear: both;
+}
+.btn--plain {
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 6px;
+  min-width: 0;
+  > .btn__content {
+    padding: 0;
+    opacity: 0.75;
+    &:before {
+      background-color: transparent !important;
+      transition: none !important;
+    }
+  }
+  &:hover {
+    > .btn__content {
+      opacity: 1;
+    }
+  }
 }
 </style>
