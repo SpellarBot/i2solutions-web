@@ -129,15 +129,15 @@ _response_
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-11T18:54:31.744Z",
+    "fecha": "2018-07-11T23:40:06.260Z",
     "fotoUrl": "",
     "fueAtendida": false,
     "id": 1,
     "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
     "prioridad": "media",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-11T18:54:31.745Z",
-    "fechaCreacion": "2018-07-11T18:54:31.745Z"
+    "fechaActualizacion": "2018-07-11T23:40:06.261Z",
+    "fechaCreacion": "2018-07-11T23:40:06.261Z"
   },
   "codigoEstado": 200
 }
@@ -1827,8 +1827,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-11 18:54:32.862 +00:00",
-    "fechaActualizacion": "2018-07-11 18:54:32.862 +00:00",
+    "fechaCreacion": "2018-07-11 23:40:07.341 +00:00",
+    "fechaActualizacion": "2018-07-11 23:40:07.341 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200

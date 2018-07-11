@@ -1,5 +1,5 @@
 module.exports = {
-  API_2_SCHEMA: {
+  API_2_SCHEMA: { // crear una empresa
     BODY: {
       'minProperties': 5,
       // 'additionalProperties': false, // porque el urlFoto no se enviara si la empresa no tiene logo
@@ -14,7 +14,7 @@ module.exports = {
       }
     }
   },
-  API_3_SCHEMA: {
+  API_3_SCHEMA: { // editar una empresa
     BODY: {
       'minProperties': 3,
       // 'additionalProperties': false,  // porque el urlFoto no se enviara si la empresa no tiene logo
@@ -35,7 +35,7 @@ module.exports = {
       }
     }
   },
-  API_4_SCHEMA: {
+  API_4_SCHEMA: { // eliminar una empresa
     PARAMS: {
       'minProperties': 1,
       'additionalProperties': false,
@@ -45,7 +45,7 @@ module.exports = {
       }
     }
   },
-  API_5_SCHEMA: {
+  API_5_SCHEMA: { // obtener una empresa
     PARAMS: {
       'minProperties': 1,
       'additionalProperties': false,
@@ -53,6 +53,27 @@ module.exports = {
       'properties': {
         'empresasId': { 'type': 'number', minimum: 1 }
       }
+    }
+  },
+  API_6_SCHEMA: {
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'empresasId': { 'type': 'number', minimum: 1 }
+      }
+    },
+    REQUEST: {
+      'minProperties': 4,
+      'type': 'object',
+      'properties': {
+        'id': { 'type': 'number', minimum: 1 },
+        'urlFoto': { 'type': 'string', 'format': 'url' },
+        'nombre': { 'type': 'string', minLength: 2 },
+        'tieneNovedades': { 'type': 'boolean' } // muestra si existen o no novedades sin atender algun puesto de la empresa
+      },
+      'required': ['id', 'urlFoto', 'nombre', 'tieneNovedades']
     }
   }
 }

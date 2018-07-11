@@ -41,8 +41,8 @@ _response_
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-11 18:54:27.504 +00:00",
-      "fechaActualizacion": "2018-07-11 18:54:27.504 +00:00"
+      "fechaCreacion": "2018-07-11 23:40:01.701 +00:00",
+      "fechaActualizacion": "2018-07-11 23:40:01.701 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -268,16 +268,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-11T18:54:27.594Z",
-    "fechaCreacion": "2018-07-11T18:54:27.594Z",
+    "fechaActualizacion": "2018-07-11T23:40:01.794Z",
+    "fechaCreacion": "2018-07-11T23:40:01.794Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-11T18:54:27.596Z",
-      "fechaCreacion": "2018-07-11T18:54:27.596Z"
+      "fechaActualizacion": "2018-07-11T23:40:01.795Z",
+      "fechaCreacion": "2018-07-11T23:40:01.795Z"
     }
   },
   "codigoEstado": 200
@@ -2063,16 +2063,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-11T18:54:28.660Z",
-    "fechaActualizacion": "2018-07-11T18:54:28.660Z",
+    "fechaCreacion": "2018-07-11 23:40:02.890 +00:00",
+    "fechaActualizacion": "2018-07-11 23:40:02.890 +00:00",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-11 18:54:28.661 +00:00",
-        "fechaActualizacion": "2018-07-11 18:54:28.661 +00:00",
+        "fechaCreacion": "2018-07-11 23:40:02.892 +00:00",
+        "fechaActualizacion": "2018-07-11 23:40:02.892 +00:00",
         "empresasId": 1
       },
       {
@@ -2080,8 +2080,8 @@ _response_
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-11 18:54:28.662 +00:00",
-        "fechaActualizacion": "2018-07-11 18:54:28.662 +00:00",
+        "fechaCreacion": "2018-07-11 23:40:02.893 +00:00",
+        "fechaActualizacion": "2018-07-11 23:40:02.893 +00:00",
         "empresasId": 1
       }
     ]
@@ -2180,6 +2180,221 @@ _response_
 {
   "estado": false,
   "datos": "La empresa no existe",
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## OBTENER EMPRESAS PARA PAGINA PRINCIPAL FRONT
+
+> Código: API_6
+
+> Descripción: OBTENER EMPRESAS PARA PAGINA PRINCIPAL FRONT
+
+> Url : /api/web/empresas/:empresasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
+				<td>minimum: !1 }</td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+empresa con novedades
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+GET /api/web/administrador/empresas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Zapata S.A.",
+    "actividadComercial": "Integrado sensible al contexto sistema abierto",
+    "razonSocial": "La casa",
+    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+    "fechaCreacion": "2018-07-11 23:40:03.034 +00:00",
+    "fechaActualizacion": "2018-07-11 23:40:03.034 +00:00",
+    "tieneNovedades": true
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+empresa sin novedades
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+GET /api/web/administrador/empresas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Zapata S.A.",
+    "actividadComercial": "Integrado sensible al contexto sistema abierto",
+    "razonSocial": "La casa",
+    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+    "fechaCreacion": "2018-07-11 23:40:03.085 +00:00",
+    "fechaActualizacion": "2018-07-11 23:40:03.085 +00:00",
+    "tieneNovedades": false
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+empresasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+GET /api/web/administrador/empresas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "empresasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[4]__
+
+empresasId no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+GET /api/web/administrador/empresas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "empresasId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[5]__
+
+empresas no existe
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/empresas/:empresasId
+
+GET /api/web/administrador/empresas/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "empresa con es id no existe",
   "codigoEstado": 200
 }
 ```

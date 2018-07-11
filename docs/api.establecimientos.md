@@ -35,8 +35,8 @@ __POST__ __/api/web/establecimientos__
     "direccion": "22050 Felipe Rampa",
     "ruc": "0923651688001",
     "empresasId": 1,
-    "fechaActualizacion": "2018-07-11T18:54:30.582Z",
-    "fechaCreacion": "2018-07-11T18:54:30.582Z"
+    "fechaActualizacion": "2018-07-11T23:40:04.990Z",
+    "fechaCreacion": "2018-07-11T23:40:04.990Z"
   },
   "codigoEstado": 200
 }

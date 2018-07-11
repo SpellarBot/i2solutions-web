@@ -17,8 +17,8 @@ Obtener todas las empresas de i2Solutions
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-11 18:54:27.504 +00:00",
-      "fechaActualizacion": "2018-07-11 18:54:27.504 +00:00"
+      "fechaCreacion": "2018-07-11 23:40:01.701 +00:00",
+      "fechaActualizacion": "2018-07-11 23:40:01.701 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -59,16 +59,16 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-11T18:54:27.594Z",
-    "fechaCreacion": "2018-07-11T18:54:27.594Z",
+    "fechaActualizacion": "2018-07-11T23:40:01.794Z",
+    "fechaCreacion": "2018-07-11T23:40:01.794Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-11T18:54:27.596Z",
-      "fechaCreacion": "2018-07-11T18:54:27.596Z"
+      "fechaActualizacion": "2018-07-11T23:40:01.795Z",
+      "fechaCreacion": "2018-07-11T23:40:01.795Z"
     }
   },
   "codigoEstado": 200
@@ -350,16 +350,16 @@ __GET__ __/api/web/empresas/:empresasId__
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-11T18:54:28.660Z",
-    "fechaActualizacion": "2018-07-11T18:54:28.660Z",
+    "fechaCreacion": "2018-07-11 23:40:02.890 +00:00",
+    "fechaActualizacion": "2018-07-11 23:40:02.890 +00:00",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-11 18:54:28.661 +00:00",
-        "fechaActualizacion": "2018-07-11 18:54:28.661 +00:00",
+        "fechaCreacion": "2018-07-11 23:40:02.892 +00:00",
+        "fechaActualizacion": "2018-07-11 23:40:02.892 +00:00",
         "empresasId": 1
       },
       {
@@ -367,11 +367,46 @@ __GET__ __/api/web/empresas/:empresasId__
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-11 18:54:28.662 +00:00",
-        "fechaActualizacion": "2018-07-11 18:54:28.662 +00:00",
+        "fechaCreacion": "2018-07-11 23:40:02.893 +00:00",
+        "fechaActualizacion": "2018-07-11 23:40:02.893 +00:00",
         "empresasId": 1
       }
     ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener una empresa con datos para front
+
+__GET__ __/api/web/administrador/empresas/:empresasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| empresasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Zapata S.A.",
+    "actividadComercial": "Integrado sensible al contexto sistema abierto",
+    "razonSocial": "La casa",
+    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+    "fechaCreacion": "2018-07-11 23:40:03.034 +00:00",
+    "fechaActualizacion": "2018-07-11 23:40:03.034 +00:00",
+    "tieneNovedades": true
   },
   "codigoEstado": 200
 }
