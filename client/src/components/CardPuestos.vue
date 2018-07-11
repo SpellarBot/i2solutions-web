@@ -22,7 +22,7 @@
       <p> Puesto donde se realiza el empaquetado de pollo y se envía a distribución.</p>
       <span class="link" v-on:click="visualizarPersonas"> Número Personas: 1</span>
       <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: 1</span>
-      <span class="link"> Novedades sin arender: 1</span>
+      <span class="link" v-on:click="visualizarNovedadesFromAreas"> Novedades sin arender: 1</span>
     </v-card>
     <footer>
       <DialogPersonasFromPuestos
@@ -37,6 +37,9 @@
     :visible="visibleEdicion"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
+    <DialogNovedadesFromAreas
+    :visible="visibleNovedades"
+    @close="visibleNovedades=false"></DialogNovedadesFromAreas>
     </footer>
   </main>
 </template>
@@ -44,13 +47,15 @@
 import DialogPersonasFromPuestos from './DialogPersonasFromPuestos'
 import DialogAccidentesFromPuestos from './DialogAccidentesFromPuestos'
 import DialogEditarPuestos from './Editar/DialogEditarPuestos'
+import DialogNovedadesFromAreas from './Novedades/DialogNovedadesFromAreas'
 export default {
-  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos },
+  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromAreas },
   data () {
     return {
       visiblePersonas: false,
       visibleAccidentes: false,
-      visibleEdicion: false
+      visibleEdicion: false,
+      visibleNovedades: false
     }
   },
   methods: {
@@ -59,6 +64,9 @@ export default {
     },
     visualizarAccidentes () {
       this.visibleAccidentes = true
+    },
+    visualizarNovedadesFromAreas () {
+      this.visibleNovedades = true
     },
     visualizarEditar () {
       // luego aquí pondré los datos que debe recibir el dialog, por ahora no :v

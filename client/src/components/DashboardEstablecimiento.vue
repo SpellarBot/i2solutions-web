@@ -90,6 +90,9 @@
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarCapacitaciones">#Capacitaciones: {{establecimiento.numCapacitaciones}}</span>
                     </v-flex>
+                    <v-flex xs6 md6>
+                      <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento">#Novedades: {{establecimiento.numNovedades}}</span>
+                    </v-flex>
                   </v-layout>
                 </v-container>
             </v-card-text>
@@ -116,6 +119,10 @@
     :visible="visibleCapacitaciones"
     @close="visibleCapacitaciones=false"
     ></DialogCapacitacionesFromEstablecimientos>
+    <DialogNovedadesFromEstablecimientos
+    :visible="visibleNovedades"
+    @close="visibleNovedades=false"
+    ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
     :visible="visibleAreas"
     :EstablecimientoId="establecimientoId"
@@ -137,6 +144,7 @@ import DialogPuestosFromEstablecimientos from './DialogPuestosFromEstablecimient
 import DialogPersonasFromEstablecimientos from './DialogPersonasFromEstablecimientos'
 import DialogAccidentesFromEstablecimientos from './DialogAccidentesFromEstablecimientos'
 import DialogCapacitacionesFromEstablecimientos from './DialogCapacitacionesFromEstablecimientos'
+import DialogNovedadesFromEstablecimientos from './Novedades/DialogNovedadesFromEstablecimientos'
 import DialogAreas from './Areas/verAreasDialog'
 import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 export default {
@@ -145,6 +153,7 @@ export default {
     DialogPersonasFromEstablecimientos,
     DialogAccidentesFromEstablecimientos,
     DialogCapacitacionesFromEstablecimientos,
+    DialogNovedadesFromEstablecimientos,
     DialogAreas,
     DialogEditarEmpresas
   },
@@ -163,6 +172,7 @@ export default {
       visibleCapacitaciones: false,
       visibleAreas: false,
       visibleEdicion: false,
+      visibleNovedades: false,
       establecimientoId: '',
       nombreEstablecimiento: '',
       establecimientos: [
@@ -239,6 +249,9 @@ export default {
     },
     visualizarCapacitaciones () {
       this.visibleCapacitaciones = true
+    },
+    visualizarNovedadesFromEstablecimiento () {
+      this.visibleNovedades = true
     },
     visualizarEdicion () {
       // aqui luego cargare los datos :v
