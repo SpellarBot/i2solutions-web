@@ -65,15 +65,15 @@ __POST__ __/api/movil/novedad__
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-11T04:32:20.779Z",
+    "fecha": "2018-07-11T18:54:36.229Z",
     "fueAtendida": false,
     "id": 1,
     "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
     "prioridad": "media",
     "fotoUrl": "https://imagen.png",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-11T04:32:20.779Z",
-    "fechaCreacion": "2018-07-11T04:32:20.779Z"
+    "fechaActualizacion": "2018-07-11T18:54:36.229Z",
+    "fechaCreacion": "2018-07-11T18:54:36.229Z"
   },
   "codigoEstado": 200
 }
@@ -116,12 +116,12 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
         "descripcionAtendida": null,
         "prioridad": "baja",
-        "fecha": "2018-07-11 04:32:20.828 +00:00",
+        "fecha": "2018-07-11 18:54:36.275 +00:00",
         "fotoUrl": "https://imagen.png",
         "fueAtendida": false,
         "puestosId": 1,
-        "fechaCreacion": "2018-07-11 04:32:20.828 +00:00",
-        "fechaActualizacion": "2018-07-11 04:32:20.828 +00:00"
+        "fechaCreacion": "2018-07-11 18:54:36.275 +00:00",
+        "fechaActualizacion": "2018-07-11 18:54:36.275 +00:00"
       }
     ],
     "novedadesAtendidas": [
@@ -130,12 +130,12 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
         "descripcionAtendida": "Fue atendida",
         "prioridad": "media",
-        "fecha": "2018-07-11 04:32:20.827 +00:00",
+        "fecha": "2018-07-11 18:54:36.274 +00:00",
         "fotoUrl": "https://imagen.png",
         "fueAtendida": true,
         "puestosId": 1,
-        "fechaCreacion": "2018-07-11 04:32:20.827 +00:00",
-        "fechaActualizacion": "2018-07-11 04:32:20.831 +00:00"
+        "fechaCreacion": "2018-07-11 18:54:36.274 +00:00",
+        "fechaActualizacion": "2018-07-11 18:54:36.278 +00:00"
       }
     ],
     "riesgos": [
@@ -145,10 +145,10 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "personasExpuestas": 15,
         "valoracion": "1524",
         "valoracionLiteral": "aa",
-        "fecha": "2018-07-11 04:32:20.814 +00:00",
+        "fecha": "2014-05-21 19:27:28.576 +00:00",
         "porcentajeRiesgo": 2,
-        "fechaCreacion": "2018-07-11 04:32:20.814 +00:00",
-        "fechaActualizacion": "2018-07-11 04:32:20.814 +00:00",
+        "fechaCreacion": "2018-07-11 18:54:36.263 +00:00",
+        "fechaActualizacion": "2018-07-11 18:54:36.263 +00:00",
         "puestosId": 1
       }
     ],
@@ -168,8 +168,8 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "atendidoEnEmpresa": 1,
         "muertos": 0,
         "fecha": "2014-05-21 19:27:28.576 +00:00",
-        "fechaCreacion": "2018-07-11 04:32:20.816 +00:00",
-        "fechaActualizacion": "2018-07-11 04:32:20.816 +00:00",
+        "fechaCreacion": "2018-07-11 18:54:36.264 +00:00",
+        "fechaActualizacion": "2018-07-11 18:54:36.264 +00:00",
         "puestosId": 1
       }
     ],
@@ -180,8 +180,8 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
         "descripcion": "La capacitación fue un éxito",
         "tema": "Como hacer que todo valga",
         "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
-        "fechaCreacion": "2018-07-11 04:32:20.826 +00:00",
-        "fechaActualizacion": "2018-07-11 04:32:20.826 +00:00",
+        "fechaCreacion": "2018-07-11 18:54:36.273 +00:00",
+        "fechaActualizacion": "2018-07-11 18:54:36.273 +00:00",
         "areasId": 1
       }
     ]

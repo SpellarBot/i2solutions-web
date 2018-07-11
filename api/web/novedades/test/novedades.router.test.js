@@ -344,7 +344,7 @@ describe('NOVEDADES', () => {
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       let novedadGuardado = await models.novedades.Obtener({ id: params['novedadesId'] })
-      expect(novedadGuardado).not.equal(null)
+      expect(novedadGuardado).to.equal(null)
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })
 

@@ -69,8 +69,8 @@ _response_
       "nombres": "matriz",
       "direccion": "22050 Felipe Rampa",
       "ruc": "0923651688001",
-      "fechaCreacion": "2018-07-11 04:32:16.690 +00:00",
-      "fechaActualizacion": "2018-07-11 04:32:16.690 +00:00",
+      "fechaCreacion": "2018-07-11 18:54:30.466 +00:00",
+      "fechaActualizacion": "2018-07-11 18:54:30.466 +00:00",
       "empresasId": 1
     },
     {
@@ -78,8 +78,8 @@ _response_
       "nombres": "Lira - Barajas",
       "direccion": "0119 Laboy Mercado",
       "ruc": "2023651688001",
-      "fechaCreacion": "2018-07-11 04:32:16.691 +00:00",
-      "fechaActualizacion": "2018-07-11 04:32:16.691 +00:00",
+      "fechaCreacion": "2018-07-11 18:54:30.467 +00:00",
+      "fechaActualizacion": "2018-07-11 18:54:30.467 +00:00",
       "empresasId": 1
     }
   ],
@@ -302,8 +302,8 @@ _response_
     "direccion": "22050 Felipe Rampa",
     "ruc": "0923651688001",
     "empresasId": 1,
-    "fechaActualizacion": "2018-07-11T04:32:16.805Z",
-    "fechaCreacion": "2018-07-11T04:32:16.805Z"
+    "fechaActualizacion": "2018-07-11T18:54:30.582Z",
+    "fechaCreacion": "2018-07-11T18:54:30.582Z"
   },
   "codigoEstado": 200
 }

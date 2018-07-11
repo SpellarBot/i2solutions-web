@@ -10,6 +10,7 @@ require('./capacitaciones/capacitaciones.router')(app)
 require('./equipos/equipos.router')(app)
 require('./accidentes/accidentes.router')(app)
 require('./novedades/novedades.router')(app)
+require('./riesgos/riesgos.router')(app)
 app.route('*')
   .get((req, res) => {
     res.json({ mensaje: 'Esta ruta no existe' })

@@ -129,15 +129,15 @@ _response_
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-11T04:32:17.846Z",
+    "fecha": "2018-07-11T18:54:31.744Z",
     "fotoUrl": "",
     "fueAtendida": false,
     "id": 1,
     "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
     "prioridad": "media",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-11T04:32:17.847Z",
-    "fechaCreacion": "2018-07-11T04:32:17.847Z"
+    "fechaActualizacion": "2018-07-11T18:54:31.745Z",
+    "fechaCreacion": "2018-07-11T18:54:31.745Z"
   },
   "codigoEstado": 200
 }
@@ -1758,7 +1758,7 @@ ___
 
 ## Obtener una novedad
 
-> Código: API_3
+> Código: API_4
 
 > Descripción: Obtener una novedad
 
@@ -1775,19 +1775,19 @@ ___
   </tr>
 			<tr style='background-color: #82E0AA' >
 				<td>  novedadesId </td>
-				<td> <a id='CE_API_3[C01]'>CE_API_3[C01]</a> </td>
+				<td> <a id='CE_API_4[C01]'>CE_API_4[C01]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td>  novedadesId </td>
-				<td> <a id='CE_API_3[C02]'>CE_API_3[C02]</a> </td>
+				<td> <a id='CE_API_4[C02]'>CE_API_4[C02]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td>  novedadesId </td>
-				<td> <a id='CE_API_3[C03]'>CE_API_3[C03]</a> </td>
+				<td> <a id='CE_API_4[C03]'>CE_API_4[C03]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
 			</tr>
@@ -1796,7 +1796,7 @@ ___
 
 #### Intersecciónes de clases de equivalencia o Casos de prueba
 
-__ICE_API_3[1]__
+__ICE_API_4[1]__
 
 Obtener una novedad de forma correcta
 
@@ -1827,8 +1827,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-11 04:32:18.964 +00:00",
-    "fechaActualizacion": "2018-07-11 04:32:18.964 +00:00",
+    "fechaCreacion": "2018-07-11 18:54:32.862 +00:00",
+    "fechaActualizacion": "2018-07-11 18:54:32.862 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200
@@ -1836,7 +1836,7 @@ _response_
 ```
 
 
-__ICE_API_3[2]__
+__ICE_API_4[2]__
 
 novedadesId no valido tipo de dato
 
@@ -1868,7 +1868,7 @@ _response_
 ```
 
 
-__ICE_API_3[3]__
+__ICE_API_4[3]__
 
 novedadesId  no valido numero
 
@@ -1900,7 +1900,7 @@ _response_
 ```
 
 
-__ICE_API_3[4]__
+__ICE_API_4[4]__
 
 novedadesId no exite
 

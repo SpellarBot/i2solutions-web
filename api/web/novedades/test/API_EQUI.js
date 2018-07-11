@@ -431,7 +431,7 @@ module.exports = {
   },
   API_4_EQUI: {
     nombre: 'Obtener una novedad',
-    codigo: 'API_3',
+    codigo: 'API_4',
     descripcion: 'Obtener una novedad',
     metodo: 'GET',
     url: '/api/web/novedades/:novedadesId',
