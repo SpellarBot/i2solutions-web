@@ -9,6 +9,7 @@ require('./puestos/puestos.router')(app)
 require('./capacitaciones/capacitaciones.router')(app)
 require('./equipos/equipos.router')(app)
 require('./accidentes/accidentes.router')(app)
+require('./novedades/novedades.router')(app)
 app.route('*')
   .get((req, res) => {
     res.json({ mensaje: 'Esta ruta no existe' })
