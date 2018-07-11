@@ -1,11 +1,11 @@
 # Api Accidentes
-## Crear una novedad
+## Crear un accidente
 
 > Código: API_1
 
-> Descripción: Crear una novedad
+> Descripción: Crear un accidente
 
-> Url : /api/web/novedades
+> Url : /api/web/accidentes
 
 #### Clases de equivalencia
 
@@ -17,80 +17,116 @@
     <th>Validez</th>
   </tr>
 			<tr style='background-color: #82E0AA' >
-				<td> descripcion</td>
+				<td> nombre</td>
 				<td> <a id='CE_API_1[C01]'>CE_API_1[C01]</a> </td>
 				<td> { 'type': 'string', minLength: 2 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> descripcion</td>
+				<td> nombre</td>
 				<td> <a id='CE_API_1[C02]'>CE_API_1[C02]</a> </td>
 				<td> 'type': !'string'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> descripcion</td>
+				<td> nombre</td>
 				<td> <a id='CE_API_1[C03]'>CE_API_1[C03]</a> </td>
 				<td> minLength: !2 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> prioridad</td>
+				<td> descripcion</td>
 				<td> <a id='CE_API_1[C11]'>CE_API_1[C11]</a> </td>
-				<td> { 'type': 'string', 'enum': ['alta', 'media', 'baja'] }</td>
+				<td> { 'type': 'string', minLength: 2 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> prioridad</td>
+				<td> descripcion</td>
 				<td> <a id='CE_API_1[C12]'>CE_API_1[C12]</a> </td>
-				<td> 'enum': !['alta', 'media', 'baja']</td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #82E0AA' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_1[C21]'>CE_API_1[C21]</a> </td>
-				<td> 'type': 'string', 'format': 'url'</td>
-				<td> válido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_1[C22]'>CE_API_1[C22]</a> </td>
 				<td> 'type': !'string'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
+				<td> descripcion</td>
+				<td> <a id='CE_API_1[C13]'>CE_API_1[C13]</a> </td>
+				<td> minLength: !2 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> heridos</td>
+				<td> <a id='CE_API_1[C21]'>CE_API_1[C21]</a> </td>
+				<td> { 'type': 'number', minimum: 0 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> heridos</td>
+				<td> <a id='CE_API_1[C22]'>CE_API_1[C22]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> heridos</td>
 				<td> <a id='CE_API_1[C23]'>CE_API_1[C23]</a> </td>
-				<td> format: !url </td>
+				<td> minimum: !0 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> fecha</td>
+				<td> atendidoEnEmpresa</td>
 				<td> <a id='CE_API_1[C31]'>CE_API_1[C31]</a> </td>
-				<td> { 'type': 'fecha' }</td>
+				<td> { 'type': 'boolean' }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> fecha</td>
+				<td> atendidoEnEmpresa</td>
 				<td> <a id='CE_API_1[C32]'>CE_API_1[C32]</a> </td>
-				<td> 'type': !'fecha'</td>
+				<td> 'type': !'boolean'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> puestosId</td>
+				<td> muertos</td>
 				<td> <a id='CE_API_1[C41]'>CE_API_1[C41]</a> </td>
-				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> { 'type': 'number', minimum: 0 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> puestosId</td>
+				<td> muertos</td>
 				<td> <a id='CE_API_1[C42]'>CE_API_1[C42]</a> </td>
 				<td> 'type': !'number'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> puestosId</td>
+				<td> muertos</td>
 				<td> <a id='CE_API_1[C43]'>CE_API_1[C43]</a> </td>
+				<td> minimum: !0 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> fecha</td>
+				<td> <a id='CE_API_1[C51]'>CE_API_1[C51]</a> </td>
+				<td> { 'type': 'fecha' }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> fecha</td>
+				<td> <a id='CE_API_1[C52]'>CE_API_1[C52]</a> </td>
+				<td> 'type': !'fecha'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_1[C61]'>CE_API_1[C61]</a> </td>
+				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_1[C62]'>CE_API_1[C62]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_1[C63]'>CE_API_1[C63]</a> </td>
 				<td> minimum: !1 </td>
 				<td> invalido </td>
 			</tr>
@@ -101,22 +137,25 @@
 
 __ICE_API_1[1]__
 
-Crear una novedad de forma correcta
+Crear un accidente de forma correcta
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST /api/web/accidentes
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -129,15 +168,16 @@ _response_
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-11T04:27:40.596Z",
-    "fotoUrl": "",
-    "fueAtendida": false,
     "id": 1,
-    "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-    "prioridad": "media",
+    "descripcion": "Se cayó la solución",
+    "nombre": "Caída de instrumentos",
+    "heridos": 1,
+    "atendidoEnEmpresa": true,
+    "muertos": 0,
+    "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-11T04:27:40.599Z",
-    "fechaCreacion": "2018-07-11T04:27:40.599Z"
+    "fechaActualizacion": "2018-07-11T04:32:09.201Z",
+    "fechaCreacion": "2018-07-11T04:32:09.201Z"
   },
   "codigoEstado": 200
 }
@@ -146,23 +186,105 @@ _response_
 
 __ICE_API_1[2]__
 
+nombre tipo no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes
+
+POST /api/web/accidentes
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": 1,
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "nombre": "debe ser string"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[3]__
+
+nombre tamano no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes
+
+POST /api/web/accidentes
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "nombre": "no debe contener menos de 2 caracteres"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[4]__
+
 descripcion tipo no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST /api/web/accidentes
 
 _request o body_
 ```js
 {
   "descripcion": 1,
-  "prioridad": "media",
-  "fotoUrl": "https://imagen.png",
-  "fecha": "2018-04-25T04:27:34Z",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -182,7 +304,7 @@ _response_
 ```
 
 
-__ICE_API_1[3]__
+__ICE_API_1[5]__
 
 descripcion tamano no valido
 
@@ -190,17 +312,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST /api/web/accidentes
 
 _request o body_
 ```js
 {
   "descripcion": "",
-  "prioridad": "media",
-  "fotoUrl": "https://imagen.png",
-  "fecha": "2018-04-25T04:27:34Z",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -220,100 +344,27 @@ _response_
 ```
 
 
-__ICE_API_1[4]__
-
-prioridad enum no valido
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/novedades
-
-POST /api/web/novedades
-
-_request o body_
-```js
-{
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "otro",
-  "fecha": "2018-04-25T04:27:34Z",
-  "puestosId": 1
-}
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "prioridad": "deber ser igual a uno de los valores predefinidos"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_1[5]__
-
-fotoUrl tipo no valido
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/novedades
-
-POST /api/web/novedades
-
-_request o body_
-```js
-{
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fotoUrl": 1,
-  "fecha": "2018-04-25T04:27:34Z",
-  "puestosId": 1
-}
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "fotoUrl": "debe ser string"
-  },
-  "codigoEstado": 200
-}
-```
-
-
 __ICE_API_1[6]__
 
-fotoUrl formato no valido
+heridos tipo no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST /api/web/accidentes
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fotoUrl": "https://",
-  "fecha": "2018-04-25T04:27:34Z",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": "a",
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -326,7 +377,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fotoUrl": "debe coincidir con el formato \"url\""
+    "heridos": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -335,23 +386,185 @@ _response_
 
 __ICE_API_1[7]__
 
+heridos tamano no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes
+
+POST /api/web/accidentes
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": -1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "heridos": "debe ser >= 0"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[8]__
+
+atendidoEnEmpresa tipo no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes
+
+POST /api/web/accidentes
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": "a",
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "atendidoEnEmpresa": "debe ser boolean"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[9]__
+
+muertos tipo no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes
+
+POST /api/web/accidentes
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": "a",
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "muertos": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[10]__
+
+muertos tamano no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes
+
+POST /api/web/accidentes
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": -1,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "muertos": "debe ser >= 0"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[11]__
+
 fecha no valido
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST /api/web/accidentes
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fotoUrl": "https://imagen.png",
-  "fecha": "2018-13-25T04:27:34Z",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-13-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -371,7 +584,7 @@ _response_
 ```
 
 
-__ICE_API_1[8]__
+__ICE_API_1[12]__
 
 puestosId tipo no valido
 
@@ -379,17 +592,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST 
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fotoUrl": "https://imagen.png",
-  "fecha": "2018-04-25T04:27:34Z",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": "a"
 }
 ```
@@ -409,7 +624,7 @@ _response_
 ```
 
 
-__ICE_API_1[9]__
+__ICE_API_1[13]__
 
 puestosId tamano no valido
 
@@ -417,17 +632,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST 
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fotoUrl": "https://imagen.png",
-  "fecha": "2018-04-25T04:27:34Z",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 0
 }
 ```
@@ -447,7 +664,7 @@ _response_
 ```
 
 
-__ICE_API_1[10]__
+__ICE_API_1[14]__
 
 puestosId no existe
 
@@ -455,17 +672,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades
+> /api/web/accidentes
 
-POST /api/web/novedades
+POST 
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fotoUrl": "https://imagen.png",
-  "fecha": "2018-04-25T04:27:34Z",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 50
 }
 ```
@@ -477,7 +696,7 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "El puesto no existe",
+  "datos": "el puesto no existe",
   "codigoEstado": 200
 }
 ```
@@ -486,13 +705,13 @@ _response_
 ___
 
 
-## Actualizar una novedad
+## Actualizar una accidente
 
 > Código: API_2
 
-> Descripción: Actualizar un novedad
+> Descripción: Actualizar un accidente
 
-> Url : /api/web/novedades/:novedadesId
+> Url : /api/web/accidentes/:accidentesId
 
 #### Clases de equivalencia
 
@@ -504,98 +723,134 @@ ___
     <th>Validez</th>
   </tr>
 			<tr style='background-color: #82E0AA' >
-				<td> descripcion</td>
+				<td> nombre</td>
 				<td> <a id='CE_API_2[C01]'>CE_API_2[C01]</a> </td>
 				<td> { 'type': 'string', minLength: 2 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> descripcion</td>
+				<td> nombre</td>
 				<td> <a id='CE_API_2[C02]'>CE_API_2[C02]</a> </td>
 				<td> 'type': !'string'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> descripcion</td>
+				<td> nombre</td>
 				<td> <a id='CE_API_2[C03]'>CE_API_2[C03]</a> </td>
 				<td> minLength: !2 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> prioridad</td>
+				<td> descripcion</td>
 				<td> <a id='CE_API_2[C11]'>CE_API_2[C11]</a> </td>
-				<td> { 'type': 'string', 'enum': ['alta', 'media', 'baja'] }</td>
+				<td> { 'type': 'string', minLength: 2 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> prioridad</td>
+				<td> descripcion</td>
 				<td> <a id='CE_API_2[C12]'>CE_API_2[C12]</a> </td>
-				<td> 'enum': !['alta', 'media', 'baja']</td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #82E0AA' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C21]'>CE_API_2[C21]</a> </td>
-				<td> 'type': 'string', 'format': 'url'</td>
-				<td> válido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C22]'>CE_API_2[C22]</a> </td>
 				<td> 'type': !'string'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
+				<td> descripcion</td>
+				<td> <a id='CE_API_2[C13]'>CE_API_2[C13]</a> </td>
+				<td> minLength: !2 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> heridos</td>
+				<td> <a id='CE_API_2[C21]'>CE_API_2[C21]</a> </td>
+				<td> { 'type': 'number', minimum: 0 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> heridos</td>
+				<td> <a id='CE_API_2[C22]'>CE_API_2[C22]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> heridos</td>
 				<td> <a id='CE_API_2[C23]'>CE_API_2[C23]</a> </td>
-				<td> format: !url </td>
+				<td> minimum: !0 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> fecha</td>
+				<td> atendidoEnEmpresa</td>
 				<td> <a id='CE_API_2[C31]'>CE_API_2[C31]</a> </td>
-				<td> { 'type': 'fecha' }</td>
+				<td> { 'type': 'boolean' }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> fecha</td>
+				<td> atendidoEnEmpresa</td>
 				<td> <a id='CE_API_2[C32]'>CE_API_2[C32]</a> </td>
-				<td> 'type': !'fecha'</td>
+				<td> 'type': !'boolean'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> puestosId</td>
+				<td> muertos</td>
 				<td> <a id='CE_API_2[C41]'>CE_API_2[C41]</a> </td>
-				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> { 'type': 'number', minimum: 0 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> puestosId</td>
+				<td> muertos</td>
 				<td> <a id='CE_API_2[C42]'>CE_API_2[C42]</a> </td>
 				<td> 'type': !'number'</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td> puestosId</td>
+				<td> muertos</td>
 				<td> <a id='CE_API_2[C43]'>CE_API_2[C43]</a> </td>
+				<td> minimum: !0 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> fecha</td>
+				<td> <a id='CE_API_2[C51]'>CE_API_2[C51]</a> </td>
+				<td> { 'type': 'fecha' }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> fecha</td>
+				<td> <a id='CE_API_2[C52]'>CE_API_2[C52]</a> </td>
+				<td> 'type': !'fecha'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_2[C61]'>CE_API_2[C61]</a> </td>
+				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_2[C62]'>CE_API_2[C62]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_2[C63]'>CE_API_2[C63]</a> </td>
 				<td> minimum: !1 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td>  novedadesId </td>
-				<td> <a id='CE_API_2[C51]'>CE_API_2[C51]</a> </td>
+				<td>  accidentesId </td>
+				<td> <a id='CE_API_2[C71]'>CE_API_2[C71]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  novedadesId </td>
-				<td> <a id='CE_API_2[C52]'>CE_API_2[C52]</a> </td>
+				<td>  accidentesId </td>
+				<td> <a id='CE_API_2[C72]'>CE_API_2[C72]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  novedadesId </td>
-				<td> <a id='CE_API_2[C53]'>CE_API_2[C53]</a> </td>
+				<td>  accidentesId </td>
+				<td> <a id='CE_API_2[C73]'>CE_API_2[C73]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
 			</tr>
@@ -615,33 +870,43 @@ Actualizar un accidente de forma correcta
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
     <td>aa</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>AA</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
   </tr>
   <tr>
     <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
     <td>2014-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -650,17 +915,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
-  "descripcion": "aa",
-  "prioridad": "media",
+  "descripcion": "AA",
+  "nombre": "aa",
+  "heridos": 1,
+  "atendidoEnEmpresa": false,
+  "muertos": 0,
   "fecha": "2014-05-21T19:27:28.576Z",
-  "fotoUrl": "https://imagen.png",
   "puestosId": 1
 }
 ```
@@ -680,6 +947,182 @@ _response_
 
 __ICE_API_2[2]__
 
+nombre tipo no valido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C02]"> CE_API_2[C02]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>descripcion</td>
+    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
+    <td>Se cayó la solución</td>
+  </tr>
+  <tr>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/:accidentesId
+
+PUT /api/web/accidentes/1
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": 1,
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "nombre": "debe ser string"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[3]__
+
+nombre tamano no valido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C03]"> CE_API_2[C03]</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>descripcion</td>
+    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
+    <td>Se cayó la solución</td>
+  </tr>
+  <tr>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/:accidentesId
+
+PUT /api/web/accidentes/1
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "nombre": "no debe contener menos de 2 caracteres"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[4]__
+
 descripcion tipo no valido
 
 <table border="1">
@@ -689,33 +1132,43 @@ descripcion tipo no valido
     <th>Prueba</th> 
   </tr>
   <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
+    <td>Caída de instrumentos</td>
+  </tr>
+  <tr>
     <td>descripcion</td>
-    <td><a href="#CE_API_2[C02]"> CE_API_2[C02]</a></td>
+    <td><a href="#CE_API_2[C12]"> CE_API_2[C12]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>prioridad</td>
-    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
   </tr>
   <tr>
     <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -724,17 +1177,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
   "descripcion": 1,
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -754,7 +1209,7 @@ _response_
 ```
 
 
-__ICE_API_2[3]__
+__ICE_API_2[5]__
 
 descripcion tamano no valido
 
@@ -765,33 +1220,43 @@ descripcion tamano no valido
     <th>Prueba</th> 
   </tr>
   <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
+    <td>Caída de instrumentos</td>
+  </tr>
+  <tr>
     <td>descripcion</td>
-    <td><a href="#CE_API_2[C03]"> CE_API_2[C03]</a></td>
+    <td><a href="#CE_API_2[C13]"> CE_API_2[C13]</a></td>
     <td></td>
   </tr>
   <tr>
-    <td>prioridad</td>
-    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
-  </tr>
-  <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -800,17 +1265,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
   "descripcion": "",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -830,161 +1297,9 @@ _response_
 ```
 
 
-__ICE_API_2[4]__
-
-prioridad enum no valido
-
-<table border="1">
-  <tr>
-    <th>Nombre</th>
-    <th>CE</th> 
-    <th>Prueba</th> 
-  </tr>
-  <tr>
-    <td>descripcion</td>
-    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
-  </tr>
-  <tr>
-    <td>prioridad</td>
-    <td><a href="#CE_API_2[C12]"> CE_API_2[C12]</a></td>
-    <td>otro</td>
-  </tr>
-  <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
-    <td>1</td>
-  </tr>
-</table>
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/novedades/:novedadesId
-
-PUT /api/web/novedades/1
-
-_request o body_
-```js
-{
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "otro",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
-  "puestosId": 1
-}
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "prioridad": "deber ser igual a uno de los valores predefinidos"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_2[5]__
-
-fotoUrl tipo no valido
-
-<table border="1">
-  <tr>
-    <th>Nombre</th>
-    <th>CE</th> 
-    <th>Prueba</th> 
-  </tr>
-  <tr>
-    <td>descripcion</td>
-    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
-  </tr>
-  <tr>
-    <td>prioridad</td>
-    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
-  </tr>
-  <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C22]"> CE_API_2[C22]</a></td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
-    <td>1</td>
-  </tr>
-</table>
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/novedades/:novedadesId
-
-PUT /api/web/novedades/1
-
-_request o body_
-```js
-{
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": 1,
-  "puestosId": 1
-}
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "fotoUrl": "debe ser string"
-  },
-  "codigoEstado": 200
-}
-```
-
-
 __ICE_API_2[6]__
 
-fotoUrl formato no valido
+heridos tipo no valido
 
 <table border="1">
   <tr>
@@ -993,33 +1308,43 @@ fotoUrl formato no valido
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C23]"> CE_API_2[C23]</a></td>
-    <td>https://</td>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C22]"> CE_API_2[C22]</a></td>
+    <td>a</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
   </tr>
   <tr>
     <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1028,17 +1353,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": "a",
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -1051,7 +1378,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fotoUrl": "debe coincidir con el formato \"url\""
+    "heridos": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -1059,6 +1386,358 @@ _response_
 
 
 __ICE_API_2[7]__
+
+heridos tamano no valido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
+    <td>Caída de instrumentos</td>
+  </tr>
+  <tr>
+    <td>descripcion</td>
+    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
+    <td>Se cayó la solución</td>
+  </tr>
+  <tr>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C23]"> CE_API_2[C23]</a></td>
+    <td>-1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/:accidentesId
+
+PUT /api/web/accidentes/1
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": -1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "heridos": "debe ser >= 0"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[8]__
+
+atendidoEnEmpresa tipo no valido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
+    <td>Caída de instrumentos</td>
+  </tr>
+  <tr>
+    <td>descripcion</td>
+    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
+    <td>Se cayó la solución</td>
+  </tr>
+  <tr>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C32]"> CE_API_2[C32]</a></td>
+    <td>a</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/:accidentesId
+
+PUT /api/web/accidentes/1
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": "a",
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "atendidoEnEmpresa": "debe ser boolean"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[9]__
+
+muertos tipo no valido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
+    <td>Caída de instrumentos</td>
+  </tr>
+  <tr>
+    <td>descripcion</td>
+    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
+    <td>Se cayó la solución</td>
+  </tr>
+  <tr>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C42]"> CE_API_2[C42]</a></td>
+    <td>a</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/:accidentesId
+
+PUT /api/web/accidentes/1
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": "a",
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "muertos": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[10]__
+
+muertos tamano no valido
+
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>CE</th> 
+    <th>Prueba</th> 
+  </tr>
+  <tr>
+    <td>nombre</td>
+    <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
+    <td>Caída de instrumentos</td>
+  </tr>
+  <tr>
+    <td>descripcion</td>
+    <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
+    <td>Se cayó la solución</td>
+  </tr>
+  <tr>
+    <td>heridos</td>
+    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C43]"> CE_API_2[C43]</a></td>
+    <td>-1</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
+    <td>1</td>
+  </tr>
+</table>
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/:accidentesId
+
+PUT /api/web/accidentes/1
+
+_request o body_
+```js
+{
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": -1,
+  "fecha": "2014-05-21T19:27:28.576Z",
+  "puestosId": 1
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "muertos": "debe ser >= 0"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_2[11]__
 
 fecha no valido
 
@@ -1069,33 +1748,43 @@ fecha no valido
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C32]"> CE_API_2[C32]</a></td>
-    <td>2014-05-21T25:27:28.576Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C52]"> CE_API_2[C52]</a></td>
+    <td>2014-13-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1104,17 +1793,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2014-05-21T25:27:28.576Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-13-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -1134,7 +1825,7 @@ _response_
 ```
 
 
-__ICE_API_2[8]__
+__ICE_API_2[12]__
 
 puestosId tipo no valido
 
@@ -1145,33 +1836,43 @@ puestosId tipo no valido
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
   </tr>
   <tr>
     <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>puestosId</td>
-    <td><a href="#CE_API_2[C42]"> CE_API_2[C42]</a></td>
+    <td><a href="#CE_API_2[C62]"> CE_API_2[C62]</a></td>
     <td>a</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1180,17 +1881,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": "a"
 }
 ```
@@ -1210,7 +1913,7 @@ _response_
 ```
 
 
-__ICE_API_2[9]__
+__ICE_API_2[13]__
 
 puestosId tamano no valido
 
@@ -1221,33 +1924,43 @@ puestosId tamano no valido
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td>fecha</td>
+    <td>atendidoEnEmpresa</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td>true</td>
   </tr>
   <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C43]"> CE_API_2[C43]</a></td>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
     <td>0</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C63]"> CE_API_2[C63]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1256,17 +1969,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 0
 }
 ```
@@ -1286,7 +2001,7 @@ _response_
 ```
 
 
-__ICE_API_2[10]__
+__ICE_API_2[14]__
 
 puestosId no existe
 
@@ -1297,33 +2012,43 @@ puestosId no existe
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
   </tr>
   <tr>
     <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>50</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
   </tr>
 </table>
@@ -1332,17 +2057,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/1
+PUT /api/web/accidentes/1
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 50
 }
 ```
@@ -1354,15 +2081,15 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "El puesto no existe",
+  "datos": "el puesto no existe",
   "codigoEstado": 200
 }
 ```
 
 
-__ICE_API_2[11]__
+__ICE_API_2[15]__
 
-novedadesId tipo no valido
+accidentesId tipo no valido
 
 <table border="1">
   <tr>
@@ -1371,33 +2098,43 @@ novedadesId tipo no valido
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C52]</a></td>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C72]</a></td>
     <td>a</td>
   </tr>
 </table>
@@ -1406,17 +2143,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/a
+PUT /api/web/accidentes/a
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -1429,16 +2168,16 @@ _response_
 {
   "estado": false,
   "datos": {
-    "novedadesId": "debe ser number"
+    "accidentesId": "debe ser number"
   },
   "codigoEstado": 200
 }
 ```
 
 
-__ICE_API_2[12]__
+__ICE_API_2[16]__
 
-novedadesId tamano no valido
+accidentesId tamano no valido
 
 <table border="1">
   <tr>
@@ -1447,33 +2186,43 @@ novedadesId tamano no valido
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C53]</a></td>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C73]</a></td>
     <td>0</td>
   </tr>
 </table>
@@ -1482,17 +2231,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/0
+PUT /api/web/accidentes/0
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -1505,16 +2256,16 @@ _response_
 {
   "estado": false,
   "datos": {
-    "novedadesId": "debe ser >= 1"
+    "accidentesId": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
 ```
 
 
-__ICE_API_2[13]__
+__ICE_API_2[17]__
 
-novedadesId no existe
+accidentesId no existe
 
 <table border="1">
   <tr>
@@ -1523,33 +2274,43 @@ novedadesId no existe
     <th>Prueba</th> 
   </tr>
   <tr>
-    <td>descripcion</td>
+    <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA</td>
+    <td>Caída de instrumentos</td>
   </tr>
   <tr>
-    <td>prioridad</td>
+    <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>media</td>
+    <td>Se cayó la solución</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
+    <td>heridos</td>
     <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://imagen.png</td>
-  </tr>
-  <tr>
-    <td>fecha</td>
-    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>2018-04-25T04:27:34Z</td>
-  </tr>
-  <tr>
-    <td>puestosId</td>
-    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
     <td>1</td>
   </tr>
   <tr>
-    <td>novedadesId</td>
-    <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
+    <td>atendidoEnEmpresa</td>
+    <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>muertos</td>
+    <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>fecha</td>
+    <td><a href="#CE_API_2[C51]"> CE_API_2[C51]</a></td>
+    <td>2014-05-21T19:27:28.576Z</td>
+  </tr>
+  <tr>
+    <td>puestosId</td>
+    <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>accidentesId</td>
+    <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>50</td>
   </tr>
 </table>
@@ -1558,17 +2319,19 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-PUT /api/web/novedades/50
+PUT /api/web/accidentes/50
 
 _request o body_
 ```js
 {
-  "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
-  "prioridad": "media",
-  "fecha": "2018-04-25T04:27:34Z",
-  "fotoUrl": "https://imagen.png",
+  "descripcion": "Se cayó la solución",
+  "nombre": "Caída de instrumentos",
+  "heridos": 1,
+  "atendidoEnEmpresa": true,
+  "muertos": 0,
+  "fecha": "2014-05-21T19:27:28.576Z",
   "puestosId": 1
 }
 ```
@@ -1580,7 +2343,7 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "Error en actualizar la novedad",
+  "datos": "El id del area no existe",
   "codigoEstado": 200
 }
 ```
@@ -1589,13 +2352,13 @@ _response_
 ___
 
 
-## Eliminar una novedad
+## Eliminar un accidente
 
 > Código: API_3
 
-> Descripción: Eliminar una novedad
+> Descripción: Eliminar un accidente
 
-> Url : /api/web/novedades/:novedadesId
+> Url : /api/web/accidentes/:accidentesId
 
 #### Clases de equivalencia
 
@@ -1607,19 +2370,19 @@ ___
     <th>Validez</th>
   </tr>
 			<tr style='background-color: #82E0AA' >
-				<td>  novedadesId </td>
+				<td>  accidentesId </td>
 				<td> <a id='CE_API_3[C01]'>CE_API_3[C01]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  novedadesId </td>
+				<td>  accidentesId </td>
 				<td> <a id='CE_API_3[C02]'>CE_API_3[C02]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  novedadesId </td>
+				<td>  accidentesId </td>
 				<td> <a id='CE_API_3[C03]'>CE_API_3[C03]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
@@ -1631,15 +2394,15 @@ ___
 
 __ICE_API_3[1]__
 
-Eliminar una novedad de forma correcta
+Eliminar un accidente de forma correcta
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
-DELETE /api/web/novedades/1
+DELETE /api/web/accidentes/1
 
 _request o body_
 ```js
@@ -1661,13 +2424,13 @@ _response_
 
 __ICE_API_3[2]__
 
-novedadesId no valido tipo de dato
+accidentesId no valido tipo de dato
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 DELETE /api/web/accidentes/a
 
@@ -1693,13 +2456,13 @@ _response_
 
 __ICE_API_3[3]__
 
-novedadesId  no valido numero
+accidentesId  no valido numero
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 DELETE /api/web/accidentes/0
 
@@ -1725,13 +2488,13 @@ _response_
 
 __ICE_API_3[4]__
 
-novedadesId no exite
+accidentesId no exite
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 DELETE /api/web/accidentes/50
 
@@ -1756,13 +2519,13 @@ _response_
 ___
 
 
-## Obtener una novedad
+## Obtener un accidente
 
 > Código: API_3
 
-> Descripción: Obtener una novedad
+> Descripción: Obtener un accidente
 
-> Url : /api/web/novedades/:novedadesId
+> Url : /api/web/accidentes/:accidentesId
 
 #### Clases de equivalencia
 
@@ -1774,19 +2537,19 @@ ___
     <th>Validez</th>
   </tr>
 			<tr style='background-color: #82E0AA' >
-				<td>  novedadesId </td>
+				<td>  accidentesId </td>
 				<td> <a id='CE_API_3[C01]'>CE_API_3[C01]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  novedadesId </td>
+				<td>  accidentesId </td>
 				<td> <a id='CE_API_3[C02]'>CE_API_3[C02]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
-				<td>  novedadesId </td>
+				<td>  accidentesId </td>
 				<td> <a id='CE_API_3[C03]'>CE_API_3[C03]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
@@ -1798,13 +2561,13 @@ ___
 
 __ICE_API_3[1]__
 
-Obtener una novedad de forma correcta
+Obtener un accidente de forma correcta
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 GET /api/web/accidentes/1
 
@@ -1827,8 +2590,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-11 04:27:41.778 +00:00",
-    "fechaActualizacion": "2018-07-11 04:27:41.778 +00:00",
+    "fechaCreacion": "2018-07-11 04:32:10.874 +00:00",
+    "fechaActualizacion": "2018-07-11 04:32:10.874 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200
@@ -1838,13 +2601,13 @@ _response_
 
 __ICE_API_3[2]__
 
-novedadesId no valido tipo de dato
+accidentesId no valido tipo de dato
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 GET /api/web/accidentes/a
 
@@ -1870,13 +2633,13 @@ _response_
 
 __ICE_API_3[3]__
 
-novedadesId  no valido numero
+accidentesId  no valido numero
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 GET /api/web/accidentes/0
 
@@ -1902,13 +2665,13 @@ _response_
 
 __ICE_API_3[4]__
 
-novedadesId no exite
+accidentesId no exite
 
 __Datos prueba__
 
 _url_ 
 
-> /api/web/novedades/:novedadesId
+> /api/web/accidentes/:accidentesId
 
 GET /api/web/accidentes/50
 

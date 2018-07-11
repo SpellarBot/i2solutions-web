@@ -148,8 +148,8 @@ _response_
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-11T04:27:35.025Z",
-    "fechaCreacion": "2018-07-11T04:27:35.025Z"
+    "fechaActualizacion": "2018-07-11T04:32:12.554Z",
+    "fechaCreacion": "2018-07-11T04:32:12.554Z"
   },
   "codigoEstado": 200
 }

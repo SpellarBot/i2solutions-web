@@ -31,7 +31,7 @@ describe('NOVEDADES', () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
-    generatorDocs.EQUI({ equivalencias, nombre: 'Accidentes' })
+    generatorDocs.EQUI({ equivalencias, nombre: 'Novedades' })
     // generatorDocs.generateAPI({ docs, archivo: 'api.establecimientos.md', nombre: 'Establecimientos' })
   })
   afterEach('Limpiar la base de datos', async () => {
