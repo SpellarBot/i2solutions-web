@@ -412,7 +412,7 @@ describe('ACCIDENTES', () => {
       accidentesId = accidenteCreada['id']
     })
 
-    it('@ICE_API_3_01 Actualizar un accidente de forma correcta', async () => {
+    it('@ICE_API_3_01 Eliminar un accidente de forma correcta', async () => {
       let params = { accidentesId }
       let url = `/api/web/accidentes/${params['accidentesId']}`
       let res = await request(app).delete(url)

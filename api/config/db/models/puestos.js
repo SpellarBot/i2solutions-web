@@ -101,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Obtener = function ({ id }) {
     return new Promise((resolve, reject) => {
-      this.findById(id)
+      this.findOne({ where: { id }, raw: true })
         .then((project) => {
           resolve(project)
         }).catch((err) => {

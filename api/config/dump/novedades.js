@@ -1,34 +1,35 @@
 module.exports = {
   VALIDOS: [
     {
-      'nombre': 'Iluminación deficiente',
       'descripcion': 'INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA',
       'prioridad': 'media',
-      'fotoUrl': ''
+      'fotoUrl': 'https://imagen.png',
+      'fecha': '2018-04-25T04:27:34Z'
     },
     {
-      'nombre': 'Uso de computadores',
       'descripcion': 'INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL',
       'prioridad': 'baja',
-      'fotoUrl': ''
+      'fotoUrl': 'https://imagen.png',
+      'fecha': '2018-04-25T04:27:34Z'
     },
     {
-      'nombre': 'CLORO Y DESINFECTANTE',
       'descripcion': 'INTOXICACIONES, AFECCIONES RESPIRATORIAS, DERMATOSIS OCUPACIONAL, IRRITACIÓN DE LAS VÍAS RESPIRATORIAS Y MUCOSAS',
       'prioridad': 'baja',
-      'fotoUrl': ''
+      'fotoUrl': 'https://imagen.png',
+      'fecha': '2018-04-25T04:27:34Z'
     },
     {
-      'nombre': 'CHOQUES',
       'descripcion': 'CHOQUES CONTRA OBJETOS INMOVILES; GOLPES, TRAUMATISMOS',
       'prioridad': 'baja',
-      'fotoUrl': ''
+      'fotoUrl': 'https://imagen.png',
+      'fecha': '2018-04-25T04:27:34Z'
     },
     {
       'nombre': 'DISPENSADORES DE AGUA',
       'descripcion': 'PROBLEMAS DIGESTIVOS',
       'prioridad': 'baja',
-      'fotoUrl': ''
+      'fotoUrl': 'https://imagen.png',
+      'fecha': '2018-04-25T04:27:34Z'
     },
     {
       'nombre': 'CAJONERAS DE ESCRITORIO',
