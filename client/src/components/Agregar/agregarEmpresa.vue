@@ -1,6 +1,6 @@
 <template>
   <main id="agregarEmpresa">
-    <v-dialog fullscreen v-model="show" @keydown.esc="show=false" hide-overlay transition="dialog-bottom-transition">
+    <v-dialog fullscreen v-model="show" @keydown.esc="show=false; cleaner()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click.native="show = false">
@@ -49,9 +49,7 @@
                   <div ref="establecimientos">
                   </div>
                 </v-flex>
-              </v-layout>
-              <v-btn @click="submit">submit</v-btn>
-              <v-btn @click="clear">clear</v-btn>
+              </v-layout>              
               <v-layout row justify-space-between>
                 <v-flex md4>
                   <h3>¿Desea agregar establecimientos?</h3>
@@ -63,7 +61,7 @@
                     @click.native="removeEstablecimiento()"
                     v-if="indice>0"
                   >
-                  <v-icon>sus</v-icon>
+                  <v-icon>delete</v-icon>
                   </v-btn>
                   <v-btn
                     fab
@@ -74,6 +72,7 @@
                   </v-btn>
                 </v-flex>
               </v-layout>
+              <v-btn @click.native="guardar()">submit</v-btn>
             </v-flex>
           </v-layout>
         </v-container>
@@ -128,6 +127,18 @@ export default {
       instanceEstablecimiento.$destroy()
       instanceEstablecimiento.$el.remove()
       instanceEstablecimiento = null
+    },
+    guardar () {
+      this.instanciasEstablecimientos.forEach(function (establecimiento) {
+        establecimiento.prueba()
+      })
+    },
+    cleaner (){
+      this.instanciasEstablecimientos.forEach(function (establecimiento) {
+        establecimiento.$destroy()
+        establecimiento.$el.remove()
+        establecimiento = null
+      })
     }
   },
   data () {
