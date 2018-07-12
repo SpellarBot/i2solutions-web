@@ -560,15 +560,8 @@ module.exports = {
     codigo: 'API_6',
     descripcion: 'OBTENER EMPRESAS PARA PAGINA PRINCIPAL FRONT',
     metodo: 'GET',
-    url: '/api/web/empresas/:empresasId',
+    url: '/api/web/empresas',
     params: [
-      { nombre: 'empresasId',
-        casos: [
-          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
-          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
-          { codigo: 'C03', descripcion: 'minimum: !1 }', valido: false }
-        ]
-      }
     ],
     intersecciones: {
       '1': {
@@ -579,24 +572,6 @@ module.exports = {
       },
       '2': {
         descripcion: 'empresa sin novedades',
-        params: {
-          'empresasId': { codigo: 'C01' }
-        }
-      },
-      '3': {
-        descripcion: 'empresasId no valido tipo de dato',
-        params: {
-          'empresasId': { codigo: 'C02' }
-        }
-      },
-      '4': {
-        descripcion: 'empresasId no valido numero',
-        params: {
-          'empresasId': { codigo: 'C03' }
-        }
-      },
-      '5': {
-        descripcion: 'empresas no existe',
         params: {
           'empresasId': { codigo: 'C01' }
         }

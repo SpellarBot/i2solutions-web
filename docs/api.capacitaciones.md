@@ -17,8 +17,8 @@ __POST__ __/api/web/capacitaciones__
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-12T01:22:27.755Z",
-    "fechaCreacion": "2018-07-12T01:22:27.755Z"
+    "fechaActualizacion": "2018-07-12T23:10:33.000Z",
+    "fechaCreacion": "2018-07-12T23:10:33.000Z"
   },
   "codigoEstado": 200
 }

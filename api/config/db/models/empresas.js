@@ -1,16 +1,16 @@
 'use strict'
-let knex = {}
-if (process.env.NODE_ENV === 'testing') {
-  knex = require('knex')({
-    client: 'sqlite',
-    useNullAsDefault: true
-  })
-} else {
-  knex = require('knex')({
-    client: 'mysql',
-    useNullAsDefault: true
-  })
-}
+// let knex = {}
+// if (process.env.NODE_ENV === 'testing') {
+//   knex = require('knex')({
+//     client: 'sqlite',
+//     useNullAsDefault: true
+//   })
+// } else {
+//   knex = require('knex')({
+//     client: 'mysql',
+//     useNullAsDefault: true
+//   })
+// }
 module.exports = (sequelize, DataTypes) => {
   let singular = 'empresas'
   let plural = 'empresas'
@@ -109,24 +109,20 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.ExistenNovedades = function ({ id }) {
+  define.EmpresasNovedades = function () {
     return new Promise((resolve, reject) => {
-      let establecimientosQuery = knex('establecimientos').select('id').where('empresasId', '=', id)
-      let areasQuery = knex.select('id').from('areas').where('establecimientosId', 'in', establecimientosQuery)
-      let puestosAreasQuery = knex.select('puestosId').from('areasPuestos').where('areasId', 'in', areasQuery)
-      let cantidadNovedades = knex.count('*').from('novedades').where('puestosId', 'in', puestosAreasQuery).andWhere('fueAtendida', 0).toString()
-      sequelize.query(cantidadNovedades, { type: sequelize.QueryTypes.SELECT })
-        .then(cantidad => {
-          if (cantidad.length !== 0) {
-            let query = cantidad[0]['count(*)']
-            if (parseInt(query) !== 0) {
-              resolve(true)
-            } else {
-              resolve(false)
+      let query = 'select e.nombre as nombre, e.id as id, e.urlFoto as urlFoto, count(n.fueAtendida) as tieneNovedades  from empresas e inner join establecimientos as es on es.empresasId = e.id inner join areas a on a.establecimientosId = es.id inner join areasPuestos as ap on ap.areasId = a.id inner join novedades as n on n.puestosId = ap.puestosId and n.fueAtendida = 0 group by e.id'
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(empresas => {
+          let empresasProcesado = empresas.map(function (currentValue) {
+            return {
+              nombre: currentValue['nombre'],
+              id: currentValue['id'],
+              urlFoto: currentValue['urlFoto'],
+              tieneNovedades: currentValue['tieneNovedades'] > 0
             }
-          } else {
-            return reject(new Error('Error al extraer el query'))
-          }
+          })
+          resolve(empresasProcesado)
         }).catch((err) => {
           return reject(err)
         })

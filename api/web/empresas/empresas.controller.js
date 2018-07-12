@@ -1,4 +1,5 @@
 const co = require('co')
+const _ = require('lodash')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
@@ -82,19 +83,35 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerParaAdministrador ({ id }) {
+    ObtenerParaAdministrador () {
       return new Promise((resolve, reject) => {
         Promise.all([
-          db.empresas.Obtener({ id }),
-          db.empresas.ExistenNovedades({ id })
+          db.empresas.ObtenerTodos(),
+          db.empresas.EmpresasNovedades()
         ])
           .then((values) => {
-            let empresa = values[0]
-            if (!empresa) {
-              resolve(responses.NO_OK('empresa con es id no existe'))
-            } else {
-              resolve(responses.OK({ ...empresa, tieneNovedades: values[1] }))
+            let empresasTodas = values[0]
+            let empresasNovedades = values[1]
+            let empresasLimpiadas = []
+            for (let empresa of empresasTodas) {
+              let empresaExiste = _.find(empresasNovedades, { id: empresa['id'] })
+              if (empresaExiste) {
+                empresasLimpiadas.push({
+                  nombre: empresa['nombre'],
+                  urlFoto: empresa['urlFoto'],
+                  actividadComercial: empresa['actividadComercial'],
+                  tieneNovedades: empresaExiste['tieneNovedades']
+                })
+              } else {
+                empresasLimpiadas.push({
+                  nombre: empresa['nombre'],
+                  urlFoto: empresa['urlFoto'],
+                  actividadComercial: empresa['actividadComercial'],
+                  tieneNovedades: false
+                })
+              }
             }
+            resolve(responses.OK(empresasLimpiadas))
           }).catch((err) => {
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)

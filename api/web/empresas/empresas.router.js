@@ -114,26 +114,16 @@ module.exports = (app) => {
     })
 
   // identificador: API_6
-  // obtener una empresa con datos para front
+  // obtener las empresas con datos para front
   // Contendra un parametro con true or false para determinar si en algun puesto de la empresa existen novedades sin atender
-  app.route('/administrador/empresas/:empresasId')
+  app.route('/administrador/empresas')
     .get((req, res) => {
-      let params = utils.jsonToInt(req.params, ['empresasId'])
-      let { PARAMS } = schema.API_6_SCHEMA
-      let [err, mensaje] = validar(PARAMS, params)
-      if (err) {
-        let resp = responses.NO_OK(mensaje)
+      Controller.ObtenerParaAdministrador().then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
-      } else {
-        let { empresasId } = req.params
-        Controller.ObtenerParaAdministrador({ id: empresasId }).then((resp) => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        }).catch(resp => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        })
-      }
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
     })
 }

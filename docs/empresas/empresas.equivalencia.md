@@ -41,8 +41,8 @@ _response_
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-12 01:22:28.776 +00:00",
-      "fechaActualizacion": "2018-07-12 01:22:28.776 +00:00"
+      "fechaCreacion": "2018-07-12 23:10:34.137 +00:00",
+      "fechaActualizacion": "2018-07-12 23:10:34.137 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -268,16 +268,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-12T01:22:28.851Z",
-    "fechaCreacion": "2018-07-12T01:22:28.851Z",
+    "fechaActualizacion": "2018-07-12T23:10:34.218Z",
+    "fechaCreacion": "2018-07-12T23:10:34.218Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-12T01:22:28.853Z",
-      "fechaCreacion": "2018-07-12T01:22:28.853Z"
+      "fechaActualizacion": "2018-07-12T23:10:34.220Z",
+      "fechaCreacion": "2018-07-12T23:10:34.220Z"
     }
   },
   "codigoEstado": 200
@@ -2063,16 +2063,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-12 01:22:29.974 +00:00",
-    "fechaActualizacion": "2018-07-12 01:22:29.974 +00:00",
+    "fechaCreacion": "2018-07-12 23:10:35.413 +00:00",
+    "fechaActualizacion": "2018-07-12 23:10:35.413 +00:00",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-12 01:22:29.975 +00:00",
-        "fechaActualizacion": "2018-07-12 01:22:29.975 +00:00",
+        "fechaCreacion": "2018-07-12 23:10:35.415 +00:00",
+        "fechaActualizacion": "2018-07-12 23:10:35.415 +00:00",
         "empresasId": 1
       },
       {
@@ -2080,8 +2080,8 @@ _response_
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-12 01:22:29.976 +00:00",
-        "fechaActualizacion": "2018-07-12 01:22:29.976 +00:00",
+        "fechaCreacion": "2018-07-12 23:10:35.416 +00:00",
+        "fechaActualizacion": "2018-07-12 23:10:35.416 +00:00",
         "empresasId": 1
       }
     ]
@@ -2194,7 +2194,7 @@ ___
 
 > Descripción: OBTENER EMPRESAS PARA PAGINA PRINCIPAL FRONT
 
-> Url : /api/web/empresas/:empresasId
+> Url : /api/web/empresas
 
 #### Clases de equivalencia
 
@@ -2205,24 +2205,6 @@ ___
     <th>Descripción</th> 
     <th>Validez</th>
   </tr>
-			<tr style='background-color: #82E0AA' >
-				<td>  empresasId </td>
-				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
-				<td>{ 'type': 'number', minimum: 1 }</td>
-				<td> válido  </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td>  empresasId </td>
-				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
-				<td>'type': !'number'</td>
-				<td> invalido  </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td>  empresasId </td>
-				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
-				<td>minimum: !1 }</td>
-				<td> invalido  </td>
-			</tr>
 </table>
 
 
@@ -2236,9 +2218,9 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/empresas/:empresasId
+> /api/web/empresas
 
-GET /api/web/administrador/empresas/1
+GET /api/web/administrador/empresas
 
 _request o body_
 ```js
@@ -2252,16 +2234,26 @@ _response_
 ```js
 {
   "estado": true,
-  "datos": {
-    "id": 1,
-    "nombre": "Zapata S.A.",
-    "actividadComercial": "Integrado sensible al contexto sistema abierto",
-    "razonSocial": "La casa",
-    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-12 01:22:30.116 +00:00",
-    "fechaActualizacion": "2018-07-12 01:22:30.116 +00:00",
-    "tieneNovedades": true
-  },
+  "datos": [
+    {
+      "nombre": "Zapata S.A.",
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "actividadComercial": "Integrado sensible al contexto sistema abierto",
+      "tieneNovedades": true
+    },
+    {
+      "nombre": "Quintanilla, Roldán and Mena",
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "actividadComercial": "Descentralizado sensible al contexto acceso",
+      "tieneNovedades": false
+    },
+    {
+      "nombre": "Zapata S.A.",
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "actividadComercial": "Integrado sensible al contexto sistema abierto",
+      "tieneNovedades": false
+    }
+  ],
   "codigoEstado": 200
 }
 ```
@@ -2275,9 +2267,9 @@ __Datos prueba__
 
 _url_ 
 
-> /api/web/empresas/:empresasId
+> /api/web/empresas
 
-GET /api/web/administrador/empresas/1
+GET /api/web/administrador/empresas
 
 _request o body_
 ```js
@@ -2291,110 +2283,26 @@ _response_
 ```js
 {
   "estado": true,
-  "datos": {
-    "id": 1,
-    "nombre": "Zapata S.A.",
-    "actividadComercial": "Integrado sensible al contexto sistema abierto",
-    "razonSocial": "La casa",
-    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-12 01:22:30.170 +00:00",
-    "fechaActualizacion": "2018-07-12 01:22:30.170 +00:00",
-    "tieneNovedades": false
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_6[3]__
-
-empresasId no valido tipo de dato
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/empresas/:empresasId
-
-GET /api/web/administrador/empresas/a
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "empresasId": "debe ser number"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_6[4]__
-
-empresasId no valido numero
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/empresas/:empresasId
-
-GET /api/web/administrador/empresas/0
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "empresasId": "debe ser >= 1"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_6[5]__
-
-empresas no existe
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/empresas/:empresasId
-
-GET /api/web/administrador/empresas/50
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "empresa con es id no existe",
+  "datos": [
+    {
+      "nombre": "Zapata S.A.",
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "actividadComercial": "Integrado sensible al contexto sistema abierto",
+      "tieneNovedades": false
+    },
+    {
+      "nombre": "Quintanilla, Roldán and Mena",
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "actividadComercial": "Descentralizado sensible al contexto acceso",
+      "tieneNovedades": false
+    },
+    {
+      "nombre": "Zapata S.A.",
+      "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+      "actividadComercial": "Integrado sensible al contexto sistema abierto",
+      "tieneNovedades": false
+    }
+  ],
   "codigoEstado": 200
 }
 ```
