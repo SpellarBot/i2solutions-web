@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height @keydown.enter="submit">
+  <v-container fluid fill-height @keydown.enter="submit" style="margin-top: 20%;">
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12">

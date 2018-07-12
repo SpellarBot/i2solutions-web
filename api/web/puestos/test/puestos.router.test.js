@@ -20,7 +20,10 @@ let equivalencias = {}
 const schema = utils.schemaFormato
 
 describe('PUESTOS', () => {
-  let { puestos, areas, novedades, riesgos, accidentes } = dump
+  let { puestos, areas, novedades, riesgos, accidentes, empresas, establecimientos } = dump
+  let empresa = empresas.VALIDOS[0]
+  let establecimiento = establecimientos.VALIDOS[0]
+  let establecimiento2 = establecimientos.VALIDOS[1]
   let puesto = puestos.VALIDOS[0]
   let puesto2 = puestos.VALIDOS[1]
   let puesto3 = puestos.VALIDOS[2]
@@ -29,6 +32,15 @@ describe('PUESTOS', () => {
   let novedad = novedades.VALIDOS[0]
   let riesgo = riesgos.VALIDOS[0]
   let accidente = accidentes.VALIDOS[0]
+  let establecimientosId, establecimientosId2 = -1
+  beforeEach(async () => {
+    let empresaCreada = await models.empresas.Crear(empresa)
+    let empresasId = empresaCreada['id']
+    let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+    establecimientosId = establecimientosCreada['id']
+    let establecimientosCreada2 = await models.establecimientos.Crear(establecimiento2)
+    establecimientosId2 = establecimientosCreada2['id']
+  })
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
@@ -44,13 +56,13 @@ describe('PUESTOS', () => {
     const { API_1 } = API
     let { API_1_EQUI } = EQUI
     let codigoApi = 'API_1'
-    let puestosCreada, puestosCreada2, puestosCreada3, areasCreada, areasCreada2, areasId = {}
+    let areasId = {}
     beforeEach(async () => {
-      puestosCreada = await models.puestos.Crear(puesto)
-      puestosCreada2 = await models.puestos.Crear(puesto2)
-      puestosCreada3 = await models.puestos.Crear(puesto3)
-      areasCreada = await models.areas.Crear(area)
-      areasCreada2 = await models.areas.Crear(area2)
+      let puestosCreada = await models.puestos.Crear(puesto)
+      let puestosCreada2 = await models.puestos.Crear(puesto2)
+      let puestosCreada3 = await models.puestos.Crear(puesto3)
+      let areasCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areasCreada2 = await models.areas.Crear({ ...area2, establecimientosId })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada2['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada3['id'], areasId: areasCreada2['id'] })
@@ -91,13 +103,13 @@ describe('PUESTOS', () => {
     let { API_2_EQUI } = EQUI
     let codigoApi = 'API_2'
 
-    let puestosCreada, puestosCreada2, puestosCreada3, areasCreada, areasCreada2, areasId = {}
+    let areasId = -1
     beforeEach(async () => {
-      puestosCreada = await models.puestos.Crear(puesto)
-      puestosCreada2 = await models.puestos.Crear(puesto2)
-      puestosCreada3 = await models.puestos.Crear(puesto3)
-      areasCreada = await models.areas.Crear(area)
-      areasCreada2 = await models.areas.Crear(area2)
+      let puestosCreada = await models.puestos.Crear(puesto)
+      let puestosCreada2 = await models.puestos.Crear(puesto2)
+      let puestosCreada3 = await models.puestos.Crear(puesto3)
+      let areasCreada = await models.areas.Crear(area)
+      let areasCreada2 = await models.areas.Crear(area2)
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada2['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada3['id'], areasId: areasCreada2['id'] })
@@ -175,17 +187,16 @@ describe('PUESTOS', () => {
     let { API_3_EQUI } = EQUI
     let codigoApi = 'API_3'
 
-    let puestosCreada, puestosCreada2, puestosCreada3, areasCreada, areasCreada2, areasId, puestosId = {}
+    let puestosId = -1
     beforeEach(async () => {
-      puestosCreada = await models.puestos.Crear(puesto)
-      puestosCreada2 = await models.puestos.Crear(puesto2)
-      puestosCreada3 = await models.puestos.Crear(puesto3)
-      areasCreada = await models.areas.Crear(area)
-      areasCreada2 = await models.areas.Crear(area2)
+      let puestosCreada = await models.puestos.Crear(puesto)
+      let puestosCreada2 = await models.puestos.Crear(puesto2)
+      let puestosCreada3 = await models.puestos.Crear(puesto3)
+      let areasCreada = await models.areas.Crear(area)
+      let areasCreada2 = await models.areas.Crear(area2)
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada2['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada3['id'], areasId: areasCreada2['id'] })
-      areasId = areasCreada['id']
       puestosId = puestosCreada['id']
     })
 
@@ -286,17 +297,16 @@ describe('PUESTOS', () => {
     let { API_4_EQUI } = EQUI
     let codigoApi = 'API_4'
 
-    let puestosCreada, puestosCreada2, puestosCreada3, areasCreada, areasCreada2, areasId, puestosId = {}
+    let puestosId = -1
     beforeEach(async () => {
-      puestosCreada = await models.puestos.Crear(puesto)
-      puestosCreada2 = await models.puestos.Crear(puesto2)
-      puestosCreada3 = await models.puestos.Crear(puesto3)
-      areasCreada = await models.areas.Crear(area)
-      areasCreada2 = await models.areas.Crear(area2)
+      let puestosCreada = await models.puestos.Crear(puesto)
+      let puestosCreada2 = await models.puestos.Crear(puesto2)
+      let puestosCreada3 = await models.puestos.Crear(puesto3)
+      let areasCreada = await models.areas.Crear(area)
+      let areasCreada2 = await models.areas.Crear(area2)
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada2['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada3['id'], areasId: areasCreada2['id'] })
-      areasId = areasCreada['id']
       puestosId = puestosCreada['id']
     })
 
@@ -344,17 +354,16 @@ describe('PUESTOS', () => {
     let { API_5_EQUI } = EQUI
     let codigoApi = 'API_5'
 
-    let puestosCreada, puestosCreada2, puestosCreada3, areasCreada, areasCreada2, areasId, puestosId = {}
+    let puestosId, puestosCreada = -1
     beforeEach(async () => {
       puestosCreada = await models.puestos.Crear(puesto)
-      puestosCreada2 = await models.puestos.Crear(puesto2)
-      puestosCreada3 = await models.puestos.Crear(puesto3)
-      areasCreada = await models.areas.Crear(area)
-      areasCreada2 = await models.areas.Crear(area2)
+      let puestosCreada2 = await models.puestos.Crear(puesto2)
+      let puestosCreada3 = await models.puestos.Crear(puesto3)
+      let areasCreada = await models.areas.Crear(area)
+      let areasCreada2 = await models.areas.Crear(area2)
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada2['id'], areasId: areasCreada['id'] })
       await models.areasPuestos.Crear({ puestosId: puestosCreada3['id'], areasId: areasCreada2['id'] })
-      areasId = areasCreada['id']
       puestosId = puestosCreada['id']
     })
 

@@ -34,6 +34,15 @@ const datos = () => {
       'logging': false,
       'dialect': 'mysql'
     }
+  } else if (usuario === 'LAPTOP-Q9MEDK44') {
+    return {
+      'username': 'root',
+      'password': '123456789',
+      'database': 'i2solutions_development',
+      'host': '127.0.0.1',
+      'logging': false,
+      'dialect': 'mysql'
+    }
   } else if (usuario === 'DESKTOP-FJ6A4I5') {
     return {
       'username': 'root',

@@ -65,7 +65,7 @@ const Conectar = () => {
               return resolve(db)
             })
         } else {
-          sequelize.query('PRAGMA foreign_keys = OFF') // para sqlite
+          // sequelize.query('PRAGMA foreign_keys = OFF') // para sqlite
           return resolve()
         }
       })

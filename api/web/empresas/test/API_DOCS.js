@@ -49,5 +49,16 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_6: {
+    nombre: 'Obtener una empresa con datos para front',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/administrador/empresas/:empresasId',
+    params: [
+      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
   }
 }

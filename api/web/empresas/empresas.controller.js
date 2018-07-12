@@ -81,6 +81,25 @@ module.exports = ({ responses, db }) => {
             return reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    ObtenerParaAdministrador ({ id }) {
+      return new Promise((resolve, reject) => {
+        Promise.all([
+          db.empresas.Obtener({ id }),
+          db.empresas.ExistenNovedades({ id })
+        ])
+          .then((values) => {
+            let empresa = values[0]
+            if (!empresa) {
+              resolve(responses.NO_OK('empresa con es id no existe'))
+            } else {
+              resolve(responses.OK({ ...empresa, tieneNovedades: values[1] }))
+            }
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

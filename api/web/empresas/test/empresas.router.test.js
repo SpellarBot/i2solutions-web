@@ -9,6 +9,7 @@ const db = rfr('api/config/db')
 const app = rfr('app')
 const dump = rfr('api/config/dump')
 const utils = rfr('api/utils')
+const validar = rfr('api/utils').schemaFormato
 
 const SCHEMA = require('../API_SCHEMA')
 const API = require('./API_DOCS')
@@ -20,12 +21,15 @@ let equivalencias = {}
 const schema = utils.schemaFormato
 
 describe('EMPRESAS', () => {
-  let { empresas, establecimientos } = dump
+  let { empresas, establecimientos, areas, puestos, novedades } = dump
   let empresa = empresas.VALIDOS[0]
   let empresa2 = empresas.VALIDOS[1]
   let establecimiento = establecimientos.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
   let establecimiento3 = establecimientos.VALIDOS[2]
+  let area = areas.VALIDOS[0]
+  let puesto = puestos.VALIDOS[0]
+  let novedad = novedades.VALIDOS[0]
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
@@ -41,7 +45,7 @@ describe('EMPRESAS', () => {
     const { API_1 } = API
     let { API_1_EQUI } = EQUI
     let codigoApi = 'API_1'
-    it(`@ICE_${codigoApi}_1 Una empresa creada`, async () => {
+    it(`@ICE_API_1_01 Una empresa creada`, async () => {
       await models.empresas.Crear(empresa)
       let res = await request(app).get('/api/web/empresas')
       expect(res.body.estado).to.equal(true)
@@ -50,7 +54,7 @@ describe('EMPRESAS', () => {
       generatorDocs.OK({ docs, doc: API_1, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, res, codigoApi })
     })
-    it(`@ICE_${codigoApi}_2 Sin empresas existentes`, async () => {
+    it(`@ICE_API_1_02 Sin empresas existentes`, async () => {
       let res = await request(app).get('/api/web/empresas')
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
@@ -379,7 +383,6 @@ describe('EMPRESAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '11', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
-      generatorDocs.OK({ docs, doc: API_3, res, req })
     })
 
     it(`@ICE_API_3_12 urlFoto formato no válido`, async () => {
@@ -394,7 +397,6 @@ describe('EMPRESAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '12', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
-      generatorDocs.OK({ docs, doc: API_3, res, req })
     })
   })
 
@@ -452,12 +454,12 @@ describe('EMPRESAS', () => {
     let { API_5_EQUI } = EQUI
     const codigoApi = 'API_5'
 
-    it(`@ICE_${codigoApi}_1 Obtener empresa`, async () => {
+    it(`@ICE_API_5_01 Obtener empresa`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear(establecimiento)
-      let establecimientoCreada2 = await models.establecimientos.Crear(establecimiento2)
-      establecimiento3['empresasId'] = 5
-      let establecimientoCreada3 = await models.establecimientos.Crear(establecimiento3)
+      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
+      let establecimientoCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada['id'] })
+      let empresaCreada2 = await models.empresas.Crear(empresa2)
+      let establecimientoCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada2['id'] })
 
       let params = { empresasId: empresaCreada['id'] }
       let url = `/api/web/empresas/${params['empresasId']}`
@@ -470,7 +472,7 @@ describe('EMPRESAS', () => {
       generatorDocs.OK({ docs, doc: API_5, res })
     })
 
-    it(`@ICE_${codigoApi}_2 empresasId no valido numero`, async () => {
+    it(`@ICE_API_5_02 empresasId no valido numero`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
 
       let params = { empresasId: 0 }
@@ -481,7 +483,7 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_3 empresasId no valido tipo de dato`, async () => {
+    it(`@ICE_API_5_03 empresasId no valido tipo de dato`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
 
       let params = { empresasId: 'a' }
@@ -492,7 +494,7 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_4 empresas no existe`, async () => {
+    it(`@ICE_API_5_04 empresas no existe`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
 
       let params = { empresasId: 500 }
@@ -501,6 +503,77 @@ describe('EMPRESAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
+    })
+  })
+
+  describe('API_6 OBTENER EMPRESAS PARA PAGINA PRINCIPAL FRONT', () => {
+    const { API_6 } = API
+    let { API_6_EQUI } = EQUI
+    const codigoApi = 'API_6'
+    let empresasId, puestosId = -1
+    let { API_6_SCHEMA } = SCHEMA
+
+    beforeEach(async () => {
+      let empresaCreada = await models.empresas.Crear(empresa)
+      empresasId = empresaCreada['id']
+      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let puestoCreada = await models.puestos.Crear({ ...puesto, areasId: areaCreada['id'] })
+      let ap = await models.areasPuestos.Crear({ areasId: areaCreada['id'], puestosId: puestoCreada['id'] })
+      puestosId = puestoCreada['id']
+    })
+
+    it(`@ICE_API_6_01 empresa con novedades`, async () => {
+      let novedadCreada = await models.novedades.Crear({ ...novedad, puestosId })
+      let params = { empresasId }
+      let url = `/api/web/administrador/empresas/${params['empresasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos['tieneNovedades']).to.equal(true)
+      let [err, mensaje] = validar(API_6_SCHEMA, res.body)
+      expect(err).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_6, res })
+    })
+
+    it(`@ICE_API_6_02 empresa sin novedades`, async () => {
+      let params = { empresasId }
+      let url = `/api/web/administrador/empresas/${params['empresasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos['tieneNovedades']).to.equal(false)
+      let [err, mensaje] = validar(API_6_SCHEMA, res.body)
+      expect(err).to.equal(false)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+    })
+
+    it(`@ICE_API_6_03 empresasId no valido tipo de dato`, async () => {
+      let params = { empresasId: 'a' }
+      let url = `/api/web/administrador/empresas/${params['empresasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+    })
+
+    it(`@ICE_API_6_04 empresasId no valido numero`, async () => {
+      let params = { empresasId: 0 }
+      let url = `/api/web/administrador/empresas/${params['empresasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+    })
+
+    it(`@ICE_API_6_05 empresas no existe`, async () => {
+      let params = { empresasId: 50 }
+      let url = `/api/web/administrador/empresas/${params['empresasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
     })
   })
 })

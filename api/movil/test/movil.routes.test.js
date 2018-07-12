@@ -54,68 +54,68 @@ describe('MOVIL TEST', () => {
     })
   })
 
-  describe('@API_2 Crear una novedad', () => {
-    let { API_2 } = API
-    it('@CP2 OK', async () => {
-      let req = { ...novedad, puestosId: 1, inspeccionId: 1 }
-      let res = await request(app).post(`/api/movil/novedad`).send(req)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.datos['descripcion']).to.equal(req['descripcion'])
-      generatorDocs.OK({ docs, doc: API_2, res, req })
-    })
-  })
+  // describe('@API_2 Crear una novedad', () => {
+  //   let { API_2 } = API
+  //   it('@CP2 OK', async () => {
+  //     let req = { ...novedad, puestosId: 1, inspeccionId: 1 }
+  //     let res = await request(app).post(`/api/movil/novedad`).send(req)
+  //     expect(res.body.codigoEstado).to.equal(200)
+  //     expect(res.body.estado).to.equal(true)
+  //     expect(res.body.datos['descripcion']).to.equal(req['descripcion'])
+  //     generatorDocs.OK({ docs, doc: API_2, res, req })
+  //   })
+  // })
 
-  describe('@API_3 Obtener un puesto de trabajo dada un area y establecimiento', () => {
-    let { API_3 } = API
-    it('@CP3 OK', async () => {
-      let establecimientoCreada = await models.establecimientos.Crear(establecimiento)
-      let establecimientoId = establecimientoCreada['id']
-      let areaCreada = await models.areas.Crear(area)
-      let areasId = areaCreada['id']
-      let puestoCreada = await models.puestos.Crear(puesto)
-      let puestosId = puestoCreada['id']
-      await models.areasPuestos.Crear({
-        areasId,
-        puestosId
-      })
-      // riesgos
-      await models.riesgos.Crear({ ...riesgo, puestosId })
+  // describe('@API_3 Obtener un puesto de trabajo dada un area y establecimiento', () => {
+  //   let { API_3 } = API
+  //   it('@CP3 OK', async () => {
+  //     let establecimientoCreada = await models.establecimientos.Crear(establecimiento)
+  //     let establecimientoId = establecimientoCreada['id']
+  //     let areaCreada = await models.areas.Crear(area)
+  //     let areasId = areaCreada['id']
+  //     let puestoCreada = await models.puestos.Crear(puesto)
+  //     let puestosId = puestoCreada['id']
+  //     await models.areasPuestos.Crear({
+  //       areasId,
+  //       puestosId
+  //     })
+  //     // riesgos
+  //     await models.riesgos.Crear({ ...riesgo, puestosId })
 
-      // accidentes
-      await models.accidentes.Crear({ ...accidente, puestosId })
+  //     // accidentes
+  //     await models.accidentes.Crear({ ...accidente, puestosId })
 
-      // equipos
-      let equipoCreada = await models.equipos.Crear({ ...equipo, puestosId })
-      await models.equiposPuestos.Crear({ puestosId, equiposId: equipoCreada['id'], cantidad: 1 })
+  //     // equipos
+  //     let equipoCreada = await models.equipos.Crear({ ...equipo, puestosId })
+  //     await models.equiposPuestos.Crear({ puestosId, equiposId: equipoCreada['id'], cantidad: 1 })
 
-      // personas
-      let personaCreada = await models.personas.Crear(persona)
-      let personaCreada2 = await models.personas.Crear(persona2)
-      await models.personasEstablecimientos.Crear({ personasId: personaCreada['id'], establecimientosId: establecimientoId })
-      await models.personasEstablecimientos.Crear({ personasId: personaCreada2['id'], establecimientosId: establecimientoId })
+  //     // personas
+  //     let personaCreada = await models.personas.Crear(persona)
+  //     let personaCreada2 = await models.personas.Crear(persona2)
+  //     await models.personasEstablecimientos.Crear({ personasId: personaCreada['id'], establecimientosId: establecimientoId })
+  //     await models.personasEstablecimientos.Crear({ personasId: personaCreada2['id'], establecimientosId: establecimientoId })
 
-      // capacitaciones
-      await models.capacitaciones.Crear({ ...capacitacion, areasId: areasId })
+  //     // capacitaciones
+  //     await models.capacitaciones.Crear({ ...capacitacion, areasId: areasId })
 
-      // novedades
-      let novedadCreada = await models.novedades.Crear({ ...novedad, puestosId, inspeccionId: 1 })
-      let novedadCreada2 = await models.novedades.Crear({ ...novedad2, puestosId, inspeccionId: 1 })
-      let novedadCreada3 = await models.novedades.Crear({ ...novedad3, puestosId: 2, inspeccionId: 1 })
-      await models.novedades.Atender({ id: novedadCreada['id'], atendida: true, descripcionAtendida: 'Fue atendida' })
-      let res = await request(app).get(`/api/movil/area/${areasId}/puesto/${puestosId}/${establecimientoId}`)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.datos['novedadesSinAtender'].length).to.equal(1)
-      expect(res.body.datos['novedadesAtendidas'].length).to.equal(1)
-      expect(res.body.datos['riesgos'].length).to.equal(1)
-      expect(res.body.datos['cantidadEmpleados']).to.equal(2)
-      expect(res.body.datos['detallesAccidentes'].length).to.equal(1)
-      expect(res.body.datos['detallesCapacitaciones'].length).to.equal(1)
-      expect(res.body.datos['equiposProteccion'].length).to.equal(1)
-      generatorDocs.OK({ docs, doc: API_3, res })
-    })
-  })
+  //     // novedades
+  //     let novedadCreada = await models.novedades.Crear({ ...novedad, puestosId, inspeccionId: 1 })
+  //     let novedadCreada2 = await models.novedades.Crear({ ...novedad2, puestosId, inspeccionId: 1 })
+  //     let novedadCreada3 = await models.novedades.Crear({ ...novedad3, puestosId: 2, inspeccionId: 1 })
+  //     await models.novedades.Atender({ id: novedadCreada['id'], atendida: true, descripcionAtendida: 'Fue atendida' })
+  //     let res = await request(app).get(`/api/movil/area/${areasId}/puesto/${puestosId}/${establecimientoId}`)
+  //     expect(res.body.codigoEstado).to.equal(200)
+  //     expect(res.body.estado).to.equal(true)
+  //     expect(res.body.datos['novedadesSinAtender'].length).to.equal(1)
+  //     expect(res.body.datos['novedadesAtendidas'].length).to.equal(1)
+  //     expect(res.body.datos['riesgos'].length).to.equal(1)
+  //     expect(res.body.datos['cantidadEmpleados']).to.equal(2)
+  //     expect(res.body.datos['detallesAccidentes'].length).to.equal(1)
+  //     expect(res.body.datos['detallesCapacitaciones'].length).to.equal(1)
+  //     expect(res.body.datos['equiposProteccion'].length).to.equal(1)
+  //     generatorDocs.OK({ docs, doc: API_3, res })
+  //   })
+  // })
 
   describe('@API_4 Atender una novedad', () => {
     let { API_4 } = API

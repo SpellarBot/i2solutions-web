@@ -128,8 +128,8 @@ _response_
     "descripcion": "esta hecho",
     "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
     "cantidad": 1,
-    "fechaActualizacion": "2018-07-10T05:30:30.352Z",
-    "fechaCreacion": "2018-07-10T05:30:30.352Z"
+    "fechaActualizacion": "2018-07-12T01:22:30.379Z",
+    "fechaCreacion": "2018-07-12T01:22:30.379Z"
   },
   "codigoEstado": 200
 }
@@ -1570,8 +1570,8 @@ _response_
     "id": 1,
     "equiposId": "1",
     "puestosId": "1",
-    "fechaActualizacion": "2018-07-10T05:30:31.244Z",
-    "fechaCreacion": "2018-07-10T05:30:31.244Z"
+    "fechaActualizacion": "2018-07-12T01:22:31.374Z",
+    "fechaCreacion": "2018-07-12T01:22:31.374Z"
   },
   "codigoEstado": 200
 }
@@ -1855,8 +1855,8 @@ _response_
     "id": 1,
     "equiposId": "1",
     "areasId": "1",
-    "fechaActualizacion": "2018-07-10T05:30:31.517Z",
-    "fechaCreacion": "2018-07-10T05:30:31.517Z"
+    "fechaActualizacion": "2018-07-12T01:22:31.712Z",
+    "fechaCreacion": "2018-07-12T01:22:31.712Z"
   },
   "codigoEstado": 200
 }

@@ -1,28 +1,34 @@
 <template>
   <main id="CardPuestos">
     <v-card>
-      <v-toolbar dark color="primary">
 
-      <v-toolbar-title class="text-xs-center">Empaquetado de Pollo</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <h2>Empaquetado de Pollo</h2>
       <v-btn
-              icon
+              fab
               dark
+              right
+              small
+              color="blue"
+              absolute
               @click="visualizarEditar()"
             >
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
-              icon
+              fab
               dark
+              right
+              small
+              color="blue"
+              absolute
+              class="offseted"
             >
               <v-icon>delete</v-icon>
             </v-btn>
-          </v-toolbar>
-      <p> Puesto donde se realiza el empaquetado de pollo y se envía a distribución.</p>
+      <div class="small-width"><p> Puesto donde se realiza el empaquetado de pollo y se envía a distribución.</p></div>
       <span class="link" v-on:click="visualizarPersonas"> Número Personas: 1</span>
       <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: 1</span>
-      <span class="link"> Novedades sin arender: 1</span>
+      <span class="link" v-on:click="visualizarNovedadesFromAreas"> Novedades sin arender: 1</span>
     </v-card>
     <footer>
       <DialogPersonasFromPuestos
@@ -37,6 +43,9 @@
     :visible="visibleEdicion"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
+    <DialogNovedadesFromAreas
+    :visible="visibleNovedades"
+    @close="visibleNovedades=false"></DialogNovedadesFromAreas>
     </footer>
   </main>
 </template>
@@ -44,13 +53,15 @@
 import DialogPersonasFromPuestos from './DialogPersonasFromPuestos'
 import DialogAccidentesFromPuestos from './DialogAccidentesFromPuestos'
 import DialogEditarPuestos from './Editar/DialogEditarPuestos'
+import DialogNovedadesFromAreas from './Novedades/DialogNovedadesFromAreas'
 export default {
-  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos },
+  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromAreas },
   data () {
     return {
       visiblePersonas: false,
       visibleAccidentes: false,
-      visibleEdicion: false
+      visibleEdicion: false,
+      visibleNovedades: false
     }
   },
   methods: {
@@ -59,6 +70,9 @@ export default {
     },
     visualizarAccidentes () {
       this.visibleAccidentes = true
+    },
+    visualizarNovedadesFromAreas () {
+      this.visibleNovedades = true
     },
     visualizarEditar () {
       // luego aquí pondré los datos que debe recibir el dialog, por ahora no :v
@@ -70,5 +84,9 @@ export default {
 <style>
   .offseted {
   top: 6.5em;
+}
+.small-width {
+  width: 70%;
+  margin-left: 15%;
 }
 </style>

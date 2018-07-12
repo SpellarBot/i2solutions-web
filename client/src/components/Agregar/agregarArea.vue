@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <div>
     <v-card hover style="cursor: inherit;">
@@ -104,3 +105,6 @@ import agregarPuesto from './agregarPuesto'
   }
 }
 </script>
+=======
+agregarArea.vue
+>>>>>>> 81b1531391c68de1b27dcfcc67de8094f45b567d

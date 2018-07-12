@@ -24,10 +24,16 @@
                           <span class="link" v-on:click="dumb=true">#Personas: {{puesto.numPersonas}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="dumb=true">#Novedades: {{puesto.numNovedades}}</span>
+                          <span class="link" v-on:click="visualizarNovedades">#Novedades: {{puesto.numNovedades}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="dumb=true">#Accidentes: {{puesto.numAccidentes}}</span>
+                        </v-flex>
+                        <v-flex xs6 md6>
+                          <span class="link" v-on:click="visualizarEquipos">#Equipos: {{puesto.numEquipos}}</span>
+                        </v-flex>
+                        <v-flex xs6 md6>
+                          <span class="link" v-on:click="visualizarRiesgos">#Pool de Riesgos: </span>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -36,15 +42,37 @@
          </v-flex>
       </v-layout>
     </v-container>
+    <footer>
+    <DialogNovedadesFromPuestos
+    :visible ="visibleNovedades"
+    @close ="visibleNovedades=false">
+    </DialogNovedadesFromPuestos>
+    <DialogEquiposFromPuestos
+    :visible ="visibleEquipos"
+    @close ="visibleEquipos=false">
+    </DialogEquiposFromPuestos>
+    <DialogRiesgosFromPuestos
+    :visible ="visibleRiesgos"
+    @close ="visibleRiesgos=false">
+    </DialogRiesgosFromPuestos>
+  </footer>
   </main>
 </template>
+
 <script>
+import DialogNovedadesFromPuestos from '../Novedades/DialogNovedadesFromPuestos'
+import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
+import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 export default{
+  components: {DialogNovedadesFromPuestos, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
   name: 'puestosPorArea',
   props: ['idArea'],
   data () {
     return {
       dumb: false,
+      visibleNovedades: false,
+      visibleEquipos: false,
+      visibleRiesgos: false,
       puestos:
       [
         {
@@ -54,6 +82,7 @@ export default{
           numPersonas: 3,
           numNovedades: 1,
           numAccidentes: 0,
+          numEquipos: 5,
           idArea: '0'
         },
         {
@@ -63,6 +92,7 @@ export default{
           numPersonas: 2,
           numNovedades: 0,
           numAccidentes: 0,
+          numEquipos: 4,
           idArea: '0'
         },
         {
@@ -72,9 +102,21 @@ export default{
           numPersonas: 2,
           numNovedades: 0,
           numAccidentes: 0,
+          numEquipos: 10,
           idArea: '1'
         }
       ]
+    }
+  },
+  methods: {
+    visualizarNovedades () {
+      this.visibleNovedades = true
+    },
+    visualizarEquipos () {
+      this.visibleEquipos = true
+    },
+    visualizarRiesgos () {
+      this.visibleRiesgos = true
     }
   }
 }

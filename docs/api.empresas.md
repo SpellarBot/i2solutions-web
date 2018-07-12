@@ -17,8 +17,8 @@ Obtener todas las empresas de i2Solutions
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-10 05:30:28.965 +00:00",
-      "fechaActualizacion": "2018-07-10 05:30:28.965 +00:00"
+      "fechaCreacion": "2018-07-12 01:22:28.776 +00:00",
+      "fechaActualizacion": "2018-07-12 01:22:28.776 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -59,16 +59,16 @@ Crear una empresa, esto tambien deberia crear un establecimiento por defecto
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-10T05:30:29.042Z",
-    "fechaCreacion": "2018-07-10T05:30:29.042Z",
+    "fechaActualizacion": "2018-07-12T01:22:28.851Z",
+    "fechaCreacion": "2018-07-12T01:22:28.851Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-10T05:30:29.044Z",
-      "fechaCreacion": "2018-07-10T05:30:29.044Z"
+      "fechaActualizacion": "2018-07-12T01:22:28.853Z",
+      "fechaCreacion": "2018-07-12T01:22:28.853Z"
     }
   },
   "codigoEstado": 200
@@ -95,157 +95,19 @@ __PUT__ __/api/web/empresas/:empresasId__
 
 ```json
 {
-  "nombre": "Zapata S.A.",
-  "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa",
-  "urlFoto": "http://"
-}
-```
-
-#### Response:
-
-```json
-{
-  "estado": false,
-  "datos": {
-    "urlFoto": "debe coincidir con el formato \"url\""
-  },
-  "codigoEstado": 200
-}
-```
-
-#### ERRORS:
-__El Id de la empresa no existe__
-
-
-
-
-_request_
-
-```js
-{
-  "nombre": "Zapata S.A.",
+  "nombre": "Nombre cambiado",
   "actividadComercial": "Integrado sensible al contexto sistema abierto",
   "razonSocial": "La casa",
   "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
 }
 ```
 
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "La empresa con ese id no existe",
-  "codigoEstado": 200
-}
-```
-	
-	
-
-
-___
-
-
-
-## Actualizar Empresa
-
-__PUT__ __/api/web/empresas/:empresasId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| empresasId | Number |   ---   |
-	
-
-#### Request:
-
-```json
-{
-  "nombre": "Zapata S.A.",
-  "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa",
-  "urlFoto": "http://"
-}
-```
-
 #### Response:
 
 ```json
 {
-  "estado": false,
-  "datos": {
-    "urlFoto": "debe coincidir con el formato \"url\""
-  },
-  "codigoEstado": 200
-}
-```
-
-#### ERRORS:
-__El Id de la empresa no existe__
-
-
-
-
-_request_
-
-```js
-{
-  "nombre": "Zapata S.A.",
-  "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa",
-  "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png"
-}
-```
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "La empresa con ese id no existe",
-  "codigoEstado": 200
-}
-```
-	
-	
-
-
-___
-
-
-
-## Actualizar Empresa
-
-__PUT__ __/api/web/empresas/:empresasId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| empresasId | Number |   ---   |
-	
-
-#### Request:
-
-```json
-{
-  "nombre": "Zapata S.A.",
-  "actividadComercial": "Integrado sensible al contexto sistema abierto",
-  "razonSocial": "La casa",
-  "urlFoto": "http://"
-}
-```
-
-#### Response:
-
-```json
-{
-  "estado": false,
-  "datos": {
-    "urlFoto": "debe coincidir con el formato \"url\""
-  },
+  "estado": true,
+  "datos": true,
   "codigoEstado": 200
 }
 ```
@@ -350,16 +212,16 @@ __GET__ __/api/web/empresas/:empresasId__
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-10T05:30:30.154Z",
-    "fechaActualizacion": "2018-07-10T05:30:30.154Z",
+    "fechaCreacion": "2018-07-12 01:22:29.974 +00:00",
+    "fechaActualizacion": "2018-07-12 01:22:29.974 +00:00",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-10 05:30:30.155 +00:00",
-        "fechaActualizacion": "2018-07-10 05:30:30.155 +00:00",
+        "fechaCreacion": "2018-07-12 01:22:29.975 +00:00",
+        "fechaActualizacion": "2018-07-12 01:22:29.975 +00:00",
         "empresasId": 1
       },
       {
@@ -367,11 +229,46 @@ __GET__ __/api/web/empresas/:empresasId__
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-10 05:30:30.156 +00:00",
-        "fechaActualizacion": "2018-07-10 05:30:30.156 +00:00",
+        "fechaCreacion": "2018-07-12 01:22:29.976 +00:00",
+        "fechaActualizacion": "2018-07-12 01:22:29.976 +00:00",
         "empresasId": 1
       }
     ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener una empresa con datos para front
+
+__GET__ __/api/web/administrador/empresas/:empresasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| empresasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Zapata S.A.",
+    "actividadComercial": "Integrado sensible al contexto sistema abierto",
+    "razonSocial": "La casa",
+    "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
+    "fechaCreacion": "2018-07-12 01:22:30.116 +00:00",
+    "fechaActualizacion": "2018-07-12 01:22:30.116 +00:00",
+    "tieneNovedades": true
   },
   "codigoEstado": 200
 }

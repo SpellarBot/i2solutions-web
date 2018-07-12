@@ -1,16 +1,16 @@
 'use strict'
-// let knex = {}
-// if (process.env.NODE_ENV === 'testing') {
-//   knex = require('knex')({
-//     client: 'sqlite',
-//     useNullAsDefault: true
-//   })
-// } else {
-//   knex = require('knex')({
-//     client: 'mysql',
-//     useNullAsDefault: true
-//   })
-// }
+let knex = {}
+if (process.env.NODE_ENV === 'testing') {
+  knex = require('knex')({
+    client: 'sqlite',
+    useNullAsDefault: true
+  })
+} else {
+  knex = require('knex')({
+    client: 'mysql',
+    useNullAsDefault: true
+  })
+}
 module.exports = (sequelize, DataTypes) => {
   let singular = 'empresas'
   let plural = 'empresas'
@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Obtener = function ({ id }) {
     return new Promise((resolve, reject) => {
-      this.findById(id)
+      this.findOne({ where: { id }, raw: true })
         .then((project) => {
           resolve(project)
         }).catch((err) => {
@@ -102,6 +102,30 @@ module.exports = (sequelize, DataTypes) => {
             resolve(true)
           } else {
             resolve(false)
+          }
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ExistenNovedades = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let establecimientosQuery = knex('establecimientos').select('id').where('empresasId', '=', id)
+      let areasQuery = knex.select('id').from('areas').where('establecimientosId', 'in', establecimientosQuery)
+      let puestosAreasQuery = knex.select('puestosId').from('areasPuestos').where('areasId', 'in', areasQuery)
+      let cantidadNovedades = knex.count('*').from('novedades').where('puestosId', 'in', puestosAreasQuery).andWhere('fueAtendida', 0).toString()
+      sequelize.query(cantidadNovedades, { type: sequelize.QueryTypes.SELECT })
+        .then(cantidad => {
+          if (cantidad.length !== 0) {
+            let query = cantidad[0]['count(*)']
+            if (parseInt(query) !== 0) {
+              resolve(true)
+            } else {
+              resolve(false)
+            }
+          } else {
+            return reject(new Error('Error al extraer el query'))
           }
         }).catch((err) => {
           return reject(err)
