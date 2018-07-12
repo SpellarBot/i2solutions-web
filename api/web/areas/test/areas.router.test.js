@@ -20,12 +20,23 @@ let equivalencias = {}
 const schema = utils.schemaFormato
 
 describe('AREAS', () => {
-  let { establecimientos, areas } = dump
+  let { establecimientos, areas, empresas } = dump
   let establecimiento = establecimientos.VALIDOS[0]
+  let empresa = empresas.VALIDOS[0]
+  let establecimiento2 = establecimientos.VALIDOS[1]
   let area = areas.VALIDOS[0]
   let area2 = areas.VALIDOS[1]
+  let establecimientosId, establecimientosId2 = -1
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
+  })
+  beforeEach(async () => {
+    let empresaCreada = await models.empresas.Crear(empresa)
+    let empresasId = empresaCreada['id']
+    let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+    establecimientosId = establecimientosCreada['id']
+    let establecimientosCreada2 = await models.establecimientos.Crear(establecimiento2)
+    establecimientosId2 = establecimientosCreada2['id']
   })
   after('Desconectar la base de datos', function() {
     generatorDocs.generateAPI({ docs, archivo: 'api.areas.md', nombre: 'Areas' })
@@ -38,13 +49,14 @@ describe('AREAS', () => {
     const { API_1 } = API
     let { API_1_EQUI } = EQUI
     let codigoApi = 'API_1'
+
     let areasCreada, areasCreada2 = {}
     beforeEach(async () => {
-      areasCreada = await models.areas.Crear({ ...area, establecimientosId: 1 })
-      areasCreada2 = await models.areas.Crear({ ...area2, establecimientosId: 2 })
+      areasCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasCreada2 = await models.areas.Crear({ ...area2, establecimientosId: establecimientosId2 })
     })
-    it(`@ICE_API_1_1 areas con los establecimientos`, async () => {
-      let establecimientosId = areasCreada['establecimientosId']
+
+    it(`@ICE_API_1_01 areas con los establecimientos`, async () => {
       let params = { establecimientosId }
       let url = `/api/web/areas/establecimientos/${establecimientosId}`
       let res = await request(app).get(url)
@@ -81,11 +93,8 @@ describe('AREAS', () => {
     let { API_2_EQUI } = EQUI
     let codigoApi = 'API_2'
 
-    beforeEach(async () => {
-    })
-
     it('@ICE_API_2_01 area creado existosamente', async () => {
-      let req = { ...area, establecimientosId: 1 }
+      let req = { ...area, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)
@@ -96,7 +105,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_02 actividad tipo no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad: 1, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad: 1, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -105,7 +114,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_03 actividad tamano no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad: '', nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad: '', nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -114,7 +123,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_04 nombre tipo no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre: 1, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad, nombre: 1, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -123,7 +132,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_05 nombre tamano no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre: 0, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad, nombre: 0, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -132,7 +141,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_06 fotoUrl tipo no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, fotoUrl: 1, metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad, nombre, fotoUrl: 1, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -141,7 +150,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_07 fotoUrl formato no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, fotoUrl: 'https//', metrosCuadrados, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad, nombre, fotoUrl: 'https//', metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -150,7 +159,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_08 metrosCuadrados tipo no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, metrosCuadrados: 1, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad, nombre, metrosCuadrados: 1, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -159,7 +168,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_09 metrosCuadrados tamano no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, metrosCuadrados: 0, descripcionLugar, establecimientosId: 1 }
+      let req = { actividad, nombre, metrosCuadrados: 0, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -168,7 +177,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_10 descripcionLugar tipo no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 1, establecimientosId: 1 }
+      let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 1, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -177,7 +186,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_2_11 descripcionLugar tamano no valido', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 0, establecimientosId: 1 }
+      let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 0, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -207,9 +216,10 @@ describe('AREAS', () => {
     const { API_3 } = API
     let { API_3_EQUI } = EQUI
     let codigoApi = 'API_3'
-    let areasId, areasCreada = {}
+
+    let areasId = -1
     beforeEach(async () => {
-      areasCreada = await models.areas.Crear(area)
+      let areasCreada = await models.areas.Crear({ ...area, establecimientosId })
       areasId = areasCreada['id']
     })
 
@@ -378,9 +388,9 @@ describe('AREAS', () => {
     let { API_4_EQUI } = EQUI
     let codigoApi = 'API_4'
 
-    let areasId, areasCreada = {}
+    let areasId = -1
     beforeEach(async () => {
-      areasCreada = await models.areas.Crear(area)
+      let areasCreada = await models.areas.Crear({ ...area, establecimientosId })
       areasId = areasCreada['id']
     })
 
@@ -428,9 +438,9 @@ describe('AREAS', () => {
     let { API_5_EQUI } = EQUI
     let codigoApi = 'API_5'
 
-    let areasId, areasCreada = {}
+    let areasId = -1
     beforeEach(async () => {
-      areasCreada = await models.areas.Crear(area)
+      let areasCreada = await models.areas.Crear({ ...area, establecimientosId })
       areasId = areasCreada['id']
     })
 

@@ -19,20 +19,30 @@ let equivalencias = {}
 
 describe('ACCIDENTES', () => {
   let { areas, puestos, equipos, empresas, establecimientos, accidentes } = dump
+  let establecimiento = establecimientos.VALIDOS[0]
+  let establecimiento2 = establecimientos.VALIDOS[1]
   let area = areas.VALIDOS[0]
   let empresa = empresas.VALIDOS[0]
-  let establecimiento = establecimientos.VALIDOS[0]
   let puesto = puestos.VALIDOS[0]
   let equipo = equipos.VALIDOS[0]
   let equipo2 = equipos.VALIDOS[1]
   let equipo3 = equipos.VALIDOS[2]
   let accidente = accidentes.VALIDOS[0]
+  let establecimientosId, establecimientosId2 = -1
+  beforeEach(async () => {
+    let empresaCreada = await models.empresas.Crear(empresa)
+    let empresasId = empresaCreada['id']
+    let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+    establecimientosId = establecimientosCreada['id']
+    let establecimientosCreada2 = await models.establecimientos.Crear(establecimiento2)
+    establecimientosId2 = establecimientosCreada2['id']
+  })
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
     generatorDocs.EQUI({ equivalencias, nombre: 'Accidentes' })
-    // generatorDocs.generateAPI({ docs, archivo: 'api.establecimientos.md', nombre: 'Establecimientos' })
+    generatorDocs.generateAPI({ docs, archivo: 'api.accidentes.md', nombre: 'Accidentes' })
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
@@ -46,9 +56,7 @@ describe('ACCIDENTES', () => {
     let puestosId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       let areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
@@ -63,6 +71,7 @@ describe('ACCIDENTES', () => {
       expect(res.body.codigoEstado).to.equal(200)
       let accidenteGuardado = await models.accidentes.Obtener({ id: res.body.datos['id'] })
       expect(accidenteGuardado).to.not.equal(null)
+      generatorDocs.OK({ docs, doc: API_1, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
     })
 
@@ -192,9 +201,7 @@ describe('ACCIDENTES', () => {
     let accidentesId, puestosId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       let areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
@@ -213,6 +220,7 @@ describe('ACCIDENTES', () => {
       expect(res.body.codigoEstado).to.equal(200)
       let accidenteGuardado = await models.accidentes.Obtener({ id: params['accidentesId'] })
       expect(accidenteGuardado).to.not.equal(null)
+      generatorDocs.OK({ docs, doc: API_2, res, req })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_2_EQUI, req, res, codigoApi, url, params })
     })
 
@@ -398,16 +406,14 @@ describe('ACCIDENTES', () => {
     let { API_3_EQUI } = EQUI
     let codigoApi = 'API_3'
 
-    let accidentesId, puestosId = -1
+    let accidentesId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       let areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
-      puestosId = puestosCreada['id']
+      let puestosId = puestosCreada['id']
       let accidenteCreada = await models.accidentes.Crear({ ...accidentes, puestosId })
       accidentesId = accidenteCreada['id']
     })
@@ -420,6 +426,7 @@ describe('ACCIDENTES', () => {
       expect(res.body.codigoEstado).to.equal(200)
       let accidenteGuardado = await models.accidentes.Obtener({ id: params['accidentesId'] })
       expect(accidenteGuardado).not.equal(null)
+      generatorDocs.OK({ docs, doc: API_3, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })
 
@@ -456,16 +463,14 @@ describe('ACCIDENTES', () => {
     let { API_4_EQUI } = EQUI
     let codigoApi = 'API_4'
 
-    let accidentesId, puestosId = -1
+    let accidentesId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       let areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
-      puestosId = puestosCreada['id']
+      let puestosId = puestosCreada['id']
       let accidenteCreada = await models.accidentes.Crear({ ...accidentes, puestosId })
       accidentesId = accidenteCreada['id']
     })
@@ -476,6 +481,7 @@ describe('ACCIDENTES', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_4, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
     })
 

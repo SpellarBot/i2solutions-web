@@ -24,8 +24,8 @@ __GET__ __/api/web/areas/establecimientos/:establecimientosId__
       "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-      "fechaCreacion": "2018-07-11 23:39:58.980 +00:00",
-      "fechaActualizacion": "2018-07-11 23:39:58.980 +00:00",
+      "fechaCreacion": "2018-07-12 01:22:26.236 +00:00",
+      "fechaActualizacion": "2018-07-12 01:22:26.236 +00:00",
       "establecimientosId": 1
     }
   ],
@@ -79,8 +79,8 @@ __POST__ __/api/web/areas__
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
-    "fechaActualizacion": "2018-07-11T23:39:59.105Z",
-    "fechaCreacion": "2018-07-11T23:39:59.105Z"
+    "fechaActualizacion": "2018-07-12T01:22:26.374Z",
+    "fechaCreacion": "2018-07-12T01:22:26.374Z"
   },
   "codigoEstado": 200
 }
@@ -187,9 +187,9 @@ __GET__ __/api/web/areas/:areasId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-11 23:40:00.228 +00:00",
-    "fechaActualizacion": "2018-07-11 23:40:00.228 +00:00",
-    "establecimientosId": null
+    "fechaCreacion": "2018-07-12 01:22:27.581 +00:00",
+    "fechaActualizacion": "2018-07-12 01:22:27.581 +00:00",
+    "establecimientosId": 1
   },
   "codigoEstado": 200
 }

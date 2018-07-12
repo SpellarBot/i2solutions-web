@@ -22,16 +22,26 @@ describe('EQUIPOS', () => {
   let area = areas.VALIDOS[0]
   let empresa = empresas.VALIDOS[0]
   let establecimiento = establecimientos.VALIDOS[0]
+  let establecimiento2 = establecimientos.VALIDOS[1]
   let puesto = puestos.VALIDOS[0]
   let equipo = equipos.VALIDOS[0]
   let equipo2 = equipos.VALIDOS[1]
   let equipo3 = equipos.VALIDOS[2]
+  let establecimientosId, establecimientosId2 = -1
+  beforeEach(async () => {
+    let empresaCreada = await models.empresas.Crear(empresa)
+    let empresasId = empresaCreada['id']
+    let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+    establecimientosId = establecimientosCreada['id']
+    let establecimientosCreada2 = await models.establecimientos.Crear(establecimiento2)
+    establecimientosId2 = establecimientosCreada2['id']
+  })
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
     generatorDocs.EQUI({ equivalencias, nombre: 'Equipos' })
-    // generatorDocs.generateAPI({ docs, archivo: 'api.establecimientos.md', nombre: 'Establecimientos' })
+    generatorDocs.generateAPI({ docs, archivo: 'api.equipos.md', nombre: 'Equipos' })
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
@@ -42,9 +52,6 @@ describe('EQUIPOS', () => {
     let { API_1_EQUI } = EQUI
     let codigoApi = 'API_1'
 
-    beforeEach(async () => {
-    })
-
     it('@ICE_API_1_01 Crear un equipo de forma correcta', async () => {
       let { nombre, descripcion, fotoUrl, cantidad } = equipo
       let req = { nombre, descripcion, fotoUrl, cantidad }
@@ -53,6 +60,7 @@ describe('EQUIPOS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
       expect(equipoGuardado).to.not.equal(null)
+      generatorDocs.OK({ docs, doc: API_1, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
     })
 
@@ -136,9 +144,7 @@ describe('EQUIPOS', () => {
     let equiposId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       let areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
@@ -157,6 +163,7 @@ describe('EQUIPOS', () => {
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.datos).to.equal(true)
+      generatorDocs.OK({ docs, doc: API_2, res, req })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_2_EQUI, req, res, codigoApi, url, params })
     })
 
@@ -278,9 +285,7 @@ describe('EQUIPOS', () => {
     let equiposId, areasId, puestosId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       puestosId = puestosCreada['id']
@@ -304,6 +309,7 @@ describe('EQUIPOS', () => {
       expect(equipoAreasBuscado.length).to.equal(0)
       let equipoPuestosBuscado = await models.equiposPuestos.ObtenerPorEquipos({ id: params['equiposId'] })
       expect(equipoPuestosBuscado.length).to.equal(0)
+      generatorDocs.OK({ docs, doc: API_3, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })
 
@@ -342,9 +348,7 @@ describe('EQUIPOS', () => {
     let equiposId, areasId, puestosId = -1
 
     beforeEach(async () => {
-      let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       puestosId = puestosCreada['id']
@@ -361,6 +365,7 @@ describe('EQUIPOS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       let equipoPuestosBuscado = await models.equiposPuestos.ObtenerPorEquipos({ id: params['equiposId'] })
       expect(equipoPuestosBuscado.length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_4, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
     })
 
@@ -446,6 +451,7 @@ describe('EQUIPOS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       let equipoPuestosBuscado = await models.equiposAreas.ObtenerPorEquipos({ id: params['equiposId'] })
       expect(equipoPuestosBuscado.length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_5, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
     })
 

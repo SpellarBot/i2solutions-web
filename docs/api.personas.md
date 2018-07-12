@@ -23,8 +23,8 @@ Obtener todas las personas
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-07-11 23:40:07.538 +00:00",
-      "fechaActualizacion": "2018-07-11 23:40:07.538 +00:00"
+      "fechaCreacion": "2018-07-12 01:22:34.816 +00:00",
+      "fechaActualizacion": "2018-07-12 01:22:34.816 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -88,8 +88,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-07-11T23:40:07.641Z",
-    "fechaCreacion": "2018-07-11T23:40:07.641Z"
+    "fechaActualizacion": "2018-07-12T01:22:34.850Z",
+    "fechaCreacion": "2018-07-12T01:22:34.850Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +139,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-07-11T23:40:07.676Z",
-  "fechaCreacion": "2018-07-11T23:40:07.676Z"
+  "fechaActualizacion": "2018-07-12T01:22:34.878Z",
+  "fechaCreacion": "2018-07-12T01:22:34.878Z"
 }
 ```
 
@@ -194,50 +194,6 @@ ___
 
 
 
-## Eliminar persona
-
-__DELETE__ __/api/web/personas/:personasId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| personasId | Number |   ---   |
-	
-
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": true,
-  "codigoEstado": 200
-}
-```
-
-#### ERRORS:
-__El id de la persona no existe__
-
-
-
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "persona con es id no existe",
-  "codigoEstado": 200
-}
-```
-	
-	
-
-
-___
-
-
-
 ## Obtener una persona
 
 __GET__ __/api/web/personas/:personasId__
@@ -266,8 +222,8 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-07-11 23:40:07.810 +00:00",
-    "fechaActualizacion": "2018-07-11 23:40:07.810 +00:00"
+    "fechaCreacion": "2018-07-12 01:22:34.971 +00:00",
+    "fechaActualizacion": "2018-07-12 01:22:34.971 +00:00"
   },
   "codigoEstado": 200
 }
@@ -307,22 +263,22 @@ __GET__ __/api/web/personas/establecimientos/:establecimientosId__
       "perfilOcupacional": "",
       "usuario": "Jaime_Solís",
       "rol": "",
-      "fechaCreacion": "2018-07-11T23:40:07.848Z",
-      "fechaActualizacion": "2018-07-11T23:40:07.848Z",
+      "fechaCreacion": "2018-07-12T01:22:35.013Z",
+      "fechaActualizacion": "2018-07-12T01:22:35.013Z",
       "establecimientos": [
         {
           "id": 1,
           "nombres": "matriz",
           "direccion": "22050 Felipe Rampa",
           "ruc": "0923651688001",
-          "fechaCreacion": "2018-07-11T23:40:07.847Z",
-          "fechaActualizacion": "2018-07-11T23:40:07.847Z",
-          "empresasId": 1,
+          "fechaCreacion": "2018-07-12T01:22:35.012Z",
+          "fechaActualizacion": "2018-07-12T01:22:35.012Z",
+          "empresasId": null,
           "personasEstablecimientos": {
             "id": 2,
             "rol": "empleado",
-            "fechaCreacion": "2018-07-11T23:40:07.853Z",
-            "fechaActualizacion": "2018-07-11T23:40:07.853Z",
+            "fechaCreacion": "2018-07-12T01:22:35.017Z",
+            "fechaActualizacion": "2018-07-12T01:22:35.017Z",
             "establecimientosId": 1,
             "personasId": 1
           }
@@ -341,22 +297,22 @@ __GET__ __/api/web/personas/establecimientos/:establecimientosId__
       "perfilOcupacional": "",
       "usuario": "Antonio69",
       "rol": "",
-      "fechaCreacion": "2018-07-11T23:40:07.850Z",
-      "fechaActualizacion": "2018-07-11T23:40:07.850Z",
+      "fechaCreacion": "2018-07-12T01:22:35.014Z",
+      "fechaActualizacion": "2018-07-12T01:22:35.014Z",
       "establecimientos": [
         {
           "id": 1,
           "nombres": "matriz",
           "direccion": "22050 Felipe Rampa",
           "ruc": "0923651688001",
-          "fechaCreacion": "2018-07-11T23:40:07.847Z",
-          "fechaActualizacion": "2018-07-11T23:40:07.847Z",
-          "empresasId": 1,
+          "fechaCreacion": "2018-07-12T01:22:35.012Z",
+          "fechaActualizacion": "2018-07-12T01:22:35.012Z",
+          "empresasId": null,
           "personasEstablecimientos": {
             "id": 1,
             "rol": "jefe",
-            "fechaCreacion": "2018-07-11T23:40:07.851Z",
-            "fechaActualizacion": "2018-07-11T23:40:07.851Z",
+            "fechaCreacion": "2018-07-12T01:22:35.016Z",
+            "fechaActualizacion": "2018-07-12T01:22:35.016Z",
             "establecimientosId": 1,
             "personasId": 2
           }

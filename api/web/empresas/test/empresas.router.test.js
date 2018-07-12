@@ -45,7 +45,7 @@ describe('EMPRESAS', () => {
     const { API_1 } = API
     let { API_1_EQUI } = EQUI
     let codigoApi = 'API_1'
-    it(`@ICE_${codigoApi}_1 Una empresa creada`, async () => {
+    it(`@ICE_API_1_01 Una empresa creada`, async () => {
       await models.empresas.Crear(empresa)
       let res = await request(app).get('/api/web/empresas')
       expect(res.body.estado).to.equal(true)
@@ -54,7 +54,7 @@ describe('EMPRESAS', () => {
       generatorDocs.OK({ docs, doc: API_1, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, res, codigoApi })
     })
-    it(`@ICE_${codigoApi}_2 Sin empresas existentes`, async () => {
+    it(`@ICE_API_1_02 Sin empresas existentes`, async () => {
       let res = await request(app).get('/api/web/empresas')
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
@@ -383,7 +383,6 @@ describe('EMPRESAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '11', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
-      generatorDocs.OK({ docs, doc: API_3, res, req })
     })
 
     it(`@ICE_API_3_12 urlFoto formato no válido`, async () => {
@@ -398,7 +397,6 @@ describe('EMPRESAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '12', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
-      generatorDocs.OK({ docs, doc: API_3, res, req })
     })
   })
 
@@ -456,12 +454,12 @@ describe('EMPRESAS', () => {
     let { API_5_EQUI } = EQUI
     const codigoApi = 'API_5'
 
-    it(`@ICE_${codigoApi}_01 Obtener empresa`, async () => {
+    it(`@ICE_API_5_01 Obtener empresa`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear(establecimiento)
-      let establecimientoCreada2 = await models.establecimientos.Crear(establecimiento2)
-      establecimiento3['empresasId'] = 5
-      let establecimientoCreada3 = await models.establecimientos.Crear(establecimiento3)
+      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
+      let establecimientoCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada['id'] })
+      let empresaCreada2 = await models.empresas.Crear(empresa2)
+      let establecimientoCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada2['id'] })
 
       let params = { empresasId: empresaCreada['id'] }
       let url = `/api/web/empresas/${params['empresasId']}`
@@ -485,7 +483,7 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_3 empresasId no valido tipo de dato`, async () => {
+    it(`@ICE_API_5_03 empresasId no valido tipo de dato`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
 
       let params = { empresasId: 'a' }
@@ -496,7 +494,7 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_4 empresas no existe`, async () => {
+    it(`@ICE_API_5_04 empresas no existe`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
 
       let params = { empresasId: 500 }
