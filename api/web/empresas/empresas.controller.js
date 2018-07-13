@@ -97,6 +97,7 @@ module.exports = ({ responses, db }) => {
               let empresaExiste = _.find(empresasNovedades, { id: empresa['id'] })
               if (empresaExiste) {
                 empresasLimpiadas.push({
+                  id: empresa['id'],
                   nombre: empresa['nombre'],
                   urlFoto: empresa['urlFoto'],
                   actividadComercial: empresa['actividadComercial'],
@@ -104,6 +105,7 @@ module.exports = ({ responses, db }) => {
                 })
               } else {
                 empresasLimpiadas.push({
+                  id: empresa['id'],
                   nombre: empresa['nombre'],
                   urlFoto: empresa['urlFoto'],
                   actividadComercial: empresa['actividadComercial'],

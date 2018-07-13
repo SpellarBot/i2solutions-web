@@ -41,8 +41,8 @@ _response_
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "razonSocial": "La casa",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-      "fechaCreacion": "2018-07-12 23:10:34.137 +00:00",
-      "fechaActualizacion": "2018-07-12 23:10:34.137 +00:00"
+      "fechaCreacion": "2018-07-13 14:02:08.751 +00:00",
+      "fechaActualizacion": "2018-07-13 14:02:08.751 +00:00"
     }
   ],
   "codigoEstado": 200
@@ -268,16 +268,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaActualizacion": "2018-07-12T23:10:34.218Z",
-    "fechaCreacion": "2018-07-12T23:10:34.218Z",
+    "fechaActualizacion": "2018-07-13T14:02:08.825Z",
+    "fechaCreacion": "2018-07-13T14:02:08.825Z",
     "establecimiento": {
       "id": 1,
       "nombres": "matriz",
       "direccion": "Plaza Mayor",
       "ruc": "1702365486001",
       "empresasId": 1,
-      "fechaActualizacion": "2018-07-12T23:10:34.220Z",
-      "fechaCreacion": "2018-07-12T23:10:34.220Z"
+      "fechaActualizacion": "2018-07-13T14:02:08.827Z",
+      "fechaCreacion": "2018-07-13T14:02:08.827Z"
     }
   },
   "codigoEstado": 200
@@ -2063,16 +2063,16 @@ _response_
     "actividadComercial": "Integrado sensible al contexto sistema abierto",
     "razonSocial": "La casa",
     "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
-    "fechaCreacion": "2018-07-12 23:10:35.413 +00:00",
-    "fechaActualizacion": "2018-07-12 23:10:35.413 +00:00",
+    "fechaCreacion": "2018-07-13 14:02:09.902 +00:00",
+    "fechaActualizacion": "2018-07-13 14:02:09.902 +00:00",
     "establecimientos": [
       {
         "id": 1,
         "nombres": "matriz",
         "direccion": "22050 Felipe Rampa",
         "ruc": "0923651688001",
-        "fechaCreacion": "2018-07-12 23:10:35.415 +00:00",
-        "fechaActualizacion": "2018-07-12 23:10:35.415 +00:00",
+        "fechaCreacion": "2018-07-13 14:02:09.904 +00:00",
+        "fechaActualizacion": "2018-07-13 14:02:09.904 +00:00",
         "empresasId": 1
       },
       {
@@ -2080,8 +2080,8 @@ _response_
         "nombres": "Lira - Barajas",
         "direccion": "0119 Laboy Mercado",
         "ruc": "2023651688001",
-        "fechaCreacion": "2018-07-12 23:10:35.416 +00:00",
-        "fechaActualizacion": "2018-07-12 23:10:35.416 +00:00",
+        "fechaCreacion": "2018-07-13 14:02:09.905 +00:00",
+        "fechaActualizacion": "2018-07-13 14:02:09.905 +00:00",
         "empresasId": 1
       }
     ]
@@ -2236,18 +2236,21 @@ _response_
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Zapata S.A.",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "tieneNovedades": true
     },
     {
+      "id": 2,
       "nombre": "Quintanilla, Roldán and Mena",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
       "actividadComercial": "Descentralizado sensible al contexto acceso",
       "tieneNovedades": false
     },
     {
+      "id": 3,
       "nombre": "Zapata S.A.",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
@@ -2285,18 +2288,21 @@ _response_
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Zapata S.A.",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",
       "tieneNovedades": false
     },
     {
+      "id": 2,
       "nombre": "Quintanilla, Roldán and Mena",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
       "actividadComercial": "Descentralizado sensible al contexto acceso",
       "tieneNovedades": false
     },
     {
+      "id": 3,
       "nombre": "Zapata S.A.",
       "urlFoto": "https://www.seoclerk.com/pics/558390-11FO8A1505384509.png",
       "actividadComercial": "Integrado sensible al contexto sistema abierto",

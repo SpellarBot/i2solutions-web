@@ -176,8 +176,8 @@ _response_
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-12T23:10:29.414Z",
-    "fechaCreacion": "2018-07-12T23:10:29.414Z"
+    "fechaActualizacion": "2018-07-13T14:02:04.178Z",
+    "fechaCreacion": "2018-07-13T14:02:04.178Z"
   },
   "codigoEstado": 200
 }
@@ -2590,8 +2590,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-12 23:10:31.185 +00:00",
-    "fechaActualizacion": "2018-07-12 23:10:31.185 +00:00",
+    "fechaCreacion": "2018-07-13 14:02:05.930 +00:00",
+    "fechaActualizacion": "2018-07-13 14:02:05.930 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200

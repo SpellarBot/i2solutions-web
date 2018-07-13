@@ -1,41 +1,5 @@
 # Api Personas
 
-## Obtener todas las personas
-
-__GET__ __/api/web/personas__
-
-Obtener todas las personas
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": [
-    {
-      "id": 1,
-      "nombres": "Elsa",
-      "apellidos": "Vega",
-      "correo": "vctor_daz@hotmail.com",
-      "cedula": "9992332599",
-      "clave": "tggQK3M3L__1KRO",
-      "telefono": "966.155.986",
-      "fechaNacimiento": "Mon Mar 26 2018 23:40:21 GMT-0500 (-05)",
-      "perfilOcupacional": "",
-      "usuario": "Antonio69",
-      "rol": "",
-      "fechaCreacion": "2018-07-12 23:10:40.174 +00:00",
-      "fechaActualizacion": "2018-07-12 23:10:40.174 +00:00"
-    }
-  ],
-  "codigoEstado": 200
-}
-```
-
-
-___
-
-
-
 ## Crear persona
 
 __POST__ __/api/web/personas__
@@ -88,8 +52,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-07-12T23:10:40.214Z",
-    "fechaCreacion": "2018-07-12T23:10:40.214Z"
+    "fechaActualizacion": "2018-07-13T14:02:14.621Z",
+    "fechaCreacion": "2018-07-13T14:02:14.621Z"
   },
   "codigoEstado": 200
 }
@@ -139,8 +103,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-07-12T23:10:40.243Z",
-  "fechaCreacion": "2018-07-12T23:10:40.243Z"
+  "fechaActualizacion": "2018-07-13T14:02:14.650Z",
+  "fechaCreacion": "2018-07-13T14:02:14.650Z"
 }
 ```
 
@@ -222,104 +186,9 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-07-12 23:10:40.341 +00:00",
-    "fechaActualizacion": "2018-07-12 23:10:40.341 +00:00"
+    "fechaCreacion": "2018-07-13 14:02:14.754 +00:00",
+    "fechaActualizacion": "2018-07-13 14:02:14.754 +00:00"
   },
-  "codigoEstado": 200
-}
-```
-
-
-___
-
-
-
-## Obtener una personas por establecimiento
-
-__GET__ __/api/web/personas/establecimientos/:establecimientosId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| establecimientosId | Number |   ---   |
-	
-
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": [
-    {
-      "id": 1,
-      "nombres": "Benjamín",
-      "apellidos": "Esquibel",
-      "correo": "cristina.ferrer@yahoo.com",
-      "cedula": "9758314659",
-      "clave": "EcL1oCaneOr5ZbF",
-      "telefono": "985-612-994",
-      "fechaNacimiento": "Sat Aug 05 2017 15:30:55 GMT-0500 (-05)",
-      "perfilOcupacional": "",
-      "usuario": "Jaime_Solís",
-      "rol": "",
-      "fechaCreacion": "2018-07-12T23:10:40.375Z",
-      "fechaActualizacion": "2018-07-12T23:10:40.375Z",
-      "establecimientos": [
-        {
-          "id": 1,
-          "nombres": "matriz",
-          "direccion": "22050 Felipe Rampa",
-          "ruc": "0923651688001",
-          "fechaCreacion": "2018-07-12T23:10:40.374Z",
-          "fechaActualizacion": "2018-07-12T23:10:40.374Z",
-          "empresasId": null,
-          "personasEstablecimientos": {
-            "id": 2,
-            "rol": "empleado",
-            "fechaCreacion": "2018-07-12T23:10:40.380Z",
-            "fechaActualizacion": "2018-07-12T23:10:40.380Z",
-            "establecimientosId": 1,
-            "personasId": 1
-          }
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "nombres": "Elsa",
-      "apellidos": "Vega",
-      "correo": "vctor_daz@hotmail.com",
-      "cedula": "9992332599",
-      "clave": "tggQK3M3L__1KRO",
-      "telefono": "966.155.986",
-      "fechaNacimiento": "Mon Mar 26 2018 23:40:21 GMT-0500 (-05)",
-      "perfilOcupacional": "",
-      "usuario": "Antonio69",
-      "rol": "",
-      "fechaCreacion": "2018-07-12T23:10:40.377Z",
-      "fechaActualizacion": "2018-07-12T23:10:40.377Z",
-      "establecimientos": [
-        {
-          "id": 1,
-          "nombres": "matriz",
-          "direccion": "22050 Felipe Rampa",
-          "ruc": "0923651688001",
-          "fechaCreacion": "2018-07-12T23:10:40.374Z",
-          "fechaActualizacion": "2018-07-12T23:10:40.374Z",
-          "empresasId": null,
-          "personasEstablecimientos": {
-            "id": 1,
-            "rol": "jefe",
-            "fechaCreacion": "2018-07-12T23:10:40.378Z",
-            "fechaActualizacion": "2018-07-12T23:10:40.378Z",
-            "establecimientosId": 1,
-            "personasId": 2
-          }
-        }
-      ]
-    }
-  ],
   "codigoEstado": 200
 }
 ```
