@@ -85,5 +85,18 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.VistaPrincipal = function ({ empresasId }) {
+    return new Promise((resolve, reject) => {
+      let query = `select e.id, e.nombres, e.ruc as ruc, e.direccion as direccion, (select count(*) from areas where establecimientosId = e.id ) as cantidadAreas, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id where a.establecimientosId = e.id ) as  cantidadPuestos,  (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where a.establecimientosId = e.id) as cantidadAccidentes, (select count(*) from areas a inner join capacitaciones c on c.areasId = a.id where a.establecimientosId = e.id) as  cantidadCapacitaciones, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on pp.puestosId = ap.puestosId where a.establecimientosId = e.id )  as cantidadPersonas, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId and n.fueAtendida = 0 where a.establecimientosId = e.id) as cantidadNovadadesSinAtender from establecimientos e  where e.empresasId = ${empresasId}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(establecimientos => {
+          resolve(establecimientos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

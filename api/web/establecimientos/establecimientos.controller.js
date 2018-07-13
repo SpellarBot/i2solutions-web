@@ -52,6 +52,17 @@ module.exports = ({ responses, db }) => {
             return reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    VistaPrincipal ({ empresasId }) {
+      return new Promise((resolve, reject) => {
+        db.establecimientos.VistaPrincipal({ empresasId })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})
