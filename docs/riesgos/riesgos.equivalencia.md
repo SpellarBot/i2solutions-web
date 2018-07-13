@@ -182,8 +182,8 @@ _response_
     "porcentajeRiesgo": 2,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-13T14:02:16.123Z",
-    "fechaCreacion": "2018-07-13T14:02:16.123Z"
+    "fechaActualizacion": "2018-07-13T14:22:13.131Z",
+    "fechaCreacion": "2018-07-13T14:22:13.131Z"
   },
   "codigoEstado": 200
 }
@@ -2687,10 +2687,10 @@ _response_
     "personasExpuestas": null,
     "valoracion": null,
     "valoracionLiteral": null,
-    "fecha": "2018-07-13 14:02:17.571 +00:00",
+    "fecha": "2018-07-13 14:22:14.777 +00:00",
     "porcentajeRiesgo": null,
-    "fechaCreacion": "2018-07-13 14:02:17.571 +00:00",
-    "fechaActualizacion": "2018-07-13 14:02:17.571 +00:00",
+    "fechaCreacion": "2018-07-13 14:22:14.777 +00:00",
+    "fechaActualizacion": "2018-07-13 14:22:14.777 +00:00",
     "puestosId": 1
   },
   "codigoEstado": 200
