@@ -122,4 +122,27 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_6
+  // obtener areas de un establecimiento y categorizados por puestos
+  app.route('/areas/puestos/establecimientos/:establecimientosId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['establecimientosId'])
+      let { PARAMS } = schema.API_6_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { establecimientosId } = req.params
+        Controller.ObtenerAreasConPuestos({ id: establecimientosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

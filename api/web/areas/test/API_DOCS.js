@@ -43,6 +43,17 @@ module.exports = {
     ],
     errors: []
   },
+  API_4: {
+    nombre: 'Eliminar area',
+    metodo: 'DELETE',
+    descripcion: '',
+    url: '/api/web/areas/:areasId',
+    params: [
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
   API_5: {
     nombre: 'Obtener una area',
     metodo: 'GET',
@@ -54,13 +65,13 @@ module.exports = {
     body: [],
     errors: []
   },
-  API_4: {
-    nombre: 'Eliminar area',
-    metodo: 'DELETE',
+  API_6: {
+    nombre: 'Obtener un areas categorizados por puestos dado un establecimiento',
+    metodo: 'GET',
     descripcion: '',
-    url: '/api/web/areas/:areasId',
+    url: '/api/areas/puestos/establecimientos/:establecimientosId',
     params: [
-      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

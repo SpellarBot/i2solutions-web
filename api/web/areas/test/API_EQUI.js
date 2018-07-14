@@ -559,5 +559,41 @@ module.exports = {
         }
       }
     }
+  },
+  API_6_EQUI: {
+    nombre: 'Obtener un areas categorizados por puestos dado un establecimiento',
+    codigo: 'API_6',
+    descripcion: 'Obtener un areas categorizados por puestos dado un establecimiento',
+    metodo: 'GET',
+    url: '/api/areas/puestos/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId',
+        casos: [
+          { codigo: 'C1', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C2', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C3', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Con areas existentes',
+        params: {
+          'establecimientosId': { codigo: 'C1' }
+        }
+      },
+      '2': {
+        descripcion: 'establecimientosId no es un numero',
+        params: {
+          'establecimientosId': { codigo: 'C2' }
+        }
+      },
+      '3': {
+        descripcion: 'establecimientosId debe ser minimo 1',
+        params: {
+          'establecimientosId': { codigo: 'C3' }
+        }
+      }
+    }
   }
 }
