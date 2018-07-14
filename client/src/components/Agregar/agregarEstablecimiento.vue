@@ -22,7 +22,7 @@
               mask="#############"
             ></v-text-field>
               </v-form>
-              <div ref="CompAreas">                
+              <div ref="CompAreas">
               </div>
               <v-layout row justify-space-between>
                 <v-flex md4>
@@ -48,7 +48,7 @@
               </v-layout>
             </v-flex>
           </v-layout>
-        </v-container>        
+        </v-container>
       </v-card>
       <br><br>
   </div>
@@ -77,7 +77,7 @@ export default {
       var instanceArea = new AreaClass({
         //  Aquí van colocado los props que pida el componente
         propsData: {index: this.indice,
-                    indiceEstablecimiento: this.index}
+          indiceEstablecimiento: this.index}
       })
       //  Simple nombre.
       this.indice++
@@ -100,7 +100,7 @@ export default {
       console.log('establecimiento: ' + this.index)
       this.instanciasAreas.forEach(function (area) {
         area.prueba()
-      })      
+      })
     }
   }
 }

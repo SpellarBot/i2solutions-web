@@ -49,7 +49,7 @@
                   <div ref="establecimientos">
                   </div>
                 </v-flex>
-              </v-layout>              
+              </v-layout>
               <v-layout row justify-space-between>
                 <v-flex md4>
                   <h3>¿Desea agregar establecimientos?</h3>
@@ -133,7 +133,7 @@ export default {
         establecimiento.prueba()
       })
     },
-    cleaner (){
+    cleaner () {
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
         establecimiento.$el.remove()
