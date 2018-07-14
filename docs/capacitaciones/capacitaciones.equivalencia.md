@@ -148,8 +148,8 @@ _response_
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-14T21:02:59.500Z",
-    "fechaCreacion": "2018-07-14T21:02:59.500Z"
+    "fechaActualizacion": "2018-07-14T23:21:16.615Z",
+    "fechaCreacion": "2018-07-14T23:21:16.615Z"
   },
   "codigoEstado": 200
 }
@@ -1583,6 +1583,533 @@ _response_
   "datos": "capacitacion con es id no existe",
   "codigoEstado": 200
 }
+```
+
+
+___
+
+
+## Obtener una capacitacion
+
+> Código: API_4
+
+> Descripción: Obtener una capacitacion
+
+> Url : /api/web/capacitaciones/:capacitacionesId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  capacitacionesId </td>
+				<td> <a id='CE_API_4[C01]'>CE_API_4[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  capacitacionesId </td>
+				<td> <a id='CE_API_4[C02]'>CE_API_4[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  capacitacionesId </td>
+				<td> <a id='CE_API_4[C03]'>CE_API_4[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_4[1]__
+
+Obtener una capacitacion de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/:capacitacionesId
+
+GET /api/web/capacitaciones/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Joel Rodriguez",
+    "descripcion": "La capacitación fue un éxito",
+    "tema": "Como hacer que todo valga",
+    "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+    "fechaCreacion": "2018-07-14 23:21:17.710 +00:00",
+    "fechaActualizacion": "2018-07-14 23:21:17.710 +00:00",
+    "areasId": 1
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[2]__
+
+capacitacionesId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/:capacitacionesId
+
+GET /api/web/capacitaciones/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "capacitacionesId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[3]__
+
+capacitacionesId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/:capacitacionesId
+
+GET /api/web/capacitaciones/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "capacitacionesId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_4[4]__
+
+capacitacionesId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/:capacitacionesId
+
+GET /api/web/capacitaciones/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": null,
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener capacitaciones por establecimiento
+
+> Código: API_5
+
+> Descripción: 
+
+> Url : /api/web/capacitaciones/establecimientos/:establecimientosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C01]'>CE_API_5[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C02]'>CE_API_5[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C03]'>CE_API_5[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_5[1]__
+
+Obtener capacitaciones por establecimientos
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/establecimientos/:establecimientosId
+
+GET /api/web/capacitaciones/establecimientos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Joel Rodriguez",
+      "id": 1,
+      "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+      "tema": "Como hacer que todo valga",
+      "areasId": 1
+    },
+    {
+      "nombre": "Andres Escobar",
+      "id": 2,
+      "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+      "tema": "Datos ",
+      "areasId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[2]__
+
+establecimientosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/establecimientos/:establecimientosId
+
+GET /api/web/capacitaciones/establecimientos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[3]__
+
+establecimientosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/establecimientos/:establecimientosId
+
+GET /api/web/capacitaciones/establecimientos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[4]__
+
+establecimientosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/establecimientos/:establecimientosId
+
+GET /api/web/capacitaciones/establecimientos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener capacitaciones por areas
+
+> Código: API_6
+
+> Descripción: 
+
+> Url : /api/web/capacitaciones/areas/:areasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+Obtener capacitaciones por area
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/areas/:areasId
+
+GET /api/web/capacitaciones/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Joel Rodriguez",
+      "id": 1,
+      "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+      "tema": "Como hacer que todo valga",
+      "areasId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+areasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/areas/:areasId
+
+GET /api/web/capacitaciones/areas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+areasId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/areas/:areasId
+
+GET /api/web/capacitaciones/areas/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[4]__
+
+areasId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/capacitaciones/areas/:areasId
+
+GET 
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+
 ```
 
 

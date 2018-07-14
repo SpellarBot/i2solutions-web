@@ -1,44 +1,48 @@
 const request = require('supertest')
 const expect = require('chai').expect
-const Ajv = require('ajv')
 const rfr = require('rfr')
+const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
+
 const generatorDocs = rfr('api/config/documentacion')
 const db = rfr('api/config/db')
 const app = rfr('app')
 const dump = rfr('api/config/dump')
+const utils = rfr('api/utils')
+
+const SCHEMA = require('../API_SCHEMA')
 const API = require('./API_DOCS')
+const EQUI = require('./API_EQUI')
 const models = db.db
 let docs = []
+let equivalencias = {}
+
 describe('Personas', () => {
   let { personas, establecimientos, capacitaciones, empresas } = dump
   let persona = personas.VALIDOS[0]
   let persona2 = personas.VALIDOS[1]
   let establecimiento = establecimientos.VALIDOS[0]
+  let establecimiento2 = establecimientos.VALIDOS[1]
   let capacitacion = capacitaciones.VALIDOS[0]
   let empresa = empresas.VALIDOS[0]
+  beforeEach(async () => {
+    let empresaCreada = await models.empresas.Crear(empresa)
+    let empresasId = empresaCreada['id']
+    let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+    establecimientosId = establecimientosCreada['id']
+    let establecimientosCreada2 = await models.establecimientos.Crear(establecimiento2)
+    establecimientosId2 = establecimientosCreada2['id']
+  })
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
-    // db.Desconectar()
+    generatorDocs.EQUI({ equivalencias, nombre: 'Personas' })
     generatorDocs.generateAPI({ docs, archivo: 'api.personas.md', nombre: 'Personas' })
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
-  // describe('Obtener todas las personas ', () => {
-  //   it('@CP1 OK', async () => {
-  //     let { API_1 } = API
-  //     let personaCreada = await models.personas.Crear(persona)
-  //     let res = await request(app).get(`/api/web/personas`)
-  //     expect(res.body.estado).to.equal(true)
-  //     expect(res.body.codigoEstado).to.equal(200)
-  //     expect(res.body.datos.length).to.equal(1)
-  //     generatorDocs.OK({ docs, doc: API_1, res })
-  //   })
-  //   it('@CP1.1 por empresa')
-  // })
 
   describe('Crear una persona', () => { // como se manejara las claves?
     it('@CP2 crearla sin anadirla a un establecimiento', async () => {
@@ -105,6 +109,19 @@ describe('Personas', () => {
       generatorDocs.OK({ docs, doc: API_4, res })
     })
   })
+
+  // describe('Obtener todas las personas ', () => {
+  //   it('@CP1 OK', async () => {
+  //     let { API_1 } = API
+  //     let personaCreada = await models.personas.Crear(persona)
+  //     let res = await request(app).get(`/api/web/personas`)
+  //     expect(res.body.estado).to.equal(true)
+  //     expect(res.body.codigoEstado).to.equal(200)
+  //     expect(res.body.datos.length).to.equal(1)
+  //     generatorDocs.OK({ docs, doc: API_1, res })
+  //   })
+  //   it('@CP1.1 por empresa')
+  // })
 
   // describe('Obtener una personas por establecimiento', () => {
   //   let { API_6 } = API

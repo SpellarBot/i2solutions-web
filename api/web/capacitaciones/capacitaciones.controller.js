@@ -52,6 +52,39 @@ module.exports = ({ responses, db }) => {
             return reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    Obtener ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.capacitaciones.Obtener({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorEstablecimiento ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.capacitaciones.ObtenerPorEstablecimiento({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorArea ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.capacitaciones.ObtenerPorArea({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

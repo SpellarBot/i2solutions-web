@@ -17,8 +17,8 @@ __POST__ __/api/web/capacitaciones__
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-14T21:02:59.500Z",
-    "fechaCreacion": "2018-07-14T21:02:59.500Z"
+    "fechaActualizacion": "2018-07-14T23:21:16.615Z",
+    "fechaCreacion": "2018-07-14T23:21:16.615Z"
   },
   "codigoEstado": 200
 }
@@ -83,6 +83,116 @@ __DELETE__ __/api/web/capacitaciones/:capacitacionId__
 {
   "estado": true,
   "datos": true,
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener una capacitacion
+
+__GET__ __/api/web/capacitaciones/:capacitacionId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| capacitacionId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "nombre": "Joel Rodriguez",
+    "descripcion": "La capacitación fue un éxito",
+    "tema": "Como hacer que todo valga",
+    "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+    "fechaCreacion": "2018-07-14 23:21:17.710 +00:00",
+    "fechaActualizacion": "2018-07-14 23:21:17.710 +00:00",
+    "areasId": 1
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener por establecimiento
+
+__GET__ __/api/web/capacitaciones/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Joel Rodriguez",
+      "id": 1,
+      "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+      "tema": "Como hacer que todo valga",
+      "areasId": 1
+    },
+    {
+      "nombre": "Andres Escobar",
+      "id": 2,
+      "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+      "tema": "Datos ",
+      "areasId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener por area
+
+__GET__ __/api/web/capacitaciones/areas/:areasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| areasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Joel Rodriguez",
+      "id": 1,
+      "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
+      "tema": "Como hacer que todo valga",
+      "areasId": 1
+    }
+  ],
   "codigoEstado": 200
 }
 ```
