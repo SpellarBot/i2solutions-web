@@ -24,20 +24,20 @@ export default function MyModule (numero) {
     if (isNaN(n)) ok = 0
   }
   if (ok === 0) {
-    alert('No puede ingresar caracteres en el número')
-    return false
+    // alert('No puede ingresar caracteres en el número')
+    return [false, 'No puede ingresar caracteres en el número']
   }
 
   if (numero.length < 10) {
-    alert('El número ingresado no es válido')
-    return false
+    // alert('El número ingresado no es válido')
+    return [false, 'El número ingresado no es válido']
   }
 
   /* Los primeros dos digitos corresponden al codigo de la provincia */
   var provincia = numero.substr(0, 2)
   if (provincia < 1 || provincia > numeroProvincias) {
-    alert('El código de la provincia (dos primeros dígitos) es inválido')
-    return false
+    // alert('El código de la provincia (dos primeros dígitos) es inválido')
+    return [false, 'El código de la provincia (dos primeros dígitos) es inválido']
   }
   /* Aqui almacenamos los digitos de la cedula en variables. */
   var d1 = numero.substr(0, 1)
@@ -57,8 +57,8 @@ export default function MyModule (numero) {
   /* 6 para sociedades publicas */
   /* menor que 6 (0,1,2,3,4,5) para personas naturales */
   if (d3 === 7 || d3 === 8) {
-    alert('El tercer dígito ingresado es inválido')
-    return false
+    // alert('El tercer dígito ingresado es inválido')
+    return [false, 'El tercer dígito ingresado es inválido']
   }
 
   /* Solo para personas naturales (modulo 10) */
@@ -110,33 +110,33 @@ export default function MyModule (numero) {
   console.log(digitoVerificador)
   if (pub === true) {
     if (digitoVerificador !== parseInt(d9)) {
-      alert('El ruc de la empresa del sector público es incorrecto.')
-      return false
+      // alert('El ruc de la empresa del sector público es incorrecto.')
+      return [false, 'El ruc de la empresa del sector público es incorrecto.']
     }
     /* El ruc de las empresas del sector publico terminan con 0001 */
     if (numero.substr(9, 4) !== '0001') {
-      alert('El ruc de la empresa del sector público debe terminar con 0001')
-      return false
+      // alert('El ruc de la empresa del sector público debe terminar con 0001')
+      return [false, 'El ruc de la empresa del sector público debe terminar con 0001']
     }
   } else if (pri === true) {
     if (digitoVerificador !== parseInt(d10)) {
-      alert('El ruc de la empresa del sector privado es incorrecto.')
-      return false
+      // alert('El ruc de la empresa del sector privado es incorrecto.')
+      return [false, 'El ruc de la empresa del sector privado es incorrecto.']
     }
     if (numero.substr(10, 3) !== '001') {
-      alert('El ruc de la empresa del sector privado debe terminar con 001')
-      return false
+      // alert('El ruc de la empresa del sector privado debe terminar con 001')
+      return [false, 'El ruc de la empresa del sector privado debe terminar con 001']
     }
   } else if (nat === true) {
     console.log({ digitoVerificador, d10 })
     if (digitoVerificador !== parseInt(d10)) {
-      alert('El número de cédula de la persona natural es incorrecto.')
-      return false
+      // alert('El número de cédula de la persona natural es incorrecto.')
+      return [false, 'El número de cédula de la persona natural es incorrecto.']
     }
     if (numero.length > 10 && numero.substr(10, 3) !== '001') {
-      alert('El ruc de la persona natural debe terminar con 001')
-      return false
+      // alert('El ruc de la persona natural debe terminar con 001')
+      return [false, 'El ruc de la persona natural debe terminar con 001']
     }
   }
-  return true
+  return [true, 'OK']
 }

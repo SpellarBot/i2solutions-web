@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <div>
     <v-card hover style="cursor: inherit;">
@@ -12,18 +11,18 @@
                 <v-text-field
                   label="Nombre"
                   required
-                >              
+                >
             </v-text-field>
             <v-text-field
                   label="Descricpión"
                   required
                   multi-line
-            >              
-            </v-text-field>            
+            >
+            </v-text-field>
               </v-form>
             </v-flex>
           </v-layout>
-        </v-container>        
+        </v-container>
       </v-card>
       <br><br>
   </div>
@@ -32,7 +31,7 @@
 import Vue from 'vue'
 export default {
   name: 'agregarPuesto',
-  props: ['index','indiceArea' ,'indiceEstablecimiento'],
+  props: ['index', 'indiceArea', 'indiceEstablecimiento'],
   data () {
     return {
       indice: 0
@@ -43,8 +42,5 @@ export default {
       console.log('\t\tPuesto: ' + this.indiceEstablecimiento + '.' + this.indiceArea + '.' + this.index)
     }
   }
-}  
+}
 </script>
-=======
-agregarPuesto.vue
->>>>>>> 81b1531391c68de1b27dcfcc67de8094f45b567d
