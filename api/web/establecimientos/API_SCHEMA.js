@@ -68,10 +68,11 @@ module.exports = {
       'type': 'array',
       'items': [{
         'type': 'object',
-        'minProperties': 4,
+        'minProperties': 10,
+        'additionalProperties': false,
         'properties': {
           'id': { 'type': 'number', minimum: 1 },
-          'nombres': { 'type': 'string', 'format': 'url' },
+          'nombres': { 'type': 'string', minLength: 2 },
           'direccion': { 'type': 'string', minLength: 2 },
           'ruc': { 'cedula': false },
           'cantidadAreas': { 'type': 'number', minimum: 0 },
@@ -80,8 +81,7 @@ module.exports = {
           'cantidadNovadadesSinAtender': { 'type': 'number', minimum: 0 },
           'cantidadAccidentes': { 'type': 'number', minimum: 0 },
           'cantidadCapacitaciones': { 'type': 'number', minimum: 0 }
-        },
-        'required': ['id', 'urlFoto', 'nombre', 'tieneNovedades']
+        }
       }]
     }
   }

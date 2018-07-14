@@ -19,8 +19,8 @@ __POST__ __/api/web/accidentes__
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-13T14:22:00.613Z",
-    "fechaCreacion": "2018-07-13T14:22:00.613Z"
+    "fechaActualizacion": "2018-07-14T17:59:35.878Z",
+    "fechaCreacion": "2018-07-14T17:59:35.878Z"
   },
   "codigoEstado": 200
 }
@@ -120,8 +120,8 @@ __GET__ __/api/web/accidentes/:accidentesId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-13 14:22:02.459 +00:00",
-    "fechaActualizacion": "2018-07-13 14:22:02.459 +00:00",
+    "fechaCreacion": "2018-07-14 17:59:37.764 +00:00",
+    "fechaActualizacion": "2018-07-14 17:59:37.764 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200

@@ -58,7 +58,7 @@ module.exports = {
   API_6_SCHEMA: {
     REQUEST: {
       'title': 'Empresas',
-      'description': 'Empresas si tienen novedadv',
+      'description': 'Empresas si tienen novedades',
       'type': 'array',
       'items': [{
         'type': 'object',
