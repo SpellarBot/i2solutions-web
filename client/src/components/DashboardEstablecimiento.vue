@@ -222,48 +222,7 @@ export default {
       establecimientoId: '',
       establecimientoNombres: '',
       establecimientoDireccion: '',
-      establecimientoRUC: '',
-      establecimientos: [
-        {
-          idEmpresa: 0,
-          id: '0',
-          ruc: '1310539752001',
-          nombre: 'Matriz',
-          direccion: 'Alborada',
-          numAreas: 2,
-          numPuestos: 2,
-          numPersonas: 2,
-          numNovedades: 2,
-          numAccidentes: 2,
-          numCapacitaciones: 2
-        },
-        {
-          idEmpresa: 0,
-          id: '1',
-          ruc: '0924970452001',
-          nombre: 'pollitos hermanos 2',
-          direccion: 'Urdesa',
-          numAreas: 1,
-          numPuestos: 2,
-          numPersonas: 3,
-          numNovedades: 0,
-          numAccidentes: 2,
-          numCapacitaciones: 2
-        },
-        {
-          idEmpresa: 1,
-          id: '2',
-          ruc: '1701300103001',
-          nombre: 'Matriz',
-          direccion: 'Alborada',
-          numAreas: 1,
-          numPuestos: 1,
-          numPersonas: 3,
-          numNovedades: 1,
-          numAccidentes: 0,
-          numCapacitaciones: 0
-        }
-      ]
+      establecimientoRUC: ''
     }
   },
   mounted () {
