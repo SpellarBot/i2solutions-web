@@ -19,8 +19,8 @@ __POST__ __/api/web/accidentes__
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-15T00:21:32.457Z",
-    "fechaCreacion": "2018-07-15T00:21:32.457Z"
+    "fechaActualizacion": "2018-07-15T01:09:37.530Z",
+    "fechaCreacion": "2018-07-15T01:09:37.530Z"
   },
   "codigoEstado": 200
 }
@@ -120,10 +120,118 @@ __GET__ __/api/web/accidentes/:accidentesId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-15 00:21:34.107 +00:00",
-    "fechaActualizacion": "2018-07-15 00:21:34.107 +00:00",
+    "fechaCreacion": "2018-07-15 01:09:39.270 +00:00",
+    "fechaActualizacion": "2018-07-15 01:09:39.270 +00:00",
     "establecimientosId": 1
   },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener accidentes por establecimiento
+
+__GET__ __/api/web/accidentes/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Caída de instrumentos",
+      "descripcion": "Se cayó la solución",
+      "heridos": "1",
+      "atendidoEnEmpresa": 1,
+      "muertos": 0,
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "puestosId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener accidentes por area
+
+__GET__ __/api/web/accidentes/areas/:areasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| areasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Caída de instrumentos",
+      "descripcion": "Se cayó la solución",
+      "heridos": "1",
+      "atendidoEnEmpresa": 1,
+      "muertos": 0,
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "puestosId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener accidentes por puesto
+
+__GET__ __/api/web/accidentes/puestos/:puestosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| puestosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Caída de instrumentos",
+      "descripcion": "Se cayó la solución",
+      "heridos": "1",
+      "atendidoEnEmpresa": 1,
+      "muertos": 0,
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "puestosId": 1
+    }
+  ],
   "codigoEstado": 200
 }
 ```
