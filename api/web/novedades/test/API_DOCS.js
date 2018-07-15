@@ -40,5 +40,38 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_5: {
+    nombre: 'Obtener novedades por establecimiento',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/novedades/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_6: {
+    nombre: 'Obtener novedades por area',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/novedades/areas/:areasId',
+    params: [
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_7: {
+    nombre: 'Obtener novedades por puesto',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/novedades/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
   }
 }

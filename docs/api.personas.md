@@ -52,8 +52,8 @@ Crear una persona pero sin anadirla a ningun establecimiento
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaActualizacion": "2018-07-14T23:21:24.379Z",
-    "fechaCreacion": "2018-07-14T23:21:24.379Z"
+    "fechaActualizacion": "2018-07-15T00:21:44.078Z",
+    "fechaCreacion": "2018-07-15T00:21:44.078Z"
   },
   "codigoEstado": 200
 }
@@ -103,8 +103,8 @@ __PUT__ __/api/web/personas/:personasId__
   "perfilOcupacional": "",
   "usuario": "Antonio69",
   "rol": "",
-  "fechaActualizacion": "2018-07-14T23:21:24.419Z",
-  "fechaCreacion": "2018-07-14T23:21:24.419Z"
+  "fechaActualizacion": "2018-07-15T00:21:44.113Z",
+  "fechaCreacion": "2018-07-15T00:21:44.113Z"
 }
 ```
 
@@ -186,8 +186,8 @@ __GET__ __/api/web/personas/:personasId__
     "perfilOcupacional": "",
     "usuario": "Antonio69",
     "rol": "",
-    "fechaCreacion": "2018-07-14 23:21:24.516 +00:00",
-    "fechaActualizacion": "2018-07-14 23:21:24.516 +00:00"
+    "fechaCreacion": "2018-07-15 00:21:44.211 +00:00",
+    "fechaActualizacion": "2018-07-15 00:21:44.211 +00:00"
   },
   "codigoEstado": 200
 }

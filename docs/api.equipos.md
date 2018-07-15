@@ -16,8 +16,8 @@ __POST__ __/api/web/equipos__
     "descripcion": "esta hecho",
     "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
     "cantidad": 1,
-    "fechaActualizacion": "2018-07-14T23:21:19.758Z",
-    "fechaCreacion": "2018-07-14T23:21:19.758Z"
+    "fechaActualizacion": "2018-07-15T00:21:39.065Z",
+    "fechaCreacion": "2018-07-15T00:21:39.065Z"
   },
   "codigoEstado": 200
 }
@@ -113,8 +113,8 @@ __GET__ __/api/web/equipos/:equiposId/puestos/:puestosId__
     "id": 1,
     "equiposId": "1",
     "puestosId": "1",
-    "fechaActualizacion": "2018-07-14T23:21:20.787Z",
-    "fechaCreacion": "2018-07-14T23:21:20.787Z"
+    "fechaActualizacion": "2018-07-15T00:21:40.015Z",
+    "fechaCreacion": "2018-07-15T00:21:40.015Z"
   },
   "codigoEstado": 200
 }
@@ -147,8 +147,8 @@ __GET__ __/api/web/equipos/:equiposId/areas/:areasId__
     "id": 1,
     "equiposId": "1",
     "areasId": "1",
-    "fechaActualizacion": "2018-07-14T23:21:21.153Z",
-    "fechaCreacion": "2018-07-14T23:21:21.153Z"
+    "fechaActualizacion": "2018-07-15T00:21:40.367Z",
+    "fechaCreacion": "2018-07-15T00:21:40.367Z"
   },
   "codigoEstado": 200
 }

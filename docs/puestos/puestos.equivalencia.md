@@ -255,8 +255,8 @@ _response_
     "id": 4,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
-    "fechaActualizacion": "2018-07-14T23:21:24.739Z",
-    "fechaCreacion": "2018-07-14T23:21:24.739Z"
+    "fechaActualizacion": "2018-07-15T00:21:44.438Z",
+    "fechaCreacion": "2018-07-15T00:21:44.438Z"
   },
   "codigoEstado": 200
 }
@@ -1256,8 +1256,8 @@ _response_
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
-    "fechaCreacion": "2018-07-14 23:21:25.545 +00:00",
-    "fechaActualizacion": "2018-07-14 23:21:25.545 +00:00"
+    "fechaCreacion": "2018-07-15 00:21:45.365 +00:00",
+    "fechaActualizacion": "2018-07-15 00:21:45.365 +00:00"
   },
   "codigoEstado": 200
 }
