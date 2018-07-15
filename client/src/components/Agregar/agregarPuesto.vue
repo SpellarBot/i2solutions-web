@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 export default {
   name: 'agregarPuesto',
   props: ['index', 'indiceArea', 'indiceEstablecimiento'],
@@ -44,3 +44,4 @@ export default {
   }
 }
 </script>
+agregarPuesto.vue

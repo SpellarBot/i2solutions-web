@@ -34,5 +34,11 @@ export default {
   },
   puestoSelected (state) {
     return state.puestoSelected
+  },
+  novedades (state) {
+    return state.novedades
+  },
+  novedadSelected (state) {
+    return state.novedadSelected
   }
 }

@@ -41,5 +41,11 @@ export default {
   },
   setPuestoSelected (state, puestoSelected) {
     state.puestoSelected = puestoSelected
+  },
+  setNovedades (state, novedades) {
+    state.novedades = novedades
+  },
+  setNovedadSelected (state, novedadSelected) {
+    state.novedadSelected = novedadSelected
   }
 }

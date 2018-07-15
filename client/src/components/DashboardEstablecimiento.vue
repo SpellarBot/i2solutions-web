@@ -38,6 +38,7 @@
               fab
               color="blue"
               small
+              @click="eliminarEstablecimiento()"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -89,6 +90,7 @@
               fab
               color="blue"
               small
+              @click="eliminarTrigger(establecimiento)"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -121,6 +123,29 @@
           </v-card>
         </v-flex>
     </v-layout>
+    <!---->
+    <v-layout row justify-center>
+    <v-dialog v-model="eliminarDialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">Eliminar</v-card-title>
+        <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
+          <v-btn color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+  <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
   </v-container>
   </template>
     <footer>
@@ -212,6 +237,7 @@ export default {
       visibleEdicion: false,
       visibleEdicionEstablecimiento: false,
       visibleNovedades: false,
+      eliminarDialog: false,
 
       empresaNombre: '',
       empresaActividadComercial: '',
@@ -294,10 +320,45 @@ export default {
       this.establecimientoRUC = establecimiento.ruc
       this.visibleEdicionEstablecimiento = true
     },
-    visualizarAreas (id, nombre) {
-      this.establecimientoId = id
-      this.establecimientoNombres = nombre
+    visualizarAreas (ruc, nombre) {
+      this.establecimientoId = ruc
+      this.nombreEstablecimiento = nombre
       this.visibleAreas = true
+    },
+    eliminarTrigger (establecimiento) {
+      // this.$data.establecimientoSelectedId = establecimientoId
+      this.establecimientoId = establecimiento.id
+      this.$data.eliminarDialog = true
+    },
+    borrarEstablecimiento () {
+      this.$data.eliminarDialog = false
+      let establecimientoId = this.$data.establecimientoSelectedId
+      let datos = { establecimientoId }
+      this.$store.dispatch('deleteEstablecimiento', { datos })
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'establecimiento borrado con exito.'
+          this.color = 'success'
+          this.reloadEstablecimiento()
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    reloadEstablecimiento () {
+      let empresaId = this.empresaId
+      this.$store.dispatch('getEstablecimientos', empresaId)
+      this.$store.dispatch('getEmpresaSola', empresaId)
+        .then((resp) => {
+          router.push('DashboardEstablecimiento')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     logout () {
       this.$store.dispatch('logout')
