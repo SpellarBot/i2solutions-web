@@ -154,5 +154,68 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorEstablecimiento = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where e.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(novedades => {
+          let novedadesAtendidas = []
+          let novedadesNoAtendidas = []
+          for (let novedad of novedades) {
+            if (parseInt(novedad['fueAtendida']) === 1) {
+              novedadesAtendidas.push(novedad)
+            } else {
+              novedadesNoAtendidas.push(novedad)
+            }
+          }
+          resolve({ novedadesAtendidas, novedadesNoAtendidas })
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorAreas = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(novedades => {
+          let novedadesAtendidas = []
+          let novedadesNoAtendidas = []
+          for (let novedad of novedades) {
+            if (parseInt(novedad['fueAtendida']) === 1) {
+              novedadesAtendidas.push(novedad)
+            } else {
+              novedadesNoAtendidas.push(novedad)
+            }
+          }
+          resolve({ novedadesAtendidas, novedadesNoAtendidas })
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId from areasPuestos ap inner join novedades n on n.puestosId = ap.puestosId where ap.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(novedades => {
+          let novedadesAtendidas = []
+          let novedadesNoAtendidas = []
+          for (let novedad of novedades) {
+            if (parseInt(novedad['fueAtendida']) === 1) {
+              novedadesAtendidas.push(novedad)
+            } else {
+              novedadesNoAtendidas.push(novedad)
+            }
+          }
+          resolve({ novedadesAtendidas, novedadesNoAtendidas })
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

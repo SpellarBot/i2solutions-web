@@ -129,15 +129,15 @@ _response_
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-13T14:22:10.225Z",
+    "fecha": "2018-07-15T01:09:47.971Z",
     "fotoUrl": "",
     "fueAtendida": false,
     "id": 1,
     "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
     "prioridad": "media",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-13T14:22:10.226Z",
-    "fechaCreacion": "2018-07-13T14:22:10.226Z"
+    "fechaActualizacion": "2018-07-15T01:09:47.971Z",
+    "fechaCreacion": "2018-07-15T01:09:47.971Z"
   },
   "codigoEstado": 200
 }
@@ -1669,7 +1669,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-DELETE /api/web/accidentes/a
+DELETE /api/web/novedades/a
 
 _request o body_
 ```js
@@ -1684,7 +1684,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "accidentesId": "debe ser number"
+    "novedadesId": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -1701,7 +1701,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-DELETE /api/web/accidentes/0
+DELETE /api/web/novedades/0
 
 _request o body_
 ```js
@@ -1716,7 +1716,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "accidentesId": "debe ser >= 1"
+    "novedadesId": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
@@ -1733,7 +1733,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-DELETE /api/web/accidentes/50
+DELETE /api/web/novedades/50
 
 _request o body_
 ```js
@@ -1806,7 +1806,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-GET /api/web/accidentes/1
+GET /api/web/novedades/1
 
 _request o body_
 ```js
@@ -1822,14 +1822,15 @@ _response_
   "estado": true,
   "datos": {
     "id": 1,
-    "actividad": "gerencia",
-    "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
-    "metrosCuadrados": "20x20",
-    "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-13 14:22:11.466 +00:00",
-    "fechaActualizacion": "2018-07-13 14:22:11.466 +00:00",
-    "establecimientosId": 1
+    "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+    "descripcionAtendida": null,
+    "prioridad": "media",
+    "fecha": "2018-07-15 01:09:49.246 +00:00",
+    "fotoUrl": "https://imagen.png",
+    "fueAtendida": "0",
+    "puestosId": 1,
+    "fechaCreacion": "2018-07-15 01:09:49.246 +00:00",
+    "fechaActualizacion": "2018-07-15 01:09:49.246 +00:00"
   },
   "codigoEstado": 200
 }
@@ -1846,7 +1847,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-GET /api/web/accidentes/a
+GET /api/web/novedades/a
 
 _request o body_
 ```js
@@ -1861,7 +1862,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "accidentesId": "debe ser number"
+    "novedadesId": "debe ser number"
   },
   "codigoEstado": 200
 }
@@ -1878,7 +1879,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-GET /api/web/accidentes/0
+GET /api/web/novedades/0
 
 _request o body_
 ```js
@@ -1893,7 +1894,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "accidentesId": "debe ser >= 1"
+    "novedadesId": "debe ser >= 1"
   },
   "codigoEstado": 200
 }
@@ -1910,7 +1911,7 @@ _url_
 
 > /api/web/novedades/:novedadesId
 
-GET /api/web/accidentes/50
+GET /api/web/novedades/50
 
 _request o body_
 ```js
@@ -1925,6 +1926,585 @@ _response_
 {
   "estado": true,
   "datos": null,
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener novedades por establecimiento
+
+> Código: API_5
+
+> Descripción: 
+
+> Url : /api/web/novedades/establecimientos/:establecimientosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C01]'>CE_API_5[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C02]'>CE_API_5[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C03]'>CE_API_5[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_5[1]__
+
+Obtener novedades de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/establecimientos/:establecimientosId
+
+GET /api/web/novedades/establecimientos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [
+      {
+        "id": 1,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+        "prioridad": "media",
+        "fecha": "2018-07-15 01:09:49.474 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "1",
+        "puestosId": 1
+      }
+    ],
+    "novedadesNoAtendidas": [
+      {
+        "id": 2,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
+        "prioridad": "baja",
+        "fecha": "2018-07-15 01:09:49.476 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "0",
+        "puestosId": 1
+      }
+    ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[2]__
+
+establecimientosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/establecimientos/:establecimientosId
+
+GET /api/web/novedades/establecimientos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[3]__
+
+establecimientosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/establecimientos/:establecimientosId
+
+GET /api/web/novedades/establecimientos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[4]__
+
+establecimientosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/establecimientos/:establecimientosId
+
+GET /api/web/novedades/establecimientos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [],
+    "novedadesNoAtendidas": []
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener novedades por area
+
+> Código: API_6
+
+> Descripción: 
+
+> Url : /api/web/novedades/areas/:areasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+Obtener novedades de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/areas/:areasId
+
+GET /api/web/novedades/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [
+      {
+        "id": 1,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+        "prioridad": "media",
+        "fecha": "2018-07-15 01:09:49.674 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "1",
+        "puestosId": 1
+      }
+    ],
+    "novedadesNoAtendidas": [
+      {
+        "id": 2,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
+        "prioridad": "baja",
+        "fecha": "2018-07-15 01:09:49.675 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "0",
+        "puestosId": 1
+      }
+    ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+areasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/areas/:areasId
+
+GET /api/web/novedades/areas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+areasId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/areas/:areasId
+
+GET /api/web/novedades/areas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[4]__
+
+areasId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/areas/:areasId
+
+GET /api/web/novedades/areas/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [],
+    "novedadesNoAtendidas": []
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener novedades por puesto
+
+> Código: API_7
+
+> Descripción: 
+
+> Url : /api/web/novedades/puestos/:puestosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_7[C01]'>CE_API_7[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_7[C02]'>CE_API_7[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_7[C03]'>CE_API_7[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_7[1]__
+
+Obtener novedades de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/puestos/:puestosId
+
+GET /api/web/novedades/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [
+      {
+        "id": 1,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+        "prioridad": "media",
+        "fecha": "2018-07-15 01:09:49.902 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "1",
+        "puestosId": 1
+      }
+    ],
+    "novedadesNoAtendidas": [
+      {
+        "id": 2,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
+        "prioridad": "baja",
+        "fecha": "2018-07-15 01:09:49.903 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "0",
+        "puestosId": 1
+      }
+    ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[2]__
+
+puestosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/puestos/:puestosId
+
+GET /api/web/novedades/puestos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[3]__
+
+puestosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/puestos/:puestosId
+
+GET /api/web/novedades/puestos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[4]__
+
+puestosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/novedades/puestos/:puestosId
+
+GET /api/web/novedades/puestos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [],
+    "novedadesNoAtendidas": []
+  },
   "codigoEstado": 200
 }
 ```

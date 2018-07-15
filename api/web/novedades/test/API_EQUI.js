@@ -470,5 +470,131 @@ module.exports = {
         }
       }
     }
+  },
+  API_5_EQUI: {
+    nombre: 'Obtener novedades por establecimiento',
+    codigo: 'API_5',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/novedades/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener novedades de forma correcta',
+        params: {
+          'establecimientosId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'establecimientosId no valido tipo de dato',
+        params: {
+          'establecimientosId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'establecimientosId  no valido numero',
+        params: {
+          'establecimientosId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'establecimientosId no exite',
+        params: {
+          'establecimientosId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_6_EQUI: {
+    nombre: 'Obtener novedades por area',
+    codigo: 'API_6',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/novedades/areas/:areasId',
+    params: [
+      { nombre: 'areasId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener novedades de forma correcta',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'areasId no valido tipo de dato',
+        params: {
+          'areasId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'areasId  no valido numero',
+        params: {
+          'areasId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'areasId no exite',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_7_EQUI: {
+    nombre: 'Obtener novedades por puesto',
+    codigo: 'API_7',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/novedades/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener novedades de forma correcta',
+        params: {
+          'puestosId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'puestosId no valido tipo de dato',
+        params: {
+          'puestosId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'puestosId  no valido numero',
+        params: {
+          'puestosId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'puestosId no exite',
+        params: {
+          'puestosId': { codigo: 'C01' }
+        }
+      }
+    }
   }
 }

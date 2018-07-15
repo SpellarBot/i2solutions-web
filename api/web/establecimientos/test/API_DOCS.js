@@ -53,12 +53,12 @@ module.exports = {
     errors: []
   },
   API_5: {
-    nombre: 'Obtener un establecimiento',
+    nombre: 'Datos de establecimientos para front',
     metodo: 'GET',
     descripcion: '',
-    url: '/api/web/establecimientos/:establecimientosId',
+    url: '/api/web/principal/establecimientos/empresas/:empresasId',
     params: [
-      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'empresasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

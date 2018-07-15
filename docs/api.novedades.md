@@ -11,15 +11,15 @@ __POST__ __/api/web/novedades__
 {
   "estado": true,
   "datos": {
-    "fecha": "2018-07-13T14:22:10.225Z",
+    "fecha": "2018-07-15T01:09:47.971Z",
     "fotoUrl": "",
     "fueAtendida": false,
     "id": 1,
     "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
     "prioridad": "media",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-13T14:22:10.226Z",
-    "fechaCreacion": "2018-07-13T14:22:10.226Z"
+    "fechaActualizacion": "2018-07-15T01:09:47.971Z",
+    "fechaCreacion": "2018-07-15T01:09:47.971Z"
   },
   "codigoEstado": 200
 }
@@ -112,14 +112,162 @@ __GET__ __/api/web/novedades/:novedadesId__
   "estado": true,
   "datos": {
     "id": 1,
-    "actividad": "gerencia",
-    "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
-    "metrosCuadrados": "20x20",
-    "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-13 14:22:11.466 +00:00",
-    "fechaActualizacion": "2018-07-13 14:22:11.466 +00:00",
-    "establecimientosId": 1
+    "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+    "descripcionAtendida": null,
+    "prioridad": "media",
+    "fecha": "2018-07-15 01:09:49.246 +00:00",
+    "fotoUrl": "https://imagen.png",
+    "fueAtendida": "0",
+    "puestosId": 1,
+    "fechaCreacion": "2018-07-15 01:09:49.246 +00:00",
+    "fechaActualizacion": "2018-07-15 01:09:49.246 +00:00"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener novedades por establecimiento
+
+__GET__ __/api/web/novedades/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [
+      {
+        "id": 1,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+        "prioridad": "media",
+        "fecha": "2018-07-15 01:09:49.474 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "1",
+        "puestosId": 1
+      }
+    ],
+    "novedadesNoAtendidas": [
+      {
+        "id": 2,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
+        "prioridad": "baja",
+        "fecha": "2018-07-15 01:09:49.476 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "0",
+        "puestosId": 1
+      }
+    ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener novedades por area
+
+__GET__ __/api/web/novedades/areas/:areasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| areasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [
+      {
+        "id": 1,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+        "prioridad": "media",
+        "fecha": "2018-07-15 01:09:49.674 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "1",
+        "puestosId": 1
+      }
+    ],
+    "novedadesNoAtendidas": [
+      {
+        "id": 2,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
+        "prioridad": "baja",
+        "fecha": "2018-07-15 01:09:49.675 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "0",
+        "puestosId": 1
+      }
+    ]
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener novedades por puesto
+
+__GET__ __/api/web/novedades/puestos/:puestosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| puestosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "novedadesAtendidas": [
+      {
+        "id": 1,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL, DOLOR DE CABEZA",
+        "prioridad": "media",
+        "fecha": "2018-07-15 01:09:49.902 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "1",
+        "puestosId": 1
+      }
+    ],
+    "novedadesNoAtendidas": [
+      {
+        "id": 2,
+        "descripcion": "INCREMENTO DE LAS ANOMALÍAS VISUALES, FATIGA MENTAL Y VISUAL",
+        "prioridad": "baja",
+        "fecha": "2018-07-15 01:09:49.903 +00:00",
+        "fotoUrl": "https://imagen.png",
+        "fueAtendida": "0",
+        "puestosId": 1
+      }
+    ]
   },
   "codigoEstado": 200
 }

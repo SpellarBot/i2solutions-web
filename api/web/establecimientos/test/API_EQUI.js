@@ -473,5 +473,41 @@ module.exports = {
         }
       }
     }
+  },
+  API_5_EQUI: {
+    nombre: 'Datos de establecimientos para front',
+    codigo: 'API_5',
+    descripcion: 'Obtiene los establecimientos con datos para representarlos en el front',
+    metodo: 'GET',
+    url: '/api/web/principal/establecimientos/empresas/:empresasId',
+    params: [
+      { nombre: 'empresasId',
+        casos: [
+          { codigo: '1', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: '2', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: '3', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Con establecimientos existentes',
+        params: {
+          'empresasId': { codigo: '1' }
+        }
+      },
+      '2': {
+        descripcion: 'empresasId no es un numero',
+        params: {
+          'empresasId': { codigo: '2' }
+        }
+      },
+      '3': {
+        descripcion: 'empresasId debe ser minimo 1',
+        params: {
+          'empresasId': { codigo: '3' }
+        }
+      }
+    }
   }
 }

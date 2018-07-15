@@ -103,5 +103,42 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
+
+  define.ObtenerPorEstablecimiento = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where e.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(accidentes => {
+          resolve(accidentes)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorAreas = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId from areas a inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId from areasPuestos ap join accidentes ac on ac.puestosId = ap.puestosId where ap.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

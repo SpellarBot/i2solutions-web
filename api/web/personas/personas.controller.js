@@ -49,6 +49,7 @@ module.exports = ({ responses, db }) => {
       })
     },
     Borrar ({ id }) {
+      // corroborar que se elimine de personasPuestos la tabla
       return new Promise((resolve, reject) => {
         db.personas.Borrar({ id })
           .then((resp) => {

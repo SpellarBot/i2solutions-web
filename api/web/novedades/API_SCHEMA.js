@@ -52,5 +52,35 @@ module.exports = {
         'novedadesId': { 'type': 'number', minimum: 1 }
       }
     }
+  },
+  API_5_SCHEMA: { // obtener novedades por establecimiento
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'establecimientosId': { 'type': 'number', minimum: 1 }
+      }
+    }
+  },
+  API_6_SCHEMA: { // obtener novedades por area
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'areasId': { 'type': 'number', minimum: 1 }
+      }
+    }
+  },
+  API_7_SCHEMA: { // obtener novedades por puesto
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'puestosId': { 'type': 'number', minimum: 1 }
+      }
+    }
   }
 }

@@ -74,4 +74,73 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_4
+  // obtener una capacitacion
+  app.route('/capacitaciones/:capacitacionesId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['capacitacionesId'])
+      let { PARAMS } = schema.API_4_SCHEMA
+      let [err, mensaje] = validar(PARAMS, params)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { capacitacionesId } = req.params
+        Controller.Obtener({ id: capacitacionesId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // identificador: API_5
+  // capacitaciones por establecimiento
+  app.route('/capacitaciones/establecimientos/:establecimientosId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['establecimientosId'])
+      let { PARAMS } = schema.API_5_SCHEMA
+      let [err, mensaje] = validar(PARAMS, params)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { establecimientosId } = req.params
+        Controller.ObtenerPorEstablecimiento({ id: establecimientosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // identificador: API_6
+  // capacitaciones por area
+  app.route('/capacitaciones/areas/:areasId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['areasId'])
+      let { PARAMS } = schema.API_6_SCHEMA
+      let [err, mensaje] = validar(PARAMS, params)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { areasId } = req.params
+        Controller.ObtenerPorArea({ id: areasId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

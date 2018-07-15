@@ -10,7 +10,6 @@ module.exports = {
   inspecciones: require('./inspecciones'),
   novedades: require('./novedades'),
   personas: require('./personas'),
-  personasEstablecimientos: require('./personasEstablecimientos'),
   puestos: require('./puestos'),
   riesgos: require('./riesgos')
 }

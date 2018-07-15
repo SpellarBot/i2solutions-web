@@ -176,8 +176,8 @@ _response_
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-13T14:22:00.613Z",
-    "fechaCreacion": "2018-07-13T14:22:00.613Z"
+    "fechaActualizacion": "2018-07-15T01:09:37.530Z",
+    "fechaCreacion": "2018-07-15T01:09:37.530Z"
   },
   "codigoEstado": 200
 }
@@ -2521,7 +2521,7 @@ ___
 
 ## Obtener un accidente
 
-> Código: API_3
+> Código: API_4
 
 > Descripción: Obtener un accidente
 
@@ -2538,19 +2538,19 @@ ___
   </tr>
 			<tr style='background-color: #82E0AA' >
 				<td>  accidentesId </td>
-				<td> <a id='CE_API_3[C01]'>CE_API_3[C01]</a> </td>
+				<td> <a id='CE_API_4[C01]'>CE_API_4[C01]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
 				<td> válido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td>  accidentesId </td>
-				<td> <a id='CE_API_3[C02]'>CE_API_3[C02]</a> </td>
+				<td> <a id='CE_API_4[C02]'>CE_API_4[C02]</a> </td>
 				<td>'type': !'number'</td>
 				<td> invalido  </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td>  accidentesId </td>
-				<td> <a id='CE_API_3[C03]'>CE_API_3[C03]</a> </td>
+				<td> <a id='CE_API_4[C03]'>CE_API_4[C03]</a> </td>
 				<td>minimum: !1 </td>
 				<td> invalido  </td>
 			</tr>
@@ -2559,7 +2559,7 @@ ___
 
 #### Intersecciónes de clases de equivalencia o Casos de prueba
 
-__ICE_API_3[1]__
+__ICE_API_4[1]__
 
 Obtener un accidente de forma correcta
 
@@ -2590,8 +2590,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-13 14:22:02.459 +00:00",
-    "fechaActualizacion": "2018-07-13 14:22:02.459 +00:00",
+    "fechaCreacion": "2018-07-15 01:09:39.270 +00:00",
+    "fechaActualizacion": "2018-07-15 01:09:39.270 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200
@@ -2599,7 +2599,7 @@ _response_
 ```
 
 
-__ICE_API_3[2]__
+__ICE_API_4[2]__
 
 accidentesId no valido tipo de dato
 
@@ -2631,7 +2631,7 @@ _response_
 ```
 
 
-__ICE_API_3[3]__
+__ICE_API_4[3]__
 
 accidentesId  no valido numero
 
@@ -2663,7 +2663,7 @@ _response_
 ```
 
 
-__ICE_API_3[4]__
+__ICE_API_4[4]__
 
 accidentesId no exite
 
@@ -2688,6 +2688,537 @@ _response_
 {
   "estado": true,
   "datos": null,
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener accidentes por establecimientos
+
+> Código: API_5
+
+> Descripción: 
+
+> Url : /api/web/accidentes/establecimientos/:establecimientosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C01]'>CE_API_5[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C02]'>CE_API_5[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_5[C03]'>CE_API_5[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_5[1]__
+
+Obtener accidentes de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/establecimientos/:establecimientosId
+
+GET /api/web/accidentes/establecimientos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Caída de instrumentos",
+      "descripcion": "Se cayó la solución",
+      "heridos": "1",
+      "atendidoEnEmpresa": 1,
+      "muertos": 0,
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "puestosId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[2]__
+
+establecimientosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/establecimientos/:establecimientosId
+
+GET /api/web/accidentes/establecimientos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[3]__
+
+establecimientosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/establecimientos/:establecimientosId
+
+GET /api/web/accidentes/establecimientos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[4]__
+
+establecimientosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/establecimientos/:establecimientosId
+
+GET /api/web/accidentes/establecimientos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener accidentes por area
+
+> Código: API_6
+
+> Descripción: 
+
+> Url : /api/web/accidentes/areas/:areasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+Obtener un accidente de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/areas/:areasId
+
+GET /api/web/accidentes/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Caída de instrumentos",
+      "descripcion": "Se cayó la solución",
+      "heridos": "1",
+      "atendidoEnEmpresa": 1,
+      "muertos": 0,
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "puestosId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+areasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/areas/:areasId
+
+GET /api/web/accidentes/areas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+areasId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/areas/:areasId
+
+GET /api/web/accidentes/areas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[4]__
+
+areasId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/areas/:areasId
+
+GET /api/web/accidentes/areas/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener accidentes por puesto
+
+> Código: API_7
+
+> Descripción: 
+
+> Url : /api/web/accidentes/puestos/:puestosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  accidentesId </td>
+				<td> <a id='CE_API_7[C01]'>CE_API_7[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  accidentesId </td>
+				<td> <a id='CE_API_7[C02]'>CE_API_7[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  accidentesId </td>
+				<td> <a id='CE_API_7[C03]'>CE_API_7[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_7[1]__
+
+Obtener un accidente de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/puestos/:puestosId
+
+GET /api/web/accidentes/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "nombre": "Caída de instrumentos",
+      "descripcion": "Se cayó la solución",
+      "heridos": "1",
+      "atendidoEnEmpresa": 1,
+      "muertos": 0,
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "puestosId": 1
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[2]__
+
+puestosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/puestos/:puestosId
+
+GET /api/web/accidentes/puestos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[3]__
+
+puestosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/puestos/:puestosId
+
+GET /api/web/accidentes/puestos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[4]__
+
+puestosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/accidentes/puestos/:puestosId
+
+GET /api/web/accidentes/puestos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
   "codigoEstado": 200
 }
 ```

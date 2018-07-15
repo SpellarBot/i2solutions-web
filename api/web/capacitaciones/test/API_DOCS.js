@@ -31,12 +31,34 @@ module.exports = {
     errors: []
   },
   API_4: {
-    nombre: 'Obtener un capacitacion',
+    nombre: 'Obtener una capacitacion',
     metodo: 'GET',
     descripcion: '',
     url: '/api/web/capacitaciones/:capacitacionId',
     params: [
       { nombre: 'capacitacionId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_5: {
+    nombre: 'Obtener por establecimiento',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/capacitaciones/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_6: {
+    nombre: 'Obtener por area',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/capacitaciones/areas/:areasId',
+    params: [
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

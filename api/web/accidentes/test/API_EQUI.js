@@ -602,7 +602,7 @@ module.exports = {
   },
   API_4_EQUI: {
     nombre: 'Obtener un accidente',
-    codigo: 'API_3',
+    codigo: 'API_4',
     descripcion: 'Obtener un accidente',
     metodo: 'GET',
     url: '/api/web/accidentes/:accidentesId',
@@ -638,6 +638,132 @@ module.exports = {
         descripcion: 'accidentesId no exite',
         params: {
           'accidentesId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_5_EQUI: {
+    nombre: 'Obtener accidentes por establecimientos',
+    codigo: 'API_5',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/accidentes/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener accidentes de forma correcta',
+        params: {
+          'establecimientosId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'establecimientosId no valido tipo de dato',
+        params: {
+          'establecimientosId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'establecimientosId  no valido numero',
+        params: {
+          'establecimientosId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'establecimientosId no exite',
+        params: {
+          'establecimientosId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_6_EQUI: {
+    nombre: 'Obtener accidentes por area',
+    codigo: 'API_6',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/accidentes/areas/:areasId',
+    params: [
+      { nombre: 'areasId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener un accidente de forma correcta',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'areasId no valido tipo de dato',
+        params: {
+          'areasId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'areasId  no valido numero',
+        params: {
+          'areasId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'areasId no exite',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_7_EQUI: {
+    nombre: 'Obtener accidentes por puesto',
+    codigo: 'API_7',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/accidentes/puestos/:puestosId',
+    params: [
+      { nombre: 'accidentesId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener un accidente de forma correcta',
+        params: {
+          'puestosId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'puestosId no valido tipo de dato',
+        params: {
+          'puestosId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'puestosId  no valido numero',
+        params: {
+          'puestosId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'puestosId no exite',
+        params: {
+          'puestosId': { codigo: 'C01' }
         }
       }
     }

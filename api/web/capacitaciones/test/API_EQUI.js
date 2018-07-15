@@ -400,5 +400,131 @@ module.exports = {
         }
       }
     }
+  },
+  API_4_EQUI: {
+    nombre: 'Obtener una capacitacion',
+    codigo: 'API_4',
+    descripcion: 'Obtener una capacitacion',
+    metodo: 'GET',
+    url: '/api/web/capacitaciones/:capacitacionesId',
+    params: [
+      { nombre: 'capacitacionesId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener una capacitacion de forma correcta',
+        params: {
+          'capacitacionesId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'capacitacionesId no valido tipo de dato',
+        params: {
+          'capacitacionesId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'capacitacionesId  no valido numero',
+        params: {
+          'capacitacionesId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'capacitacionesId no exite',
+        params: {
+          'capacitacionesId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_5_EQUI: {
+    nombre: 'Obtener capacitaciones por establecimiento',
+    codigo: 'API_5',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/capacitaciones/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener capacitaciones por establecimientos',
+        params: {
+          'establecimientosId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'establecimientosId no valido tipo de dato',
+        params: {
+          'establecimientosId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'establecimientosId  no valido numero',
+        params: {
+          'establecimientosId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'establecimientosId no exite',
+        params: {
+          'establecimientosId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_6_EQUI: {
+    nombre: 'Obtener capacitaciones por areas',
+    codigo: 'API_6',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/capacitaciones/areas/:areasId',
+    params: [
+      { nombre: 'areasId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Obtener capacitaciones por area',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'areasId no valido tipo de dato',
+        params: {
+          'areasId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'areasId  no valido numero',
+        params: {
+          'areasId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'areasId no exite',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      }
+    }
   }
 }

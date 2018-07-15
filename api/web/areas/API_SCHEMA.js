@@ -63,5 +63,18 @@ module.exports = {
         'areasId': { 'type': 'number', minimum: 1 }
       }
     }
+  },
+  API_6_SCHEMA: {
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'establecimientosId': { 'type': 'number', minimum: 1 }
+      }
+    },
+    RESPONSE: {
+
+    }
   }
 }
