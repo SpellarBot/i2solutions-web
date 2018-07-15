@@ -47,5 +47,8 @@ export default {
   },
   setNovedadSelected (state, novedadSelected) {
     state.novedadSelected = novedadSelected
+  },
+  setAreasPuestos (state, areasPuestos) {
+    state.areasPuestos = areasPuestos
   }
 }

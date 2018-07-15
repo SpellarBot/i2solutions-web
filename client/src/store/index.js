@@ -24,7 +24,8 @@ export const store = new Vuex.Store({
     puestos: null,
     puestoSelected: null,
     novedades: null,
-    novedadSelected: null
+    novedadSelected: null,
+    areasPuestos: null
   },
   mutations,
   actions,

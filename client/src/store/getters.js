@@ -40,5 +40,8 @@ export default {
   },
   novedadSelected (state) {
     return state.novedadSelected
+  },
+  areasPuestos (state) {
+    return state.areasPuestos
   }
 }
