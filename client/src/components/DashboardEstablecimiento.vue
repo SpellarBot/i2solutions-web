@@ -101,7 +101,7 @@
                         > #Areas: {{establecimiento.cantidadAreas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPuestos(establecimiento.id)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
+                      <span class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.cantidadPersonas}}</span>
@@ -127,6 +127,7 @@
     <DialogPuestosFromEstablecimientos
     :visible="visiblePuestos"
     :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visiblePuestos=false"
     ></DialogPuestosFromEstablecimientos>
     <DialogPersonasFromEstablecimientos
@@ -261,8 +262,9 @@ export default {
           this.mensajeSnackbar = err
         })
     },
-    visualizarPuestos (establecimientoId) {
+    visualizarPuestos (establecimientoId, establecimientoNombre) {
       this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visiblePuestos = true
     },
     visualizarPersonas () {

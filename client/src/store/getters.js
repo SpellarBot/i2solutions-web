@@ -34,5 +34,8 @@ export default {
   },
   puestoSelected (state) {
     return state.puestoSelected
+  },
+  areasPuestos (state) {
+    return state.areasPuestos
   }
 }

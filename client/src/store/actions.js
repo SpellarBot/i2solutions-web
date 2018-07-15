@@ -149,6 +149,23 @@ export default {
         })
     })
   },
+  getPuestosFromEstablecimiento ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/areas/puestos/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setAreasPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getAreas ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/areas/establecimientos/' + establecimientoId)

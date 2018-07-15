@@ -14,26 +14,22 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Establecimiento Matriz</v-toolbar-title>
+        <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
       </v-toolbar>
-      <h1>Área: Producción 1</h1>
+      <div v-for="(area) in this.$store.getters.areasPuestos" :key="area.id">
+      <h1>Área: {{ area.nombre }}</h1>
       <h3>Puestos de trabajo:</h3>
       <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 md6 lg4>
-            <CardPuestos></CardPuestos>
+          <v-flex xs12 md6 lg4 v-for="(puesto) in area.puestos" :key="puesto.id">
+            <CardPuestos
+            :puesto = "puesto"
+            :areaId = "area.id"
+            ></CardPuestos>
           </v-flex>
         </v-layout>
       </v-container>
-      <h1>Área: Producción 2</h1>
-      <h3>Puestos de trabajo:</h3>
-      <v-container grid-list-md>
-        <v-layout row wrap>
-          <v-flex xs12 md6 lg4>
-            <CardPuestos></CardPuestos>
-          </v-flex>
-        </v-layout>
-      </v-container>
+    </div>
 
     </v-card>
     </v-dialog>
@@ -53,19 +49,20 @@ export default {
       snackbar: false
     }
   },
-  mounted () {
-    this.cargarDatos()
-  },
+  /*mounted () {
+    this.cargarData()
+  },*/
   methods: {
-    cargarDatos () {
+    cargarData () {
       this.valid = null
       this.loading = true
-      this.verAreas()
+      this.verAreasPuestos()
       this.loading = false
       this.valid = true
+      console.log('LOG')
     },
-    verAreas () {
-      this.$store.dispatch('getAreas', this.establecimientoId)
+    verAreasPuestos () {
+      this.$store.dispatch('getPuestosFromEstablecimiento', this.establecimientoId)
         .then((resp) => {
           console.log('Done')
         })
@@ -74,13 +71,15 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
-    },
-    verPuestos () {
-
     }
   },
-  name: 'DialogPuestos',
-  props: ['visible', 'establecimientoId'],
+  name: 'DialogPuestosFromEstablecimientos',
+  watch: {
+    show () {
+      this.cargarData()
+    }
+  },
+  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
   computed: {
     show: {
       get () {
