@@ -95,7 +95,7 @@
         right
         relative
         fab
-        @click.native="agregarDialog=true; console.log(agregarDialog)"
+        @click.native="agregarDialog=true"
         >
         <v-icon>add</v-icon>
       </v-btn>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <div>
     <v-card hover style="cursor: inherit;">
@@ -8,15 +7,17 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex md8 offset-md1>
-              <v-form ref="form">
+              <v-form ref="form" lazy-validation>
                 <v-text-field
                   label="Nombre"
                   required
+                  :rules="[rules.required, rules.nameMin]"
                 >              
             </v-text-field>
             <v-text-field
                   label="Descricpión"
                   required
+                  :rules="[rules.required, rules.nameMin]"
                   multi-line
             >              
             </v-text-field>            
@@ -35,7 +36,11 @@ export default {
   props: ['index','indiceArea' ,'indiceEstablecimiento'],
   data () {
     return {
-      indice: 0
+      indice: 0,
+      rules: {
+        required: v => !!v || 'Campo requerido',
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+      }
     }
   },
   methods: {
@@ -45,6 +50,3 @@ export default {
   }
 }  
 </script>
-=======
-agregarPuesto.vue
->>>>>>> 81b1531391c68de1b27dcfcc67de8094f45b567d
