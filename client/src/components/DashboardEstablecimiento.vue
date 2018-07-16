@@ -408,7 +408,7 @@ export default {
     reloadEmpresas () {
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
-          router.push('Dashboard')
+          router.push('/dashboard')
         })
         .catch((err) => {
           this.color = 'error'

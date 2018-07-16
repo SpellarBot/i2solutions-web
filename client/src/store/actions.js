@@ -201,6 +201,24 @@ export default {
         })
     })
   },
+  getRiesgosSolo ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/riesgos/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Novedades no Atendida', resp.body.datos)
+            commit('setNovedadesPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getAreas ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/areas/establecimientos/' + establecimientoId)
@@ -269,12 +287,11 @@ export default {
         })
     })
   },
-  deletePuesto ({commit}, puestoId) {
+  deletePuesto ({commit}, puestosId) {
     return new Promise((resolve, reject) => {
-      Vue.http.delete('/api/web/puestos/' + puestoId)
+      Vue.http.delete('/api/web/puestos/' + puestosId)
         .then((resp) => {
           if (resp.body.estado) {
-            console.log('entre')
             return resolve()
           } else {
             commit('setError', resp.body.datos)
