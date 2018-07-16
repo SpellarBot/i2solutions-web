@@ -142,7 +142,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerAreasConPuestosPorEstablecimiento = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select a.id as areaId , a.nombre as areaNombre, a.actividad as areaActividad, a.descripcionLugar as areaDescripcionLugar, p.id as puestoId, p.nombre as puestoNombre, p.descripcion as puestoDescripcion, (select count(*) from personasPuestos where puestosId = p.id) as cantidadPersonas, (select count(*) from accidentes where puestosId = p.id) as cantidadAccidentes, (select count(*) from novedades where puestosId = p.id and fueAtendida = 0) as cantidadNovedadesSinAtender from areas a inner join areasPuestos ap on ap.areasId = a.id inner join puestos p on p.id = ap.puestosId where a.establecimientosId = ${id}`
+      let query = `select a.id as areaId , a.nombre as areaNombre, a.actividad as areaActividad, a.descripcionLugar as areaDescripcionLugar, p.id as puestoId, p.nombre as puestoNombre, p.descripcion as puestoDescripcion, (select count(*) from personasPuestos where puestosId = p.id) as cantidadPersonas, (select count(*) from accidentes where puestosId = p.id) as cantidadAccidentes, (select count(*) from novedades where puestosId = p.id and fueAtendida = 0) as cantidadNovedadesSinAtender, (select count(*) from equiposPuestos where puestosId = p.id) as cantidadEquipos from areas a inner join areasPuestos ap on ap.areasId = a.id inner join puestos p on p.id = ap.puestosId where a.establecimientosId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(areas => {
           let areasLimpiada = areas.reduce(function (result, item, index, array) {
@@ -158,6 +158,7 @@ module.exports = (sequelize, DataTypes) => {
                     cantidadPersonas: item['cantidadPersonas'],
                     cantidadAccidentes: item['cantidadAccidentes'],
                     cantidadNovedadesSinAtender: item['cantidadNovedadesSinAtender'],
+                    cantidadEquipos: item['cantidadEquipos'],
                     id: item['puestoId'],
                     nombre: item['puestoNombre'],
                     descripcion: item['puestoDescripcion']
@@ -168,6 +169,7 @@ module.exports = (sequelize, DataTypes) => {
                   cantidadPersonas: item['cantidadPersonas'],
                   cantidadAccidentes: item['cantidadAccidentes'],
                   cantidadNovedadesSinAtender: item['cantidadNovedadesSinAtender'],
+                  cantidadEquipos: item['cantidadEquipos'],
                   id: item['puestoId'],
                   nombre: item['puestoNombre'],
                   descripcion: item['puestoDescripcion']
