@@ -19,8 +19,8 @@ __POST__ __/api/web/accidentes__
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-16T02:18:53.009Z",
-    "fechaCreacion": "2018-07-16T02:18:53.009Z"
+    "fechaActualizacion": "2018-07-16T12:08:35.299Z",
+    "fechaCreacion": "2018-07-16T12:08:35.299Z"
   },
   "codigoEstado": 200
 }
@@ -120,8 +120,8 @@ __GET__ __/api/web/accidentes/:accidentesId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-16 02:18:55.249 +00:00",
-    "fechaActualizacion": "2018-07-16 02:18:55.249 +00:00",
+    "fechaCreacion": "2018-07-16 12:08:36.937 +00:00",
+    "fechaActualizacion": "2018-07-16 12:08:36.937 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200
@@ -151,6 +151,7 @@ __GET__ __/api/web/accidentes/establecimientos/:establecimientosId__
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Caída de instrumentos",
       "descripcion": "Se cayó la solución",
       "heridos": "1",
@@ -192,6 +193,7 @@ __GET__ __/api/web/accidentes/areas/:areasId__
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Caída de instrumentos",
       "descripcion": "Se cayó la solución",
       "heridos": "1",
@@ -228,6 +230,7 @@ __GET__ __/api/web/accidentes/puestos/:puestosId__
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Caída de instrumentos",
       "descripcion": "Se cayó la solución",
       "heridos": "1",

@@ -17,8 +17,8 @@ __POST__ __/api/web/capacitaciones__
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-16T02:18:57.826Z",
-    "fechaCreacion": "2018-07-16T02:18:57.826Z"
+    "fechaActualizacion": "2018-07-16T12:08:39.358Z",
+    "fechaCreacion": "2018-07-16T12:08:39.358Z"
   },
   "codigoEstado": 200
 }
@@ -114,8 +114,8 @@ __GET__ __/api/web/capacitaciones/:capacitacionId__
     "descripcion": "La capacitación fue un éxito",
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
-    "fechaCreacion": "2018-07-16 02:18:58.967 +00:00",
-    "fechaActualizacion": "2018-07-16 02:18:58.967 +00:00",
+    "fechaCreacion": "2018-07-16 12:08:40.437 +00:00",
+    "fechaActualizacion": "2018-07-16 12:08:40.437 +00:00",
     "areasId": 1
   },
   "codigoEstado": 200
