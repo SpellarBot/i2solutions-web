@@ -34,5 +34,23 @@ export default {
   },
   puestoSelected (state) {
     return state.puestoSelected
+  },
+  novedades (state) {
+    return state.novedades
+  },
+  novedadSelected (state) {
+    return state.novedadSelected
+  },
+  novedadesEstablecimientos (state) {
+    return state.novedadesEstablecimientos
+  },
+  areasPuestos (state) {
+    return state.areasPuestos
+  },
+  equipos (state) {
+    return state.equipos
+  },
+  equipoSelected () {
+    return this.equipoSelected
   }
 }

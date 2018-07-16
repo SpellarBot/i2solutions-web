@@ -2,33 +2,28 @@
   <main id="CardPuestos">
     <v-card>
 
-      <h2>Empaquetado de Pollo</h2>
+      <h2>{{ puestos.nombre }}</h2>
       <v-btn
               fab
               dark
-              right
               small
               color="blue"
-              absolute
-              @click="visualizarEditar()"
+              @click="visualizarEditar(puestos, areasId)"
             >
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
               fab
               dark
-              right
               small
               color="blue"
-              absolute
-              class="offseted"
             >
               <v-icon>delete</v-icon>
             </v-btn>
-      <div class="small-width"><p> Puesto donde se realiza el empaquetado de pollo y se envía a distribución.</p></div>
-      <span class="link" v-on:click="visualizarPersonas"> Número Personas: 1</span>
-      <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: 1</span>
-      <span class="link" v-on:click="visualizarNovedadesFromAreas"> Novedades sin arender: 1</span>
+      <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
+      <span class="link" v-on:click="visualizarPersonas"> Número Personas: {{ puestos.cantidadPersonas }}</span>
+      <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
+      <span class="link" v-on:click="visualizarNovedadesFromAreas"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
     </v-card>
     <footer>
       <DialogPersonasFromPuestos
@@ -41,6 +36,10 @@
     ></DialogAccidentesFromPuestos>
     <DialogEditarPuestos
     :visible="visibleEdicion"
+    :puestoNombre="puestoNombre"
+    :puestoDescripcion="puestoDescripcion"
+    :puestoId="puestoId"
+    :areaId="areaIdEdit"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromAreas
@@ -55,13 +54,30 @@ import DialogAccidentesFromPuestos from './DialogAccidentesFromPuestos'
 import DialogEditarPuestos from './Editar/DialogEditarPuestos'
 import DialogNovedadesFromAreas from './Novedades/DialogNovedadesFromAreas'
 export default {
+  props: [ 'puesto', 'areaId' ],
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromAreas },
   data () {
     return {
       visiblePersonas: false,
       visibleAccidentes: false,
       visibleEdicion: false,
-      visibleNovedades: false
+      visibleNovedades: false,
+      puestoNombre: '',
+      puestoDescripcion: '',
+      puestoId: '',
+      areaIdEdit: ''
+    }
+  },
+  computed: {
+    puestos: {
+      get () {
+        return this.puesto
+      }
+    },
+    areasId: {
+      get () {
+        return this.areaId
+      }
     }
   },
   methods: {
@@ -74,8 +90,12 @@ export default {
     visualizarNovedadesFromAreas () {
       this.visibleNovedades = true
     },
-    visualizarEditar () {
-      // luego aquí pondré los datos que debe recibir el dialog, por ahora no :v
+    visualizarEditar (puesto, areaId) {
+      console.log(puesto.descripcion)
+      this.puestoNombre = puesto.nombre
+      this.puestoDescripcion = puesto.descripcion
+      this.puestoId = puesto.id
+      this.areaIdEdit = areaId
       this.visibleEdicion = true
     }
   }

@@ -49,6 +49,7 @@
             </v-flex>
           </v-layout>
         </v-container>
+
       </v-card>
       <br><br>
   </div>
@@ -76,8 +77,7 @@ export default {
       //  Creado la clase puedo hacer una instancia de la misma.
       var instanceArea = new AreaClass({
         //  Aquí van colocado los props que pida el componente
-        propsData: {index: this.indice,
-          indiceEstablecimiento: this.index}
+        propsData: {index: this.indice, indiceEstablecimiento: this.index}
       })
       //  Simple nombre.
       this.indice++

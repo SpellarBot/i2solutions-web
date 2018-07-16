@@ -38,6 +38,7 @@
               fab
               color="blue"
               small
+              @click="eliminarEmpresa()"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -89,6 +90,7 @@
               fab
               color="blue"
               small
+              @click="eliminarEstablecimiento(establecimiento)"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -101,7 +103,7 @@
                         > #Areas: {{establecimiento.cantidadAreas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPuestos(establecimiento.id)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
+                      <span class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.cantidadPersonas}}</span>
@@ -113,7 +115,7 @@
                       <span class="link" v-on:click="visualizarCapacitaciones">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento">#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
+                      <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento(establecimiento.id, establecimiento.nombres)">#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -121,12 +123,36 @@
           </v-card>
         </v-flex>
     </v-layout>
+    <!---->
+    <v-layout row justify-center>
+    <v-dialog v-model="eliminarDialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">Eliminar</v-card-title>
+        <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
+          <v-btn color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+  <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
   </v-container>
   </template>
     <footer>
     <DialogPuestosFromEstablecimientos
     :visible="visiblePuestos"
     :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visiblePuestos=false"
     ></DialogPuestosFromEstablecimientos>
     <DialogPersonasFromEstablecimientos
@@ -143,6 +169,8 @@
     ></DialogCapacitacionesFromEstablecimientos>
     <DialogNovedadesFromEstablecimientos
     :visible="visibleNovedades"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visibleNovedades=false"
     ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
@@ -212,6 +240,7 @@ export default {
       visibleEdicion: false,
       visibleEdicionEstablecimiento: false,
       visibleNovedades: false,
+      eliminarDialog: false,
 
       empresaNombre: '',
       empresaActividadComercial: '',
@@ -222,7 +251,8 @@ export default {
       establecimientoId: '',
       establecimientoNombres: '',
       establecimientoDireccion: '',
-      establecimientoRUC: ''
+      establecimientoRUC: '',
+      establecimientoSelectedId: 0
     }
   },
   mounted () {
@@ -261,8 +291,9 @@ export default {
           this.mensajeSnackbar = err
         })
     },
-    visualizarPuestos (establecimientoId) {
+    visualizarPuestos (establecimientoId, establecimientoNombre) {
       this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visiblePuestos = true
     },
     visualizarPersonas () {
@@ -274,7 +305,9 @@ export default {
     visualizarCapacitaciones () {
       this.visibleCapacitaciones = true
     },
-    visualizarNovedadesFromEstablecimiento () {
+    visualizarNovedadesFromEstablecimiento (establecimientoId, establecimientoNombre) {
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visibleNovedades = true
     },
     visualizarEdicion () {
@@ -294,11 +327,46 @@ export default {
       this.establecimientoRUC = establecimiento.ruc
       this.visibleEdicionEstablecimiento = true
     },
-    visualizarAreas (id, nombre) {
-      this.establecimientoId = id
-      this.establecimientoNombres = nombre
+    visualizarAreas (ruc, nombre) {
+      this.establecimientoId = ruc
+      this.nombreEstablecimiento = nombre
       this.visibleAreas = true
     },
+    eliminarEstablecimiento (establecimiento) {
+      this.establecimientoSelectedId = establecimiento.id
+      this.$data.eliminarDialog = true
+    },
+    borrarEstablecimiento () {
+      this.eliminarDialog = false
+      let establecimientoId = this.establecimientoSelectedId
+      let datos = { establecimientoId }
+      this.$store.dispatch('deleteEstablecimiento', { datos })
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'establecimiento borrado con exito.'
+          this.color = 'success'
+          this.reloadEstablecimiento()
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    reloadEstablecimiento () {
+    //   let empresaId = this.empresaId
+      this.$store.dispatch('getEstablecimientosFront', this.id)
+      this.$store.dispatch('getEmpresaSola', this.id)
+        .then((resp) => {
+          router.push('DashboardEstablecimiento')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+
     logout () {
       this.$store.dispatch('logout')
       router.push('/')
