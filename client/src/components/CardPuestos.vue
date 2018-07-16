@@ -39,7 +39,7 @@
     :puestoNombre="puestoNombre"
     :puestoDescripcion="puestoDescripcion"
     :puestoId="puestoId"
-    :areaId="areaId"
+    :areaId="areaIdEdit"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromAreas
@@ -64,8 +64,8 @@ export default {
       visibleNovedades: false,
       puestoNombre: '',
       puestoDescripcion: '',
-      puestoId: ''
-      // areaId: ''
+      puestoId: '',
+      areaIdEdit: ''
     }
   },
   computed: {
@@ -95,7 +95,7 @@ export default {
       this.puestoNombre = puesto.nombre
       this.puestoDescripcion = puesto.descripcion
       this.puestoId = puesto.id
-      this.areaId = areaId
+      this.areaIdEdit = areaId
       this.visibleEdicion = true
     }
   }
