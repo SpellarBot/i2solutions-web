@@ -12,7 +12,7 @@
       <v-layout>
       <v-flex xs12>
         <v-card>
-            <h1><b>Establecimiento: </b>{{this.puestoNombre}}</h1>
+            <h1><b>Puesto: </b>{{this.puestoNombre}}</h1>
           <v-container  fluid>
             <h2>Novedades Sin Atender</h2>
             <v-layout row wrap>
