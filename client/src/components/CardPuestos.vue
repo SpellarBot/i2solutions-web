@@ -23,7 +23,7 @@
       <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <span class="link" v-on:click="visualizarPersonas"> Número Personas: {{ puestos.cantidadPersonas }}</span>
       <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
-      <span class="link" v-on:click="visualizarNovedadesFromAreas"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
+      <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
     </v-card>
     <footer>
       <DialogPersonasFromPuestos
@@ -42,9 +42,11 @@
     :areaId="areaIdEdit"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
-    <DialogNovedadesFromAreas
+    <DialogNovedadesFromPuestos
     :visible="visibleNovedades"
-    @close="visibleNovedades=false"></DialogNovedadesFromAreas>
+    :puestoNombre ="puestoNombre"
+    :puestoId="puestoId"
+    @close="visibleNovedades=false"></DialogNovedadesFromPuestos>
     </footer>
   </main>
 </template>
@@ -52,10 +54,10 @@
 import DialogPersonasFromPuestos from './DialogPersonasFromPuestos'
 import DialogAccidentesFromPuestos from './DialogAccidentesFromPuestos'
 import DialogEditarPuestos from './Editar/DialogEditarPuestos'
-import DialogNovedadesFromAreas from './Novedades/DialogNovedadesFromAreas'
+import DialogNovedadesFromPuestos from './Novedades/DialogNovedadesFromPuestos'
 export default {
   props: [ 'puesto', 'areaId' ],
-  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromAreas },
+  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos },
   data () {
     return {
       visiblePersonas: false,
@@ -87,7 +89,9 @@ export default {
     visualizarAccidentes () {
       this.visibleAccidentes = true
     },
-    visualizarNovedadesFromAreas () {
+    visualizarNovedadesFromPuestos (puestoId, puestoNombre) {
+      this.puestoId = puestoId
+      this.puestoNombre = puestoNombre
       this.visibleNovedades = true
     },
     visualizarEditar (puesto, areaId) {

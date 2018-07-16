@@ -171,8 +171,25 @@ export default {
       Vue.http.get('/api/web/novedades/establecimientos/' + establecimientoId)
         .then((resp) => {
           if (resp.body.estado) {
-            console.log(resp.body.datos.novedadesNoAtendidas)
             commit('setNovedadesEstablecimientos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getNovedadesFromPuestos ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/novedades/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Novedades no Atendida', resp.body.datos.novedadesNoAtendidas)
+            commit('setNovedadesPuestos', resp.body.datos)
             return resolve()
           } else {
             commit('setError', resp.body.datos)
