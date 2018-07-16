@@ -1,34 +1,34 @@
 <template>
   <main id="CardCapacitaciones">
-        <div><b>Capacitación en seguridad al empacar pollo. </b></div>
-        <v-btn
+        <div><b>{{ capacitacions.tema }}</b></div>
+          <div class="small-width">{{ capacitacions.descripcion }}</div>
+          <div><b>Fecha:</b> {{ fecha(capacitacions.fechaCapacitacion) }} </div>
+          <div><b>Capacitador:</b> {{ capacitacions.nombre }}z</div>
+          <v-btn
               fab
               dark
-              right
               small
               color="blue"
-              absolute
-              @click="visualizarEditar()"
+              @click="visualizarEditar(capacitacions, fecha(capacitacions.fechaCapacitacion))"
             >
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
               fab
               dark
-              right
               small
               color="blue"
-              absolute
-              class="offseted"
             >
               <v-icon>delete</v-icon>
             </v-btn>
-          <div class="small-width">Capacitación realizada para poder empacar pollo de manera efectiva sin riesgo de muerte</div>
-          <div><b>Fecha:</b> 15/06/2018 </div>
-          <div><b>Capacitador:</b> Joel Rodríguez</div>
           <footer>
             <DialogEditarCapacitaciones
             :visible="visibleEdicion"
+            :capacitacionTema="capacitacionTema"
+            :capacitacionDescripcion="capacitacionDescripcion"
+            :capacitacionFecha="capacitacionFecha"
+            :capacitacionCapacitador="capacitacionCapacitador"
+            :capacitacionId="capacitacionId"
             @close="visibleEdicion=false"
             ></DialogEditarCapacitaciones>
           </footer>
@@ -36,16 +36,37 @@
 </template>
 <script>
 import DialogEditarCapacitaciones from './Editar/DialogEditarCapacitaciones'
+const moment = require('moment')
 export default {
+  props: [ 'capacitacion' ],
   components: { DialogEditarCapacitaciones },
   data () {
     return {
-      visibleEdicion: false
+      visibleEdicion: false,
+      capacitacionTema: '',
+      capacitacionDescripcion: '',
+      capacitacionFecha: '',
+      capacitacionCapacitador: '',
+      capacitacionId: ''
+    }
+  },
+  computed: {
+    capacitacions: {
+      get () {
+        return this.capacitacion
+      }
     }
   },
   methods: {
-    visualizarEditar () {
-      // luego aquí pondré los datos que debe recibir el dialog, por ahora no :v
+    fecha: function (date) {
+      return moment(date).format('L')
+    },
+    visualizarEditar (capacitacion, fecha) {
+      this.capacitacionTema = capacitacion.tema
+      this.capacitacionDescripcion = capacitacion.descripcion
+      this.capacitacionFecha = fecha
+      this.capacitacionCapacitador = capacitacion.nombre
+      this.capacitacionId = capacitacion.id
       this.visibleEdicion = true
     }
   }

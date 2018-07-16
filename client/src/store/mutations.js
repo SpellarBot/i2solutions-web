@@ -59,5 +59,8 @@ export default {
   },
   setEquipoSelected (state, equipoSelected) {
     state.equipoSelected = equipoSelected
+  },
+  setCapacitaciones (state, capacitaciones) {
+    state.capacitaciones = capacitaciones
   }
 }
