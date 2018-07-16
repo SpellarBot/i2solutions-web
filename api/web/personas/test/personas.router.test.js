@@ -18,9 +18,11 @@ let docs = []
 let equivalencias = {}
 
 describe('Personas', () => {
-  let { personas, establecimientos, capacitaciones, empresas } = dump
+  let { personas, establecimientos, capacitaciones, empresas, puestos } = dump
   let persona = personas.VALIDOS[0]
   let persona2 = personas.VALIDOS[1]
+  let puesto = puestos.VALIDOS0]
+  let puesto2 = puestos.VALIDOS[1]
   let establecimiento = establecimientos.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
   let capacitacion = capacitaciones.VALIDOS[0]

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     fechaNacimiento: { type: DataTypes.STRING },
     perfilOcupacional: { type: DataTypes.STRING },
     usuario: { type: DataTypes.STRING },
-    rol: { type: DataTypes.STRING }
+    rol: { type: DataTypes.ENUM('admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado') }
   }, {
     name: {
       singular,

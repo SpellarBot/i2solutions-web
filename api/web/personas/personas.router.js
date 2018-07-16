@@ -6,13 +6,21 @@ module.exports = (app) => {
   // crear una persona
   app.route('/personas')
     .post((req, res) => {
-      Controller.Crear(req.body).then((resp) => {
+      let { BODY } = schema.API_1_SCHEMA
+      let [err, mensaje] = validar(BODY, req.body)
+      if (err) {
+        let resp = responses.NO_OK({ ...mensaje })
         res.status(resp.codigoEstado)
         res.json(resp)
-      }).catch(resp => {
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      })
+      } else {
+        Controller.Crear(req.body).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
     })
 
   // identificador: API_2
