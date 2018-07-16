@@ -50,7 +50,10 @@ export default {
   equipos (state) {
     return state.equipos
   },
-  equipoSelected () {
-    return this.equipoSelected
+  equipoSelected (state) {
+    return state.equipoSelected
+  },
+  capacitaciones (state) {
+    return state.capacitaciones
   }
 }
