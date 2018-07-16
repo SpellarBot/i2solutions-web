@@ -19,8 +19,8 @@ __POST__ __/api/web/accidentes__
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-15T01:09:37.530Z",
-    "fechaCreacion": "2018-07-15T01:09:37.530Z"
+    "fechaActualizacion": "2018-07-16T02:18:53.009Z",
+    "fechaCreacion": "2018-07-16T02:18:53.009Z"
   },
   "codigoEstado": 200
 }
@@ -120,8 +120,8 @@ __GET__ __/api/web/accidentes/:accidentesId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-15 01:09:39.270 +00:00",
-    "fechaActualizacion": "2018-07-15 01:09:39.270 +00:00",
+    "fechaCreacion": "2018-07-16 02:18:55.249 +00:00",
+    "fechaActualizacion": "2018-07-16 02:18:55.249 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200
@@ -157,7 +157,12 @@ __GET__ __/api/web/accidentes/establecimientos/:establecimientosId__
       "atendidoEnEmpresa": 1,
       "muertos": 0,
       "fecha": "2014-05-21 19:27:28.576 +00:00",
-      "puestosId": 1
+      "puestosId": 1,
+      "areasId": 1,
+      "areasActividad": "gerencia",
+      "areasNombre": "Gerente General",
+      "areasDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+      "puestosNombre": "Oficina de gerente general"
     }
   ],
   "codigoEstado": 200

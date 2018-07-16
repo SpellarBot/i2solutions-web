@@ -17,8 +17,8 @@ __POST__ __/api/web/capacitaciones__
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-15T01:09:41.868Z",
-    "fechaCreacion": "2018-07-15T01:09:41.868Z"
+    "fechaActualizacion": "2018-07-16T02:18:57.826Z",
+    "fechaCreacion": "2018-07-16T02:18:57.826Z"
   },
   "codigoEstado": 200
 }
@@ -114,8 +114,8 @@ __GET__ __/api/web/capacitaciones/:capacitacionId__
     "descripcion": "La capacitación fue un éxito",
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
-    "fechaCreacion": "2018-07-15 01:09:42.902 +00:00",
-    "fechaActualizacion": "2018-07-15 01:09:42.902 +00:00",
+    "fechaCreacion": "2018-07-16 02:18:58.967 +00:00",
+    "fechaActualizacion": "2018-07-16 02:18:58.967 +00:00",
     "areasId": 1
   },
   "codigoEstado": 200
@@ -147,16 +147,24 @@ __GET__ __/api/web/capacitaciones/establecimientos/:establecimientosId__
     {
       "nombre": "Joel Rodriguez",
       "id": 1,
+      "descripcion": "La capacitación fue un éxito",
       "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
       "tema": "Como hacer que todo valga",
-      "areasId": 1
+      "areasId": 1,
+      "areasActividad": "gerencia",
+      "areasNombre": "Gerente General",
+      "areasDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
     },
     {
       "nombre": "Andres Escobar",
       "id": 2,
+      "descripcion": "Ensenar como hacer algo",
       "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
       "tema": "Datos ",
-      "areasId": 1
+      "areasId": 1,
+      "areasActividad": "gerencia",
+      "areasNombre": "Gerente General",
+      "areasDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
     }
   ],
   "codigoEstado": 200

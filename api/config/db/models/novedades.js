@@ -156,7 +156,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorEstablecimiento = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where e.id = ${id}`
+      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar, (select nombre from puestos where id = ap.puestosId) as puestosNombre from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where e.id = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(novedades => {
           let novedadesAtendidas = []
