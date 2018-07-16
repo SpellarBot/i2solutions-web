@@ -65,5 +65,8 @@ export default {
   },
   setCapacitaciones (state, capacitaciones) {
     state.capacitaciones = capacitaciones
+  },
+  setAccidentes (state, accidentes) {
+    state.accidentes = accidentes
   }
 }

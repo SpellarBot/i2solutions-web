@@ -3,6 +3,8 @@
     <v-card>
 
       <h2>{{ puestos.nombre }}</h2>
+
+      <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <v-btn
               fab
               dark
@@ -22,9 +24,8 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-      <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <span class="link" v-on:click="visualizarPersonas"> Número Personas: {{ puestos.cantidadPersonas }}</span>
-      <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
+      <span class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
       <span class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
     </v-card>
@@ -60,6 +61,8 @@
     ></DialogPersonasFromPuestos>
     <DialogAccidentesFromPuestos
     :visible="visibleAccidentes"
+    :puestoId="puestoId"
+    :puestoNombre="puestoNombre"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromPuestos>
     <DialogEditarPuestos
@@ -103,6 +106,9 @@ export default {
       visibleNovedades: false,
       visibleRiesgos: false,
       eliminarDialogPuestos: false,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
       puestoNombre: '',
       puestoDescripcion: '',
       puestoId: '',
@@ -126,7 +132,9 @@ export default {
     visualizarPersonas () {
       this.visiblePersonas = true
     },
-    visualizarAccidentes () {
+    visualizarAccidentes (puesto) {
+      this.puestoNombre = puesto.nombre
+      this.puestoId = puesto.id
       this.visibleAccidentes = true
     },
     visualizarNovedadesFromPuestos (puestoId, puestoNombre) {
@@ -153,14 +161,14 @@ export default {
     },
     eliminarPuesto (puesto) {
       this.$data.puestoSelected = puesto.id
-      console.log( this.$data.puestoSelected)
+      console.log(this.$data.puestoSelected)
       this.eliminarDialogPuestos = true
     },
     borrarPuesto () {
-      //console.log('eliminarDialogPuestos', this.eliminarDialogPuestos)
+      // console.log('eliminarDialogPuestos', this.eliminarDialogPuestos)
       this.eliminarDialogPuestos = false
       let puestosId = Number(this.puestoSelected)
-      console.log ('idPuesto', puestosId )
+      console.log('idPuesto', puestosId)
       this.$store.dispatch('deletePuesto', puestosId)
         .then((resp) => {
           console.log('entre')
@@ -172,12 +180,11 @@ export default {
         })
         .catch((err) => {
           this.color = 'error'
-          console.log (err)
+          console.log(err)
           this.snackbar = true
           this.mensajeSnackbar = err
         })
     }
-
 
     /* reloadEstablecimiento () {
       this.$store.dispatch('getEstablecimientosFront', this.id)
