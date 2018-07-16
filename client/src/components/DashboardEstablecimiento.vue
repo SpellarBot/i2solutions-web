@@ -112,7 +112,7 @@
                       <span class="link" v-on:click="visualizarAccidentes">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarCapacitaciones">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
+                      <span class="link" v-on:click="visualizarCapacitaciones(establecimiento.id, establecimiento.nombres)">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento(establecimiento.id, establecimiento.nombres)">#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
@@ -180,6 +180,8 @@
     ></DialogAccidentesFromEstablecimientos>
     <DialogCapacitacionesFromEstablecimientos
     :visible="visibleCapacitaciones"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visibleCapacitaciones=false"
     ></DialogCapacitacionesFromEstablecimientos>
     <DialogNovedadesFromEstablecimientos
@@ -318,7 +320,9 @@ export default {
     visualizarAccidentes () {
       this.visibleAccidentes = true
     },
-    visualizarCapacitaciones () {
+    visualizarCapacitaciones (establecimientoId, establecimientoNombre) {
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visibleCapacitaciones = true
     },
     visualizarNovedadesFromEstablecimiento (establecimientoId, establecimientoNombre) {
