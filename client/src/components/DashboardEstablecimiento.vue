@@ -38,6 +38,7 @@
               fab
               color="blue"
               small
+              @click="eliminarEmpresa()"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -114,7 +115,7 @@
                       <span class="link" v-on:click="visualizarCapacitaciones">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento">#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
+                      <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento(establecimiento.id, establecimiento.nombres)">#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -168,6 +169,8 @@
     ></DialogCapacitacionesFromEstablecimientos>
     <DialogNovedadesFromEstablecimientos
     :visible="visibleNovedades"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visibleNovedades=false"
     ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
@@ -302,7 +305,9 @@ export default {
     visualizarCapacitaciones () {
       this.visibleCapacitaciones = true
     },
-    visualizarNovedadesFromEstablecimiento () {
+    visualizarNovedadesFromEstablecimiento (establecimientoId, establecimientoNombre) {
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visibleNovedades = true
     },
     visualizarEdicion () {

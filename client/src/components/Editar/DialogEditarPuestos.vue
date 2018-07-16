@@ -53,7 +53,7 @@ export default {
       }
     }
   },
-  props: ['visible','puestoNombre','puestoDescripcion','puestoId','areaId'],
+  props: ['visible', 'puestoNombre', 'puestoDescripcion', 'puestoId', 'areaId'],
   watch: {
     nombre () {
       this.newNombre = this.nombre
@@ -96,31 +96,31 @@ export default {
       let descripcion = this.$data.newDescripcion
       let puestoId = this.puestoId
       let areaId = this.areaId
-        this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
-          .then((resp) => {
-            for (let i = 0; i < this.$store.getters.areasPuestos.length; i++) {
-              let area = this.$store.getters.areasPuestos[i]
-              if (area.id === areaId) {
-                for (let j = 0; j < area.puestos.length; j++){
-                  let puesto = area.puestos[j]
-                  if(puesto.id === puestoId){
-                    puesto.nombre = nombre
-                    puesto.descripcion = descripcion
-                    break
-                  }
+      this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
+        .then((resp) => {
+          for (let i = 0; i < this.$store.getters.areasPuestos.length; i++) {
+            let area = this.$store.getters.areasPuestos[i]
+            if (area.id === areaId) {
+              for (let j = 0; j < area.puestos.length; j++) {
+                let puesto = area.puestos[j]
+                if (puesto.id === puestoId) {
+                  puesto.nombre = nombre
+                  puesto.descripcion = descripcion
+                  break
                 }
               }
             }
-            this.snackbar = true
-            this.mensajeSnackbar = 'Puesto de trabajo editado exitosamente.'
-            this.color = 'success'
-            this.$emit('close')
-          })
-          .catch((err) => {
-            this.color = 'error'
-            this.snackbar = true
-            this.mensajeSnackbar = err
-          })
+          }
+          this.snackbar = true
+          this.mensajeSnackbar = 'Puesto de trabajo editado exitosamente.'
+          this.color = 'success'
+          this.$emit('close')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

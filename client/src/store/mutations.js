@@ -48,7 +48,16 @@ export default {
   setNovedadSelected (state, novedadSelected) {
     state.novedadSelected = novedadSelected
   },
+  setNovedadesEstablecimientos (state, novedadesEstablecimientos) {
+    state.novedadesEstablecimientos = novedadesEstablecimientos
+  },
   setAreasPuestos (state, areasPuestos) {
     state.areasPuestos = areasPuestos
+  },
+  setEquipos (state, equipos) {
+    state.equipos = equipos
+  },
+  setEquipoSelected (state, equipoSelected) {
+    state.equipoSelected = equipoSelected
   }
 }

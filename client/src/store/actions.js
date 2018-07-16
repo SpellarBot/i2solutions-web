@@ -166,6 +166,24 @@ export default {
         })
     })
   },
+  getNovedadesFromEstablecimiento ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/novedades/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log(resp.body.datos.novedadesNoAtendidas)
+            commit('setNovedadesEstablecimientos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getAreas ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/areas/establecimientos/' + establecimientoId)

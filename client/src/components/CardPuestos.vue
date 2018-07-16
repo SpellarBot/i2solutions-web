@@ -64,8 +64,8 @@ export default {
       visibleNovedades: false,
       puestoNombre: '',
       puestoDescripcion: '',
-      puestoId: '',
-      areaId: ''
+      puestoId: ''
+      // areaId: ''
     }
   },
   computed: {

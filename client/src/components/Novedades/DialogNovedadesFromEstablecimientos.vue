@@ -12,12 +12,12 @@
       <v-layout>
       <v-flex xs12>
         <v-card>
-            <h3>Novedades Sin Atender en  Establecimiento:</h3>
-            <h2> {{nombreEstablecimiento}}</h2>
+            <h1><b>Establecimiento: </b>{{establecimientoNombre}}</h1>
           <v-container  fluid>
+            <h2>Novedades Sin Atender</h2>
             <v-layout row wrap>
               <v-flex
-                v-for="novedad in novedades"
+                v-for="(novedad) in this.$store.getters.novedadesEstablecimientos.novedadesNoAtendidas"
                 :key="novedad.id"
                 xs4 lg4>
                 <v-card style="padding:10px; margin:25px;" >
@@ -25,12 +25,31 @@
                   <div>{{novedad.descripcion}}</div>
                   <div><b>prioridad: </b>{{novedad.prioridad}}</div>
                   <div><b>fecha: </b>{{novedad.fecha}}</div>
-                  <div><b>Area: </b>{{novedad.area}}</div>
-                  <div><b>Puesto: </b>{{novedad.puesto}}</div>
+                  <div><b>Puesto: </b>{{novedad.puestosId}}</div>
                 </v-card>
               </v-flex>
             </v-layout>
           </v-container>
+          <!--br>
+          <hr>
+          <h1>Novedades Atendidas</h1>
+          <h2> {{establecimientoNombre}}</h2>
+          <v-container  fluid>
+            <v-layout row wrap>
+              <v-flex
+                v-for="(novedad) in this.$store.getters.novedadesEstablecimientos.novedadesAtendidas"
+                :key="novedad.id"
+                xs4 lg4>
+                <v-card style="padding:10px; margin:25px;" >
+                  <div style="text-align:center"><b>Descripción</b></div>
+                  <div>{{novedad.descripcion}}</div>
+                  <div><b>prioridad: </b>{{novedad.prioridad}}</div>
+                  <div><b>fecha: </b>{{novedad.fecha}}</div>
+                  <div><b>Puesto: </b>{{novedad.puestosId}}</div>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container-->
         </v-card>
       </v-flex>
     </v-layout>
@@ -40,13 +59,16 @@
 </template>
 <script>
 export default {
-  name: 'DialogNovedades',
-  props: ['visible', 'EstablecimientoId'],
-  mounted () {
-  },
+  name: 'DialogNovedadesFromEstablecimiento',
+  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  /* mounted () {
+  }, */
   data () {
     return {
-      nombreEstablecimiento: 'Matriz',
+      // nombreEstablecimiento: 'Matriz',
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
       novedades: [
         {
           'id': 1,
@@ -75,6 +97,7 @@ export default {
       ]
     }
   },
+
   computed: {
     show: {
       get () {
@@ -85,12 +108,35 @@ export default {
           this.$emit('close')
         }
       }
-    },
-    establecimientoId: {
-      get () {
-        return this.EstablecimientoId
-      }
     }
+  },
+  watch: {
+    show () {
+      this.cargarData()
+    }
+  },
+  methods: {
+    cargarData () {
+      this.valid = null
+      this.loading = true
+      this.verNovedadesEstablecimiento()
+      this.loading = false
+      this.valid = true
+      console.log('LOG')
+    },
+    verNovedadesEstablecimiento () {
+      this.$store.dispatch('getNovedadesFromEstablecimiento', this.establecimientoId)
+        .then((resp) => {
+          console.log('Done')
+          console.log('Datos', this.$store.getters.novedadesEstablecimientos)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    }
+
   }
 }
 </script>
