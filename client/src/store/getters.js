@@ -53,6 +53,9 @@ export default {
   equipos (state) {
     return state.equipos
   },
+  verified () {
+    return this.verified
+  },
   equipoPuesto (state) {
     return state.equipoPuesto
   },

@@ -9,7 +9,7 @@
         <v-toolbar-title>{{nombreEstablecimiento}}</v-toolbar-title>
       </v-toolbar>
       <br>
-      <div v-for="area in areas" v-if="area.EstablecimientoId == EstablecimientoId" :key="area.idArea">
+      <div v-for="area in $store.getters.areas" :key="area.id">
         <h3>{{area.nombre}}</h3>
         <puestosPorArea
           :idArea="area.idArea"

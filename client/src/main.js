@@ -12,8 +12,10 @@ import Navbar from '@/components/Navbar'
 import 'vuetify/dist/vuetify.min.css'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import confirmDialog from '@/components/confirmDialog'
 
 Vue.component('app-navbar', Navbar)
+Vue.component('confirmDialog', confirmDialog)
 Vue.use(Vuetify)
 Vue.use(VueLocalStorage)
 Vue.use(VeeValidate)

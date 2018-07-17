@@ -395,8 +395,9 @@ export default {
       this.establecimientoRUC = establecimiento.ruc
       this.visibleEdicionEstablecimiento = true
     },
-    visualizarAreas (ruc, nombre) {
-      this.establecimientoId = ruc
+    visualizarAreas (id, nombre) {
+      this.establecimientoId = id
+      this.$store.dispatch('getAreas', this.establecimientoId)
       this.nombreEstablecimiento = nombre
       this.visibleAreas = true
     },

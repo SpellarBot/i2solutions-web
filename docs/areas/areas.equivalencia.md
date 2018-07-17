@@ -2392,3 +2392,163 @@ _response_
 ___
 
 
+## Obtener un areas con detalles
+
+> Código: API_7
+
+> Descripción: 
+
+> Url : /api/areasDetalle/establecimientos/:establecimientosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_7[C1]'>CE_API_7[C1]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_7[C2]'>CE_API_7[C2]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_7[C3]'>CE_API_7[C3]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_7[1]__
+
+Areas existentes
+
+__Datos prueba__
+
+_url_ 
+
+> /api/areasDetalle/establecimientos/:establecimientosId
+
+GET /api/web/areasDetalle/establecimientos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "areaNombre": "Gerente General",
+      "areaActividad": "gerencia",
+      "areaDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+      "cantidadPuestos": 2,
+      "cantidadPersonas": 1,
+      "cantidadCapacitaciones": 0,
+      "cantidadNovedades": 1,
+      "cantidadEquipos": 0
+    },
+    {
+      "id": 2,
+      "areaNombre": "Jefe TTHH",
+      "areaActividad": "recursos humanos",
+      "areaDescripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
+      "cantidadPuestos": 1,
+      "cantidadPersonas": 0,
+      "cantidadCapacitaciones": 0,
+      "cantidadNovedades": 0,
+      "cantidadEquipos": 0
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[2]__
+
+establecimientosId no es un numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/areasDetalle/establecimientos/:establecimientosId
+
+GET /api/web/areasDetalle/establecimientos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[3]__
+
+establecimientosId debe ser minimo 1
+
+__Datos prueba__
+
+_url_ 
+
+> /api/areasDetalle/establecimientos/:establecimientosId
+
+GET /api/web/areasDetalle/establecimientos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+

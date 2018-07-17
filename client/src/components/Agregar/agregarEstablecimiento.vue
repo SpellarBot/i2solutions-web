@@ -7,18 +7,25 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex md10 offset-md1>
-              <v-form ref="form">
+              <v-form ref="form2" lazy-validation>
                 <v-text-field
                   label="Nombre"
                   required
+                  v-model="establecimiento.nombre"
+                  :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="Dirección"
               required
+              v-model="establecimiento.direccion"
+              :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="RUC"
               required
+              v-model="establecimiento.RUC"
+              :rules="[rules.required, rules.RUCvalidate]"
+              :counter="13"
               mask="#############"
             ></v-text-field>
               </v-form>
@@ -32,7 +39,7 @@
                   <v-btn
                     fab
                     small
-                    v-if="indice>0"
+                    v-if="indice>1"
                     @click.native="removeEstablecimiento"
                   >
                   <v-icon>delete</v-icon>
@@ -57,6 +64,8 @@
 <script>
 import Vue from 'vue'
 import agregarArea from './agregarArea'
+import MyModule from '../MyModule.js'
+import Vuex from 'vuex'
 export default {
   name: 'agregarEstablecimiento',
   props: ['index'],
@@ -66,8 +75,26 @@ export default {
   data () {
     return {
       indice: 0,
-      instanciasAreas: []
+      instanciasAreas: [],
+      establecimiento: {
+        nombre: '',
+        direccion: '',
+        RUC: ''
+      },
+      rules: {
+        required: v => !!v || 'Campo requerido',
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        RUCvalidate: v => {
+          if ( MyModule(v)[0] ) {
+            return true
+          }
+          return MyModule(v)[1]
+        }
+      }
     }
+  },
+  mounted () {
+    this.insertarArea()
   },
   methods: {
     insertarArea () {
@@ -101,6 +128,11 @@ export default {
       this.instanciasAreas.forEach(function (area) {
         area.prueba()
       })
+    },
+    verify () {
+      if ( !this.$refs.form2.validate() ) {
+        this.$store.commit('setVerified', false)
+      }
     }
   }
 }

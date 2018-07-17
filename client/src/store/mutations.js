@@ -63,6 +63,9 @@ export default {
   setEquipoSelected (state, equipoSelected) {
     state.equipoSelected = equipoSelected
   },
+  setVerified (state, payload) {
+    state.verified = payload
+  },
   setEquiposPuestos (state, equipoPuesto) {
     state.equipoPuesto = equipoPuesto
   },
