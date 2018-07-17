@@ -191,9 +191,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerAreasDetalle = function ({ id }) {
     return new Promise((resolve, reject) => {
-      // cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos
-      // , (select count(*) from personasPuestos where puestosId = p.id) as cantidadPersonas, (select count(*) from accidentes where puestosId = p.id) as cantidadAccidentes, (select count(*) from novedades where puestosId = p.id and fueAtendida = 0) as cantidadNovedadesSinAtender, (select count(*) from equiposPuestos where puestosId = p.id) as cantidadEquipos inner join puestos p on p.id = ap.puestosId
-      let query = `select a.id as id , a.nombre as areaNombre, a.actividad as areaActividad, a.descripcionLugar as areaDescripcionLugar, (select count(*) from areasPuestos where areasId = a.id) as cantidadPuestos, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on pp.puestosId = ap.id where a.id = a.id ) from areas a where a.id = ${id}`
+      let query = `select ar.id as id , ar.nombre as areaNombre, ar.actividad as areaActividad, ar.descripcionLugar as areaDescripcionLugar, (select count(*) from areasPuestos where areasId = ar.id) as cantidadPuestos, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on pp.puestosId = ap.id where a.id = ar.id ) as cantidadPersonas, (select count(*) from capacitaciones where areasId = ar.id) as cantidadCapacitaciones,  (select count(*) from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where a.id = ar.id) as cantidadNovedades, (select count(*) from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join equiposPuestos eq on eq.puestosId = ap.puestosId where a.id = ar.id) as cantidadEquipos from areas ar where ar.establecimientosId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(areas => {
           resolve(areas)

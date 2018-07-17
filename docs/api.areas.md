@@ -270,3 +270,52 @@ ___
 
 
 
+## Obtener un areas por establecimiento con detalles de cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos
+
+__GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "areaNombre": "Gerente General",
+      "areaActividad": "gerencia",
+      "areaDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+      "cantidadPuestos": 2,
+      "cantidadPersonas": 1,
+      "cantidadCapacitaciones": 0,
+      "cantidadNovedades": 1,
+      "cantidadEquipos": 0
+    },
+    {
+      "id": 2,
+      "areaNombre": "Jefe TTHH",
+      "areaActividad": "recursos humanos",
+      "areaDescripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
+      "cantidadPuestos": 1,
+      "cantidadPersonas": 0,
+      "cantidadCapacitaciones": 0,
+      "cantidadNovedades": 0,
+      "cantidadEquipos": 0
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
