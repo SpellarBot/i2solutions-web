@@ -19,8 +19,8 @@ __POST__ __/api/web/riesgos__
     "porcentajeRiesgo": 2,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-12T01:22:36.445Z",
-    "fechaCreacion": "2018-07-12T01:22:36.445Z"
+    "fechaActualizacion": "2018-07-16T02:19:09.867Z",
+    "fechaCreacion": "2018-07-16T02:19:09.867Z"
   },
   "codigoEstado": 200
 }
@@ -119,10 +119,10 @@ __GET__ __/api/web/riesgos/:riesgosId__
     "personasExpuestas": null,
     "valoracion": null,
     "valoracionLiteral": null,
-    "fecha": "2018-07-12 01:22:38.024 +00:00",
+    "fecha": "2018-07-16 02:19:14.339 +00:00",
     "porcentajeRiesgo": null,
-    "fechaCreacion": "2018-07-12 01:22:38.024 +00:00",
-    "fechaActualizacion": "2018-07-12 01:22:38.024 +00:00",
+    "fechaCreacion": "2018-07-16 02:19:14.339 +00:00",
+    "fechaActualizacion": "2018-07-16 02:19:14.339 +00:00",
     "puestosId": 1
   },
   "codigoEstado": 200

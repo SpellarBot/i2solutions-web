@@ -20,12 +20,21 @@ let equivalencias = {}
 const schema = utils.schemaFormato
 
 describe('AREAS', () => {
-  let { establecimientos, areas, empresas } = dump
+  let { establecimientos, areas, empresas, puestos, personas, accidentes, novedades } = dump
   let establecimiento = establecimientos.VALIDOS[0]
   let empresa = empresas.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
   let area = areas.VALIDOS[0]
   let area2 = areas.VALIDOS[1]
+  let puesto = puestos.VALIDOS[0]
+  let puesto2 = puestos.VALIDOS[1]
+  let puesto3 = puestos.VALIDOS[1]
+  let persona = personas.VALIDOS[0]
+  let persona2 = personas.VALIDOS[1]
+  let accidente = accidentes.VALIDOS[0]
+  let accidente2 = accidentes.VALIDOS[1]
+  let novedad = novedades.VALIDOS[0]
+  let novedad2 = novedades.VALIDOS[1]
   let establecimientosId, establecimientosId2 = -1
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
@@ -470,6 +479,59 @@ describe('AREAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
+    })
+  })
+
+  describe('API_6 Obtener un areas categorizados por puestos dado un establecimiento', () => {
+    const { API_6 } = API
+    let { API_6_EQUI } = EQUI
+    let codigoApi = 'API_6'
+
+    let areasId = -1
+    beforeEach(async () => {
+      let areasCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areasCreada2 = await models.areas.Crear({ ...area2, establecimientosId })
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      let puestosCreada2 = await models.puestos.Crear({ ...puesto2 })
+      let puestosCreada3 = await models.puestos.Crear({ ...puesto3 })
+      let personaCreada = await models.personas.Crear({ ...persona })
+      await models.personasPuestos.Crear({ puestosId: puestosCreada['id'], personasId: personaCreada['id']})
+      await models.areasPuestos.Crear({ areasId: areasCreada['id'], puestosId: puestosCreada['id'] })
+      await models.areasPuestos.Crear({ areasId: areasCreada['id'], puestosId: puestosCreada2['id'] })
+      await models.areasPuestos.Crear({ areasId: areasCreada2['id'], puestosId: puestosCreada3['id'] })
+      await models.accidentes.Crear({ ...accidente, puestosId: puestosCreada['id'] })
+      await models.accidentes.Crear({ ...accidente, puestosId: puestosCreada2['id'] })
+      await models.novedades.Crear({ ...novedad, puestosId: personaCreada['id'] })
+      areasId = areasCreada['id']
+    })
+
+    it('@ICE_API_6_01 Obtener areas', async () => {
+      let params = { establecimientosId }
+      let url = `/api/web/areas/puestos/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      // console.log(JSON.stringify(res.body.datos, null, 2))
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_6, res })
+    })
+
+    it('@ICE_API_6_02 establecimientosId no es un numero', async () => {
+      let params = { establecimientosId: 'a' }
+      let url = `/api/web/areas/puestos/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+    })
+
+    it('@ICE_API_6_03 establecimientosId debe ser minimo 1', async () => {
+      let params = { establecimientosId: 0 }
+      let url = `/api/web/areas/puestos/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
     })
   })
 })

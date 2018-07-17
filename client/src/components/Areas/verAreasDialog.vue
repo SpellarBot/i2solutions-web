@@ -9,7 +9,7 @@
         <v-toolbar-title>{{nombreEstablecimiento}}</v-toolbar-title>
       </v-toolbar>
       <br>
-      <div v-for="area in areas" v-if="area.EstablecimientoId == EstablecimientoId" :key="area.idArea">
+      <div v-for="area in $store.getters.areas" :key="area.id">
         <h3>{{area.nombre}}</h3>
         <puestosPorArea
           :idArea="area.idArea"
@@ -37,7 +37,7 @@ export default {
           nombre: 'Área Administrativa',
           actividad: 'Administración de personal',
           metrosCuadrados: 5.0,
-          EstablecimientoId: '1310539752001',
+          EstablecimientoId: '0',
           fotoUrl: '',
           numPuestos: 2,
           numPersonas: 5,
@@ -50,7 +50,7 @@ export default {
           nombre: 'Área Recursos humanos',
           actividad: 'Contratación del personal',
           metrosCuadrados: 4.5,
-          EstablecimientoId: '1310539752001',
+          EstablecimientoId: '0',
           fotoUrl: '',
           numPuestos: 1,
           numPersonas: 2,
@@ -60,10 +60,10 @@ export default {
         },
         {
           idArea: '3',
-          nombre: 'Área 1',
-          actividad: '',
+          nombre: 'Área Contabilidad',
+          actividad: 'Contabilizar ingresos y egresos',
           metrosCuadrados: 2.3,
-          EstablecimientoId: '0924970452001',
+          EstablecimientoId: '1',
           fotoUrl: '',
           numPuestos: 0,
           numPersonas: 0,

@@ -50,6 +50,30 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorEstablecimiento = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select c.nombre as nombre, c.id as id, c.descripcion as descripcion, c.fechaCapacitacion as fechaCapacitacion, c.tema as tema, c.areasId as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar from establecimientos e inner join areas a on a.establecimientosId = e.id inner join capacitaciones c on c.areasId = a.id where e.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorArea = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select c.nombre as nombre, c.id as id, c.fechaCapacitacion as fechaCapacitacion, c.tema as tema, c.areasId as areasId from areas a inner join capacitaciones c on c.areasId = a.id where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
     let { nombre, descripcion, tema, fechaCapacitacion } = datos

@@ -41,5 +41,26 @@ export default {
   },
   setPuestoSelected (state, puestoSelected) {
     state.puestoSelected = puestoSelected
+  },
+  setNovedades (state, novedades) {
+    state.novedades = novedades
+  },
+  setNovedadSelected (state, novedadSelected) {
+    state.novedadSelected = novedadSelected
+  },
+  setNovedadesEstablecimientos (state, novedadesEstablecimientos) {
+    state.novedadesEstablecimientos = novedadesEstablecimientos
+  },
+  setAreasPuestos (state, areasPuestos) {
+    state.areasPuestos = areasPuestos
+  },
+  setEquipos (state, equipos) {
+    state.equipos = equipos
+  },
+  setEquipoSelected (state, equipoSelected) {
+    state.equipoSelected = equipoSelected
+  },
+  setVerified (state, payload) {
+    state.verified = payload
   }
 }

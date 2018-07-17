@@ -24,8 +24,8 @@ __GET__ __/api/web/areas/establecimientos/:establecimientosId__
       "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-      "fechaCreacion": "2018-07-12 01:22:26.236 +00:00",
-      "fechaActualizacion": "2018-07-12 01:22:26.236 +00:00",
+      "fechaCreacion": "2018-07-16 02:18:56.104 +00:00",
+      "fechaActualizacion": "2018-07-16 02:18:56.104 +00:00",
       "establecimientosId": 1
     }
   ],
@@ -79,8 +79,8 @@ __POST__ __/api/web/areas__
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
-    "fechaActualizacion": "2018-07-12T01:22:26.374Z",
-    "fechaCreacion": "2018-07-12T01:22:26.374Z"
+    "fechaActualizacion": "2018-07-16T02:18:56.300Z",
+    "fechaCreacion": "2018-07-16T02:18:56.300Z"
   },
   "codigoEstado": 200
 }
@@ -187,10 +187,77 @@ __GET__ __/api/web/areas/:areasId__
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-12 01:22:27.581 +00:00",
-    "fechaActualizacion": "2018-07-12 01:22:27.581 +00:00",
+    "fechaCreacion": "2018-07-16 02:18:57.459 +00:00",
+    "fechaActualizacion": "2018-07-16 02:18:57.459 +00:00",
     "establecimientosId": 1
   },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Obtener un areas categorizados por puestos dado un establecimiento
+
+__GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| establecimientosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "nombre": "Gerente General",
+      "actividad": "gerencia",
+      "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+      "puestos": [
+        {
+          "cantidadPersonas": 1,
+          "cantidadAccidentes": 1,
+          "cantidadNovedadesSinAtender": 1,
+          "id": 1,
+          "nombre": "Oficina de gerente general",
+          "descripcion": "AA"
+        },
+        {
+          "cantidadPersonas": 0,
+          "cantidadAccidentes": 1,
+          "cantidadNovedadesSinAtender": 0,
+          "id": 2,
+          "nombre": "Oficina de jefe de TTHH",
+          "descripcion": "AA"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Jefe TTHH",
+      "actividad": "recursos humanos",
+      "descripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
+      "puestos": [
+        {
+          "cantidadPersonas": 0,
+          "cantidadAccidentes": 0,
+          "cantidadNovedadesSinAtender": 0,
+          "id": 3,
+          "nombre": "Oficina de jefe de TTHH",
+          "descripcion": "AA"
+        }
+      ]
+    }
+  ],
   "codigoEstado": 200
 }
 ```

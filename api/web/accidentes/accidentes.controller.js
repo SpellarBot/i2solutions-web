@@ -34,17 +34,6 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerPorEstablecimiento ({ establecimientosId }) {
-      return new Promise((resolve, reject) => {
-        db.areas.ObtenerPorEstablecimiento({ establecimientosId })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
-      })
-    },
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
@@ -80,6 +69,39 @@ module.exports = ({ responses, db }) => {
             } else {
               resolve(responses.OK(resp))
             }
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorEstablecimiento ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.accidentes.ObtenerPorEstablecimiento({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorAreas ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.accidentes.ObtenerPorAreas({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorPuestos ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.accidentes.ObtenerPorPuestos({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
           }).catch((err) => {
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)

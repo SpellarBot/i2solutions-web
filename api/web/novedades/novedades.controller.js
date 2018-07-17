@@ -92,6 +92,39 @@ module.exports = ({ responses, db }) => {
             reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    ObtenerPorEstablecimientos ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.novedades.ObtenerPorEstablecimiento({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorAreas ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.novedades.ObtenerPorAreas({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorPuestos ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.novedades.ObtenerPorPuestos({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

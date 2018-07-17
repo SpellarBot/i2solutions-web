@@ -19,21 +19,21 @@
                   required
                   :rules="[rules.required, rules.nameMin]"
                   multi-line
-            >              
-            </v-text-field>            
+            >
+            </v-text-field>
               </v-form>
             </v-flex>
           </v-layout>
-        </v-container>        
+        </v-container>
       </v-card>
       <br><br>
   </div>
 </template>
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 export default {
   name: 'agregarPuesto',
-  props: ['index','indiceArea' ,'indiceEstablecimiento'],
+  props: ['index', 'indiceArea', 'indiceEstablecimiento'],
   data () {
     return {
       indice: 0,
@@ -48,5 +48,5 @@ export default {
       console.log('\t\tPuesto: ' + this.indiceEstablecimiento + '.' + this.indiceArea + '.' + this.index)
     }
   }
-}  
+}
 </script>

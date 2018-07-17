@@ -69,8 +69,8 @@ _response_
       "nombres": "matriz",
       "direccion": "22050 Felipe Rampa",
       "ruc": "0923651688001",
-      "fechaCreacion": "2018-07-12 01:22:32.033 +00:00",
-      "fechaActualizacion": "2018-07-12 01:22:32.033 +00:00",
+      "fechaCreacion": "2018-07-16 02:19:03.195 +00:00",
+      "fechaActualizacion": "2018-07-16 02:19:03.195 +00:00",
       "empresasId": 1
     },
     {
@@ -78,8 +78,8 @@ _response_
       "nombres": "Lira - Barajas",
       "direccion": "0119 Laboy Mercado",
       "ruc": "2023651688001",
-      "fechaCreacion": "2018-07-12 01:22:32.034 +00:00",
-      "fechaActualizacion": "2018-07-12 01:22:32.034 +00:00",
+      "fechaCreacion": "2018-07-16 02:19:03.196 +00:00",
+      "fechaActualizacion": "2018-07-16 02:19:03.196 +00:00",
       "empresasId": 1
     }
   ],
@@ -302,8 +302,8 @@ _response_
     "direccion": "22050 Felipe Rampa",
     "ruc": "0923651688001",
     "empresasId": 1,
-    "fechaActualizacion": "2018-07-12T01:22:32.168Z",
-    "fechaCreacion": "2018-07-12T01:22:32.168Z"
+    "fechaActualizacion": "2018-07-16T02:19:03.329Z",
+    "fechaCreacion": "2018-07-16T02:19:03.329Z"
   },
   "codigoEstado": 200
 }
@@ -2058,6 +2058,168 @@ _response_
 {
   "estado": false,
   "datos": "establecimientos con es id no existe",
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Datos de establecimientos para front
+
+> Código: API_5
+
+> Descripción: Obtiene los establecimientos con datos para representarlos en el front
+
+> Url : /api/web/principal/establecimientos/empresas/:empresasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_5[1]'>CE_API_5[1]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_5[2]'>CE_API_5[2]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  empresasId </td>
+				<td> <a id='CE_API_5[3]'>CE_API_5[3]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_5[1]__
+
+Con establecimientos existentes
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/principal/establecimientos/empresas/:empresasId
+
+GET /api/web/principal/establecimientos/empresas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "nombres": "matriz",
+      "ruc": "0923651688001",
+      "direccion": "22050 Felipe Rampa",
+      "cantidadAreas": 1,
+      "cantidadPuestos": 1,
+      "cantidadAccidentes": 1,
+      "cantidadCapacitaciones": 1,
+      "cantidadPersonas": 1,
+      "cantidadNovadadesSinAtender": 2
+    },
+    {
+      "id": 3,
+      "nombres": "Lira - Barajas",
+      "ruc": "2023651688001",
+      "direccion": "0119 Laboy Mercado",
+      "cantidadAreas": 0,
+      "cantidadPuestos": 0,
+      "cantidadAccidentes": 0,
+      "cantidadCapacitaciones": 0,
+      "cantidadPersonas": 0,
+      "cantidadNovadadesSinAtender": 0
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[2]__
+
+empresasId no es un numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/principal/establecimientos/empresas/:empresasId
+
+GET /api/web/principal/establecimientos/empresas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "empresasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[3]__
+
+empresasId debe ser minimo 1
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/principal/establecimientos/empresas/:empresasId
+
+GET /api/web/principal/establecimientos/empresas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "empresasId": "debe ser >= 1"
+  },
   "codigoEstado": 200
 }
 ```

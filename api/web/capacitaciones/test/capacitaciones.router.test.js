@@ -347,4 +347,168 @@ describe('CAPACITACIONES', () => {
     })
 
   })
+
+  describe('API_4 OBTENER UNO', () => {
+    const { API_4 } = API
+    let { API_4_EQUI } = EQUI
+    let codigoApi = 'API_4'
+    let capacitacionesId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let capacitacionCreada = await models.capacitaciones.Crear({ ...capacitacion, areasId })
+      capacitacionesId = capacitacionCreada['id']
+    })
+
+    it('@ICE_API_4_01 OBTENER una capacitacion de forma correcta', async () => {
+      let params = { capacitacionesId }
+      let url = `/api/web/capacitaciones/${params['capacitacionesId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_4, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_4_02 capacitacionesId no valido tipo de dato', async () => {
+      let params = { capacitacionesId: 'a' }
+      let url = `/api/web/capacitaciones/${params['capacitacionesId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_4_03 capacitacionesId  no valido numero', async () => {
+      let params = { capacitacionesId: 0 }
+      let url = `/api/web/capacitaciones/${params['capacitacionesId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_4_04 capacitacionesId no exite', async () => {
+      let params = { capacitacionesId: 50 }
+      let url = `/api/web/capacitaciones/${params['capacitacionesId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos).to.equal(null)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
+    })
+
+  })
+
+  describe('API_5 OBTENER por establecimiento', () => {
+    const { API_5 } = API
+    let { API_5_EQUI } = EQUI
+    let codigoApi = 'API_5'
+    let capacitacionesId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let capacitacionCreada = await models.capacitaciones.Crear({ ...capacitacion, areasId })
+      let capacitacionCreada2 = await models.capacitaciones.Crear({ ...capacitacion2, areasId })
+      capacitacionesId = capacitacionCreada['id']
+    })
+
+    it('@ICE_API_5_01 OBTENER capacitaciones por establecimientos', async () => {
+      let params = { establecimientosId }
+      let url = `/api/web/capacitaciones/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(2)
+      generatorDocs.OK({ docs, doc: API_5, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_5_02 establecimientosId no valido tipo de dato', async () => {
+      let params = { establecimientosId: 'a' }
+      let url = `/api/web/capacitaciones/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_5_03 establecimientosId  no valido numero', async () => {
+      let params = { establecimientosId: 0 }
+      let url = `/api/web/capacitaciones/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_5_04 establecimientosId no exite', async () => {
+      let params = { establecimientosId: 50 }
+      let url = `/api/web/capacitaciones/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos.length).to.equal(0)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+  })
+
+  describe('API_6 OBTENER por area', () => {
+    const { API_6 } = API
+    let { API_6_EQUI } = EQUI
+    let codigoApi = 'API_6'
+    let capacitacionesId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areaCreada2 = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let capacitacionCreada = await models.capacitaciones.Crear({ ...capacitacion, areasId })
+      let capacitacionCreada2 = await models.capacitaciones.Crear({ ...capacitacion2, areasId: areaCreada2['id'] })
+      capacitacionesId = capacitacionCreada['id']
+    })
+
+    it('@ICE_API_6_01 OBTENER capacitaciones por area', async () => {
+      let params = { areasId }
+      let url = `/api/web/capacitaciones/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_6, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_6_02 areasId no valido tipo de dato', async () => {
+      let params = { areasId: 'a' }
+      let url = `/api/web/capacitaciones/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_6_03 areasId  no valido numero', async () => {
+      let params = { areasId: 0 }
+      let url = `/api/web/capacitaciones/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_6_04 areasId no exite', async () => {
+      let params = { areasId: 50 }
+      let url = `/api/web/capacitaciones/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos.length).to.equal(0)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+  })
 })

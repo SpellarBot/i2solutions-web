@@ -35,7 +35,7 @@
               multi-line
             ></v-text-field>
               </v-form>
-              <div ref="CompAreas">                
+              <div ref="CompAreas">
               </div>
               <v-layout row justify-space-between>
                 <v-flex md4>
@@ -61,7 +61,7 @@
               </v-layout>
             </v-flex>
           </v-layout>
-        </v-container>        
+        </v-container>
       </v-card>
       <br><br>
   </div>
@@ -69,7 +69,7 @@
 <script>
 import Vue from 'vue'
 import agregarPuesto from './agregarPuesto'
-  export default {
+export default {
   name: 'agregarArea',
   props: ['index', 'indiceEstablecimiento'],
   data () {
@@ -90,8 +90,8 @@ import agregarPuesto from './agregarPuesto'
       var PuestoClass = Vue.extend(agregarPuesto)
       var instancePuesto = new PuestoClass({
         propsData: {index: this.indice,
-                    indiceEstablecimiento: this.indiceEstablecimiento,
-                    indiceArea: this.index}
+          indiceEstablecimiento: this.indiceEstablecimiento,
+          indiceArea: this.index}
       })
       this.indice++
       this.instanciasPuesto.push(instancePuesto)
@@ -109,7 +109,7 @@ import agregarPuesto from './agregarPuesto'
     },
     prueba () {
       console.log('\tArea: ' + this.indiceEstablecimiento + '.' + this.index)
-      this.instanciasPuesto.forEach(function (puesto){
+      this.instanciasPuesto.forEach(function (puesto) {
         puesto.prueba()
       })
     }

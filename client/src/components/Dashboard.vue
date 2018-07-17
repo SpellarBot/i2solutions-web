@@ -1,6 +1,16 @@
 <template>
   <main id="dashboard">
     <app-navbar></app-navbar>
+    <template v-if="loading">
+      <div class="text-xs-center">
+    <v-progress-circular
+      indeterminate
+      color="primary"
+    ></v-progress-circular>
+    Cargando...
+  </div>
+</template>
+<template v-if="done">
     <v-container grid-list-md>
       <br>
       <h2 class="text-md-left">Empresas</h2>
@@ -18,18 +28,18 @@
         </v-card>
       </v-flex-->
         <v-flex
-          v-for="(empresa,index) in empresas" :key="empresa.id"
+          v-for="(empresa,index) in this.$store.getters.empresas" :key="empresa.id"
           xs10
           md4
         >
-          <div v-if="index%3 == 0 && index > 0"> <br><br> </div>
+          <div v-if="index%3 == 0 && index > 0"> </div>
             <v-card
             height="100%"
             raised
             hover
             @click.native="dashboardEstablecimientos(empresa.id)"
             >
-            <div v-if="empresa.novedad">
+            <div v-if="empresa.tieneNovedades">
               <v-btn
                 absolute
                 top
@@ -45,8 +55,9 @@
               <p class="headline" >{{empresa.nombre}}</p>
             </v-card-title>
             <v-card-media class="white--text"
-              :src=empresa.imagen
-              height="240px"
+              :src=empresa.urlFoto
+              height="180px"
+              contain
               >
             </v-card-media>
           </v-card>
@@ -104,6 +115,7 @@
       @close="agregarDialog=false"
       ></agregarEmpresa>
     </footer>
+  </template>
   </main>
 </template>
 
@@ -121,6 +133,8 @@ export default {
       color: '',
       snackbar: false,
       agregarDialog: false,
+      loading: false,
+      done: null,
       empresas: [
         {
           nombre: 'Los pollos hermanos 2',
@@ -150,7 +164,17 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.cargarDatos()
+  },
   methods: {
+    cargarDatos () {
+      this.done = null
+      this.loading = true
+      this.verEmpresas()
+      this.loading = false
+      this.done = true
+    },
     logout () {
       this.$store.dispatch('logout')
       router.push('/')
@@ -164,7 +188,7 @@ export default {
     verEmpresas () {
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
-          router.push('empresas')
+          console.log('Done')
         })
         .catch((err) => {
           this.color = 'error'

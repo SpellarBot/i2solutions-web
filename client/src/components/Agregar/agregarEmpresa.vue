@@ -15,6 +15,7 @@
                 <v-flex xs12 md6 lg4>
                   <v-text-field
                     label="Nombre"
+                    v-model="empresa.nombre"
                     required
                     :rules="[rules.required, rules.nameMin]"
                   ></v-text-field>
@@ -22,13 +23,15 @@
                 <v-flex xs12 md4 lg4>
                   <v-text-field
                     label="Actividad Comercial"
+                    v-model="empresa.actividad"
                     required
                     :rules="[rules.required, rules.nameMin]"
                   ></v-text-field>
                 </v-flex>
                 <v-flex md12>
                     <v-text-field
-                    class="razon"
+                      class="razon"
+                      v-model="empresa.razon"
                       label="Razon Social"
                       required
                       :rules="[rules.required, rules.nameMin]"
@@ -37,14 +40,18 @@
                   <v-text-field
                   class="direccion"
                     label="Dirección"
+                    v-model="empresa.direccion"
                     required
                     :rules="[rules.required, rules.nameMin]"
                   ></v-text-field>
                   <v-text-field
                   class="ruc"
                     label="RUC"
+                    v-model="empresa.RUC"
                     required
                     mask="#############"
+                    :rules="[rules.RUCvalidate, rules.required]"
+                    :counter="13"
                   ></v-text-field>
               </v-form>
               <br><br>
@@ -53,7 +60,7 @@
                   <div ref="establecimientos">
                   </div>
                 </v-flex>
-              </v-layout>              
+              </v-layout>
               <v-layout row justify-space-between>
                 <v-flex md4>
                   <h3>¿Desea agregar establecimientos?</h3>
@@ -106,6 +113,7 @@
 <script>
 import Vue from 'vue'
 import agregarEstablecimiento from './agregarEstablecimiento'
+import MyModule from '../MyModule.js'
 export default {
   name: 'agregarEmpresa',  
   props: ['visible'],
@@ -155,12 +163,20 @@ export default {
       instanceEstablecimiento = null
     },
     guardar () {
-      this.valid = this.$refs.form.validate()      
+      if ( !this.$refs.form.validate() ) { 
+        this.$store.commit('setVerified', false)
+      }
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
-        establecimiento.prueba()
+        establecimiento.verify()
       })
+      if ( !this.$store.state.verified ) {
+        this.$store.commit('setVerified', false)
+        console.log('algo salió mal')
+      }
+      console.log('---> ' + this.$store.state.verified + ' <---' )
+      this.$store.commit('setVerified', true)
     },
-    cleaner (){
+    cleaner () {      
       this.$refs.form.reset()
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
@@ -181,6 +197,13 @@ export default {
       valid: true,
       indice: 0,
       instanciasEstablecimientos: [],
+      empresa: {
+        nombre: '',
+        actividad: '',
+        razon: '',
+        direccion: '',
+        RUC: ''
+      },
       confirm: {
         open: false,
         title: '¿Está seguro que quiere salir?',
@@ -190,7 +213,13 @@ export default {
       },
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        RUCvalidate: v => {
+          if ( MyModule(v)[0] ) {
+            return true
+          }
+          return MyModule(v)[1]
+        }
       }
     }
   }

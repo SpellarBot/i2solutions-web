@@ -96,4 +96,27 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_5
+  // obtener establecimientos
+  app.route('/principal/establecimientos/empresas/:empresasId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['empresasId'])
+      let { PARAMS } = schema.API_5_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { empresasId } = req.params
+        Controller.VistaPrincipal({ empresasId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

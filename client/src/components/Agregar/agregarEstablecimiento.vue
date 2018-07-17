@@ -7,25 +7,29 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex md10 offset-md1>
-              <v-form ref="form" lazy-validation>
+              <v-form ref="form2" lazy-validation>
                 <v-text-field
                   label="Nombre"
                   required
+                  v-model="establecimiento.nombre"
                   :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="Dirección"
               required
+              v-model="establecimiento.direccion"
               :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="RUC"
               required
-              :rules="[rules.required]"
+              v-model="establecimiento.RUC"
+              :rules="[rules.required, rules.RUCvalidate]"
+              :counter="13"
               mask="#############"
             ></v-text-field>
               </v-form>
-              <div ref="CompAreas">                
+              <div ref="CompAreas">
               </div>
               <v-layout row justify-space-between>
                 <v-flex md4>
@@ -51,7 +55,8 @@
               </v-layout>
             </v-flex>
           </v-layout>
-        </v-container>        
+        </v-container>
+
       </v-card>
       <br><br>
   </div>
@@ -59,6 +64,8 @@
 <script>
 import Vue from 'vue'
 import agregarArea from './agregarArea'
+import MyModule from '../MyModule.js'
+import Vuex from 'vuex'
 export default {
   name: 'agregarEstablecimiento',
   props: ['index'],
@@ -69,9 +76,20 @@ export default {
     return {
       indice: 0,
       instanciasAreas: [],
+      establecimiento: {
+        nombre: '',
+        direccion: '',
+        RUC: ''
+      },
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        RUCvalidate: v => {
+          if ( MyModule(v)[0] ) {
+            return true
+          }
+          return MyModule(v)[1]
+        }
       }
     }
   },
@@ -86,8 +104,7 @@ export default {
       //  Creado la clase puedo hacer una instancia de la misma.
       var instanceArea = new AreaClass({
         //  Aquí van colocado los props que pida el componente
-        propsData: {index: this.indice,
-                    indiceEstablecimiento: this.index}
+        propsData: {index: this.indice, indiceEstablecimiento: this.index}
       })
       //  Simple nombre.
       this.indice++
@@ -110,7 +127,12 @@ export default {
       console.log('establecimiento: ' + this.index)
       this.instanciasAreas.forEach(function (area) {
         area.prueba()
-      })      
+      })
+    },
+    verify () {
+      if ( !this.$refs.form2.validate() ) {
+        this.$store.commit('setVerified', false)
+      }
     }
   }
 }

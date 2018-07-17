@@ -71,8 +71,8 @@ _response_
       "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-      "fechaCreacion": "2018-07-12 01:22:26.236 +00:00",
-      "fechaActualizacion": "2018-07-12 01:22:26.236 +00:00",
+      "fechaCreacion": "2018-07-16 02:18:56.104 +00:00",
+      "fechaActualizacion": "2018-07-16 02:18:56.104 +00:00",
       "establecimientosId": 1
     }
   ],
@@ -317,8 +317,8 @@ _response_
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
-    "fechaActualizacion": "2018-07-12T01:22:26.374Z",
-    "fechaCreacion": "2018-07-12T01:22:26.374Z"
+    "fechaActualizacion": "2018-07-16T02:18:56.300Z",
+    "fechaCreacion": "2018-07-16T02:18:56.300Z"
   },
   "codigoEstado": 200
 }
@@ -2135,8 +2135,8 @@ _response_
     "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-12 01:22:27.581 +00:00",
-    "fechaActualizacion": "2018-07-12 01:22:27.581 +00:00",
+    "fechaCreacion": "2018-07-16 02:18:57.459 +00:00",
+    "fechaActualizacion": "2018-07-16 02:18:57.459 +00:00",
     "establecimientosId": 1
   },
   "codigoEstado": 200
@@ -2202,6 +2202,184 @@ _response_
   "estado": false,
   "datos": {
     "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener un areas categorizados por puestos dado un establecimiento
+
+> Código: API_6
+
+> Descripción: Obtener un areas categorizados por puestos dado un establecimiento
+
+> Url : /api/areas/puestos/establecimientos/:establecimientosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_6[C1]'>CE_API_6[C1]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_6[C2]'>CE_API_6[C2]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  establecimientosId </td>
+				<td> <a id='CE_API_6[C3]'>CE_API_6[C3]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+Con areas existentes
+
+__Datos prueba__
+
+_url_ 
+
+> /api/areas/puestos/establecimientos/:establecimientosId
+
+GET /api/web/areas/puestos/establecimientos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "nombre": "Gerente General",
+      "actividad": "gerencia",
+      "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+      "puestos": [
+        {
+          "cantidadPersonas": 1,
+          "cantidadAccidentes": 1,
+          "cantidadNovedadesSinAtender": 1,
+          "id": 1,
+          "nombre": "Oficina de gerente general",
+          "descripcion": "AA"
+        },
+        {
+          "cantidadPersonas": 0,
+          "cantidadAccidentes": 1,
+          "cantidadNovedadesSinAtender": 0,
+          "id": 2,
+          "nombre": "Oficina de jefe de TTHH",
+          "descripcion": "AA"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Jefe TTHH",
+      "actividad": "recursos humanos",
+      "descripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
+      "puestos": [
+        {
+          "cantidadPersonas": 0,
+          "cantidadAccidentes": 0,
+          "cantidadNovedadesSinAtender": 0,
+          "id": 3,
+          "nombre": "Oficina de jefe de TTHH",
+          "descripcion": "AA"
+        }
+      ]
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+establecimientosId no es un numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/areas/puestos/establecimientos/:establecimientosId
+
+GET /api/web/areas/puestos/establecimientos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+establecimientosId debe ser minimo 1
+
+__Datos prueba__
+
+_url_ 
+
+> /api/areas/puestos/establecimientos/:establecimientosId
+
+GET /api/web/areas/puestos/establecimientos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "establecimientosId": "debe ser >= 1"
   },
   "codigoEstado": 200
 }

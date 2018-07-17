@@ -56,24 +56,21 @@ module.exports = {
     }
   },
   API_6_SCHEMA: {
-    PARAMS: {
-      'minProperties': 1,
-      'additionalProperties': false,
-      'type': 'object',
-      'properties': {
-        'empresasId': { 'type': 'number', minimum: 1 }
-      }
-    },
     REQUEST: {
-      'minProperties': 4,
-      'type': 'object',
-      'properties': {
-        'id': { 'type': 'number', minimum: 1 },
-        'urlFoto': { 'type': 'string', 'format': 'url' },
-        'nombre': { 'type': 'string', minLength: 2 },
-        'tieneNovedades': { 'type': 'boolean' } // muestra si existen o no novedades sin atender algun puesto de la empresa
-      },
-      'required': ['id', 'urlFoto', 'nombre', 'tieneNovedades']
+      'title': 'Empresas',
+      'description': 'Empresas si tienen novedades',
+      'type': 'array',
+      'items': [{
+        'type': 'object',
+        'minProperties': 4,
+        'properties': {
+          'id': { 'type': 'number', minimum: 1 },
+          'urlFoto': { 'type': 'string', 'format': 'url' },
+          'nombre': { 'type': 'string', minLength: 2 },
+          'tieneNovedades': { 'type': 'boolean' } // muestra si existen o no novedades sin atender algun puesto de la empresa
+        },
+        'required': ['id', 'urlFoto', 'nombre', 'tieneNovedades']
+      }]
     }
   }
 }
