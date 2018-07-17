@@ -2510,7 +2510,7 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "areas con es id no existe",
+  "datos": "accidentes con es id no existe",
   "codigoEstado": 200
 }
 ```

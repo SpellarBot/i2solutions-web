@@ -104,6 +104,24 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.Borrar = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.destroy({
+        where: {
+          id
+        }})
+        .then((rowDeleted) => {
+          if (rowDeleted > 0) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.ObtenerPorEstablecimiento = function ({ id }) {
     return new Promise((resolve, reject) => {
       let query = `select ac.id as id, ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar, (select nombre from puestos where id = ap.puestosId) as puestosNombre from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where e.id = ${id}`

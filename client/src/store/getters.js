@@ -44,6 +44,9 @@ export default {
   novedadesEstablecimientos (state) {
     return state.novedadesEstablecimientos
   },
+  novedadesAreas (state) {
+    return state.novedadesAreas
+  },
   novedadesPuestos (state) {
     return state.novedadesPuestos
   },
@@ -52,6 +55,9 @@ export default {
   },
   equipos (state) {
     return state.equipos
+  },
+  verified () {
+    return this.verified
   },
   equipoPuesto (state) {
     return state.equipoPuesto

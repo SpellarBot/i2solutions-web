@@ -183,6 +183,27 @@ export default {
         })
     })
   },
+  getNovedadesFromAreas ({commit}, areasId) {
+    console.log('entre')
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/novedades/areas/' + areasId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setNovedadesAreas', resp.body.datos)
+            console.log(resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            console.log('error posible', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          console.log('error:', err)
+          return reject(err)
+        })
+    })
+  },
   getNovedadesFromPuestos ({commit}, puestosId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/novedades/puestos/' + puestosId)
@@ -257,7 +278,7 @@ export default {
   },
   getAreas ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/web/areas/establecimientos/' + establecimientoId)
+      Vue.http.get('/api/web/areasDetalle/establecimientos/' + establecimientoId)
         .then((resp) => {
           if (resp.body.estado) {
             commit('setAreas', resp.body.datos)
@@ -335,6 +356,45 @@ export default {
           }
         }).catch((err) => {
           commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  deleteCapacitaciones ({commit}, capacitacionesId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/capacitaciones/' + capacitacionesId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Entre a borrar capacitaciones')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            console.log(resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          console.log(err)
+          return reject(err)
+        })
+    })
+  },
+  deleteAccidentes ({commit}, accidentesId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/accidentes/' + accidentesId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Entre a borrar Accidenntes')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            console.log('Segunda Parte de Accidentes')
+            console.log(resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          console.log('3 partes', err)
           return reject(err)
         })
     })

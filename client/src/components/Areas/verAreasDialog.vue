@@ -6,27 +6,37 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>{{nombreEstablecimiento}}</v-toolbar-title>
+        <v-toolbar-title>{{establecimientoNombres}}</v-toolbar-title>
       </v-toolbar>
       <br>
-      <div v-for="area in areas" v-if="area.EstablecimientoId == EstablecimientoId" :key="area.idArea">
-        <h3>{{area.nombre}}</h3>
-        <puestosPorArea
-          :idArea="area.idArea"
-          >
-        </puestosPorArea>
-        <hr><br>
-      </div>
+      <v-container grid-list-md text-xs-center>
+        <v-layout row wrap align-center>
+            <v-flex md4 v-for="area in $store.getters.areas" :key="area.id" class="text-xs-center">
+              <cardAreas
+                :idArea = "area.id"
+                :nombre = "area.areaNombre"
+                :actividad = "area.areaActividad"
+                :descripcion = "area.areaDescripcionLugar"
+                :numPuestos = "area.cantidadPuestos"
+                :numPersonas = "area.cantidadPersonas"
+                :numCapacitaciones = "area.cantidadCapacitaciones"
+                :novedades = "area.cantidadNovedades"
+                :equipos = "area.cantidadEquipos"
+                >
+              </cardAreas>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
     </v-dialog>
   </main>
 </template>
 <script>
-import puestosPorArea from './puestosPorArea'
+import cardAreas from './cardAreas'
 export default {
-  components: { puestosPorArea },
+  components: { cardAreas },
   name: 'DialogAreas',
-  props: ['visible', 'EstablecimientoId', 'nombreEstablecimiento'],
+  props: ['visible', 'EstablecimientoId', 'establecimientoNombres'],
   mounted () {
   },
   data () {

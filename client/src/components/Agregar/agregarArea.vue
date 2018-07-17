@@ -7,26 +7,31 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex md9 offset-md1>
-              <v-form ref="form">
+              <v-form ref="form" lazy-validation>
                 <v-text-field
                   label="Nombre"
                   required
+                  :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="Actividad"
               required
+              :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="Foto"
               required
+              :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="metros 2"
               required
+              :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="descripción"
               required
+              :rules="[rules.required, rules.nameMin]"
               multi-line
             ></v-text-field>
               </v-form>
@@ -40,7 +45,7 @@
                   <v-btn
                     fab
                     small
-                    v-if="indice>0"
+                    v-if="indice>1"
                     @click.native="removeEstablecimiento"
                   >
                   <v-icon>delete</v-icon>
@@ -70,8 +75,15 @@ export default {
   data () {
     return {
       indice: 0,
-      instanciasPuesto: []
+      instanciasPuesto: [],
+      rules: {
+        required: v => !!v || 'Campo requerido',
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+      }
     }
+  },
+  mounted () {
+    this.insertarPuesto()
   },
   methods: {
     insertarPuesto () {
@@ -104,4 +116,3 @@ export default {
   }
 }
 </script>
-agregarArea.vue

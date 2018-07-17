@@ -1,52 +1,47 @@
 <template>
   <main id="puestosPorArea">
-    <v-container grid-list-md>
-      <v-layout row wrap>
-        <v-flex xs12 md4 lg4 v-for="(puesto, index) in puestos"  :key="puesto.idPuesto" offset-md1>
-          <div v-if="index%3 == 0 && index > 0"> <br><br> </div>
             <v-card
-              v-if="puesto.idArea === idArea"
               raised
               height="100%"
               >
                 <v-card-title primary-title>
                   <v-flex xs12>
-                    <h3 class="headline">{{puesto.nombrePuesto}}</h3>
+                    <h3 class="headline text-md-center">{{nombre}}</h3>
                   </v-flex>
-                  <div>
-                    <b>descripción:</b> {{puesto.descripcionPuesto}} <br>
-                  </div>
                 </v-card-title>
                 <v-card-text>
+                    <div>
+                      <span>{{actividad}}</span><br>
+                      <b>descripción:</b> {{descripcion}} <br>
+                    </div>
                     <v-container fluid>
                       <v-layout row wrap>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="dumb=true">#Personas: {{puesto.numPersonas}}</span>
+                          <span class="link" v-on:click="dumb=true">#Personas: {{numPersonas}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarNovedades">#Novedades: {{puesto.numNovedades}}</span>
+                          <span class="link" >#Puestos: {{numPuestos}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="dumb=true">#Accidentes: {{puesto.numAccidentes}}</span>
+                          <span class="link" v-on:click="dumb=true">#Capacitaciones: {{numCapacitaciones}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarEquipos">#Equipos: {{puesto.numEquipos}}</span>
+                          <span class="link" v-on:click="visualizarNovedades">#Novedades: {{novedades}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarRiesgos">#Pool de Riesgos: </span>
+                          <span class="link" v-on:click="visualizarRiesgos">#Equipos: {{equipos}}</span>
                         </v-flex>
                       </v-layout>
                     </v-container>
                 </v-card-text>
             </v-card>
-         </v-flex>
-      </v-layout>
-    </v-container>
     <footer>
-    <DialogNovedadesFromPuestos
+    <DialogNovedadesFromAreas
+    :idArea="idArea"
+    :nombre="nombre"
     :visible ="visibleNovedades"
     @close ="visibleNovedades=false">
-    </DialogNovedadesFromPuestos>
+    </DialogNovedadesFromAreas>
     <DialogEquiposFromPuestos
     :visible ="visibleEquipos"
     @close ="visibleEquipos=false">
@@ -60,19 +55,21 @@
 </template>
 
 <script>
-import DialogNovedadesFromPuestos from '../Novedades/DialogNovedadesFromPuestos'
+import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
 import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
 import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 export default{
-  components: {DialogNovedadesFromPuestos, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
   name: 'puestosPorArea',
-  props: ['idArea'],
+  props: ['nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'idArea'],
   data () {
     return {
       dumb: false,
       visibleNovedades: false,
       visibleEquipos: false,
       visibleRiesgos: false,
+      nombreArea: '',
+
       puestos:
       [
         {
@@ -117,6 +114,10 @@ export default{
     },
     visualizarRiesgos () {
       this.visibleRiesgos = true
+    },
+    visualizarNovedadesFromAreas () {
+      this.nombreArea = this.nombre
+      this.visibleNovedades = true
     }
   }
 }

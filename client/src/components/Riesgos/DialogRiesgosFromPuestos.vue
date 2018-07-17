@@ -91,9 +91,6 @@ export default {
     }
   },
   methods: {
-    fecha: function (date) {
-      return moment(date).format('L')
-    },
     cargarData () {
       this.valid = null
       this.loading = true

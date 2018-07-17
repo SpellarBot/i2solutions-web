@@ -12,7 +12,7 @@
       <v-layout>
       <v-flex xs12>
         <v-card>
-            <h3>Equipo en Puesto</h3>
+            <h1> Puesto: </h1>
             <h2> {{this.puesto}}</h2>
           <v-container  fluid>
             <v-layout row wrap>
@@ -20,15 +20,32 @@
                 v-for="equipo in this.$store.getters.equipoPuesto"
                 :key="equipo.id"
                 xs3 lg4>
-                <v-card style="padding:10px; margin:25px;" >
+                <v-card style="padding:5px; margin:25px;" >
+                  <div><h3><b>Equipo: </b>{{equipo.nombre}}</h3></div>
                   <v-card-media
-                    :src=equipo.foto
-                    height="150px"
-                    style="padding:5px"
+                    :src=equipo.fotoUrl
+                    height="200px"
+                    width="120px"
+                    contain
                   >
                   </v-card-media>
-                  <div><b>Equipo: </b>{{equipo.equipo}}</div>
-                  <div><b>Cantidad: </b>{{equipo.cantidad}}</div>
+                  <v-btn
+                    fab
+                    dark
+                    small
+                    color="blue"
+                  >
+                    <v-icon>edit</v-icon>
+                  </v-btn>
+                  <v-btn
+                    fab
+                    dark
+                    small
+                    color="blue"
+                  >
+                    <v-icon>delete</v-icon>
+                  </v-btn>
+                  <h3><b>Cantidad: </b>{{equipo.cantidad}}</h3>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -79,9 +96,6 @@ export default {
     }
   },
   methods: {
-    fecha: function (date) {
-      return moment(date).format('L')
-    },
     cargarData () {
       this.valid = null
       this.loading = true
@@ -90,7 +104,7 @@ export default {
       this.valid = true
       console.log('LOG')
     },
-    verEquiposFromPuestos() {
+    verEquiposFromPuestos () {
       let puestosId = this.puestoId
       this.$store.dispatch('getEquiposFromPuestos', puestosId)
         .then((resp) => {
