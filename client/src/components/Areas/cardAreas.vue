@@ -29,7 +29,7 @@
                           <span class="link" v-on:click="visualizarNovedades">#Novedades: {{novedades}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarRiesgos">#Equipos: {{equipos}}</span>
+                          <span class="link" v-on:click="visualizarEquipos">#Equipos: {{equipos}}</span>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -42,24 +42,21 @@
     :visible ="visibleNovedades"
     @close ="visibleNovedades=false">
     </DialogNovedadesFromAreas>
-    <DialogEquiposFromPuestos
+    <DialogEquiposFromAreas
+    :idArea="idArea"
+    :nombre="nombre"
     :visible ="visibleEquipos"
     @close ="visibleEquipos=false">
-    </DialogEquiposFromPuestos>
-    <DialogRiesgosFromPuestos
-    :visible ="visibleRiesgos"
-    @close ="visibleRiesgos=false">
-    </DialogRiesgosFromPuestos>
+    </DialogEquiposFromAreas>
   </footer>
   </main>
 </template>
 
 <script>
 import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
-import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
-import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
+import DialogEquiposFromAreas from '../Equipos/DialogEquiposFromAreas'
 export default{
-  components: {DialogNovedadesFromAreas, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas},
   name: 'puestosPorArea',
   props: ['nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'idArea'],
   data () {
@@ -67,42 +64,6 @@ export default{
       dumb: false,
       visibleNovedades: false,
       visibleEquipos: false,
-      visibleRiesgos: false,
-      nombreArea: '',
-
-      puestos:
-      [
-        {
-          idPuesto: '0',
-          nombrePuesto: 'puesto 1',
-          descripcionPuesto: 'Este es el puesto 1 que fue el primero creado',
-          numPersonas: 3,
-          numNovedades: 1,
-          numAccidentes: 0,
-          numEquipos: 5,
-          idArea: '0'
-        },
-        {
-          idPuesto: '1',
-          nombrePuesto: 'puesto 2',
-          descripcionPuesto: 'Este en cambio fue el segundo puesto',
-          numPersonas: 2,
-          numNovedades: 0,
-          numAccidentes: 0,
-          numEquipos: 4,
-          idArea: '0'
-        },
-        {
-          idPuesto: '2',
-          nombrePuesto: 'A puesto',
-          descripcionPuesto: '',
-          numPersonas: 2,
-          numNovedades: 0,
-          numAccidentes: 0,
-          numEquipos: 10,
-          idArea: '1'
-        }
-      ]
     }
   },
   methods: {
@@ -111,13 +72,6 @@ export default{
     },
     visualizarEquipos () {
       this.visibleEquipos = true
-    },
-    visualizarRiesgos () {
-      this.visibleRiesgos = true
-    },
-    visualizarNovedadesFromAreas () {
-      this.nombreArea = this.nombre
-      this.visibleNovedades = true
     }
   }
 }

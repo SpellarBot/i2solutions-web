@@ -62,6 +62,9 @@ export default {
   equipoPuesto (state) {
     return state.equipoPuesto
   },
+  equipoAreas (state) {
+    return state.equipoAreas
+  },
   riesgoPuesto (state) {
     return state.riesgoPuesto
   },

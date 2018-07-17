@@ -240,6 +240,24 @@ export default {
         })
     })
   },
+  getEquiposFromAreas ({commit}, areasId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/equipos/areas/' + areasId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Equipos: ', resp.body.datos)
+            commit('setEquiposAreas', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getRiesgosFromPuestos ({commit}, puestosId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/riesgos/puestos/' + puestosId)
