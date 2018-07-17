@@ -1,9 +1,9 @@
 <template>
   <main id="DialogAccidentesFromEstablecimientos">
-    <v-dialog fullscreen v-model="show" @keydown.esc="show=false" hide-overlay transition="dialog-bottom-transition">
+    <v-dialog fullscreen v-model="show" @keydown.esc="closing()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
       <v-toolbar dark color="primary">
-        <v-btn icon dark @click.native="show = false">
+        <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
         <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
@@ -51,16 +51,20 @@ export default {
     cargarData () {
       this.valid = null
       this.loading = true
-      this.verAccidentes()
-      console.log(this.$store.getters.accidentes)
+      // this.verAccidentes()
       this.loading = false
       this.valid = true
+    },
+    closing () {
+      this.$store.dispatch('emptyAccidentes')
+      this.show = false
     },
     verAccidentes () {
       console.log(this.establecimientoId)
       this.$store.dispatch('getAccidentesFromEstablecimiento', this.establecimientoId)
         .then((resp) => {
           console.log('Done')
+          console.log(this.$store.getters.accidentes)
         })
         .catch((err) => {
           this.color = 'error'

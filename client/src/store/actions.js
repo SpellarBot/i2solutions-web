@@ -614,5 +614,11 @@ export default {
           return reject(err)
         })
     })
+  },
+  emptyAccidentes ({commit}) {
+    commit('setAccidentes', null)
+  },
+  emptyAreasPuestos ({commit}) {
+    commit('setAreasPuestos', null)
   }
 }

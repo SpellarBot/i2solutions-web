@@ -322,7 +322,19 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    verAreasPuestos (establecimientosId) {
+      this.$store.dispatch('getPuestosFromEstablecimiento', establecimientosId)
+        .then((resp) => {
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     visualizarPuestos (establecimientoId, establecimientoNombre) {
+      this.verAreasPuestos(establecimientoId)
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
       this.visiblePuestos = true
@@ -331,6 +343,7 @@ export default {
       this.visiblePersonas = true
     },
     visualizarAccidentes (establecimientoId, establecimientoNombre) {
+      this.obtenerAccidentes(establecimientoId)
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
       this.visibleAccidentes = true
