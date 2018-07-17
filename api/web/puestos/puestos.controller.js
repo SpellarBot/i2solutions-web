@@ -33,7 +33,7 @@ module.exports = ({ responses, db }) => {
     },
     ObtenerTodosPorArea ({ id }) {
       return new Promise((resolve, reject) => {
-        db.areas.ObtenerPuestos({ id })
+        db.puestos.ObtenerPorAreas({ id })
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
