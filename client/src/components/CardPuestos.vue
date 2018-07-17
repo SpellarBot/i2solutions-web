@@ -28,6 +28,7 @@
       <span class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
       <span class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
+      <span class="link" v-on:click="visualizarRiesgos(puestos.id,puestos.nombre)"> Riesgos: {{ puestos.cantidadRiesgos }}</span>
     </v-card>
     <footer>
       <!--Para Eliminar Establecimientos-->
@@ -62,7 +63,6 @@
     <DialogAccidentesFromPuestos
     :visible="visibleAccidentes"
     :puestoId="puestoId"
-    :puestoNombre="puestoNombre"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromPuestos>
     <DialogEditarPuestos
@@ -85,8 +85,13 @@
     :puestoId="puestoId"
     @close="visibleRiesgos=false">
     </DialogRiesgosFromPuestos>
+    <DialogEquiposFromPuestos
+    :visible="visibleEquipos"
+    :puestoNombre ="puestoNombre"
+    :puestoId="puestoId"
+    @close="visibleEquipos=false">
+    </DialogEquiposFromPuestos>
     </footer>
-
   </main>
 </template>
 <script>
@@ -95,9 +100,10 @@ import DialogAccidentesFromPuestos from './DialogAccidentesFromPuestos'
 import DialogEditarPuestos from './Editar/DialogEditarPuestos'
 import DialogNovedadesFromPuestos from './Novedades/DialogNovedadesFromPuestos'
 import DialogRiesgosFromPuestos from './Riesgos/DialogRiesgosFromPuestos'
+import DialogEquiposFromPuestos from './Equipos/DialogEquiposFromPuestos'
 export default {
   props: [ 'puesto', 'areaId' ],
-  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos },
+  components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },
   data () {
     return {
       visiblePersonas: false,
@@ -105,6 +111,7 @@ export default {
       visibleEdicion: false,
       visibleNovedades: false,
       visibleRiesgos: false,
+      visibleEquipos: false,
       eliminarDialogPuestos: false,
       mensajeSnackbar: '',
       color: '',
@@ -144,12 +151,19 @@ export default {
         this.visibleNovedades = true
       }
     },
-    visualizarEquipos (puestoId, puestoNombre) {
+    visualizarRiesgos (puestoId, puestoNombre) {
       if (this.puestos.cantidadEquipos > 0) {
         this.puestoId = puestoId
         this.puestoNombre = puestoNombre
         this.visibleRiesgos = true
       }
+    },
+    visualizarEquipos (puestoId, puestoNombre) {
+      // if (this.puestos.cantidadEquipos > 0) {
+        this.puestoId = puestoId
+        this.puestoNombre = puestoNombre
+        this.visibleEquipos = true
+      // }
     },
     visualizarEditar (puesto, areaId) {
       console.log(puesto.descripcion)
@@ -165,7 +179,6 @@ export default {
       this.eliminarDialogPuestos = true
     },
     borrarPuesto () {
-      // console.log('eliminarDialogPuestos', this.eliminarDialogPuestos)
       this.eliminarDialogPuestos = false
       let puestosId = Number(this.puestoSelected)
       console.log('idPuesto', puestosId)
@@ -175,8 +188,6 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Puesto borrado con exito.'
           this.color = 'success'
-          // this.$store.dispatch('getPuestos', this.$store.getters.area.id)
-          // this.reloadEstablecimiento()
         })
         .catch((err) => {
           this.color = 'error'
@@ -185,7 +196,6 @@ export default {
           this.mensajeSnackbar = err
         })
     }
-
     /* reloadEstablecimiento () {
       this.$store.dispatch('getEstablecimientosFront', this.id)
       this.$store.dispatch('getEmpresaSola', this.id)

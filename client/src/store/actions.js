@@ -201,6 +201,42 @@ export default {
         })
     })
   },
+  getEquiposFromPuestos ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/equipos/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Equipos: ', resp.body.datos)
+            commit('setEquiposPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getRiesgosFromPuestos ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/riesgos/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Riesgos: ', resp.body.datos)
+            commit('setRiesgosPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getRiesgosSolo ({commit}, puestosId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/riesgos/puestos/' + puestosId)
