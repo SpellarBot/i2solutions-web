@@ -27,6 +27,7 @@ export const store = new Vuex.Store({
     novedadSelected: null,
     areasPuestos: null,
     novedadesEstablecimientos: null,
+    novedadesAreas: null,
     novedadesPuestos: null,
     equipos: null,
     verified: true,

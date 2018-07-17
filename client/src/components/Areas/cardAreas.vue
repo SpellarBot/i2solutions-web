@@ -110,7 +110,12 @@ export default{
     },
     visualizarRiesgos () {
       this.visibleRiesgos = true
-    }
+    },
+    visualizarNovedadesFromAreas (areaId, areaNombre) {
+      this.areaId = areaId
+      this.areaNombre = areaNombre
+      this.visibleNovedades = true
+    },
   }
 }
 </script>

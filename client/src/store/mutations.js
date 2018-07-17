@@ -51,6 +51,9 @@ export default {
   setNovedadesEstablecimientos (state, novedadesEstablecimientos) {
     state.novedadesEstablecimientos = novedadesEstablecimientos
   },
+  setNovedadesAreas (state, novedadesAreas) {
+    state.novedadesAreas = novedadesAreas
+  },
   setNovedadesPuestos (state, novedadesPuestos) {
     state.novedadesPuestos = novedadesPuestos
   },
