@@ -257,7 +257,7 @@ export default {
   },
   getAreas ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/web/areas/establecimientos/' + establecimientoId)
+      Vue.http.get('/api/web/areasDetalle/establecimientos/' + establecimientoId)
         .then((resp) => {
           if (resp.body.estado) {
             commit('setAreas', resp.body.datos)

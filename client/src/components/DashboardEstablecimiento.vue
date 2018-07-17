@@ -99,7 +99,7 @@
                   <v-layout row wrap>
                     <v-flex xs6 md6>
                       <span class="link"
-                        v-on:click="visualizarAreas(establecimiento.id, establecimiento.nombre)"
+                        v-on:click="visualizarAreas(establecimiento.id, establecimiento.nombres)"
                         > #Areas: {{establecimiento.cantidadAreas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
@@ -189,7 +189,7 @@
     <DialogNovedadesFromEstablecimientos
     :visible="visibleNovedades"
     :establecimientoId="establecimientoId"
-    :establecimientoNombre="establecimientoNombres"
+    :establecimientoNombres="establecimientoNombres"
     @close="visibleNovedades=false"
     ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
@@ -397,8 +397,8 @@ export default {
     },
     visualizarAreas (id, nombre) {
       this.establecimientoId = id
-      this.$store.dispatch('getAreas', this.establecimientoId)
       this.nombreEstablecimiento = nombre
+      this.$store.dispatch('getAreas', this.establecimientoId)
       this.visibleAreas = true
     },
     eliminarEstablecimiento (establecimiento) {
