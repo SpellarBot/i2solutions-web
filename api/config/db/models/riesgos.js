@@ -129,5 +129,29 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorAreas = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select r.id as id, r.tipoRiesgo as tipoRiesgo, r.personasExpuestas as personasExpuestas, r.valoracion as valoracion, r.valoracionLiteral as valoracionLiteral, r.fecha as fecha, r.porcentajeRiesgo as porcentajeRiesgo, r.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre, a.id as areasId, a.nombre as areasNombre from areas a inner join areasPuestos ap on ap.areasId = a.id inner join riesgos r on r.puestosId = ap.puestosId where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(riesgos => {
+          resolve(riesgos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select r.id as id, r.tipoRiesgo as tipoRiesgo, r.personasExpuestas as personasExpuestas, r.valoracion as valoracion, r.valoracionLiteral as valoracionLiteral, r.fecha as fecha, r.porcentajeRiesgo as porcentajeRiesgo, r.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from areasPuestos ap join riesgos r on r.puestosId = ap.puestosId where ap.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(riesgos => {
+          resolve(riesgos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

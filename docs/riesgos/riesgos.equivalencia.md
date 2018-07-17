@@ -182,8 +182,8 @@ _response_
     "porcentajeRiesgo": 2,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-16T12:08:48.895Z",
-    "fechaCreacion": "2018-07-16T12:08:48.895Z"
+    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
+    "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
   "codigoEstado": 200
 }
@@ -2683,14 +2683,14 @@ _response_
   "estado": true,
   "datos": {
     "id": 1,
-    "tipoRiesgo": null,
-    "personasExpuestas": null,
-    "valoracion": null,
-    "valoracionLiteral": null,
-    "fecha": "2018-07-16 12:08:50.312 +00:00",
-    "porcentajeRiesgo": null,
-    "fechaCreacion": "2018-07-16 12:08:50.313 +00:00",
-    "fechaActualizacion": "2018-07-16 12:08:50.313 +00:00",
+    "tipoRiesgo": "Caida de objetos",
+    "personasExpuestas": 15,
+    "valoracion": "1524",
+    "valoracionLiteral": "aa",
+    "fecha": "2014-05-21 19:27:28.576 +00:00",
+    "porcentajeRiesgo": 2,
+    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
     "puestosId": 1
   },
   "codigoEstado": 200
@@ -2787,6 +2787,366 @@ _response_
 {
   "estado": true,
   "datos": null,
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener riesgos por areas
+
+> Código: API_5
+
+> Descripción: Obtener riesgos por areas
+
+> Url : /api/web/riesgos/areas/:areasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_5[C01]'>CE_API_5[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_5[C02]'>CE_API_5[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_5[C03]'>CE_API_5[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_5[1]__
+
+Obtener riesgos de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/areas/:areasId
+
+GET /api/web/riesgos/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "tipoRiesgo": "Caida de objetos",
+      "personasExpuestas": 15,
+      "valoracion": "1524",
+      "valoracionLiteral": "aa",
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "porcentajeRiesgo": 2,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[2]__
+
+areasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/areas/:areasId
+
+GET /api/web/riesgos/areas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[3]__
+
+areasId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/areas/:areasId
+
+GET /api/web/riesgos/areas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_5[4]__
+
+areasId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/areas/:areasId
+
+GET /api/web/riesgos/areas/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener riesgos por puestos
+
+> Código: API_6
+
+> Descripción: Obtener riesgos por puestos
+
+> Url : /api/web/riesgos/puestos/:puestosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+Obtener riesgos de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/puestos/:puestosId
+
+GET /api/web/riesgos/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "tipoRiesgo": "Caida de objetos",
+      "personasExpuestas": 15,
+      "valoracion": "1524",
+      "valoracionLiteral": "aa",
+      "fecha": "2014-05-21 19:27:28.576 +00:00",
+      "porcentajeRiesgo": 2,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+puestosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/puestos/:puestosId
+
+GET /api/web/riesgos/puestos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+puestosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/puestos/:puestosId
+
+GET /api/web/riesgos/puestos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[4]__
+
+puestosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/riesgos/puestos/:puestosId
+
+GET /api/web/riesgos/puestos/50
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [],
   "codigoEstado": 200
 }
 ```

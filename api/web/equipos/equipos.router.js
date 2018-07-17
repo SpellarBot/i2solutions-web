@@ -117,4 +117,50 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_5
+  // obtener equipos por areas
+  app.route('/equipos/areas/:areasId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['areasId'])
+      let { PARAMS } = schema.API_4_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { areasId } = req.params
+        Controller.Obtener({ id: areasId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // identificador: API_6
+  // obtener equipos por puestos
+  app.route('/equipos/puestos/:areasId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['areasId'])
+      let { PARAMS } = schema.API_4_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { areasId } = req.params
+        Controller.Obtener({ id: areasId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

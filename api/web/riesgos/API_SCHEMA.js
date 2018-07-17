@@ -58,5 +58,25 @@ module.exports = {
         'riesgosId': { 'type': 'number', minimum: 1 }
       }
     }
+  },
+  API_5_SCHEMA: { // obtener riesgos por areas
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'areasId': { 'type': 'number', minimum: 1 }
+      }
+    }
+  },
+  API_6_SCHEMA: { // obtener riesgos por puestos
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'puestosId': { 'type': 'number', minimum: 1 }
+      }
+    }
   }
 }
