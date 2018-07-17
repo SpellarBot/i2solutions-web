@@ -134,7 +134,7 @@ export default {
       snackbar: false,
       agregarDialog: false,
       loading: false,
-      done: null,
+      done: null
     }
   },
   mounted () {

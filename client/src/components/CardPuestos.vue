@@ -60,6 +60,7 @@
     ></DialogPersonasFromPuestos>
     <DialogAccidentesFromPuestos
     :visible="visibleAccidentes"
+    :puestoId="puestoId"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromPuestos>
     <DialogEditarPuestos
@@ -153,32 +154,27 @@ export default {
     },
     eliminarPuesto (puesto) {
       this.$data.puestoSelected = puesto.id
-      console.log( this.$data.puestoSelected)
+      console.log(this.$data.puestoSelected)
       this.eliminarDialogPuestos = true
     },
     borrarPuesto () {
-      //console.log('eliminarDialogPuestos', this.eliminarDialogPuestos)
       this.eliminarDialogPuestos = false
       let puestosId = Number(this.puestoSelected)
-      console.log ('idPuesto', puestosId )
+      console.log('idPuesto', puestosId)
       this.$store.dispatch('deletePuesto', puestosId)
         .then((resp) => {
           console.log('entre')
           this.snackbar = true
           this.mensajeSnackbar = 'Puesto borrado con exito.'
           this.color = 'success'
-          // this.$store.dispatch('getPuestos', this.$store.getters.area.id)
-          // this.reloadEstablecimiento()
         })
         .catch((err) => {
           this.color = 'error'
-          console.log (err)
+          console.log(err)
           this.snackbar = true
           this.mensajeSnackbar = err
         })
     }
-
-
     /* reloadEstablecimiento () {
       this.$store.dispatch('getEstablecimientosFront', this.id)
       this.$store.dispatch('getEmpresaSola', this.id)
