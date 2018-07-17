@@ -1,5 +1,6 @@
 const request = require('supertest')
 const expect = require('chai').expect
+const sinon = require('sinon')
 const rfr = require('rfr')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
@@ -40,6 +41,7 @@ describe('AREAS', () => {
     await db.Limpiar()
   })
   beforeEach(async () => {
+    clock = sinon.useFakeTimers(new Date(2011,9,1).getTime())
     let empresaCreada = await models.empresas.Crear(empresa)
     let empresasId = empresaCreada['id']
     let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
@@ -48,6 +50,7 @@ describe('AREAS', () => {
     establecimientosId2 = establecimientosCreada2['id']
   })
   after('Desconectar la base de datos', function() {
+    clock.restore()
     generatorDocs.generateAPI({ docs, archivo: 'api.areas.md', nombre: 'Areas' })
     generatorDocs.EQUI({ equivalencias, nombre: 'Areas' })
   })

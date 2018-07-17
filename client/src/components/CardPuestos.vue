@@ -3,6 +3,8 @@
     <v-card>
 
       <h2>{{ puestos.nombre }}</h2>
+
+      <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <v-btn
               fab
               dark
@@ -22,9 +24,8 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-      <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <span class="link" v-on:click="visualizarPersonas"> Número Personas: {{ puestos.cantidadPersonas }}</span>
-      <span class="link" v-on:click="visualizarAccidentes"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
+      <span class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
       <span class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
     </v-card>
@@ -104,6 +105,9 @@ export default {
       visibleNovedades: false,
       visibleRiesgos: false,
       eliminarDialogPuestos: false,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
       puestoNombre: '',
       puestoDescripcion: '',
       puestoId: '',
@@ -127,7 +131,9 @@ export default {
     visualizarPersonas () {
       this.visiblePersonas = true
     },
-    visualizarAccidentes () {
+    visualizarAccidentes (puesto) {
+      this.puestoNombre = puesto.nombre
+      this.puestoId = puesto.id
       this.visibleAccidentes = true
     },
     visualizarNovedadesFromPuestos (puestoId, puestoNombre) {

@@ -6,13 +6,15 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Producción 1 - Empaquetado de Pollo</v-toolbar-title>
+        <v-toolbar-title>{{ this.puestoNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Accidentes: </h1>
       <v-layout>
         <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4'>
-          <CardAccidentes></CardAccidentes>
+        <v-card class='mb-4' v-for="(accidente) in this.$store.getters.accidentes" :key="accidente.id">
+          <CardAccidentes
+          :accidente="accidente"
+          ></CardAccidentes>
         </v-card>
       </v-flex>
       </v-layout>
@@ -25,7 +27,12 @@ import CardAccidentes from './CardAccidentes'
 export default {
   components: { CardAccidentes },
   name: 'DialogPuestos',
-  props: ['visible'],
+  props: ['visible', 'puestoId', 'puestoNombre'],
+  watch: {
+    show () {
+      this.cargarData()
+    }
+  },
   computed: {
     show: {
       get () {
@@ -36,6 +43,27 @@ export default {
           this.$emit('close')
         }
       }
+    }
+  },
+  methods: {
+    cargarData () {
+      this.valid = null
+      this.loading = true
+      this.verAccidentes()
+      this.loading = false
+      this.valid = true
+    },
+    verAccidentes () {
+      console.log(this.puestoId)
+      this.$store.dispatch('getAccidentesFromPuesto', this.puestoId)
+        .then((resp) => {
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

@@ -563,5 +563,62 @@ export default {
           return reject(err)
         })
     })
+  },
+  getAccidentesFromEstablecimiento ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/accidentes/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setAccidentes', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  updateAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.put('/api/web/accidentes/' + accidentesId, { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId })
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getAccidentesFromPuesto ({commit}, puestoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/accidentes/puestos/' + puestoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setAccidentes', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyAccidentes ({commit}) {
+    commit('setAccidentes', null)
+  },
+  emptyAreasPuestos ({commit}) {
+    commit('setAreasPuestos', null)
   }
 }

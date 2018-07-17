@@ -1,5 +1,6 @@
 const request = require('supertest')
 const expect = require('chai').expect
+const sinon = require('sinon')
 const rfr = require('rfr')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
@@ -28,6 +29,7 @@ describe('RIESGOS', () => {
   let riesgo = riesgos.VALIDOS[0]
   let establecimientosId, establecimientosId2 = -1
   beforeEach(async () => {
+    clock = sinon.useFakeTimers(new Date(2011,9,1).getTime())
     let empresaCreada = await models.empresas.Crear(empresa)
     let empresasId = empresaCreada['id']
     let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
@@ -39,6 +41,7 @@ describe('RIESGOS', () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
+    clock.restore()
     generatorDocs.EQUI({ equivalencias, nombre: 'Riesgos' })
     generatorDocs.generateAPI({ docs, archivo: 'api.riesgos.md', nombre: 'Riesgos' })
   })
@@ -490,7 +493,7 @@ describe('RIESGOS', () => {
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
       puestosId = puestosCreada['id']
-      let riesgoCreada = await models.riesgos.Crear({ ...puesto, puestosId: puestosCreada['id'] })
+      let riesgoCreada = await models.riesgos.Crear({ ...riesgo, puestosId: puestosCreada['id'] })
       riesgosId = riesgoCreada['id']
     })
 
@@ -530,6 +533,123 @@ describe('RIESGOS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.datos).to.equal(null)
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
+    })
+  })
+
+
+  describe('API_5 OBTENER POR AREAS', () => {
+    const { API_5 } = API
+    let { API_5_EQUI } = EQUI
+    let codigoApi = 'API_5'
+
+    let areasId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      let puestosId = puestosCreada['id']
+      let riesgoCreada = await models.riesgos.Crear({ ...riesgo, puestosId })
+      let riesgosId = riesgoCreada['id']
+    })
+
+    it('@ICE_API_5_01 Obtener una riesgo de forma correcta', async () => {
+      let params = { areasId }
+      let url = `/api/web/riesgos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_5, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_5_02 areasId no valido tipo de dato', async () => {
+      let params = { areasId: 'a' }
+      let url = `/api/web/riesgos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_5_03 areasId  no valido numero', async () => {
+      let params = { areasId: 0 }
+      let url = `/api/web/riesgos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_5_04 areasId no exite', async () => {
+      let params = { areasId: 50 }
+      let url = `/api/web/riesgos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(0)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
+    })
+  })
+
+  describe('API_6 OBTENER POR AREAS', () => {
+    const { API_6 } = API
+    let { API_6_EQUI } = EQUI
+    let codigoApi = 'API_6'
+
+    let puestosId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      let puestosCreada2 = await models.puestos.Crear({ ...puesto })
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      await models.areasPuestos.Crear({ puestosId: puestosCreada2['id'], areasId: areaCreada['id'] })
+      puestosId = puestosCreada['id']
+      let riesgoCreada = await models.riesgos.Crear({ ...riesgo, puestosId })
+      let riesgoCreada2 = await models.riesgos.Crear({ ...riesgo, puestosId: puestosCreada2['id'] })
+      let riesgosId = riesgoCreada['id']
+    })
+
+    it('@ICE_API_6_01 Obtener una riesgo de forma correcta', async () => {
+      let params = { puestosId }
+      let url = `/api/web/riesgos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_6, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_6_02 puestosId no valido tipo de dato', async () => {
+      let params = { puestosId: 'a' }
+      let url = `/api/web/riesgos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_6_03 puestosId  no valido numero', async () => {
+      let params = { puestosId: 0 }
+      let url = `/api/web/riesgos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_6_04 puestosId  no valido numero', async () => {
+      let params = { puestosId: 50 }
+      let url = `/api/web/riesgos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(0)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
     })
   })
 })

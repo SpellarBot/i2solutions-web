@@ -148,8 +148,8 @@ _response_
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
-    "fechaActualizacion": "2018-07-16T12:08:39.358Z",
-    "fechaCreacion": "2018-07-16T12:08:39.358Z"
+    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
+    "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
   "codigoEstado": 200
 }
@@ -1659,8 +1659,8 @@ _response_
     "descripcion": "La capacitación fue un éxito",
     "tema": "Como hacer que todo valga",
     "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
-    "fechaCreacion": "2018-07-16 12:08:40.437 +00:00",
-    "fechaActualizacion": "2018-07-16 12:08:40.437 +00:00",
+    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
     "areasId": 1
   },
   "codigoEstado": 200

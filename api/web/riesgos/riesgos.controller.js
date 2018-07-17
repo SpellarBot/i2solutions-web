@@ -65,6 +65,28 @@ module.exports = ({ responses, db }) => {
             return reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    ObtenerPorAreas ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.riesgos.ObtenerPorAreas({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorPuestos ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.riesgos.ObtenerPorPuestos({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

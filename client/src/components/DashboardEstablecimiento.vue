@@ -109,7 +109,7 @@
                       <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.cantidadPersonas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarAccidentes">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
+                      <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarCapacitaciones(establecimiento.id, establecimiento.nombres)">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
@@ -176,6 +176,8 @@
     ></DialogPersonasFromEstablecimientos>
     <DialogAccidentesFromEstablecimientos
     :visible="visibleAccidentes"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromEstablecimientos>
     <DialogCapacitacionesFromEstablecimientos
@@ -309,7 +311,30 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    obtenerAccidentes (establecimientosId) {
+      this.$store.dispatch('getAccidentesFromEstablecimiento', establecimientosId)
+        .then((resp) => {
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    verAreasPuestos (establecimientosId) {
+      this.$store.dispatch('getPuestosFromEstablecimiento', establecimientosId)
+        .then((resp) => {
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     visualizarPuestos (establecimientoId, establecimientoNombre) {
+      this.verAreasPuestos(establecimientoId)
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
       this.visiblePuestos = true
@@ -317,7 +342,10 @@ export default {
     visualizarPersonas () {
       this.visiblePersonas = true
     },
-    visualizarAccidentes () {
+    visualizarAccidentes (establecimientoId, establecimientoNombre) {
+      this.obtenerAccidentes(establecimientoId)
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visibleAccidentes = true
     },
     visualizarCapacitaciones (establecimientoId, establecimientoNombre) {

@@ -58,5 +58,8 @@ export default {
   },
   capacitaciones (state) {
     return state.capacitaciones
+  },
+  accidentes (state) {
+    return state.accidentes
   }
 }

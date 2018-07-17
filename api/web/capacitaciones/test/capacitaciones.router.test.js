@@ -1,5 +1,6 @@
 const request = require('supertest')
 const expect = require('chai').expect
+const sinon = require('sinon')
 const rfr = require('rfr')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
@@ -28,6 +29,7 @@ describe('CAPACITACIONES', () => {
   let capacitacion3 = capacitaciones.VALIDOS[2]
   let establecimientosId, establecimientosId2 = -1
   beforeEach(async () => {
+    clock = sinon.useFakeTimers(new Date(2011,9,1).getTime())
     let empresaCreada = await models.empresas.Crear(empresa)
     let empresasId = empresaCreada['id']
     let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
@@ -39,6 +41,7 @@ describe('CAPACITACIONES', () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
+    clock.restore()
     generatorDocs.EQUI({ equivalencias, nombre: 'Capacitaciones' })
     generatorDocs.generateAPI({ docs, archivo: 'api.capacitaciones.md', nombre: 'Capacitaciones' })
   })

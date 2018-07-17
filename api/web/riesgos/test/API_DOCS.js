@@ -40,5 +40,27 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_5: {
+    nombre: 'Obtener riesgos por area',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/riesgos/areas/:areasId',
+    params: [
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_6: {
+    nombre: 'Obtener riesgos por puestos',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/riesgos/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
   }
 }
