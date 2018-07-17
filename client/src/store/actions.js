@@ -339,6 +339,44 @@ export default {
         })
     })
   },
+  deleteCapacitaciones ({commit}, capacitacionesId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/capacitaciones/' + capacitacionesId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Entre a borrar capacitaciones')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            console.log(resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          console.log(err)
+          return reject(err)
+        })
+    })
+  },
+  deleteAccidentes ({commit}, accidentesId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/accidentes/' + accidentesId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Entre a borrar Accidenntes')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            console.log(resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          console.log(err)
+          return reject(err)
+        })
+    })
+  },
   getEmpresaSola ({commit}, empresasId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/empresas/' + empresasId)

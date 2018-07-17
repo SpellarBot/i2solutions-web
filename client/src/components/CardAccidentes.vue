@@ -22,9 +22,33 @@
               dark
               small
               color="blue"
+              @click="eliminarAccidente(accidents)"
             >
               <v-icon>delete</v-icon>
             </v-btn>
+            <v-layout row justify-center>
+            <v-dialog v-model="eliminarDialogAccidentes" persistent max-width="290">
+              <v-card>
+                <v-card-title class="headline">Eliminar</v-card-title>
+                <v-card-text>¿Está seguro que quiere eliminar este Accidente?</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
+                  <v-btn color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-layout>
+
+          <v-snackbar
+            :timeout="3000"
+            :multi-line="true"
+            :color="color"
+            :top="true"
+            v-model="snackbar"
+          >
+            {{mensajeSnackbar}}
+          </v-snackbar>
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"
@@ -55,7 +79,9 @@ export default {
       accidenteMuertos: null,
       accidenteAtendidoEnEmpresa: null,
       accidenteId: '',
-      accidentePuestoId: ''
+      accidentePuestoId: '',
+      accidenteSelected: 0,
+      eliminarDialogAccidentes: false
     }
   },
   computed: {
@@ -84,6 +110,29 @@ export default {
       console.log(accidente.id)
       this.accidentePuestoId = accidente.puestosId
       this.visibleEdicion = true
+    },
+    eliminarAccidente (accidente) {
+      this.accidenteSelected = accidente.id
+      console.log(this.accidenteSelected)
+      this.eliminarDialogAccidentes = true
+    },
+    borrarAccidente () {
+      this.eliminarDialogAccidentes = false
+      let accidentesId = Number(this.accidenteSelected)
+      console.log('accidentesId', accidentesId)
+      this.$store.dispatch('deleteAccidentes', accidentesId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Accidente borrada con exito.'
+          this.color = 'success'
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }
