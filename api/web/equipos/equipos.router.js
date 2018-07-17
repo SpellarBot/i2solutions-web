@@ -118,12 +118,12 @@ module.exports = (app) => {
       }
     })
 
-  // identificador: API_5
+  // identificador: API_6
   // obtener equipos por areas
   app.route('/equipos/areas/:areasId')
     .get((req, res) => {
       let params = utils.jsonToInt(req.params, ['areasId'])
-      let { PARAMS } = schema.API_4_SCHEMA
+      let { PARAMS } = schema.API_6_SCHEMA
       let [errParams, mensajeParams] = validar(PARAMS, params)
       if (errParams) {
         let resp = responses.NO_OK({ ...mensajeParams })
@@ -131,7 +131,7 @@ module.exports = (app) => {
         res.json(resp)
       } else {
         let { areasId } = req.params
-        Controller.Obtener({ id: areasId }).then((resp) => {
+        Controller.ObtenerPorAreas({ id: areasId }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {
@@ -141,20 +141,43 @@ module.exports = (app) => {
       }
     })
 
-  // identificador: API_6
+  // identificador: API_7
   // obtener equipos por puestos
-  app.route('/equipos/puestos/:areasId')
+  app.route('/equipos/puestos/:puestosId')
     .get((req, res) => {
-      let params = utils.jsonToInt(req.params, ['areasId'])
-      let { PARAMS } = schema.API_4_SCHEMA
+      let params = utils.jsonToInt(req.params, ['puestosId'])
+      let { PARAMS } = schema.API_7_SCHEMA
       let [errParams, mensajeParams] = validar(PARAMS, params)
       if (errParams) {
         let resp = responses.NO_OK({ ...mensajeParams })
         res.status(resp.codigoEstado)
         res.json(resp)
       } else {
-        let { areasId } = req.params
-        Controller.Obtener({ id: areasId }).then((resp) => {
+        let { puestosId } = req.params
+        Controller.ObtenerPorPuestos({ id: puestosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // identificador: API_8
+  // obtener un equipo
+  app.route('/equipos/:equiposId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['equiposId'])
+      let { PARAMS } = schema.API_8_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { equiposId } = req.params
+        Controller.Obtener({ ...req.body, id: equiposId }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {

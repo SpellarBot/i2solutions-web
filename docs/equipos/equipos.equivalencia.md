@@ -2054,3 +2054,604 @@ _response_
 ___
 
 
+## Obtener equipos por area
+
+> Código: API_6
+
+> Descripción: Obtener equipos por area
+
+> Url : /api/web/equipos/areas/:areasId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C01]'>CE_API_6[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C02]'>CE_API_6[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  areasId </td>
+				<td> <a id='CE_API_6[C03]'>CE_API_6[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_6[1]__
+
+Accion de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/areas/:areasId
+
+GET /api/web/equipos/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    },
+    {
+      "id": 2,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[2]__
+
+areasId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/areas/:areasId
+
+GET /api/web/equipos/areas/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[3]__
+
+areasId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/areas/:areasId
+
+GET /api/web/equipos/areas/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "areasId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_6[4]__
+
+areasId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/areas/:areasId
+
+GET /api/web/equipos/areas/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    },
+    {
+      "id": 2,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener equipos por puestos
+
+> Código: API_7
+
+> Descripción: Obtener equipos por puestos
+
+> Url : /api/web/equipos/puestos/:puestosId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_7[C01]'>CE_API_7[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_7[C02]'>CE_API_7[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  puestosId </td>
+				<td> <a id='CE_API_7[C03]'>CE_API_7[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_7[1]__
+
+Accion de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/puestos/:puestosId
+
+GET /api/web/equipos/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    },
+    {
+      "id": 2,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[2]__
+
+puestosId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/puestos/:puestosId
+
+GET /api/web/equipos/puestos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[3]__
+
+puestosId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/puestos/:puestosId
+
+GET /api/web/equipos/puestos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_7[4]__
+
+puestosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/puestos/:puestosId
+
+GET /api/web/equipos/puestos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    },
+    {
+      "id": 2,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+## Obtener un equipo
+
+> Código: API_8
+
+> Descripción: 
+
+> Url : /api/web/equipos/:equiposId
+
+#### Clases de equivalencia
+
+<table border="1">
+  <tr>
+  	<th> </th>
+    <th>CE</th>
+    <th>Descripción</th> 
+    <th>Validez</th>
+  </tr>
+			<tr style='background-color: #82E0AA' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_8[C01]'>CE_API_8[C01]</a> </td>
+				<td>{ 'type': 'number', minimum: 1 }</td>
+				<td> válido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_8[C02]'>CE_API_8[C02]</a> </td>
+				<td>'type': !'number'</td>
+				<td> invalido  </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td>  equiposId </td>
+				<td> <a id='CE_API_8[C03]'>CE_API_8[C03]</a> </td>
+				<td>minimum: !1 </td>
+				<td> invalido  </td>
+			</tr>
+</table>
+
+
+#### Intersecciónes de clases de equivalencia o Casos de prueba
+
+__ICE_API_8[1]__
+
+Accion de forma correcta
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId
+
+GET /api/web/equipos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "descripcion": "esta hecho",
+    "nombre": "Extintor",
+    "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+    "cantidad": 1,
+    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_8[2]__
+
+equiposId no valido tipo de dato
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId
+
+GET /api/web/equipos/a
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "equiposId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_8[3]__
+
+equiposId  no valido numero
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId
+
+GET /api/web/equipos/0
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "equiposId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_8[4]__
+
+equiposId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos/:equiposId
+
+GET /api/web/equipos/1
+
+_request o body_
+```js
+
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "descripcion": "esta hecho",
+    "nombre": "Extintor",
+    "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+    "cantidad": 1,
+    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+

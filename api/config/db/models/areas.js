@@ -189,5 +189,19 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerAreasDetalle = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      // cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos
+      // , (select count(*) from personasPuestos where puestosId = p.id) as cantidadPersonas, (select count(*) from accidentes where puestosId = p.id) as cantidadAccidentes, (select count(*) from novedades where puestosId = p.id and fueAtendida = 0) as cantidadNovedadesSinAtender, (select count(*) from equiposPuestos where puestosId = p.id) as cantidadEquipos inner join puestos p on p.id = ap.puestosId
+      let query = `select a.id as id , a.nombre as areaNombre, a.actividad as areaActividad, a.descripcionLugar as areaDescripcionLugar, (select count(*) from areasPuestos where areasId = a.id) as cantidadPuestos, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on pp.puestosId = ap.id where a.id = a.id ) from areas a where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(areas => {
+          resolve(areas)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

@@ -86,5 +86,29 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorAreas = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select eq.id as id, eq.descripcion as descripcion, eq.nombre as nombre, eq.fotoUrl as fotoUrl, eq.cantidad as cantidad, ap.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre, a.id as areasId, a.nombre as areasNombre from areas a inner join areasPuestos ap on ap.areasId = a.id inner join equiposPuestos ep on ep.puestosId = ap.puestosId inner join equipos eq on eq.id = ep.equiposId where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select eq.id as id, eq.descripcion as descripcion, eq.nombre as nombre, eq.fotoUrl as fotoUrl, eq.cantidad as cantidad, ap.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from areasPuestos ap inner join equiposPuestos ep on ep.puestosId = ap.puestosId inner join equipos eq on eq.id = ep.equiposId where ap.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

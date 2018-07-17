@@ -99,7 +99,7 @@ __GET__ __/api/web/equipos/:equiposId/puestos/:puestosId__
 #### Params:
 | Name       | Type    | Desc |
 | :--------- | :------ | :-------|
-| puestosId | Number |   ---   |
+| equiposId | Number |   ---   |
 	
 | puestosId | Number |   ---   |
 	
@@ -149,6 +149,134 @@ __GET__ __/api/web/equipos/:equiposId/areas/:areasId__
     "areasId": "1",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## OBTENER EQUIPOS POR AREAS
+
+__GET__ __/api/web/equipos/areas/:areasId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| areasId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    },
+    {
+      "id": 2,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## OBTENER EQUIPOS POR PUESTOS
+
+__GET__ __/api/web/equipos/puestos/:puestosId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| puestosId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "id": 1,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    },
+    {
+      "id": 2,
+      "descripcion": "esta hecho",
+      "nombre": "Extintor",
+      "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+      "cantidad": 1,
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## OBTENER UN EQUIPO
+
+__GET__ __/api/web/equipos/:equiposId__
+
+
+#### Params:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------|
+| equiposId | Number |   ---   |
+	
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "id": 1,
+    "descripcion": "esta hecho",
+    "nombre": "Extintor",
+    "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+    "cantidad": 1,
+    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
   },
   "codigoEstado": 200
 }

@@ -499,5 +499,131 @@ module.exports = {
         }
       }
     }
+  },
+  API_6_EQUI: {
+    nombre: 'Obtener equipos por area',
+    codigo: 'API_6',
+    descripcion: 'Obtener equipos por area',
+    metodo: 'GET',
+    url: '/api/web/equipos/areas/:areasId',
+    params: [
+      { nombre: 'areasId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Accion de forma correcta',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'areasId no valido tipo de dato',
+        params: {
+          'areasId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'areasId  no valido numero',
+        params: {
+          'areasId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'areasId no exite',
+        params: {
+          'areasId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_7_EQUI: {
+    nombre: 'Obtener equipos por puestos',
+    codigo: 'API_7',
+    descripcion: 'Obtener equipos por puestos',
+    metodo: 'GET',
+    url: '/api/web/equipos/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Accion de forma correcta',
+        params: {
+          'puestosId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'puestosId no valido tipo de dato',
+        params: {
+          'puestosId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'puestosId  no valido numero',
+        params: {
+          'puestosId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'puestosId no exite',
+        params: {
+          'puestosId': { codigo: 'C01' }
+        }
+      }
+    }
+  },
+  API_8_EQUI: {
+    nombre: 'Obtener un equipo',
+    codigo: 'API_8',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/web/equipos/:equiposId',
+    params: [
+      { nombre: 'equiposId',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C03', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Accion de forma correcta',
+        params: {
+          'equiposId': { codigo: 'C01' }
+        }
+      },
+      '2': {
+        descripcion: 'equiposId no valido tipo de dato',
+        params: {
+          'equiposId': { codigo: 'C02' }
+        }
+      },
+      '3': {
+        descripcion: 'equiposId  no valido numero',
+        params: {
+          'equiposId': { codigo: 'C03' }
+        }
+      },
+      '4': {
+        descripcion: 'equiposId no exite',
+        params: {
+          'equiposId': { codigo: 'C01' }
+        }
+      }
+    }
   }
 }

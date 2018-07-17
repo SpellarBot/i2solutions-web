@@ -512,4 +512,180 @@ describe('EQUIPOS', () => {
       generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
     })
   })
+
+  describe('API_6 OBTENER POR AREAS', () => {
+    const { API_6 } = API
+    let { API_6_EQUI } = EQUI
+    let codigoApi = 'API_6'
+    let equiposId, areasId, puestosId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      puestosId = puestosCreada['id']
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      let equiposCreada = await models.equipos.Crear({ ...equipo })
+      let equiposCreada2 = await models.equipos.Crear({ ...equipo })
+      await models.equiposAreas.Crear({ equiposId: equiposCreada['id'], areasId: areaCreada['id'] })
+      await models.equiposPuestos.Crear({ equiposId: equiposCreada['id'], puestosId: puestosCreada['id'] })
+      await models.equiposPuestos.Crear({ equiposId: equiposCreada2['id'], puestosId: puestosCreada['id'] })
+      equiposId = equiposCreada['id']
+    })
+
+    it('@ICE_API_06_01 Obtener equipos por area', async () => {
+      let params = { areasId }
+      let url = `/api/web/equipos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(2)
+      generatorDocs.OK({ docs, doc: API_6, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_06_02 areasId no valido tipo de dato', async () => {
+      let params = { areasId: 'a' }
+      let url = `/api/web/equipos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_06_03 areasId  no valido numero', async () => {
+      let params = { areasId: 0 }
+      let url = `/api/web/equipos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_06_04 areasId no exite', async () => {
+      let params = { areasId }
+      let url = `/api/web/equipos/areas/${params['areasId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
+    })
+  })
+
+  describe('API_7 OBTENER POR PUESTOS', () => {
+    const { API_7 } = API
+    let { API_7_EQUI } = EQUI
+    let codigoApi = 'API_7'
+    let equiposId, areasId, puestosId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      puestosId = puestosCreada['id']
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      let equiposCreada = await models.equipos.Crear({ ...equipo })
+      let equiposCreada2 = await models.equipos.Crear({ ...equipo })
+      await models.equiposAreas.Crear({ equiposId: equiposCreada['id'], areasId: areaCreada['id'] })
+      await models.equiposPuestos.Crear({ equiposId: equiposCreada['id'], puestosId: puestosCreada['id'] })
+      await models.equiposPuestos.Crear({ equiposId: equiposCreada2['id'], puestosId: puestosCreada['id'] })
+      equiposId = equiposCreada['id']
+    })
+
+    it('@ICE_API_07_01 Obtener equipos por puestos', async () => {
+      let params = { puestosId }
+      let url = `/api/web/equipos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(2)
+      generatorDocs.OK({ docs, doc: API_7, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_07_02 puestosId no valido tipo de dato', async () => {
+      let params = { puestosId: 'a' }
+      let url = `/api/web/equipos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_07_03 puestosId  no valido numero', async () => {
+      let params = { puestosId: 0 }
+      let url = `/api/web/equipos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_07_04 puestosId no exite', async () => {
+      let params = { puestosId }
+      let url = `/api/web/equipos/puestos/${params['puestosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
+    })
+  })
+
+  describe('API_8 OBTENER UN EQUIPO', () => {
+    const { API_8 } = API
+    let { API_8_EQUI } = EQUI
+    let codigoApi = 'API_8'
+    let equiposId, areasId, puestosId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      puestosId = puestosCreada['id']
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      let equiposCreada = await models.equipos.Crear({ ...equipo })
+      let equiposCreada2 = await models.equipos.Crear({ ...equipo })
+      await models.equiposAreas.Crear({ equiposId: equiposCreada['id'], areasId: areaCreada['id'] })
+      await models.equiposPuestos.Crear({ equiposId: equiposCreada['id'], puestosId: puestosCreada['id'] })
+      await models.equiposPuestos.Crear({ equiposId: equiposCreada2['id'], puestosId: puestosCreada['id'] })
+      equiposId = equiposCreada['id']
+    })
+
+    it('@ICE_API_08_01 Obtener equipos por puestos', async () => {
+      let params = { equiposId }
+      let url = `/api/web/equipos/${params['equiposId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_8, res })
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_08_02 equiposId no valido tipo de dato', async () => {
+      let params = { equiposId: 'a' }
+      let url = `/api/web/equipos/${params['equiposId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_08_03 equiposId  no valido numero', async () => {
+      let params = { equiposId: 0 }
+      let url = `/api/web/equipos/${params['equiposId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
+    })
+
+    it('@ICE_API_08_04 equiposId no exite', async () => {
+      let params = { equiposId }
+      let url = `/api/web/equipos/${params['equiposId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
+    })
+  })
 })
