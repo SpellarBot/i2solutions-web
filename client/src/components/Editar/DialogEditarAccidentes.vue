@@ -8,12 +8,12 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
-                  v-model = "nombre"
+                  v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
-                  v-model = "descripcion"
+                  v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
                 ></v-text-field>
@@ -30,7 +30,7 @@
               >
                 <v-text-field
                   slot="activator"
-                  v-model="date"
+                  v-model="newDate"
                   label="Fecha"
                   readonly
                   required
@@ -46,43 +46,57 @@
                 ></v-date-picker>
               </v-menu>
                 <v-text-field
-                  v-model = "heridos"
+                  v-model = "newHeridos"
                   label="Número Heridos" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
-                  v-model = "fallecidos"
+                  v-model = "newMuertos"
                   label="Número Fallecidos" required
-                  :rules="[rules.required]"
-                ></v-text-field>
-                <v-text-field
-                  v-model = "heridos"
-                  label="Número Heridos" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-checkbox
       label="¿Fue atendido en la empresa?"
-      v-model="checkbox"
+      v-model="newCheckbox"
     ></v-checkbox>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
   </main>
 </template>
 <script>
+const moment = require('moment')
 export default {
   data () {
     return {
+      newNombre: '',
+      newDescripcion: '',
+      newDate: '',
+      newHeridos: null,
+      newMuertos: null,
+      newCheckbox: null,
       date: null,
       menu: false,
       valid: false,
       checkbox: false,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -93,14 +107,72 @@ export default {
   watch: {
     menu (val) {
       val && this.$nextTick(() => (this.$refs.picker.activePicker = 'Año'))
+    },
+    nombre () {
+      this.newNombre = this.nombre
+    },
+    descripcion () {
+      this.newDescripcion = this.descripcion
+    },
+    fecha () {
+      this.newDate = this.fecha
+    },
+    heridos () {
+      this.newHeridos = this.heridos
+    },
+    muertos () {
+      this.newMuertos = this.muertos
+    },
+    atencion () {
+      this.newCheckbox = this.atencion
+    },
+    date () {
+      this.newDate = moment(this.date).format('L')
+    },
+    checkbox () {
+      this.newCheckbox = this.checkbox
     }
   },
   methods: {
-    save (date) {
-      this.$refs.menu.save(date)
+    save (newDate) {
+      this.$refs.menu.save(newDate)
+    },
+    edit () {
+      let nombre = this.$data.newNombre
+      let descripcion = this.$data.newDescripcion
+      let fecha = moment(this.$data.newDate).format()
+      let heridos = Number(this.$data.newHeridos)
+      let muertos = Number(this.$data.newMuertos)
+      let atendidoEnEmpresa = this.$data.newCheckbox
+      let puestosId = this.accidentePuestoId
+      let accidentesId = Number(this.accidenteId)
+      this.$store.dispatch('updateAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId })
+        .then((resp) => {
+          for (let i = 0; i < this.$store.getters.accidentes.length; i++) {
+            let accidente = this.$store.getters.accidentes[i]
+            if (accidente.id === accidentesId) {
+              accidente.nombre = nombre
+              accidente.descripcion = descripcion
+              accidente.fecha = fecha
+              accidente.heridos = heridos
+              accidente.muertos = muertos
+              accidente.atendidoEnEmpresa = atendidoEnEmpresa
+              break
+            }
+          }
+          this.snackbar = true
+          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+          this.color = 'success'
+          this.$emit('close')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   },
-  props: ['visible'],
+  props: ['visible', 'accidenteNombre', 'accidenteDescripcion', 'accidenteFecha', 'accidenteHeridos', 'accidenteMuertos', 'accidenteAtendidoEnEmpresa', 'accidenteId', 'accidentePuestoId'],
   computed: {
     show: {
       get () {
@@ -110,6 +182,54 @@ export default {
         if (!value) {
           this.$emit('close')
         }
+      }
+    },
+    nombre: {
+      get () {
+        return this.accidenteNombre
+      },
+      set (value) {
+        this.$data.newNombre = value
+      }
+    },
+    descripcion: {
+      get () {
+        return this.accidenteDescripcion
+      },
+      set (value) {
+        this.$data.newDescripcion = value
+      }
+    },
+    fecha: {
+      get () {
+        return this.accidenteFecha
+      },
+      set (value) {
+        this.$data.newDate = value
+      }
+    },
+    heridos: {
+      get () {
+        return this.accidenteHeridos
+      },
+      set (value) {
+        this.$data.newHeridos = value
+      }
+    },
+    muertos: {
+      get () {
+        return this.accidenteMuertos
+      },
+      set (value) {
+        this.$data.newMuertos = value
+      }
+    },
+    atencion: {
+      get () {
+        return this.accidenteAtendidoEnEmpresa
+      },
+      set (value) {
+        this.$data.newCheckbox = value
       }
     }
   }

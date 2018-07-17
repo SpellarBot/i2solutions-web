@@ -51,6 +51,9 @@ export default {
   setNovedadesEstablecimientos (state, novedadesEstablecimientos) {
     state.novedadesEstablecimientos = novedadesEstablecimientos
   },
+  setNovedadesPuestos (state, novedadesPuestos) {
+    state.novedadesPuestos = novedadesPuestos
+  },
   setAreasPuestos (state, areasPuestos) {
     state.areasPuestos = areasPuestos
   },
@@ -62,5 +65,8 @@ export default {
   },
   setCapacitaciones (state, capacitaciones) {
     state.capacitaciones = capacitaciones
+  },
+  setAccidentes (state, accidentes) {
+    state.accidentes = accidentes
   }
 }

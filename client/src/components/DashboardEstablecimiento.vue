@@ -109,7 +109,7 @@
                       <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.cantidadPersonas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarAccidentes">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
+                      <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarCapacitaciones(establecimiento.id, establecimiento.nombres)">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
@@ -123,20 +123,35 @@
           </v-card>
         </v-flex>
     </v-layout>
-    <!---->
+    <!--Para Eliminar Establecimientos-->
     <v-layout row justify-center>
-    <v-dialog v-model="eliminarDialog" persistent max-width="290">
-      <v-card>
-        <v-card-title class="headline">Eliminar</v-card-title>
-        <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="eliminarDialog = false">No</v-btn>
-          <v-btn color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-layout>
+      <v-dialog v-model="eliminarDialog" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialog = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+    <!--Para elimiar Empresa-->
+    <v-layout row justify-center>
+      <v-dialog v-model="eliminarDialog2" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar esta Empresa?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialog2 = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarEmpresa()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+
   <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -161,6 +176,8 @@
     ></DialogPersonasFromEstablecimientos>
     <DialogAccidentesFromEstablecimientos
     :visible="visibleAccidentes"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromEstablecimientos>
     <DialogCapacitacionesFromEstablecimientos
@@ -243,6 +260,7 @@ export default {
       visibleEdicionEstablecimiento: false,
       visibleNovedades: false,
       eliminarDialog: false,
+      eliminarDialog2: false,
 
       empresaNombre: '',
       empresaActividadComercial: '',
@@ -293,6 +311,17 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    obtenerAccidentes (establecimientosId) {
+      this.$store.dispatch('getAccidentesFromEstablecimiento', establecimientosId)
+        .then((resp) => {
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     visualizarPuestos (establecimientoId, establecimientoNombre) {
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
@@ -301,7 +330,9 @@ export default {
     visualizarPersonas () {
       this.visiblePersonas = true
     },
-    visualizarAccidentes () {
+    visualizarAccidentes (establecimientoId, establecimientoNombre) {
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
       this.visibleAccidentes = true
     },
     visualizarCapacitaciones (establecimientoId, establecimientoNombre) {
@@ -314,6 +345,26 @@ export default {
       this.establecimientoNombres = establecimientoNombre
       this.visibleNovedades = true
     },
+    eliminarEmpresa () {
+      this.eliminarDialog2 = true
+    },
+    borrarEmpresa () {
+      this.eliminarDialog2 = false
+      let empresaId = this.id
+      this.$store.dispatch('deleteEmpresa', empresaId)
+        .then((resp) => {
+          this.snackbar = true
+          this.mensajeSnackbar = 'establecimiento borrado con exito.'
+          this.color = 'success'
+          this.reloadEmpresas()
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+
     visualizarEdicion () {
       let empresa = this.$store.getters.empresaSelected
       this.empresaId = this.id
@@ -358,11 +409,21 @@ export default {
         })
     },
     reloadEstablecimiento () {
-    //   let empresaId = this.empresaId
       this.$store.dispatch('getEstablecimientosFront', this.id)
       this.$store.dispatch('getEmpresaSola', this.id)
         .then((resp) => {
           router.push('DashboardEstablecimiento')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    reloadEmpresas () {
+      this.$store.dispatch('getEmpresas')
+        .then((resp) => {
+          router.push('/dashboard')
         })
         .catch((err) => {
           this.color = 'error'
@@ -391,6 +452,9 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    dashboard () {
+      router.push('dashboard')
     },
     verPersonas () {
       this.$store.dispatch('getPersonas')

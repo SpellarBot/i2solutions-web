@@ -65,7 +65,6 @@ export default {
       this.$store.dispatch('getPuestosFromEstablecimiento', this.establecimientoId)
         .then((resp) => {
           console.log('Done')
-          console.log('datos:', this.$store.getters.areasPuestos)
         })
         .catch((err) => {
           this.color = 'error'

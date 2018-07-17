@@ -134,34 +134,7 @@ export default {
       snackbar: false,
       agregarDialog: false,
       loading: false,
-      done: null,
-      empresas: [
-        {
-          nombre: 'Los pollos hermanos 2',
-          imagen: 'https://www.dondevive.org/wp-content/uploads/2016/05/donde-viven-el-pollo.jpg',
-          novedad: true,
-          id: 0
-        },
-        {
-          nombre: 'Empaquetados Mendoza',
-          imagen: 'http://mudanzasdiagonal.com/img/empaquetado-de-enseres.jpg',
-          novedad: false,
-          id: 1
-        },
-        {
-          nombre: 'Encotech',
-          imagen: 'https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg',
-          novedad: false,
-          id: 2
-        },
-        {
-          nombre: 'Encotech',
-          imagen: 'https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg',
-          novedad: false,
-          id: 3
-        }
-
-      ]
+      done: null
     }
   },
   mounted () {

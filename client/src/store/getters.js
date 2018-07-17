@@ -44,6 +44,9 @@ export default {
   novedadesEstablecimientos (state) {
     return state.novedadesEstablecimientos
   },
+  novedadesPuestos (state) {
+    return state.novedadesPuestos
+  },
   areasPuestos (state) {
     return state.areasPuestos
   },
@@ -55,5 +58,8 @@ export default {
   },
   capacitaciones (state) {
     return state.capacitaciones
+  },
+  accidentes (state) {
+    return state.accidentes
   }
 }

@@ -13,7 +13,7 @@
       <v-flex xs12>
         <v-card>
             <h3>Riesgos en Puesto</h3>
-            <h2> {{nombrePuesto}}</h2>
+            <h2> {{this.puesto}}</h2>
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
@@ -38,13 +38,12 @@
 </template>
 <script>
 export default {
-  name: 'DialogNovedades',
-  props: ['visible', 'EstablecimientoId'],
+  name: 'DialogRiesgosFromPuestos',
+  props: ['visible', 'puestoId', 'puestoNombre'],
   mounted () {
   },
   data () {
     return {
-      nombrePuesto: 'Puesto1',
       size: 'sm',
       riesgos: [
         {
@@ -96,9 +95,14 @@ export default {
         }
       }
     },
-    establecimientoId: {
+    puestosId: {
       get () {
-        return this.EstablecimientoId
+        return this.puestoId
+      }
+    },
+    puesto: {
+      get () {
+        return this.puestoNombre
       }
     }
   }
