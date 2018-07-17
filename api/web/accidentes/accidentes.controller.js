@@ -25,7 +25,7 @@ module.exports = ({ responses, db }) => {
     },
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
-        db.areas.Obtener({ id })
+        db.accidentes.Obtener({ id })
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
@@ -37,10 +37,10 @@ module.exports = ({ responses, db }) => {
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
-        db.puestos.Obtener({ id: puestosId })
+        db.accidentes.Obtener({ id: puestosId })
           .then((resp) => {
             if (resp) {
-              db.areas.Actualizar(datos)
+              db.accidentes.Actualizar(datos)
                 .then((resp) => {
                   if (resp[0].toString() === '1') {
                     resolve(responses.OK(true))

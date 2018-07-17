@@ -51,6 +51,9 @@ export default {
   setNovedadesEstablecimientos (state, novedadesEstablecimientos) {
     state.novedadesEstablecimientos = novedadesEstablecimientos
   },
+  setNovedadesPuestos (state, novedadesPuestos) {
+    state.novedadesPuestos = novedadesPuestos
+  },
   setAreasPuestos (state, areasPuestos) {
     state.areasPuestos = areasPuestos
   },
@@ -62,5 +65,17 @@ export default {
   },
   setVerified (state, payload) {
     state.verified = payload
+  },
+  setEquiposPuestos (state, equipoPuesto) {
+    state.equipoPuesto = equipoPuesto
+  },
+  setRiesgosPuestos (state, riesgoPuesto) {
+    state.riesgoPuesto = riesgoPuesto
+  },
+  setCapacitaciones (state, capacitaciones) {
+    state.capacitaciones = capacitaciones
+  },
+  setAccidentes (state, accidentes) {
+    state.accidentes = accidentes
   }
 }

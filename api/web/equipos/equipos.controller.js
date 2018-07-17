@@ -23,6 +23,17 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    Obtener ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.equipos.Obtener({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.equipos.Actualizar(datos)
@@ -115,6 +126,28 @@ module.exports = ({ responses, db }) => {
               console.error(err)
               return reject(responses.ERROR_SERVIDOR)
             })
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorAreas ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.equipos.ObtenerPorAreas({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerPorPuestos ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.equipos.ObtenerPorPuestos({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
           }).catch((err) => {
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)

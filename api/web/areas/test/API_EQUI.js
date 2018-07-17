@@ -595,5 +595,41 @@ module.exports = {
         }
       }
     }
+  },
+  API_7_EQUI: {
+    nombre: 'Obtener un areas con detalles',
+    codigo: 'API_7',
+    descripcion: '',
+    metodo: 'GET',
+    url: '/api/areasDetalle/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId',
+        casos: [
+          { codigo: 'C1', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C2', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C3', descripcion: 'minimum: !1 ', valido: false }
+        ]
+      }
+    ],
+    intersecciones: {
+      '1': {
+        descripcion: 'Areas existentes',
+        params: {
+          'establecimientosId': { codigo: 'C1' }
+        }
+      },
+      '2': {
+        descripcion: 'establecimientosId no es un numero',
+        params: {
+          'establecimientosId': { codigo: 'C2' }
+        }
+      },
+      '3': {
+        descripcion: 'establecimientosId debe ser minimo 1',
+        params: {
+          'establecimientosId': { codigo: 'C3' }
+        }
+      }
+    }
   }
 }

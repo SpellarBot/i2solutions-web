@@ -171,8 +171,79 @@ export default {
       Vue.http.get('/api/web/novedades/establecimientos/' + establecimientoId)
         .then((resp) => {
           if (resp.body.estado) {
-            console.log(resp.body.datos.novedadesNoAtendidas)
             commit('setNovedadesEstablecimientos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getNovedadesFromPuestos ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/novedades/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Novedades no Atendida', resp.body.datos.novedadesNoAtendidas)
+            commit('setNovedadesPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getEquiposFromPuestos ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/equipos/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Equipos: ', resp.body.datos)
+            commit('setEquiposPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getRiesgosFromPuestos ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/riesgos/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Riesgos: ', resp.body.datos)
+            commit('setRiesgosPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getRiesgosSolo ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/riesgos/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('Novedades no Atendida', resp.body.datos)
+            commit('setNovedadesPuestos', resp.body.datos)
             return resolve()
           } else {
             commit('setError', resp.body.datos)
@@ -252,12 +323,11 @@ export default {
         })
     })
   },
-  deletePuesto ({commit}, puestoId) {
+  deletePuesto ({commit}, puestosId) {
     return new Promise((resolve, reject) => {
-      Vue.http.delete('/api/web/puestos/' + puestoId)
+      Vue.http.delete('/api/web/puestos/' + puestosId)
         .then((resp) => {
           if (resp.body.estado) {
-            console.log('entre')
             return resolve()
           } else {
             commit('setError', resp.body.datos)
@@ -495,5 +565,96 @@ export default {
           return reject(err)
         })
     })
+  },
+  getCapacitacionesFromEstablecimiento ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/capacitaciones/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setCapacitaciones', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  updateCapacitacion ({commit}, {tema, descripcion, fechaCapacitacion, nombre, capacitacionId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.put('/api/web/capacitaciones/' + capacitacionId, { tema, descripcion, fechaCapacitacion, nombre })
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getAccidentesFromEstablecimiento ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/accidentes/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setAccidentes', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  updateAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.put('/api/web/accidentes/' + accidentesId, { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId })
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getAccidentesFromPuesto ({commit}, puestoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/accidentes/puestos/' + puestoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setAccidentes', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyAccidentes ({commit}) {
+    commit('setAccidentes', null)
+  },
+  emptyAreasPuestos ({commit}) {
+    commit('setAreasPuestos', null)
   }
 }

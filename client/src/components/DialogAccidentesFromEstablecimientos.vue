@@ -1,25 +1,22 @@
 <template>
   <main id="DialogAccidentesFromEstablecimientos">
-    <v-dialog fullscreen v-model="show" @keydown.esc="show=false" hide-overlay transition="dialog-bottom-transition">
+    <v-dialog fullscreen v-model="show" @keydown.esc="closing()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
       <v-toolbar dark color="primary">
-        <v-btn icon dark @click.native="show = false">
+        <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Establecimiento Matriz</v-toolbar-title>
+        <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Accidentes: </h1>
-      <v-layout>
-        <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4'>
-          <CardAccidentes></CardAccidentes>
-          <div><b>Puesto de trabajo:</b> Empaquetado de Pollo</div>
-          <div><b>Área de trabajo:</b> Producción 1</div>
-        </v-card>
-        <v-card class='mb-4'>
-          <CardAccidentes></CardAccidentes>
-          <div><b>Puesto de trabajo:</b> Empaquetado de Pollo</div>
-          <div><b>Área de trabajo:</b> Producción 2</div>
+      <v-layout row wrap>
+        <v-flex xs12 sm6 lg4 v-for="(accidente) in this.$store.getters.accidentes" :key="accidente.id">
+        <v-card class='mb-4' >
+          <CardAccidentes
+          :accidente="accidente"
+          ></CardAccidentes>
+          <div><b>Puesto de trabajo:</b> {{ accidente.areasNombre }}</div>
+          <div><b>Área de trabajo:</b> {{ accidente.puestosNombre }}</div>
         </v-card>
       </v-flex>
       </v-layout>
@@ -31,8 +28,13 @@
 import CardAccidentes from './CardAccidentes'
 export default {
   components: { CardAccidentes },
-  name: 'DialogPuestos',
-  props: ['visible'],
+  name: 'DialogAccidentesFromEstablecimientos',
+  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  watch: {
+    show () {
+      this.cargarData()
+    }
+  },
   computed: {
     show: {
       get () {
@@ -43,6 +45,32 @@ export default {
           this.$emit('close')
         }
       }
+    }
+  },
+  methods: {
+    cargarData () {
+      this.valid = null
+      this.loading = true
+      // this.verAccidentes()
+      this.loading = false
+      this.valid = true
+    },
+    closing () {
+      this.$store.dispatch('emptyAccidentes')
+      this.show = false
+    },
+    verAccidentes () {
+      console.log(this.establecimientoId)
+      this.$store.dispatch('getAccidentesFromEstablecimiento', this.establecimientoId)
+        .then((resp) => {
+          console.log('Done')
+          console.log(this.$store.getters.accidentes)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

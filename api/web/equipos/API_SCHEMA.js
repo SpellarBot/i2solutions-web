@@ -62,5 +62,35 @@ module.exports = {
         'areasId': { 'type': 'number', minimum: 1 }
       }
     }
+  },
+  API_6_SCHEMA: {
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'areasId': { 'type': 'number', minimum: 1 }
+      }
+    }
+  },
+  API_7_SCHEMA: {
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'puestosId': { 'type': 'number', minimum: 1 }
+      }
+    }
+  },
+  API_8_SCHEMA: {
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'equiposId': { 'type': 'number', minimum: 1 }
+      }
+    }
   }
 }

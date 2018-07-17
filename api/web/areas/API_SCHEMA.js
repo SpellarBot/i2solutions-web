@@ -76,5 +76,18 @@ module.exports = {
     RESPONSE: {
 
     }
+  },
+  API_7_SCHEMA: {
+    PARAMS: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'establecimientosId': { 'type': 'number', minimum: 1 }
+      }
+    },
+    RESPONSE: {
+
+    }
   }
 }

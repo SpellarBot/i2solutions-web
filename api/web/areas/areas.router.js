@@ -145,4 +145,27 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_7
+  // Obtener un areas por establecimiento con detalles de cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos
+  app.route('/areasDetalle/establecimientos/:establecimientosId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['establecimientosId'])
+      let { PARAMS } = schema.API_7_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { establecimientosId } = req.params
+        Controller.ObtenerAreasDetalle({ id: establecimientosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

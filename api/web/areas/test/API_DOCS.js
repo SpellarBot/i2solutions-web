@@ -75,5 +75,16 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_7: {
+    nombre: 'Obtener un areas por establecimiento con detalles de cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/areas/puestos/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
   }
 }

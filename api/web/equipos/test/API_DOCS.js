@@ -59,8 +59,41 @@ module.exports = {
     descripcion: '',
     url: '/api/web/equipos/:equiposId/puestos/:puestosId',
     params: [
-      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' },
+      { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' },
       { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_6: {
+    nombre: 'OBTENER EQUIPOS POR AREAS',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/equipos/areas/:areasId',
+    params: [
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_7: {
+    nombre: 'OBTENER EQUIPOS POR PUESTOS',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/equipos/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_8: {
+    nombre: 'OBTENER UN EQUIPO',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/equipos/:equiposId',
+    params: [
+      { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

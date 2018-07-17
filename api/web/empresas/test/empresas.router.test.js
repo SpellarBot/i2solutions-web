@@ -1,5 +1,6 @@
 const request = require('supertest')
 const expect = require('chai').expect
+const sinon = require('sinon')
 const rfr = require('rfr')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
@@ -30,10 +31,14 @@ describe('EMPRESAS', () => {
   let area = areas.VALIDOS[0]
   let puesto = puestos.VALIDOS[0]
   let novedad = novedades.VALIDOS[0]
+  beforeEach(async () => {
+    clock = sinon.useFakeTimers(new Date(2011,9,1).getTime())
+  })
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
   after('Desconectar la base de datos', function () {
+    clock.restore()
     generatorDocs.generateAPI({ docs, archivo: 'api.empresas.md', nombre: 'Empresas' })
     generatorDocs.EQUI({ equivalencias, nombre: 'Empresas' })
   })

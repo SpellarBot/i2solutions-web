@@ -176,8 +176,8 @@ _response_
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
-    "fechaActualizacion": "2018-07-16T02:18:53.009Z",
-    "fechaCreacion": "2018-07-16T02:18:53.009Z"
+    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
+    "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
   "codigoEstado": 200
 }
@@ -2585,14 +2585,15 @@ _response_
   "estado": true,
   "datos": {
     "id": 1,
-    "actividad": "gerencia",
-    "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
-    "metrosCuadrados": "20x20",
-    "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-    "fechaCreacion": "2018-07-16 02:18:55.249 +00:00",
-    "fechaActualizacion": "2018-07-16 02:18:55.249 +00:00",
-    "establecimientosId": 1
+    "descripcion": null,
+    "nombre": null,
+    "heridos": null,
+    "atendidoEnEmpresa": null,
+    "muertos": null,
+    "fecha": null,
+    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
+    "puestosId": 1
   },
   "codigoEstado": 200
 }
@@ -2762,6 +2763,7 @@ _response_
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Caída de instrumentos",
       "descripcion": "Se cayó la solución",
       "heridos": "1",
@@ -2944,13 +2946,17 @@ _response_
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Caída de instrumentos",
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,
       "muertos": 0,
       "fecha": "2014-05-21 19:27:28.576 +00:00",
-      "puestosId": 1
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general",
+      "areasId": 1,
+      "areasNombre": "Gerente General"
     }
   ],
   "codigoEstado": 200
@@ -3121,13 +3127,15 @@ _response_
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "nombre": "Caída de instrumentos",
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,
       "muertos": 0,
       "fecha": "2014-05-21 19:27:28.576 +00:00",
-      "puestosId": 1
+      "puestosId": 1,
+      "puestosNombre": "Oficina de gerente general"
     }
   ],
   "codigoEstado": 200

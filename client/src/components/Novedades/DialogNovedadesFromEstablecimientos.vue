@@ -24,8 +24,9 @@
                   <div style="text-align:center"><b>Descripción</b></div>
                   <div>{{novedad.descripcion}}</div>
                   <div><b>prioridad: </b>{{novedad.prioridad}}</div>
-                  <div><b>fecha: </b>{{novedad.fecha}}</div>
-                  <div><b>Puesto: </b>{{novedad.puestosId}}</div>
+                  <div><b>fecha: </b>{{fecha(novedad.fecha)}}</div>
+                  <div><b>Puesto: </b>{{novedad.puestosNombre}}</div>
+                  <div><b>Areas: </b>{{novedad.areasNombre}}</div>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -58,6 +59,7 @@
   </main>
 </template>
 <script>
+const moment = require('moment')
 export default {
   name: 'DialogNovedadesFromEstablecimiento',
   props: ['visible', 'establecimientoId', 'establecimientoNombre'],
@@ -65,36 +67,9 @@ export default {
   }, */
   data () {
     return {
-      // nombreEstablecimiento: 'Matriz',
       mensajeSnackbar: '',
       color: '',
-      snackbar: false,
-      novedades: [
-        {
-          'id': 1,
-          'descripcion': 'Extintores en deshuso, algunos caducados y con falta de mantenimiento',
-          'prioridad': 'Alta',
-          'fecha': '17/09/2017',
-          'area': 'Administrativa',
-          'puesto': 'Empacadora de Pollos'
-        },
-        {
-          'id': 2,
-          'descripcion': 'Mal Olor en puestos específicos del area de trabajo, poca operabilidad',
-          'prioridad': 'Media',
-          'fecha': '17/09/2015',
-          'area': 'Coorporativa',
-          'puesto': 'Empacadora de Carnes'
-        },
-        {
-          'id': 3,
-          'descripcion': 'Piso Mojado debido a la reciente limpieza, ocaciona inconvenientes',
-          'prioridad': 'Baja',
-          'fecha': '17/09/1997',
-          'area': 'Contabilidad',
-          'puesto': 'Area de Presupuesto'
-        }
-      ]
+      snackbar: false
     }
   },
 
@@ -116,6 +91,9 @@ export default {
     }
   },
   methods: {
+    fecha: function (date) {
+      return moment(date).format('L')
+    },
     cargarData () {
       this.valid = null
       this.loading = true

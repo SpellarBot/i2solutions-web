@@ -13,11 +13,11 @@
       <v-flex xs12>
         <v-card>
             <h3>Equipo en Puesto</h3>
-            <h2> {{nombrePuesto}}</h2>
+            <h2> {{this.puesto}}</h2>
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="equipo in equipos"
+                v-for="equipo in this.$store.getters.equipoPuesto"
                 :key="equipo.id"
                 xs3 lg4>
                 <v-card style="padding:10px; margin:25px;" >
@@ -42,46 +42,18 @@
 </template>
 <script>
 export default {
-  name: 'DialogNovedades',
-  props: ['visible', 'EstablecimientoId'],
-  mounted () {
-  },
+  name: 'DialogEquiposFromPuestos',
+  props: ['visible', 'puestoId', 'puestoNombre'],
+  /* mounted () {
+  }, */
   data () {
     return {
-      nombrePuesto: 'Puesto1',
-      size: 'sm',
-      equipos: [
-        {
-          'equipoId': 1,
-          'equipo': 'Peladora',
-          'cantidad': 20,
-          'foto': 'http://lorempixel.com/500/500/food'
-        },
-        {
-          'equipoId': 2,
-          'equipo': 'Empacadora',
-          'cantidad': 10,
-          'foto': 'http://lorempixel.com/500/500/any'
-        },
-        {
-          'equipoId': 3,
-          'equipo': 'Peladora',
-          'cantidad': 25,
-          'foto': 'http://lorempixel.com/500/500/people'
-        },
-        {
-          'equipoId': 4,
-          'equipo': 'Camiones',
-          'cantidad': 4,
-          'foto': 'http://lorempixel.com/500/500/nature'
-        },
-        {
-          'equipoId': 5,
-          'equipo': 'Cortadora',
-          'cantidad': 20,
-          'foto': 'http://lorempixel.com/500/500/food'
-        }
-      ]
+      size: 'sm'
+    }
+  },
+  watch: {
+    show () {
+      this.cargarData()
     }
   },
   computed: {
@@ -95,11 +67,43 @@ export default {
         }
       }
     },
-    establecimientoId: {
+    puestosId: {
       get () {
-        return this.EstablecimientoId
+        return this.puestoId
+      }
+    },
+    puesto: {
+      get () {
+        return this.puestoNombre
       }
     }
+  },
+  methods: {
+    fecha: function (date) {
+      return moment(date).format('L')
+    },
+    cargarData () {
+      this.valid = null
+      this.loading = true
+      this.verEquiposFromPuestos()
+      this.loading = false
+      this.valid = true
+      console.log('LOG')
+    },
+    verEquiposFromPuestos() {
+      let puestosId = this.puestoId
+      this.$store.dispatch('getEquiposFromPuestos', puestosId)
+        .then((resp) => {
+          console.log('Done')
+          console.log('Datos', this.$store.getters.equipoPuesto)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    }
+
   }
 }
 </script>

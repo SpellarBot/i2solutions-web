@@ -1,5 +1,6 @@
 const request = require('supertest')
 const expect = require('chai').expect
+const sinon = require('sinon')
 const rfr = require('rfr')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
@@ -40,6 +41,7 @@ describe('AREAS', () => {
     await db.Limpiar()
   })
   beforeEach(async () => {
+    clock = sinon.useFakeTimers(new Date(2011,9,1).getTime())
     let empresaCreada = await models.empresas.Crear(empresa)
     let empresasId = empresaCreada['id']
     let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
@@ -48,6 +50,7 @@ describe('AREAS', () => {
     establecimientosId2 = establecimientosCreada2['id']
   })
   after('Desconectar la base de datos', function() {
+    clock.restore()
     generatorDocs.generateAPI({ docs, archivo: 'api.areas.md', nombre: 'Areas' })
     generatorDocs.EQUI({ equivalencias, nombre: 'Areas' })
   })
@@ -532,6 +535,58 @@ describe('AREAS', () => {
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })
+    })
+  })
+
+  describe('API_7 Obtener un areas con detalles', () => {
+    const { API_7 } = API
+    let { API_7_EQUI } = EQUI
+    let codigoApi = 'API_7'
+
+    let areasId = -1
+    beforeEach(async () => {
+      let areasCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areasCreada2 = await models.areas.Crear({ ...area2, establecimientosId })
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      let puestosCreada2 = await models.puestos.Crear({ ...puesto2 })
+      let puestosCreada3 = await models.puestos.Crear({ ...puesto3 })
+      let personaCreada = await models.personas.Crear({ ...persona })
+      await models.personasPuestos.Crear({ puestosId: puestosCreada['id'], personasId: personaCreada['id']})
+      await models.areasPuestos.Crear({ areasId: areasCreada['id'], puestosId: puestosCreada['id'] })
+      await models.areasPuestos.Crear({ areasId: areasCreada['id'], puestosId: puestosCreada2['id'] })
+      await models.areasPuestos.Crear({ areasId: areasCreada2['id'], puestosId: puestosCreada3['id'] })
+      await models.accidentes.Crear({ ...accidente, puestosId: puestosCreada['id'] })
+      await models.accidentes.Crear({ ...accidente, puestosId: puestosCreada2['id'] })
+      await models.novedades.Crear({ ...novedad, puestosId: personaCreada['id'] })
+      areasId = areasCreada['id']
+    })
+
+    it('@ICE_API_7_01 Obtener areas', async () => {
+      let params = { establecimientosId }
+      let url = `/api/web/areasDetalle/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_7_EQUI, res, url, params, codigoApi })
+      generatorDocs.OK({ docs, doc: API_7, res })
+    })
+
+    it('@ICE_API_7_02 establecimientosId no es un numero', async () => {
+      let params = { establecimientosId: 'a' }
+      let url = `/api/web/areasDetalle/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_7_EQUI, res, url, params, codigoApi })
+    })
+
+    it('@ICE_API_7_03 establecimientosId debe ser minimo 1', async () => {
+      let params = { establecimientosId: 0 }
+      let url = `/api/web/areasDetalle/establecimientos/${params['establecimientosId']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(false)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_7_EQUI, res, url, params, codigoApi })
     })
   })
 })

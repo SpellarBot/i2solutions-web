@@ -44,16 +44,31 @@ export default {
   novedadesEstablecimientos (state) {
     return state.novedadesEstablecimientos
   },
+  novedadesPuestos (state) {
+    return state.novedadesPuestos
+  },
   areasPuestos (state) {
     return state.areasPuestos
   },
   equipos (state) {
     return state.equipos
   },
-  equipoSelected () {
-    return this.equipoSelected
-  },
   verified () {
     return this.verified
+  },
+  equipoPuesto (state) {
+    return state.equipoPuesto
+  },
+  riesgoPuesto (state) {
+    return state.riesgoPuesto
+  },
+  equipoSelected (state) {
+    return state.equipoSelected
+  },
+  capacitaciones (state) {
+    return state.capacitaciones
+  },
+  accidentes (state) {
+    return state.accidentes
   }
 }
