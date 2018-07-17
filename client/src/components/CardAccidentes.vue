@@ -26,6 +26,7 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
+            <footer>
             <v-layout row justify-center>
             <v-dialog v-model="eliminarDialogAccidentes" persistent max-width="290">
               <v-card>
@@ -61,6 +62,7 @@
           :accidentePuestoId="accidentePuestoId"
           @close="visibleEdicion=false"
           ></DialogEditarAccidentes>
+        </footer>
   </main>
 </template>
 <script>
@@ -81,7 +83,8 @@ export default {
       accidenteId: '',
       accidentePuestoId: '',
       accidenteSelected: 0,
-      eliminarDialogAccidentes: false
+      eliminarDialogAccidentes: false,
+      snackbar: false
     }
   },
   computed: {

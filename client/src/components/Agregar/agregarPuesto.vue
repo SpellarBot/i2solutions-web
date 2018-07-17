@@ -12,7 +12,7 @@
                   label="Nombre"
                   required
                   :rules="[rules.required, rules.nameMin]"
-                >              
+                >
             </v-text-field>
             <v-text-field
                   label="Descricpión"

@@ -53,7 +53,7 @@ module.exports = (app) => {
     })
 
   // identificador: API_3
-  // eliminar un establecimiento
+  // eliminar una Capacitación
   app.route('/capacitaciones/:capacitacionesId')
     .delete((req, res) => {
       let params = utils.jsonToInt(req.params, ['capacitacionesId'])

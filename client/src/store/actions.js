@@ -367,12 +367,13 @@ export default {
             return resolve()
           } else {
             commit('setError', resp.body.datos)
+            console.log('Segunda Parte de Accidentes')
             console.log(resp.body.datos)
             return reject(resp.body.datos)
           }
         }).catch((err) => {
           commit('setError', err)
-          console.log(err)
+          console.log('3 partes', err)
           return reject(err)
         })
     })
