@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorArea = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select c.nombre as nombre, c.id as id, c.fechaCapacitacion as fechaCapacitacion, c.tema as tema, c.areasId as areasId from areas a inner join capacitaciones c on c.areasId = a.id where a.id = ${id}`
+      let query = `select c.nombre as nombre, c.id as id, c.descripcion as descripcion, c.fechaCapacitacion as fechaCapacitacion, c.tema as tema, c.areasId as areasId from areas a inner join capacitaciones c on c.areasId = a.id where a.id = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(capacitaciones => {
           resolve(capacitaciones)

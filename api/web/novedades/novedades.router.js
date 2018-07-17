@@ -144,7 +144,7 @@ module.exports = (app) => {
     })
 
   // identificador: API_7
-  // obtener por areas
+  // obtener por puestos
   app.route('/novedades/puestos/:puestosId')
     .get((req, res) => {
       let params = utils.jsonToInt(req.params, ['puestosId'])

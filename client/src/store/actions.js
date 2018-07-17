@@ -184,18 +184,22 @@ export default {
     })
   },
   getNovedadesFromAreas ({commit}, areasId) {
+    console.log('entre')
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/novedades/areas/' + areasId)
         .then((resp) => {
           if (resp.body.estado) {
             commit('setNovedadesAreas', resp.body.datos)
+            console.log(resp.body.datos)
             return resolve()
           } else {
             commit('setError', resp.body.datos)
+            console.log('error posible', resp.body.datos)
             return reject(resp.body.datos)
           }
         }).catch((err) => {
           commit('setError', err)
+          console.log('error:', err)
           return reject(err)
         })
     })

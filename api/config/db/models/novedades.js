@@ -177,7 +177,8 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorAreas = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where a.id = ${id}`
+      // Esto agregue antes del from (select nombre from puestos where id = ap.puestosId) as puestosNombre (Es el único cambio que he hecho)
+      let query = `select n.id as id, n.descripcion as descripcion, n.prioridad as prioridad, n.fecha as fecha, n.fotoUrl as fotoUrl, n.fueAtendida as fueAtendida, n.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where a.id = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(novedades => {
           let novedadesAtendidas = []

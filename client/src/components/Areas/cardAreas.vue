@@ -20,13 +20,13 @@
                           <span class="link" v-on:click="dumb=true">#Personas: {{numPersonas}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarNovedades">#Puestos: {{numPuestos}}</span>
+                          <span class="link" >#Puestos: {{numPuestos}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="dumb=true">#Capacitaciones: {{numCapacitaciones}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarEquipos">#Novedades: {{novedades}}</span>
+                          <span class="link" v-on:click="visualizarNovedades">#Novedades: {{novedades}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarRiesgos">#Equipos: {{equipos}}</span>
@@ -36,10 +36,12 @@
                 </v-card-text>
             </v-card>
     <footer>
-    <DialogNovedadesFromPuestos
+    <DialogNovedadesFromAreas
+    :idArea="idArea"
+    :nombre="nombre"
     :visible ="visibleNovedades"
     @close ="visibleNovedades=false">
-    </DialogNovedadesFromPuestos>
+    </DialogNovedadesFromAreas>
     <DialogEquiposFromPuestos
     :visible ="visibleEquipos"
     @close ="visibleEquipos=false">
@@ -53,19 +55,21 @@
 </template>
 
 <script>
-import DialogNovedadesFromPuestos from '../Novedades/DialogNovedadesFromPuestos'
+import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
 import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
 import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 export default{
-  components: {DialogNovedadesFromPuestos, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromPuestos, DialogRiesgosFromPuestos},
   name: 'puestosPorArea',
-  props: ['nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos'],
+  props: ['nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'idArea'],
   data () {
     return {
       dumb: false,
       visibleNovedades: false,
       visibleEquipos: false,
       visibleRiesgos: false,
+      nombreArea: '',
+
       puestos:
       [
         {
@@ -111,11 +115,10 @@ export default{
     visualizarRiesgos () {
       this.visibleRiesgos = true
     },
-    visualizarNovedadesFromAreas (areaId, areaNombre) {
-      this.areaId = areaId
-      this.areaNombre = areaNombre
+    visualizarNovedadesFromAreas () {
+      this.nombreArea = this.nombre
       this.visibleNovedades = true
-    },
+    }
   }
 }
 </script>

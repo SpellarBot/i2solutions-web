@@ -85,12 +85,12 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
-
-  define.BorrarPorPuestos = function ({ id }) {
+  define.Borrar = function ({ id }) {
+    // Aqui Cambie la definición de boorarPuestos a simplemente Borrar
     return new Promise((resolve, reject) => {
       this.destroy({
         where: {
-          puestosId: id
+          id
         }})
         .then((rowDeleted) => {
           if (rowDeleted > 0) {

@@ -22,7 +22,7 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-          <footer>
+      <footer>
             <DialogEditarCapacitaciones
             :visible="visibleEdicion"
             :capacitacionTema="capacitacionTema"
@@ -55,7 +55,7 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
-          </footer>
+  </footer>
   </main>
 </template>
 <script>
@@ -124,4 +124,4 @@ export default {
 }
 </script>
 <style>
-  </style>
+</style>

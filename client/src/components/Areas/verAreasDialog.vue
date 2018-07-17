@@ -13,6 +13,7 @@
         <v-layout row wrap align-center>
             <v-flex md4 v-for="area in $store.getters.areas" :key="area.id" class="text-xs-center">
               <cardAreas
+                :idArea = "area.id"
                 :nombre = "area.areaNombre"
                 :actividad = "area.areaActividad"
                 :descripcion = "area.areaDescripcionLugar"

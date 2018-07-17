@@ -62,10 +62,11 @@ module.exports = ({ responses, db }) => {
     },
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
-        db.areas.Borrar({ id })
+        // cambie de db.areas a db.accidentes
+        db.accidentes.Borrar({ id })
           .then((resp) => {
             if (!resp) {
-              resolve(responses.NO_OK('areas con es id no existe'))
+              resolve(responses.NO_OK('accidentes con es id no existe'))
             } else {
               resolve(responses.OK(resp))
             }
