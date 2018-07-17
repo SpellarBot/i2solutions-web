@@ -29,6 +29,8 @@ export const store = new Vuex.Store({
     novedadesEstablecimientos: null,
     novedadesPuestos: null,
     equipos: null,
+    equipoPuesto: null,
+    riesgoPuesto: null,
     equipoSelected: null,
     capacitaciones: null,
     accidentes: null

@@ -63,6 +63,12 @@ export default {
   setEquipoSelected (state, equipoSelected) {
     state.equipoSelected = equipoSelected
   },
+  setEquiposPuestos (state, equipoPuesto) {
+    state.equipoPuesto = equipoPuesto
+  },
+  setRiesgosPuestos (state, riesgoPuesto) {
+    state.riesgoPuesto = riesgoPuesto
+  },
   setCapacitaciones (state, capacitaciones) {
     state.capacitaciones = capacitaciones
   },
