@@ -8,10 +8,10 @@
   </div>
     </template>
     <template class="content" v-if="valid">
-    <v-dialog fullscreen v-model="show" @keydown.esc="show=false" hide-overlay transition="dialog-bottom-transition">
+    <v-dialog fullscreen v-model="show" @keydown.esc="closing()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
       <v-toolbar dark color="primary">
-        <v-btn icon dark @click.native="show = false">
+        <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
         <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
@@ -56,10 +56,14 @@ export default {
     cargarData () {
       this.valid = null
       this.loading = true
-      this.verAreasPuestos()
+      // this.verAreasPuestos()
       this.loading = false
       this.valid = true
       console.log('LOG')
+    },
+    closing () {
+      this.$store.dispatch('emptyAreasPuestos')
+      this.show = false
     },
     verAreasPuestos () {
       this.$store.dispatch('getPuestosFromEstablecimiento', this.establecimientoId)
