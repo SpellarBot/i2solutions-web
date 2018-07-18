@@ -1,5 +1,5 @@
 <template>
-  <main id="DialogPuestosFromEstablecimientos">
+  <main id="DialogPuestosFromAreas">
     <template v-if="loading">
       <div class="text-xs-center">
     <v-progress-circular
@@ -14,17 +14,15 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
+        <v-toolbar-title>Área {{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
-      <div v-for="(area) in this.$store.getters.areasPuestos" :key="area.id">
-      <h1>Área: {{ area.nombre }}</h1>
-      <h3>Puestos de trabajo:</h3>
+      <h1>Puestos de trabajo</h1>
       <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 md6 lg4 v-for="(puesto) in area.puestos" :key="puesto.id">
+          <v-flex xs12 md6 lg4 v-for="(puesto) in this.$store.getters.puestos" :key="puesto.id">
             <CardPuestos
             :puesto = "puesto"
-            :areaId = "area.id"
+            :areaId = "idArea"
             :editMode = "editMode"
             ></CardPuestos>
           </v-flex>
@@ -48,7 +46,7 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      editMode: 0,
+      editMode: 1
     }
   },
   /* mounted () {
@@ -58,14 +56,13 @@ export default {
     cargarData () {
       this.valid = null
       this.loading = true
-      console.log(this.editMode)
       // this.verAreasPuestos()
       this.loading = false
       this.valid = true
       console.log('LOG')
     },
     closing () {
-      this.$store.dispatch('emptyAreasPuestos')
+      this.$store.dispatch('emptyPuestos')
       this.show = false
     },
     verAreasPuestos () {
@@ -80,13 +77,13 @@ export default {
         })
     }
   },
-  name: 'DialogPuestosFromEstablecimientos',
+  name: 'DialogPuestosFromAreas',
   watch: {
     show () {
       this.cargarData()
     }
   },
-  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  props: ['visible', 'areaId', 'areaNombre'],
   computed: {
     show: {
       get () {
@@ -96,6 +93,11 @@ export default {
         if (!value) {
           this.$emit('close')
         }
+      }
+    },
+    idArea: {
+      get () {
+        return this.areaId
       }
     }
   }

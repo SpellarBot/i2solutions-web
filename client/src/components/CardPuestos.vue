@@ -46,6 +46,7 @@
     :puestoDescripcion="puestoDescripcion"
     :puestoId="puestoId"
     :areaId="areaIdEdit"
+    :editMode="editModes"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromPuestos
@@ -101,7 +102,7 @@ import DialogNovedadesFromPuestos from './Novedades/DialogNovedadesFromPuestos'
 import DialogRiesgosFromPuestos from './Riesgos/DialogRiesgosFromPuestos'
 import DialogEquiposFromPuestos from './Equipos/DialogEquiposFromPuestos'
 export default {
-  props: [ 'puesto', 'areaId' ],
+  props: [ 'puesto', 'areaId', 'editMode' ],
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },
   data () {
     return {
@@ -119,7 +120,7 @@ export default {
       puestoDescripcion: '',
       puestoId: '',
       puestoSelected: 0,
-      areaIdEdit: ''
+      areaIdEdit: '',
     }
   },
   computed: {
@@ -131,6 +132,11 @@ export default {
     areasId: {
       get () {
         return this.areaId
+      }
+    },
+    editModes: {
+      get () {
+        return this.editMode
       }
     }
   },
@@ -165,7 +171,7 @@ export default {
       // }
     },
     visualizarEditar (puesto, areaId) {
-      console.log(puesto.descripcion)
+      console.log(this.editModes)
       this.puestoNombre = puesto.nombre
       this.puestoDescripcion = puesto.descripcion
       this.puestoId = puesto.id

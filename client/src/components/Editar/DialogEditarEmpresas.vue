@@ -22,6 +22,25 @@
                   label="Razón Social" required
                   :rules="[rules.required]"
                 ></v-text-field>
+                <img :src="imageUrl" height="150" v-if="imageUrl"/>
+                <v-btn v-if="imageUrl"
+                @click="emptyImage"
+                fab
+                dark
+                small
+                color="blue"
+                >
+                <v-icon>delete</v-icon>
+              </v-btn>
+          <v-text-field label="Seleccione Imagen" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+          <input
+            type="file"
+            style="display: none"
+            ref="image"
+            accept="image/*"
+            @change="onFilePicked"
+          >
+          <p>Nota: Si no selecciona una nueva imagen, se quedará con la imagen previa</p>
             </v-form>
         </v-card-text>
         <v-card-actions>
@@ -55,6 +74,9 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -117,18 +139,54 @@ export default {
     }
   },
   methods: {
+    emptyImage () {
+      this.imageName = ''
+      this.imageFile = ''
+      this.imageUrl = ''
+    },
+    pickFile () {
+            this.$refs.image.click ()
+        },
+    onFilePicked (e) {
+      const files = e.target.files
+      if(files[0] !== undefined) {
+        this.imageName = files[0].name
+        if(this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader ()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = ''
+        this.imageFile = ''
+        this.imageUrl = ''
+      }
+    },
     edit () {
       let nombre = this.$data.newNombre
       let actividadComercial = this.$data.newActividadComercial
       let razonSocial = this.$data.newRazonSocial
       let empresaId = this.empresaId
-      let urlFoto = this.empresaUrlFoto
-      console.log(urlFoto)
-      this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial, urlFoto })
+      let urlFoto = ''
+      let logo = false
+      if (this.imageUrl === ''){
+        urlFoto = this.empresaUrlFoto
+        console.log(urlFoto)
+      } else {
+        urlFoto = this.imageUrl
+        logo = true
+      }
+      this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial, urlFoto, logo })
         .then((resp) => {
+          console.log('YUP')
           this.$store.getters.empresaSelected.nombre = nombre
           this.$store.getters.empresaSelected.actividadComercial = actividadComercial
           this.$store.getters.empresaSelected.razonSocial = razonSocial
+          this.$store.getters.empresaSelected.urlFoto = urlFoto
           this.snackbar = true
           this.mensajeSnackbar = 'Empresa editada exitosamente.'
           this.color = 'success'

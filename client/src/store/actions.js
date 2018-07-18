@@ -557,10 +557,19 @@ export default {
         })
     })
   },
-  updateEmpresa ({commit}, {empresaId, nombre, actividadComercial, razonSocial, urlFoto}) {
+  updateEmpresa ({commit}, {empresaId, nombre, actividadComercial, razonSocial, urlFoto, logo}) {
     console.log({ empresaId, nombre })
-    return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
+    console.log(logo)
+    if (logo) {
+      let image = urlFoto.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
+      console.log(image)
+      return new Promise((resolve, reject) => {
+        Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
+        .then((resp) => {
+          let urlFoto = resp.body.data.link
+          console.log(urlFoto)
+          new Promise((resolve, reject) => {
+            Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
         .then((resp) => {
           if (resp.body.estado) {
             console.log('done')
@@ -573,7 +582,27 @@ export default {
           commit('setError', err)
           return reject(err)
         })
-    })
+          })
+          return resolve()
+        })
+      })
+    } else {
+      return new Promise((resolve, reject) => {
+        Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+      })
+    }
   },
   updateEstablecimiento ({commit}, {nombres, direccion, ruc, empresasId, establecimientoId}) {
     console.log({nombres, direccion, ruc, empresasId})
@@ -734,5 +763,42 @@ export default {
   },
   emptyAreasPuestos ({commit}) {
     commit('setAreasPuestos', null)
+  },
+  getPuestosFromArea ({commit}, areaId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/puestos/areas/' + areaId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setPuestos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyPuestos ({commit}) {
+    commit('setPuestos', null)
+  },
+  getCapacitacionesFromArea ({commit}, areasId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/capacitaciones/areas/' + areasId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setCapacitaciones', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
   }
 }

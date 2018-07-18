@@ -194,7 +194,7 @@
     ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
     :visible="visibleAreas"
-    :EstablecimientoId="establecimientoId"
+    :establecimientoId="establecimientoId"
     :establecimientoNombres="establecimientoNombres"
     @close="visibleAreas=false"
     ></DialogAreas>
@@ -397,7 +397,8 @@ export default {
     },
     visualizarAreas (id, nombre) {
       this.establecimientoId = id
-      this.nombreEstablecimiento = nombre
+      this.establecimientoNombres = nombre
+      console.log(this.establecimientoNombres)
       this.$store.dispatch('getAreas', this.establecimientoId)
       this.visibleAreas = true
     },

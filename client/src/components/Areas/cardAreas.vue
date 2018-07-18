@@ -11,8 +11,27 @@
                 </v-card-title>
                 <v-card-text>
                     <div>
-                      <span>{{actividad}}</span><br>
-                      <b>descripción:</b> {{descripcion}} <br>
+                      <span><b>Actividad:</b> {{actividad}}</span><br>
+                      <b>Descripción:</b> {{descripcion}} <br>
+                      <v-btn
+              fab
+              dark
+              small
+              color="blue"
+              @click="visualizarEditar(puestos, areasId)"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <!--Eliminar Puesto-->
+            <v-btn
+              fab
+              dark
+              small
+              color="blue"
+              @click="eliminarPuesto(puestos)"
+            >
+              <v-icon>delete</v-icon>
+            </v-btn>
                     </div>
                     <v-container fluid>
                       <v-layout row wrap>
@@ -20,10 +39,10 @@
                           <span class="link" v-on:click="dumb=true">#Personas: {{numPersonas}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" >#Puestos: {{numPuestos}}</span>
+                          <span class="link" v-on:click="visualizarPuestosFromAreas(nombre)">#Puestos: {{numPuestos}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="dumb=true">#Capacitaciones: {{numCapacitaciones}}</span>
+                          <span class="link" v-on:click="visualizarCapacitaciones(nombre)">#Capacitaciones: {{numCapacitaciones}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarNovedades">#Novedades: {{novedades}}</span>
@@ -35,9 +54,18 @@
                     </v-container>
                 </v-card-text>
             </v-card>
+            <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
     <footer>
     <DialogNovedadesFromAreas
-    :idArea="idArea"
+    :areaId="areaId"
     :nombre="nombre"
     :visible ="visibleNovedades"
     @close ="visibleNovedades=false">
@@ -48,22 +76,59 @@
     :visible ="visibleEquipos"
     @close ="visibleEquipos=false">
     </DialogEquiposFromAreas>
+    <DialogRiesgosFromPuestos
+    :visible ="visibleRiesgos"
+    @close ="visibleRiesgos=false">
+    </DialogRiesgosFromPuestos>
+    <DialogPuestosFromAreas
+    :visible="visiblePuestos"
+    :areaId="areaId"
+    :areaNombre="areaNombre"
+    @close="visiblePuestos=false">
+  </DialogPuestosFromAreas>
+  <!--DialogEditarAreas
+  :visible="visibleEdicion"
+  :areaId="areaId"
+  :areaNombre="areaNombre"
+  @close="visibleEdicion=false">
+</DialogEditarAreas-->
+<DialogCapacitacionesFromAreas
+:visible="visibleCapacitaciones"
+:areaId="areaId"
+:areaNombre="areaNombre"
+@close="visibleCapacitaciones=false">
+</DialogCapacitacionesFromAreas>
   </footer>
+
   </main>
 </template>
 
 <script>
 import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
 import DialogEquiposFromAreas from '../Equipos/DialogEquiposFromAreas'
+import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
+import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
+import DialogPuestosFromAreas from '../DialogPuestosFromAreas'
+// import DialogEditarAreas from '../Editar/DialogEditarAreas'
+import DialogCapacitacionesFromAreas from '../DialogCapacitacionesFromAreas'
 export default{
-  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas},
   name: 'puestosPorArea',
-  props: ['nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'idArea'],
+  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos'],
   data () {
     return {
       dumb: false,
       visibleNovedades: false,
       visibleEquipos: false,
+      visibleRiesgos: false,
+      visiblePuestos: false,
+      visibleCapacitaciones: false,
+      areaId: '',
+      areaNombre: '',
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
+      visibleEdicion: false
     }
   },
   methods: {
@@ -72,6 +137,36 @@ export default{
     },
     visualizarEquipos () {
       this.visibleEquipos = true
+    },
+    visualizarRiesgos () {
+      this.visibleRiesgos = true
+    },
+    visualizarNovedadesFromAreas () {
+      this.areaNombre = this.nombre
+      this.visibleNovedades = true
+    },
+    visualizarPuestosFromAreas (areaNombre) {
+      console.log(areaNombre)
+      this.areaId = this.id
+      this.areaNombre = areaNombre
+      this.verPuestos(this.id)
+      this.visiblePuestos = true
+    },
+    visualizarCapacitaciones (areaNombre) {
+      this.areaId = this.id
+      this.areaNombre = areaNombre
+      this.visibleCapacitaciones = true
+    },
+    verPuestos (areaId) {
+      this.$store.dispatch('getPuestosFromArea', areaId)
+        .then((resp) => {
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }
