@@ -161,7 +161,7 @@ export default {
             }
           }
           this.snackbar = true
-          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+          this.mensajeSnackbar = 'Accidente editado exitosamente.'
           this.color = 'success'
           this.$emit('close')
         })

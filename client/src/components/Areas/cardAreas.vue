@@ -13,12 +13,13 @@
                     <div>
                       <span><b>Actividad:</b> {{actividad}}</span><br>
                       <b>Descripción:</b> {{descripcion}} <br>
+                      <b>Metros Cuadrados:</b> {{areaMetrosCuadrados}} <br>
                       <v-btn
               fab
               dark
               small
               color="blue"
-              @click="visualizarEditar(puestos, areasId)"
+              @click="visualizarEditar()"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -85,12 +86,16 @@
     :areaNombre="areaNombre"
     @close="visiblePuestos=false">
   </DialogPuestosFromAreas>
-  <!--DialogEditarAreas
+  <DialogEditarAreas
   :visible="visibleEdicion"
   :areaId="areaId"
   :areaNombre="areaNombre"
+  :areaActividad="areaActividad"
+  :areaDescripcion="areaDescripcion"
+  :areaMetrosCuadrados="metrosCuadrados"
+  :areaFotoUrl="areaFotoUrl"
   @close="visibleEdicion=false">
-</DialogEditarAreas-->
+</DialogEditarAreas>
 <DialogCapacitacionesFromAreas
 :visible="visibleCapacitaciones"
 :areaId="areaId"
@@ -107,12 +112,12 @@ import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
 import DialogEquiposFromAreas from '../Equipos/DialogEquiposFromAreas'
 import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 import DialogPuestosFromAreas from '../DialogPuestosFromAreas'
-// import DialogEditarAreas from '../Editar/DialogEditarAreas'
+import DialogEditarAreas from '../Editar/DialogEditarAreas'
 import DialogCapacitacionesFromAreas from '../DialogCapacitacionesFromAreas'
 export default{
-  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas},
   name: 'puestosPorArea',
-  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos'],
+  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl'],
   data () {
     return {
       dumb: false,
@@ -123,6 +128,10 @@ export default{
       visibleCapacitaciones: false,
       areaId: '',
       areaNombre: '',
+      areaActividad: '',
+      metrosCuadrados: '',
+      areaFotoUrl: '',
+      areaDescripcion: '',
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
@@ -130,6 +139,15 @@ export default{
     }
   },
   methods: {
+    visualizarEditar () {
+      this.areaId = this.id
+      this.areaActividad = this.actividad
+      this.areaDescripcion = this.descripcion
+      this.areaFotoUrl = this.fotoUrl
+      this.metrosCuadrados = this.areaMetrosCuadrados
+      this.areaNombre = this.nombre
+      this.visibleEdicion = true
+    },
     visualizarNovedades () {
       this.visibleNovedades = true
     },

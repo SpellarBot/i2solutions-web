@@ -803,5 +803,22 @@ export default {
           return reject(err)
         })
     })
+  },
+  updateEquipos ({commit}, {nombre, descripcion, fotoUrl, cantidad, equiposId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.put('/api/web/equipos/' + equiposId, {nombre, descripcion, fotoUrl, cantidad})
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
   }
 }

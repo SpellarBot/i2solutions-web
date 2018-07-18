@@ -70,7 +70,7 @@ export default {
     state.verified = payload
   },
   setEquiposPuestos (state, equipoPuesto) {
-    state.equipoPuesto = equipoPuesto
+    state.equipoAreas = equipoPuesto
   },
   setEquiposAreas (state, equipoAreas) {
     state.equipoAreas = equipoAreas

@@ -34,6 +34,7 @@
                     dark
                     small
                     color="blue"
+                    @click="visualizarEditar(equipo)"
                   >
                     <v-icon>edit</v-icon>
                   </v-btn>
@@ -45,6 +46,7 @@
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
+                  <h3><b>Descripcion: </b>{{equipo.descripcion}}</h3>
                   <h3><b>Cantidad: </b>{{equipo.cantidad}}</h3>
                   <h3><b>Puesto: </b>{{equipo.puestosNombre}}</h3>
                 </v-card>
@@ -56,17 +58,48 @@
     </v-layout>
     </v-card>
     </v-dialog>
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
+    <footer>
+      <DialogEditarEquipos
+      :visible="visibleEdicion"
+      :equipoId="equipoId"
+      :equipoNombre="equipoNombre"
+      :equipoFotoUrl="equipoFotoUrl"
+      :equipoDescripcion="equipoDescripcion"
+      :equipoCantidad="equipoCantidad"
+      @close="visibleEdicion=false">
+    </DialogEditarEquipos>
+    </footer>
   </main>
 </template>
 <script>
+import DialogEditarEquipos from '../Editar/DialogEditarEquipos'
 export default {
+  components: { DialogEditarEquipos },
   name: 'DialogEquiposFromAreas',
   props: ['visible', 'nombre', 'areaId'],
   /* mounted () {
   }, */
   data () {
     return {
-      size: 'sm'
+      size: 'sm',
+      equipoId: '',
+      equipoNombre: '',
+      equipoDescripcion: '',
+      equipoFotoUrl: '',
+      equipoCantidad: '',
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
+      visibleEdicion: false
     }
   },
   watch: {
@@ -100,15 +133,21 @@ export default {
       this.$store.dispatch('getEquiposFromAreas', areasId)
         .then((resp) => {
           console.log('Done')
-          console.log('Datos', this.$store.getters.equipoPuesto)
         })
         .catch((err) => {
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    visualizarEditar (equipo) {
+      this.equipoNombre = equipo.nombre
+      this.equipoId = equipo.id
+      this.equipoDescripcion = equipo.descripcion
+      this.equipoFotoUrl = equipo.fotoUrl
+      this.equipoCantidad = equipo.cantidad
+      this.visibleEdicion = true
     }
-
   }
 }
 </script>

@@ -1,31 +1,21 @@
 <template>
-  <main id="DialogEditarAreas">
+  <main id="DialogEditarEquipos">
     <v-dialog v-model="show" @keydown.esc="show=false" persistent max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="headline">Editar Área</span>
+          <span class="headline">Editar Equipo</span>
         </v-card-title>
         <v-card-text>
           <p>{{ this.equipoNombre }}</p>
               <v-form v-model="valid">
-                <v-text-field
-                  v-model = "newNombre"
-                  label="Nombre" required
-                  :rules="[rules.required]"
-                ></v-text-field>
-                <v-text-field
-                  v-model = "newActividad"
-                  label="Actividad" required
-                  :rules="[rules.required]"
-                ></v-text-field>
                 <v-text-field
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
-                  v-model = "newMetrosCuadrados"
-                  label="Metros Cuadrados" required
+                  v-model = "newCantidad"
+                  label="Cantidad" required
                   :rules="[rules.required]"
                 ></v-text-field>
             </v-form>
@@ -53,9 +43,7 @@ export default {
   data () {
     return {
       newDescripcion: '',
-      newNombre: '',
-      newActividad: '',
-      newMetrosCuadrados: '',
+      newCantidad: '',
       valid: false,
       mensajeSnackbar: '',
       color: '',
@@ -66,19 +54,13 @@ export default {
       }
     }
   },
-  props: ['visible', 'areaNombre', 'areaDescripcion', 'areaActividad', 'areaMetrosCuadrados', 'areaFotoUrl', 'areaId'],
+  props: ['visible', 'equipoNombre', 'equipoCantidad', 'equipoId', 'equipoDescripcion', 'equipoFotoUrl'],
   watch: {
-    nombre () {
-      this.newNombre = this.nombre
+    cantidad () {
+      this.newCantidad = this.cantidad
     },
     descripcion () {
       this.newDescripcion = this.descripcion
-    },
-    actividad () {
-      this.newActividad = this.actividad
-    },
-    metrosCuadrados () {
-      this.newMetrosCuadrados = this.metrosCuadrados
     }
   },
   computed: {
@@ -92,56 +74,37 @@ export default {
         }
       }
     },
-    nombre: {
+    cantidad: {
       get () {
-        return this.areaNombre
+        return this.equipoCantidad
       },
       set (value) {
-        this.$data.newNombre = value
+        this.$data.newCantidad = value
       }
     },
     descripcion: {
       get () {
-        return this.areaDescripcion
+        return this.equipoDescripcion
       },
       set (vaule) {
         this.$data.newDescripcion = value
-      }
-    },
-    actividad: {
-      get () {
-        return this.areaActividad
-      },
-      set (value) {
-        this.$data.newActividad = value
-      }
-    },
-    metrosCuadrados: {
-      get () {
-        return this.areaMetrosCuadrados
-      },
-      set () {
-        this.$data.newMetrosCuadrados = value
       }
     }
   },
   methods: {
     edit () {
-      let nombre = this.$data.newNombre
-      let descripcionLugar = this.$data.newDescripcion
-      let fotoUrl = this.areaFotoUrl
-      let actividad = this.$data.newActividad
-      let metrosCuadrados = this.$data.newMetrosCuadrados
-      let areasId = this.areaId
-      this.$store.dispatch('updateArea', {areasId, nombre, actividad, fotoUrl, metrosCuadrados, descripcionLugar })
+      let nombre = this.equipoNombre
+      let descripcion = this.$data.newDescripcion
+      let fotoUrl = this.equipoFotoUrl
+      let cantidad = Number(this.$data.newCantidad)
+      let equiposId = this.equipoId
+      this.$store.dispatch('updateEquipos', { nombre, descripcion, fotoUrl, cantidad, equiposId })
         .then((resp) => {
-          for (let i = 0; i < this.$store.getters.areas.length; i++) {
-            let area = this.$store.getters.areas[i]
-            if (area.id === areasId) {
-              area.areaNombre = nombre
-              area.areaActividad = actividad
-              area.areaDescripcionLugar = descripcionLugar
-              area.areaMetrosCuadrados = metrosCuadrados
+          for (let i = 0; i < this.$store.getters.equipoAreas.length; i++) {
+            let equipo = this.$store.getters.equipoAreas[i]
+            if (equipo.id === equiposId) {
+              equipo.descripcion = descripcion
+              equipo.cantidad = cantidad
               break
             }
           }

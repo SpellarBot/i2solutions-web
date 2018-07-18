@@ -22,6 +22,8 @@
                 :numCapacitaciones = "area.cantidadCapacitaciones"
                 :novedades = "area.cantidadNovedades"
                 :equipos = "area.cantidadEquipos"
+                :areaMetrosCuadrados = "area.areaMetrosCuadrados"
+                :fotoUrl = "area.areaFotoUrl"
                 >
               </cardAreas>
           </v-flex>
