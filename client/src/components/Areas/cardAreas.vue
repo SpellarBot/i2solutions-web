@@ -22,7 +22,6 @@
             >
               <v-icon>edit</v-icon>
             </v-btn>
-            <!--Eliminar Puesto-->
             <v-btn
               fab
               dark

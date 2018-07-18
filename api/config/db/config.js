@@ -19,7 +19,7 @@ const datos = () => {
   } else if (usuario === 'ALEX-PC') {
     return {
       'username': 'root',
-      'password': 'Aisakataiga1',
+      'password': 'ELGIGAROOT',
       'database': 'i2solutions_development',
       'host': '127.0.0.1',
       'logging': false,
