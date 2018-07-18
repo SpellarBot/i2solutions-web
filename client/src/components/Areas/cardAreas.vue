@@ -70,7 +70,7 @@
     @close ="visibleNovedades=false">
     </DialogNovedadesFromAreas>
     <DialogEquiposFromAreas
-    :idArea="idArea"
+    :areaId="areaId"
     :nombre="nombre"
     :visible ="visibleEquipos"
     @close ="visibleEquipos=false">
