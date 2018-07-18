@@ -12,9 +12,8 @@
       <v-layout>
       <v-flex xs12>
         <v-card>
-            <h1><b>Establecimiento: </b>{{establecimientoNombre}}</h1>
+            <h1><b>Establecimiento: </b>{{establecimientoNombres}}</h1>
           <v-container  fluid>
-            <h2>Novedades Sin Atender</h2>
             <v-layout row wrap>
               <v-flex
                 v-for="(novedad) in this.$store.getters.novedadesEstablecimientos.novedadesNoAtendidas"
@@ -62,7 +61,7 @@
 const moment = require('moment')
 export default {
   name: 'DialogNovedadesFromEstablecimiento',
-  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  props: ['visible', 'establecimientoId', 'establecimientoNombres'],
   /* mounted () {
   }, */
   data () {
