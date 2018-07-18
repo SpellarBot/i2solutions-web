@@ -48,7 +48,7 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      editMode: 0,
+      editMode: 0
     }
   },
   /* mounted () {

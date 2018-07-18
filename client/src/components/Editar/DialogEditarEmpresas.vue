@@ -145,16 +145,16 @@ export default {
       this.imageUrl = ''
     },
     pickFile () {
-            this.$refs.image.click ()
-        },
+      this.$refs.image.click()
+    },
     onFilePicked (e) {
       const files = e.target.files
-      if(files[0] !== undefined) {
+      if (files[0] !== undefined) {
         this.imageName = files[0].name
-        if(this.imageName.lastIndexOf('.') <= 0) {
+        if (this.imageName.lastIndexOf('.') <= 0) {
           return
         }
-        const fr = new FileReader ()
+        const fr = new FileReader()
         fr.readAsDataURL(files[0])
         fr.addEventListener('load', () => {
           this.imageUrl = fr.result
@@ -173,7 +173,7 @@ export default {
       let empresaId = this.empresaId
       let urlFoto = ''
       let logo = false
-      if (this.imageUrl === ''){
+      if (this.imageUrl === '') {
         urlFoto = this.empresaUrlFoto
         console.log(urlFoto)
       } else {

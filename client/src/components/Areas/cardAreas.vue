@@ -44,7 +44,7 @@
                           <span class="link" v-on:click="visualizarCapacitaciones(nombre)">#Capacitaciones: {{numCapacitaciones}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarNovedades">#Novedades: {{novedades}}</span>
+                          <span class="link" v-on:click="visualizarNovedadesFromAreas">#Novedades: {{novedades}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarEquipos">#Equipos: {{equipos}}</span>
@@ -105,7 +105,6 @@
 <script>
 import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
 import DialogEquiposFromAreas from '../Equipos/DialogEquiposFromAreas'
-import DialogEquiposFromPuestos from '../Equipos/DialogEquiposFromPuestos'
 import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 import DialogPuestosFromAreas from '../DialogPuestosFromAreas'
 // import DialogEditarAreas from '../Editar/DialogEditarAreas'
@@ -135,12 +134,15 @@ export default{
       this.visibleNovedades = true
     },
     visualizarEquipos () {
+      this.areaId = this.id
+      this.areaNombre = this.nombre
       this.visibleEquipos = true
     },
     visualizarRiesgos () {
       this.visibleRiesgos = true
     },
     visualizarNovedadesFromAreas () {
+      this.areaId = this.id
       this.areaNombre = this.nombre
       this.visibleNovedades = true
     },

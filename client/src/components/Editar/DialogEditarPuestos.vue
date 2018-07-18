@@ -104,31 +104,29 @@ export default {
       console.log(this.editModes)
       this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
         .then((resp) => {
-
-          if (this.editModes === 0){
+          if (this.editModes === 0) {
             for (let i = 0; i < this.$store.getters.areasPuestos.length; i++) {
-            let area = this.$store.getters.areasPuestos[i]
-            if (area.id === areaId) {
-              for (let j = 0; j < area.puestos.length; j++) {
-                let puesto = area.puestos[j]
-                if (puesto.id === puestoId) {
-                  puesto.nombre = nombre
-                  puesto.descripcion = descripcion
-                  break
+              let area = this.$store.getters.areasPuestos[i]
+              if (area.id === areaId) {
+                for (let j = 0; j < area.puestos.length; j++) {
+                  let puesto = area.puestos[j]
+                  if (puesto.id === puestoId) {
+                    puesto.nombre = nombre
+                    puesto.descripcion = descripcion
+                    break
+                  }
                 }
               }
             }
-          }
-          }
-          else {
+          } else {
             for (let i = 0; i < this.$store.getters.puestos.length; i++) {
-            let puesto = this.$store.getters.puestos[i]
-            if (puesto.id === puestoId) {
-                  puesto.nombre = nombre
-                  puesto.descripcion = descripcion
-                  break
+              let puesto = this.$store.getters.puestos[i]
+              if (puesto.id === puestoId) {
+                puesto.nombre = nombre
+                puesto.descripcion = descripcion
+                break
+              }
             }
-          }
           }
           this.snackbar = true
           this.mensajeSnackbar = 'Puesto de trabajo editado exitosamente.'

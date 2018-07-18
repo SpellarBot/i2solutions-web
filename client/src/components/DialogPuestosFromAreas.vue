@@ -28,7 +28,6 @@
           </v-flex>
         </v-layout>
       </v-container>
-    </div>
 
     </v-card>
     </v-dialog>

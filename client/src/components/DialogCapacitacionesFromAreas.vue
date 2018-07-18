@@ -72,7 +72,6 @@ export default {
       this.valid = true
     },
     verCapacitaciones () {
-      console.log(this.establecimientoId)
       this.$store.dispatch('getCapacitacionesFromArea', this.areaId)
         .then((resp) => {
           console.log('Done')

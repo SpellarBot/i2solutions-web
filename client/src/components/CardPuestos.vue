@@ -120,7 +120,7 @@ export default {
       puestoDescripcion: '',
       puestoId: '',
       puestoSelected: 0,
-      areaIdEdit: '',
+      areaIdEdit: ''
     }
   },
   computed: {

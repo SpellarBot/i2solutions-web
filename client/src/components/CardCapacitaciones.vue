@@ -22,6 +22,15 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
+            <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
       <footer>
             <DialogEditarCapacitaciones
             :visible="visibleEdicion"
@@ -46,15 +55,6 @@
       </v-dialog>
     </v-layout>
 
-    <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar>
   </footer>
   </main>
 </template>
@@ -67,6 +67,8 @@ export default {
   data () {
     return {
       visibleEdicion: false,
+      mensajeSnackbar: '',
+      color: '',
       snackbar: false,
       eliminarDialogCapacitaciones: false,
       capacitacionTema: '',

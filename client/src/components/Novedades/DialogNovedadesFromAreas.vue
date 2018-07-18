@@ -47,7 +47,7 @@
 const moment = require('moment')
 export default {
   name: 'DialogNovedadesFromAreas',
-  props: ['visible', 'nombre', 'idArea'],
+  props: ['visible', 'nombre', 'areaId'],
   /* mounted () {
   }, */
   data () {
@@ -92,7 +92,8 @@ export default {
       console.log('LOG')
     },
     verNovedadesAreas () {
-      let areasId = Number(this.idArea)
+      console.log(this.areaId)
+      let areasId = Number(this.areaId)
       console.log(areasId)
       this.$store.dispatch('getNovedadesFromAreas', areasId)
         .then((resp) => {

@@ -565,42 +565,45 @@ export default {
       console.log(image)
       return new Promise((resolve, reject) => {
         Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
-        .then((resp) => {
-          let urlFoto = resp.body.data.link
-          console.log(urlFoto)
-          new Promise((resolve, reject) => {
-            Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
-        .then((resp) => {
-          if (resp.body.estado) {
-            console.log('done')
+          .then((resp) => {
+            let urlFoto = resp.body.data.link
+            console.log(urlFoto)
+            Promise((resolve, reject) => {
+              Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
+                .then((resp) => {
+                  if (resp.body.estado) {
+                    console.log('done')
+                    return resolve()
+                  } else {
+                    commit('setError', resp.body.datos)
+                    return reject(resp.body.datos)
+                  }
+                }).catch((err) => {
+                  commit('setError', err)
+                  return reject(err)
+                })
+            })
             return resolve()
-          } else {
-            commit('setError', resp.body.datos)
-            return reject(resp.body.datos)
-          }
-        }).catch((err) => {
-          commit('setError', err)
-          return reject(err)
-        })
+          }).catch((err) => {
+            commit('setError', err)
+            return reject(err)
           })
-          return resolve()
-        })
       })
     } else {
       return new Promise((resolve, reject) => {
         Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
-        .then((resp) => {
-          if (resp.body.estado) {
-            console.log('done')
-            return resolve()
-          } else {
-            commit('setError', resp.body.datos)
-            return reject(resp.body.datos)
-          }
-        }).catch((err) => {
-          commit('setError', err)
-          return reject(err)
-        })
+          .then((resp) => {
+            if (resp.body.estado) {
+              console.log('done')
+              return resolve()
+            } else {
+              commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            commit('setError', err)
+            return reject(err)
+          })
       })
     }
   },

@@ -61,7 +61,7 @@
 <script>
 export default {
   name: 'DialogEquiposFromAreas',
-  props: ['visible', 'nombre', 'idArea'],
+  props: ['visible', 'nombre', 'areaId'],
   /* mounted () {
   }, */
   data () {
@@ -84,7 +84,7 @@ export default {
           this.$emit('close')
         }
       }
-    },
+    }
   },
   methods: {
     cargarData () {
@@ -96,7 +96,7 @@ export default {
       console.log('LOG')
     },
     verEquiposFromAreas () {
-      let areasId = this.idArea
+      let areasId = this.areaId
       this.$store.dispatch('getEquiposFromAreas', areasId)
         .then((resp) => {
           console.log('Done')

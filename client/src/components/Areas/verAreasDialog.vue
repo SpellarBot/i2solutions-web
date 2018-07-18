@@ -94,11 +94,6 @@ export default {
           this.$emit('close')
         }
       }
-    },
-    establecimientoId: {
-      get () {
-        return this.EstablecimientoId
-      }
     }
   }
 }
