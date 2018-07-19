@@ -23,8 +23,8 @@ describe('MOVIL TEST', () => {
   let accidente = accidentes.VALIDOS[0]
   let riesgo = riesgos.VALIDOS[0]
   let equipo = equipos.VALIDOS[0]
-  let persona = personas.VALIDOS[0]
-  let persona2 = personas.VALIDOS[1]
+  let persona = personas.INSPECTOR_SEGURIDAD
+  let persona2 = personas.ADMIN_I2SOLUTIONS
   let capacitacion = capacitaciones.VALIDOS[0]
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()

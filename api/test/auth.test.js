@@ -20,71 +20,72 @@ function e(validate) {
 }
 
 describe('@AUTH_1 AUTH TEST', () => {
-
+  let { establecimientos, empresas, areas, puestos, accidentes, capacitaciones, personas, novedades } = dump
   // id
   // componentes
   // datos prueba
   // resultados esperados
   // resultados obtenidos
-  let persona = dump.personas.VALIDOS[0]
-  let usuario = {
-    usuario: persona['usuario'],
-    clave: persona['clave']
-  }
-  let usuario_NOVALIDO = {
-    usuario: persona['usuario'] + 'a',
-    clave: persona['clave']
-  }
+  // let persona = personas.INSPECTOR_SEGURIDAD
+  // let persona2 = personas.ADMIN_I2SOLUTIONS
+  // let usuario = {
+  //   usuario: persona['usuario'],
+  //   clave: 'aaa'
+  // }
+  // let usuario_NOVALIDO = {
+  //   usuario: persona['usuario'] + 'a',
+  //   clave: 'aaa'
+  // }
 
-  before('Limpiar la base de datos', async () => {
-    await db.Limpiar()
-  })
-  beforeEach('Crear el usuario', async () => {
-    await models.personas.Crear(persona)
-  })
-  after('Desconectar la base de datos', function() {
-    generatorDocs.generateAPI({ docs, archivo: 'api.auth.md', nombre: 'Auth' })
-  })
-  afterEach('Limpiar la base de datos', async () => {
-    await db.Limpiar()
-  })
+  // before('Limpiar la base de datos', async () => {
+  //   await db.Limpiar()
+  // })
+  // beforeEach('Crear el usuario', async () => {
+  //   await models.personas.Crear(persona)
+  // })
+  // after('Desconectar la base de datos', function() {
+  //   generatorDocs.generateAPI({ docs, archivo: 'api.auth.md', nombre: 'Auth' })
+  // })
+  // afterEach('Limpiar la base de datos', async () => {
+  //   await db.Limpiar()
+  // })
 
-  context('usuario y clave valido', () => {
-    it('@CP1 valido', async () => {
-      let { API_1 } = API
-      let req = usuario
-      let res = await request(app).post(`/api/auth/login`).send(req)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_1, res, req })
-    })
-    it('@CP2 NO valido', async () => {
-      let { API_1 } = API
-      let req = usuario_NOVALIDO
-      let res = await request(app).post(`/api/auth/login`).send(req)
-      expect(res.body.estado).to.equal(false)
-      expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.ERROR({ nombre: 'Usuario no valido', docs, doc: API_1, res, req })
-    })
-  })
+  // context('usuario y clave valido', () => {
+  //   it('@CP1 valido', async () => {
+  //     let { API_1 } = API
+  //     let req = usuario
+  //     let res = await request(app).post(`/api/auth/login`).send(req)
+  //     expect(res.body.estado).to.equal(true)
+  //     expect(res.body.codigoEstado).to.equal(200)
+  //     generatorDocs.OK({ docs, doc: API_1, res, req })
+  //   })
+  //   it('@CP2 NO valido', async () => {
+  //     let { API_1 } = API
+  //     let req = usuario_NOVALIDO
+  //     let res = await request(app).post(`/api/auth/login`).send(req)
+  //     expect(res.body.estado).to.equal(false)
+  //     expect(res.body.codigoEstado).to.equal(200)
+  //     generatorDocs.ERROR({ nombre: 'Usuario no valido', docs, doc: API_1, res, req })
+  //   })
+  // })
 
-  context('autorizacion', () => {
-    let { API_2 } = API
-    it('@CP4 autorizado', async () => {
-      let login = await request(app).post(`/api/auth/login`).send(usuario)
-      let { token } = login.body.datos
-      let res = await request(app).get(`/api/auth/verify`).set({ Authorization: `Bearer ${token}`})
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_2, res })
-    })
-    it('@CP3 NO autorizado', async () => {
-      let res = await request(app).get(`/api/auth/verify`).set({ Authorization: 'Bearer AAAAAA'})
-      expect(res.body.estado).to.equal(false)
-      expect(res.body.codigoEstado).to.equal(401)
-      generatorDocs.ERROR({ nombre: 'Usuario no autorizado', docs, doc: API_2, res })
-    })
-  })
+  // context('autorizacion', () => {
+  //   let { API_2 } = API
+  //   it('@CP4 autorizado', async () => {
+  //     let login = await request(app).post(`/api/auth/login`).send(usuario)
+  //     let { token } = login.body.datos
+  //     let res = await request(app).get(`/api/auth/verify`).set({ Authorization: `Bearer ${token}`})
+  //     expect(res.body.estado).to.equal(true)
+  //     expect(res.body.codigoEstado).to.equal(200)
+  //     generatorDocs.OK({ docs, doc: API_2, res })
+  //   })
+  //   it('@CP3 NO autorizado', async () => {
+  //     let res = await request(app).get(`/api/auth/verify`).set({ Authorization: 'Bearer AAAAAA'})
+  //     expect(res.body.estado).to.equal(false)
+  //     expect(res.body.codigoEstado).to.equal(401)
+  //     generatorDocs.ERROR({ nombre: 'Usuario no autorizado', docs, doc: API_2, res })
+  //   })
+  // })
 
   // context('tiempo autorizado', () => {
   //   it('@CP5 verificar un dia de autorizado', async () => {

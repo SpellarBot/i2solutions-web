@@ -4,6 +4,9 @@ module.exports = ({ responses, db }) => {
       return new Promise((resolve, reject) => {
         db.personas.Crear(datos)
           .then((resp) => {
+            if (resp['clave']) {
+              delete resp['clave']
+            }
             resolve(responses.OK(resp))
           }).catch((err) => {
             console.error(err)
@@ -67,6 +70,18 @@ module.exports = ({ responses, db }) => {
     ObtenerTodosPorEstablecimiento ({ establecimientosId }) {
       return new Promise((resolve, reject) => {
         db.personas.ObtenerPorEstablecimientos({ id: establecimientosId })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    AnadirAPuesto (datos) {
+      let { puestosId, personasId } = datos
+      return new Promise((resolve, reject) => {
+        db.personasPuestos.Crear({ puestosId, personasId })
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
