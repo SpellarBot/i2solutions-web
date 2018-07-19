@@ -180,6 +180,12 @@ ajv.addKeyword('fecha', {
 })
 
 module.exports = {
+  random (tamano) {
+    var text = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxjz'
+    for (var i = 0; i < tamano; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+    return text
+  },
   jsonToInt (json, propiedades) {
     let datos = { }
     for (let propiedad of propiedades) {

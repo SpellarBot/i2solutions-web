@@ -25,7 +25,6 @@ module.exports = {
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
-        'clave': { 'type': 'string', minLength: 4 }, // esto se generar en al back?
         'telefono': { 'type': 'string', minLength: 2 },
         'fechaNacimiento': { 'fecha': true },
         'perfilOcupacional': { 'type': 'string', minLength: 2 },

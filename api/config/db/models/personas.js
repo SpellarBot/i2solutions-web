@@ -1,4 +1,5 @@
 'use strict'
+const { random } = require('../../../utils')
 module.exports = (sequelize, DataTypes) => {
   let singular = 'personas'
   let plural = 'personas'
@@ -33,22 +34,15 @@ module.exports = (sequelize, DataTypes) => {
     define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' }, {onDelete: 'CASCADE'})
   }
 
-  define.Crear = function ({
-    nombres,
-    apellidos,
-    correo,
-    cedula,
-    clave,
-    telefono,
-    fechaNacimiento,
-    perfilOcupacional,
-    usuario,
-    rol
-  }) {
-    let empleado = arguments['0']
+  define.Crear = function (d) {
+    let datos = arguments['0']
+    datos['clave'] = random(5)
     return new Promise((resolve, reject) => {
-      return this.create(empleado)
+      return this.create(datos)
         .then((resp) => {
+          if (resp['clave']) {
+            delete resp['clave']
+          }
           return resolve(resp.get({ plain: true }))
         })
         .catch((err) => {
@@ -92,13 +86,17 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
+    let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = datos
     let id = datos['id']
     delete datos['id']
     return new Promise((resolve, reject) => {
       return this.update(
-        { datos },
+        { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol },
         { where: { id } })
         .then((resp) => {
+          if (resp['clave']) {
+            delete resp['clave']
+          }
           return resolve(resp)
         })
         .catch((err) => {
@@ -111,6 +109,9 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { id }, raw: true })
         .then((project) => {
+          if (project && project['clave']) {
+            delete project['clave']
+          }
           resolve(project)
         }).catch((err) => {
           return reject(err)

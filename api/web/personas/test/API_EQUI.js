@@ -60,7 +60,7 @@ module.exports = {
       },
       { nombre: 'rol',
         casos: [
-          { codigo: 'C11', descripcion: `{ \'type\': \'string\', \'enum\': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] }`, valido: true },
+          { codigo: 'C11', descripcion: '{ \'type\': \'string\', \'enum\': [\'admin-i2solutions\', \'inspector-seguridad\', \'jefe-seguridad\', \'admin-empresa\', \'empleado\'] }', valido: true },
           { codigo: 'C12', descripcion: '\'enum\': ![\'alta\', \'media\', \'baja\']', valido: false }
         ]
       }
