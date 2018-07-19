@@ -1,5 +1,5 @@
 <template>
-  <main id="DialogPersonasFromEstablecimientos">
+  <main id="DialogPersonasFromAreas">
     <template v-if="loading">
       <div class="text-xs-center">
     <v-progress-circular
@@ -14,7 +14,7 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
+        <v-toolbar-title>{{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Personas: </h1>
       <v-layout>
@@ -24,7 +24,6 @@
           :persona="persona"
           ></CardPersonas>
           <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }}</div>
-          <div><b>Área de trabajo:</b> {{ persona.areasNombre }}</div>
         </v-card>
       </v-flex>
       </v-layout>
@@ -65,7 +64,7 @@ export default {
       this.show = false
     }
   },
-  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  props: ['visible', 'areaId', 'areaNombre'],
   computed: {
     show: {
       get () {

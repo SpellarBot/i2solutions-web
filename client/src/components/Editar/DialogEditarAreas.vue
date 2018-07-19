@@ -6,7 +6,6 @@
           <span class="headline">Editar Área</span>
         </v-card-title>
         <v-card-text>
-          <p>{{ this.equipoNombre }}</p>
               <v-form v-model="valid">
                 <v-text-field
                   v-model = "newNombre"
@@ -104,7 +103,7 @@ export default {
       get () {
         return this.areaDescripcion
       },
-      set (vaule) {
+      set (value) {
         this.$data.newDescripcion = value
       }
     },
@@ -120,7 +119,7 @@ export default {
       get () {
         return this.areaMetrosCuadrados
       },
-      set () {
+      set (value) {
         this.$data.newMetrosCuadrados = value
       }
     }
@@ -133,7 +132,7 @@ export default {
       let actividad = this.$data.newActividad
       let metrosCuadrados = this.$data.newMetrosCuadrados
       let areasId = this.areaId
-      this.$store.dispatch('updateArea', {areasId, nombre, actividad, fotoUrl, metrosCuadrados, descripcionLugar })
+      this.$store.dispatch('updateArea', { areasId, nombre, actividad, fotoUrl, metrosCuadrados, descripcionLugar })
         .then((resp) => {
           for (let i = 0; i < this.$store.getters.areas.length; i++) {
             let area = this.$store.getters.areas[i]

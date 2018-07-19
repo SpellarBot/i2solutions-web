@@ -84,7 +84,9 @@ export default {
       accidentePuestoId: '',
       accidenteSelected: 0,
       eliminarDialogAccidentes: false,
-      snackbar: false
+      snackbar: false,
+      mensajeSnackbar: '',
+      color: ''
     }
   },
   computed: {

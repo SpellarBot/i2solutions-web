@@ -36,7 +36,7 @@
                     <v-container fluid>
                       <v-layout row wrap>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="dumb=true">#Personas: {{numPersonas}}</span>
+                          <span class="link" v-on:click="visualizarPersonas(nombre)">#Personas: {{numPersonas}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarPuestosFromAreas(nombre)">#Puestos: {{numPuestos}}</span>
@@ -102,6 +102,12 @@
 :areaNombre="areaNombre"
 @close="visibleCapacitaciones=false">
 </DialogCapacitacionesFromAreas>
+<DialogPersonasFromAreas
+:visible="visiblePersonas"
+:areaId="areaId"
+:areaNombre="areaNombre"
+@close="visiblePersonas=false">
+</DialogPersonasFromAreas>
   </footer>
 
   </main>
@@ -114,8 +120,9 @@ import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
 import DialogPuestosFromAreas from '../DialogPuestosFromAreas'
 import DialogEditarAreas from '../Editar/DialogEditarAreas'
 import DialogCapacitacionesFromAreas from '../DialogCapacitacionesFromAreas'
+import DialogPersonasFromAreas from '../DialogPersonasFromAreas'
 export default{
-  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas, DialogPersonasFromAreas},
   name: 'puestosPorArea',
   props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl'],
   data () {
@@ -126,6 +133,7 @@ export default{
       visibleRiesgos: false,
       visiblePuestos: false,
       visibleCapacitaciones: false,
+      visiblePersonas: false,
       areaId: '',
       areaNombre: '',
       areaActividad: '',
@@ -170,6 +178,13 @@ export default{
       this.areaNombre = areaNombre
       this.verPuestos(this.id)
       this.visiblePuestos = true
+    },
+    visualizarPersonas (areaNombre) {
+      console.log(areaNombre)
+      this.areaId = this.id
+      this.areaNombre = areaNombre
+      this.$store.dispatch('getPersonasFromArea', this.areaId)
+      this.visiblePersonas = true
     },
     visualizarCapacitaciones (areaNombre) {
       this.areaId = this.id
