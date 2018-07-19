@@ -130,16 +130,69 @@ module.exports = (app) => {
   //     })
   //   })
 
-  // // obtener personas por establecimiento
-  // app.route('/personas/establecimientos/:establecimientosId')
-  //   .get((req, res) => {
-  //     let { establecimientosId } = req.params
-  //     Controller.ObtenerTodosPorEstablecimiento({ establecimientosId }).then((resp) => {
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     }).catch(resp => {
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     })
-  //   })
+  // obtener personas por establecimiento
+  app.route('/personas/establecimientos/:establecimientosId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['establecimientosId'])
+      let { PARAMS } = schema.API_5_SCHEMA
+      let [err, mensaje] = validar(PARAMS, params)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { establecimientosId } = req.params
+        Controller.ObtenerTodosPorEstablecimiento({ id: establecimientosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // obtener personas por areas
+  app.route('/personas/areas/:areasId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['areasId'])
+      let { PARAMS } = schema.API_6_SCHEMA
+      let [err, mensaje] = validar(PARAMS, params)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { areasId } = req.params
+        Controller.ObtenerTodosPorAreas({ id: areasId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // obtener personas por puestos
+  app.route('/personas/puestos/:puestosId')
+    .get((req, res) => {
+      let params = utils.jsonToInt(req.params, ['puestosId'])
+      let { PARAMS } = schema.API_7_SCHEMA
+      let [err, mensaje] = validar(PARAMS, params)
+      if (err) {
+        let resp = responses.NO_OK(mensaje)
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let { puestosId } = req.params
+        Controller.ObtenerTodosPorPuestos({ id: puestosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

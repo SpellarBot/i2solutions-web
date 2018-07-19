@@ -158,5 +158,41 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerTodosPorEstablecimiento = function ({ id }) {
+    return new Promise((resolve, reject) => {
+       let query = `select pe.nombres as nombres, pe.apellidos as apellidos, pe.correo as correo, pe.cedula as cedula, pe.telefono as telefono, pe.fechaNacimiento as fechaNacimiento, pe.perfilOcupacional as perfilOcupacional, pe.usuario as usuario, pe.rol as rol, (select nombre from puestos where id = pp.puestosId) as puestosNombre, (select id from puestos where id = pp.puestosId) as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on ap.puestosId = pp.puestosId inner join personas pe on pe.id = pp.personasId where a.establecimientosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          resolve(puestos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodosPorAreas = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select pe.nombres as nombres, pe.apellidos as apellidos, pe.correo as correo, pe.cedula as cedula, pe.telefono as telefono, pe.fechaNacimiento as fechaNacimiento, pe.perfilOcupacional as perfilOcupacional, pe.usuario as usuario, pe.rol as rol, (select nombre from puestos where id = pp.puestosId) as puestosNombre, (select id from puestos where id = pp.puestosId) as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on ap.puestosId = pp.puestosId inner join personas pe on pe.id = pp.personasId where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          resolve(puestos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodosPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select pe.nombres as nombres, pe.apellidos as apellidos, pe.correo as correo, pe.cedula as cedula, pe.telefono as telefono, pe.fechaNacimiento as fechaNacimiento, pe.perfilOcupacional as perfilOcupacional, (select nombre from puestos where id = ${id}) as puestosNombre, pe.usuario as usuario, pe.rol as rol from personas pe inner join personasPuestos pp on pp.personasId = pe.id where pp.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          resolve(puestos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

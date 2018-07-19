@@ -67,9 +67,21 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerTodosPorEstablecimiento ({ establecimientosId }) {
+    // ObtenerTodosPorEstablecimiento ({ establecimientosId }) {
+    //   return new Promise((resolve, reject) => {
+    //     db.personas.ObtenerPorEstablecimientos({ id: establecimientosId })
+    //       .then((resp) => {
+    //         resolve(responses.OK(resp))
+    //       }).catch((err) => {
+    //         console.error(err)
+    //         return reject(responses.ERROR_SERVIDOR)
+    //       })
+    //   })
+    // },
+    AnadirAPuesto (datos) {
+      let { puestosId, personasId } = datos
       return new Promise((resolve, reject) => {
-        db.personas.ObtenerPorEstablecimientos({ id: establecimientosId })
+        db.personasPuestos.Crear({ puestosId, personasId })
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
@@ -78,10 +90,31 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    AnadirAPuesto (datos) {
-      let { puestosId, personasId } = datos
+    ObtenerTodosPorEstablecimiento ({ id }) {
       return new Promise((resolve, reject) => {
-        db.personasPuestos.Crear({ puestosId, personasId })
+        db.personas.ObtenerTodosPorEstablecimiento({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerTodosPorAreas ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.personas.ObtenerTodosPorAreas({ id })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
+    },
+    ObtenerTodosPorPuestos ({ id }) {
+      return new Promise((resolve, reject) => {
+        db.personas.ObtenerTodosPorPuestos({ id })
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
