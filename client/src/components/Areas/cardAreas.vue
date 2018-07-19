@@ -28,7 +28,7 @@
               dark
               small
               color="blue"
-              @click="eliminarPuesto(puestos)"
+              @click="eliminarArea()"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -54,7 +54,7 @@
                     </v-container>
                 </v-card-text>
             </v-card>
-            <v-snackbar
+      <v-snackbar
       :timeout="3000"
       :multi-line="true"
       :color="color"
@@ -63,6 +63,22 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+
+    <!--Para Eliminar Puestos-->
+
+    <v-layout row justify-center>
+      <v-dialog v-model="eliminarDialogAreas" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar esta Area?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialogAreas = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarArea()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
     <footer>
     <DialogNovedadesFromAreas
     :areaId="areaId"
@@ -117,7 +133,7 @@ import DialogCapacitacionesFromAreas from '../DialogCapacitacionesFromAreas'
 export default{
   components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas},
   name: 'puestosPorArea',
-  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl'],
+  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index'],
   data () {
     return {
       dumb: false,
@@ -126,6 +142,7 @@ export default{
       visibleRiesgos: false,
       visiblePuestos: false,
       visibleCapacitaciones: false,
+      eliminarDialogAreas: false,
       areaId: '',
       areaNombre: '',
       areaActividad: '',
@@ -183,6 +200,29 @@ export default{
         })
         .catch((err) => {
           this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+
+    eliminarArea () {
+      this.eliminarDialogAreas = true
+    },
+    borrarArea () {
+      this.eliminarDialogAreas = false
+      let areasId = Number(this.id)
+      console.log('idPuesto', areasId)
+      this.$store.dispatch('deleteArea', areasId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Area borrada con exito.'
+          this.color = 'success'
+          this.$store.getters.areas.splice(this.index,1)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
           this.snackbar = true
           this.mensajeSnackbar = err
         })

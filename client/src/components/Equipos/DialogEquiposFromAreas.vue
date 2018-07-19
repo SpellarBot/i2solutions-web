@@ -43,6 +43,7 @@
                     dark
                     small
                     color="blue"
+                    @click="eliminarEquipo(equipo)"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -67,6 +68,20 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+    <!--Para Eliminar Equipos-->
+    <v-layout row justify-center>
+      <v-dialog v-model="eliminarDialogEquipo" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
     <footer>
       <DialogEditarEquipos
       :visible="visibleEdicion"
@@ -147,6 +162,30 @@ export default {
       this.equipoFotoUrl = equipo.fotoUrl
       this.equipoCantidad = equipo.cantidad
       this.visibleEdicion = true
+    },
+    eliminarEquipo (equipo) {
+      this.equipoId = equipo.id
+      this.eliminarDialogEquipo = true
+    },
+    borrarEquipo () {
+      this.eliminarDialogEquipo = false
+      let equiposId = Number(this.equipoId)
+      console.log('idPuesto', equiposId)
+      this.$store.dispatch('deleteEquipo', equiposId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Equipo borrada con exito.'
+          console.log ('Si borre con exito')
+          this.color = 'success'
+          // this.reloadEstablecimiento()
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

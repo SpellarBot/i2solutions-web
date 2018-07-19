@@ -23,14 +23,14 @@
               <v-icon>delete</v-icon>
             </v-btn>
             <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar>
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
       <footer>
             <DialogEditarCapacitaciones
             :visible="visibleEdicion"
@@ -62,7 +62,7 @@
 import DialogEditarCapacitaciones from './Editar/DialogEditarCapacitaciones'
 const moment = require('moment')
 export default {
-  props: [ 'capacitacion', 'puestoId' ],
+  props: [ 'capacitacion', 'puestoId', 'index' ],
   components: { DialogEditarCapacitaciones },
   data () {
     return {
@@ -114,6 +114,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Capacitación borrada con exito.'
           this.color = 'success'
+          this.$store.getters.capacitaciones.splice(this.index,1)
         })
         .catch((err) => {
           this.color = 'error'

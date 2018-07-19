@@ -19,9 +19,10 @@
       <h1>Capacitaciones: </h1>
       <v-layout>
         <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4' v-for="(capacitacion) in this.$store.getters.capacitaciones" :key="capacitacion.id">
+        <v-card class='mb-4' v-for="(capacitacion,index) in this.$store.getters.capacitaciones" :key="capacitacion.id">
           <CardCapacitaciones
           :capacitacion="capacitacion"
+          :index="index"
           ></CardCapacitaciones>
         </v-card>
       </v-flex>

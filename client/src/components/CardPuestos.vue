@@ -67,7 +67,17 @@
     :puestoId="puestoId"
     @close="visibleEquipos=false">
     </DialogEquiposFromPuestos>
-    <!--Para Eliminar Establecimientos-->
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
+
+    <!--Para Eliminar Puestos-->
     <v-layout row justify-center>
       <v-dialog v-model="eliminarDialogPuestos" persistent max-width="290">
         <v-card>
@@ -81,16 +91,6 @@
         </v-card>
       </v-dialog>
     </v-layout>
-
-    <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar>
     </footer>
   </main>
 </template>
@@ -101,8 +101,9 @@ import DialogEditarPuestos from './Editar/DialogEditarPuestos'
 import DialogNovedadesFromPuestos from './Novedades/DialogNovedadesFromPuestos'
 import DialogRiesgosFromPuestos from './Riesgos/DialogRiesgosFromPuestos'
 import DialogEquiposFromPuestos from './Equipos/DialogEquiposFromPuestos'
+import index from '../router'
 export default {
-  props: [ 'puesto', 'areaId', 'editMode' ],
+  props: [ 'puesto', 'areaId', 'editMode', 'deleteMode', 'index1', 'index2' ],
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },
   data () {
     return {
@@ -125,6 +126,7 @@ export default {
   },
   computed: {
     puestos: {
+
       get () {
         return this.puesto
       }
@@ -157,18 +159,18 @@ export default {
       }
     },
     visualizarRiesgos (puestoId, puestoNombre) {
-      if (this.puestos.cantidadEquipos > 0) {
-        this.puestoId = puestoId
-        this.puestoNombre = puestoNombre
-        this.visibleRiesgos = true
-      }
-    },
-    visualizarEquipos (puestoId, puestoNombre) {
       // if (this.puestos.cantidadEquipos > 0) {
       this.puestoId = puestoId
       this.puestoNombre = puestoNombre
-      this.visibleEquipos = true
+      this.visibleRiesgos = true
       // }
+    },
+    visualizarEquipos (puestoId, puestoNombre) {
+      if (this.puestos.cantidadEquipos > 0) {
+        this.puestoId = puestoId
+        this.puestoNombre = puestoNombre
+        this.visibleEquipos = true
+      }
     },
     visualizarEditar (puesto, areaId) {
       console.log(this.editModes)
@@ -191,6 +193,12 @@ export default {
         .then((resp) => {
           console.log('entre')
           this.snackbar = true
+
+          if (this.deleteMode === 1) {
+            this.$store.getters.puestos.splice(this.index, 1)
+          } else {
+            this.$store.getters.areasPuestos[this.index1].puestos.splice(this.index2, 1)
+          }
           this.mensajeSnackbar = 'Puesto borrado con exito.'
           this.color = 'success'
         })
@@ -201,18 +209,6 @@ export default {
           this.mensajeSnackbar = err
         })
     }
-    /* reloadEstablecimiento () {
-      this.$store.dispatch('getEstablecimientosFront', this.id)
-      this.$store.dispatch('getEmpresaSola', this.id)
-        .then((resp) => {
-          router.push('DashboardEstablecimiento')
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
-    } */
   }
 }
 </script>
