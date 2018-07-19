@@ -118,18 +118,7 @@ module.exports = (app) => {
       }
     })
 
-  // // obtener todas las personas
-  // app.route('/personas')
-  //   .get((req, res) => {
-  //     Controller.ObtenerTodos().then((resp) => {
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     }).catch(resp => {
-  //       res.status(resp.codigoEstado)
-  //       res.json(resp)
-  //     })
-  //   })
-
+  // identificador: API_5_SCHEMA
   // obtener personas por establecimiento
   app.route('/personas/establecimientos/:establecimientosId')
     .get((req, res) => {
@@ -152,6 +141,7 @@ module.exports = (app) => {
       }
     })
 
+  // identificador: API_6_SCHEMA
   // obtener personas por areas
   app.route('/personas/areas/:areasId')
     .get((req, res) => {
@@ -174,6 +164,7 @@ module.exports = (app) => {
       }
     })
 
+  // identificador: API_7_SCHEMA
   // obtener personas por puestos
   app.route('/personas/puestos/:puestosId')
     .get((req, res) => {

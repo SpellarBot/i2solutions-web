@@ -5,7 +5,7 @@ const responses = require('./responses')
 const messages = require('./messages')
 const utils = require('./utils')
 const db = require('./config/db').db
-
+const co = require('co')
 function createAccessToken (user) {
   return jwt.sign({
     data: user
@@ -15,9 +15,16 @@ function createAccessToken (user) {
 app.route('/login')
   .post((req, res) => {
     const usuario = req.body
-    db.personas.Login(usuario).then((usuarioEncontrado) => {
+    co(function * () {
+      let usuarioEncontrado = yield db.personas.Login(usuario)
       if (usuarioEncontrado) {
-        const token = createAccessToken(usuarioEncontrado)
+        let empresasId = yield db.personas.ObtenerEmpresa({ id: usuarioEncontrado['id'] })
+        let token = ''
+        if (empresasId) {
+          token = createAccessToken({ ...usuarioEncontrado, empresasId })
+        } else {
+          token = createAccessToken({ ...usuarioEncontrado })
+        }
         let resp = responses.OK({ token })
         res.status(resp.codigoEstado)
         res.json(resp)
@@ -26,6 +33,11 @@ app.route('/login')
         res.status(resp.codigoEstado)
         res.json(resp)
       }
+    }).catch(err => {
+      console.log(err)
+      let resp = responses.NO_OK(messages.AUTH.AUTH_1.ERROR)
+      res.status(resp.codigoEstado)
+      res.json(err)
     })
   })
 

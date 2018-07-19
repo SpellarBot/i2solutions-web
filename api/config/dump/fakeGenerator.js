@@ -5,18 +5,18 @@ const faker = require('faker')
 faker.seed(123)
 faker.locale = 'es'
 const conexion = require('../db')
-const random = () => {
-  var text = ''
-  var possible = '0123456789' // ABCDEFGHIJKLMNOPQRSTUVWXYZ
-  for (var i = 0; i < 10; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
-  return text
-}
+// const random = () => {
+//   var text = ''
+//   var possible = '0123456789' // ABCDEFGHIJKLMNOPQRSTUVWXYZ
+//   for (var i = 0; i < 10; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+//   return text
+// }
 
 function randomIntFromInterval (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-let roles = ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado']
+let roles = ['inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado']
 let areasDatos = [
   {
     'actividad': 'gerencia',
@@ -93,6 +93,18 @@ let accidentes = []
 let equipos = []
 conexion.Conectar().then(async (db) => {
   await conexion.Limpiar()
+  await db.personas.Crear({
+    nombres: 'admin',
+    apellidos: 'admin',
+    correo: 'admin@gmail.com',
+    cedula: '0931823447',
+    clave: 'admin',
+    telefono: '259956326',
+    fechaNacimiento: `${faker.date.past()}`,
+    perfilOcupacional: 'admin',
+    usuario: 'admin',
+    rol: 'admin-i2solutions'
+  })
   // 1. empresas
   for (let i = 0; i < 5; i++) {
     let empresa = {
