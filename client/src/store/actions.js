@@ -582,8 +582,11 @@ export default {
               return reject(resp.body.datos)
             }
           }).catch((err) => {
-            commit('setError', err)
-            return reject(err)
+            if (err.ok === false) {
+              console.log('Aqui')
+              commit('setError', 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.')
+              return reject(err)
+            }
           })
       })
     } else {
