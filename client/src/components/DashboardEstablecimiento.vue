@@ -95,7 +95,7 @@
                       <span class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.cantidadPersonas}}</span>
+                      <span class="link" v-on:click="visualizarPersonas(establecimiento.id, establecimiento.nombres)">#Personas: {{establecimiento.cantidadPersonas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
@@ -161,6 +161,8 @@
     ></DialogPuestosFromEstablecimientos>
     <DialogPersonasFromEstablecimientos
     :visible="visiblePersonas"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visiblePersonas=false"
     ></DialogPersonasFromEstablecimientos>
     <DialogAccidentesFromEstablecimientos
@@ -328,7 +330,10 @@ export default {
       this.establecimientoNombres = establecimientoNombre
       this.visiblePuestos = true
     },
-    visualizarPersonas () {
+    visualizarPersonas (establecimientoId, establecimientoNombre) {
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
+      this.$store.dispatch('getPersonasFromEstablecimiento', this.establecimientoId)
       this.visiblePersonas = true
     },
     visualizarAccidentes (establecimientoId, establecimientoNombre) {

@@ -86,7 +86,7 @@ export default {
       get () {
         return this.equipoDescripcion
       },
-      set (vaule) {
+      set (value) {
         this.$data.newDescripcion = value
       }
     }

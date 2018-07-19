@@ -1,6 +1,6 @@
 <template>
   <main id="CardPersonas">
-        <div><b>Nombres y Apellido: </b> Mario Gutierrez </div>
+        <div><b>Nombres y Apellido: </b> {{ nombreCompleto }} </div>
         <v-btn
               fab
               dark
@@ -23,13 +23,26 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-          <div><b>Rol: </b> Inspector de Seguridad</div>
-          <div><b>Correo:</b> magutie@gmail.com </div>
-          <div><b>Cédula:</b> 1310539752</div>
-          <div><b>Telefono:</b> 0969004491</div>
-          <div><b>Fecha de Nacimiento: </b> 14/02/1973</div>
-          <div><b>Perfil Profesional: </b> Magister en Empaques</div>
-          <div><b>usuario:</b> magutie</div>
+          <div v-if="personas.rol === 'admin-i2solutions'"><b>Rol:</b> Administrador de i2solutions</div>
+          <div v-if="personas.rol === 'inspector-seguridad'"><b>Rol:</b> Inspector de Seguridad</div>
+          <div v-if="personas.rol === 'jefe-seguridad'"><b>Rol:</b> Jefe de Seguridad</div>
+          <div v-if="personas.rol === 'admin-empresa'"><b>Rol:</b> Administrador de la empresa</div>
+          <div v-if="personas.rol === 'empleado'"><b>Rol:</b> Empleado</div>
+          <div><b>Correo:</b> {{ personas.correo }} </div>
+          <div><b>Cédula:</b> {{ personas.cedula }}</div>
+          <div><b>Telefono:</b> {{ personas.telefono }}</div>
+          <div><b>Fecha de Nacimiento: </b> {{ fecha(personas.fechaNacimiento) }}</div>
+          <div><b>Perfil Ocupacional: </b> {{ personas.perfilOcupacional }}</div>
+          <div><b>usuario:</b> {{ personas.usuario }}</div>
+          <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
           <footer>
             <DialogEditarPersonas
             :visible="visibleEdicion"
@@ -40,14 +53,34 @@
 </template>
 <script>
 import DialogEditarPersonas from './Editar/DialogEditarPersonas'
+const moment = require('moment')
 export default {
+  props: [ 'persona' ],
   components: { DialogEditarPersonas },
   data () {
     return {
-      visibleEdicion: false
+      visibleEdicion: false,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false
+    }
+  },
+  computed: {
+    personas: {
+      get () {
+        return this.persona
+      }
+    },
+    nombreCompleto: {
+      get () {
+        return this.personas.nombres + ' ' + this.personas.apellidos
+      }
     }
   },
   methods: {
+    fecha: function (date) {
+      return moment(date).format('L')
+    },
     visualizarEditar () {
       // aqui recibir los datos de la persona para editar
       this.visibleEdicion = true

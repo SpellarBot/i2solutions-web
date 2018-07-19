@@ -24,7 +24,7 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-      <span class="link" v-on:click="visualizarPersonas"> Número Personas: {{ puestos.cantidadPersonas }}</span>
+      <span class="link" v-on:click="visualizarPersonas(puestos)"> Número Personas: {{ puestos.cantidadPersonas }}</span>
       <span class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
       <span class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
@@ -33,6 +33,8 @@
     <footer>
     <DialogPersonasFromPuestos
     :visible="visiblePersonas"
+    :puestoId="puestoId"
+    :puestoNombre="puestoNombre"
     @close="visiblePersonas=false"
     ></DialogPersonasFromPuestos>
     <DialogAccidentesFromPuestos
@@ -141,7 +143,10 @@ export default {
     }
   },
   methods: {
-    visualizarPersonas () {
+    visualizarPersonas (puesto) {
+      this.puestoId = puesto.id
+      this.puestoNombre = puesto.nombre
+      this.$store.dispatch('getPersonasFromPuesto', this.puestoId)
       this.visiblePersonas = true
     },
     visualizarAccidentes (puesto) {
