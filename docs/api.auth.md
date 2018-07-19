@@ -15,8 +15,8 @@ __POST__ __/api/auth/login__
 
 ```json
 {
-  "usuario": "Antonio69",
-  "clave": "tggQK3M3L__1KRO"
+  "usuario": "elsa",
+  "clave": "aa"
 }
 ```
 
@@ -26,7 +26,7 @@ __POST__ __/api/auth/login__
 {
   "estado": true,
   "datos": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzdWFyaW8iOiJBbnRvbmlvNjkiLCJjb3JyZW8iOiJ2Y3Rvcl9kYXpAaG90bWFpbC5jb20iLCJub21icmVzIjoiRWxzYSIsImFwZWxsaWRvcyI6IlZlZ2EiLCJpZCI6MX0sImlhdCI6MTMxNzQ0NTIwMH0.AS_FYlc4j6fnMcErerk7jDsjuyq6KOk0Jdfcxy4-1LQ"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzdWFyaW8iOiJlbHNhIiwiY29ycmVvIjoidmN0b3JfZGF6QGhvdG1haWwuY29tIiwibm9tYnJlcyI6IkVsc2EiLCJhcGVsbGlkb3MiOiJWZWdhIiwiaWQiOjEsInJvbCI6ImFkbWluLWkyc29sdXRpb25zIiwiZW1wcmVzYXNJZCI6MX0sImlhdCI6MTMxNzQ0NTIwMH0.XP37W3iEvRKQVJ82j-xR2ODPLGSzlERWiqgtauTzj2Y"
   },
   "codigoEstado": 200
 }
@@ -42,8 +42,8 @@ _request_
 
 ```js
 {
-  "usuario": "Antonio69a",
-  "clave": "tggQK3M3L__1KRO"
+  "usuario": "usaer",
+  "clave": "aa"
 }
 ```
 
@@ -54,46 +54,6 @@ _response_
   "estado": false,
   "datos": "El usuario no existe. Clave o usuario mal ingresado",
   "codigoEstado": 200
-}
-```
-	
-	
-
-
-___
-
-
-
-## Verificar validez jwt
-
-__GET__ __/api/auth/verify__
-
-{ Authorization: Bearer token}
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": "Autorizado",
-  "codigoEstado": 200
-}
-```
-
-#### ERRORS:
-__Usuario no autorizado__
-
-
-
-
-_response_
-
-```js
-{
-  "datos": {
-    "mensaje_error": "No autorizado"
-  },
-  "codigoEstado": 401,
-  "estado": false
 }
 ```
 	

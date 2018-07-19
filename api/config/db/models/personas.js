@@ -1,4 +1,5 @@
 'use strict'
+const { random } = require('../../../utils')
 module.exports = (sequelize, DataTypes) => {
   let singular = 'personas'
   let plural = 'personas'
@@ -14,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     fechaNacimiento: { type: DataTypes.STRING },
     perfilOcupacional: { type: DataTypes.STRING },
     usuario: { type: DataTypes.STRING },
-    rol: { type: DataTypes.STRING }
+    rol: { type: DataTypes.ENUM('admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado') }
   }, {
     name: {
       singular,
@@ -33,21 +34,27 @@ module.exports = (sequelize, DataTypes) => {
     define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' }, {onDelete: 'CASCADE'})
   }
 
-  define.Crear = function ({
-    nombres,
-    apellidos,
-    correo,
-    cedula,
-    clave,
-    telefono,
-    fechaNacimiento,
-    perfilOcupacional,
-    usuario,
-    rol
-  }) {
-    let empleado = arguments['0']
+  define.Crear = function (d) {
+    let datos = arguments['0']
+    datos['clave'] = random(5)
     return new Promise((resolve, reject) => {
-      return this.create(empleado)
+      return this.create(datos)
+        .then((resp) => {
+          if (resp['clave']) {
+            delete resp['clave']
+          }
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.CrearConClave = function (d) {
+    let datos = arguments['0']
+    return new Promise((resolve, reject) => {
+      return this.create(datos)
         .then((resp) => {
           return resolve(resp.get({ plain: true }))
         })
@@ -65,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
           usuario,
           clave
         },
-        attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id']
+        attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol']
       })
         .then((resp) => {
           return resolve(resp)
@@ -92,13 +99,17 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
+    let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = datos
     let id = datos['id']
     delete datos['id']
     return new Promise((resolve, reject) => {
       return this.update(
-        { datos },
+        { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol },
         { where: { id } })
         .then((resp) => {
+          if (resp['clave']) {
+            delete resp['clave']
+          }
           return resolve(resp)
         })
         .catch((err) => {
@@ -111,6 +122,9 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { id }, raw: true })
         .then((project) => {
+          if (project && project['clave']) {
+            delete project['clave']
+          }
           resolve(project)
         }).catch((err) => {
           return reject(err)
@@ -151,6 +165,58 @@ module.exports = (sequelize, DataTypes) => {
       })
         .then((project) => {
           resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodosPorEstablecimiento = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select pe.nombres as nombres, pe.apellidos as apellidos, pe.correo as correo, pe.cedula as cedula, pe.telefono as telefono, pe.fechaNacimiento as fechaNacimiento, pe.perfilOcupacional as perfilOcupacional, pe.usuario as usuario, pe.rol as rol, (select nombre from puestos where id = pp.puestosId) as puestosNombre, (select id from puestos where id = pp.puestosId) as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on ap.puestosId = pp.puestosId inner join personas pe on pe.id = pp.personasId where a.establecimientosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          resolve(puestos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodosPorAreas = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select pe.nombres as nombres, pe.apellidos as apellidos, pe.correo as correo, pe.cedula as cedula, pe.telefono as telefono, pe.fechaNacimiento as fechaNacimiento, pe.perfilOcupacional as perfilOcupacional, pe.usuario as usuario, pe.rol as rol, (select nombre from puestos where id = pp.puestosId) as puestosNombre, (select id from puestos where id = pp.puestosId) as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on ap.puestosId = pp.puestosId inner join personas pe on pe.id = pp.personasId where a.id = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          resolve(puestos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodosPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select pe.nombres as nombres, pe.apellidos as apellidos, pe.correo as correo, pe.cedula as cedula, pe.telefono as telefono, pe.fechaNacimiento as fechaNacimiento, pe.perfilOcupacional as perfilOcupacional, (select nombre from puestos where id = ${id}) as puestosNombre, pe.usuario as usuario, pe.rol as rol from personas pe inner join personasPuestos pp on pp.personasId = pe.id where pp.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          resolve(puestos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerEmpresa = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select pp.personasId as personasId, em.id as empresasId from personasPuestos pp inner join areasPuestos ap on ap.puestosId = pp.puestosId inner join establecimientos es on es.id = ap.areasId inner join empresas em on em.id = es.empresasId where pp.personasId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(persona => {
+          if (persona && persona.length > 0) {
+            resolve(persona[0]['empresasId'])
+          } else {
+            resolve(null)
+          }
         }).catch((err) => {
           return reject(err)
         })

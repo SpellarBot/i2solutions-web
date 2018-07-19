@@ -20,44 +20,48 @@ module.exports = {
           { codigo: 'C03', descripcion: 'minLength: !2 ', valido: false }
         ]
       },
-      { nombre: 'descripcion',
+      { nombre: 'correo',
         casos: [
-          { codigo: 'C11', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
-          { codigo: 'C12', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C13', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C11', descripcion: '{ \'type\': \'string\', format: email }', valido: true },
+          { codigo: 'C12', descripcion: '\'format\': !\'email\'', valido: false }
         ]
       },
-      { nombre: 'heridos',
+      { nombre: 'cedula',
         casos: [
-          { codigo: 'C21', descripcion: '{ \'type\': \'number\', minimum: 0 }', valido: true },
-          { codigo: 'C22', descripcion: '\'type\': !\'number\'', valido: false },
-          { codigo: 'C23', descripcion: 'minimum: !0 ', valido: false }
+          { codigo: 'C21', descripcion: '{ \'type\': \'cedula\' }', valido: true },
+          { codigo: 'C22', descripcion: '\'type\': !\'cedula\'', valido: false }
         ]
       },
-      { nombre: 'atendidoEnEmpresa',
+      { nombre: 'telefono',
         casos: [
           { codigo: 'C31', descripcion: '{ \'type\': \'boolean\' }', valido: true },
           { codigo: 'C32', descripcion: '\'type\': !\'boolean\'', valido: false }
         ]
       },
-      { nombre: 'muertos',
-        casos: [
-          { codigo: 'C41', descripcion: '{ \'type\': \'number\', minimum: 0 }', valido: true },
-          { codigo: 'C42', descripcion: '\'type\': !\'number\'', valido: false },
-          { codigo: 'C43', descripcion: 'minimum: !0 ', valido: false }
-        ]
-      },
-      { nombre: 'fecha',
+      { nombre: 'fechaNacimiento',
         casos: [
           { codigo: 'C51', descripcion: '{ \'type\': \'fecha\' }', valido: true },
           { codigo: 'C52', descripcion: '\'type\': !\'fecha\'', valido: false }
         ]
       },
-      { nombre: 'puestosId',
+      { nombre: 'perfilOcupacional',
         casos: [
-          { codigo: 'C61', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
-          { codigo: 'C62', descripcion: '\'type\': !\'number\'', valido: false },
-          { codigo: 'C63', descripcion: 'minimum: !1 ', valido: false }
+          { codigo: 'C01', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'string\'', valido: false },
+          { codigo: 'C03', descripcion: 'minLength: !2 ', valido: false }
+        ]
+      },
+      { nombre: 'usuario',
+        casos: [
+          { codigo: 'C01', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
+          { codigo: 'C02', descripcion: '\'type\': !\'string\'', valido: false },
+          { codigo: 'C03', descripcion: 'minLength: !2 ', valido: false }
+        ]
+      },
+      { nombre: 'rol',
+        casos: [
+          { codigo: 'C11', descripcion: '{ \'type\': \'string\', \'enum\': [\'admin-i2solutions\', \'inspector-seguridad\', \'jefe-seguridad\', \'admin-empresa\', \'empleado\'] }', valido: true },
+          { codigo: 'C12', descripcion: '\'enum\': ![\'alta\', \'media\', \'baja\']', valido: false }
         ]
       }
     ],

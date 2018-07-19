@@ -178,32 +178,14 @@ ajv.addKeyword('fecha', {
   },
   errors: true
 })
-// const validator = require('validator')
-
-// ajv.addKeyword('date-custom', function (data) {
-//   validate: function xyz (schema, data) {
-//     xyz.errors = []
-//     let type = 'cedula'
-//     if (!schema) {
-//       type = 'ruc'
-//     }
-//     let [ err, mensaje ] = verificadorCedulaRuc(`${data}`, type)
-//     if (err) {
-//       xyz.errors.push({
-//         keyword: type,
-//         message: mensaje,
-//         params: {
-//           keyword: type
-//         }
-//       })
-//     }
-//     return !err
-//     // return validator.isRFC3339(data)
-//   }
-//   errors: true
-// })
 
 module.exports = {
+  random (tamano) {
+    var text = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxjz'
+    for (var i = 0; i < tamano; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+    return text
+  },
   jsonToInt (json, propiedades) {
     let datos = { }
     for (let propiedad of propiedades) {
@@ -240,7 +222,6 @@ module.exports = {
       res.json(resp)
     }
   },
-  // return [err, mensajeError]
   verificadorCedulaRuc,
   schemaFormato (schema, datos) {
     const validate = ajv.compile(schema)
@@ -257,6 +238,9 @@ module.exports = {
       return [true, erroresReturn]
     }
     return [false, {}]
-    // console.log(ajv.errorsText(validate.errors, { separator: '\n' }))
+  },
+  veficicadorTelefonos (telefono) {
+    // 0931823447 2938373
+    return [false, 'mensaje']
   }
 }

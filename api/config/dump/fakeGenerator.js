@@ -5,16 +5,18 @@ const faker = require('faker')
 faker.seed(123)
 faker.locale = 'es'
 const conexion = require('../db')
-const random = () => {
-  var text = ''
-  var possible = '0123456789' // ABCDEFGHIJKLMNOPQRSTUVWXYZ
-  for (var i = 0; i < 10; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
-  return text
-}
+// const random = () => {
+//   var text = ''
+//   var possible = '0123456789' // ABCDEFGHIJKLMNOPQRSTUVWXYZ
+//   for (var i = 0; i < 10; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+//   return text
+// }
 
 function randomIntFromInterval (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+let roles = ['inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado']
 let areasDatos = [
   {
     'actividad': 'gerencia',
@@ -91,6 +93,18 @@ let accidentes = []
 let equipos = []
 conexion.Conectar().then(async (db) => {
   await conexion.Limpiar()
+  await db.personas.Crear({
+    nombres: 'admin',
+    apellidos: 'admin',
+    correo: 'admin@gmail.com',
+    cedula: '0931823447',
+    clave: 'admin',
+    telefono: '259956326',
+    fechaNacimiento: `${faker.date.past()}`,
+    perfilOcupacional: 'admin',
+    usuario: 'admin',
+    rol: 'admin-i2solutions'
+  })
   // 1. empresas
   for (let i = 0; i < 5; i++) {
     let empresa = {
@@ -121,57 +135,6 @@ conexion.Conectar().then(async (db) => {
       let establecimientosId = establecimientoCreada['id']
       establecimientos.push(establecimiento)
 
-      // 3. personas
-      for (let i = 0; i < 10; i++) {
-        let persona = {
-          nombres: faker.name.firstName(),
-          apellidos: faker.name.lastName(),
-          correo: faker.internet.email().toLowerCase(),
-          cedula: random(),
-          clave: faker.internet.password(),
-          telefono: faker.phone.phoneNumber(),
-          fechaNacimiento: `${faker.date.past()}`,
-          perfilOcupacional: '',
-          usuario: faker.internet.userName(),
-          rol: ''
-        }
-        personas.push(persona)
-        let personasCreada = await db.personas.Crear(persona)
-        let personasId = personasCreada['id']
-        // 4. personasEstablecimientos
-        if (i === 1) {
-          await db.personasEstablecimientos.Crear({
-            personasId,
-            establecimientosId,
-            rol: 'inspector'
-          })
-        } else if (i === 2) {
-          await db.personasEstablecimientos.Crear({
-            personasId,
-            establecimientosId,
-            rol: 'jefe'
-          })
-        } else {
-          await db.personasEstablecimientos.Crear({
-            personasId,
-            establecimientosId,
-            rol: 'empleado'
-          })
-        }
-
-        // 5. personasPuestos
-        await db.personasPuestos.Crear({
-          personasId,
-          puestosId: randomIntFromInterval(1, puestosDatos.length - 1)
-        })
-
-        // 6. personasCapacitaciones
-        await db.personasCapacitaciones.Crear({
-          capacitacionesId: randomIntFromInterval(1, capacitacionesCantidad),
-          personasId
-        })
-      }
-      console.log('personas')
       // 7. areas
       for (let i = 0; i < areasDatos.length; i++) {
         let area = {
@@ -212,6 +175,36 @@ conexion.Conectar().then(async (db) => {
           puestos.push(puesto)
           let puestoCreada = await db.puestos.Crear(puesto)
           let puestosId = puestoCreada['id']
+          // 3. personas
+          for (let i = 0; i < randomIntFromInterval(1, 10); i++) {
+            let persona = {
+              nombres: faker.name.firstName(),
+              apellidos: faker.name.lastName(),
+              correo: faker.internet.email().toLowerCase(),
+              cedula: '0931823447',
+              clave: faker.internet.password(),
+              telefono: faker.phone.phoneNumber(),
+              fechaNacimiento: `${faker.date.past()}`,
+              perfilOcupacional: 'Empleado',
+              usuario: faker.internet.userName(),
+              rol: roles[randomIntFromInterval(0, roles.length - 1)]
+            }
+            personas.push(persona)
+            let personasCreada = await db.personas.Crear(persona)
+            let personasId = personasCreada['id']
+
+            // 5. personasPuestos
+            await db.personasPuestos.Crear({
+              personasId,
+              puestosId
+            })
+
+            // 6. personasCapacitaciones
+            await db.personasCapacitaciones.Crear({
+              capacitacionesId: randomIntFromInterval(1, capacitacionesCantidad),
+              personasId
+            })
+          }
           // 10. areasPuestos
           await db.areasPuestos.Crear({
             areasId,

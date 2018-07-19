@@ -567,23 +567,20 @@ export default {
         Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
           .then((resp) => {
             let urlFoto = resp.body.data.link
-            console.log(urlFoto)
-            Promise((resolve, reject) => {
-              Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
-                .then((resp) => {
-                  if (resp.body.estado) {
-                    console.log('done')
-                    return resolve()
-                  } else {
-                    commit('setError', resp.body.datos)
-                    return reject(resp.body.datos)
-                  }
-                }).catch((err) => {
-                  commit('setError', err)
-                  return reject(err)
-                })
-            })
-            return resolve()
+            return urlFoto
+          })
+          .then((urlFoto) => {
+            console.log('Entered here')
+            return Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
+          })
+          .then((resp) => {
+            if (resp.body.estado) {
+              console.log('done')
+              return resolve()
+            } else {
+              commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
           }).catch((err) => {
             commit('setError', err)
             return reject(err)
@@ -837,4 +834,58 @@ export default {
         })
     })
   },
+  getPersonasFromEstablecimiento ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/personas/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setPersonas', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyPersonas ({commit}) {
+    commit('setPersonas', null)
+  },
+  getPersonasFromPuesto ({commit}, puestoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/personas/puestos/' + puestoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setPersonas', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getPersonasFromArea ({commit}, areaId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/personas/areas/' + areaId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setPersonas', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  }
 }

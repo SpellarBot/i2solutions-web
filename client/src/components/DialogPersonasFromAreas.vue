@@ -1,5 +1,5 @@
 <template>
-  <main id="DialogPersonasFromEstablecimientos">
+  <main id="DialogPersonasFromAreas">
     <template v-if="loading">
       <div class="text-xs-center">
     <v-progress-circular
@@ -14,20 +14,19 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
+        <v-toolbar-title>{{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Personas: </h1>
       <v-layout>
         <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4' v-for="(persona,indexE) in this.$store.getters.personas" :key="persona.id">
+        <v-card class='mb-4' v-for="(persona, indexA) in this.$store.getters.personas" :key="persona.id">
           <CardPersonas
           :persona="persona"
-          :indexE="indexE"
-          :deleteMode="deleteMode"
-          :personasId:="persona.id"
+          :indexA="indexA"
+          deleteMode="deleteMode"
+          personasId="persona.id"
           ></CardPersonas>
-          <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }}</div>
-          <div><b>Área de trabajo:</b> {{ persona.areasNombre }}</div>
+          <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }} , {{persona.id}} </div>
         </v-card>
       </v-flex>
       </v-layout>
@@ -47,7 +46,7 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      deleteMode: 1
+      deleteMode: 2
     }
   },
   watch: {
@@ -63,13 +62,14 @@ export default {
       this.loading = false
       this.valid = true
       console.log('LOG')
+      console.log(this.$store.getters.personas)
     },
     closing () {
       this.$store.dispatch('emptyPersonas')
       this.show = false
     }
   },
-  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  props: ['visible', 'areaId', 'areaNombre'],
   computed: {
     show: {
       get () {
