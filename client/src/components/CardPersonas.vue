@@ -8,7 +8,7 @@
               small
               color="blue"
               absolute
-              @click="visualizarEditar()"
+              @click="visualizarEditar(personas, fecha(personas.fechaNacimiento))"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -48,6 +48,16 @@
           <footer>
             <DialogEditarPersonas
             :visible="visibleEdicion"
+            :personaNombres="personaNombres"
+            :personaApellidos="personaApellidos"
+            :personaFechaNacimiento="personaFechaNacimiento"
+            :personaRol="personaRol"
+            :personaCorreo="personaCorreo"
+            :personaCedula="personaCedula"
+            :personaTelefono="personaTelefono"
+            :personaPerfilOcupacional="personaPerfilOcupacional"
+            :personaUsuario="personaUsuario"
+            :personaId="personaId"
             @close="visibleEdicion=false"
             ></DialogEditarPersonas>
 
@@ -80,7 +90,17 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      eliminarDialogPersona: false
+      eliminarDialogPersona: false,
+      personaNombres: '',
+      personaApellidos: '',
+      personaFechaNacimiento: '',
+      personaRol: '',
+      personaCorreo: '',
+      personaCedula: '',
+      personaTelefono: '',
+      personaPerfilOcupacional: '',
+      personaUsuario: '',
+      personaId: ''
     }
   },
   computed: {
@@ -99,8 +119,17 @@ export default {
     fecha: function (date) {
       return moment(date).format('L')
     },
-    visualizarEditar () {
-      // aqui recibir los datos de la persona para editar
+    visualizarEditar (persona, fecha) {
+      this.personaId = persona.id
+      this.personaNombres = persona.nombres
+      this.personaApellidos = persona.apellidos
+      this.personaFechaNacimiento = fecha
+      this.personaCorreo = persona.correo
+      this.personaCedula = persona.cedula
+      this.personaRol = persona.rol
+      this.personaPerfilOcupacional = persona.perfilOcupacional
+      this.personaTelefono = persona.telefono
+      this.personaUsuario = persona.usuario
       this.visibleEdicion = true
     },
 
@@ -113,9 +142,6 @@ export default {
       this.$store.dispatch('deletePersona', personasId)
         .then((resp) => {
           console.log('entre')
-          this.snackbar = true
-          this.mensajeSnackbar = 'Persona borrada con exito.'
-          this.color = 'success'
           if (this.deleteMode === 1) {
             this.$store.getters.personas.splice(this.indexE, 1)
           } else if (this.deleteMode === 2) {
@@ -123,6 +149,9 @@ export default {
           } else {
             this.$store.getters.personas.splice(this.indexP, 1)
           }
+          this.snackbar = true
+          this.mensajeSnackbar = 'Persona borrada con exito.'
+          this.color = 'success'
         })
         .catch((err) => {
           this.color = 'error'
