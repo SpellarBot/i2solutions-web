@@ -91,9 +91,20 @@ let inspecciones = []
 let novedades = []
 let accidentes = []
 let equipos = []
+/*
+  empresas
+    establecimientos
+      areas
+        puestos
+          areasPuestos
+          equipos
+            equiposPuestos
+          capacitaciones
+
+*/
 conexion.Conectar().then(async (db) => {
   await conexion.Limpiar()
-  await db.personas.Crear({
+  db.personas.CrearConClave({
     nombres: 'admin',
     apellidos: 'admin',
     correo: 'admin@gmail.com',
@@ -106,7 +117,7 @@ conexion.Conectar().then(async (db) => {
     rol: 'admin-i2solutions'
   })
   // 1. empresas
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 2; i++) {
     let empresa = {
       nombre: faker.company.companyName(),
       actividadComercial: faker.company.catchPhrase(),
@@ -176,13 +187,13 @@ conexion.Conectar().then(async (db) => {
           let puestoCreada = await db.puestos.Crear(puesto)
           let puestosId = puestoCreada['id']
           // 3. personas
-          for (let i = 0; i < randomIntFromInterval(1, 10); i++) {
+          for (let i = 0; i < randomIntFromInterval(1, 5); i++) {
             let persona = {
               nombres: faker.name.firstName(),
               apellidos: faker.name.lastName(),
               correo: faker.internet.email().toLowerCase(),
               cedula: '0931823447',
-              clave: faker.internet.password(),
+              clave: '1234',
               telefono: faker.phone.phoneNumber(),
               fechaNacimiento: `${faker.date.past()}`,
               perfilOcupacional: 'Empleado',
@@ -190,7 +201,7 @@ conexion.Conectar().then(async (db) => {
               rol: roles[randomIntFromInterval(0, roles.length - 1)]
             }
             personas.push(persona)
-            let personasCreada = await db.personas.Crear(persona)
+            let personasCreada = await db.personas.CrearConClave(persona)
             let personasId = personasCreada['id']
 
             // 5. personasPuestos

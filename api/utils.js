@@ -4,6 +4,8 @@ let localize = require('ajv-i18n')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
 require('ajv-errors')(ajv)
+const bcrypt = require('bcrypt')
+const saltos = 5
 
 function verificadorCedulaRuc (identificacion, tipo) {
   if (tipo === 'cedula' && identificacion.length !== 10) {
@@ -180,6 +182,28 @@ ajv.addKeyword('fecha', {
 })
 
 module.exports = {
+  genHash (clave) {
+    return new Promise((resolve, reject) => {
+      bcrypt.hash(clave, saltos, function (err, hash) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(hash)
+        }
+      })
+    })
+  },
+  verificarClave (clave, hashDB) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(clave, hashDB, function (err, res) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(res)
+        }
+      })
+    })
+  },
   random (tamano) {
     var text = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxjz'

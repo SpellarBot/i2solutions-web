@@ -1,5 +1,8 @@
 'use strict'
 const { random } = require('../../../utils')
+const { genHash } = require('../../../utils')
+const { verificarClave } = require('../../../utils')
+
 module.exports = (sequelize, DataTypes) => {
   let singular = 'personas'
   let plural = 'personas'
@@ -36,31 +39,39 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Crear = function (d) {
     let datos = arguments['0']
+    let self = this
     datos['clave'] = random(5)
     return new Promise((resolve, reject) => {
-      return this.create(datos)
-        .then((resp) => {
-          if (resp['clave']) {
-            delete resp['clave']
-          }
-          return resolve(resp.get({ plain: true }))
-        })
-        .catch((err) => {
-          return reject(err)
-        })
+      genHash(datos['clave']).then(hash => {
+        datos['clave'] = hash
+        self.create(datos)
+          .then((resp) => {
+            if (resp && resp['clave']) {
+              delete resp['clave']
+            }
+            return resolve(resp.get({ plain: true }))
+          })
+          .catch((err) => {
+            return reject(err)
+          })
+      })
     })
   }
 
   define.CrearConClave = function (d) {
     let datos = arguments['0']
+    let self = this
     return new Promise((resolve, reject) => {
-      return this.create(datos)
-        .then((resp) => {
-          return resolve(resp.get({ plain: true }))
-        })
-        .catch((err) => {
-          return reject(err)
-        })
+      genHash(datos['clave']).then(hash => {
+        datos['clave'] = hash
+        self.create(datos)
+          .then((resp) => {
+            return resolve(resp.get({ plain: true }))
+          })
+          .catch((err) => {
+            return reject(err)
+          })
+      })
     })
   }
 
@@ -69,13 +80,17 @@ module.exports = (sequelize, DataTypes) => {
       return this.findOne({
         raw: true,
         where: {
-          usuario,
-          clave
+          usuario
         },
-        attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol']
+        attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol', 'clave']
       })
         .then((resp) => {
-          return resolve(resp)
+          if (resp && resp['clave'] && verificarClave(clave, resp['clave'])) {
+            delete resp['clave']
+            return resolve(resp)
+          } else {
+            return resolve(null)
+          }
         })
         .catch((err) => {
           return reject(err)

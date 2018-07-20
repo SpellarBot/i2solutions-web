@@ -68,7 +68,6 @@ describe('AUTH TEST', () => {
       let req = { usuario: persona_ADMIN_I2SOLUTIONS['usuario'], clave: 'aa' }
       let res = await request(app).post(`/api/auth/login`).send(req)
       var decoded = jwt_decode(res.body.datos.token)
-      // console.log(decoded)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.OK({ docs, doc: API_1, res, req })

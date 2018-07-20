@@ -2343,7 +2343,7 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "El id del area no existe",
+  "datos": "el accidente no existe",
   "codigoEstado": 200
 }
 ```
