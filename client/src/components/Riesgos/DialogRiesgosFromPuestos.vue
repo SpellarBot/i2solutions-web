@@ -17,7 +17,7 @@
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="riesgo in this.$store.getters.riesgoPuesto"
+                v-for="(riesgo, index) in this.$store.getters.riesgoPuesto"
                 :key="riesgo.id"
                 xs3 lg4>
                 <v-card style="padding:10px; margin:25px;" >
@@ -38,6 +38,7 @@
                     dark
                     small
                     color="blue"
+                     @click="eliminarRiesgo(riesgo,index)"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -50,6 +51,31 @@
     </v-layout>
     </v-card>
     </v-dialog>
+
+        <!--Para Eliminar Riesgos-->
+    <v-layout row justify-center>
+      <v-dialog v-model="eliminarDialogRiesgo" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar este Equipo?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialogRiesgo = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarRiesgo()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
   </main>
 </template>
 <script>
@@ -60,7 +86,10 @@ export default {
   }, */
   data () {
     return {
-      size: 'sm'
+      size: 'sm',
+      eliminarDialogRiesgo: false,
+      riesgoId: '',
+      indice: -1
     }
   },
   watch: {
@@ -104,15 +133,38 @@ export default {
       this.$store.dispatch('getRiesgosFromPuestos', puestosId)
         .then((resp) => {
           console.log('Done')
-          console.log('Datos', this.$store.getters.riesgoPuesto)
         })
         .catch((err) => {
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    eliminarRiesgo (riesgo, indice) {
+      this.riesgoId = riesgo.id
+      this.indice = indice
+      this.eliminarDialogRiesgo = true
+    },
+    borrarRiesgo () {
+      console.log('Entre')
+      this.eliminarDialogRiesgo = false
+      let riesgosId = Number(this.riesgoId)
+      console.log('idPuesto', riesgosId)
+      this.$store.dispatch('deleteRiesgo', riesgosId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Equipo borrada con exito.'
+          this.color = 'success'
+          this.$store.getters.riesgoPuesto.splice(this.indice, 1)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
-
   }
 }
 </script>

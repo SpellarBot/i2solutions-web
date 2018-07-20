@@ -838,6 +838,22 @@ export default {
         })
     })
   },
+  deleteRiesgo ({commit}, riesgosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/riesgos/' + riesgosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
   getPersonasFromEstablecimiento ({commit}, establecimientoId) {
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/personas/establecimientos/' + establecimientoId)
