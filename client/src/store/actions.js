@@ -728,6 +728,7 @@ export default {
     })
   },
   updateAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId}) {
+    console.log(puestosId)
     return new Promise((resolve, reject) => {
       Vue.http.put('/api/web/accidentes/' + accidentesId, { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId })
         .then((resp) => {

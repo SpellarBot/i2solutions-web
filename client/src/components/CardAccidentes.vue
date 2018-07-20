@@ -25,6 +25,15 @@
               @click="eliminarAccidente(accidents)"
             >
               <v-icon>delete</v-icon>
+              <v-snackbar
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
             </v-btn>
             <footer>
             <v-layout row justify-center>
@@ -41,15 +50,7 @@
             </v-dialog>
           </v-layout>
 
-           <v-snackbar
-              :timeout="3000"
-              :multi-line="true"
-              :color="color"
-              :top="true"
-              v-model="snackbar"
-            >
-              {{mensajeSnackbar}}
-            </v-snackbar>
+
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"

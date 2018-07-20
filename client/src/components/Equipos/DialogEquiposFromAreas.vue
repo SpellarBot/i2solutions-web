@@ -73,7 +73,7 @@
       <v-dialog v-model="eliminarDialogEquipo" persistent max-width="290">
         <v-card>
           <v-card-title class="headline">Eliminar</v-card-title>
-          <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
+          <v-card-text>¿Está seguro que quiere eliminar este Equipo?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
@@ -190,7 +190,7 @@ export default {
         })
     },
     quitarDeArray () {
-      this.$store.getters.equipoAreas.splice(this.indice,1)
+      this.$store.getters.equipoAreas.splice(this.indice, 1)
     }
   }
 }
