@@ -39,6 +39,7 @@
                     small
                     color="blue"
                      @click="eliminarRiesgo(riesgo,index)"
+                     v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>

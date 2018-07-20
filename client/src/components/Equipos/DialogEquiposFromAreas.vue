@@ -35,6 +35,7 @@
                     small
                     color="blue"
                     @click="visualizarEditar(equipo)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
                   >
                     <v-icon>edit</v-icon>
                   </v-btn>
@@ -44,6 +45,7 @@
                     small
                     color="blue"
                     @click="eliminarEquipo(equipo, index)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>

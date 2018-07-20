@@ -10,6 +10,7 @@
               small
               color="blue"
               @click="visualizarEditar(capacitacions, fecha(capacitacions.fechaCapacitacion))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -19,6 +20,7 @@
               small
               color="blue"
               @click="eliminarCapacitacion(capacitacions)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
             </v-btn>

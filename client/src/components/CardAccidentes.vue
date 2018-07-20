@@ -14,6 +14,7 @@
               small
               color="blue"
               @click="visualizarEditar(accidents, fecha(accidents.fecha))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -23,6 +24,7 @@
               small
               color="blue"
               @click="eliminarAccidente(accidents)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
               <v-snackbar

@@ -18,6 +18,7 @@ import VerPuestos from '@/components/VerPuestos'
 import PuestoEditar from '@/components/PuestoEditar'
 import PuestoCrear from '@/components/PuestoCrear'
 import DashboardEstablecimiento from '@/components/DashboardEstablecimiento'
+import AuthAdmin from './authAdmin'
 
 Vue.use(Router)
 
@@ -32,7 +33,7 @@ export default new Router({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      beforeEnter: AuthGuard
+      beforeEnter: AuthAdmin
     }, {
       path: '/crearEmpresa',
       name: 'CrearEmpresa',

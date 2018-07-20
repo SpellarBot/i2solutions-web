@@ -20,6 +20,7 @@
               small
               color="blue"
               @click="visualizarEditar()"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -29,6 +30,7 @@
               small
               color="blue"
               @click="eliminarArea()"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>delete</v-icon>
             </v-btn>

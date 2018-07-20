@@ -54,7 +54,14 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'El usuario ingresado correctamente'
           this.color = 'success'
-          router.push('dashboard')
+          if (this.$store.getters.usuario.rol === 'admin-i2solutions'){
+            router.push('dashboard')
+          }
+          else {
+            let empId = this.$store.getters.usuario.empresasId
+            router.push('/dashboard/' + empId )
+          }
+
         })
         .catch((err) => {
           this.color = 'error'
