@@ -69,7 +69,7 @@
 </template>
 <script>
 import DialogEditarPersonas from './Editar/DialogEditarPersonas'
-import index from '../router';
+// import index from '../router'
 const moment = require('moment')
 export default {
   props: [ 'persona', 'deleteMode', 'indexE', 'indexA', 'indexP', 'personasId' ],
@@ -80,7 +80,7 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      eliminarDialogPersona: false,
+      eliminarDialogPersona: false
     }
   },
   computed: {
@@ -93,7 +93,7 @@ export default {
       get () {
         return this.personas.nombres + ' ' + this.personas.apellidos
       }
-    },
+    }
   },
   methods: {
     fecha: function (date) {
@@ -105,32 +105,24 @@ export default {
     },
 
     eliminarPersona () {
-      //this.personasId = this.persona.id
-      //console.log(this.personasId)
       this.eliminarDialogPersona = true
     },
     borrarPersona () {
-      console.log ('Persona', this.personas)
-      console.log(this.personasId, ',', this.indexP, '', this.indexA,'', this.indexE)
       this.eliminarDialogPersona = false
-      //let personasId = Number(this.personasId)
-
-      this.$store.dispatch('deletePersona', this.personasId)
+      let personasId = Number(this.persona.id)
+      this.$store.dispatch('deletePersona', personasId)
         .then((resp) => {
           console.log('entre')
           this.snackbar = true
           this.mensajeSnackbar = 'Persona borrada con exito.'
           this.color = 'success'
           if (this.deleteMode === 1) {
-            this.$store.getters.personas.splice(this.indexE,1)
+            this.$store.getters.personas.splice(this.indexE, 1)
+          } else if (this.deleteMode === 2) {
+            this.$store.getters.personas.splice(this.indexA, 1)
+          } else {
+            this.$store.getters.personas.splice(this.indexP, 1)
           }
-          else if (this.deleteMode === 2) {
-             this.$store.getters.personas.splice(this.indexA,1)
-          }
-          else {
-             this.$store.getters.personas.splice(this.indexP,1)
-          }
-
         })
         .catch((err) => {
           this.color = 'error'

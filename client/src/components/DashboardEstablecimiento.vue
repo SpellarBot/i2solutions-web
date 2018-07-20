@@ -186,6 +186,7 @@
     <DialogAreas
     :visible="visibleAreas"
     :establecimientoId="establecimientoId"
+    :indexE="index"
     :establecimientoNombres="establecimientoNombres"
     @close="visibleAreas=false"
     ></DialogAreas>

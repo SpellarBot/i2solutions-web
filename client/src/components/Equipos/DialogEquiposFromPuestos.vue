@@ -17,7 +17,7 @@
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="equipo in this.$store.getters.equipoAreas"
+                v-for="(equipo, index) in this.$store.getters.equipoAreas"
                 :key="equipo.id"
                 xs3 lg4>
                 <v-card style="padding:5px; margin:25px;" >
@@ -43,7 +43,7 @@
                     dark
                     small
                     color="blue"
-                    @click="eliminarEquipo(equipo)"
+                    @click="eliminarEquipo(equipo, index)"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -116,7 +116,8 @@ export default {
       color: '',
       snackbar: false,
       visibleEdicion: false,
-      eliminarDialogEquipo: false
+      eliminarDialogEquipo: false,
+      indice: -1
     }
   },
   watch: {
@@ -176,8 +177,9 @@ export default {
       this.visibleEdicion = true
     },
 
-    eliminarEquipo (equipo) {
+    eliminarEquipo (equipo, indice) {
       this.equipoId = equipo.id
+      this.indice = indice
       this.eliminarDialogEquipo = true
     },
     borrarEquipo () {
@@ -189,9 +191,8 @@ export default {
           console.log('entre')
           this.snackbar = true
           this.mensajeSnackbar = 'Equipo borrada con exito.'
-          console.log ('Si borre con exito')
           this.color = 'success'
-          // this.reloadEstablecimiento()
+          this.$store.getters.equipoAreas.splice(this.indice,1)
         })
         .catch((err) => {
           this.color = 'error'

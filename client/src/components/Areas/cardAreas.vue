@@ -54,18 +54,7 @@
                     </v-container>
                 </v-card-text>
             </v-card>
-      <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar>
-
     <!--Para Eliminar Puestos-->
-
     <v-layout row justify-center>
       <v-dialog v-model="eliminarDialogAreas" persistent max-width="290">
         <v-card>
@@ -79,6 +68,15 @@
         </v-card>
       </v-dialog>
     </v-layout>
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
     <footer>
     <DialogNovedadesFromAreas
     :areaId="areaId"
@@ -157,10 +155,10 @@ export default{
       metrosCuadrados: '',
       areaFotoUrl: '',
       areaDescripcion: '',
+      visibleEdicion: false,
       mensajeSnackbar: '',
       color: '',
-      snackbar: false,
-      visibleEdicion: false
+      snackbar: false
     }
   },
   methods: {
@@ -226,14 +224,13 @@ export default{
     borrarArea () {
       this.eliminarDialogAreas = false
       let areasId = Number(this.id)
-      console.log('idPuesto', areasId)
+      console.log('idArea', areasId)
       this.$store.dispatch('deleteArea', areasId)
         .then((resp) => {
-          console.log('entre')
           this.snackbar = true
           this.mensajeSnackbar = 'Area borrada con exito.'
           this.color = 'success'
-          this.$store.getters.areas.splice(this.index,1)
+          this.quitarDeArray()
         })
         .catch((err) => {
           this.color = 'error'
@@ -241,6 +238,10 @@ export default{
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    quitarDeArray () {
+      let array = this.$store.getters.areas
+      array.splice(this.index, 1)
     }
   }
 }

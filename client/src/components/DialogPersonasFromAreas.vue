@@ -26,7 +26,7 @@
           deleteMode="deleteMode"
           personasId="persona.id"
           ></CardPersonas>
-          <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }} , {{persona.id}} </div>
+          <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }} </div>
         </v-card>
       </v-flex>
       </v-layout>

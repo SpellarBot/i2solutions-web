@@ -17,7 +17,7 @@
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="equipo in this.$store.getters.equipoAreas"
+                v-for="(equipo,index) in this.$store.getters.equipoAreas"
                 :key="equipo.id"
                 xs3 lg4>
                 <v-card style="padding:5px; margin:25px;" >
@@ -43,7 +43,7 @@
                     dark
                     small
                     color="blue"
-                    @click="eliminarEquipo(equipo)"
+                    @click="eliminarEquipo(equipo, index)"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -114,7 +114,8 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      visibleEdicion: false
+      visibleEdicion: false,
+      indice: -1
     }
   },
   watch: {
@@ -163,9 +164,10 @@ export default {
       this.equipoCantidad = equipo.cantidad
       this.visibleEdicion = true
     },
-    eliminarEquipo (equipo) {
+    eliminarEquipo (equipo, indice) {
       this.equipoId = equipo.id
       this.eliminarDialogEquipo = true
+      this.indice = indice
     },
     borrarEquipo () {
       this.eliminarDialogEquipo = false
@@ -176,9 +178,9 @@ export default {
           console.log('entre')
           this.snackbar = true
           this.mensajeSnackbar = 'Equipo borrada con exito.'
-          console.log ('Si borre con exito')
+          console.log('Si borre con exito')
           this.color = 'success'
-          // this.reloadEstablecimiento()
+          this.quitarDeArray()
         })
         .catch((err) => {
           this.color = 'error'
@@ -186,6 +188,9 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    quitarDeArray () {
+      this.$store.getters.equipoAreas.splice(this.indice,1)
     }
   }
 }

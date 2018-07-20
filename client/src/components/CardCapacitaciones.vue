@@ -114,7 +114,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Capacitación borrada con exito.'
           this.color = 'success'
-          this.$store.getters.capacitaciones.splice(this.index,1)
+          this.$store.getters.capacitaciones.splice(this.index, 1)
         })
         .catch((err) => {
           this.color = 'error'

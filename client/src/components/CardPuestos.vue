@@ -103,7 +103,7 @@ import DialogEditarPuestos from './Editar/DialogEditarPuestos'
 import DialogNovedadesFromPuestos from './Novedades/DialogNovedadesFromPuestos'
 import DialogRiesgosFromPuestos from './Riesgos/DialogRiesgosFromPuestos'
 import DialogEquiposFromPuestos from './Equipos/DialogEquiposFromPuestos'
-import index from '../router'
+// import index from '../router'
 export default {
   props: [ 'puesto', 'areaId', 'editMode', 'deleteMode', 'index1', 'index2' ],
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },

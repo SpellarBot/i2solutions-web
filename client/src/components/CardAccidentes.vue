@@ -86,10 +86,7 @@ export default {
       accidenteId: '',
       accidentePuestoId: '',
       accidenteSelected: 0,
-      eliminarDialogAccidentes: false,
-      snackbar: false,
-      mensajeSnackbar: '',
-      color: ''
+      eliminarDialogAccidentes: false
     }
   },
   computed: {
@@ -135,8 +132,7 @@ export default {
           this.color = 'success'
           if (this.deleteMode === 1) {
             this.$store.getters.accidentes.splice(this.indexE, 1)
-          }
-          else {
+          } else {
             this.$store.getters.accidentes.splice(this.indexP, 1)
             this.snackbar = true
           }
