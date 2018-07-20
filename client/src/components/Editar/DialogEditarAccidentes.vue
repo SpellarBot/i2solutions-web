@@ -157,7 +157,11 @@ export default {
               accidente.fecha = fecha
               accidente.heridos = heridos
               accidente.muertos = muertos
-              accidente.atendidoEnEmpresa = atendidoEnEmpresa
+              if (atendidoEnEmpresa === false) {
+                accidente.atendidoEnEmpresa = 0
+              } else {
+                accidente.atendidoEnEmpresa = 1
+              }
               break
             }
           }

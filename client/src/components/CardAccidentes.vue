@@ -50,7 +50,6 @@
             </v-dialog>
           </v-layout>
 
-
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"
