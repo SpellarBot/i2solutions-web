@@ -41,15 +41,15 @@
             </v-dialog>
           </v-layout>
 
-          <v-snackbar
-            :timeout="3000"
-            :multi-line="true"
-            :color="color"
-            :top="true"
-            v-model="snackbar"
-          >
-            {{mensajeSnackbar}}
-          </v-snackbar>
+           <v-snackbar
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"
@@ -69,10 +69,13 @@
 import DialogEditarAccidentes from './Editar/DialogEditarAccidentes'
 const moment = require('moment')
 export default {
-  props: [ 'accidente' ],
+  props: [ 'accidente', 'indexE', 'indexP', 'deleteMode' ],
   components: { DialogEditarAccidentes },
   data () {
     return {
+      color: '',
+      snackbar: false,
+      mensajeSnackbar: '',
       visibleEdicion: false,
       accidenteNombre: '',
       accidenteDescripcion: '',
@@ -83,10 +86,7 @@ export default {
       accidenteId: '',
       accidentePuestoId: '',
       accidenteSelected: 0,
-      eliminarDialogAccidentes: false,
-      snackbar: false,
-      mensajeSnackbar: '',
-      color: ''
+      eliminarDialogAccidentes: false
     }
   },
   computed: {
@@ -128,9 +128,14 @@ export default {
       this.$store.dispatch('deleteAccidentes', accidentesId)
         .then((resp) => {
           console.log('entre')
-          this.snackbar = true
-          this.mensajeSnackbar = 'Accidente borrada con exito.'
+          this.mensajeSnackbar = 'Accidente borrado con exito.'
           this.color = 'success'
+          if (this.deleteMode === 1) {
+            this.$store.getters.accidentes.splice(this.indexE, 1)
+          } else {
+            this.$store.getters.accidentes.splice(this.indexP, 1)
+            this.snackbar = true
+          }
         })
         .catch((err) => {
           this.color = 'error'

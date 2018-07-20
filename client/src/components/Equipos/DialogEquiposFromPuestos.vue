@@ -17,7 +17,7 @@
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="equipo in this.$store.getters.equipoAreas"
+                v-for="(equipo, index) in this.$store.getters.equipoAreas"
                 :key="equipo.id"
                 xs3 lg4>
                 <v-card style="padding:5px; margin:25px;" >
@@ -43,6 +43,7 @@
                     dark
                     small
                     color="blue"
+                    @click="eliminarEquipo(equipo, index)"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -57,6 +58,22 @@
     </v-layout>
     </v-card>
     </v-dialog>
+
+    <!--Para Eliminar Equipos-->
+    <v-layout row justify-center>
+      <v-dialog v-model="eliminarDialogEquipo" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+
     <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -98,7 +115,9 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      visibleEdicion: false
+      visibleEdicion: false,
+      eliminarDialogEquipo: false,
+      indice: -1
     }
   },
   watch: {
@@ -156,6 +175,31 @@ export default {
       this.equipoFotoUrl = equipo.fotoUrl
       this.equipoCantidad = equipo.cantidad
       this.visibleEdicion = true
+    },
+
+    eliminarEquipo (equipo, indice) {
+      this.equipoId = equipo.id
+      this.indice = indice
+      this.eliminarDialogEquipo = true
+    },
+    borrarEquipo () {
+      this.eliminarDialogEquipo = false
+      let equiposId = Number(this.equipoId)
+      console.log('idPuesto', equiposId)
+      this.$store.dispatch('deleteEquipo', equiposId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Equipo borrada con exito.'
+          this.color = 'success'
+          this.$store.getters.equipoAreas.splice(this.indice,1)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

@@ -8,29 +8,29 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
-                  v-model = "nombres"
+                  v-model = "newNombres"
                   label="Nombres" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
-                  v-model = "apellidos"
+                  v-model = "newApellidos"
                   label="Apellidos" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-select
               :items="roles"
-              v-model="rol"
+              v-model="newRol"
               label="Rol"
-              required=""
+              required
               :rules="[rules.required]"
             ></v-select>
                 <v-text-field
-              v-model="correo"
+              v-model="newCorreo"
               label="Correo"
               :rules="emailRules"
               required
             ></v-text-field><v-text-field
-              v-model="cedula"
+              v-model="newCedula"
               label="Cédula"
               maxlength=10
               :rules="cedulaRules"
@@ -38,9 +38,10 @@
               v-validate="'required | max:10'"
               required
               :counter=10
+              mask="#############"
             ></v-text-field>
             <v-text-field
-              v-model="telefono"
+              v-model="newTelefono"
               label="Télefono"
               maxlength=10
               :rules="telefonoRules"
@@ -63,7 +64,7 @@
               >
                 <v-text-field
                   slot="activator"
-                  v-model="date"
+                  v-model="newDate"
                   label="Fecha de Nacimiento"
                   readonly
                   required
@@ -79,13 +80,13 @@
                 ></v-date-picker>
               </v-menu>
               <v-text-field
-              v-model="perfilOcupacional"
+              v-model="newPerfilOcupacional"
               label="Perfil Ocupacional"
               required
               :rules="[rules.required]"
             ></v-text-field>
             <v-text-field
-              v-model="usuario"
+              v-model="newUsuario"
               label="Usuario"
               required
               :rules="[rules.required]"
@@ -95,19 +96,42 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
   </main>
 </template>
 <script>
+  import MyModule from '../MyModule.js'
+  const moment = require('moment')
 export default {
   data () {
     return {
       date: null,
       menu: false,
       valid: false,
+      newNombres: '',
+      newApellidos: '',
+      newDate: null,
+      newRol: '',
+      newCorreo: '',
+      newCedula: '',
+      newPerfilOcupacional: '',
+      newTelefono: '',
+      newUsuario: '',
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -127,16 +151,20 @@ export default {
         v => (!Number.isNaN(parseInt(v))) || 'cédula no valida'
       ],
       roles: [{
-        value: 'Jefe de Seguridad',
+        value: 'jefe-seguridad',
         text: 'Jefe de Seguridad'
       },
       {
-        value: 'Inspector de Seuridad',
+        value: 'inspector-seguridad',
         text: 'Inspector de Seguridad'
       },
       {
-        value: 'Empleado',
+        value: 'empleado',
         text: 'Empleado'
+      },
+      {
+        value: 'admin-empresa',
+        text: 'Administrador de la empresa'
       }
       ]
     }
@@ -144,15 +172,91 @@ export default {
   watch: {
     menu (val) {
       val && this.$nextTick(() => (this.$refs.picker.activePicker = 'Año'))
+    },
+    nombres () {
+      this.newNombres = this.nombres
+    },
+    apellidos () {
+      this.newApellidos = this.apellidos
+    },
+    rol () {
+      this.newRol = this.rol
+    },
+    fecha () {
+      this.newDate = this.fecha
+    },
+    date () {
+      this.newDate = moment(this.date).format('L')
+    },
+    correo () {
+      this.newCorreo = this.correo
+    },
+    cedula () {
+      this.newCedula = this.cedula
+    },
+    telefono () {
+      this.newTelefono = this.telefono
+    },
+    perfilOcupacional () {
+      this.newPerfilOcupacional = this.perfilOcupacional
+    },
+    usuario () {
+      this.newUsuario = this.usuario
     }
   },
   methods: {
     save (date) {
       this.$refs.menu.save(date)
+    },
+    edit () {
+      let nombres = this.$data.newNombres
+      let apellidos = this.$data.newApellidos
+      let cedula = this.$data.newCedula
+      let personasId = this.personaId
+      let correo = this.$data.newCorreo
+      let fechaNacimiento = moment(this.$data.newDate).format()
+      let rol = this.$data.newRol
+      let telefono = this.$data.newTelefono
+      let perfilOcupacional = this.$data.newPerfilOcupacional
+      let usuario = this.$data.newUsuario
+      let validacionCedula = MyModule(cedula)
+      if (validacionCedula[0] === false) {
+        this.snackbar = true
+        this.mensajeSnackbar = validacionRuc[1]
+        this.color = 'error'
+      } else {
+        this.$store.dispatch('updatePersona', { personasId, nombres, apellidos, cedula, correo, fechaNacimiento, rol, telefono, perfilOcupacional, usuario })
+          .then((resp) => {
+            for (let i = 0; i < this.$store.getters.personas.length; i++) {
+              let persona = this.$store.getters.personas[i]
+              if (persona.id === personasId) {
+                persona.nombres = nombres
+                persona.apellidos = apellidos
+                persona.cedula = cedula
+                persona.fechaNacimiento = fechaNacimiento
+                persona.rol = rol
+                persona.correo = correo
+                persona.telefono = telefono
+                persona.perfilOcupacional = perfilOcupacional
+                persona.usuario = usuario
+                break
+              }
+            }
+            this.snackbar = true
+            this.mensajeSnackbar = 'Persona editada exitosamente.'
+            this.color = 'success'
+            this.$emit('close')
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      }
     }
   },
   name: 'DialogEditarPersonas',
-  props: ['visible'],
+  props: ['visible', 'personaNombres', 'personaApellidos', 'personaFechaNacimiento', 'personaRol', 'personaCorreo', 'personaCedula', 'personaTelefono', 'personaPerfilOcupacional', 'personaUsuario', 'personaId'],
   computed: {
     show: {
       get () {
@@ -162,6 +266,78 @@ export default {
         if (!value) {
           this.$emit('close')
         }
+      }
+    },
+    nombres: {
+      get () {
+        return this.personaNombres
+      },
+      set (value) {
+        this.newNombres = value
+      }
+    },
+    apellidos: {
+      get () {
+        return this.personaApellidos
+      },
+      set (value) {
+        this.newApellidos = value
+      }
+    },
+    fecha: {
+      get () {
+        return this.personaFechaNacimiento
+      },
+      set (value) {
+        this.newDate = value
+      }
+    },
+    correo: {
+      get () {
+        return this.personaCorreo
+      },
+      set (value) {
+        this.newCorreo = value
+      }
+    },
+    cedula: {
+      get () {
+        return this.personaCedula
+      },
+      set (value) {
+        this.newCedula = value
+      }
+    },
+    rol: {
+      get () {
+        return this.personaRol
+      },
+      set (value) {
+        this.newRol = value
+      }
+    },
+    telefono: {
+      get () {
+        return this.personaTelefono
+      },
+      set (value) {
+        this.newTelefono = value
+      }
+    },
+    perfilOcupacional: {
+      get () {
+        return this.personaPerfilOcupacional
+      },
+      set (value) {
+        this.newPerfilOcupacional = value
+      }
+    },
+    usuario: {
+      get () {
+        return this.personaUsuario
+      },
+      set (value) {
+        this.newUsuario = value
       }
     }
   }

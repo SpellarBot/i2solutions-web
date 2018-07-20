@@ -19,11 +19,13 @@
       <h1>Puestos de trabajo</h1>
       <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 md6 lg4 v-for="(puesto) in this.$store.getters.puestos" :key="puesto.id">
+          <v-flex xs12 md6 lg4 v-for="(puesto,index) in this.$store.getters.puestos" :key="puesto.id">
             <CardPuestos
             :puesto = "puesto"
             :areaId = "idArea"
             :editMode = "editMode"
+            :deleteMode = "deleteMode"
+            :index = index
             ></CardPuestos>
           </v-flex>
         </v-layout>
@@ -45,7 +47,8 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
-      editMode: 1
+      editMode: 1,
+      deleteMode: 1
     }
   },
   /* mounted () {

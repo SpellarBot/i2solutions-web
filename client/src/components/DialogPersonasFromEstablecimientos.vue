@@ -19,9 +19,12 @@
       <h1>Personas: </h1>
       <v-layout>
         <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4' v-for="(persona) in this.$store.getters.personas" :key="persona.id">
+        <v-card class='mb-4' v-for="(persona,indexE) in this.$store.getters.personas" :key="persona.id">
           <CardPersonas
           :persona="persona"
+          :indexE="indexE"
+          :deleteMode="deleteMode"
+          :personasId:="persona.id"
           ></CardPersonas>
           <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }}</div>
           <div><b>Área de trabajo:</b> {{ persona.areasNombre }}</div>
@@ -43,7 +46,8 @@ export default {
       valid: null,
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      deleteMode: 1
     }
   },
   watch: {

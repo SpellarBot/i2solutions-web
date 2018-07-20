@@ -193,9 +193,15 @@ export default {
           this.$emit('close')
         })
         .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
+          if (err.ok === false) {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.'
+          } else {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          }
         })
     }
   }

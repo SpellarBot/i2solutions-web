@@ -582,8 +582,11 @@ export default {
               return reject(resp.body.datos)
             }
           }).catch((err) => {
-            commit('setError', err)
-            return reject(err)
+            if (err.ok === false) {
+              console.log('Aqui')
+              commit('setError', 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.')
+              return reject(err)
+            }
           })
       })
     } else {
@@ -639,9 +642,9 @@ export default {
         })
     })
   },
-  updatePersona ({commit}, {personasId, correo, telefono, clave, usuario, rol}) {
+  updatePersona ({commit}, {personasId, nombres, apellidos, cedula, correo, fechaNacimiento, rol, telefono, perfilOcupacional, usuario}) {
     return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/personas/' + personasId, { correo, telefono, clave, usuario, rol })
+      Vue.http.put('/api/web/personas/' + personasId, { nombres, apellidos, cedula, correo, fechaNacimiento, rol, telefono, perfilOcupacional, usuario })
         .then((resp) => {
           if (resp.body.estado) {
             console.log('done')
@@ -807,6 +810,22 @@ export default {
         .then((resp) => {
           if (resp.body.estado) {
             console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  deleteEquipo ({commit}, equiposId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/equipos/' + equiposId)
+        .then((resp) => {
+          if (resp.body.estado) {
             return resolve()
           } else {
             commit('setError', resp.body.datos)

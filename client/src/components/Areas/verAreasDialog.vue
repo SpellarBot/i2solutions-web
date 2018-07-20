@@ -11,7 +11,7 @@
       <br>
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap align-center>
-            <v-flex md4 v-for="area in $store.getters.areas" :key="area.id" class="text-xs-center">
+            <v-flex md4 v-for="(area,index) in $store.getters.areas" :key="area.id" class="text-xs-center">
               <cardAreas
                 :id = "area.id"
                 :nombre = "area.areaNombre"
@@ -24,6 +24,7 @@
                 :equipos = "area.cantidadEquipos"
                 :areaMetrosCuadrados = "area.areaMetrosCuadrados"
                 :fotoUrl = "area.areaFotoUrl"
+                :index = index
                 >
               </cardAreas>
           </v-flex>

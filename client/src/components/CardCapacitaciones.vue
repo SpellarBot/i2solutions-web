@@ -23,14 +23,14 @@
               <v-icon>delete</v-icon>
             </v-btn>
             <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar>
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
       <footer>
             <DialogEditarCapacitaciones
             :visible="visibleEdicion"
@@ -42,18 +42,18 @@
             @close="visibleEdicion=false"
             ></DialogEditarCapacitaciones>
             <v-layout row justify-center>
-      <v-dialog v-model="eliminarDialogCapacitaciones" persistent max-width="290">
-        <v-card>
-          <v-card-title class="headline">Eliminar</v-card-title>
-          <v-card-text>¿Está seguro que quiere eliminar esta Capacitación?</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-layout>
+              <v-dialog v-model="eliminarDialogCapacitaciones" persistent max-width="290">
+                <v-card>
+                  <v-card-title class="headline">Eliminar</v-card-title>
+                  <v-card-text>¿Está seguro que quiere eliminar esta Capacitación?</v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
+                    <v-btn color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-layout>
 
   </footer>
   </main>
@@ -62,7 +62,7 @@
 import DialogEditarCapacitaciones from './Editar/DialogEditarCapacitaciones'
 const moment = require('moment')
 export default {
-  props: [ 'capacitacion', 'puestoId' ],
+  props: [ 'capacitacion', 'puestoId', 'index' ],
   components: { DialogEditarCapacitaciones },
   data () {
     return {
@@ -114,6 +114,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Capacitación borrada con exito.'
           this.color = 'success'
+          this.$store.getters.capacitaciones.splice(this.index, 1)
         })
         .catch((err) => {
           this.color = 'error'
