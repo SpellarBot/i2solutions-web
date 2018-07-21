@@ -57,13 +57,17 @@ const Conectar = () => {
       .sync()
       .then(() => {
         if (process.env.NODE_ENV !== 'testing') {
-          sequelize.query('SET FOREIGN_KEY_CHECKS=0')
-            .then((resp) => { // mysql
-              if (process.env.NODE_ENV === 'development') {
-                console.log('Connection has been established successfully.')
-              }
-              return resolve(db)
-            })
+          if (process.env.NODE_ENV === 'development') {
+            console.log('Connection has been established successfully.')
+          }
+          return resolve(db)
+          // sequelize.query('SET FOREIGN_KEY_CHECKS=0')
+          //   .then((resp) => { // mysql
+          //     if (process.env.NODE_ENV === 'development') {
+          //       console.log('Connection has been established successfully.')
+          //     }
+          //     return resolve(db)
+          //   })
         } else {
           // sequelize.query('PRAGMA foreign_keys = OFF') // para sqlite
           return resolve()
