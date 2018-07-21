@@ -728,6 +728,7 @@ export default {
     })
   },
   updateAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId}) {
+    console.log(puestosId)
     return new Promise((resolve, reject) => {
       Vue.http.put('/api/web/accidentes/' + accidentesId, { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId })
         .then((resp) => {
@@ -824,6 +825,22 @@ export default {
   deleteEquipo ({commit}, equiposId) {
     return new Promise((resolve, reject) => {
       Vue.http.delete('/api/web/equipos/' + equiposId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  deleteRiesgo ({commit}, riesgosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.delete('/api/web/riesgos/' + riesgosId)
         .then((resp) => {
           if (resp.body.estado) {
             return resolve()

@@ -112,8 +112,8 @@
   </main>
 </template>
 <script>
-  import MyModule from '../MyModule.js'
-  const moment = require('moment')
+import MyModule from '../MyModule.js'
+const moment = require('moment')
 export default {
   data () {
     return {
@@ -222,7 +222,7 @@ export default {
       let validacionCedula = MyModule(cedula)
       if (validacionCedula[0] === false) {
         this.snackbar = true
-        this.mensajeSnackbar = validacionRuc[1]
+        this.mensajeSnackbar = validacionCedula[1]
         this.color = 'error'
       } else {
         this.$store.dispatch('updatePersona', { personasId, nombres, apellidos, cedula, correo, fechaNacimiento, rol, telefono, perfilOcupacional, usuario })

@@ -14,6 +14,7 @@
               small
               color="blue"
               @click="visualizarEditar(accidents, fecha(accidents.fecha))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -23,8 +24,18 @@
               small
               color="blue"
               @click="eliminarAccidente(accidents)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
+              <v-snackbar
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
             </v-btn>
             <footer>
             <v-layout row justify-center>
@@ -41,15 +52,6 @@
             </v-dialog>
           </v-layout>
 
-           <v-snackbar
-              :timeout="3000"
-              :multi-line="true"
-              :color="color"
-              :top="true"
-              v-model="snackbar"
-            >
-              {{mensajeSnackbar}}
-            </v-snackbar>
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"

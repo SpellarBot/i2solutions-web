@@ -9,6 +9,7 @@
               color="blue"
               absolute
               @click="visualizarEditar(personas, fecha(personas.fechaNacimiento))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -21,6 +22,7 @@
               absolute
               class="offseted"
               @click="eliminarPersona()"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
             </v-btn>

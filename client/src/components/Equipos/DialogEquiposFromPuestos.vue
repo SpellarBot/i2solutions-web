@@ -35,6 +35,7 @@
                     small
                     color="blue"
                     @click="visualizarEditar(equipo)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
                   >
                     <v-icon>edit</v-icon>
                   </v-btn>
@@ -44,6 +45,7 @@
                     small
                     color="blue"
                     @click="eliminarEquipo(equipo, index)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -64,7 +66,7 @@
       <v-dialog v-model="eliminarDialogEquipo" persistent max-width="290">
         <v-card>
           <v-card-title class="headline">Eliminar</v-card-title>
-          <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
+          <v-card-text>¿Está seguro que quiere eliminar este Equipo?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
@@ -192,7 +194,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Equipo borrada con exito.'
           this.color = 'success'
-          this.$store.getters.equipoAreas.splice(this.indice,1)
+          this.$store.getters.equipoAreas.splice(this.indice, 1)
         })
         .catch((err) => {
           this.color = 'error'

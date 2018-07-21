@@ -146,6 +146,7 @@ export default {
       let atendidoEnEmpresa = this.$data.newCheckbox
       let puestosId = this.accidentePuestoId
       let accidentesId = Number(this.accidenteId)
+      console.log(puestosId)
       this.$store.dispatch('updateAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId })
         .then((resp) => {
           for (let i = 0; i < this.$store.getters.accidentes.length; i++) {
@@ -156,7 +157,11 @@ export default {
               accidente.fecha = fecha
               accidente.heridos = heridos
               accidente.muertos = muertos
-              accidente.atendidoEnEmpresa = atendidoEnEmpresa
+              if (atendidoEnEmpresa === false) {
+                accidente.atendidoEnEmpresa = 0
+              } else {
+                accidente.atendidoEnEmpresa = 1
+              }
               break
             }
           }

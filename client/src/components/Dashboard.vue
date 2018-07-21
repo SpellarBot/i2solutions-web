@@ -58,6 +58,7 @@
               :src=empresa.urlFoto
               height="180px"
               contain
+              style="padding: 20px"
               >
             </v-card-media>
           </v-card>

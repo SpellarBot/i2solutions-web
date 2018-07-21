@@ -11,6 +11,7 @@
               small
               color="blue"
               @click="visualizarEditar(puestos, areasId)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -21,6 +22,7 @@
               small
               color="blue"
               @click="eliminarPuesto(puestos)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>delete</v-icon>
             </v-btn>

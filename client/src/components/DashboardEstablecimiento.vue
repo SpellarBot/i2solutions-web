@@ -30,6 +30,7 @@
               color="blue"
               small
               @click="visualizarEdicion()"
+              v-if="this.$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -39,6 +40,7 @@
               color="blue"
               small
               @click="eliminarEmpresa()"
+              v-if="this.$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -71,6 +73,7 @@
               color="blue"
               small
               @click="visualizarEdicionEstablecimiento(establecimiento)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -80,6 +83,7 @@
               color="blue"
               small
               @click="eliminarEstablecimiento(establecimiento)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -264,7 +268,8 @@ export default {
       establecimientoNombres: '',
       establecimientoDireccion: '',
       establecimientoRUC: '',
-      establecimientoSelectedId: 0
+      establecimientoSelectedId: 0,
+      rol: ''
     }
   },
   mounted () {
@@ -275,7 +280,9 @@ export default {
       console.log(this.$route.params.empresaId)
       this.error = this.valid = null
       this.loading = true
+      this.rol = this.$store.getters.usuario.rol
       this.id = Number(this.$route.params.empresaId)
+      // console.log(this.$store.getters.usuario.rol)
       this.verEmpresaSelected()
       this.verEstablecimientos()
       this.loading = false
