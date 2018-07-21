@@ -173,7 +173,6 @@ export default {
         this.$store.commit('setVerified', false)
         console.log('algo salió mal')
       }
-      console.log('---> ' + this.$store.state.verified + ' <---' )
       this.$store.commit('setVerified', true)
     },
     cleaner () {      
