@@ -275,6 +275,19 @@ function crearRiesgos ({ puestosId, db }) {
 conexion.Conectar().then(async (db) => {
   await conexion.Limpiar()
   let promesas = []
+  // crear admin
+  await db.personas.CrearConClave({
+      nombres: 'admin',
+      apellidos: 'admin',
+      correo: 'admin@gmail.com',
+      cedula: '0931823447',
+      clave: 'admin',
+      telefono: '259956326',
+      fechaNacimiento: `${faker.date.past()}`,
+      perfilOcupacional: 'admin',
+      usuario: 'admin',
+      rol: 'admin-i2solutions'
+  })
   const cantidadEmpresas = 5
   const cantidadEstablecimientosMaximo = 4
   const cantidadAreasMaximo = 6
@@ -291,7 +304,7 @@ conexion.Conectar().then(async (db) => {
     console.log(`Creada empresa ${i}`)
     // empresa
     let empresasId = await crearEmpresas({ db })
-    for (let i = 1; i <= ri(1, cantidadEstablecimientosMaximo); i++) {
+    for (let i = 1; i <= ri(2, cantidadEstablecimientosMaximo); i++) {
       // establecimiento
       let establecimientosId = await crearEstablecimientos({ db, empresasId })
       for (let i = 1; i <= ri(1, cantidadAreasMaximo); i++) {
@@ -361,32 +374,7 @@ conexion.Conectar().then(async (db) => {
 })
 
 /*
-  empresas
-    establecimientos
-      areas
-        puestos
-          areasPuestos
-          equipos
-            equiposPuestos
-          capacitaciones
-            personasCapacitaciones
-          accidentes
-          inspecciones
-            novedades
-          personas
-            personasPuestos
-          riesgos
-
 inspecciones
 matriz
+controles
 */
-
-// 18. controles
-// let control = {
-
-// }
-
-// 19. matrices
-// let matriz = {
-
-// }
