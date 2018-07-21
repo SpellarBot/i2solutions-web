@@ -8,16 +8,19 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                :class="'temaCapacitacion' + this.capacitacionId"
                   v-model = "newTema"
                   label="Tema" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                :class="'descripcionCapacitacion' + this.capacitacionId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-menu
+                :class="'fechaCapacitacion' + this.capacitacionId"
                 ref="menu"
                 :close-on-content-click="false"
                 v-model="menu"
@@ -46,6 +49,7 @@
                 ></v-date-picker>
               </v-menu>
                 <v-text-field
+                :class="'capacitadorCapacitacion' + this.capacitacionId"
                   v-model = "newCapacitador"
                   label="Capacitador" required
                   :rules="[rules.required]"
@@ -55,7 +59,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn :class="'editCapacitacion' + this.capacitacionId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

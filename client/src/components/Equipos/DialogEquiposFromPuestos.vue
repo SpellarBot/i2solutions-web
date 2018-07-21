@@ -30,6 +30,7 @@
                   >
                   </v-card-media>
                   <v-btn
+                  :class="'editarEquipo' + equipo.id"
                     fab
                     dark
                     small

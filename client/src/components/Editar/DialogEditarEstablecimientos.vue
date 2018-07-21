@@ -8,16 +8,19 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                class="nombres"
                   v-model = "newNombres"
                   label="Nombre" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                class="direccion"
                   v-model = "newDireccion"
                   label="Direccion" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                class="ruc"
                   v-model = "newRUC"
                   label="RUC" required
                   :rules="[rules.required, rules.RUC]"
@@ -28,7 +31,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn class="editarEstablecimiento" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -8,16 +8,19 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                class="nombre"
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                class="actividadComercial"
                   v-model = "newActividadComercial"
                   label="Actividad Comercial" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                class="razonSocial"
                   v-model = "newRazonSocial"
                   label="Razón Social" required
                   :rules="[rules.required]"
@@ -34,6 +37,7 @@
               </v-btn>
           <v-text-field label="Seleccione Imagen" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
           <input
+          class="imagen"
             type="file"
             style="display: none"
             ref="image"
@@ -46,7 +50,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn class="editar" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

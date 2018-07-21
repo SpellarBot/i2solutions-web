@@ -8,16 +8,19 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                :class="'nombrePersona' + this.personaId"
                   v-model = "newNombres"
                   label="Nombres" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
                   v-model = "newApellidos"
+                  :class="'apellidoPersona' + this.personaId"
                   label="Apellidos" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-select
+                :class="'rolPersona' + this.personaId"
               :items="roles"
               v-model="newRol"
               label="Rol"
@@ -25,12 +28,14 @@
               :rules="[rules.required]"
             ></v-select>
                 <v-text-field
+                :class="'correoPersona' + this.personaId"
               v-model="newCorreo"
               label="Correo"
               :rules="emailRules"
               required
             ></v-text-field><v-text-field
               v-model="newCedula"
+              :class="'cedulaPersona' + this.personaId"
               label="Cédula"
               maxlength=10
               :rules="cedulaRules"
@@ -41,6 +46,7 @@
               mask="#############"
             ></v-text-field>
             <v-text-field
+            :class="'telefonoPersona' + this.personaId"
               v-model="newTelefono"
               label="Télefono"
               maxlength=10
@@ -52,6 +58,7 @@
               counter="10"
             ></v-text-field>
             <v-menu
+            :class="'fechaPersona' + this.personaId"
                 ref="menu"
                 :close-on-content-click="false"
                 v-model="menu"
@@ -80,12 +87,14 @@
                 ></v-date-picker>
               </v-menu>
               <v-text-field
+              :class="'perfilPersona' + this.personaId"
               v-model="newPerfilOcupacional"
               label="Perfil Ocupacional"
               required
               :rules="[rules.required]"
             ></v-text-field>
             <v-text-field
+            :class="'usuarioPersona' + this.personaId"
               v-model="newUsuario"
               label="Usuario"
               required
@@ -96,7 +105,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn :class="'editPersona' + this.personaId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

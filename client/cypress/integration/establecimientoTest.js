@@ -1,0 +1,21 @@
+describe('Editar Establecimiento', function () {
+  it('Desde login hasta editar un establecimiento', function () {
+    cy.visit('http://localhost:3002')
+    cy.get('.user').find('input').type('admin')
+    cy.get('.password').find('input').type('admin')
+    cy.get('button').contains('Iniciar Sesión').click()
+    cy.wait(1500)
+    cy.get('.empresa2').click() // el numero es el id de la empresa
+    cy.wait(1000)
+    cy.get('.editarEstablecimiento4').click()
+    cy.wait(1000)
+    cy.get('.nombres').find('input').type('{selectall}{del}Matriz')
+    cy.wait(600)
+    cy.get('.direccion').find('input').type('{selectall}{del}Kennedy Nueva. Av. Orión Llaguno Márquez')
+    cy.wait(600)
+    cy.get('.editarEstablecimiento').click()
+    cy.wait(1500)
+    // cy.get('button').contains('Crear Empresa').click()
+    // cy.wait(600)
+  })
+})
