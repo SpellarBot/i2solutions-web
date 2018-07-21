@@ -1,38 +1,75 @@
 <template>
   <main id="DialogPersonasFromEstablecimientos">
-    <v-dialog fullscreen v-model="show" @keydown.esc="show=false" hide-overlay transition="dialog-bottom-transition">
+    <template v-if="loading">
+      <div class="text-xs-center">
+    <v-progress-circular
+      indeterminate
+    ></v-progress-circular>
+  </div>
+    </template>
+    <template class="content" v-if="valid">
+    <v-dialog fullscreen v-model="show" @keydown.esc="closing()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
       <v-toolbar dark color="primary">
-        <v-btn icon dark @click.native="show = false">
+        <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Establecimiento Matriz</v-toolbar-title>
+        <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Personas: </h1>
       <v-layout>
         <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4'>
-          <CardPersonas></CardPersonas>
-          <div><b>Puesto de trabajo:</b> Empaquetado de Pollo</div>
-          <div><b>Área de trabajo:</b> Producción 1</div>
-        </v-card>
-        <v-card class='mb-4'>
-          <CardPersonas></CardPersonas>
-          <div><b>Puesto de trabajo:</b> Empaquetado de Pollo</div>
-          <div><b>Área de trabajo:</b> Producción 2</div>
+        <v-card class='mb-4' v-for="(persona,indexE) in this.$store.getters.personas" :key="persona.id">
+          <CardPersonas
+          :persona="persona"
+          :indexE="indexE"
+          :deleteMode="deleteMode"
+          :personasId:="persona.id"
+          ></CardPersonas>
+          <div><b>Puesto de trabajo:</b> {{ persona.puestosNombre }}</div>
+          <div><b>Área de trabajo:</b> {{ persona.areasNombre }}</div>
         </v-card>
       </v-flex>
       </v-layout>
     </v-card>
     </v-dialog>
+  </template>
   </main>
 </template>
 <script>
 import CardPersonas from './CardPersonas'
 export default {
   components: { CardPersonas },
+  data () {
+    return {
+      loading: false,
+      valid: null,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
+      deleteMode: 1
+    }
+  },
+  watch: {
+    show () {
+      this.cargarData()
+    }
+  },
   name: 'DialogPersonas',
-  props: ['visible'],
+  methods: {
+    cargarData () {
+      this.valid = null
+      this.loading = true
+      this.loading = false
+      this.valid = true
+      console.log('LOG')
+    },
+    closing () {
+      this.$store.dispatch('emptyPersonas')
+      this.show = false
+    }
+  },
+  props: ['visible', 'establecimientoId', 'establecimientoNombre'],
   computed: {
     show: {
       get () {

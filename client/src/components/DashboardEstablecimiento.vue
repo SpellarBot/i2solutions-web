@@ -29,7 +29,9 @@
               fab
               color="blue"
               small
+              class="editarEmpresa"
               @click="visualizarEdicion()"
+              v-if="this.$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -38,7 +40,9 @@
               fab
               color="blue"
               small
+              class="eliminarEmpresa"
               @click="eliminarEmpresa()"
+              v-if="this.$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -49,17 +53,6 @@
     <h3>Establecimientos</h3>
     <v-container grid-list-md>
       <v-layout row wrap>
-        <!--v-flex xs12 md6 lg4 v-for="i in 9" :key="i">
-          <v-card>
-            <v-card-media class="white--text"
-            src="http://lorempixel.com/640/480"
-            height="240px"
-            width="320px"
-            >
-          </v-card-media>
-          Los Pollos Hermanos 2
-        </v-card>
-      </v-flex-->
         <v-flex xs12 md5 lg4
         v-for="(establecimiento, index) in this.$store.getters.establecimientos"
         :key="establecimiento.id">
@@ -81,7 +74,9 @@
               fab
               color="blue"
               small
+              :class="'editarEstablecimiento' + establecimiento.id"
               @click="visualizarEdicionEstablecimiento(establecimiento)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -91,6 +86,7 @@
               color="blue"
               small
               @click="eliminarEstablecimiento(establecimiento)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -99,14 +95,17 @@
                   <v-layout row wrap>
                     <v-flex xs6 md6>
                       <span class="link"
+                      :class="'verAreas' + establecimiento.id"
                         v-on:click="visualizarAreas(establecimiento.id, establecimiento.nombres)"
                         > #Areas: {{establecimiento.cantidadAreas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
+                      <span
+                      :class="'verPuestos' + establecimiento.id"
+                       class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPersonas">#Personas: {{establecimiento.cantidadPersonas}}</span>
+                      <span :class="'personasEstablecimiento' + establecimiento.id" class="link" v-on:click="visualizarPersonas(establecimiento.id, establecimiento.nombres)">#Personas: {{establecimiento.cantidadPersonas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
@@ -146,7 +145,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialog2 = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarEmpresa()">Sí</v-btn>
+            <v-btn class="eliminar" color="blue darken-1" flat @click = "borrarEmpresa()">Sí</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -172,6 +171,8 @@
     ></DialogPuestosFromEstablecimientos>
     <DialogPersonasFromEstablecimientos
     :visible="visiblePersonas"
+    :establecimientoId="establecimientoId"
+    :establecimientoNombre="establecimientoNombres"
     @close="visiblePersonas=false"
     ></DialogPersonasFromEstablecimientos>
     <DialogAccidentesFromEstablecimientos
@@ -194,7 +195,8 @@
     ></DialogNovedadesFromEstablecimientos>
     <DialogAreas
     :visible="visibleAreas"
-    :EstablecimientoId="establecimientoId"
+    :establecimientoId="establecimientoId"
+    :indexE="index"
     :establecimientoNombres="establecimientoNombres"
     @close="visibleAreas=false"
     ></DialogAreas>
@@ -272,7 +274,8 @@ export default {
       establecimientoNombres: '',
       establecimientoDireccion: '',
       establecimientoRUC: '',
-      establecimientoSelectedId: 0
+      establecimientoSelectedId: 0,
+      rol: ''
     }
   },
   mounted () {
@@ -283,7 +286,9 @@ export default {
       console.log(this.$route.params.empresaId)
       this.error = this.valid = null
       this.loading = true
+      this.rol = this.$store.getters.usuario.rol
       this.id = Number(this.$route.params.empresaId)
+      // console.log(this.$store.getters.usuario.rol)
       this.verEmpresaSelected()
       this.verEstablecimientos()
       this.loading = false
@@ -339,7 +344,10 @@ export default {
       this.establecimientoNombres = establecimientoNombre
       this.visiblePuestos = true
     },
-    visualizarPersonas () {
+    visualizarPersonas (establecimientoId, establecimientoNombre) {
+      this.establecimientoId = establecimientoId
+      this.establecimientoNombres = establecimientoNombre
+      this.$store.dispatch('getPersonasFromEstablecimiento', this.establecimientoId)
       this.visiblePersonas = true
     },
     visualizarAccidentes (establecimientoId, establecimientoNombre) {
@@ -397,7 +405,8 @@ export default {
     },
     visualizarAreas (id, nombre) {
       this.establecimientoId = id
-      this.nombreEstablecimiento = nombre
+      this.establecimientoNombres = nombre
+      console.log(this.establecimientoNombres)
       this.$store.dispatch('getAreas', this.establecimientoId)
       this.visibleAreas = true
     },

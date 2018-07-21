@@ -45,7 +45,12 @@ export default {
       router.push('/crearArea')
     },
     ToDashboard () {
-      router.push('/dashboard')
+      if (this.$store.getters.usuario.rol === 'admin-i2solutions') {
+        router.push('/dashboard')
+      } else {
+        let empId = this.$store.getters.usuario.empresasId
+        router.push('/dashboard/' + empId)
+      }
     },
     verAreas () {
       this.$store.dispatch('getAreas')

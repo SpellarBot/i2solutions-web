@@ -9,11 +9,13 @@
           <div v-if="accidents.atendidoEnEmpresa === 0">No fue atendido en la empresa</div>
           <div v-if="accidents.atendidoEnEmpresa === 1">Fue atendido en la empresa</div>
           <v-btn
+          :class="'editarAccidentes' + accidents.id"
               fab
               dark
               small
               color="blue"
               @click="visualizarEditar(accidents, fecha(accidents.fecha))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -22,9 +24,35 @@
               dark
               small
               color="blue"
+              @click="eliminarAccidente(accidents)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
+              <v-snackbar
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
             </v-btn>
+            <footer>
+            <v-layout row justify-center>
+            <v-dialog v-model="eliminarDialogAccidentes" persistent max-width="290">
+              <v-card>
+                <v-card-title class="headline">Eliminar</v-card-title>
+                <v-card-text>¿Está seguro que quiere eliminar este Accidente?</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
+                  <v-btn color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-layout>
+
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"
@@ -37,16 +65,20 @@
           :accidentePuestoId="accidentePuestoId"
           @close="visibleEdicion=false"
           ></DialogEditarAccidentes>
+        </footer>
   </main>
 </template>
 <script>
 import DialogEditarAccidentes from './Editar/DialogEditarAccidentes'
 const moment = require('moment')
 export default {
-  props: [ 'accidente' ],
+  props: [ 'accidente', 'indexE', 'indexP', 'deleteMode' ],
   components: { DialogEditarAccidentes },
   data () {
     return {
+      color: '',
+      snackbar: false,
+      mensajeSnackbar: '',
       visibleEdicion: false,
       accidenteNombre: '',
       accidenteDescripcion: '',
@@ -55,7 +87,9 @@ export default {
       accidenteMuertos: null,
       accidenteAtendidoEnEmpresa: null,
       accidenteId: '',
-      accidentePuestoId: ''
+      accidentePuestoId: '',
+      accidenteSelected: 0,
+      eliminarDialogAccidentes: false
     }
   },
   computed: {
@@ -84,6 +118,34 @@ export default {
       console.log(accidente.id)
       this.accidentePuestoId = accidente.puestosId
       this.visibleEdicion = true
+    },
+    eliminarAccidente (accidente) {
+      this.accidenteSelected = accidente.id
+      console.log(this.accidenteSelected)
+      this.eliminarDialogAccidentes = true
+    },
+    borrarAccidente () {
+      this.eliminarDialogAccidentes = false
+      let accidentesId = Number(this.accidenteSelected)
+      console.log('accidentesId', accidentesId)
+      this.$store.dispatch('deleteAccidentes', accidentesId)
+        .then((resp) => {
+          console.log('entre')
+          this.mensajeSnackbar = 'Accidente borrado con exito.'
+          this.color = 'success'
+          if (this.deleteMode === 1) {
+            this.$store.getters.accidentes.splice(this.indexE, 1)
+          } else {
+            this.$store.getters.accidentes.splice(this.indexP, 1)
+            this.snackbar = true
+          }
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

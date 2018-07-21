@@ -6,13 +6,14 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>{{establecimientoNombres}}</v-toolbar-title>
+        <v-toolbar-title>Establecimiento {{this.establecimientoNombres}}</v-toolbar-title>
       </v-toolbar>
       <br>
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap align-center>
-            <v-flex md4 v-for="area in $store.getters.areas" :key="area.id" class="text-xs-center">
+            <v-flex md4 v-for="(area,index) in $store.getters.areas" :key="area.id" class="text-xs-center">
               <cardAreas
+                :id = "area.id"
                 :nombre = "area.areaNombre"
                 :actividad = "area.areaActividad"
                 :descripcion = "area.areaDescripcionLugar"
@@ -21,6 +22,9 @@
                 :numCapacitaciones = "area.cantidadCapacitaciones"
                 :novedades = "area.cantidadNovedades"
                 :equipos = "area.cantidadEquipos"
+                :areaMetrosCuadrados = "area.areaMetrosCuadrados"
+                :fotoUrl = "area.areaFotoUrl"
+                :index = index
                 >
               </cardAreas>
           </v-flex>
@@ -35,7 +39,7 @@ import cardAreas from './cardAreas'
 export default {
   components: { cardAreas },
   name: 'DialogAreas',
-  props: ['visible', 'EstablecimientoId', 'establecimientoNombres'],
+  props: ['visible', 'establecimientoId', 'establecimientoNombres'],
   mounted () {
   },
   data () {
@@ -92,11 +96,6 @@ export default {
         if (!value) {
           this.$emit('close')
         }
-      }
-    },
-    establecimientoId: {
-      get () {
-        return this.EstablecimientoId
       }
     }
   }

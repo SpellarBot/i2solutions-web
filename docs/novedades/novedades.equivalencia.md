@@ -2210,7 +2210,8 @@ _response_
         "fecha": "2011-10-01 05:00:00.000 +00:00",
         "fotoUrl": "https://imagen.png",
         "fueAtendida": "1",
-        "puestosId": 1
+        "puestosId": 1,
+        "puestosNombre": "Oficina de gerente general"
       }
     ],
     "novedadesNoAtendidas": [
@@ -2221,7 +2222,8 @@ _response_
         "fecha": "2011-10-01 05:00:00.000 +00:00",
         "fotoUrl": "https://imagen.png",
         "fueAtendida": "0",
-        "puestosId": 1
+        "puestosId": 1,
+        "puestosNombre": "Oficina de gerente general"
       }
     ]
   },

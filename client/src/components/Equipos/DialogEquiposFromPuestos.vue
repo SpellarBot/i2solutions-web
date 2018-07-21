@@ -12,23 +12,46 @@
       <v-layout>
       <v-flex xs12>
         <v-card>
-            <h3>Equipo en Puesto</h3>
+            <h1> Puesto: </h1>
             <h2> {{this.puesto}}</h2>
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="equipo in this.$store.getters.equipoPuesto"
+                v-for="(equipo, index) in this.$store.getters.equipoAreas"
                 :key="equipo.id"
                 xs3 lg4>
-                <v-card style="padding:10px; margin:25px;" >
+                <v-card style="padding:5px; margin:25px;" >
+                  <div><h3><b>Equipo: </b>{{equipo.nombre}}</h3></div>
                   <v-card-media
-                    :src=equipo.foto
-                    height="150px"
-                    style="padding:5px"
+                    :src=equipo.fotoUrl
+                    height="200px"
+                    width="120px"
+                    contain
                   >
                   </v-card-media>
-                  <div><b>Equipo: </b>{{equipo.equipo}}</div>
-                  <div><b>Cantidad: </b>{{equipo.cantidad}}</div>
+                  <v-btn
+                  :class="'editarEquipo' + equipo.id"
+                    fab
+                    dark
+                    small
+                    color="blue"
+                    @click="visualizarEditar(equipo)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
+                  >
+                    <v-icon>edit</v-icon>
+                  </v-btn>
+                  <v-btn
+                    fab
+                    dark
+                    small
+                    color="blue"
+                    @click="eliminarEquipo(equipo, index)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
+                  >
+                    <v-icon>delete</v-icon>
+                  </v-btn>
+                  <h3><b>Descripcion: </b>{{equipo.descripcion}}</h3>
+                  <h3><b>Cantidad: </b>{{equipo.cantidad}}</h3>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -38,17 +61,66 @@
     </v-layout>
     </v-card>
     </v-dialog>
+
+    <!--Para Eliminar Equipos-->
+    <v-layout row justify-center>
+      <v-dialog v-model="eliminarDialogEquipo" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>¿Está seguro que quiere eliminar este Equipo?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
+            <v-btn color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+
+    <v-snackbar
+      :timeout="3000"
+      :multi-line="true"
+      :color="color"
+      :top="true"
+      v-model="snackbar"
+    >
+      {{mensajeSnackbar}}
+    </v-snackbar>
+    <footer>
+      <DialogEditarEquipos
+      :visible="visibleEdicion"
+      :equipoId="equipoId"
+      :equipoNombre="equipoNombre"
+      :equipoFotoUrl="equipoFotoUrl"
+      :equipoDescripcion="equipoDescripcion"
+      :equipoCantidad="equipoCantidad"
+      @close="visibleEdicion=false">
+    </DialogEditarEquipos>
+    </footer>
   </main>
 </template>
 <script>
+import DialogEditarEquipos from '../Editar/DialogEditarEquipos'
 export default {
+  components: { DialogEditarEquipos },
   name: 'DialogEquiposFromPuestos',
   props: ['visible', 'puestoId', 'puestoNombre'],
   /* mounted () {
   }, */
   data () {
     return {
-      size: 'sm'
+      size: 'sm',
+      equipoId: '',
+      equipoNombre: '',
+      equipoDescripcion: '',
+      equipoFotoUrl: '',
+      equipoCantidad: '',
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
+      visibleEdicion: false,
+      eliminarDialogEquipo: false,
+      indice: -1
     }
   },
   watch: {
@@ -79,9 +151,6 @@ export default {
     }
   },
   methods: {
-    fecha: function (date) {
-      return moment(date).format('L')
-    },
     cargarData () {
       this.valid = null
       this.loading = true
@@ -90,20 +159,51 @@ export default {
       this.valid = true
       console.log('LOG')
     },
-    verEquiposFromPuestos() {
+    verEquiposFromPuestos () {
       let puestosId = this.puestoId
       this.$store.dispatch('getEquiposFromPuestos', puestosId)
         .then((resp) => {
           console.log('Done')
-          console.log('Datos', this.$store.getters.equipoPuesto)
         })
         .catch((err) => {
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
         })
-    }
+    },
+    visualizarEditar (equipo) {
+      this.equipoNombre = equipo.nombre
+      this.equipoId = equipo.id
+      this.equipoDescripcion = equipo.descripcion
+      this.equipoFotoUrl = equipo.fotoUrl
+      this.equipoCantidad = equipo.cantidad
+      this.visibleEdicion = true
+    },
 
+    eliminarEquipo (equipo, indice) {
+      this.equipoId = equipo.id
+      this.indice = indice
+      this.eliminarDialogEquipo = true
+    },
+    borrarEquipo () {
+      this.eliminarDialogEquipo = false
+      let equiposId = Number(this.equipoId)
+      console.log('idPuesto', equiposId)
+      this.$store.dispatch('deleteEquipo', equiposId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Equipo borrada con exito.'
+          this.color = 'success'
+          this.$store.getters.equipoAreas.splice(this.indice, 1)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    }
   }
 }
 </script>

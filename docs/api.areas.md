@@ -290,6 +290,8 @@ __GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
     {
       "id": 1,
       "areaNombre": "Gerente General",
+      "areaMetrosCuadrados": "20x20",
+      "areaFotoUrl": "http://lorempixel.com/640/480",
       "areaActividad": "gerencia",
       "areaDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
       "cantidadPuestos": 2,
@@ -301,6 +303,8 @@ __GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
     {
       "id": 2,
       "areaNombre": "Jefe TTHH",
+      "areaMetrosCuadrados": "20x20",
+      "areaFotoUrl": "http://lorempixel.com/640/480",
       "areaActividad": "recursos humanos",
       "areaDescripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
       "cantidadPuestos": 1,

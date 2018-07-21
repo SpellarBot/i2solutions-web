@@ -86,8 +86,8 @@
               <v-btn @click.native="guardar()" :disabled="!valid">submit</v-btn>
             </v-flex>
           </v-layout>
-        </v-container>        
-      </v-card>      
+        </v-container>
+      </v-card>
     </v-dialog>
     <footer>
       <v-dialog v-model="confirm.open" max-width="500px" @keydown.esc="confirm.open=false">
@@ -103,7 +103,7 @@
         </v-card-text>
           <v-card-actions>
             <v-btn color="primary" flat @click.stop="cleaner(); show=false; confirm.open=false; insertarEstablecimiento(); indice=0">Sí</v-btn>
-            <v-btn color="primary" flat @click.stop="confirm.open=false">No</v-btn>            
+            <v-btn color="primary" flat @click.stop="confirm.open=false">No</v-btn>
           </v-card-actions>
       </v-card>
     </v-dialog>
@@ -115,7 +115,7 @@ import Vue from 'vue'
 import agregarEstablecimiento from './agregarEstablecimiento'
 import MyModule from '../MyModule.js'
 export default {
-  name: 'agregarEmpresa',  
+  name: 'agregarEmpresa',
   props: ['visible'],
   components: {
     agregarEstablecimiento
@@ -163,19 +163,23 @@ export default {
       instanceEstablecimiento = null
     },
     guardar () {
-      if ( !this.$refs.form.validate() ) { 
+      if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
       }
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
       })
-      if ( !this.$store.state.verified ) {
+      if (!this.$store.state.verified) {
         this.$store.commit('setVerified', false)
         console.log('algo salió mal')
       }
+<<<<<<< HEAD
+=======
+      console.log('---> ' + this.$store.state.verified + ' <---')
+>>>>>>> 14fcc8ee743644e4712b6b691c5c2ab951dc67b4
       this.$store.commit('setVerified', true)
     },
-    cleaner () {      
+    cleaner () {
       this.$refs.form.reset()
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
@@ -183,10 +187,10 @@ export default {
         establecimiento = null
       })
     },
-    declineDialog(){
-      console.log("hey hey")
+    declineDialog () {
+      console.log('hey hey')
     },
-    acceptDialog() {
+    acceptDialog () {
       this.cleaner()
       this.show = false
     }
@@ -214,7 +218,7 @@ export default {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
         RUCvalidate: v => {
-          if ( MyModule(v)[0] ) {
+          if (MyModule(v)[0]) {
             return true
           }
           return MyModule(v)[1]

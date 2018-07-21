@@ -11,9 +11,11 @@
       <h1>Accidentes: </h1>
       <v-layout>
         <v-flex xs12 sm4 offset-sm4>
-        <v-card class='mb-4' v-for="(accidente) in this.$store.getters.accidentes" :key="accidente.id">
+        <v-card class='mb-4' v-for="(accidente,indexP) in this.$store.getters.accidentes" :key="accidente.id">
           <CardAccidentes
           :accidente="accidente"
+          :indexP="indexP"
+          :deleteMode="deleteMode"
           ></CardAccidentes>
         </v-card>
       </v-flex>
@@ -28,6 +30,11 @@ export default {
   components: { CardAccidentes },
   name: 'DialogPuestos',
   props: ['visible', 'puestoId', 'puestoNombre'],
+  data () {
+    return {
+      deleteMode: 0
+    }
+  },
   watch: {
     show () {
       this.cargarData()

@@ -428,7 +428,7 @@ describe('ACCIDENTES', () => {
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       let accidenteGuardado = await models.accidentes.Obtener({ id: params['accidentesId'] })
-      expect(accidenteGuardado).not.equal(null)
+      expect(accidenteGuardado).equal(null)
       generatorDocs.OK({ docs, doc: API_3, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })

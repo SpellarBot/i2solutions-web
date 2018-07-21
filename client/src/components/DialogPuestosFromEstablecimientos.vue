@@ -16,15 +16,19 @@
         </v-btn>
         <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
       </v-toolbar>
-      <div v-for="(area) in this.$store.getters.areasPuestos" :key="area.id">
+      <div v-for="(area,index1) in this.$store.getters.areasPuestos" :key="area.id">
       <h1>Área: {{ area.nombre }}</h1>
       <h3>Puestos de trabajo:</h3>
       <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 md6 lg4 v-for="(puesto) in area.puestos" :key="puesto.id">
+          <v-flex xs12 md6 lg4 v-for="(puesto,index2) in area.puestos" :key="puesto.id">
             <CardPuestos
             :puesto = "puesto"
             :areaId = "area.id"
+            :editMode = "editMode"
+            :deleteMode = "deleteMode"
+            :index1 = index1
+            :index2 = index2
             ></CardPuestos>
           </v-flex>
         </v-layout>
@@ -46,7 +50,9 @@ export default {
       valid: null,
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      editMode: 0,
+      deleteMode: 0
     }
   },
   /* mounted () {
@@ -56,6 +62,7 @@ export default {
     cargarData () {
       this.valid = null
       this.loading = true
+      console.log(this.editMode)
       // this.verAreasPuestos()
       this.loading = false
       this.valid = true

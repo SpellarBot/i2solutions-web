@@ -10,10 +10,12 @@
       </v-toolbar>
       <h1>Accidentes: </h1>
       <v-layout row wrap>
-        <v-flex xs12 sm6 lg4 v-for="(accidente) in this.$store.getters.accidentes" :key="accidente.id">
+        <v-flex xs12 sm6 lg4 v-for="(accidente,indexE) in this.$store.getters.accidentes" :key="accidente.id">
         <v-card class='mb-4' >
           <CardAccidentes
           :accidente="accidente"
+          :indexE="indexE"
+          :deleteMode ="deleteMode"
           ></CardAccidentes>
           <div><b>Puesto de trabajo:</b> {{ accidente.areasNombre }}</div>
           <div><b>Área de trabajo:</b> {{ accidente.puestosNombre }}</div>
@@ -30,6 +32,11 @@ export default {
   components: { CardAccidentes },
   name: 'DialogAccidentesFromEstablecimientos',
   props: ['visible', 'establecimientoId', 'establecimientoNombre'],
+  data () {
+    return {
+      deleteMode: 1
+    }
+  },
   watch: {
     show () {
       this.cargarData()

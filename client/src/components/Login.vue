@@ -9,13 +9,13 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-text-field prepend-icon="person" name="login" v-model="usuario" label="Usario" type="text"></v-text-field>
-              <v-text-field prepend-icon="lock" name="password" v-model= "clave" label="Password" id="password" type="password"></v-text-field>
+              <v-text-field class="user" prepend-icon="person" name="login" v-model="usuario" label="Usario" type="text"></v-text-field>
+              <v-text-field class="password" prepend-icon="lock" name="password" v-model= "clave" label="Password" id="password" type="password"></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submit" type="submit">Login</v-btn>
+            <v-btn color="primary" @click="submit" type="submit">Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -54,7 +54,12 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'El usuario ingresado correctamente'
           this.color = 'success'
-          router.push('dashboard')
+          if (this.$store.getters.usuario.rol === 'admin-i2solutions') {
+            router.push('dashboard')
+          } else {
+            let empId = this.$store.getters.usuario.empresasId
+            router.push('/dashboard/' + empId)
+          }
         })
         .catch((err) => {
           this.color = 'error'

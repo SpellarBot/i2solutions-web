@@ -87,7 +87,7 @@ export default {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
         RUCvalidate: v => {
-          if ( MyModule(v)[0] ) {
+          if (MyModule(v)[0]) {
             return true
           }
           return MyModule(v)[1]

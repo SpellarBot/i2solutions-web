@@ -12,20 +12,26 @@
       <v-layout>
       <v-flex xs12>
         <v-card>
-            <h3>Novedades Sin Atender en  Area:</h3>
-            <h2> {{nombreArea}}</h2>
+            <h1>Novedades Sin Atender en  Area:</h1>
+            <h2> {{nombre}}</h2>
           <v-container  fluid>
             <v-layout row wrap>
               <v-flex
-                v-for="novedad in novedades"
+                v-for="novedad in this.$store.getters.novedadesAreas.novedadesNoAtendidas"
                 :key="novedad.id"
                 xs4 lg4>
                 <v-card style="padding:10px; margin:25px;" >
                   <div style="text-align:center"><b>Descripción</b></div>
                   <div>{{novedad.descripcion}}</div>
                   <div><b>prioridad: </b>{{novedad.prioridad}}</div>
-                  <div><b>fecha: </b>{{novedad.fecha}}</div>
-                  <div><b>Puesto: </b>{{novedad.puesto}}</div>
+                  <div>
+                  <v-tooltip bottom>
+                    <span slot="activator"><b>fecha:</b>{{fecha(novedad.fecha)}}</span>
+                    <span>{{cuanto(novedad.fecha)}}</span>
+                  </v-tooltip>
+                  </div>
+
+                  <div><b>Puesto: </b>{{novedad.puestosNombre}}</div>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -38,42 +44,20 @@
   </main>
 </template>
 <script>
+const moment = require('moment')
 export default {
-  name: 'DialogNovedades',
-  props: ['visible', 'EstablecimientoId'],
-  mounted () {
-  },
+  name: 'DialogNovedadesFromAreas',
+  props: ['visible', 'nombre', 'areaId'],
+  /* mounted () {
+  }, */
   data () {
     return {
-      nombreArea: 'Administrativa',
-      novedades: [
-        {
-          'id': 1,
-          'descripcion': 'Extintores en deshuso, algunos caducados y con falta de mantenimiento',
-          'prioridad': 'Alta',
-          'fecha': '17/09/2017',
-          'area': 'Administrativa',
-          'puesto': 'Empacadora de Pollos'
-        },
-        {
-          'id': 2,
-          'descripcion': 'Mal Olor en puestos específicos del area de trabajo, poca operabilidad',
-          'prioridad': 'Media',
-          'fecha': '17/09/2015',
-          'area': 'Coorporativa',
-          'puesto': 'Empacadora de Carnes'
-        },
-        {
-          'id': 3,
-          'descripcion': 'Piso Mojado debido a la reciente limpieza, ocaciona inconvenientes',
-          'prioridad': 'Baja',
-          'fecha': '17/09/1997',
-          'area': 'Contabilidad',
-          'puesto': 'Area de Presupuesto'
-        }
-      ]
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false
     }
   },
+
   computed: {
     show: {
       get () {
@@ -84,11 +68,43 @@ export default {
           this.$emit('close')
         }
       }
+    }
+  },
+  watch: {
+    show () {
+      this.cargarData()
+    }
+  },
+  methods: {
+    fecha: function (date) {
+      return moment(date).format('L')
     },
-    establecimientoId: {
-      get () {
-        return this.EstablecimientoId
-      }
+    cuanto: function (date) {
+      moment.lang('es')
+      return moment(date, 'YYYYMMDD').fromNow()
+    },
+    cargarData () {
+      this.valid = null
+      this.loading = true
+      this.verNovedadesAreas()
+      this.loading = false
+      this.valid = true
+      console.log('LOG')
+    },
+    verNovedadesAreas () {
+      console.log(this.areaId)
+      let areasId = Number(this.areaId)
+      console.log(areasId)
+      this.$store.dispatch('getNovedadesFromAreas', areasId)
+        .then((resp) => {
+          console.log('Done')
+          console.log('Datos', this.$store.getters.novedadesAreas.novedadesNoAtendidas)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }

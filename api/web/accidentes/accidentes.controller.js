@@ -37,7 +37,7 @@ module.exports = ({ responses, db }) => {
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
-        db.accidentes.Obtener({ id: puestosId })
+        db.puestos.Obtener({ id: puestosId })
           .then((resp) => {
             if (resp) {
               db.accidentes.Actualizar(datos)
@@ -45,7 +45,7 @@ module.exports = ({ responses, db }) => {
                   if (resp[0].toString() === '1') {
                     resolve(responses.OK(true))
                   } else {
-                    resolve(responses.NO_OK('El id del area no existe'))
+                    resolve(responses.NO_OK('el accidente no existe'))
                   }
                 }).catch((err) => {
                   console.error(err)
@@ -62,10 +62,10 @@ module.exports = ({ responses, db }) => {
     },
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
-        db.areas.Borrar({ id })
+        db.accidentes.Borrar({ id })
           .then((resp) => {
             if (!resp) {
-              resolve(responses.NO_OK('areas con es id no existe'))
+              resolve(responses.NO_OK('accidentes con es id no existe'))
             } else {
               resolve(responses.OK(resp))
             }

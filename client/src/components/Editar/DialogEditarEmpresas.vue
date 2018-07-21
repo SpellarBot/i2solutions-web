@@ -8,26 +8,49 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                class="nombre"
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                class="actividadComercial"
                   v-model = "newActividadComercial"
                   label="Actividad Comercial" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                class="razonSocial"
                   v-model = "newRazonSocial"
                   label="Razón Social" required
                   :rules="[rules.required]"
                 ></v-text-field>
+                <img :src="imageUrl" height="150" v-if="imageUrl"/>
+                <v-btn v-if="imageUrl"
+                @click="emptyImage"
+                fab
+                dark
+                small
+                color="blue"
+                >
+                <v-icon>delete</v-icon>
+              </v-btn>
+          <v-text-field label="Seleccione Imagen" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+          <input
+          class="imagen"
+            type="file"
+            style="display: none"
+            ref="image"
+            accept="image/*"
+            @change="onFilePicked"
+          >
+          <p>Nota: Si no selecciona una nueva imagen, se quedará con la imagen previa</p>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn class="editar" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -55,6 +78,9 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -117,27 +143,69 @@ export default {
     }
   },
   methods: {
+    emptyImage () {
+      this.imageName = ''
+      this.imageFile = ''
+      this.imageUrl = ''
+    },
+    pickFile () {
+      this.$refs.image.click()
+    },
+    onFilePicked (e) {
+      const files = e.target.files
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = ''
+        this.imageFile = ''
+        this.imageUrl = ''
+      }
+    },
     edit () {
       let nombre = this.$data.newNombre
       let actividadComercial = this.$data.newActividadComercial
       let razonSocial = this.$data.newRazonSocial
       let empresaId = this.empresaId
-      let urlFoto = this.empresaUrlFoto
-      console.log(urlFoto)
-      this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial, urlFoto })
+      let urlFoto = ''
+      let logo = false
+      if (this.imageUrl === '') {
+        urlFoto = this.empresaUrlFoto
+        console.log(urlFoto)
+      } else {
+        urlFoto = this.imageUrl
+        logo = true
+      }
+      this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial, urlFoto, logo })
         .then((resp) => {
+          console.log('YUP')
           this.$store.getters.empresaSelected.nombre = nombre
           this.$store.getters.empresaSelected.actividadComercial = actividadComercial
           this.$store.getters.empresaSelected.razonSocial = razonSocial
+          this.$store.getters.empresaSelected.urlFoto = urlFoto
           this.snackbar = true
           this.mensajeSnackbar = 'Empresa editada exitosamente.'
           this.color = 'success'
           this.$emit('close')
         })
         .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
+          if (err.ok === false) {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.'
+          } else {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          }
         })
     }
   }

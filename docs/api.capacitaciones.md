@@ -198,7 +198,8 @@ __GET__ __/api/web/capacitaciones/areas/:areasId__
       "id": 1,
       "fechaCapacitacion": "2018-04-25 04:27:34.000 +00:00",
       "tema": "Como hacer que todo valga",
-      "areasId": 1
+      "areasId": 1,
+      "descripcion": "La capacitación fue un éxito"
     }
   ],
   "codigoEstado": 200

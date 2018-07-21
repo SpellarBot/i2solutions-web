@@ -66,13 +66,23 @@ _response_
   "datos": [
     {
       "id": 1,
+      "descripcion": "AA",
       "nombre": "Oficina de gerente general",
-      "descripcion": "AA"
+      "cantidadPersonas": 0,
+      "cantidadAccidentes": 0,
+      "cantidadNovedadesSinAtender": 0,
+      "cantidadEquipos": 0,
+      "cantidadRiesgos": 0
     },
     {
       "id": 2,
+      "descripcion": "AA",
       "nombre": "Oficina de jefe de TTHH",
-      "descripcion": "AA"
+      "cantidadPersonas": 0,
+      "cantidadAccidentes": 0,
+      "cantidadNovedadesSinAtender": 0,
+      "cantidadEquipos": 0,
+      "cantidadRiesgos": 0
     }
   ],
   "codigoEstado": 200

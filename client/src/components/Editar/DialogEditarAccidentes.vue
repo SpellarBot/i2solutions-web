@@ -8,16 +8,19 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                :class="'nombreAccidente' + this.accidenteId"
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                :class="'descripcionAccidente' + this.accidenteId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-menu
+                :class="'fechaAccidente' + this.accidenteId"
                 ref="menu"
                 :close-on-content-click="false"
                 v-model="menu"
@@ -46,16 +49,19 @@
                 ></v-date-picker>
               </v-menu>
                 <v-text-field
+                :class="'heridosAccidente' + this.accidenteId"
                   v-model = "newHeridos"
                   label="Número Heridos" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                :class="'muertosAccidente' + this.accidenteId"
                   v-model = "newMuertos"
                   label="Número Fallecidos" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-checkbox
+                :class="'atencionAccidente' + this.accidenteId"
       label="¿Fue atendido en la empresa?"
       v-model="newCheckbox"
     ></v-checkbox>
@@ -64,7 +70,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn :class="'editAccidente' + this.accidenteId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -146,6 +152,7 @@ export default {
       let atendidoEnEmpresa = this.$data.newCheckbox
       let puestosId = this.accidentePuestoId
       let accidentesId = Number(this.accidenteId)
+      console.log(puestosId)
       this.$store.dispatch('updateAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, accidentesId })
         .then((resp) => {
           for (let i = 0; i < this.$store.getters.accidentes.length; i++) {
@@ -156,12 +163,16 @@ export default {
               accidente.fecha = fecha
               accidente.heridos = heridos
               accidente.muertos = muertos
-              accidente.atendidoEnEmpresa = atendidoEnEmpresa
+              if (atendidoEnEmpresa === false) {
+                accidente.atendidoEnEmpresa = 0
+              } else {
+                accidente.atendidoEnEmpresa = 1
+              }
               break
             }
           }
           this.snackbar = true
-          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+          this.mensajeSnackbar = 'Accidente editado exitosamente.'
           this.color = 'success'
           this.$emit('close')
         })

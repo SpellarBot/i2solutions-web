@@ -5,11 +5,13 @@
           <div><b>Fecha:</b> {{ fecha(capacitacions.fechaCapacitacion) }} </div>
           <div><b>Capacitador:</b> {{ capacitacions.nombre }}z</div>
           <v-btn
+          :class="'editarCapacitacion' + capacitacions.id"
               fab
               dark
               small
               color="blue"
               @click="visualizarEditar(capacitacions, fecha(capacitacions.fechaCapacitacion))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -19,33 +21,20 @@
               small
               color="blue"
               @click="eliminarCapacitacion(capacitacions)"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
             </v-btn>
-      <v-layout row justify-center>
-      <v-dialog v-model="eliminarDialogCapacitaciones" persistent max-width="290">
-        <v-card>
-          <v-card-title class="headline">Eliminar</v-card-title>
-          <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarCapacitaciones()">Sí</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-layout>
-
-    <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar>
-          <footer>
+            <v-snackbar
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
+      <footer>
             <DialogEditarCapacitaciones
             :visible="visibleEdicion"
             :capacitacionTema="capacitacionTema"
@@ -55,24 +44,42 @@
             :capacitacionId="capacitacionId"
             @close="visibleEdicion=false"
             ></DialogEditarCapacitaciones>
-          </footer>
+            <v-layout row justify-center>
+              <v-dialog v-model="eliminarDialogCapacitaciones" persistent max-width="290">
+                <v-card>
+                  <v-card-title class="headline">Eliminar</v-card-title>
+                  <v-card-text>¿Está seguro que quiere eliminar esta Capacitación?</v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
+                    <v-btn color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-layout>
+
+  </footer>
   </main>
 </template>
 <script>
 import DialogEditarCapacitaciones from './Editar/DialogEditarCapacitaciones'
 const moment = require('moment')
 export default {
-  props: [ 'capacitacion', 'puestoId' ],
+  props: [ 'capacitacion', 'puestoId', 'index' ],
   components: { DialogEditarCapacitaciones },
   data () {
     return {
       visibleEdicion: false,
+      mensajeSnackbar: '',
+      color: '',
+      snackbar: false,
       eliminarDialogCapacitaciones: false,
       capacitacionTema: '',
       capacitacionDescripcion: '',
       capacitacionFecha: '',
       capacitacionCapacitador: '',
-      capacitacionId: ''
+      capacitacionId: '',
+      capacitacionSelected: 0
     }
   },
   computed: {
@@ -93,9 +100,34 @@ export default {
       this.capacitacionCapacitador = capacitacion.nombre
       this.capacitacionId = capacitacion.id
       this.visibleEdicion = true
+    },
+
+    eliminarCapacitacion (capacitacion) {
+      this.capacitacionSelected = capacitacion.id
+      console.log(this.capacitacionSelected)
+      this.eliminarDialogCapacitaciones = true
+    },
+    borrarCapacitacion () {
+      this.eliminarDialogCapacitaciones = false
+      let capacitacionesId = Number(this.capacitacionSelected)
+      console.log('capacitacionesId', capacitacionesId)
+      this.$store.dispatch('deleteCapacitaciones', capacitacionesId)
+        .then((resp) => {
+          console.log('entre')
+          this.snackbar = true
+          this.mensajeSnackbar = 'Capacitación borrada con exito.'
+          this.color = 'success'
+          this.$store.getters.capacitaciones.splice(this.index, 1)
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }
 </script>
 <style>
-  </style>
+</style>

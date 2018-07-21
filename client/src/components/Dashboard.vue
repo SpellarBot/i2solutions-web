@@ -34,6 +34,7 @@
         >
           <div v-if="index%3 == 0 && index > 0"> </div>
             <v-card
+            :class="'empresa' + empresa.id"
             height="100%"
             raised
             hover
@@ -58,6 +59,7 @@
               :src=empresa.urlFoto
               height="180px"
               contain
+              style="padding: 20px"
               >
             </v-card-media>
           </v-card>

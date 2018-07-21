@@ -8,11 +8,13 @@
         <v-card-text>
               <v-form v-model="valid">
                 <v-text-field
+                :class="'nombrePuesto' + this.puestoId"
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                :class="'descripcionPuesto' + this.puestoId"
                   v-model = "newDescripcion"
                   label="Descripción" required
                   :rules="[rules.required]"
@@ -22,7 +24,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn :class="'editPuesto' + this.puestoId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -53,7 +55,7 @@ export default {
       }
     }
   },
-  props: ['visible', 'puestoNombre', 'puestoDescripcion', 'puestoId', 'areaId'],
+  props: ['visible', 'puestoNombre', 'puestoDescripcion', 'puestoId', 'areaId', 'editMode'],
   watch: {
     nombre () {
       this.newNombre = this.nombre
@@ -71,6 +73,11 @@ export default {
         if (!value) {
           this.$emit('close')
         }
+      }
+    },
+    editModes: {
+      get () {
+        return this.editMode
       }
     },
     nombre: {
@@ -96,18 +103,30 @@ export default {
       let descripcion = this.$data.newDescripcion
       let puestoId = this.puestoId
       let areaId = this.areaId
+      console.log(this.editModes)
       this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
         .then((resp) => {
-          for (let i = 0; i < this.$store.getters.areasPuestos.length; i++) {
-            let area = this.$store.getters.areasPuestos[i]
-            if (area.id === areaId) {
-              for (let j = 0; j < area.puestos.length; j++) {
-                let puesto = area.puestos[j]
-                if (puesto.id === puestoId) {
-                  puesto.nombre = nombre
-                  puesto.descripcion = descripcion
-                  break
+          if (this.editModes === 0) {
+            for (let i = 0; i < this.$store.getters.areasPuestos.length; i++) {
+              let area = this.$store.getters.areasPuestos[i]
+              if (area.id === areaId) {
+                for (let j = 0; j < area.puestos.length; j++) {
+                  let puesto = area.puestos[j]
+                  if (puesto.id === puestoId) {
+                    puesto.nombre = nombre
+                    puesto.descripcion = descripcion
+                    break
+                  }
                 }
+              }
+            }
+          } else {
+            for (let i = 0; i < this.$store.getters.puestos.length; i++) {
+              let puesto = this.$store.getters.puestos[i]
+              if (puesto.id === puestoId) {
+                puesto.nombre = nombre
+                puesto.descripcion = descripcion
+                break
               }
             }
           }
