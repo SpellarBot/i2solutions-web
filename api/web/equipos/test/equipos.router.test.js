@@ -24,6 +24,7 @@ describe('EQUIPOS', () => {
   let empresa = empresas.VALIDOS[0]
   let establecimiento = establecimientos.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
+  let establecimiento3 = establecimientos.VALIDOS[2]
   let puesto = puestos.VALIDOS[0]
   let equipo = equipos.VALIDOS[0]
   let equipo2 = equipos.VALIDOS[1]
@@ -436,7 +437,7 @@ describe('EQUIPOS', () => {
 
     beforeEach(async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
-      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
+      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada['id'] })
       let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientoCreada['id'] })
       areasId = areaCreada['id']
       let puestosCreada = await models.puestos.Crear({ ...puesto })

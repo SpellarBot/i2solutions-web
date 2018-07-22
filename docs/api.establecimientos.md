@@ -241,15 +241,45 @@ __GET__ __/api/web/principal/establecimientos/empresas/:empresasId__
     },
     {
       "id": 3,
-      "nombres": "Lira - Barajas",
-      "ruc": "2023651688001",
-      "direccion": "0119 Laboy Mercado",
+      "nombres": "Adame S.L.",
+      "ruc": "2523651369001",
+      "direccion": "1209 Luisa Grupo",
       "cantidadAreas": 0,
       "cantidadPuestos": 0,
       "cantidadAccidentes": 0,
       "cantidadCapacitaciones": 0,
       "cantidadPersonas": 0,
       "cantidadNovadadesSinAtender": 0
+    }
+  ],
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Buscar establecimientos con ruc existente en base de datos
+
+__GET__ __/api/web/establecimientos/buscar/por?ruc=0931823557001,0931823446001__
+
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": [
+    {
+      "0923651688001": true
+    },
+    {
+      "2023651688001": true
+    },
+    {
+      "0931823447001": false
     }
   ],
   "codigoEstado": 200

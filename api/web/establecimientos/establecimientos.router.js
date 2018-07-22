@@ -119,4 +119,29 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_6
+  // obtener establecimientos por ruc
+  app.route('/establecimientos/buscar/por')
+    .get((req, res) => {
+      let rucs = []
+      if (req.query['ruc']) {
+        rucs = req.query['ruc'].split(',')
+      }
+      let { QUERY } = schema.API_6_SCHEMA
+      let [errParams, mensajeParams] = validar(QUERY, rucs)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        Controller.BuscarPor({ rucs }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
 }

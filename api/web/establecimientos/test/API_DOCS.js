@@ -62,5 +62,15 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_6: {
+    nombre: 'Buscar establecimientos con ruc existente en base de datos',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/establecimientos/buscar/por?ruc=0931823557001,0931823446001',
+    params: [
+    ],
+    body: [],
+    errors: []
   }
 }

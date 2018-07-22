@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombres: { type: DataTypes.STRING },
     apellidos: { type: DataTypes.STRING },
-    correo: { type: DataTypes.STRING },
+    correo: { type: DataTypes.STRING, unique: true },
     cedula: { type: DataTypes.STRING },
     clave: { type: DataTypes.STRING },
     telefono: { type: DataTypes.STRING },
     fechaNacimiento: { type: DataTypes.STRING },
     perfilOcupacional: { type: DataTypes.STRING },
-    usuario: { type: DataTypes.STRING },
+    usuario: { type: DataTypes.STRING, unique: true },
     rol: { type: DataTypes.ENUM('admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado') }
   }, {
     name: {

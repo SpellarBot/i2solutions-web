@@ -1,26 +1,24 @@
-// const co = require('co')
+const co = require('co')
+if (process.env.NODE_ENV === 'testing') {
+  console.error = function () { return true }
+}
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
-        db.puestos.Obtener({ id: puestosId })
-          .then((resp) => {
-            if (resp) {
-              db.accidentes.Crear(datos)
-                .then((resp) => {
-                  resolve(responses.OK(resp))
-                }).catch((err) => {
-                  console.error(err)
-                  return reject(responses.ERROR_SERVIDOR)
-                })
-            } else {
-              resolve(responses.NO_OK('el puesto no existe'))
-            }
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+        co(function * () {
+          let puesto = yield db.puestos.Obtener({ id: puestosId })
+          if (!puesto) {
+            resolve(responses.NO_OK('el puesto no existe'))
+          } else {
+            let resp = yield db.accidentes.Crear(datos)
+            resolve(responses.OK(resp))
+          }
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     Obtener ({ id }) {
@@ -37,27 +35,22 @@ module.exports = ({ responses, db }) => {
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
-        db.puestos.Obtener({ id: puestosId })
-          .then((resp) => {
-            if (resp) {
-              db.accidentes.Actualizar(datos)
-                .then((resp) => {
-                  if (resp[0].toString() === '1') {
-                    resolve(responses.OK(true))
-                  } else {
-                    resolve(responses.NO_OK('el accidente no existe'))
-                  }
-                }).catch((err) => {
-                  console.error(err)
-                  return reject(responses.ERROR_SERVIDOR)
-                })
+        co(function * () {
+          let puesto = yield db.puestos.Obtener({ id: puestosId })
+          if (!puesto) {
+            resolve(responses.NO_OK('el puesto no existe'))
+          } else {
+            let resp = yield db.accidentes.Actualizar(datos)
+            if (resp[0].toString() === '1') {
+              resolve(responses.OK(true))
             } else {
-              resolve(responses.NO_OK('el puesto no existe'))
+              resolve(responses.NO_OK('el accidente no existe'))
             }
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+          }
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     Borrar ({ id }) {

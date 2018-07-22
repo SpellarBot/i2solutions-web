@@ -435,7 +435,6 @@ describe('PERSONAS', () => {
       let res = await request(app).delete(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_3, res })
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })
 
@@ -445,7 +444,6 @@ describe('PERSONAS', () => {
       let res = await request(app).delete(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_3, res })
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })
 
@@ -455,7 +453,6 @@ describe('PERSONAS', () => {
       let res = await request(app).delete(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_3, res })
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_3_EQUI, res, codigoApi, url, params })
     })
   })
@@ -489,7 +486,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_4, res })
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
     })
 
@@ -499,7 +495,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_4, res })
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
     })
 
@@ -509,7 +504,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_4, res })
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_4_EQUI, res, codigoApi, url, params })
     })
   })
@@ -543,7 +537,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_5, res })
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
     })
 
@@ -553,7 +546,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_5, res })
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
     })
 
@@ -563,7 +555,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_5, res })
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
     })
   })
@@ -597,7 +588,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_6, res })
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
     })
 
@@ -607,7 +597,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_6, res })
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
     })
 
@@ -617,7 +606,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_6, res })
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
     })
   })
@@ -651,7 +639,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_7, res })
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
     })
 
@@ -661,7 +648,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_7, res })
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
     })
 
@@ -671,7 +657,6 @@ describe('PERSONAS', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_7, res })
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_7_EQUI, res, codigoApi, url, params })
     })
   })
@@ -706,7 +691,6 @@ describe('PERSONAS', () => {
       let res = await request(app).put(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_8, res })
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
     })
 
@@ -716,7 +700,6 @@ describe('PERSONAS', () => {
       let res = await request(app).put(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_8, res })
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
     })
 
@@ -726,7 +709,6 @@ describe('PERSONAS', () => {
       let res = await request(app).put(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_8, res })
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
     })
 
@@ -736,7 +718,6 @@ describe('PERSONAS', () => {
       let res = await request(app).put(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_8, res })
       generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
     })
 
@@ -746,7 +727,6 @@ describe('PERSONAS', () => {
       let res = await request(app).put(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_8, res })
       generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
     })
 
@@ -756,7 +736,6 @@ describe('PERSONAS', () => {
       let res = await request(app).put(url)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_8, res })
       generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_8_EQUI, res, codigoApi, url, params })
     })
 

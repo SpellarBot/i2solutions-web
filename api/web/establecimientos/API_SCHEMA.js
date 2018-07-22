@@ -84,5 +84,16 @@ module.exports = {
         }
       }]
     }
+  },
+  API_6_SCHEMA: {
+    QUERY: {
+      'minProperties': 1,
+      'type': 'array',
+      'items': [
+        {
+          'ruc': { 'cedula': false }
+        }
+      ]
+    }
   }
 }

@@ -1,4 +1,5 @@
 'use strict'
+const _ = require('lodash')
 module.exports = (sequelize, DataTypes) => {
   let singular = 'establecimientos'
   let plural = 'establecimientos'
@@ -7,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombres: { type: DataTypes.STRING },
     direccion: { type: DataTypes.STRING },
-    ruc: { type: DataTypes.STRING }
+    ruc: { type: DataTypes.STRING, unique: true }
   }, {
     name: {
       singular,
@@ -92,6 +93,34 @@ module.exports = (sequelize, DataTypes) => {
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(establecimientos => {
           resolve(establecimientos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.BuscarPorRucs = function ({ rucs }) {
+    return new Promise((resolve, reject) => {
+      this.findAll({
+        where: {
+          ruc: rucs
+        },
+        raw: true })
+        .then((project) => {
+          let respuestas = []
+          for (let ruc of rucs) {
+            let establecimiento = _.find(project, { ruc })
+            if (establecimiento) {
+              let r = {}
+              r[ruc] = true
+              respuestas.push(r)
+            } else {
+              let r = {}
+              r[ruc] = false
+              respuestas.push(r)
+            }
+          }
+          resolve(respuestas)
         }).catch((err) => {
           return reject(err)
         })

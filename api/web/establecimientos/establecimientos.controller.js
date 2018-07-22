@@ -63,6 +63,17 @@ module.exports = ({ responses, db }) => {
             return reject(responses.ERROR_SERVIDOR)
           })
       })
+    },
+    BuscarPor ({ rucs }) {
+      return new Promise((resolve, reject) => {
+        db.establecimientos.BuscarPorRucs({ rucs })
+          .then((resp) => {
+            resolve(responses.OK(resp))
+          }).catch((err) => {
+            console.error(err)
+            return reject(responses.ERROR_SERVIDOR)
+          })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

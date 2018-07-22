@@ -467,8 +467,8 @@ describe('ESTABLECIMIENTOS', () => {
       let empresaCreada2 = await models.empresas.Crear(empresa)
       empresasId = empresaCreada['id']
       let establecimientosCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
-      let establecimientosCreada2 = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada2['id'] })
-      let establecimientosCreada3 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada['id'] })
+      let establecimientosCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada2['id'] })
+      let establecimientosCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada['id'] })
       let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientosCreada['id'] })
       let areaCreada2 = await models.areas.Crear({ ...area2, establecimientosId: establecimientosCreada2['id'] })
       let puestoCreada = await models.puestos.Crear({ ...puesto })
@@ -516,5 +516,32 @@ describe('ESTABLECIMIENTOS', () => {
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_5_EQUI, res, codigoApi, params, url })
     })
+  })
+
+  describe('API_6 Buscar establecimientos con ruc existente en base de datos', () => {
+    const { API_6 } = API
+    // let { API_6_EQUI } = EQUI
+    // let { API_6_SCHEMA } = SCHEMA
+    let codigoApi = 'API_6'
+    let empresasId = -1, establecimientosCreada, establecimientosCreada2 = {}
+
+    beforeEach(async () => {
+      empresaCreada = await models.empresas.Crear(empresa)
+      let empresaCreada2 = await models.empresas.Crear(empresa)
+      empresasId = empresaCreada['id']
+      establecimientosCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
+      establecimientosCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada['id'] })
+      establecimientosCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada['id'] })
+    })
+
+    it(`@ICE_API_6_01 Obtener empresa`, async () => {
+      let query = { ruc: `${establecimientosCreada['ruc']},${establecimientosCreada2['ruc']},0931823447001` }
+      let url = `/api/web/establecimientos/buscar/por?ruc=${query['ruc']}`
+      let res = await request(app).get(url)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_6, res })
+    })
+
   })
 })

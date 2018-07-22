@@ -2145,9 +2145,9 @@ _response_
     },
     {
       "id": 3,
-      "nombres": "Lira - Barajas",
-      "ruc": "2023651688001",
-      "direccion": "0119 Laboy Mercado",
+      "nombres": "Adame S.L.",
+      "ruc": "2523651369001",
+      "direccion": "1209 Luisa Grupo",
       "cantidadAreas": 0,
       "cantidadPuestos": 0,
       "cantidadAccidentes": 0,
