@@ -124,9 +124,9 @@ describe('CAPACITACIONES', () => {
       generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_1_8 fechaCapacitacion tipo no valido', async () => {
+    it('@ICE_API_1_08 fechaCapacitacion tipo no valido', async () => {
       let { nombre, descripcion, tema, fechaCapacitacion } = capacitacion
-      let req = { nombre, descripcion, tema, fechaCapacitacion: 1, areasId }
+      let req = { nombre, descripcion, tema, fechaCapacitacion: '2017-13-09', areasId }
       let res = await request(app).post(`/api/web/capacitaciones`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -135,7 +135,7 @@ describe('CAPACITACIONES', () => {
 
     it('@ICE_API_1_9 fechaCapacitacion formato no valido', async () => {
       let { nombre, descripcion, tema, fechaCapacitacion } = capacitacion
-      let req = { nombre, descripcion, tema, fechaCapacitacion: '2017-08-09', areasId }
+      let req = { nombre, descripcion, tema, fechaCapacitacion: '2017-13-09', areasId }
       let res = await request(app).post(`/api/web/capacitaciones`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -255,7 +255,7 @@ describe('CAPACITACIONES', () => {
 
     it('@ICE_API_2_8 fechaCapacitacion tipo no valido', async () => {
       let { nombre, descripcion, tema, fechaCapacitacion } = capacitacion
-      let req = { nombre, descripcion, tema, fechaCapacitacion: 1 }
+      let req = { nombre, descripcion, tema, fechaCapacitacion: '2017-13-09' }
       let params = { capacitacionesId }
       let url = `/api/web/capacitaciones/${params['capacitacionesId']}`
       let res = await request(app).put(url).send(req)

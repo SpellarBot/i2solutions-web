@@ -5,7 +5,12 @@ module.exports = {
     descripcion: '',
     url: '/api/web/equipos',
     params: [],
-    body: [],
+    body: [
+      { nombre: 'nombre', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'fotoUrl', tipo: 'string', descripcion: ' url ' },
+      { nombre: 'cantidad', tipo: 'number', descripcion: ' minimum: 1 ' }
+    ],
     errors: []
   },
   API_2: {
@@ -16,7 +21,12 @@ module.exports = {
     params: [
       { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' }
     ],
-    body: [],
+    body: [
+      { nombre: 'nombre', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'fotoUrl', tipo: 'string', descripcion: ' url ' },
+      { nombre: 'cantidad', tipo: 'number', descripcion: ' minimum: 1 ' }
+    ],
     errors: []
   },
   API_3: {
@@ -30,29 +40,6 @@ module.exports = {
     body: [],
     errors: []
   },
-  // API_4: {
-  //   nombre: 'Obtener un equipo',
-  //   metodo: 'GET',
-  //   descripcion: '',
-  //   url: '/api/web/equipos/:equiposId',
-  //   params: [
-  //     { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' }
-  //   ],
-  //   body: [],
-  //   errors: []
-  // },
-  API_5: {
-    nombre: 'ANADIR EQUIPO A UN AREA',
-    metodo: 'GET',
-    descripcion: '',
-    url: '/api/web/equipos/:equiposId/areas/:areasId',
-    params: [
-      { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' },
-      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
-    ],
-    body: [],
-    errors: []
-  },
   API_4: {
     nombre: 'ANADIR EQUIPO A UN PUESTO',
     metodo: 'GET',
@@ -61,6 +48,18 @@ module.exports = {
     params: [
       { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' },
       { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_5: {
+    nombre: 'ANADIR EQUIPO A UN AREA',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/equipos/:equiposId/areas/:areasId',
+    params: [
+      { nombre: 'equiposId', tipo: 'Number', descripcion: ' --- ' },
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []

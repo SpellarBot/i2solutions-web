@@ -215,7 +215,7 @@ describe('ACCIDENTES', () => {
 
     it('@ICE_API_2_01 Actualizar un accidente de forma correcta', async () => {
       let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha } = accidente
-      let req = { descripcion: 'AA', nombre: 'aa', heridos: 1, atendidoEnEmpresa: false, muertos: 0, fecha: '2014-05-21T19:27:28.576Z', puestosId }
+      let req = { descripcion: 'Caida de objeto', nombre: 'Caida de objeto', heridos: 1, atendidoEnEmpresa: false, muertos: 0, fecha: '2014-05-21T19:27:28.576Z', puestosId }
       let params = { accidentesId }
       let url = `/api/web/accidentes/${params['accidentesId']}`
       let res = await request(app).put(url).send(req)

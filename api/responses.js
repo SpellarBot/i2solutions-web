@@ -16,11 +16,6 @@ const NO_ENVIO_JWT = { datos: { mensaje_error: 'No envio el jwt en el Bearer' },
 
 const CREADO = { datos: { mensaje: 'Creado Correctamente' }, codigoEstado: 201, estado: true }
 
-const ERROR_VALIDACION = (dato) => {
-  const resp = { datos: { mensaje_error: `Error en ${dato}` }, codigoEstado: 500, estado: false }
-  return resp
-}
-
 const OK = (datos) => {
   const resp = { estado: true, datos, codigoEstado: 200 }
   return resp
@@ -36,7 +31,6 @@ module.exports = {
   NO_AUTORIZADO,
   OK,
   NO_OK,
-  ERROR_VALIDACION,
   CREADO,
   NO_ENVIO_JWT
 }

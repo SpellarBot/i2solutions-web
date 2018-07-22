@@ -5,7 +5,15 @@ module.exports = {
     descripcion: '',
     url: '/api/web/accidentes',
     params: [],
-    body: [],
+    body: [
+      { nombre: 'nombre', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'heridos', tipo: 'number', descripcion: ' minimum: 0 ' },
+      { nombre: 'atendidoEnEmpresa', tipo: 'boolean', descripcion: ' --- ' },
+      { nombre: 'muertos', tipo: 'number', descripcion: ' minimum: 0 ' },
+      { nombre: 'fecha', tipo: 'fecha', descripcion: ' --- ' },
+      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' }
+    ],
     errors: []
   },
   API_2: {
@@ -16,7 +24,15 @@ module.exports = {
     params: [
       { nombre: 'accidentesId', tipo: 'Number', descripcion: ' --- ' }
     ],
-    body: [],
+    body: [
+      { nombre: 'nombre', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'heridos', tipo: 'number', descripcion: ' minimum: 0 ' },
+      { nombre: 'atendidoEnEmpresa', tipo: 'boolean', descripcion: ' --- ' },
+      { nombre: 'muertos', tipo: 'number', descripcion: ' minimum: 0 ' },
+      { nombre: 'fecha', tipo: 'fecha', descripcion: ' --- ' },
+      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' }
+    ],
     errors: []
   },
   API_3: {

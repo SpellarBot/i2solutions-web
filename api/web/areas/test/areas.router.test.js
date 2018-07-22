@@ -79,7 +79,7 @@ describe('AREAS', () => {
       generatorDocs.OK({ docs, doc: API_1, res })
     })
 
-    it(`@ICE_API_1_2 establecimientosId no es un numero`, async () => {
+    it(`@ICE_API_1_02 establecimientosId no es un numero`, async () => {
       let establecimientosId = 'a'
       let params = { establecimientosId }
       let url = `/api/web/areas/establecimientos/${establecimientosId}`
@@ -89,7 +89,7 @@ describe('AREAS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_1_EQUI, res, codigoApi, url, params })
     })
 
-    it(`@ICE_API_1_3 establecimientosId debe ser minimo 1`, async () => {
+    it(`@ICE_API_1_03 establecimientosId debe ser minimo 1`, async () => {
       let establecimientosId = 0
       let params = { establecimientosId }
       let url = `/api/web/areas/establecimientos/${establecimientosId}`
@@ -237,7 +237,7 @@ describe('AREAS', () => {
 
     it('@ICE_API_3_01 area actualizada existosamente', async () => {
       let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad: 'AA', nombre: 'Mi nombre editado', fotoUrl: 'https://image.png', metrosCuadrados: '50', descripcionLugar: 'AA' }
+      let areaEditada = { actividad: 'Venta de productos', nombre: 'Mi nombre editado', fotoUrl: 'https://image.png', metrosCuadrados: '50x50', descripcionLugar: 'Ventas' }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -406,7 +406,7 @@ describe('AREAS', () => {
       areasId = areasCreada['id']
     })
 
-    it('@ICE_API_4_1 Eliminada una area de forma correcta', async () => {
+    it('@ICE_API_4_01 Eliminada una area de forma correcta', async () => {
       let params = { areasId }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).delete(url)
@@ -417,7 +417,7 @@ describe('AREAS', () => {
       generatorDocs.OK({ docs, doc: API_4, res })
     })
 
-    it('@ICE_API_4_2 areasId no valido numero', async () => {
+    it('@ICE_API_4_02 areasId no valido numero', async () => {
       let params = { areasId: 0 }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).delete(url)
@@ -426,7 +426,7 @@ describe('AREAS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_4_3 areasId no valido tipo de dato', async () => {
+    it('@ICE_API_4_03 areasId no valido tipo de dato', async () => {
       let params = { areasId: 'a' }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).delete(url)
@@ -435,7 +435,7 @@ describe('AREAS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_4_4 areasId no exite', async () => {
+    it('@ICE_API_4_04 areasId no exite', async () => {
       let params = { areasId: 50 }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).delete(url)
@@ -456,7 +456,7 @@ describe('AREAS', () => {
       areasId = areasCreada['id']
     })
 
-    it('@ICE_API_5_1 Eliminada una area de forma correcta', async () => {
+    it('@ICE_API_5_01 Eliminada una area de forma correcta', async () => {
       let params = { areasId }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).get(url)
@@ -466,7 +466,7 @@ describe('AREAS', () => {
       generatorDocs.OK({ docs, doc: API_5, res })
     })
 
-    it('@ICE_API_5_2 areasId no valido numero', async () => {
+    it('@ICE_API_5_02 areasId no valido numero', async () => {
       let params = { areasId: 0 }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).get(url)
@@ -475,7 +475,7 @@ describe('AREAS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_5_EQUI, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_5_3 areasId no valido tipo de dato', async () => {
+    it('@ICE_API_5_03 areasId no valido tipo de dato', async () => {
       let params = { areasId: 'a' }
       let url = `/api/web/areas/${params['areasId']}`
       let res = await request(app).get(url)

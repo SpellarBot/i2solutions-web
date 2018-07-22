@@ -30,17 +30,6 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerPorEstablecimiento ({ establecimientosId }) {
-      return new Promise((resolve, reject) => {
-        db.areas.ObtenerPorEstablecimiento({ establecimientosId })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
-      })
-    },
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
@@ -77,22 +66,22 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ActualizarEstadoNovedad ({ id, atendida, descripcionAtendida }) {
-      return new Promise((resolve, reject) => {
-        let datos = arguments['0']
-        db.novedades.Atender(datos)
-          .then((resp) => {
-            if (!resp) {
-              resolve(responses.NO_OK('La novedad con ese id no exite'))
-            } else {
-              resolve(responses.OK(true))
-            }
-          }).catch(err => {
-            console.error(err)
-            reject(responses.ERROR_SERVIDOR)
-          })
-      })
-    },
+    // ActualizarEstadoNovedad ({ id, atendida, descripcionAtendida }) {
+    //   return new Promise((resolve, reject) => {
+    //     let datos = arguments['0']
+    //     db.novedades.Atender(datos)
+    //       .then((resp) => {
+    //         if (!resp) {
+    //           resolve(responses.NO_OK('La novedad con ese id no exite'))
+    //         } else {
+    //           resolve(responses.OK(true))
+    //         }
+    //       }).catch(err => {
+    //         console.error(err)
+    //         reject(responses.ERROR_SERVIDOR)
+    //       })
+    //   })
+    // },
     ObtenerPorEstablecimientos ({ id }) {
       return new Promise((resolve, reject) => {
         db.novedades.ObtenerPorEstablecimiento({ id })

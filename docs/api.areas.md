@@ -115,11 +115,11 @@ __PUT__ __/api/web/areas/:areasId__
 
 ```json
 {
-  "actividad": "AA",
+  "actividad": "Venta de productos",
   "nombre": "Mi nombre editado",
   "fotoUrl": "https://image.png",
-  "metrosCuadrados": "50",
-  "descripcionLugar": "AA"
+  "metrosCuadrados": "50x50",
+  "descripcionLugar": "Ventas"
 }
 ```
 
@@ -272,7 +272,7 @@ ___
 
 ## Obtener un areas por establecimiento con detalles de cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos
 
-__GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
+__GET__ __/api/areasDetalle/establecimientos/:establecimientosId__
 
 
 #### Params:

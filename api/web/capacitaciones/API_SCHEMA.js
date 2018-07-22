@@ -8,7 +8,7 @@ module.exports = {
         'nombre': { 'type': 'string', minLength: 2 },
         'descripcion': { 'type': 'string', minLength: 2 },
         'tema': { 'type': 'string', minLength: 2 },
-        'fechaCapacitacion': { 'type': 'string', 'format': 'date-time' },
+        'fechaCapacitacion': { 'fecha': true },
         'areasId': { 'type': 'number', minimum: 1 }
       }
     }
@@ -22,7 +22,7 @@ module.exports = {
         'nombre': { 'type': 'string', minLength: 2 },
         'descripcion': { 'type': 'string', minLength: 2 },
         'tema': { 'type': 'string', minLength: 2 },
-        'fechaCapacitacion': { 'type': 'string', 'format': 'date-time' }
+        'fechaCapacitacion': { 'fecha': true }
       }
     },
     PARAMS: {

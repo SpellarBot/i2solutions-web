@@ -80,7 +80,7 @@ module.exports = {
     nombre: 'Obtener un areas por establecimiento con detalles de cantidad de puestos, accidentes, personas, capacitacion, novedades y equipos',
     metodo: 'GET',
     descripcion: '',
-    url: '/api/areas/puestos/establecimientos/:establecimientosId',
+    url: '/api/areasDetalle/establecimientos/:establecimientosId',
     params: [
       { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
     ],

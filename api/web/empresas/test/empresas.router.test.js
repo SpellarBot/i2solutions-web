@@ -410,7 +410,7 @@ describe('EMPRESAS', () => {
     let { API_4_EQUI } = EQUI
     const codigoApi = 'API_4'
 
-    it(`@ICE_${codigoApi}_1 eliminar una empresa`, async () => {
+    it(`@ICE_API_4_01 eliminar una empresa`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
       let params = { empresasId: empresaCreada['id'] }
       let url = `/api/web/empresas/${params['empresasId']}`
@@ -422,7 +422,7 @@ describe('EMPRESAS', () => {
       generatorDocs.OK({ docs, doc: API_4, res })
     })
 
-    it(`@ICE_${codigoApi}_2 empresasId no valido numero`, async () => {
+    it(`@ICE_API_4_02 empresasId no valido numero`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
       let params = { empresasId: 0 }
       let url = `/api/web/empresas/${params['empresasId']}`
@@ -432,7 +432,7 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_3 empresasId no valido tipo de dato`, async () => {
+    it(`@ICE_API_4_03 empresasId no valido tipo de dato`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
       let params = { empresasId: 'a' }
       let url = `/api/web/empresas/${params['empresasId']}`
@@ -442,7 +442,7 @@ describe('EMPRESAS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
     })
 
-    it(`@ICE_${codigoApi}_4 empresasId no existe`, async () => {
+    it(`@ICE_API_4_04 empresasId no existe`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
       let params = { empresasId: '500' }
       let url = `/api/web/empresas/${params['empresasId']}`

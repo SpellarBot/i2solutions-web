@@ -1,4 +1,3 @@
-// const _ = require('lodash')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
@@ -66,14 +65,12 @@ module.exports = ({ responses, db }) => {
           db.puestos.Borrar({ id })
         ])
           .then((resp) => {
-            // let valido = _.every(resp)
             if (!resp[3]) {
               resolve(responses.NO_OK('puesto con es id no existe'))
             } else {
               resolve(responses.OK(resp[3]))
             }
           }).catch((err) => {
-            console.log(err)
             console.error(err)
             return reject(responses.ERROR_SERVIDOR)
           })

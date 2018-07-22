@@ -277,16 +277,16 @@ conexion.Conectar().then(async (db) => {
   let promesas = []
   // crear admin
   await db.personas.CrearConClave({
-      nombres: 'admin',
-      apellidos: 'admin',
-      correo: 'admin@gmail.com',
-      cedula: '0931823447',
-      clave: 'admin',
-      telefono: '259956326',
-      fechaNacimiento: `${faker.date.past()}`,
-      perfilOcupacional: 'admin',
-      usuario: 'admin',
-      rol: 'admin-i2solutions'
+    nombres: 'admin',
+    apellidos: 'admin',
+    correo: 'admin@gmail.com',
+    cedula: '0931823447',
+    clave: 'admin',
+    telefono: '259956326',
+    fechaNacimiento: `${faker.date.past()}`,
+    perfilOcupacional: 'admin',
+    usuario: 'admin',
+    rol: 'admin-i2solutions'
   })
   const cantidadEmpresas = 5
   const cantidadEstablecimientosMaximo = 4

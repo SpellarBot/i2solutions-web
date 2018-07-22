@@ -67,7 +67,7 @@ describe('ESTABLECIMIENTOS', () => {
       let establecimientosCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId })
       let establecimientosCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada2['id'] })
     })
-    it(`@ICE_API_1_1 empresa con dos establecimientos`, async () => {
+    it(`@ICE_API_1_01 empresa con dos establecimientos`, async () => {
       let params = { empresasId }
       let url = `/api/web/establecimientos/${empresasId}`
       let res = await request(app).get(url)
@@ -78,7 +78,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, res, codigoApi, params, url })
     })
 
-    it(`@ICE_API_1_2 empresasId no es un numero`, async () => {
+    it(`@ICE_API_1_02 empresasId no es un numero`, async () => {
       let params = { empresasId }
       let url = `/api/web/establecimientos/a`
       let res = await request(app).get(url)
@@ -87,7 +87,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_1_EQUI, res, codigoApi, params, url })
     })
 
-    it(`@ICE_API_1_3 empresasId debe ser minimo 1`, async () => {
+    it(`@ICE_API_1_03 empresasId debe ser minimo 1`, async () => {
       let params = { empresasId }
       let url = `/api/web/establecimientos/${0}`
       let res = await request(app).get(url)
@@ -109,7 +109,7 @@ describe('ESTABLECIMIENTOS', () => {
       empresasId = empresaCreada['id']
     })
 
-    it('@ICE_API_2_1 establecimiento creado existosamente', async () => {
+    it('@ICE_API_2_01 establecimiento creado existosamente', async () => {
       let req = { ...establecimiento, empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
       expect(res.body.estado).to.equal(true)
@@ -119,7 +119,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.OK({ docs, doc: API_2, res, req })
     })
 
-    it('@ICE_API_2_2 nombres tipo no valido', async () => {
+    it('@ICE_API_2_02 nombres tipo no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres: 1, direccion, ruc, empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -128,7 +128,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_3 nombres tamano no valido', async () => {
+    it('@ICE_API_2_03 nombres tamano no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres: '', direccion, ruc, empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -137,7 +137,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_4 direccion tipo no valido', async () => {
+    it('@ICE_API_2_04 direccion tipo no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion: 1, ruc, empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -146,7 +146,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_5 direccion tamano no valido', async () => {
+    it('@ICE_API_2_05 direccion tamano no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion: '', ruc, empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -155,7 +155,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_6 empresasId tipo no valido', async () => {
+    it('@ICE_API_2_06 empresasId tipo no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc, empresasId: 'a' }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -164,7 +164,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_7 empresasId tamano no valido', async () => {
+    it('@ICE_API_2_07 empresasId tamano no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc, empresasId: 0 }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -173,7 +173,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_8 ruc 1-2 digitos valor>24', async () => {
+    it('@ICE_API_2_08 ruc 1-2 digitos valor>24', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc: '2502365486001', empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -182,7 +182,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '8', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_9 ruc 1-2 digitos valor=00', async () => {
+    it('@ICE_API_2_09 ruc 1-2 digitos valor=00', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc: '0002365486001', empresasId }
       let res = await request(app).post(`/api/web/establecimientos`).send(req)
@@ -233,7 +233,7 @@ describe('ESTABLECIMIENTOS', () => {
       establecimientosId = establecimientosCreada['id']
     })
 
-    it('@ICE_API_3_1 editado existosamente', async () => {
+    it('@ICE_API_3_01 editado existosamente', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres: 'Empresa editada', direccion, ruc, empresasId }
       let params = { establecimientosId }
@@ -246,7 +246,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.OK({ docs, doc: API_3, res, req })
     })
 
-    it('@ICE_API_3_2 nombres tipo no valido', async () => {
+    it('@ICE_API_3_02 nombres tipo no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres: 2, direccion, ruc, empresasId }
       let params = { establecimientosId }
@@ -257,7 +257,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_3 nombres tamano no valido', async () => {
+    it('@ICE_API_3_03 nombres tamano no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres: '', direccion, ruc, empresasId }
       let params = { establecimientosId }
@@ -268,7 +268,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_4 direccion tipo no valido', async () => {
+    it('@ICE_API_3_04 direccion tipo no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion: 1, ruc, empresasId }
       let params = { establecimientosId }
@@ -279,7 +279,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '4', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_5 direccion tamano no valido', async () => {
+    it('@ICE_API_3_05 direccion tamano no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion: '', ruc, empresasId }
       let params = { establecimientosId }
@@ -290,7 +290,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_6 empresasId tipo no valido', async () => {
+    it('@ICE_API_3_06 empresasId tipo no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc, empresasId: 'a' }
       let params = { establecimientosId }
@@ -301,7 +301,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_7 empresasId tamano no valido', async () => {
+    it('@ICE_API_3_07 empresasId tamano no valido', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc, empresasId: 0 }
       let params = { establecimientosId }
@@ -312,7 +312,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_8 ruc 1-2 digitos valor>24', async () => {
+    it('@ICE_API_3_08 ruc 1-2 digitos valor>24', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc: '2502365486001', empresasId }
       let params = { establecimientosId }
@@ -323,7 +323,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '8', equivalencias, equi: API_3_EQUI, req, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_3_9 ruc 1-2 digitos valor=00', async () => {
+    it('@ICE_API_3_09 ruc 1-2 digitos valor=00', async () => {
       let { nombres, direccion, ruc } = establecimiento
       let req = { nombres, direccion, ruc: '0002365486001', empresasId }
       let params = { establecimientosId }
@@ -415,7 +415,7 @@ describe('ESTABLECIMIENTOS', () => {
       establecimientosId = establecimientosCreada['id']
     })
 
-    it('@ICE_API_4_1 Eliminada una empresa de forma correcta', async () => {
+    it('@ICE_API_4_01 Eliminada una empresa de forma correcta', async () => {
       let params = { establecimientosId }
       let url = `/api/web/establecimientos/${params['establecimientosId']}`
       let res = await request(app).delete(url)
@@ -426,7 +426,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.OK({ docs, doc: API_4, res })
     })
 
-    it('@ICE_API_4_2 establecimientosId no valido numero', async () => {
+    it('@ICE_API_4_02 establecimientosId no valido numero', async () => {
       let params = { establecimientosId: 0 }
       let url = `/api/web/establecimientos/${params['establecimientosId']}`
       let res = await request(app).delete(url)
@@ -435,7 +435,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '2', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_4_3 establecimientosId no valido tipo de dato', async () => {
+    it('@ICE_API_4_03 establecimientosId no valido tipo de dato', async () => {
       let params = { establecimientosId: 'a' }
       let url = `/api/web/establecimientos/${params['establecimientosId']}`
       let res = await request(app).delete(url)
@@ -444,7 +444,7 @@ describe('ESTABLECIMIENTOS', () => {
       generatorDocs.ADDINTER({ codigo: '3', equivalencias, equi: API_4_EQUI, res, url, params, codigoApi })
     })
 
-    it('@ICE_API_4_4 establecimientosId no exite', async () => {
+    it('@ICE_API_4_04 establecimientosId no exite', async () => {
       let params = { establecimientosId: 500 }
       let url = `/api/web/establecimientos/${params['establecimientosId']}`
       let res = await request(app).delete(url)

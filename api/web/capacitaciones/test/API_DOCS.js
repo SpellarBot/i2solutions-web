@@ -5,7 +5,12 @@ module.exports = {
     descripcion: '',
     url: '/api/web/capacitaciones',
     params: [],
-    body: [],
+    body: [
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'tema', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'fechaCapacitacion', tipo: 'fecha', descripcion: ' --- ' },
+      { nombre: 'areasId', tipo: 'number', descripcion: ' minimum: 1 ' }
+    ],
     errors: []
   },
   API_2: {
@@ -16,7 +21,12 @@ module.exports = {
     params: [
       { nombre: 'capacitacionId', tipo: 'Number', descripcion: ' --- ' }
     ],
-    body: [],
+    body: [
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'tema', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'fechaCapacitacion', tipo: 'fecha', descripcion: ' --- ' },
+      { nombre: 'areasId', tipo: 'number', descripcion: ' minimum: 1 ' }
+    ],
     errors: []
   },
   API_3: {

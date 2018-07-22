@@ -933,7 +933,7 @@ Crear un area de forma correcta
   <tr>
     <td>actividad</td>
     <td><a href="#CE_API_2[C1]"> CE_API_2[C1]</a></td>
-    <td>AA</td>
+    <td>Venta de productos</td>
   </tr>
   <tr>
     <td>nombre</td>
@@ -948,12 +948,12 @@ Crear un area de forma correcta
   <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>50</td>
+    <td>50x50</td>
   </tr>
   <tr>
     <td>descripcionLugar</td>
     <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
-    <td>AA</td>
+    <td>Ventas</td>
   </tr>
   <tr>
     <td>areasId</td>
@@ -973,11 +973,11 @@ PUT /api/web/areas/1
 _request o body_
 ```js
 {
-  "actividad": "AA",
+  "actividad": "Venta de productos",
   "nombre": "Mi nombre editado",
   "fotoUrl": "https://image.png",
-  "metrosCuadrados": "50",
-  "descripcionLugar": "AA"
+  "metrosCuadrados": "50x50",
+  "descripcionLugar": "Ventas"
 }
 ```
 

@@ -96,28 +96,6 @@ module.exports = (app) => {
       }
     })
 
-  // identificador: API_8
-  // anadir persona a un puesto
-  app.route('/personas/:personasId/puestos/:puestosId')
-    .put((req, res) => {
-      let params = utils.jsonToInt(req.params, ['personasId', 'puestosId'])
-      let { PARAMS } = schema.API_8_SCHEMA
-      let [errParams, mensajeParams] = validar(PARAMS, params)
-      if (errParams) {
-        let resp = responses.NO_OK({ ...mensajeParams })
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      } else {
-        Controller.AnadirAPuesto({ ...req.params }).then((resp) => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        }).catch(resp => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        })
-      }
-    })
-
   // identificador: API_5_SCHEMA
   // obtener personas por establecimiento
   app.route('/personas/establecimientos/:establecimientosId')
@@ -178,6 +156,28 @@ module.exports = (app) => {
       } else {
         let { puestosId } = req.params
         Controller.ObtenerTodosPorPuestos({ id: puestosId }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // identificador: API_8
+  // anadir persona a un puesto
+  app.route('/personas/:personasId/puestos/:puestosId')
+    .put((req, res) => {
+      let params = utils.jsonToInt(req.params, ['personasId', 'puestosId'])
+      let { PARAMS } = schema.API_8_SCHEMA
+      let [errParams, mensajeParams] = validar(PARAMS, params)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        Controller.AnadirAPuesto({ ...req.params }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {

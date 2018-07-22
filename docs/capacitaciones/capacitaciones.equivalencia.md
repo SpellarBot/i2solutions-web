@@ -402,7 +402,7 @@ _request o body_
   "nombre": "Joel Rodriguez",
   "descripcion": "La capacitación fue un éxito",
   "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": 1,
+  "fechaCapacitacion": "2017-13-09",
   "areasId": 1
 }
 ```
@@ -415,7 +415,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe ser string"
+    "fechaCapacitacion": "La fecha no es valida"
   },
   "codigoEstado": 200
 }
@@ -440,7 +440,7 @@ _request o body_
   "nombre": "Joel Rodriguez",
   "descripcion": "La capacitación fue un éxito",
   "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": "2017-08-09",
+  "fechaCapacitacion": "2017-13-09",
   "areasId": 1
 }
 ```
@@ -453,7 +453,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe coincidir con el formato \"date-time\""
+    "fechaCapacitacion": "La fecha no es valida"
   },
   "codigoEstado": 200
 }
@@ -1167,7 +1167,7 @@ fechaCapacitacion tipo no valido
   <tr>
     <td>fechaCapacitacion</td>
     <td><a href="#CE_API_2[C32]"> CE_API_2[C32]</a></td>
-    <td>1</td>
+    <td>2017-13-09</td>
   </tr>
   <tr>
     <td>capacitacionesId</td>
@@ -1190,7 +1190,7 @@ _request o body_
   "nombre": "Joel Rodriguez",
   "descripcion": "La capacitación fue un éxito",
   "tema": "Como hacer que todo valga",
-  "fechaCapacitacion": 1
+  "fechaCapacitacion": "2017-13-09"
 }
 ```
 
@@ -1202,7 +1202,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe ser string"
+    "fechaCapacitacion": "La fecha no es valida"
   },
   "codigoEstado": 200
 }
@@ -1272,7 +1272,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaCapacitacion": "debe coincidir con el formato \"date-time\""
+    "fechaCapacitacion": "La fecha no es valida"
   },
   "codigoEstado": 200
 }

@@ -59,6 +59,39 @@ module.exports = {
     body: [],
     errors: []
   },
+  API_5: {
+    nombre: 'Obtener personas por establecimiento',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/personas/establecimientos/:establecimientosId',
+    params: [
+      { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_6: {
+    nombre: 'Obtener personas por area',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/personas/areas/:areasId',
+    params: [
+      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_7: {
+    nombre: 'Obtener personas por puesto',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/personas/puestos/:puestosId',
+    params: [
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
   API_8: {
     nombre: 'Anadir una persona a un puesto',
     metodo: 'GET',
@@ -71,24 +104,4 @@ module.exports = {
     body: [],
     errors: []
   }
-  // API_6: {
-  //   nombre: 'Obtener una personas por establecimiento',
-  //   metodo: 'GET',
-  //   descripcion: '',
-  //   url: '/api/web/personas/establecimientos/:establecimientosId',
-  //   params: [
-  //     { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
-  //   ],
-  //   body: [],
-  //   errors: []
-  // },
-  // API_1: {
-  //   nombre: 'Obtener todas las personas',
-  //   metodo: 'GET',
-  //   descripcion: 'Obtener todas las personas',
-  //   url: '/api/web/personas',
-  //   params: [],
-  //   body: [],
-  //   errors: []
-  // },
 }

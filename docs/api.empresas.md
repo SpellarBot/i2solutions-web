@@ -35,6 +35,16 @@ ___
 __POST__ __/api/web/empresas__
 
 Crear una empresa, esto tambien deberia crear un establecimiento por defecto
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  nombre  | string  |   ---   | 
+|  actividadComercial  | string  |   ---   | 
+|  razonSocial  | string  |   ---   | 
+|  direccion  | string  |   ---   | 
+|  urlFoto  | string  |   url   | 
+|  ruc  | string  |   ruc formato   | 
+
 #### Request:
 
 ```json
@@ -90,6 +100,14 @@ __PUT__ __/api/web/empresas/:empresasId__
 | :--------- | :------ | :-------|
 | empresasId | Number |   ---   |
 	
+
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  nombre  | string  |   ---   | 
+|  actividadComercial  | string  |   ---   | 
+|  razonSocial  | string  |   ---   | 
+|  urlFoto  | string  |   url   | 
 
 #### Request:
 

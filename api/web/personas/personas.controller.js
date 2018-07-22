@@ -1,3 +1,4 @@
+const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
@@ -70,13 +71,21 @@ module.exports = ({ responses, db }) => {
     AnadirAPuesto (datos) {
       let { puestosId, personasId } = datos
       return new Promise((resolve, reject) => {
-        db.personasPuestos.Crear({ puestosId, personasId })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+        co(function * () {
+          let persona = yield db.personas.Obtener({ id: personasId })
+          let puesto = yield db.puestos.Obtener({ id: puestosId })
+          if (!persona) {
+            return resolve(responses.NO_OK('persona con es id no existe'))
+          } else if (!puesto) {
+            return resolve(responses.NO_OK('puesto con es id no existe'))
+          } else {
+            let resp = yield db.personasPuestos.Crear({ puestosId, personasId })
+            return resolve(responses.OK(resp))
+          }
+        }).catch((err) => {
+          if (process.env.NODE_ENV === 'testing') { console.error(err) }
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     ObtenerTodosPorEstablecimiento ({ id }) {

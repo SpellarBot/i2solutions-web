@@ -872,12 +872,12 @@ Actualizar un accidente de forma correcta
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C01]"> CE_API_2[C01]</a></td>
-    <td>aa</td>
+    <td>Caida de objeto</td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>AA</td>
+    <td>Caida de objeto</td>
   </tr>
   <tr>
     <td>heridos</td>
@@ -922,8 +922,8 @@ PUT /api/web/accidentes/1
 _request o body_
 ```js
 {
-  "descripcion": "AA",
-  "nombre": "aa",
+  "descripcion": "Caida de objeto",
+  "nombre": "Caida de objeto",
   "heridos": 1,
   "atendidoEnEmpresa": false,
   "muertos": 0,

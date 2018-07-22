@@ -5,6 +5,14 @@
 __POST__ __/api/web/capacitaciones__
 
 
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  descripcion  | string  |   minLength: 2   | 
+|  tema  | string  |   minLength: 2   | 
+|  fechaCapacitacion  | fecha  |   ---   | 
+|  areasId  | number  |   minimum: 1   | 
+
 #### Response:
 
 ```json
@@ -39,6 +47,14 @@ __PUT__ __/api/web/capacitaciones/:capacitacionId__
 | :--------- | :------ | :-------|
 | capacitacionId | Number |   ---   |
 	
+
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  descripcion  | string  |   minLength: 2   | 
+|  tema  | string  |   minLength: 2   | 
+|  fechaCapacitacion  | fecha  |   ---   | 
+|  areasId  | number  |   minimum: 1   | 
 
 #### Request:
 

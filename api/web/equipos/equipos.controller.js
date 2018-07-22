@@ -12,17 +12,6 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerTodos ({ empresasId }) {
-      return new Promise((resolve, reject) => {
-        db.equipos.ObtenerPorEmpresas({ empresasId })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
-      })
-    },
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.equipos.Obtener({ id })

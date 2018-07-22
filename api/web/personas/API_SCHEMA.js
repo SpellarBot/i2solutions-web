@@ -4,7 +4,7 @@ module.exports = {
       'minProperties': 9,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 },
+        'nombres': { 'type': 'string', minLength: 2 }, // , pattern: '/^[a-zA-Z ]+$/'
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
@@ -21,7 +21,7 @@ module.exports = {
       'minProperties': 4,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 },
+        'nombres': { 'type': 'string', minLength: 2 }, // , pattern: '/^[a-zA-Z ]+$/'
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
@@ -101,7 +101,5 @@ module.exports = {
         'puestosId': { 'type': 'number', minimum: 1 }
       }
     }
-  },
-  API_9_SCHEMA: { // obtener todas la personas
   }
 }

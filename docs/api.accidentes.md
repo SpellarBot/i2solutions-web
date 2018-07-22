@@ -5,6 +5,17 @@
 __POST__ __/api/web/accidentes__
 
 
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  nombre  | string  |   minLength: 2   | 
+|  descripcion  | string  |   minLength: 2   | 
+|  heridos  | number  |   minimum: 0   | 
+|  atendidoEnEmpresa  | boolean  |   ---   | 
+|  muertos  | number  |   minimum: 0   | 
+|  fecha  | fecha  |   ---   | 
+|  puestosId  | number  |   minimum: 1   | 
+
 #### Response:
 
 ```json
@@ -42,12 +53,23 @@ __PUT__ __/api/web/accidentes/:accidentesId__
 | accidentesId | Number |   ---   |
 	
 
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  nombre  | string  |   minLength: 2   | 
+|  descripcion  | string  |   minLength: 2   | 
+|  heridos  | number  |   minimum: 0   | 
+|  atendidoEnEmpresa  | boolean  |   ---   | 
+|  muertos  | number  |   minimum: 0   | 
+|  fecha  | fecha  |   ---   | 
+|  puestosId  | number  |   minimum: 1   | 
+
 #### Request:
 
 ```json
 {
-  "descripcion": "AA",
-  "nombre": "aa",
+  "descripcion": "Caida de objeto",
+  "nombre": "Caida de objeto",
   "heridos": 1,
   "atendidoEnEmpresa": false,
   "muertos": 0,

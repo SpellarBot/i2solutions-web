@@ -5,6 +5,15 @@
 __POST__ __/api/web/novedades__
 
 
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  descripcion  | string  |   minLength: 2   | 
+|  prioridad  | string  |   'alta', 'media', 'baja'   | 
+|  fotoUrl  | string  |   url   | 
+|  fecha  | fecha  |   ---   | 
+|  puestosId  | Number  |   ---   | 
+
 #### Response:
 
 ```json
@@ -40,6 +49,15 @@ __PUT__ __/api/web/novedades/:novedadesId__
 | :--------- | :------ | :-------|
 | novedadesId | Number |   ---   |
 	
+
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  descripcion  | string  |   minLength: 2   | 
+|  prioridad  | string  |   'alta', 'media', 'baja'   | 
+|  fotoUrl  | string  |   url   | 
+|  fecha  | fecha  |   ---   | 
+|  puestosId  | Number  |   ---   | 
 
 #### Request:
 

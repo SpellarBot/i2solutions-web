@@ -5,6 +5,14 @@
 __POST__ __/api/web/equipos__
 
 
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  nombre  | string  |   minLength: 2   | 
+|  descripcion  | string  |   minLength: 2   | 
+|  fotoUrl  | string  |   url   | 
+|  cantidad  | number  |   minimum: 1   | 
+
 #### Response:
 
 ```json
@@ -38,6 +46,14 @@ __PUT__ __/api/web/equipos/:equiposId__
 | :--------- | :------ | :-------|
 | equiposId | Number |   ---   |
 	
+
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  nombre  | string  |   minLength: 2   | 
+|  descripcion  | string  |   minLength: 2   | 
+|  fotoUrl  | string  |   url   | 
+|  cantidad  | number  |   minimum: 1   | 
 
 #### Request:
 

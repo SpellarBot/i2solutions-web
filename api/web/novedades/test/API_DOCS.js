@@ -5,7 +5,13 @@ module.exports = {
     descripcion: '',
     url: '/api/web/novedades',
     params: [],
-    body: [],
+    body: [
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'prioridad', tipo: 'string', descripcion: ' \'alta\', \'media\', \'baja\' ' },
+      { nombre: 'fotoUrl', tipo: 'string', descripcion: ' url ' },
+      { nombre: 'fecha', tipo: 'fecha', descripcion: ' --- ' },
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     errors: []
   },
   API_2: {
@@ -16,7 +22,13 @@ module.exports = {
     params: [
       { nombre: 'novedadesId', tipo: 'Number', descripcion: ' --- ' }
     ],
-    body: [],
+    body: [
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
+      { nombre: 'prioridad', tipo: 'string', descripcion: ' \'alta\', \'media\', \'baja\' ' },
+      { nombre: 'fotoUrl', tipo: 'string', descripcion: ' url ' },
+      { nombre: 'fecha', tipo: 'fecha', descripcion: ' --- ' },
+      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+    ],
     errors: []
   },
   API_3: {
