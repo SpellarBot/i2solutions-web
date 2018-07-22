@@ -56,7 +56,6 @@
               {{mensajeSnackbar}}
             </v-snackbar>
 
-
           <DialogEditarAccidentes
           :visible="visibleEdicion"
           :accidenteNombre="accidenteNombre"

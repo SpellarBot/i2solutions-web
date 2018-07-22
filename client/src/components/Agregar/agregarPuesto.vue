@@ -13,7 +13,7 @@
                   v-model="nombre"
                   required
                   :rules="[rules.required, rules.nameMin]"
-                >              
+                >
             </v-text-field>
             <v-text-field
                   label="Descripción"
@@ -53,7 +53,7 @@ export default {
       console.log('\t\tPuesto: ' + this.indiceEstablecimiento + '.' + this.indiceArea + '.' + this.index)
     },
     verify () {
-      if ( !this.$refs.form.validate() ) {
+      if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
       }
     },
@@ -62,18 +62,18 @@ export default {
       let descripcion = this.descripcion
       let areasId = Number(areaId)
       return new Promise((resolve, reject) => {
-      Vue.http.post('/api/web/puestos', {nombre, descripcion, areasId})
-        .then((resp) => {
-          if (resp.body.estado) {
-            return resolve()
-          } else {
-            this.$store.commit('setError', resp.body.datos)
-            return reject(resp.body.datos)
-          }
-        }).catch((err) => {
-          this.$store.commit('setError', err)
-          return reject(err)
-        })
+        Vue.http.post('/api/web/puestos', {nombre, descripcion, areasId})
+          .then((resp) => {
+            if (resp.body.estado) {
+              return resolve()
+            } else {
+              this.$store.commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            this.$store.commit('setError', err)
+            return reject(err)
+          })
       })
     }
   }

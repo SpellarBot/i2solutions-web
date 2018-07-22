@@ -128,7 +128,7 @@ export default {
       })
     },
     verify () {
-      if ( !this.$refs.form.validate() ) {
+      if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
       }
       this.instanciasPuesto.forEach(function (puesto) {
@@ -137,7 +137,7 @@ export default {
     },
     crear (idEstablecimiento) {
       this.area.establecimientoId = idEstablecimiento
-      this.agregar()      
+      this.agregar()
     },
     agregar () {
       let nombre = this.area.nombre
@@ -147,9 +147,9 @@ export default {
       let descripcionLugar = this.area.descripcion
       let establecimientosId = Number(this.area.establecimientoId)
       return new Promise((resolve, reject) => {
-      Vue.http.post('/api/web/areas', {actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId})
-        .then((resp) => {
-          if (resp.body.estado) {              
+        Vue.http.post('/api/web/areas', {actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId})
+          .then((resp) => {
+            if (resp.body.estado) {
               this.instanciasPuesto.forEach(function (puesto) {
                 puesto.crear(resp.body.datos.id)
               })
@@ -159,11 +159,11 @@ export default {
               return reject(resp.body.datos)
             }
           })
-        .catch((err) => {
-          console.log(empresasId)
-          this.$store.commit('setError', err)
-          return reject(err)
-        })
+          .catch((err) => {
+            console.log(empresasId)
+            this.$store.commit('setError', err)
+            return reject(err)
+          })
       })
     }
   }

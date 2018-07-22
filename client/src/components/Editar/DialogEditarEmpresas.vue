@@ -54,6 +54,18 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="cargando" hide-overlay persistent max-width="400px" hide-overlay>
+      <div class="text-xs-center">
+      <v-card>
+      <v-progress-circular
+      :size="70"
+      :width="7"
+      indeterminate
+      color="primary"
+    ></v-progress-circular>
+  </v-card>
+</div>
+    </v-dialog>
     <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -81,6 +93,7 @@ export default {
       imageName: '',
       imageUrl: '',
       imageFile: '',
+      cargando: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -184,8 +197,10 @@ export default {
         urlFoto = this.imageUrl
         logo = true
       }
+      this.cargando = true
       this.$store.dispatch('updateEmpresa', { empresaId, nombre, actividadComercial, razonSocial, urlFoto, logo })
         .then((resp) => {
+          this.cargando = false
           console.log('YUP')
           this.$store.getters.empresaSelected.nombre = nombre
           this.$store.getters.empresaSelected.actividadComercial = actividadComercial
@@ -198,10 +213,12 @@ export default {
         })
         .catch((err) => {
           if (err.ok === false) {
+            this.cargando = false
             this.color = 'error'
             this.snackbar = true
             this.mensajeSnackbar = 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.'
           } else {
+            this.cargando = false
             this.color = 'error'
             this.snackbar = true
             this.mensajeSnackbar = err
