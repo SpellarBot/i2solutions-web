@@ -10,26 +10,31 @@
               <v-form ref="form" lazy-validation>
                 <v-text-field
                   label="Nombre"
+                  v-model="area.nombre"
                   required
                   :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="Actividad"
+              v-model="area.actividad"
               required
               :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="Foto"
+              v-model="area.foto"
               required
               :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="metros 2"
+              v-model="area.metros2"
               required
               :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
               label="descripción"
+              v-model="area.descripcion"
               required
               :rules="[rules.required, rules.nameMin]"
               multi-line
@@ -79,6 +84,14 @@ export default {
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+      },
+      area: {
+        nombre: '',
+        actividad: '',
+        foto: '',
+        metros2: '',
+        descripcion: '',
+        establecimientoId: ''
       }
     }
   },
@@ -89,6 +102,7 @@ export default {
     insertarPuesto () {
       var PuestoClass = Vue.extend(agregarPuesto)
       var instancePuesto = new PuestoClass({
+        parent: this,
         propsData: {index: this.indice,
           indiceEstablecimiento: this.indiceEstablecimiento,
           indiceArea: this.index}
@@ -111,6 +125,45 @@ export default {
       console.log('\tArea: ' + this.indiceEstablecimiento + '.' + this.index)
       this.instanciasPuesto.forEach(function (puesto) {
         puesto.prueba()
+      })
+    },
+    verify () {
+      if ( !this.$refs.form.validate() ) {
+        this.$store.commit('setVerified', false)
+      }
+      this.instanciasPuesto.forEach(function (puesto) {
+        puesto.verify()
+      })
+    },
+    crear (idEstablecimiento) {
+      this.area.establecimientoId = idEstablecimiento
+      this.agregar()      
+    },
+    agregar () {
+      let nombre = this.area.nombre
+      let actividad = this.area.actividad
+      let fotoUrl = this.area.foto
+      let metrosCuadrados = this.area.metros2
+      let descripcionLugar = this.area.descripcion
+      let establecimientosId = Number(this.area.establecimientoId)
+      return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/areas', {actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId})
+        .then((resp) => {
+          if (resp.body.estado) {              
+              this.instanciasPuesto.forEach(function (puesto) {
+                puesto.crear(resp.body.datos.id)
+              })
+              return resolve()
+            } else {
+              this.$store.commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          })
+        .catch((err) => {
+          console.log(empresasId)
+          this.$store.commit('setError', err)
+          return reject(err)
+        })
       })
     }
   }
