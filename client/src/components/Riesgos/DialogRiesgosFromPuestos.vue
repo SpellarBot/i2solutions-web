@@ -23,13 +23,17 @@
                 <v-card style="padding:10px; margin:25px;" >
                   <div><b>Tipo De Riezgo: </b>{{riesgo.tipoRiesgo}}</div>
                   <div><b>Porcentaje de Riezgo: </b>{{riesgo.porcentajeRiesgo}} %</div>
+                  <div><b>Valoración: </b>{{riesgo.valoracion}}</div>
                   <div><b>Valoración Literal: </b>{{riesgo.valoracionLiteral}}</div>
                   <div><b>Personas Expuestas: </b>{{riesgo.personasExpuestas}}</div>
                   <v-btn
+                  :class="'editarRiesgo' + riesgo.id"
                     fab
                     dark
                     small
                     color="blue"
+                    @click="visualizarEditar(riesgo)"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
                   >
                     <v-icon>edit</v-icon>
                   </v-btn>
@@ -77,16 +81,40 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+    <footer>
+      <DialogEditarRiesgos
+      :visible="visibleEditar"
+      :riesgoTipoRiesgo="riesgoTipoRiesgo"
+      :riesgoPorcentajeRiesgo="riesgoPorcentajeRiesgo"
+      :riesgoValoracion="riesgoValoracion"
+      :riesgoValoracionLiteral="riesgoValoracionLiteral"
+      :riesgoPersonasExpuestas="riesgoPersonasExpuestas"
+      :riesgoFecha="riesgoFecha"
+      :puestoId="puestoId"
+      :riesgoId="riesgoId"
+      @close="visibleEditar=false">
+      ></DialogEditarRiesgos>
+    </footer>
   </main>
 </template>
 <script>
+import DialogEditarRiesgos from '../Editar/DialogEditarRiesgos'
 export default {
+  components: { DialogEditarRiesgos },
   name: 'DialogRiesgosFromPuestos',
   props: ['visible', 'puestoId', 'puestoNombre'],
   /* mounted () {
   }, */
   data () {
     return {
+      visibleEditar: false,
+      riesgoTipoRiesgo: '',
+      riesgoPorcentajeRiesgo: '',
+      riesgoValoracion: '',
+      riesgoValoracionLiteral: '',
+      riesgoPersonasExpuestas: '',
+      riesgoFecha: '',
+      puestoId: '',
       size: 'sm',
       eliminarDialogRiesgo: false,
       riesgoId: '',
@@ -140,6 +168,17 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+    },
+    visualizarEditar (riesgo) {
+      this.riesgoTipoRiesgo = riesgo.tipoRiesgo
+      this.riesgoPorcentajeRiesgo = riesgo.porcentajeRiesgo
+      this.riesgoValoracion = riesgo.valoracion
+      this.riesgoValoracionLiteral = riesgo.valoracionLiteral
+      this.riesgoPersonasExpuestas = riesgo.personasExpuestas
+      this.puestoId = riesgo.puestosId
+      this.riesgoFecha = riesgo.fecha
+      this.riesgoId = riesgo.id
+      this.visibleEditar = true
     },
     eliminarRiesgo (riesgo, indice) {
       this.riesgoId = riesgo.id

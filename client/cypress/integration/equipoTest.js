@@ -9,15 +9,15 @@ describe('Editar Equipo', function () {
     cy.wait(1000)
     cy.get('.verPuestos4').click() // el numero es el id del establecimiento
     cy.wait(1000)
-    cy.get('.equiposPuesto21').click() // el numero es el id del puesto
+    cy.get('.equiposPuesto19').click() // el numero es el id del puesto
     cy.wait(1000)
-    cy.get('.editarEquipo43').last().click() // el numero es el id del equipo
+    cy.get('.editarEquipo41').last().click() // el numero es el id del equipo
     cy.wait(1000)
-    cy.get('.descripcionEquipo43').find('input').type('{selectall}{del}Equipo usado para apagar el fuego.')// el numero es el id del equipo
+    cy.get('.descripcionEquipo41').find('input').type('{selectall}{del}Equipo usado para apagar el fuego.')// el numero es el id del equipo
     cy.wait(600)
-    cy.get('.cantidadEquipo43').find('input').type('{selectall}{del}7')// el numero es el id del puesto
+    cy.get('.cantidadEquipo41').find('input').type('{selectall}{del}7')// el numero es el id del puesto
     cy.wait(600)
-    cy.get('.editEquipo43').click()// el numero es el id del puesto
+    cy.get('.editEquipo41').click()// el numero es el id del puesto
     cy.wait(1500)
   })
 })

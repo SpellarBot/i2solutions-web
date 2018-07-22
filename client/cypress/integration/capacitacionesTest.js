@@ -9,23 +9,23 @@ describe('Editar Capacitación', function () {
     cy.wait(1000)
     cy.get('.verAreas4').click() // el numero es el id del establecimiento
     cy.wait(1000)
-    cy.get('.capacitacionesArea10').click() // el numero es el id del area
+    cy.get('.capacitacionesArea9').click() // el numero es el id del area
     cy.wait(1000)
-    cy.get('.editarCapacitacion48').click() // el numero es el id de la capacitacion
+    cy.get('.editarCapacitacion43').click() // el numero es el id de la capacitacion
     cy.wait(1000)
-    cy.get('.temaCapacitacion48').find('input').type('{selectall}{del}Uso apropiado de equipos de seguridad') // el numero es el id de la capacitacion
+    cy.get('.temaCapacitacion43').find('input').type('{selectall}{del}Uso apropiado de equipos de seguridad') // el numero es el id de la capacitacion
     cy.wait(600)
-    cy.get('.descripcionCapacitacion48').find('input').type('{selectall}{del}Capacitación para mejorar la eficiencia de uso de equipos básicos de seguridad') // el numero es el id de la capacitacion
+    cy.get('.descripcionCapacitacion43').find('input').type('{selectall}{del}Capacitación para mejorar la eficiencia de uso de equipos básicos de seguridad') // el numero es el id de la capacitacion
     cy.wait(600)
-    cy.get('.fechaCapacitacion48').click() // el numero es el id de la capacitacion
+    cy.get('.fechaCapacitacion43').click() // el numero es el id de la capacitacion
     cy.wait(600)
     cy.get('button').contains('Jan').click()
     cy.wait(600)
     cy.get('button').contains('10').click()
     cy.wait(600)
-    cy.get('.capacitadorCapacitacion48').find('input').type('{selectall}{del}Joaquín Pérez') // el numero es el id de la capacitacion
+    cy.get('.capacitadorCapacitacion43').find('input').type('{selectall}{del}Joaquín Pérez') // el numero es el id de la capacitacion
     cy.wait(600)
-    cy.get('.editCapacitacion48').click()
+    cy.get('.editCapacitacion43').click()
     cy.wait(1500)
   })
 })
