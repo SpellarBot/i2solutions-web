@@ -16,6 +16,7 @@
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
+              :class="'eliminarCapacitacion' + capacitacions.id"
               fab
               dark
               small
@@ -52,7 +53,7 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
-                    <v-btn color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
+                    <v-btn :class="'boraarCapacitacion' + this.capacitacionSelected" color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -105,6 +106,7 @@ export default {
     eliminarCapacitacion (capacitacion) {
       this.capacitacionSelected = capacitacion.id
       console.log(this.capacitacionSelected)
+      console.log(this.$store.getters.capacitaciones[this.index])
       this.eliminarDialogCapacitaciones = true
     },
     borrarCapacitacion () {

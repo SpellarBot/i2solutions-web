@@ -30,6 +30,7 @@
               dark
               small
               color="blue"
+              :class="'eliminarArea' + id"
               @click="eliminarArea()"
               v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
@@ -68,7 +69,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialogAreas = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarArea()">Sí</v-btn>
+            <v-btn :class="'eliminarAreas' + this.areaId" color="blue darken-1" flat @click.native = "borrarArea()">Sí</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -82,6 +83,7 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+
     <footer>
     <DialogNovedadesFromAreas
     :areaId="areaId"
@@ -224,6 +226,8 @@ export default{
     },
 
     eliminarArea () {
+      this.areaId = this.id
+      console.log('areaId', this.areaId)
       this.eliminarDialogAreas = true
     },
     borrarArea () {
@@ -235,6 +239,7 @@ export default{
           this.snackbar = true
           this.mensajeSnackbar = 'Area borrada con exito.'
           this.color = 'success'
+          console.log('area: ', this.$store.getters.areas[this.index])
           this.quitarDeArray()
         })
         .catch((err) => {

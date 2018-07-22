@@ -44,47 +44,6 @@ export default {
   },
   data () {
     return {
-      areas: [
-        {
-          idArea: '0',
-          nombre: 'Área Administrativa',
-          actividad: 'Administración de personal',
-          metrosCuadrados: 5.0,
-          EstablecimientoId: '0',
-          fotoUrl: '',
-          numPuestos: 2,
-          numPersonas: 5,
-          numNovedades: 1,
-          numAccidentes: 0,
-          numCapacitaciones: 0
-        },
-        {
-          idArea: '1',
-          nombre: 'Área Recursos humanos',
-          actividad: 'Contratación del personal',
-          metrosCuadrados: 4.5,
-          EstablecimientoId: '0',
-          fotoUrl: '',
-          numPuestos: 1,
-          numPersonas: 2,
-          numNovedades: 0,
-          numAccidentes: 0,
-          numCapacitaciones: 0
-        },
-        {
-          idArea: '3',
-          nombre: 'Área Contabilidad',
-          actividad: 'Contabilizar ingresos y egresos',
-          metrosCuadrados: 2.3,
-          EstablecimientoId: '1',
-          fotoUrl: '',
-          numPuestos: 0,
-          numPersonas: 0,
-          numNovedades: 0,
-          numAccidentes: 0,
-          numCapacitaciones: 0
-        }
-      ]
     }
   },
   computed: {

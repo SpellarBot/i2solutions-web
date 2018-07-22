@@ -85,6 +85,7 @@
               fab
               color="blue"
               small
+              :class="'eliminarEstablecimiento' + establecimiento.id"
               @click="eliminarEstablecimiento(establecimiento)"
               v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
@@ -131,7 +132,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialog = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+            <v-btn class="eliminarEstablecimiento" color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -407,11 +408,13 @@ export default {
       this.establecimientoId = id
       this.establecimientoNombres = nombre
       console.log(this.establecimientoNombres)
+      console.log('establicimientoid', this.establecimientoId)
       this.$store.dispatch('getAreas', this.establecimientoId)
       this.visibleAreas = true
     },
     eliminarEstablecimiento (establecimiento) {
       this.establecimientoSelectedId = establecimiento.id
+      console.log('establecimiento: ',this.establecimientoSelectedId)
       this.$data.eliminarDialog = true
     },
     borrarEstablecimiento () {
