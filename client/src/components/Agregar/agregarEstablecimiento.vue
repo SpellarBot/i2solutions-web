@@ -66,12 +66,14 @@ import Vue from 'vue'
 import agregarArea from './agregarArea'
 import MyModule from '../MyModule.js'
 import Vuex from 'vuex'
+import { store } from './../../store'
 export default {
   name: 'agregarEstablecimiento',
   props: ['index'],
   components: {
     agregarArea
   },
+
   data () {
     return {
       indice: 0,
@@ -104,6 +106,7 @@ export default {
       //  Creado la clase puedo hacer una instancia de la misma.
       var instanceArea = new AreaClass({
         //  Aquí van colocado los props que pida el componente
+        parent: this,
         propsData: {index: this.indice, indiceEstablecimiento: this.index}
       })
       //  Simple nombre.
@@ -130,7 +133,8 @@ export default {
       })
     },
     verify () {
-      if (!this.$refs.form2.validate()) {
+      if ( !this.$refs.form2.validate() ) {
+        console.log(this.$store)
         this.$store.commit('setVerified', false)
       }
     }

@@ -9,6 +9,7 @@
           <div v-if="accidents.atendidoEnEmpresa === 0">No fue atendido en la empresa</div>
           <div v-if="accidents.atendidoEnEmpresa === 1">Fue atendido en la empresa</div>
           <v-btn
+          :class="'editarAccidentes' + accidents.id"
               fab
               dark
               small

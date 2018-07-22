@@ -3,6 +3,7 @@
         <div><b>Nombres y Apellido: </b> {{ nombreCompleto }} </div>
         <v-btn
               fab
+              :class="'editarPersona' + personas.id"
               dark
               right
               small

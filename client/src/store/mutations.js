@@ -1,4 +1,7 @@
 import decode from 'jwt-decode'
+import Vue from "vue"
+import Vuex from 'vuex'
+
 export default {
   setError (state, payload) {
     state.error = payload

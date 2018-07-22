@@ -9,11 +9,13 @@
           <p>{{ this.equipoNombre }}</p>
               <v-form v-model="valid">
                 <v-text-field
+                :class="'descripcionEquipo' + this.equipoId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
                 ></v-text-field>
                 <v-text-field
+                :class="'cantidadEquipo' + this.equipoId"
                   v-model = "newCantidad"
                   label="Cantidad" required
                   :rules="[rules.required]"
@@ -23,7 +25,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn :class="'editEquipo' + this.equipoId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

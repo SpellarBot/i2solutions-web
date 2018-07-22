@@ -34,6 +34,7 @@
         >
           <div v-if="index%3 == 0 && index > 0"> </div>
             <v-card
+            :class="'empresa' + empresa.id"
             height="100%"
             raised
             hover

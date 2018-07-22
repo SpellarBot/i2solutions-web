@@ -6,6 +6,7 @@
 
       <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <v-btn
+      :class="'editarPuesto' + puestos.id"
               fab
               dark
               small
@@ -27,9 +28,9 @@
               <v-icon>delete</v-icon>
             </v-btn>
       <span class="link" v-on:click="visualizarPersonas(puestos)"> Número Personas: {{ puestos.cantidadPersonas }}</span>
-      <span class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
+      <span :class="'accidentesPuesto' + puestos.id" class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
-      <span class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
+      <span  :class="'equiposPuesto' + puestos.id" class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
       <span class="link" v-on:click="visualizarRiesgos(puestos.id,puestos.nombre)"> Riesgos</span>
     </v-card>
     <footer>

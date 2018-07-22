@@ -15,6 +15,7 @@
                       <b>Descripción:</b> {{descripcion}} <br>
                       <b>Metros Cuadrados:</b> {{areaMetrosCuadrados}} <br>
                       <v-btn
+                      :class="'editarArea' + id"
               fab
               dark
               small
@@ -44,7 +45,9 @@
                           <span class="link" v-on:click="visualizarPuestosFromAreas(nombre)">#Puestos: {{numPuestos}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <span class="link" v-on:click="visualizarCapacitaciones(nombre)">#Capacitaciones: {{numCapacitaciones}}</span>
+                          <span
+                          :class="'capacitacionesArea' + id"
+                          class="link" v-on:click="visualizarCapacitaciones(nombre)">#Capacitaciones: {{numCapacitaciones}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarNovedadesFromAreas">#Novedades: {{novedades}}</span>

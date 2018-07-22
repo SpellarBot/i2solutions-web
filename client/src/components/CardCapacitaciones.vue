@@ -5,6 +5,7 @@
           <div><b>Fecha:</b> {{ fecha(capacitacions.fechaCapacitacion) }} </div>
           <div><b>Capacitador:</b> {{ capacitacions.nombre }}z</div>
           <v-btn
+          :class="'editarCapacitacion' + capacitacions.id"
               fab
               dark
               small

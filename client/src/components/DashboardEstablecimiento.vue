@@ -29,6 +29,7 @@
               fab
               color="blue"
               small
+              class="editarEmpresa"
               @click="visualizarEdicion()"
               v-if="this.$store.getters.usuario.rol === 'admin-i2solutions'"
             >
@@ -39,6 +40,7 @@
               fab
               color="blue"
               small
+              class="eliminarEmpresa"
               @click="eliminarEmpresa()"
               v-if="this.$store.getters.usuario.rol === 'admin-i2solutions'"
             >
@@ -72,6 +74,7 @@
               fab
               color="blue"
               small
+              :class="'editarEstablecimiento' + establecimiento.id"
               @click="visualizarEdicionEstablecimiento(establecimiento)"
               v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
             >
@@ -92,14 +95,17 @@
                   <v-layout row wrap>
                     <v-flex xs6 md6>
                       <span class="link"
+                      :class="'verAreas' + establecimiento.id"
                         v-on:click="visualizarAreas(establecimiento.id, establecimiento.nombres)"
                         > #Areas: {{establecimiento.cantidadAreas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
+                      <span
+                      :class="'verPuestos' + establecimiento.id"
+                       class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <span class="link" v-on:click="visualizarPersonas(establecimiento.id, establecimiento.nombres)">#Personas: {{establecimiento.cantidadPersonas}}</span>
+                      <span :class="'personasEstablecimiento' + establecimiento.id" class="link" v-on:click="visualizarPersonas(establecimiento.id, establecimiento.nombres)">#Personas: {{establecimiento.cantidadPersonas}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
                       <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
@@ -139,7 +145,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialog2 = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarEmpresa()">Sí</v-btn>
+            <v-btn class="eliminar" color="blue darken-1" flat @click = "borrarEmpresa()">Sí</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
