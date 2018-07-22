@@ -168,6 +168,7 @@ export default {
     },
     eliminarEquipo (equipo, indice) {
       this.equipoId = equipo.id
+      console.log(this.equipoId)
       this.eliminarDialogEquipo = true
       this.indice = indice
     },

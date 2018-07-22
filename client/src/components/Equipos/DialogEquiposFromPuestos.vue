@@ -41,6 +41,7 @@
                     <v-icon>edit</v-icon>
                   </v-btn>
                   <v-btn
+                  :class="'eliminarEquipos' + equipo.id"
                     fab
                     dark
                     small
@@ -71,7 +72,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
+            <v-btn :class="'borrarEquipo' + this.equipoId" color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -182,6 +183,7 @@ export default {
 
     eliminarEquipo (equipo, indice) {
       this.equipoId = equipo.id
+      console.log(this.equipoId)
       this.indice = indice
       this.eliminarDialogEquipo = true
     },

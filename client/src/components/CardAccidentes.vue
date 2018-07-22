@@ -9,7 +9,7 @@
           <div v-if="accidents.atendidoEnEmpresa === 0">No fue atendido en la empresa</div>
           <div v-if="accidents.atendidoEnEmpresa === 1">Fue atendido en la empresa</div>
           <v-btn
-          :class="'editarAccidentes' + accidents.id"
+          :class="'editarAccidentes' + this.accidenteId"
               fab
               dark
               small
@@ -20,6 +20,7 @@
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
+            :class="'eliminaAccident' + accidents.id "
               fab
               dark
               small
@@ -28,16 +29,8 @@
               v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >
               <v-icon>delete</v-icon>
-              <v-snackbar
-              :timeout="3000"
-              :multi-line="true"
-              :color="color"
-              :top="true"
-              v-model="snackbar"
-            >
-              {{mensajeSnackbar}}
-            </v-snackbar>
             </v-btn>
+
             <footer>
             <v-layout row justify-center>
             <v-dialog v-model="eliminarDialogAccidentes" persistent max-width="290">
@@ -47,11 +40,22 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
-                  <v-btn color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
+                  <v-btn :class="'borrarAccidentes' + this.accidenteSelected" color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-layout>
+
+          <v-snackbar
+              :timeout="3000"
+              :multi-line="true"
+              :color="color"
+              :top="true"
+              v-model="snackbar"
+            >
+              {{mensajeSnackbar}}
+            </v-snackbar>
+
 
           <DialogEditarAccidentes
           :visible="visibleEdicion"
@@ -121,6 +125,7 @@ export default {
     },
     eliminarAccidente (accidente) {
       this.accidenteSelected = accidente.id
+      this.accidenteId = accidente.id
       console.log(this.accidenteSelected)
       this.eliminarDialogAccidentes = true
     },
