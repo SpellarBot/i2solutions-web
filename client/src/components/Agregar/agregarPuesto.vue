@@ -10,12 +10,14 @@
               <v-form ref="form" lazy-validation>
                 <v-text-field
                   label="Nombre"
+                  v-model="nombre"
                   required
                   :rules="[rules.required, rules.nameMin]"
-                >
+                >              
             </v-text-field>
             <v-text-field
-                  label="Descricpión"
+                  label="Descripción"
+                  v-model="descripcion"
                   required
                   :rules="[rules.required, rules.nameMin]"
                   multi-line
@@ -30,6 +32,7 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 // import Vue from 'vue'
 export default {
   name: 'agregarPuesto',
@@ -37,6 +40,8 @@ export default {
   data () {
     return {
       indice: 0,
+      nombre: '',
+      descripcion: '',
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
@@ -46,6 +51,30 @@ export default {
   methods: {
     prueba () {
       console.log('\t\tPuesto: ' + this.indiceEstablecimiento + '.' + this.indiceArea + '.' + this.index)
+    },
+    verify () {
+      if ( !this.$refs.form.validate() ) {
+        this.$store.commit('setVerified', false)
+      }
+    },
+    crear (areaId) {
+      let nombre = this.nombre
+      let descripcion = this.descripcion
+      let areasId = Number(areaId)
+      return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/puestos', {nombre, descripcion, areasId})
+        .then((resp) => {
+          if (resp.body.estado) {
+            return resolve()
+          } else {
+            this.$store.commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          this.$store.commit('setError', err)
+          return reject(err)
+        })
+      })
     }
   }
 }

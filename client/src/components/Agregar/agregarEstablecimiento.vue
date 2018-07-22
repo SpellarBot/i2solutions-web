@@ -69,7 +69,7 @@ import Vuex from 'vuex'
 import { store } from './../../store'
 export default {
   name: 'agregarEstablecimiento',
-  props: ['index'],
+  props: ['index', 'empresaId'],
   components: {
     agregarArea
   },
@@ -81,13 +81,14 @@ export default {
       establecimiento: {
         nombre: '',
         direccion: '',
-        RUC: ''
+        RUC: '',
+        empresaId: ''
       },
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
         RUCvalidate: v => {
-          if (MyModule(v)[0]) {
+          if ( MyModule(v)[0] ) {
             return true
           }
           return MyModule(v)[1]
@@ -134,9 +135,41 @@ export default {
     },
     verify () {
       if ( !this.$refs.form2.validate() ) {
-        console.log(this.$store)
-        this.$store.commit('setVerified', false)
+        //Al primer error, el valor de verified se hace falso.
+        this.$store.commit('setVerified', false)        
       }
+      this.instanciasAreas.forEach(function (area) {
+          area.verify()
+        })
+    },
+    crear (empresaId) {
+      this.establecimiento.empresaId = Number(empresaId)
+      this.agregar()
+    },
+    agregar () {
+      let nombres = this.establecimiento.nombre
+      let direccion = this.establecimiento.direccion
+      let ruc = this.establecimiento.RUC
+      let empresasId = Number(this.establecimiento.empresaId)      
+      return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/establecimientos', {nombres, direccion, ruc, empresasId})
+        .then((resp) => {
+          console.log(empresasId)
+          if (resp.body.estado) {
+            this.instanciasAreas.forEach(function (area) {
+              area.crear(resp.body.datos.id)
+            })
+            return resolve()
+          } else {
+            this.$store.commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          console.log(empresasId)
+          this.$store.commit('setError', err)
+          return reject(err)
+        })
+    })
     }
   }
 }
