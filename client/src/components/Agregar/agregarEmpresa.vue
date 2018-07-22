@@ -94,8 +94,8 @@
               <v-btn @click.native="guardar()" :disabled="!valid">submit</v-btn>
             </v-flex>
           </v-layout>
-        </v-container>        
-      </v-card>      
+        </v-container>
+      </v-card>
     </v-dialog>
     <footer>
       <v-dialog v-model="confirm.open" max-width="500px" @keydown.esc="confirm.open=false">
@@ -111,7 +111,7 @@
         </v-card-text>
           <v-card-actions>
             <v-btn color="primary" flat @click.stop="cleaner(); show=false; confirm.open=false; indice=0">Sí</v-btn>
-            <v-btn color="primary" flat @click.stop="confirm.open=false">No</v-btn>            
+            <v-btn color="primary" flat @click.stop="confirm.open=false">No</v-btn>
           </v-card-actions>
       </v-card>
     </v-dialog>
@@ -135,7 +135,7 @@ import agregarEstablecimiento from './agregarEstablecimiento'
 import agregarArea from './agregarArea'
 import MyModule from '../MyModule.js'
 export default {
-  name: 'agregarEmpresa',  
+  name: 'agregarEmpresa',
   props: ['visible'],
   components: {
     agregarEstablecimiento,
@@ -183,7 +183,7 @@ export default {
       })
       this.areaInicial = instanceArea
       instanceArea.$mount()
-      this.$refs.establecimientos.appendChild(instanceArea.$el)      
+      this.$refs.establecimientos.appendChild(instanceArea.$el)
     },
     removeEstablecimiento () {
       this.indice--
@@ -197,17 +197,17 @@ export default {
     guardar () {
       let empresaId = this.empresaId
       this.areaInicial.verify()
-      if ( !this.$refs.form.validate() ) { 
+      if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
       }
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
       })
-      //Si todo salió bien.
-      if (this.$store.state.verified){
+      // Si todo salió bien.
+      if (this.$store.state.verified) {
         this.agregar()
       }
-      //Si en este punto no ha ocurrido un error, entonces se puede guardar
+      // Si en este punto no ha ocurrido un error, entonces se puede guardar
       this.$store.commit('setVerified', true)
     },
     agregar () {
@@ -216,7 +216,7 @@ export default {
       let razonSocial = this.empresa.razon
       let urlFoto = this.empresa.urlFoto
       let direccion = this.empresa.direccion
-      let ruc = this.empresa.RUC 
+      let ruc = this.empresa.RUC
       let empresaId = 0
       let matrizId = 0
       return new Promise((resolve, reject) => {
@@ -227,7 +227,7 @@ export default {
               matrizId = resp.body.datos.establecimiento.id
 
               this.areaInicial.crear(Number(matrizId))
-              this.instanciasEstablecimientos.forEach(function (establecimiento) {          
+              this.instanciasEstablecimientos.forEach(function (establecimiento) {
                 establecimiento.crear(Number(empresaId))
               })
               this.created = true
@@ -241,8 +241,8 @@ export default {
             return reject(err)
           })
       })
-      },
-    cleaner () {      
+    },
+    cleaner () {
       this.$refs.form.reset()
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
@@ -250,10 +250,10 @@ export default {
         establecimiento = null
       })
     },
-    declineDialog(){
-      console.log("hey hey")
+    declineDialog () {
+      console.log('hey hey')
     },
-    acceptDialog() {
+    acceptDialog () {
       this.cleaner()
       this.show = false
     }
@@ -271,7 +271,7 @@ export default {
         razon: '',
         urlFoto: '',
         direccion: '',
-        RUC: '',
+        RUC: ''
       },
       confirm: {
         open: false,
@@ -285,7 +285,7 @@ export default {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
         RUCvalidate: v => {
-          if ( MyModule(v)[0] ) {
+          if (MyModule(v)[0]) {
             return true
           }
           return MyModule(v)[1]

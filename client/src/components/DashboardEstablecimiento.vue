@@ -414,7 +414,7 @@ export default {
     },
     eliminarEstablecimiento (establecimiento) {
       this.establecimientoSelectedId = establecimiento.id
-      console.log('establecimiento: ',this.establecimientoSelectedId)
+      console.log('establecimiento: ', this.establecimientoSelectedId)
       this.$data.eliminarDialog = true
     },
     borrarEstablecimiento () {

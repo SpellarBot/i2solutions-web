@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from "vuex"
+import Vuex from 'vuex'
 
 export default {
   login ({commit}, {usuario, clave}) {
@@ -480,23 +480,55 @@ export default {
         })
     })
   },
-  updateEmpresa ({commit}, {empresaId, nombre, actividadComercial, razonSocial, urlFoto}) {
+  updateEmpresa ({commit}, {empresaId, nombre, actividadComercial, razonSocial, urlFoto, logo}) {
     console.log({ empresaId, nombre })
-    return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
-        .then((resp) => {
-          if (resp.body.estado) {
-            console.log('done')
-            return resolve()
-          } else {
-            commit('setError', resp.body.datos)
-            return reject(resp.body.datos)
-          }
-        }).catch((err) => {
-          commit('setError', err)
-          return reject(err)
-        })
-    })
+    console.log(logo)
+    if (logo) {
+      let image = urlFoto.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
+      console.log(image)
+      return new Promise((resolve, reject) => {
+        Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
+          .then((resp) => {
+            let urlFoto = resp.body.data.link
+            return urlFoto
+          })
+          .then((urlFoto) => {
+            console.log('Entered here')
+            return Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
+          })
+          .then((resp) => {
+            if (resp.body.estado) {
+              console.log('done')
+              return resolve()
+            } else {
+              commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            if (err.ok === false) {
+              console.log('Aqui')
+              commit('setError', 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.')
+              return reject(err)
+            }
+          })
+      })
+    } else {
+      return new Promise((resolve, reject) => {
+        Vue.http.put('/api/web/empresas/' + empresaId, {nombre, actividadComercial, razonSocial, urlFoto})
+          .then((resp) => {
+            if (resp.body.estado) {
+              console.log('done')
+              return resolve()
+            } else {
+              commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            commit('setError', err)
+            return reject(err)
+          })
+      })
+    }
   },
   updateEstablecimiento ({commit}, {nombres, direccion, ruc, empresasId, establecimientoId}) {
     console.log({nombres, direccion, ruc, empresasId})
