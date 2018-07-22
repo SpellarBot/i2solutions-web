@@ -95,4 +95,12 @@ describe('Utils Test', () => {
       })
     })
   })
+
+  describe('Nombres y apellidos', () => {
+
+  })
+
+  describe('Numeros telefono celular y convencional', () => {
+
+  })
 })

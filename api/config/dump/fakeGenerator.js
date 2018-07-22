@@ -1,16 +1,18 @@
 const faker = require('faker')
+const seedrandom = require('seedrandom')
+var rng = seedrandom('hello.')
 faker.seed(123)
 faker.locale = 'es'
 const conexion = require('../db')
 const random = (cantidad) => {
   var text = ''
   var possible = '0123456789'
-  for (var i = 0; i < cantidad; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+  for (var i = 0; i < cantidad; i++) { text += possible.charAt(Math.floor(rng() * possible.length)) }
   return text
 }
 
 function ri (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
+  return Math.floor(rng() * (max - min + 1) + min)
 }
 
 let roles = ['inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado']
@@ -247,8 +249,12 @@ async function crearPersonas ({ db }) {
     usuario: faker.internet.userName(),
     rol: roles[ri(0, roles.length - 1)]
   }
-  let personaCreada = await db.personas.CrearConClave(persona)
-  return personaCreada['id']
+  try {
+    let personaCreada = await db.personas.CrearConClave(persona)
+    return personaCreada['id']
+  } catch (err) {
+    return null
+  }
 }
 
 function crearPersonasPuestos ({ personasId, puestosId, db }) {
@@ -328,12 +334,14 @@ conexion.Conectar().then(async (db) => {
             // personas
             for (let i = 1; i <= ri(1, cantidadPersonasMaximo); i++) {
               let personasId = await crearPersonas({ db })
-              // personasCapacitaciones
-              if (i === 1) {
-                await crearPersonasCapacitaciones({ db, personasId, capacitacionesId })
+              if (personasId) {
+                // personasCapacitaciones
+                if (i === 1) {
+                  await crearPersonasCapacitaciones({ db, personasId, capacitacionesId })
+                }
+                // personasPuestos
+                await crearPersonasPuestos({ db, personasId, puestosId })
               }
-              // personasPuestos
-              await crearPersonasPuestos({ db, personasId, puestosId })
             }
           }
 

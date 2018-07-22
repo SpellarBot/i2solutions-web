@@ -82,6 +82,7 @@
     "nunjucks": "^3.1.2",
     "nyc": "^11.4.1",
     "remarkable": "^1.7.1",
+    "seedrandom": "^2.4.3",
     "sequelize-cli": "^4.0.0",
     "sinon": "^5.0.10",
     "sqlite3": "^4.0.0",

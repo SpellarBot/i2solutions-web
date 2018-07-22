@@ -10,10 +10,6 @@
 
 https://i2s-app.herokuapp.com/
 
-## Features
-
-## Screenshots
-
 ## Documentación
 [I2Solutions Documentación](https://i2solutions.gitbook.io/docs)
 
@@ -24,9 +20,6 @@ Nodejs >= 9.0.0
 Mysql >= 3.6
 
 Ubuntu 16.04 LTS
-
-## Setup
-
 
 ## Development
 
@@ -91,7 +84,7 @@ yarn db:init
 2. Correr la aplicacion servidor
 
 ```sh
-> npm run dev #correra en el puerto 3001
+> npm run dev # correra en el puerto 3001
 ```
 
 3. Correr el cliente
@@ -114,7 +107,7 @@ __squash commits__
 ```
 
 
-2. Para subir a heroku hay que forzarlo por el squash si es que se necesite
+2. Para subir a heroku hay que forzarlo por el squash, hacerlo si es necesario
 
 ```sh
 git push heroku master --force
@@ -156,7 +149,8 @@ Establecer la variables de entorno:
 2. DATABASE_HOST
 3. DATABASE_USER
 4. DATABASE_PASSWORD
-5.  heroku config:set NPM_CONFIG_PRODUCTION=false
+5. heroku config:set NPM_CONFIG_PRODUCTION=false
+
 ## Authors
 
 Joel Rodriguez

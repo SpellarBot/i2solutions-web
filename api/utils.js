@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken')
-const responses = require('./responses')
+const moment = require('moment')
 let localize = require('ajv-i18n')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
 require('ajv-errors')(ajv)
 const bcrypt = require('bcrypt')
 const saltos = 5
+const responses = require('./responses')
 
 function verificadorCedulaRuc (identificacion, tipo) {
   if (tipo === 'cedula' && identificacion.length !== 10) {
@@ -162,7 +163,7 @@ ajv.addKeyword('cedula', {
   },
   errors: true
 })
-const moment = require('moment')
+
 ajv.addKeyword('fecha', {
   validate: function xyz (schema, data) {
     xyz.errors = []
@@ -263,8 +264,12 @@ module.exports = {
     }
     return [false, {}]
   },
-  veficicadorTelefonos (telefono) {
+  verificarTelefono (telefono) {
     // 0931823447 2938373
+    return [false, 'mensaje']
+  },
+  verificarNombres (nombres) {
+    // Joel Eduardo Rodriguez Llamuca , solo letras con especios
     return [false, 'mensaje']
   }
 }
