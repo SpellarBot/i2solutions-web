@@ -24,7 +24,7 @@
               label="RUC"
               required
               v-model="establecimiento.RUC"
-              :rules="[rules.required, rules.RUCvalidate]"
+              :rules="[rules.required, rules.RUCvalidate, rules.rucMin]"
               :counter="13"
               mask="#############"
             ></v-text-field>
@@ -39,7 +39,7 @@
                   <v-btn
                     fab
                     small
-                    v-if="indice>1"
+                    v-if="indice>2"
                     @click.native="removeEstablecimiento"
                   >
                   <v-icon>delete</v-icon>
@@ -76,7 +76,7 @@ export default {
 
   data () {
     return {
-      indice: 0,
+      indice: 1,
       instanciasAreas: [],
       establecimiento: {
         nombre: '',
@@ -87,6 +87,7 @@ export default {
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        rucMin: v => (v && v.length ==13) || 'Debe tener 13 letras',
         RUCvalidate: v => {
           if (MyModule(v)[0]) {
             return true
@@ -127,6 +128,14 @@ export default {
       instanceArea.$el.remove()
       instanceArea = null
     },
+    cleaner () {
+      this.$refs.form.reset()
+      this.instanciasAreas.forEach(function (areas) {
+        areas.$destroy()
+        areas.$el.remove()
+        areas = null
+      })
+    },
     prueba () {
       console.log('establecimiento: ' + this.index)
       this.instanciasAreas.forEach(function (area) {
@@ -142,6 +151,9 @@ export default {
         area.verify()
       })
     },
+    getRuc () {
+      return this.establecimiento.RUC
+    },
     crear (empresaId) {
       this.establecimiento.empresaId = Number(empresaId)
       this.agregar()
@@ -154,7 +166,6 @@ export default {
       return new Promise((resolve, reject) => {
         Vue.http.post('/api/web/establecimientos', {nombres, direccion, ruc, empresasId})
           .then((resp) => {
-            console.log(empresasId)
             if (resp.body.estado) {
               this.instanciasAreas.forEach(function (area) {
                 area.crear(resp.body.datos.id)
@@ -165,7 +176,6 @@ export default {
               return reject(resp.body.datos)
             }
           }).catch((err) => {
-            console.log(empresasId)
             this.$store.commit('setError', err)
             return reject(err)
           })

@@ -24,12 +24,13 @@
               label="Foto"
               v-model="area.foto"
               required
-              :rules="[rules.required, rules.nameMin]"
+              :rules="[rules.required, rules.isUrl]"
             ></v-text-field>
             <v-text-field
-              label="metros 2"
+              label="metros 2 ejemplo(22x02)"
               v-model="area.metros2"
               required
+              mask="##x##"
               :rules="[rules.required, rules.nameMin]"
             ></v-text-field>
             <v-text-field
@@ -50,7 +51,7 @@
                   <v-btn
                     fab
                     small
-                    v-if="indice>1"
+                    v-if="indice>2"
                     @click.native="removeEstablecimiento"
                   >
                   <v-icon>delete</v-icon>
@@ -79,11 +80,22 @@ export default {
   props: ['index', 'indiceEstablecimiento'],
   data () {
     return {
-      indice: 0,
+      indice: 1,
       instanciasPuesto: [],
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        isUrl: v  => {
+          let regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+          if (regexp.test(v))
+          {
+            return true;
+          }
+          else
+          {
+            return "Url no válida";
+          }
+        }
       },
       area: {
         nombre: '',
@@ -120,6 +132,14 @@ export default {
       instancePuesto.$destroy()
       instancePuesto.$el.remove()
       instancePuesto = null
+    },
+    cleaner () {
+      this.$refs.form.reset()
+      this.instanciasPuesto.forEach(function (puestos) {
+        puestos.$destroy()
+        puestos.$el.remove()
+        puestos = null
+      })
     },
     prueba () {
       console.log('\tArea: ' + this.indiceEstablecimiento + '.' + this.index)
