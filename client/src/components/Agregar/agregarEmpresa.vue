@@ -29,12 +29,25 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg4>
-                  <v-text-field
-                    label="Foto de la empresa"
-                    v-model="empresa.urlFoto"
-                    required
-                    :rules="[rules.required, rules.nameMin]"
-                  ></v-text-field>
+                  <img :src="imageUrl" height="150" v-if="imageUrl"/>
+                </v-flex>
+                <v-flex xs12 md4 lg4>
+                  <v-text-field 
+                    label="Seleccione Imagen" 
+                    @click='pickFile' 
+                    v-model='imageName' 
+                    :rules="[rules.required]"
+                    prepend-icon='attach_file'
+                    >                      
+                    </v-text-field>
+                  <input
+                    class="imagen"
+                      type="file"
+                      style="display: none"
+                      ref="image"
+                      accept="image/*"
+                      @change="onFilePicked"
+                    >
                 </v-flex>
                 <v-flex md12>
                     <v-text-field
@@ -58,11 +71,39 @@
                     v-model="empresa.RUC"
                     required
                     mask="#############"
-                    :rules="[rules.RUCvalidate, rules.required]"
+                    :rules="[rules.RUCvalidate, rules.required, rules.rucMin]"
                     :counter="13"
                   ></v-text-field>
               </v-form>
               <br><br>
+              <v-layout row align-center>
+                <v-flex md9 offset-md1>
+                  <div ref="areas">
+                  </div>
+                  <v-layout row justify-space-between>
+                    <v-flex md4>
+                      <h3>¿Desea agregar Areas?</h3>
+                    </v-flex>
+                    <v-flex md4>
+                      <v-btn
+                        fab
+                        small
+                        @click.native="removeArea()"
+                        v-if="indiceArea>2"
+                      >
+                      <v-icon>delete</v-icon>
+                      </v-btn>
+                      <v-btn
+                        fab
+                        small
+                        @click.native="insertarArea()"
+                      >
+                      <v-icon>add</v-icon>
+                      </v-btn>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-layout>              
               <v-layout row align-center>
                 <v-flex md10>
                   <div ref="establecimientos">
@@ -78,7 +119,7 @@
                     fab
                     small
                     @click.native="removeEstablecimiento()"
-                    v-if="indice>1"
+                    v-if="indice>2"
                   >
                   <v-icon>delete</v-icon>
                   </v-btn>
@@ -110,20 +151,48 @@
           </span>
         </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" flat @click.stop="cleaner(); show=false; confirm.open=false; indice=0">Sí</v-btn>
+            <v-btn color="primary" flat @click.stop="cleaner(); show=false; confirm.open=false; indice=1;">Sí</v-btn>
             <v-btn color="primary" flat @click.stop="confirm.open=false">No</v-btn>
           </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="created" max-width="500px" @keydown.esc="cleaner(); show=false; confirm.open=false;">
+    <v-dialog v-model="created" max-width="500px" @keydown.esc="cleaner(); show=false; created=false; insertarArea(); indice=1;">
       <v-card>
         <v-card-title>
           <span class="headline">¡La empresa ha sido creada con éxito!</span>
-          <v-spacer></v-spacer>
         </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" flat @click.stop="cleaner(); show=false; created=false; insertarArea(); indice=0">Ok</v-btn>
+            <v-btn color="primary" flat @click.stop="cleaner(); show=false; created=false; insertarArea(); indice=1; loading=false">Ok</v-btn>
           </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="error.trigger" max-width="500px" @keydown.esc="error.trigger=false; loading=false">
+      <v-card>
+        <v-card-title>
+          <span class="headline">¡Algo ha salido mal!</span>
+        </v-card-title>
+        <v-card-text>
+          {{error.message}}
+        </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" flat @click.stop="error.trigger=false; loading=false">Ok</v-btn>
+          </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="loading" persistent max-width="700px">
+      <v-card>
+        <v-card-text>Creando la empresa, por favor espere...</v-card-text>
+        <div class="container">
+          <svg class="bag" height="100" width="100">
+            <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
+            </circle>
+          </svg>
+          <svg class="over" height="100" width="100">
+            <circle  cx="50" cy="50" r="40" stroke="#2196f3" stroke-width="3" fill="none" >
+              <animate attributeType="CSS" attributeName="stroke-dasharray" from="1,254" to="247,56" dur="5s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </div>
       </v-card>
     </v-dialog>
     </footer>
@@ -179,11 +248,12 @@ export default {
       var AreaClass = Vue.extend(agregarArea)
       var instanceArea = new AreaClass({
         parent: this,
-        propsData: {index: this.indice}
+        propsData: {index: this.indiceArea}
       })
-      this.areaInicial = instanceArea
+      this.indiceArea++
+      this.instanciasAreas.push(instanceArea)
       instanceArea.$mount()
-      this.$refs.establecimientos.appendChild(instanceArea.$el)
+      this.$refs.areas.appendChild(instanceArea.$el)
     },
     removeEstablecimiento () {
       this.indice--
@@ -194,39 +264,139 @@ export default {
       instanceEstablecimiento.$el.remove()
       instanceEstablecimiento = null
     },
+    removeArea () {
+      this.indiceArea--
+      var instanceArea = this.instanciasAreas.pop()
+      instanceArea.$destroy()
+      instanceArea.$el.remove()
+      instanceArea = null
+    },
     guardar () {
       let empresaId = this.empresaId
-      this.areaInicial.verify()
+      let arrayRuc = []
+      let arrayBool = {}
+      let rucRepetido = false
+      let rucActual = ''
       if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
       }
+      this.instanciasAreas.forEach(function (area) {
+        area.verify()
+      })
+      //En este punto, está todo verificado si es que algo no está llenado
+/*      if (!this.$store.state.verified) {
+        this.error.message = "Por favor, llene todos los campos"
+        this.error.trigger = true
+        this.$store.commit('setVerified', true)
+        return
+      }
+*/
+      //Agregamos el ruc del establecimiento matriz      
+      arrayRuc.push(this.empresa.RUC)
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
-      })
-      // Si todo salió bien.
-      if (this.$store.state.verified) {
-        this.agregar()
+        rucActual = establecimiento.getRuc()
+        rucRepetido = this.rucIngresado(rucActual, arrayRuc)
+        arrayRuc.push(establecimiento.getRuc())
+      }.bind(this))      
+      //Ahora verificaremos cada uno de los RUC ingresados. Estos no deberían existir en la bd      
+      return new Promise((resolve, reject) => {
+        let url = '/api/web/establecimientos/buscar/por?ruc=' + arrayRuc.join()
+        Vue.http.get(url)
+          .then((resp) => {
+          if (resp.body.estado) {
+            arrayBool = resp.body.datos
+            //Se recorre la lista a ver si hay un RUC ya ingresado.
+            this.RUCbd(arrayBool, arrayRuc)
+
+            if (this.$store.state.verified) {
+              this.loading = true
+              this.agregar()
+            }
+            // Si en este punto no ha ocurrido un error, entonces se puede guardar
+            this.$store.commit('setVerified', true)
+            return resolve()
+          } else {
+            this.$store.commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+          }).catch((err) => {
+            this.$store.commit('setError', err)
+          return reject(err)
+          })
+        })
+      this.loading = false
+    },
+    //Esta función regresa verdadero si el RUC ya ha sido ingresado en el formulario
+    rucIngresado (ruc, arrayRuc) {
+      arrayRuc.forEach(function  (prueba) {
+        if (prueba === ruc) {
+          this.error.message = "el RUC " + ruc + " es ingresado más de una vez"
+          this.error.trigger = true
+          this.$store.commit('setVerified', false) //El RUC ya ha sido ingresado
+          return true
+        }
+      }.bind(this))
+      return false
+    },
+    pickFile () {
+      this.$refs.image.click()
+    },
+    onFilePicked (e) {
+      const files = e.target.files
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = ''
+        this.imageFile = ''
+        this.imageUrl = ''
       }
-      // Si en este punto no ha ocurrido un error, entonces se puede guardar
-      this.$store.commit('setVerified', true)
+    },
+    RUCbd (objectRuc, arrayRuc) {
+      let prueba = objectRuc
+      for (let ruc in objectRuc) {
+        if ( objectRuc[ruc] ){
+          this.$store.commit('setVerified', false)
+          this.error.message = "el RUC " + ruc + " ya existe"
+          this.error.trigger = true
+        }
+      }
     },
     agregar () {
       let nombre = this.empresa.nombre
       let actividadComercial = this.empresa.actividad
       let razonSocial = this.empresa.razon
-      let urlFoto = this.empresa.urlFoto
+      let urlFoto = this.imageUrl
       let direccion = this.empresa.direccion
       let ruc = this.empresa.RUC
       let empresaId = 0
       let matrizId = 0
+      let image = urlFoto.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
       return new Promise((resolve, reject) => {
-        Vue.http.post('/api/web/empresas', {nombre, actividadComercial, razonSocial, urlFoto, direccion, ruc})
+        Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
+          .then((resp) => {
+            let urlFoto = resp.body.data.link
+            return urlFoto
+          })
+          .then ((urlFoto) => {
+            return Vue.http.post('/api/web/empresas', {nombre, actividadComercial, razonSocial, urlFoto, direccion, ruc})
+          })
           .then((resp) => {
             if (resp.body.estado) {
               empresaId = resp.body.datos.id
               matrizId = resp.body.datos.establecimiento.id
-
-              this.areaInicial.crear(Number(matrizId))
+              this.instanciasAreas.forEach(function (area) {
+                area.crear(Number(matrizId))
+              })
               this.instanciasEstablecimientos.forEach(function (establecimiento) {
                 establecimiento.crear(Number(empresaId))
               })
@@ -243,28 +413,51 @@ export default {
       })
     },
     cleaner () {
+      this.imageName = ''
+      this.imageUrl = ''
+      this.imageFile = ''
       this.$refs.form.reset()
+      this.instanciasAreas.forEach(function (area) {
+          area.$destroy()
+          area.$el.remove()
+          area = null
+      })
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
         establecimiento.$el.remove()
         establecimiento = null
       })
-    },
-    declineDialog () {
-      console.log('hey hey')
+      this.indiceArea = 1
+      this.indice = 1
+      this.insertarArea()
     },
     acceptDialog () {
       this.cleaner()
       this.show = false
-    }
+    },
+    isUrl (str) {
+          let regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+          if (regexp.test(str))
+          {
+            return true;
+          }
+          else
+          {
+            return "Url no válida";
+          }
+        }
   },
   data () {
     return {
       valid: true,
-      indice: 0,
+      indice: 1,
+      indiceArea: 1,
       empresaId: 1,
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
       instanciasEstablecimientos: [],
-      areaInicial: {},
+      instanciasAreas: [],
       empresa: {
         nombre: '',
         actividad: '',
@@ -280,15 +473,32 @@ export default {
         acceptMessage: 'Sí',
         declineMessage: 'No'
       },
+      error: {
+        message: '',
+        trigger: false
+      },
       created: false,
+      loading: false,
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        rucMin: v => (v && v.length ==13) || 'Debe tener 13 letras',
         RUCvalidate: v => {
           if (MyModule(v)[0]) {
             return true
           }
           return MyModule(v)[1]
+        },
+        isUrl: v  => {
+          let regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+          if (regexp.test(v))
+          {
+            return true;
+          }
+          else
+          {
+            return "Url no válida";
+          }
         }
       }
     }

@@ -40,7 +40,7 @@ describe('ACCIDENTES', () => {
     establecimientosId2 = establecimientosCreada2['id']
   })
   before('Limpiar la base de datos', async () => {
-    // await db.Limpiar()
+    await db.Limpiar()
   })
   after('Desconectar la base de datos', function() {
     clock.restore()

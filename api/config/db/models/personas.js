@@ -32,9 +32,9 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: 'personasId' }, {onDelete: 'CASCADE'})
-    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: 'personasId' }, {onDelete: 'CASCADE'})
-    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' }, {onDelete: 'CASCADE'})
+    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
   }
 
   define.Crear = function (d) {

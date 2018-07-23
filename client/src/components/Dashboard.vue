@@ -114,7 +114,7 @@
       </v-btn>
       <agregarEmpresa
       :visible="agregarDialog"
-      @close="agregarDialog=false"
+      @close="agregarDialog=false; cargarDatos()"
       ></agregarEmpresa>
     </footer>
   </template>

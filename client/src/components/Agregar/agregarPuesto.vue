@@ -39,7 +39,7 @@ export default {
   props: ['index', 'indiceArea', 'indiceEstablecimiento'],
   data () {
     return {
-      indice: 0,
+      indice: 1,
       nombre: '',
       descripcion: '',
       rules: {

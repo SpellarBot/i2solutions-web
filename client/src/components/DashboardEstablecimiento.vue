@@ -218,7 +218,7 @@
     :establecimientoDireccion="establecimientoDireccion"
     :establecimientoRUC="establecimientoRUC"
     @close="visibleEdicionEstablecimiento=false"
-    ></DialogEditarEstablecimientos>
+    ></DialogEditarEstablecimientos>    
   </footer>
   </main>
 
@@ -234,6 +234,7 @@ import DialogNovedadesFromEstablecimientos from './Novedades/DialogNovedadesFrom
 import DialogAreas from './Areas/verAreasDialog'
 import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 import DialogEditarEstablecimientos from './Editar/DialogEditarEstablecimientos'
+import agregarArea from './Agregar/agregarArea'
 export default {
   components: {
     DialogPuestosFromEstablecimientos,
@@ -264,6 +265,8 @@ export default {
       visibleNovedades: false,
       eliminarDialog: false,
       eliminarDialog2: false,
+
+      agregarArea: false,
 
       empresaNombre: '',
       empresaActividadComercial: '',
