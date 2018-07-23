@@ -7,7 +7,7 @@ describe('Eliminar Establecimiento', function () {
     cy.wait(1500)
     cy.get('.empresa1').click() // el numero es el id de la empresa
     cy.wait(1000)
-    cy.get('.eliminarEstablecimiento2').click()
+    cy.get('.eliminarEstablecimiento2').click({force: true})
     cy.wait(1000)
     cy.get('.eliminarEstablecimiento').click()
     cy.wait(1500)

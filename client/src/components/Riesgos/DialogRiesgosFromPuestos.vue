@@ -38,6 +38,7 @@
                     <v-icon>edit</v-icon>
                   </v-btn>
                   <v-btn
+                  :class="'elimiaRiesgo' + riesgo.id"
                     fab
                     dark
                     small
@@ -66,7 +67,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialogRiesgo = false">No</v-btn>
-            <v-btn color="blue darken-1" flat @click = "borrarRiesgo()">Sí</v-btn>
+            <v-btn :class="'borraRiesgo' + this.riesgoId" color="blue darken-1" flat @click = "borrarRiesgo()">Sí</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -182,6 +183,7 @@ export default {
     },
     eliminarRiesgo (riesgo, indice) {
       this.riesgoId = riesgo.id
+      console.log(this.riesgoId)
       this.indice = indice
       this.eliminarDialogRiesgo = true
     },
