@@ -54,17 +54,21 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="cargando" hide-overlay persistent max-width="400px" hide-overlay>
-      <div class="text-xs-center">
-      <v-card>
-      <v-progress-circular
-      :size="70"
-      :width="7"
-      indeterminate
-      color="primary"
-    ></v-progress-circular>
-  </v-card>
+    <v-dialog v-model="cargando" persistent max-width="700px">
+        <v-card>
+        <v-card-text>Editando la empresa, por favor espere...</v-card-text>
+      <div class="container">
+  <svg class="bag" height="100" width="100">
+    <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
+    </circle>
+  </svg>
+  <svg class="over" height="100" width="100">
+    <circle  cx="50" cy="50" r="40" stroke="#2196f3" stroke-width="3" fill="none" >
+      <animate attributeType="CSS" attributeName="stroke-dasharray" from="1,254" to="247,56" dur="5s" repeatCount="indefinite" />
+    </circle>
+  </svg>
 </div>
+</v-card>
     </v-dialog>
     <v-snackbar
       :timeout="3000"
@@ -232,4 +236,21 @@ export default {
 .izq {
   text-align: left;
 }
+svg{
+
+          }
+          .over{
+              -webkit-animation: rotator 1.5s ease-in-out infinite;
+              stroke-dasharray: 107,38;
+          }
+          .bag{
+            position: absolute;
+          }
+          @-webkit-keyframes rotator {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                .container{
+
+                }
 </style>

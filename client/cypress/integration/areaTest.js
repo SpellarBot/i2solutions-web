@@ -9,17 +9,17 @@ describe('Editar Área', function () {
     cy.wait(1000)
     cy.get('.verAreas4').click() // el numero es el id del establecimiento
     cy.wait(1000)
-    cy.get('.editarArea10').click() // el numero es el id del area
+    cy.get('.editarArea9').click() // el numero es el id del area
     cy.wait(1000)
-    cy.get('.nombreArea10').find('input').type('{selectall}{del}Gerencia')// el numero es el id del area
+    cy.get('.nombreArea9').find('input').type('{selectall}{del}Gerencia')// el numero es el id del area
     cy.wait(600)
-    cy.get('.actividadArea10').find('input').type('{selectall}{del}Tareas gerenciales')// el numero es el id del area
+    cy.get('.actividadArea9').find('input').type('{selectall}{del}Tareas gerenciales')// el numero es el id del area
     cy.wait(600)
-    cy.get('.descripcionArea10').find('input').type('{selectall}{del}Área donde se realizan las actividades relacionadas a la gerencia.')// el numero es el id del area
+    cy.get('.descripcionArea9').find('input').type('{selectall}{del}Área donde se realizan las actividades relacionadas a la gerencia.')// el numero es el id del area
     cy.wait(600)
-    cy.get('.metrosCuadradosArea10').find('input').type('{selectall}{del}30x30')// el numero es el id del area
+    cy.get('.metrosCuadradosArea9').find('input').type('{selectall}{del}30x30')// el numero es el id del area
     cy.wait(600)
-    cy.get('.editArea10').click()// el numero es el id del area
+    cy.get('.editArea9').click()// el numero es el id del area
     cy.wait(1500)
   })
 })
