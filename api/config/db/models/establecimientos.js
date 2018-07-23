@@ -107,17 +107,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         raw: true })
         .then((project) => {
-          let respuestas = []
+          let respuestas = {}
           for (let ruc of rucs) {
             let establecimiento = _.find(project, { ruc })
             if (establecimiento) {
-              let r = {}
-              r[ruc] = true
-              respuestas.push(r)
+              respuestas[ruc] = true
             } else {
-              let r = {}
-              r[ruc] = false
-              respuestas.push(r)
+              respuestas[ruc] = false
             }
           }
           resolve(respuestas)

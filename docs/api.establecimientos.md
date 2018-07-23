@@ -271,17 +271,11 @@ __GET__ __/api/web/establecimientos/buscar/por?ruc=0931823557001,0931823446001__
 ```json
 {
   "estado": true,
-  "datos": [
-    {
-      "0923651688001": true
-    },
-    {
-      "2023651688001": true
-    },
-    {
-      "0931823447001": false
-    }
-  ],
+  "datos": {
+    "0923651688001": true,
+    "2023651688001": true,
+    "0931823447001": false
+  },
   "codigoEstado": 200
 }
 ```
