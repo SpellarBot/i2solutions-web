@@ -243,7 +243,7 @@ async function crearPersonas ({ db }) {
     correo: faker.internet.email().toLowerCase(),
     cedula: `093${random(5)}47`, // '0931823447'
     clave: '1234',
-    telefono: faker.phone.phoneNumber(),
+    telefono: `098${random(5)}70`,
     fechaNacimiento: `${faker.date.past()}`,
     perfilOcupacional: perfilesOcupacionales[ri(0, perfilesOcupacionales.length - 1)],
     usuario: faker.internet.userName(),
