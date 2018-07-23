@@ -512,7 +512,7 @@ describe('AREAS', () => {
       let params = { establecimientosId }
       let url = `/api/web/areas/puestos/establecimientos/${params['establecimientosId']}`
       let res = await request(app).get(url)
-      // console.log(JSON.stringify(res.body.datos, null, 2))
+      console.log(JSON.stringify(res.body.datos, null, 2))
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, url, params, codigoApi })

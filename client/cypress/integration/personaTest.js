@@ -9,21 +9,21 @@ describe('Editar Persona', function () {
     cy.wait(1000)
     cy.get('.personasEstablecimiento4').click() // el numero es el id del establecimiento
     cy.wait(1000)
-    cy.get('.editarPersona283').click() // el numero es el id de la persona
+    cy.get('.editarPersona223').click() // el numero es el id de la persona
     cy.wait(1000)
-    cy.get('.nombrePersona283').find('input').type('{selectall}{del}Alex Roberto') // el numero es el id de la persona
+    cy.get('.nombrePersona223').find('input').type('{selectall}{del}Alex Roberto') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.apellidoPersona283').find('input').type('{selectall}{del}Ferrín Alcívar') // el numero es el id de la persona
+    cy.get('.apellidoPersona223').find('input').type('{selectall}{del}Ferrín Alcívar') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.rolPersona283').click() // el numero es el id de la persona
+    cy.get('.rolPersona223').click() // el numero es el id de la persona
     cy.wait(600)
     cy.get('.list__tile.list__tile--link').last().contains('Administrador de la empresa').click()
     cy.wait(600)
-    cy.get('.correoPersona283').find('input').type('{selectall}{del}alex-710@hotmail.com') // el numero es el id de la persona
+    cy.get('.correoPersona223').find('input').type('{selectall}{del}alex-710@hotmail.com') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.telefonoPersona283').find('input').type('{selectall}{del}0969004491') // el numero es el id de la persona
+    cy.get('.telefonoPersona223').find('input').type('{selectall}{del}0969004491') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.fechaPersona283').click() // el numero es el id d la persona
+    cy.get('.fechaPersona223').click() // el numero es el id d la persona
     cy.wait(600)
     cy.get('.picker__title__btn.date-picker-title__year').contains('2018').click()
     cy.wait(600)
@@ -33,11 +33,11 @@ describe('Editar Persona', function () {
     cy.wait(600)
     cy.get('button').contains('16').click()
     cy.wait(600)
-    cy.get('.perfilPersona283').find('input').type('{selectall}{del}Ingeniero en Computación') // el numero es el id de la persona
+    cy.get('.perfilPersona223').find('input').type('{selectall}{del}Ingeniero en Computación') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.usuarioPersona283').find('input').type('{selectall}{del}aferrin') // el numero es el id de la persona
+    cy.get('.usuarioPersona223').find('input').type('{selectall}{del}aferrin') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.editPersona283').click() // el numero es el id de la persona
+    cy.get('.editPersona223').click() // el numero es el id de la persona
     cy.wait(1500)
   })
 })

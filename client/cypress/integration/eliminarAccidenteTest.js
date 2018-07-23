@@ -7,13 +7,13 @@ describe('Eliminar  Accidente', function () {
     cy.wait(1500)
     cy.get('.empresa3').click() // el numero es el id de la empresa
     cy.wait(1000)
-    cy.get('.verPuestos7').click() // el numero es el id del establecimiento
+    cy.get('.verPuestos8').click() // el numero es el id del establecimiento
     cy.wait(1000)
-    cy.get('.accidentesPuesto35').click() // el numero es el id del puesto
+    cy.get('.accidentesPuesto34').click() // el numero es el id del puesto
     cy.wait(1000)
-    cy.get('.eliminaAccident60').click({force: true})// el numero es el id del accidente
+    cy.get('.accidenteEliminar71').click({force: true, multiple: true})// el numero es el id del accidente
     cy.wait(600)
-    cy.get('.borrarAccidentes60').click()
+    cy.get('.borrarAccidente71').click({force: true, multiple: true})
     cy.wait(1500)
   })
 })

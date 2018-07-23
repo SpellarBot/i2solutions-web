@@ -1,5 +1,5 @@
-describe('Eliminar Equipo', function () {
-  it('Desde login hasta Eliminar un equipo y mostrar la vista actualizada', function () {
+describe('Eliminar Riesgo', function () {
+  it('Desde login hasta eliminar un riesgo', function () {
     cy.visit('http://localhost:3002')
     cy.get('.user').find('input').type('admin')
     cy.get('.password').find('input').type('admin')
@@ -9,11 +9,11 @@ describe('Eliminar Equipo', function () {
     cy.wait(1000)
     cy.get('.verPuestos4').click() // el numero es el id del establecimiento
     cy.wait(1000)
-    cy.get('.equiposPuesto19').click() // el numero es el id del puesto
+    cy.get('.riesgosPuesto19').click() // el numero es el id del puesto
     cy.wait(1000)
-    cy.get('.eliminarEquipos42').last().click({force: true}) // el numero es el id del equipo
+    cy.get('.elimiaRiesgo32').last().click({force: true}) // el numero es el id del riesgo
     cy.wait(1000)
-    cy.get('.borrarEquipo42').click()// el numero es el id del puesto
+    cy.get('.borraRiesgo32').click()// el numero es el id del riesgo
     cy.wait(1500)
   })
 })

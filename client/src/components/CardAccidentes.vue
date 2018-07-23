@@ -9,7 +9,7 @@
           <div v-if="accidents.atendidoEnEmpresa === 0">No fue atendido en la empresa</div>
           <div v-if="accidents.atendidoEnEmpresa === 1">Fue atendido en la empresa</div>
           <v-btn
-          :class="'editarAccidentes' + this.accidenteId"
+          :class="'editarAccidentes' + this.accidents.id"
               fab
               dark
               small
@@ -20,7 +20,7 @@
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
-            :class="'eliminaAccident' + accidents.id "
+              :class="'accidenteEliminar' + this.accidents.id "
               fab
               dark
               small
@@ -40,7 +40,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
-                  <v-btn :class="'borrarAccidentes' + this.accidenteSelected" color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
+                  <v-btn :class="'borrarAccidente' + this.accidenteSelected" color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
