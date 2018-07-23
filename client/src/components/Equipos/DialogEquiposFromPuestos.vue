@@ -71,8 +71,8 @@
           <v-card-text>¿Está seguro que quiere eliminar este Equipo?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
             <v-btn :class="'borrarEquipo' + this.equipoId" color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

@@ -39,8 +39,8 @@
                 <v-card-text>¿Está seguro que quiere eliminar este Accidente?</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
                   <v-btn :class="'borrarAccidente' + this.accidenteSelected" color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
+                  <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>

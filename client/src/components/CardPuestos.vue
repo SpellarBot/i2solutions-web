@@ -91,8 +91,8 @@
           <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialogPuestos = false">No</v-btn>
             <v-btn :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click = "borrarPuesto()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialogPuestos = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

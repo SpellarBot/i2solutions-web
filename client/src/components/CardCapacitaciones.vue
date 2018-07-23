@@ -52,8 +52,8 @@
                   <v-card-text>¿Está seguro que quiere eliminar esta Capacitación?</v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
                     <v-btn :class="'boraarCapacitacion' + this.capacitacionSelected" color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
+                    <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
