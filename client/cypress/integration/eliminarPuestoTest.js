@@ -11,7 +11,7 @@ describe('Eliminar Puesto', function () {
     cy.wait(1000)
     cy.get('.eliminarPuesto2').click({force: true}) // el numero es el id del puesto
     cy.wait(1000)
-    cy.get('.borrarPuesto1').click()// el numero es el id del puesto
+    cy.get('.borrarPuesto2').click()// el numero es el id del puesto
     cy.wait(1500)
   })
 })

@@ -219,6 +219,20 @@
     :establecimientoRUC="establecimientoRUC"
     @close="visibleEdicionEstablecimiento=false"
     ></DialogEditarEstablecimientos>
+    <v-btn
+        top
+        right
+        relative
+        fab
+        @click.native="agregarDialog=true"
+        >
+        <v-icon>add</v-icon>
+    </v-btn>
+    <agregarArea
+    :visible="agregarArea"
+    @close="agregarArea=false"
+    >      
+    </agregarArea>
   </footer>
   </main>
 
@@ -234,6 +248,7 @@ import DialogNovedadesFromEstablecimientos from './Novedades/DialogNovedadesFrom
 import DialogAreas from './Areas/verAreasDialog'
 import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 import DialogEditarEstablecimientos from './Editar/DialogEditarEstablecimientos'
+import agregarArea from './Agregar/agregarArea'
 export default {
   components: {
     DialogPuestosFromEstablecimientos,
@@ -264,6 +279,8 @@ export default {
       visibleNovedades: false,
       eliminarDialog: false,
       eliminarDialog2: false,
+
+      agregarArea: false,
 
       empresaNombre: '',
       empresaActividadComercial: '',

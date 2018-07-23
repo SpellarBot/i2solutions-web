@@ -20,7 +20,7 @@
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn
-            :class="'eliminaAccident' + accidents.id "
+              :class="'accidenteEliminar' + this.accidents.id "
               fab
               dark
               small
@@ -40,7 +40,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue" flat @click.native="eliminarDialogAccidentes = false">No</v-btn>
-                  <v-btn :class="'borrarAccidentes' + this.accidenteSelected" color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
+                  <v-btn :class="'borrarAccidente' + this.accidenteSelected" color="blue darken-1" flat @click = "borrarAccidente()">Sí</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
