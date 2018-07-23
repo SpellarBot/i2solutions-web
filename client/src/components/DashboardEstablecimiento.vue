@@ -218,21 +218,7 @@
     :establecimientoDireccion="establecimientoDireccion"
     :establecimientoRUC="establecimientoRUC"
     @close="visibleEdicionEstablecimiento=false"
-    ></DialogEditarEstablecimientos>
-    <v-btn
-        top
-        right
-        relative
-        fab
-        @click.native="agregarDialog=true"
-        >
-        <v-icon>add</v-icon>
-    </v-btn>
-    <agregarArea
-    :visible="agregarArea"
-    @close="agregarArea=false"
-    >      
-    </agregarArea>
+    ></DialogEditarEstablecimientos>    
   </footer>
   </main>
 

@@ -283,14 +283,22 @@ export default {
       this.instanciasAreas.forEach(function (area) {
         area.verify()
       })
-      //Agregamos el ruc del establecimiento matriz
+      //En este punto, está todo verificado si es que algo no está llenado
+/*      if (!this.$store.state.verified) {
+        this.error.message = "Por favor, llene todos los campos"
+        this.error.trigger = true
+        this.$store.commit('setVerified', true)
+        return
+      }
+*/
+      //Agregamos el ruc del establecimiento matriz      
       arrayRuc.push(this.empresa.RUC)
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
         rucActual = establecimiento.getRuc()
         rucRepetido = this.rucIngresado(rucActual, arrayRuc)
         arrayRuc.push(establecimiento.getRuc())
-      }.bind(this))
+      }.bind(this))      
       //Ahora verificaremos cada uno de los RUC ingresados. Estos no deberían existir en la bd      
       return new Promise((resolve, reject) => {
         let url = '/api/web/establecimientos/buscar/por?ruc=' + arrayRuc.join()
@@ -306,7 +314,7 @@ export default {
               this.agregar()
             }
             // Si en este punto no ha ocurrido un error, entonces se puede guardar
-            this.$store.commit('setVerified', true)            
+            this.$store.commit('setVerified', true)
             return resolve()
           } else {
             this.$store.commit('setError', resp.body.datos)
@@ -352,7 +360,7 @@ export default {
         this.imageFile = ''
         this.imageUrl = ''
       }
-    },    
+    },
     RUCbd (objectRuc, arrayRuc) {
       let prueba = objectRuc
       for (let ruc in objectRuc) {
@@ -405,6 +413,9 @@ export default {
       })
     },
     cleaner () {
+      this.imageName = ''
+      this.imageUrl = ''
+      this.imageFile = ''
       this.$refs.form.reset()
       this.instanciasAreas.forEach(function (area) {
           area.$destroy()
