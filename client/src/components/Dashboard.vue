@@ -16,17 +16,6 @@
       <h2 class="text-md-left">Empresas</h2>
       <br>
       <v-layout row wrap>
-        <!--v-flex xs12 md6 lg4 v-for="i in 9" :key="i">
-          <v-card>
-            <v-card-media class="white--text"
-            src="http://lorempixel.com/640/480"
-            height="240px"
-            width="320px"
-            >
-          </v-card-media>
-          Los Pollos Hermanos 2
-        </v-card>
-      </v-flex-->
         <v-flex
           v-for="(empresa,index) in this.$store.getters.empresas" :key="empresa.id"
           xs10

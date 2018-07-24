@@ -12,31 +12,40 @@
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                 :class="'actividadArea' + this.areaId"
                   v-model = "newActividad"
                   label="Actividad" required
                   :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionArea' + this.areaId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
+                  multi-line
+                  maxlength=150
+                  :counter=150
                 ></v-text-field>
                 <v-text-field
                 :class="'metrosCuadradosArea' + this.areaId"
                   v-model = "newMetrosCuadrados"
                   label="Metros Cuadrados" required
                   :rules="[rules.required]"
+                  hint="ejemplo(22x02)"
+                  mask="##x##"
                 ></v-text-field>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
           <v-btn :class="'editArea' + this.areaId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
