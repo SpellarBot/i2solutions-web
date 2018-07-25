@@ -6,26 +6,36 @@
           <span class="headline">Editar Equipo</span>
         </v-card-title>
         <v-card-text>
-          <p>{{ this.equipoNombre }}</p>
               <v-form v-model="valid">
+                <v-text-field
+                :class="'nombreEquipo' + this.equipoId"
+                  v-model = "newNombre"
+                  label="Nombre" required
+                  :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
+                ></v-text-field>
                 <v-text-field
                 :class="'descripcionEquipo' + this.equipoId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 :class="'cantidadEquipo' + this.equipoId"
                   v-model = "newCantidad"
                   label="Cantidad" required
                   :rules="[rules.required]"
+                  mask="###"
                 ></v-text-field>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
           <v-btn :class="'editEquipo' + this.equipoId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -46,6 +56,7 @@ export default {
     return {
       newDescripcion: '',
       newCantidad: '',
+      newNombre: '',
       valid: false,
       mensajeSnackbar: '',
       color: '',
@@ -58,6 +69,9 @@ export default {
   },
   props: ['visible', 'equipoNombre', 'equipoCantidad', 'equipoId', 'equipoDescripcion', 'equipoFotoUrl'],
   watch: {
+    nombre () {
+      this.newNombre = this.nombre
+    },
     cantidad () {
       this.newCantidad = this.cantidad
     },
@@ -74,6 +88,14 @@ export default {
         if (!value) {
           this.$emit('close')
         }
+      }
+    },
+    nombre: {
+      get () {
+        return this.equipoNombre
+      },
+      set (value) {
+        this.$data.newNombre = value
       }
     },
     cantidad: {
@@ -95,7 +117,7 @@ export default {
   },
   methods: {
     edit () {
-      let nombre = this.equipoNombre
+      let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
       let fotoUrl = this.equipoFotoUrl
       let cantidad = Number(this.$data.newCantidad)

@@ -23,19 +23,7 @@ describe('Editar Persona', function () {
     cy.wait(600)
     cy.get('.telefonoPersona223').find('input').type('{selectall}{del}0969004491') // el numero es el id de la persona
     cy.wait(600)
-    cy.get('.fechaPersona223').click() // el numero es el id d la persona
-    cy.wait(600)
-    cy.get('.picker__title__btn.date-picker-title__year').contains('2018').click()
-    cy.wait(600)
-    cy.get('li').contains('1995').click()
-    cy.wait(600)
-    cy.get('button').contains('Jun').click()
-    cy.wait(600)
-    cy.get('button').contains('16').click()
-    cy.wait(600)
     cy.get('.perfilPersona223').find('input').type('{selectall}{del}Ingeniero en Computación') // el numero es el id de la persona
-    cy.wait(600)
-    cy.get('.usuarioPersona223').find('input').type('{selectall}{del}aferrin') // el numero es el id de la persona
     cy.wait(600)
     cy.get('.editPersona223').click() // el numero es el id de la persona
     cy.wait(1500)

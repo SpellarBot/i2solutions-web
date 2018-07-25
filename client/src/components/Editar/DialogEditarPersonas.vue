@@ -12,12 +12,16 @@
                   v-model = "newNombres"
                   label="Nombres" required
                   :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                   v-model = "newApellidos"
                   :class="'apellidoPersona' + this.personaId"
                   label="Apellidos" required
                   :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-select
                 :class="'rolPersona' + this.personaId"
@@ -33,7 +37,8 @@
               label="Correo"
               :rules="emailRules"
               required
-            ></v-text-field><v-text-field
+            ></v-text-field>
+            <!--v-text-field
               v-model="newCedula"
               :class="'cedulaPersona' + this.personaId"
               label="Cédula"
@@ -44,7 +49,7 @@
               required
               :counter=10
               mask="#############"
-            ></v-text-field>
+            ></v-text-field-->
             <v-text-field
             :class="'telefonoPersona' + this.personaId"
               v-model="newTelefono"
@@ -57,7 +62,7 @@
               required
               counter="10"
             ></v-text-field>
-            <v-menu
+            <!--v-menu
             :class="'fechaPersona' + this.personaId"
                 ref="menu"
                 :close-on-content-click="false"
@@ -85,27 +90,31 @@
                   @change="save"
                   :rules="[rules.required]"
                 ></v-date-picker>
-              </v-menu>
+              </v-menu-->
               <v-text-field
               :class="'perfilPersona' + this.personaId"
               v-model="newPerfilOcupacional"
               label="Perfil Ocupacional"
               required
               :rules="[rules.required]"
+              maxlength=40
+              :counter=40
             ></v-text-field>
-            <v-text-field
+            <!--v-text-field
             :class="'usuarioPersona' + this.personaId"
               v-model="newUsuario"
               label="Usuario"
               required
               :rules="[rules.required]"
-            ></v-text-field>
+              maxlength=15
+              :counter=15
+            ></v-text-field-->
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
           <v-btn :class="'editPersona' + this.personaId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -220,14 +229,14 @@ export default {
     edit () {
       let nombres = this.$data.newNombres
       let apellidos = this.$data.newApellidos
-      let cedula = this.$data.newCedula
+      let cedula = this.personaCedula
       let personasId = this.personaId
       let correo = this.$data.newCorreo
-      let fechaNacimiento = moment(this.$data.newDate).format()
+      let fechaNacimiento = moment(this.personaFechaNacimiento).format()
       let rol = this.$data.newRol
       let telefono = this.$data.newTelefono
       let perfilOcupacional = this.$data.newPerfilOcupacional
-      let usuario = this.$data.newUsuario
+      let usuario = this.personaUsuario
       let validacionCedula = MyModule(cedula)
       if (validacionCedula[0] === false) {
         this.snackbar = true
