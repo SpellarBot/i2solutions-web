@@ -63,7 +63,7 @@
           <span class="headline">Nueva Capacitación</span>
         </v-card-title>
         <v-card-text>
-              <v-form v-model="valid">
+              <v-form ref="form" v-model="valid">
                 <v-text-field
                   v-model = "newTema"
                   label="Tema" required
@@ -73,6 +73,7 @@
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
+                  multi-line
                 ></v-text-field>
                 <v-menu
                 ref="menu"
@@ -111,8 +112,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="visibleAgregar = false">Cerrar</v-btn>
           <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Crear</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="visibleAgregar = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -155,7 +156,6 @@ export default {
       capacitaciones: [],
       capacitacionSelected: null,
       visibleAgregar: false,
-      createMode: 0,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
@@ -187,9 +187,9 @@ export default {
     },
     minDate: {
       get () {
-        let oneWeekAgo = new Date()
-        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
-        let finalDate = oneWeekAgo.toISOString().substr(0, 10)
+        let oneYearAgo = new Date()
+        oneYearAgo.setDate(oneYearAgo.getDate() - 365)
+        let finalDate = oneYearAgo.toISOString().substr(0, 10)
         return finalDate
       }
     }
@@ -222,7 +222,8 @@ export default {
       this.$store.dispatch('crearCapacitacion', { nombre, descripcion, tema, fechaCapacitacion, areasId })
         .then((resp) => {
           console.log('Here')
-          let capacitacion = { nombre, tema, descripcion, fechaCapacitacion, areasId }
+          let id = this.$store.getters.capacitacionCreada.id
+          let capacitacion = { id, nombre, tema, descripcion, fechaCapacitacion, areasId }
           console.log(capacitacion)
           this.capacitaciones.push(capacitacion)
           this.snackbar = true
@@ -237,11 +238,9 @@ export default {
         })
     },
     cargarData () {
-      this.valid = null
       this.loading = true
       this.capacitaciones = this.$store.getters.capacitaciones
       this.loading = false
-      this.valid = true
     },
     closing () {
       this.$store.dispatch('emptyCapacitaciones')
@@ -270,6 +269,10 @@ export default {
       this.indexEliminar = this.capacitaciones.indexOf(capacitacion)
       this.capacitacionSelected = capacitacion.id
       this.eliminarDialogCapacitaciones = true
+    },
+    reiniciar () {
+      this.$data.valid = false
+      this.$refs.form.reset()
     }
   }
 }

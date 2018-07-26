@@ -1,13 +1,6 @@
 <template>
   <main id="DialogCapacitacionesFromEstablecimientos">
-    <template v-if="loading">
-      <div class="text-xs-center">
-    <v-progress-circular
-      indeterminate
-    ></v-progress-circular>
-  </div>
-    </template>
-    <template class="content" v-if="valid">
+    <template class="content">
     <v-dialog fullscreen v-model="show" @keydown.esc="closing()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
       <v-toolbar dark color="primary">
@@ -17,6 +10,8 @@
         <v-toolbar-title>Establecimiento {{ this.establecimientoNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Capacitaciones: </h1>
+      <v-spacer></v-spacer>
+        <v-btn color="primary" dark @click="agregar()">Agregar Capacitación</v-btn>
       <v-layout align-center justify-center row>
       <v-data-table
       :headers="headers"
@@ -63,6 +58,75 @@
             </v-snackbar>
             <footer>
               <v-layout row justify-center>
+                <v-dialog v-model="visibleAgregar" @keydown.esc="visibleAgregar=false" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Nueva Capacitación</span>
+        </v-card-title>
+        <v-card-text>
+              <v-form ref="form" v-model="valid">
+                <v-text-field
+                  v-model = "newTema"
+                  label="Tema" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-text-field
+                  v-model = "newDescripcion"
+                  label="Descripcion" required
+                  :rules="[rules.required]"
+                  multi-line
+                ></v-text-field>
+                <v-menu
+                ref="menu"
+                :close-on-content-click="false"
+                v-model="menu"
+                :nudge-right="40"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  v-model="newDate"
+                  label="Fecha"
+                  readonly
+                  required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-date-picker
+                  ref="picker"
+                  v-model="date"
+                  :max="new Date().toISOString().substr(0, 10)"
+                  :min="minDate"
+                  @change="save"
+                  :rules="[rules.required]"
+                ></v-date-picker>
+              </v-menu>
+                <v-text-field
+                  v-model = "newCapacitador"
+                  label="Capacitador" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-select
+                :items="areasExistentes"
+                label="Área"
+                v-model = "newAreaId"
+                item-text="areaNombre"
+                :rules="[rules.required]"
+                ></v-select>
+            </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Crear</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="visibleAgregar = false">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+              <v-layout row justify-center>
               <v-dialog v-model="eliminarDialogCapacitaciones" persistent max-width="290">
                 <v-card>
                   <v-card-title class="headline">Eliminar</v-card-title>
@@ -84,8 +148,14 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      newTema: '',
+      newDescripcion: '',
+      newDate: null,
+      newCapacitador: '',
+      date: null,
+      menu: false,
       loading: false,
-      valid: null,
+      valid: false,
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
@@ -93,6 +163,13 @@ export default {
       indexEliminar: 0,
       capacitaciones: [],
       capacitacionSelected: null,
+      visibleAgregar: false,
+      areasExistentes: [],
+      newAreaId: null,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      },
       headers: [
         {
           text: 'Tema',
@@ -111,6 +188,12 @@ export default {
   watch: {
     show () {
       this.cargarData()
+    },
+    menu (val) {
+      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'Año'))
+    },
+    date () {
+      this.newDate = moment(this.date).format('L')
     }
   },
   computed: {
@@ -123,18 +206,56 @@ export default {
           this.$emit('close')
         }
       }
+    },
+    minDate: {
+      get () {
+        let oneYearAgo = new Date()
+        oneYearAgo.setDate(oneYearAgo.getDate() - 365)
+        let finalDate = oneYearAgo.toISOString().substr(0, 10)
+        return finalDate
+      }
     }
   },
   methods: {
     fecha: function (date) {
       return moment(date).format('L')
     },
+    save (newDate) {
+      this.$refs.menu.save(newDate)
+    },
+    crear () {
+      let tema = this.$data.newTema
+      let descripcion = this.$data.newDescripcion
+      let fechaCapacitacion = moment(this.$data.newDate).format()
+      let nombre = this.$data.newCapacitador
+      let areasId = Number(this.$data.newAreaId.id)
+      let areaNombre = this.$data.newAreaId.areaNombre
+      this.$store.dispatch('crearCapacitacion', { nombre, descripcion, tema, fechaCapacitacion, areasId })
+        .then((resp) => {
+          console.log('Here')
+          let areasNombre = areaNombre
+          let id = this.$store.getters.capacitacionCreada.id
+          console.log(id)
+          let capacitacion = { id, nombre, tema, descripcion, fechaCapacitacion, areasId, areasNombre }
+          console.log(capacitacion)
+          this.capacitaciones.push(capacitacion)
+          this.snackbar = true
+          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+          this.color = 'success'
+          this.$store.dispatch('emptyCapacitacionCreada')
+          this.visibleAgregar = false
+          this.reiniciar()
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     cargarData () {
-      this.valid = null
       this.loading = true
       this.capacitaciones = this.$store.getters.capacitaciones
       this.loading = false
-      this.valid = true
     },
     closing () {
       this.$store.dispatch('emptyCapacitaciones')
@@ -170,6 +291,23 @@ export default {
       this.indexEliminar = this.capacitaciones.indexOf(capacitacion)
       this.capacitacionSelected = capacitacion.id
       this.eliminarDialogCapacitaciones = true
+    },
+    agregar () {
+      this.$store.dispatch('getAreas', this.establecimientoId)
+        .then((resp) => {
+          this.areasExistentes = this.$store.getters.areas
+          this.visibleAgregar = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = 'No se pudieron cargar las áreas.'
+        })
+    },
+    reiniciar () {
+      this.$data.valid = false
+      this.$refs.form.reset()
     }
   }
 }

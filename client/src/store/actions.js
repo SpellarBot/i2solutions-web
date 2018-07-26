@@ -966,6 +966,7 @@ export default {
       Vue.http.post('/api/web/capacitaciones', {nombre, descripcion, tema, fechaCapacitacion, areasId})
         .then((resp) => {
           if (resp.body.estado) {
+            commit('setCapacitacionCreada', resp.body.datos)
             return resolve()
           } else {
             commit('setError', resp.body.datos)
@@ -976,5 +977,28 @@ export default {
           return reject(err)
         })
     })
+  },
+  emptyCapacitacionCreada ({commit}) {
+    commit('setCapacitacionCreada', null)
+  },
+  crearAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/accidentes', {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId})
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setAccidenteCreado', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyAccidenteCreado ({commit}) {
+    commit('setAccidenteCreado', null)
   }
 }

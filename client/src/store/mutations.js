@@ -86,5 +86,11 @@ export default {
   },
   setAccidentes (state, accidentes) {
     state.accidentes = accidentes
+  },
+  setCapacitacionCreada (state, capacitacion) {
+    state.capacitacionCreada = capacitacion
+  },
+  setAccidenteCreado (state, accidente) {
+    state.accidenteCreado = accidente
   }
 }
