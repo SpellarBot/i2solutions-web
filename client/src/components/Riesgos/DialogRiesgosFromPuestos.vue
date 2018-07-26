@@ -91,7 +91,7 @@
       :riesgoValoracionLiteral="riesgoValoracionLiteral"
       :riesgoPersonasExpuestas="riesgoPersonasExpuestas"
       :riesgoFecha="riesgoFecha"
-      :puestoId="puestoId"
+      :puestosId="puestosId"
       :riesgoId="riesgoId"
       @close="visibleEditar=false">
       ></DialogEditarRiesgos>
@@ -115,7 +115,7 @@ export default {
       riesgoValoracionLiteral: '',
       riesgoPersonasExpuestas: '',
       riesgoFecha: '',
-      puestoId: '',
+      puestosId: '',
       size: 'sm',
       eliminarDialogRiesgo: false,
       riesgoId: '',
@@ -138,7 +138,7 @@ export default {
         }
       }
     },
-    puestosId: {
+    puestosEId: {
       get () {
         return this.puestoId
       }
@@ -176,7 +176,7 @@ export default {
       this.riesgoValoracion = riesgo.valoracion
       this.riesgoValoracionLiteral = riesgo.valoracionLiteral
       this.riesgoPersonasExpuestas = riesgo.personasExpuestas
-      this.puestoId = riesgo.puestosId
+      this.puestosId = riesgo.puestosId
       this.riesgoFecha = riesgo.fecha
       this.riesgoId = riesgo.id
       this.visibleEditar = true

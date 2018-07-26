@@ -15,7 +15,7 @@ describe('Editar Área', function () {
     cy.wait(600)
     cy.get('.actividadArea9').find('input').type('{selectall}{del}Tareas gerenciales')// el numero es el id del area
     cy.wait(600)
-    cy.get('.descripcionArea9').find('input').type('{selectall}{del}Área donde se realizan las actividades relacionadas a la gerencia.')// el numero es el id del area
+    cy.get('.descripcionArea9').find('textarea').type('{selectall}{del}Área donde se realizan las actividades relacionadas a la gerencia.')// el numero es el id del area
     cy.wait(600)
     cy.get('.metrosCuadradosArea9').find('input').type('{selectall}{del}30x30')// el numero es el id del area
     cy.wait(600)

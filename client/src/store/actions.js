@@ -644,6 +644,7 @@ export default {
     })
   },
   updatePersona ({commit}, {personasId, nombres, apellidos, cedula, correo, fechaNacimiento, rol, telefono, perfilOcupacional, usuario}) {
+    console.log(fechaNacimiento)
     return new Promise((resolve, reject) => {
       Vue.http.put('/api/web/personas/' + personasId, { nombres, apellidos, cedula, correo, fechaNacimiento, rol, telefono, perfilOcupacional, usuario })
         .then((resp) => {
@@ -766,6 +767,9 @@ export default {
   emptyAccidentes ({commit}) {
     commit('setAccidentes', null)
   },
+  emptyCapacitaciones ({commit}) {
+    commit('setCapacitaciones', null)
+  },
   emptyAreasPuestos ({commit}) {
     commit('setAreasPuestos', null)
   },
@@ -806,22 +810,53 @@ export default {
         })
     })
   },
-  updateEquipos ({commit}, {nombre, descripcion, fotoUrl, cantidad, equiposId}) {
-    return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/equipos/' + equiposId, {nombre, descripcion, fotoUrl, cantidad})
-        .then((resp) => {
-          if (resp.body.estado) {
-            console.log('done')
-            return resolve()
-          } else {
-            commit('setError', resp.body.datos)
-            return reject(resp.body.datos)
-          }
-        }).catch((err) => {
-          commit('setError', err)
-          return reject(err)
-        })
-    })
+  updateEquipos ({commit}, {nombre, descripcion, fotoUrl, cantidad, equiposId, logo}) {
+    if (logo) {
+      let image = fotoUrl.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
+      console.log(image)
+      return new Promise((resolve, reject) => {
+        Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
+          .then((resp) => {
+            let fotoUrl = resp.body.data.link
+            return fotoUrl
+          })
+          .then((fotoUrl) => {
+            console.log('Entered here')
+            return Vue.http.put('/api/web/equipos/' + equiposId, {nombre, descripcion, fotoUrl, cantidad})
+          })
+          .then((resp) => {
+            if (resp.body.estado) {
+              console.log('done')
+              return resolve()
+            } else {
+              commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            if (err.ok === false) {
+              console.log('Aqui')
+              commit('setError', 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.')
+              return reject(err)
+            }
+          })
+      })
+    } else {
+      return new Promise((resolve, reject) => {
+        Vue.http.put('/api/web/equipos/' + equiposId, {nombre, descripcion, fotoUrl, cantidad})
+          .then((resp) => {
+            if (resp.body.estado) {
+              console.log('done')
+              return resolve()
+            } else {
+              commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            commit('setError', err)
+            return reject(err)
+          })
+      })
+    }
   },
   deleteEquipo ({commit}, equiposId) {
     return new Promise((resolve, reject) => {
@@ -915,6 +950,22 @@ export default {
         .then((resp) => {
           if (resp.body.estado) {
             console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  crearCapacitacion ({commit}, {nombre, descripcion, tema, fechaCapacitacion, areasId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/capacitaciones', {nombre, descripcion, tema, fechaCapacitacion, areasId})
+        .then((resp) => {
+          if (resp.body.estado) {
             return resolve()
           } else {
             commit('setError', resp.body.datos)

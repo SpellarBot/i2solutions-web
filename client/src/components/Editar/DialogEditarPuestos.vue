@@ -12,19 +12,24 @@
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionPuesto' + this.puestoId"
                   v-model = "newDescripcion"
                   label="Descripción" required
                   :rules="[rules.required]"
+                  multi-line
+                  maxlength=150
+                  :counter=150
                 ></v-text-field>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
           <v-btn :class="'editPuesto' + this.puestoId" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

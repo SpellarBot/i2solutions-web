@@ -15,7 +15,7 @@ describe('Editar Accidente', function () {
     cy.wait(600)
     cy.get('.nombreAccidente39').find('input').type('{selectall}{del}Inciendio.')// el numero es el id del accidente
     cy.wait(600)
-    cy.get('.descripcionAccidente39').find('input').type('{selectall}{del}Fuego causado por falla en el uso de una líquido inflamable.')// el numero es el id del accidente
+    cy.get('.descripcionAccidente39').find('textarea').type('{selectall}{del}Fuego causado por falla en el uso de una líquido inflamable.')// el numero es el id del accidente
     cy.wait(600)
     cy.get('.fechaAccidente39').click() // el numero es el id del accidente
     cy.wait(600)

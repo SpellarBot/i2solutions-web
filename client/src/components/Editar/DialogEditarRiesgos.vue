@@ -178,6 +178,7 @@ export default {
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
+          this.$emit('close')
         })
     }
   }

@@ -106,16 +106,36 @@
                        class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
+                      <div v-if="establecimiento.cantidadPersonas>0">
                       <span :class="'personasEstablecimiento' + establecimiento.id" class="link" v-on:click="visualizarPersonas(establecimiento.id, establecimiento.nombres)">#Personas: {{establecimiento.cantidadPersonas}}</span>
+                    </div>
+                    <div v-if="establecimiento.cantidadPersonas===0">
+                      <span :class="'personasEstablecimiento' + establecimiento.id">#Personas: {{establecimiento.cantidadPersonas}}</span>
+                    </div>
                     </v-flex>
                     <v-flex xs6 md6>
+                      <div v-if="establecimiento.cantidadAccidentes>0">
                       <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
+                    </div>
+                    <div v-if="establecimiento.cantidadAccidentes===0">
+                      <span>#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
+                    </div>
                     </v-flex>
                     <v-flex xs6 md6>
+                      <div v-if="establecimiento.cantidadCapacitaciones>0">
                       <span class="link" v-on:click="visualizarCapacitaciones(establecimiento.id, establecimiento.nombres)">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
+                    </div>
+                    <div v-if="establecimiento.cantidadCapacitaciones===0">
+                      <span>#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
+                    </div>
                     </v-flex>
                     <v-flex xs6 md6>
+                      <div v-if="establecimiento.cantidadNovedadesSinAtender>0">
                       <span class="link" v-on:click="visualizarNovedadesFromEstablecimiento(establecimiento.id, establecimiento.nombres)">#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
+                    </div>
+                    <div v-if="establecimiento.cantidadNovedadesSinAtender===0">
+                      <span>#Novedades sin atender: {{establecimiento.cantidadNovadadesSinAtender}}</span>
+                    </div>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -218,7 +238,7 @@
     :establecimientoDireccion="establecimientoDireccion"
     :establecimientoRUC="establecimientoRUC"
     @close="visibleEdicionEstablecimiento=false"
-    ></DialogEditarEstablecimientos>    
+    ></DialogEditarEstablecimientos>
   </footer>
   </main>
 
@@ -324,6 +344,7 @@ export default {
       this.$store.dispatch('getAccidentesFromEstablecimiento', establecimientosId)
         .then((resp) => {
           console.log('Done')
+          this.visibleAccidentes = true
         })
         .catch((err) => {
           this.color = 'error'
@@ -351,19 +372,29 @@ export default {
     visualizarPersonas (establecimientoId, establecimientoNombre) {
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
-      this.$store.dispatch('getPersonasFromEstablecimiento', this.establecimientoId)
-      this.visiblePersonas = true
+      this.verPersonas(establecimientoId)
+    },
+    verPersonas (establecimientoId) {
+      this.$store.dispatch('getPersonasFromEstablecimiento', establecimientoId)
+        .then((resp) => {
+          console.log('Done')
+          this.visiblePersonas = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarAccidentes (establecimientoId, establecimientoNombre) {
       this.obtenerAccidentes(establecimientoId)
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
-      this.visibleAccidentes = true
     },
     visualizarCapacitaciones (establecimientoId, establecimientoNombre) {
+      this.verCapacitaciones(establecimientoId)
       this.establecimientoId = establecimientoId
       this.establecimientoNombres = establecimientoNombre
-      this.visibleCapacitaciones = true
     },
     visualizarNovedadesFromEstablecimiento (establecimientoId, establecimientoNombre) {
       this.establecimientoId = establecimientoId
@@ -460,6 +491,18 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    verCapacitaciones (establecimientosId) {
+      this.$store.dispatch('getCapacitacionesFromEstablecimiento', establecimientosId)
+        .then((resp) => {
+          console.log('Done')
+          this.visibleCapacitaciones = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
 
     logout () {
       this.$store.dispatch('logout')
@@ -484,17 +527,6 @@ export default {
     },
     dashboard () {
       router.push('dashboard')
-    },
-    verPersonas () {
-      this.$store.dispatch('getPersonas')
-        .then((resp) => {
-          router.push('personas')
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
     },
     crearEstablecimiento () {
       this.$store.dispatch('empresas')

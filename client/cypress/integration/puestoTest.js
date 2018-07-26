@@ -13,7 +13,7 @@ describe('Editar Puesto', function () {
     cy.wait(1000)
     cy.get('.nombrePuesto19').find('input').type('{selectall}{del}Asistente de Gerencia')// el numero es el id del puesto
     cy.wait(600)
-    cy.get('.descripcionPuesto19').find('input').type('{selectall}{del}Asiste al gerente general en decisiones administrativas.')// el numero es el id del puesto
+    cy.get('.descripcionPuesto19').find('textarea').type('{selectall}{del}Asiste al gerente general en decisiones administrativas.')// el numero es el id del puesto
     cy.wait(600)
     cy.get('.editPuesto19').click()// el numero es el id del puesto
     cy.wait(1500)
