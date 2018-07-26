@@ -766,6 +766,9 @@ export default {
   emptyAccidentes ({commit}) {
     commit('setAccidentes', null)
   },
+  emptyCapacitaciones ({commit}) {
+    commit('setCapacitaciones', null)
+  },
   emptyAreasPuestos ({commit}) {
     commit('setAreasPuestos', null)
   },
