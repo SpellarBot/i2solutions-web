@@ -26,7 +26,6 @@
         <td v-if="props.item.atendidoEnEmpresa===0" class="text-xs-left">No fue atendido en la empresa</td>
         <td v-if="props.item.atendidoEnEmpresa===1" class="text-xs-left">Fue atendido en la empresa</td>
         <td class="justify-center layout px-0">
-        </v-btn>
           <v-btn flat
           icon
             small
@@ -100,7 +99,7 @@ export default {
         { text: 'Heridos', value: 'heridos', sortable: false },
         { text: 'Fallecidos', value: 'muertos', sortable: false },
         { text: 'Atención', value: 'atendidoEnEmpresa', sortable: false },
-        { text: 'Acciones', value: 'name', sortable: false}
+        { text: 'Acciones', value: 'name', sortable: false }
       ]
     }
   },

@@ -1,13 +1,6 @@
 <template>
   <main id="DialogCapacitacionesFromEstablecimientos">
-    <template v-if="loading">
-      <div class="text-xs-center">
-    <v-progress-circular
-      indeterminate
-    ></v-progress-circular>
-  </div>
-    </template>
-    <template class="content" v-if="valid">
+    <template class="content">
     <v-dialog fullscreen v-model="show" @keydown.esc="closing()" hide-overlay transition="dialog-bottom-transition">
       <v-card>
       <v-toolbar dark color="primary">
@@ -17,6 +10,8 @@
         <v-toolbar-title>Área {{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Capacitaciones: </h1>
+      <v-spacer></v-spacer>
+        <v-btn color="primary" dark @click="visibleAgregar=true">Agregar Capacitación</v-btn>
       <v-layout align-center justify-center row>
       <v-data-table
       :headers="headers"
@@ -62,6 +57,67 @@
             </v-snackbar>
             <footer>
               <v-layout row justify-center>
+                <v-dialog v-model="visibleAgregar" @keydown.esc="visibleAgregar=false" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Nueva Capacitación</span>
+        </v-card-title>
+        <v-card-text>
+              <v-form v-model="valid">
+                <v-text-field
+                  v-model = "newTema"
+                  label="Tema" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-text-field
+                  v-model = "newDescripcion"
+                  label="Descripcion" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-menu
+                ref="menu"
+                :close-on-content-click="false"
+                v-model="menu"
+                :nudge-right="40"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  v-model="newDate"
+                  label="Fecha"
+                  readonly
+                  required
+                  :rules="[rules.required]"
+                ></v-text-field>
+                <v-date-picker
+                  ref="picker"
+                  v-model="date"
+                  :max="new Date().toISOString().substr(0, 10)"
+                  :min="minDate"
+                  @change="save"
+                  :rules="[rules.required]"
+                ></v-date-picker>
+              </v-menu>
+                <v-text-field
+                  v-model = "newCapacitador"
+                  label="Capacitador" required
+                  :rules="[rules.required]"
+                ></v-text-field>
+            </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="visibleAgregar = false">Cerrar</v-btn>
+          <v-btn color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Crear</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+              <v-layout row justify-center>
               <v-dialog v-model="eliminarDialogCapacitaciones" persistent max-width="290">
                 <v-card>
                   <v-card-title class="headline">Eliminar</v-card-title>
@@ -83,8 +139,14 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      newTema: '',
+      newDescripcion: '',
+      newDate: null,
+      newCapacitador: '',
+      date: null,
+      menu: false,
+      valid: false,
       loading: false,
-      valid: null,
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
@@ -92,6 +154,12 @@ export default {
       indexEliminar: 0,
       capacitaciones: [],
       capacitacionSelected: null,
+      visibleAgregar: false,
+      createMode: 0,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      },
       headers: [
         {
           text: 'Tema',
@@ -106,11 +174,6 @@ export default {
   },
   name: 'DialogCapacitaciones',
   props: ['visible', 'areaId', 'areaNombre'],
-  watch: {
-    show () {
-      this.cargarData()
-    }
-  },
   computed: {
     show: {
       get () {
@@ -121,11 +184,57 @@ export default {
           this.$emit('close')
         }
       }
+    },
+    minDate: {
+      get () {
+        let oneWeekAgo = new Date()
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+        let finalDate = oneWeekAgo.toISOString().substr(0, 10)
+        return finalDate
+      }
+    }
+  },
+  watch: {
+    show () {
+      this.cargarData()
+    },
+    menu (val) {
+      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'Año'))
+    },
+    date () {
+      this.newDate = moment(this.date).format('L')
     }
   },
   methods: {
     fecha: function (date) {
       return moment(date).format('L')
+    },
+    save (newDate) {
+      this.$refs.menu.save(newDate)
+    },
+    crear () {
+      let tema = this.$data.newTema
+      let descripcion = this.$data.newDescripcion
+      let fechaCapacitacion = moment(this.$data.newDate).format()
+      let nombre = this.$data.newCapacitador
+      let areasId = this.areaId
+      console.log(fechaCapacitacion)
+      this.$store.dispatch('crearCapacitacion', { nombre, descripcion, tema, fechaCapacitacion, areasId })
+        .then((resp) => {
+          console.log('Here')
+          let capacitacion = { nombre, tema, descripcion, fechaCapacitacion, areasId }
+          console.log(capacitacion)
+          this.capacitaciones.push(capacitacion)
+          this.snackbar = true
+          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+          this.color = 'success'
+          this.visibleAgregar = false
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     cargarData () {
       this.valid = null
