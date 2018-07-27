@@ -324,7 +324,7 @@ export default {
           }
           this.reiniciar()
           this.snackbar = true
-          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+          this.mensajeSnackbar = 'Accidente creado exitosamente.'
           this.color = 'success'
           this.$store.dispatch('emptyAccidenteCreado')
           this.visibleAgregar = false
