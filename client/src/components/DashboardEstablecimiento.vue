@@ -410,7 +410,7 @@ export default {
       this.$store.dispatch('deleteEmpresa', empresaId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'establecimiento borrado con exito.'
+          this.mensajeSnackbar = 'Empresa eliminada con exito.'
           this.color = 'success'
           this.reloadEmpresas()
         })
