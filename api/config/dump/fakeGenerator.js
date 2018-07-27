@@ -336,7 +336,7 @@ conexion.Conectar().then(async (db) => {
               let personasId = await crearPersonas({ db })
               if (personasId) {
                 // personasCapacitaciones
-                if (i === 1) {
+                if (ri(1, 2) === 1) {
                   await crearPersonasCapacitaciones({ db, personasId, capacitacionesId })
                 }
                 // personasPuestos

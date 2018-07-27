@@ -25,7 +25,7 @@ module.exports = {
     'nombres': 'Benjamín',
     'apellidos': 'Esquibel',
     'correo': 'cristina.ferrer@yahoo.com',
-    'cedula': '0931825449',
+    'cedula': '0931825446',
     'telefono': '2938373',
     'fechaNacimiento': '2014-05-21T19:27:28.576Z',
     'perfilOcupacional': 'jefe',

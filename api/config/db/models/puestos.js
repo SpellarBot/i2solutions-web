@@ -80,6 +80,18 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.obtenerEquiposPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select * from equiposPuestos ep inner join equipos e on e.id = ep.equiposId where ep.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(equipos => {
+          resolve(equipos)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
     let id = datos['id']

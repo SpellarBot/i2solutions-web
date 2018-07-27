@@ -91,18 +91,13 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.ObtenerPorAreas = function ({ id }) {
+  define.ObtenerPorPersonas = function ({ id }) {
     return new Promise((resolve, reject) => {
-      return this.findAll({
-        raw: true,
-        where: {
-          areasId: id
-        }
-      })
-        .then((resp) => {
-          return resolve(resp)
-        })
-        .catch((err) => {
+      let query = `select p.nombres as nombres, p.apellidos as apellidos, p.id as id, p.correo as correo, p.cedula as cedula, p.telefono as telefono, c.id as capacitacionId, c.nombre as capacitacionNombre, c.tema as capacitacionTema, c.descripcion as capacitacionDescripcion, c.fechaCapacitacion as capacitacionFechaCapacitacion from capacitaciones c inner join personasCapacitaciones pc on pc.capacitacionesId = c.id inner join personas p on p.id = pc.personasId where c.areasId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
           return reject(err)
         })
     })
