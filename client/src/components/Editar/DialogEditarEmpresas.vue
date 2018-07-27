@@ -12,18 +12,24 @@
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                 class="actividadComercial"
                   v-model = "newActividadComercial"
                   label="Actividad Comercial" required
                   :rules="[rules.required]"
+                  maxlength=40
+                  :counter=40
                 ></v-text-field>
                 <v-text-field
                 class="razonSocial"
                   v-model = "newRazonSocial"
                   label="Razón Social" required
                   :rules="[rules.required]"
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <img :src="imageUrl" height="150" v-if="imageUrl"/>
                 <v-btn v-if="imageUrl"
@@ -35,7 +41,7 @@
                 >
                 <v-icon>delete</v-icon>
               </v-btn>
-          <v-text-field label="Seleccione Imagen" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+          <v-text-field label="Logo" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
           <input
           class="imagen"
             type="file"
@@ -44,13 +50,13 @@
             accept="image/*"
             @change="onFilePicked"
           >
-          <p>Nota: Si no selecciona una nueva imagen, se quedará con la imagen previa</p>
+          <p>Nota: Si no sube un nuevo logo, se quedará con la imagen previa</p>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
           <v-btn class="editar" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -220,7 +226,7 @@ export default {
             this.cargando = false
             this.color = 'error'
             this.snackbar = true
-            this.mensajeSnackbar = 'No se pudos subir la imagen por problemas de conexión.\nRevise su conexión e inténtelo de nuevo.'
+            this.mensajeSnackbar = 'No se pudo subir la imagen. Inténtelo de nuevo más tarde.'
           } else {
             this.cargando = false
             this.color = 'error'

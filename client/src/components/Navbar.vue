@@ -1,7 +1,6 @@
 <template>
   <div id='navbar'>
   <v-toolbar color="blue darken-2">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
     <v-toolbar-title color="white" id="title"
     @click="ToDashboard" >
       i2Solutions Cía. Ltda.

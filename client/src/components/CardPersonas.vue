@@ -1,33 +1,6 @@
 <template>
   <main id="CardPersonas">
         <div><b>Nombres y Apellido: </b> {{ nombreCompleto }} </div>
-        <v-btn
-              fab
-              :class="'editarPersona' + personas.id"
-              dark
-              right
-              small
-              color="blue"
-              absolute
-              @click="visualizarEditar(personas, fecha(personas.fechaNacimiento))"
-              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
-            <v-btn
-              :class="'eliminarPersona' + personas.id"
-              fab
-              dark
-              right
-              small
-              color="blue"
-              absolute
-              class="offseted"
-              @click="eliminarPersona()"
-              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
-            >
-              <v-icon>delete</v-icon>
-            </v-btn>
           <div v-if="personas.rol === 'admin-i2solutions'"><b>Rol:</b> Administrador de i2solutions</div>
           <div v-if="personas.rol === 'inspector-seguridad'"><b>Rol:</b> Inspector de Seguridad</div>
           <div v-if="personas.rol === 'jefe-seguridad'"><b>Rol:</b> Jefe de Seguridad</div>
@@ -39,6 +12,28 @@
           <div><b>Fecha de Nacimiento: </b> {{ fecha(personas.fechaNacimiento) }}</div>
           <div><b>Perfil Ocupacional: </b> {{ personas.perfilOcupacional }}</div>
           <div><b>usuario:</b> {{ personas.usuario }}</div>
+          <v-btn
+              fab
+              :class="'editarPersona' + personas.id"
+              dark
+              small
+              color="blue"
+              @click="visualizarEditar(personas, fecha(personas.fechaNacimiento))"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+              :class="'eliminarPersona' + personas.id"
+              fab
+              dark
+              small
+              color="blue"
+              @click="eliminarPersona()"
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
+            >
+              <v-icon>delete</v-icon>
+            </v-btn>
           <v-snackbar
       :timeout="3000"
       :multi-line="true"

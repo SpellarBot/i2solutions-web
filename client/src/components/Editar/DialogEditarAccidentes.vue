@@ -18,6 +18,7 @@
                   v-model = "newDescripcion"
                   label="Descripcion" required
                   :rules="[rules.required]"
+                  multi-line
                 ></v-text-field>
                 <v-menu
                 :class="'fechaAccidente' + this.accidenteId"

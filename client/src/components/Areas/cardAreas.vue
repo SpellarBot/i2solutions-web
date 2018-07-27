@@ -40,21 +40,43 @@
                     <v-container fluid>
                       <v-layout row wrap>
                         <v-flex xs6 md6>
+                          <div v-if="numPersonas>0">
                           <span class="link" v-on:click="visualizarPersonas(nombre)">#Personas: {{numPersonas}}</span>
+                        </div>
+                        <div v-if="numPersonas===0">
+                          <span>#Personas: {{numPersonas}}</span>
+                        </div>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarPuestosFromAreas(nombre)">#Puestos: {{numPuestos}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
+                          <div v-if="numCapacitaciones>0">
                           <span
                           :class="'capacitacionesArea' + id"
                           class="link" v-on:click="visualizarCapacitaciones(nombre)">#Capacitaciones: {{numCapacitaciones}}</span>
+                        </div>
+                        <div v-if="numCapacitaciones===0">
+                          <span
+                          :class="'capacitacionesArea' + id"
+                          >#Capacitaciones: {{numCapacitaciones}}</span>
+                        </div>
                         </v-flex>
                         <v-flex xs6 md6>
+                          <div v-if="novedades>0">
                           <span class="link" v-on:click="visualizarNovedadesFromAreas">#Novedades: {{novedades}}</span>
+                        </div>
+                        <div v-if="novedades===0">
+                          <span>#Novedades: {{novedades}}</span>
+                        </div>
                         </v-flex>
                         <v-flex xs6 md6>
+                          <div v-if="equipos>0">
                           <span class="link" v-on:click="visualizarEquipos">#Equipos: {{equipos}}</span>
+                        </div>
+                        <div v-if="equipos===0">
+                          <span>#Equipos: {{equipos}}</span>
+                        </div>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -202,16 +224,38 @@ export default{
       this.visiblePuestos = true
     },
     visualizarPersonas (areaNombre) {
-      console.log(areaNombre)
       this.areaId = this.id
       this.areaNombre = areaNombre
+      this.verPersonas()
+    },
+    verPersonas () {
       this.$store.dispatch('getPersonasFromArea', this.areaId)
-      this.visiblePersonas = true
+        .then((resp) => {
+          console.log('Done')
+          this.visiblePersonas = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarCapacitaciones (areaNombre) {
       this.areaId = this.id
       this.areaNombre = areaNombre
-      this.visibleCapacitaciones = true
+      this.verCapacitaciones()
+    },
+    verCapacitaciones () {
+      this.$store.dispatch('getCapacitacionesFromArea', this.areaId)
+        .then((resp) => {
+          console.log('Done')
+          this.visibleCapacitaciones = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     verPuestos (areaId) {
       this.$store.dispatch('getPuestosFromArea', areaId)

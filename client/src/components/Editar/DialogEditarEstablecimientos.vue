@@ -12,12 +12,16 @@
                   v-model = "newNombres"
                   label="Nombre" required
                   :rules="[rules.required]"
+                  maxlength=25
+                  :counter=25
                 ></v-text-field>
                 <v-text-field
                 class="direccion"
                   v-model = "newDireccion"
                   label="Direccion" required
                   :rules="[rules.required]"
+                  maxlength=70
+                  :counter=70
                 ></v-text-field>
                 <v-text-field
                 class="ruc"
@@ -25,13 +29,14 @@
                   label="RUC" required
                   :rules="[rules.required, rules.RUC]"
                   mask="#############"
+                  :counter=13
                 ></v-text-field>
             </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
           <v-btn class="editarEstablecimiento" color="blue darken-1" flat :disabled="!valid" @click = "edit ()">Editar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

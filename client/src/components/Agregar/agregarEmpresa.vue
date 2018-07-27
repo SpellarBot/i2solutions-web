@@ -32,13 +32,13 @@
                   <img :src="imageUrl" height="150" v-if="imageUrl"/>
                 </v-flex>
                 <v-flex xs12 md4 lg4>
-                  <v-text-field 
-                    label="Seleccione Imagen" 
-                    @click='pickFile' 
-                    v-model='imageName' 
+                  <v-text-field
+                    label="Seleccione Imagen"
+                    @click='pickFile'
+                    v-model='imageName'
                     :rules="[rules.required]"
                     prepend-icon='attach_file'
-                    >                      
+                    >
                     </v-text-field>
                   <input
                     class="imagen"
@@ -103,7 +103,7 @@
                     </v-flex>
                   </v-layout>
                 </v-flex>
-              </v-layout>              
+              </v-layout>
               <v-layout row align-center>
                 <v-flex md10>
                   <div ref="establecimientos">
@@ -283,7 +283,15 @@ export default {
       this.instanciasAreas.forEach(function (area) {
         area.verify()
       })
-      //Agregamos el ruc del establecimiento matriz
+      // En este punto, está todo verificado si es que algo no está llenado
+      /*      if (!this.$store.state.verified) {
+        this.error.message = "Por favor, llene todos los campos"
+        this.error.trigger = true
+        this.$store.commit('setVerified', true)
+        return
+      }
+*/
+      // Agregamos el ruc del establecimiento matriz
       arrayRuc.push(this.empresa.RUC)
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
@@ -291,41 +299,41 @@ export default {
         rucRepetido = this.rucIngresado(rucActual, arrayRuc)
         arrayRuc.push(establecimiento.getRuc())
       }.bind(this))
-      //Ahora verificaremos cada uno de los RUC ingresados. Estos no deberían existir en la bd      
+      // Ahora verificaremos cada uno de los RUC ingresados. Estos no deberían existir en la bd
       return new Promise((resolve, reject) => {
         let url = '/api/web/establecimientos/buscar/por?ruc=' + arrayRuc.join()
         Vue.http.get(url)
           .then((resp) => {
-          if (resp.body.estado) {
-            arrayBool = resp.body.datos
-            //Se recorre la lista a ver si hay un RUC ya ingresado.
-            this.RUCbd(arrayBool, arrayRuc)
+            if (resp.body.estado) {
+              arrayBool = resp.body.datos
+              // Se recorre la lista a ver si hay un RUC ya ingresado.
+              this.RUCbd(arrayBool, arrayRuc)
 
-            if (this.$store.state.verified) {
-              this.loading = true
-              this.agregar()
+              if (this.$store.state.verified) {
+                this.loading = true
+                this.agregar()
+              }
+              // Si en este punto no ha ocurrido un error, entonces se puede guardar
+              this.$store.commit('setVerified', true)
+              return resolve()
+            } else {
+              this.$store.commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
             }
-            // Si en este punto no ha ocurrido un error, entonces se puede guardar
-            this.$store.commit('setVerified', true)            
-            return resolve()
-          } else {
-            this.$store.commit('setError', resp.body.datos)
-            return reject(resp.body.datos)
-          }
           }).catch((err) => {
             this.$store.commit('setError', err)
-          return reject(err)
+            return reject(err)
           })
-        })
+      })
       this.loading = false
     },
-    //Esta función regresa verdadero si el RUC ya ha sido ingresado en el formulario
+    // Esta función regresa verdadero si el RUC ya ha sido ingresado en el formulario
     rucIngresado (ruc, arrayRuc) {
-      arrayRuc.forEach(function  (prueba) {
+      arrayRuc.forEach(function (prueba) {
         if (prueba === ruc) {
-          this.error.message = "el RUC " + ruc + " es ingresado más de una vez"
+          this.error.message = 'el RUC ' + ruc + ' es ingresado más de una vez'
           this.error.trigger = true
-          this.$store.commit('setVerified', false) //El RUC ya ha sido ingresado
+          this.$store.commit('setVerified', false) // El RUC ya ha sido ingresado
           return true
         }
       }.bind(this))
@@ -352,13 +360,13 @@ export default {
         this.imageFile = ''
         this.imageUrl = ''
       }
-    },    
+    },
     RUCbd (objectRuc, arrayRuc) {
       let prueba = objectRuc
       for (let ruc in objectRuc) {
-        if ( objectRuc[ruc] ){
+        if (objectRuc[ruc]) {
           this.$store.commit('setVerified', false)
-          this.error.message = "el RUC " + ruc + " ya existe"
+          this.error.message = 'el RUC ' + ruc + ' ya existe'
           this.error.trigger = true
         }
       }
@@ -379,7 +387,7 @@ export default {
             let urlFoto = resp.body.data.link
             return urlFoto
           })
-          .then ((urlFoto) => {
+          .then((urlFoto) => {
             return Vue.http.post('/api/web/empresas', {nombre, actividadComercial, razonSocial, urlFoto, direccion, ruc})
           })
           .then((resp) => {
@@ -395,7 +403,7 @@ export default {
               this.created = true
               return resolve()
             } else {
-              this.$Store.commit('setError', resp.body.datos)
+              this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
             }
           }).catch((err) => {
@@ -405,11 +413,14 @@ export default {
       })
     },
     cleaner () {
+      this.imageName = ''
+      this.imageUrl = ''
+      this.imageFile = ''
       this.$refs.form.reset()
       this.instanciasAreas.forEach(function (area) {
-          area.$destroy()
-          area.$el.remove()
-          area = null
+        area.$destroy()
+        area.$el.remove()
+        area = null
       })
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
@@ -425,16 +436,13 @@ export default {
       this.show = false
     },
     isUrl (str) {
-          let regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-          if (regexp.test(str))
-          {
-            return true;
-          }
-          else
-          {
-            return "Url no válida";
-          }
-        }
+      let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/
+      if (regexp.test(str)) {
+        return true
+      } else {
+        return 'Url no válida'
+      }
+    }
   },
   data () {
     return {
@@ -471,22 +479,19 @@ export default {
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
-        rucMin: v => (v && v.length ==13) || 'Debe tener 13 letras',
+        rucMin: v => (v && v.length === 13) || 'Debe tener 13 letras',
         RUCvalidate: v => {
           if (MyModule(v)[0]) {
             return true
           }
           return MyModule(v)[1]
         },
-        isUrl: v  => {
-          let regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-          if (regexp.test(v))
-          {
-            return true;
-          }
-          else
-          {
-            return "Url no válida";
+        isUrl: v => {
+          let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/
+          if (regexp.test(v)) {
+            return true
+          } else {
+            return 'Url no válida'
           }
         }
       }
