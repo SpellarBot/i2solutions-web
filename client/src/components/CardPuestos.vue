@@ -178,13 +178,37 @@ export default {
     visualizarPersonas (puesto) {
       this.puestoId = puesto.id
       this.puestoNombre = puesto.nombre
+      this.verPersonas()
+    },
+    verPersonas () {
       this.$store.dispatch('getPersonasFromPuesto', this.puestoId)
-      this.visiblePersonas = true
+        .then((resp) => {
+          console.log('Done')
+          this.visiblePersonas = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarAccidentes (puesto) {
       this.puestoNombre = puesto.nombre
       this.puestoId = puesto.id
-      this.visibleAccidentes = true
+      this.verAccidentes()
+    },
+    verAccidentes () {
+      console.log(this.puestoId)
+      this.$store.dispatch('getAccidentesFromPuesto', this.puestoId)
+        .then((resp) => {
+          console.log('Done')
+          this.visibleAccidentes = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarNovedadesFromPuestos (puestoId, puestoNombre) {
       if (this.puestos.cantidadNovedadesSinAtender > 0) {

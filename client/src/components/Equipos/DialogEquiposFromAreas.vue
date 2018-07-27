@@ -114,6 +114,7 @@ export default {
       equipoFotoUrl: '',
       equipoCantidad: '',
       mensajeSnackbar: '',
+      eliminarDialogEquipo: false,
       color: '',
       snackbar: false,
       visibleEdicion: false,
@@ -180,7 +181,7 @@ export default {
         .then((resp) => {
           console.log('entre')
           this.snackbar = true
-          this.mensajeSnackbar = 'Equipo borrada con exito.'
+          this.mensajeSnackbar = 'Equipo borrado con exito.'
           console.log('Si borre con exito')
           this.color = 'success'
           this.quitarDeArray()

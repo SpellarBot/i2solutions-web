@@ -232,7 +232,8 @@ export default {
       let cedula = this.personaCedula
       let personasId = this.personaId
       let correo = this.$data.newCorreo
-      let fechaNacimiento = moment(this.personaFechaNacimiento).format()
+      let fechaNacimiento = moment(this.$data.newDate).format()
+      console.log(fechaNacimiento)
       let rol = this.$data.newRol
       let telefono = this.$data.newTelefono
       let perfilOcupacional = this.$data.newPerfilOcupacional

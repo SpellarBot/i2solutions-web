@@ -163,6 +163,14 @@ export default {
         }
       }
     },
+    minDate: {
+      get () {
+        let oneWeekAgo = new Date()
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+        let finalDate = oneWeekAgo.toISOString().substr(0, 10)
+        return finalDate
+      }
+    },
     tema: {
       get () {
         return this.capacitacionTema

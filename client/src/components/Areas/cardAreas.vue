@@ -224,16 +224,38 @@ export default{
       this.visiblePuestos = true
     },
     visualizarPersonas (areaNombre) {
-      console.log(areaNombre)
       this.areaId = this.id
       this.areaNombre = areaNombre
+      this.verPersonas()
+    },
+    verPersonas () {
       this.$store.dispatch('getPersonasFromArea', this.areaId)
-      this.visiblePersonas = true
+        .then((resp) => {
+          console.log('Done')
+          this.visiblePersonas = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarCapacitaciones (areaNombre) {
       this.areaId = this.id
       this.areaNombre = areaNombre
-      this.visibleCapacitaciones = true
+      this.verCapacitaciones()
+    },
+    verCapacitaciones () {
+      this.$store.dispatch('getCapacitacionesFromArea', this.areaId)
+        .then((resp) => {
+          console.log('Done')
+          this.visibleCapacitaciones = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     verPuestos (areaId) {
       this.$store.dispatch('getPuestosFromArea', areaId)

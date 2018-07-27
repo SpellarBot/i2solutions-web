@@ -30,6 +30,26 @@
                   :rules="[rules.required]"
                   mask="###"
                 ></v-text-field>
+                <img :src="imageUrl" height="150" v-if="imageUrl"/>
+                <v-btn v-if="imageUrl"
+                @click="emptyImage"
+                fab
+                dark
+                small
+                color="blue"
+                >
+                <v-icon>delete</v-icon>
+              </v-btn>
+          <v-text-field label="Imagen" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+          <input
+          class="imagen"
+            type="file"
+            style="display: none"
+            ref="image"
+            accept="image/*"
+            @change="onFilePicked"
+          >
+          <p>Nota: Si no sube una nueva imagen, se quedará con la imagen previa</p>
             </v-form>
         </v-card-text>
         <v-card-actions>
@@ -38,6 +58,22 @@
           <v-btn color="blue darken-1" flat @click.native="show = false">Cerrar</v-btn>
         </v-card-actions>
       </v-card>
+    </v-dialog>
+    <v-dialog v-model="cargando" persistent max-width="700px">
+        <v-card>
+        <v-card-text>Editando el equipo, por favor espere...</v-card-text>
+      <div class="container">
+  <svg class="bag" height="100" width="100">
+    <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
+    </circle>
+  </svg>
+  <svg class="over" height="100" width="100">
+    <circle  cx="50" cy="50" r="40" stroke="#2196f3" stroke-width="3" fill="none" >
+      <animate attributeType="CSS" attributeName="stroke-dasharray" from="1,254" to="247,56" dur="5s" repeatCount="indefinite" />
+    </circle>
+  </svg>
+</div>
+</v-card>
     </v-dialog>
     <v-snackbar
       :timeout="3000"
@@ -54,6 +90,10 @@
 export default {
   data () {
     return {
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
+      cargando: false,
       newDescripcion: '',
       newCantidad: '',
       newNombre: '',
@@ -116,19 +156,58 @@ export default {
     }
   },
   methods: {
+    emptyImage () {
+      this.imageName = ''
+      this.imageFile = ''
+      this.imageUrl = ''
+    },
+    pickFile () {
+      this.$refs.image.click()
+    },
+    onFilePicked (e) {
+      const files = e.target.files
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = ''
+        this.imageFile = ''
+        this.imageUrl = ''
+      }
+    },
     edit () {
       let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
-      let fotoUrl = this.equipoFotoUrl
       let cantidad = Number(this.$data.newCantidad)
       let equiposId = this.equipoId
-      this.$store.dispatch('updateEquipos', { nombre, descripcion, fotoUrl, cantidad, equiposId })
+      let fotoUrl = ''
+      let logo = false
+      if (this.imageUrl === '') {
+        fotoUrl = this.equipoFotoUrl
+        console.log(fotoUrl)
+      } else {
+        fotoUrl = this.imageUrl
+        logo = true
+      }
+      this.cargando = true
+      this.$store.dispatch('updateEquipos', { nombre, descripcion, fotoUrl, cantidad, equiposId, logo })
         .then((resp) => {
+          this.cargando = false
           for (let i = 0; i < this.$store.getters.equipoAreas.length; i++) {
             let equipo = this.$store.getters.equipoAreas[i]
             if (equipo.id === equiposId) {
+              equipo.nombre = nombre
               equipo.descripcion = descripcion
               equipo.cantidad = cantidad
+              equipo.fotoUrl = fotoUrl
               break
             }
           }
@@ -138,9 +217,17 @@ export default {
           this.$emit('close')
         })
         .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
+          if (err.ok === false) {
+            this.cargando = false
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = 'No se pudo subir la imagen. Inténtelo de nuevo más tarde.'
+          } else {
+            this.cargando = false
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          }
         })
     }
   }
