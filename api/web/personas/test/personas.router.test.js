@@ -33,6 +33,7 @@ describe('PERSONAS', () => {
   let puestosId = -1
   let establecimientosId = -1
   let areasId = -1
+  let clock = {}
   beforeEach(async () => {
     clock = sinon.useFakeTimers(new Date(2011,9,1).getTime())
     let empresaCreada = await models.empresas.Crear(empresa)

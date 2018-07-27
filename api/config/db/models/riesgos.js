@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'riesgos'
   let tableName = 'riesgos'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     tipoRiesgo: { type: DataTypes.STRING },
     personasExpuestas: { type: DataTypes.INTEGER },
     valoracion: { type: DataTypes.STRING },
@@ -24,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsTo(models.puestos, { onDelete: 'CASCADE', hooks: true })
   }
 
   define.Crear = function ({

@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'equiposPuestos'
   let tableName = 'equiposPuestos'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false }
   }, {
     name: {
       singular,
@@ -44,6 +43,23 @@ module.exports = (sequelize, DataTypes) => {
       })
         .then((novedades) => {
           return resolve(novedades)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      return this.findAll({
+        raw: true,
+        where: {
+          equiposId: id
+        }
+      })
+        .then((resp) => {
+          return resolve(resp)
         })
         .catch((err) => {
           return reject(err)

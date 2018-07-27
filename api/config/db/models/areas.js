@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   const plural = 'areas'
   const tableName = 'areas'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     actividad: { type: DataTypes.STRING },
     nombre: { type: DataTypes.STRING },
     fotoUrl: { type: DataTypes.STRING },
@@ -23,9 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.establecimientos, { foreignKey: 'establecimientosId', targetKey: 'id' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.puestos, { through: 'areasPuestos', foreignKey: 'areasId' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.equipos, { through: 'equiposAreas', foreignKey: 'areasId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsTo(models.establecimientos, { onDelete: 'CASCADE', hooks: true })
+    define.belongsToMany(models.puestos, { through: 'areasPuestos', foreignKey: 'areasId' })
   }
 
   define.Crear = function ({ actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }) {
@@ -194,7 +192,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerAreasDetalle = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select ar.id as id , ar.nombre as areaNombre, ar.metrosCuadrados as areaMetrosCuadrados, ar.fotoUrl as areaFotoUrl, ar.actividad as areaActividad, ar.descripcionLugar as areaDescripcionLugar, (select count(*) from areasPuestos where areasId = ar.id) as cantidadPuestos, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on pp.puestosId = ap.id where a.id = ar.id ) as cantidadPersonas, (select count(*) from capacitaciones where areasId = ar.id) as cantidadCapacitaciones,  (select count(*) from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where a.id = ar.id) as cantidadNovedades, (select count(*) from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join equiposPuestos eq on eq.puestosId = ap.puestosId where a.id = ar.id) as cantidadEquipos from areas ar where ar.establecimientosId = ${id}`
+      let query = `select ar.id as id , ar.nombre as areaNombre, ar.metrosCuadrados as areaMetrosCuadrados, ar.fotoUrl as areaFotoUrl, ar.actividad as areaActividad, ar.descripcionLugar as areaDescripcionLugar, (select count(*) from areasPuestos where areasId = ar.id) as cantidadPuestos, (select count(*) from areas a inner join areasPuestos ap on ap.areasId = a.id inner join personasPuestos pp on pp.puestosId = ap.puestosId where a.id = ar.id ) as cantidadPersonas, (select count(*) from capacitaciones where areasId = ar.id) as cantidadCapacitaciones,  (select count(*) from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join novedades n on n.puestosId = ap.puestosId where a.id = ar.id) as cantidadNovedades, (select count(*) from  areas a  inner join areasPuestos ap on ap.areasId = a.id inner join equiposPuestos eq on eq.puestosId = ap.puestosId where a.id = ar.id) as cantidadEquipos from areas ar where ar.establecimientosId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(areas => {
           resolve(areas)

@@ -4,21 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'novedades'
   let tableName = 'novedades'
   let define = sequelize.define(singular, {
-    // PK
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
-
-    // PROPERTIES
     descripcion: { type: DataTypes.STRING },
     descripcionAtendida: { type: DataTypes.STRING }, // MIGRACION
-    // nombre: { type: DataTypes.STRING },
     prioridad: { type: DataTypes.ENUM('alta', 'media', 'baja') },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     fotoUrl: { type: DataTypes.STRING, defaultValue: '' },
-    fueAtendida: { type: DataTypes.STRING, defaultValue: false },
-
-    // FK
-    puestosId: { type: DataTypes.INTEGER.UNSIGNED }
-    // inspeccionesId: { type: DataTypes.INTEGER.UNSIGNED }
+    fueAtendida: { type: DataTypes.STRING, defaultValue: false }
   }, {
     name: {
       singular,
@@ -32,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { foreignKey: 'puestosId', targetKey: 'id' })
-    // define.belongsTo(models.inspecciones, { foreignKey: 'inspeccionesId', targetKey: 'id' })
+    define.belongsTo(models.puestos)
+    define.belongsTo(models.inspecciones)
   }
 
   define.Crear = function ({ descripcion, prioridad, fotoUrl, puestosId, fueAtendida, descripcionAtendida }) {

@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'personas'
   let tableName = 'personas'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombres: { type: DataTypes.STRING },
     apellidos: { type: DataTypes.STRING },
     correo: { type: DataTypes.STRING, unique: true },
@@ -32,9 +31,9 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: 'personasId' })
+    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: 'personasId' })
+    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' })
   }
 
   define.Crear = function (d) {

@@ -3469,7 +3469,6 @@ _response_
 {
   "estado": true,
   "datos": {
-    "id": 1,
     "puestosId": "1",
     "personasId": "1",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",

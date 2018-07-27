@@ -9,7 +9,8 @@ module.exports = {
       { nombre: 'nombre', tipo: 'string', descripcion: ' minLength: 2 ' },
       { nombre: 'descripcion', tipo: 'string', descripcion: ' minLength: 2 ' },
       { nombre: 'fotoUrl', tipo: 'string', descripcion: ' url ' },
-      { nombre: 'cantidad', tipo: 'number', descripcion: ' minimum: 1 ' }
+      { nombre: 'cantidad', tipo: 'number', descripcion: ' minimum: 1 ' },
+      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' }
     ],
     errors: []
   },

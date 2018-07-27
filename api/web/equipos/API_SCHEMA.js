@@ -1,14 +1,16 @@
 module.exports = {
   API_1_SCHEMA: {
     BODY: {
-      'minProperties': 2,
+      'minProperties': 4,
       'type': 'object',
       'properties': {
         'nombre': { 'type': 'string', minLength: 2 },
         'descripcion': { 'type': 'string', minLength: 2 },
         'fotoUrl': { 'type': 'string', 'format': 'url' },
-        'cantidad': { 'type': 'number', minimum: 1 }
-      }
+        'cantidad': { 'type': 'number', minimum: 1 },
+        'puestosId': { 'type': 'number', minimum: 1 }
+      },
+      'required': ['nombre', 'puestosId', 'cantidad']
     }
   },
   API_2_SCHEMA: {

@@ -88,6 +88,24 @@
 				<td> minimum: !1 </td>
 				<td> invalido </td>
 			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_1[C41]'>CE_API_1[C41]</a> </td>
+				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_1[C42]'>CE_API_1[C42]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> puestosId</td>
+				<td> <a id='CE_API_1[C43]'>CE_API_1[C43]</a> </td>
+				<td> minimum: !1 </td>
+				<td> invalido </td>
+			</tr>
 </table>
 
 
@@ -111,7 +129,8 @@ _request o body_
   "nombre": "Extintor",
   "descripcion": "esta hecho",
   "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -129,7 +148,8 @@ _response_
     "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
     "cantidad": 1,
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "puestosId": 1
   },
   "codigoEstado": 200
 }
@@ -154,7 +174,8 @@ _request o body_
   "nombre": 1,
   "descripcion": "esta hecho",
   "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -191,7 +212,8 @@ _request o body_
   "nombre": "",
   "descripcion": "esta hecho",
   "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -228,7 +250,8 @@ _request o body_
   "nombre": "Extintor",
   "descripcion": 1,
   "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -264,7 +287,8 @@ _request o body_
 {
   "nombre": "Extintor",
   "descripcion": "",
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -301,7 +325,8 @@ _request o body_
   "nombre": "Extintor",
   "descripcion": "esta hecho",
   "fotoUrl": 1,
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -338,7 +363,8 @@ _request o body_
   "nombre": "Extintor",
   "descripcion": "esta hecho",
   "fotoUrl": "https://",
-  "cantidad": 1
+  "cantidad": 1,
+  "puestosId": 1
 }
 ```
 
@@ -375,7 +401,8 @@ _request o body_
   "nombre": "Extintor",
   "descripcion": "esta hecho",
   "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
-  "cantidad": "a"
+  "cantidad": "a",
+  "puestosId": 1
 }
 ```
 
@@ -412,7 +439,8 @@ _request o body_
   "nombre": "Extintor",
   "descripcion": "esta hecho",
   "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
-  "cantidad": -1
+  "cantidad": -1,
+  "puestosId": 1
 }
 ```
 
@@ -426,6 +454,118 @@ _response_
   "datos": {
     "cantidad": "debe ser >= 1"
   },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[10]__
+
+puestosId tipo no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos
+
+POST 
+
+_request o body_
+```js
+{
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1,
+  "puestosId": "a"
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser number"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[11]__
+
+puestosId tamano no valido
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos
+
+POST 
+
+_request o body_
+```js
+{
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1,
+  "puestosId": 0
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": {
+    "puestosId": "debe ser >= 1"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+__ICE_API_1[12]__
+
+puestosId no exite
+
+__Datos prueba__
+
+_url_ 
+
+> /api/web/equipos
+
+POST 
+
+_request o body_
+```js
+{
+  "nombre": "Extintor",
+  "descripcion": "esta hecho",
+  "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
+  "cantidad": 1,
+  "puestosId": 50
+}
+```
+
+__Resultados__
+
+_response_
+
+```js
+{
+  "estado": false,
+  "datos": "El id de puestos no existe",
   "codigoEstado": 200
 }
 ```
@@ -1567,7 +1707,6 @@ _response_
 {
   "estado": true,
   "datos": {
-    "id": 1,
     "equiposId": "1",
     "puestosId": "1",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
@@ -1761,291 +1900,6 @@ _response_
 {
   "estado": false,
   "datos": "El puesto no existe",
-  "codigoEstado": 200
-}
-```
-
-
-___
-
-
-## Anadir equipo a un area
-
-> Código: API_5
-
-> Descripción: Anadir equipo a un area
-
-> Url : /api/web/equipos/:equiposId/areas/:areasId
-
-#### Clases de equivalencia
-
-<table border="1">
-  <tr>
-  	<th> </th>
-    <th>CE</th>
-    <th>Descripción</th> 
-    <th>Validez</th>
-  </tr>
-			<tr style='background-color: #82E0AA' >
-				<td>  equiposId </td>
-				<td> <a id='CE_API_5[C01]'>CE_API_5[C01]</a> </td>
-				<td>{ 'type': 'number', minimum: 1 }</td>
-				<td> válido  </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td>  equiposId </td>
-				<td> <a id='CE_API_5[C02]'>CE_API_5[C02]</a> </td>
-				<td>'type': !'number'</td>
-				<td> invalido  </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td>  equiposId </td>
-				<td> <a id='CE_API_5[C03]'>CE_API_5[C03]</a> </td>
-				<td>minimum: !1 </td>
-				<td> invalido  </td>
-			</tr>
-			<tr style='background-color: #82E0AA' >
-				<td>  areasId </td>
-				<td> <a id='CE_API_5[C11]'>CE_API_5[C11]</a> </td>
-				<td>{ 'type': 'number', minimum: 1 }</td>
-				<td> válido  </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td>  areasId </td>
-				<td> <a id='CE_API_5[C12]'>CE_API_5[C12]</a> </td>
-				<td>'type': !'number'</td>
-				<td> invalido  </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td>  areasId </td>
-				<td> <a id='CE_API_5[C13]'>CE_API_5[C13]</a> </td>
-				<td>minimum: !1 </td>
-				<td> invalido  </td>
-			</tr>
-</table>
-
-
-#### Intersecciónes de clases de equivalencia o Casos de prueba
-
-__ICE_API_5[1]__
-
-Anadir equipo a un puesto de forma correcta
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/1/areas/1
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": true,
-  "datos": {
-    "id": 1,
-    "equiposId": "1",
-    "areasId": "1",
-    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_5[2]__
-
-equiposId no valido tipo de dato
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/a/areas/1
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "equiposId": "debe ser number"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_5[3]__
-
-equiposId  no valido numero
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/0/areas/1
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "equiposId": "debe ser >= 1"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_5[4]__
-
-areasId no valido tipo de dato
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/1/areas/a
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "areasId": "debe ser number"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_5[5]__
-
-areasId  no valido numero
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/1/areas/0
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": {
-    "areasId": "debe ser >= 1"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_5[6]__
-
-equiposId no exite
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/50/areas/1
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "El equipo no existe",
-  "codigoEstado": 200
-}
-```
-
-
-__ICE_API_5[7]__
-
-areasId no exite
-
-__Datos prueba__
-
-_url_ 
-
-> /api/web/equipos/:equiposId/areas/:areasId
-
-PUT /api/web/equipos/1/areas/50
-
-_request o body_
-```js
-
-```
-
-__Resultados__
-
-_response_
-
-```js
-{
-  "estado": false,
-  "datos": "El area no existe",
   "codigoEstado": 200
 }
 ```

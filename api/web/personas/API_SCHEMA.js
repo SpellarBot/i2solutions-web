@@ -4,7 +4,7 @@ module.exports = {
       'minProperties': 9,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 }, // , pattern: '/^[a-zA-Z ]+$/'
+        'nombres': { 'type': 'string', minLength: 2 },
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
@@ -21,7 +21,7 @@ module.exports = {
       'minProperties': 4,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 }, // , pattern: '/^[a-zA-Z ]+$/'
+        'nombres': { 'type': 'string', minLength: 2 },
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },

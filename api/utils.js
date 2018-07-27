@@ -3,7 +3,7 @@ const moment = require('moment')
 let localize = require('ajv-i18n')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-require('ajv-errors')(ajv)
+// require('ajv-errors')(ajv)
 const bcrypt = require('bcrypt')
 const saltos = 5
 const responses = require('./responses')
