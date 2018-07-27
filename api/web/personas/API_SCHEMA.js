@@ -12,7 +12,8 @@ module.exports = {
         'fechaNacimiento': { 'fecha': true },
         'perfilOcupacional': { 'type': 'string', minLength: 2 },
         'usuario': { 'type': 'string', minLength: 2 },
-        'rol': { 'type': 'string', 'enum': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] }
+        'rol': { 'type': 'string', 'enum': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] },
+        'puestosId': { 'type': 'number', minimum: 1 }
       }
     }
   },

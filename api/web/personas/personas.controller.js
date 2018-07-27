@@ -3,16 +3,26 @@ module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
       return new Promise((resolve, reject) => {
-        db.personas.Crear(datos)
-          .then((resp) => {
-            if (resp['clave']) {
-              delete resp['clave']
+        co(function * () {
+          let { puestosId } = datos
+          let puesto = yield db.puestos.Obtener({ id: puestosId })
+          if (!puesto) {
+            resolve(responses.NO_OK('El id de puestos no existe'))
+          } else {
+            let personaCreada = yield db.personas.Crear(datos)
+            let relacionCreada = yield db.personasPuestos.Crear({ personasId: personaCreada['id'], puestosId })
+            if (personaCreada && relacionCreada) {
+              let tmp = JSON.parse(JSON.stringify(personaCreada))
+              tmp['puestosId'] = puestosId
+              resolve(responses.OK(tmp))
+            } else {
+              resolve(responses.NO_OK('Ocurrio un error al crearse'))
             }
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+          }
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     ObtenerTodos () {

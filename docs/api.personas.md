@@ -16,6 +16,7 @@ La clave se genera en el back y enviar el correo dependiendo del rol
 |  fechaNacimiento  | ISOdate  |   ---   | 
 |  usuario  | String  |   ?, por definir   | 
 |  rol  | String  |  'admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'  | 
+|  personasId  | Number  |     | 
 
 #### Response:
 
@@ -33,8 +34,10 @@ La clave se genera en el back y enviar el correo dependiendo del rol
     "perfilOcupacional": "admin",
     "usuario": "elsa",
     "rol": "admin-i2solutions",
+    "clave": "$2b$05$OTCzBEy1medCs7ONJ3L9k.tpxfpvU8xrk23KGDK23hBF0YTj5V8jO",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "puestosId": 1
   },
   "codigoEstado": 200
 }

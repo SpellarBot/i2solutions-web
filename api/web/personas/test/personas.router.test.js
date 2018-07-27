@@ -67,10 +67,12 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_01 Crear correctamente', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       let personaCreada = await models.personas.Obtener({ id: res.body.datos['id'] })
       expect(personaCreada).to.not.equal(null)
+      let relacion = await models.personasPuestos.ObtenerPorPersona({ id: personaCreada['id'] })
+      expect(relacion).to.not.equal(null)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.OK({ docs, doc: API_1, res })
@@ -79,7 +81,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_02 nombres tipo no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres: 1, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres: 1, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -88,7 +90,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_03 nombres tamano no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres: 'a', apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres: 'a', apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -97,7 +99,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_04 apellidos tipo no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos: 1, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos: 1, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -106,7 +108,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_05 apellidos tamano no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos: 'a', correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos: 'a', correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -115,7 +117,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_06 cedula no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula: '093564', telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos, correo, cedula: '093564', telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -124,7 +126,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_07 correo no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo: 'joelerll@', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos, correo: 'joelerll@', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -133,7 +135,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_08 telefono no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono: 1, fechaNacimiento, perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos, correo, cedula, telefono: 1, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -142,7 +144,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_09 fechaNacimiento no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento: '2018-13-10', perfilOcupacional, usuario, rol }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento: '2018-13-10', perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -151,7 +153,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_10 perfilOcupacional tipo no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional: 1, usuario, rol }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional: 1, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -160,7 +162,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_11 perfilOcupacional tamano no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional: '', usuario, rol }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional: '', usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -169,7 +171,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_12 usuario tipo no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario: 1, rol }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario: 1, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -178,7 +180,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_13 usuario tamano no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario: 'a', rol }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario: 'a', rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
@@ -187,7 +189,7 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_1_14 rol no valido', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_ADMIN_I2SOLUTIONS
-      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol: 'otro rol' }
+      let req = { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol: 'otro rol', puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)

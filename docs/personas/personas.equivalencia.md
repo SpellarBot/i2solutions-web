@@ -188,8 +188,10 @@ _response_
     "perfilOcupacional": "admin",
     "usuario": "elsa",
     "rol": "admin-i2solutions",
+    "clave": "$2b$05$OTCzBEy1medCs7ONJ3L9k.tpxfpvU8xrk23KGDK23hBF0YTj5V8jO",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "puestosId": 1
   },
   "codigoEstado": 200
 }
