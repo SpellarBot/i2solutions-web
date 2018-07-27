@@ -206,7 +206,19 @@ export default{
     visualizarEquipos () {
       this.areaId = this.id
       this.areaNombre = this.nombre
-      this.visibleEquipos = true
+      this.verEquiposFromAreas()
+    },
+    verEquiposFromAreas () {
+      this.$store.dispatch('getEquiposFromAreas', this.areaId)
+        .then((resp) => {
+          console.log('Done')
+          this.visibleEquipos = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarRiesgos () {
       this.visibleRiesgos = true

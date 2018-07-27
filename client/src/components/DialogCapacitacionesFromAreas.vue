@@ -229,6 +229,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
           this.color = 'success'
+          this.reiniciar()
           this.visibleAgregar = false
         })
         .catch((err) => {
