@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'capacitaciones'
   let tableName = 'capacitaciones'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombre: { type: DataTypes.STRING },
     descripcion: { type: DataTypes.STRING },
     tema: { type: DataTypes.STRING },
@@ -22,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.areas, { foreignKey: 'areasId', targetKey: 'id' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.personas, { through: 'personasCapacitaciones', foreignKey: 'capacitacionesId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsTo(models.areas, { onDelete: 'CASCADE', hooks: true })
+    define.belongsToMany(models.personas, { through: 'personasCapacitaciones', foreignKey: 'capacitacionesId' })
   }
 
   define.Crear = function ({ nombre, descripcion, tema, areasId, fechaCapacitacion }) {
@@ -92,18 +91,13 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.ObtenerPorAreas = function ({ id }) {
+  define.ObtenerPorPersonas = function ({ id }) {
     return new Promise((resolve, reject) => {
-      return this.findAll({
-        raw: true,
-        where: {
-          areasId: id
-        }
-      })
-        .then((resp) => {
-          return resolve(resp)
-        })
-        .catch((err) => {
+      let query = `select p.nombres as nombres, p.apellidos as apellidos, p.id as id, p.correo as correo, p.cedula as cedula, p.telefono as telefono, c.id as capacitacionId, c.nombre as capacitacionNombre, c.tema as capacitacionTema, c.descripcion as capacitacionDescripcion, c.fechaCapacitacion as capacitacionFechaCapacitacion from capacitaciones c inner join personasCapacitaciones pc on pc.capacitacionesId = c.id inner join personas p on p.id = pc.personasId where c.areasId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
           return reject(err)
         })
     })

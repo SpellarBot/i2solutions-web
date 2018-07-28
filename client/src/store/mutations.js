@@ -98,5 +98,8 @@ export default {
   },
   setAccidenteCreado (state, accidente) {
     state.accidenteCreado = accidente
+  },
+  setEquipoCreado (state, equipo) {
+    state.equipoCreado = equipo
   }
 }

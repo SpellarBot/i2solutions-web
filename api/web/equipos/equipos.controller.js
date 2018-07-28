@@ -1,15 +1,26 @@
-// const co = require('co')
+const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
       return new Promise((resolve, reject) => {
-        db.equipos.Crear(datos)
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+        co(function * () {
+          let { puestosId } = datos
+          let puesto = yield db.puestos.Obtener({ id: puestosId })
+          if (!puesto) {
+            resolve(responses.NO_OK('El id de puestos no existe'))
+          } else {
+            let equipoCreada = yield db.equipos.Crear(datos)
+            let relacionCreada = yield db.equiposPuestos.Crear({ equiposId: equipoCreada['id'], puestosId })
+            if (equipoCreada && relacionCreada) {
+              resolve(responses.OK({ ...equipoCreada, puestosId }))
+            } else {
+              resolve(responses.NO_OK('Ocurrio un error al crearse'))
+            }
+          }
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     Obtener ({ id }) {
@@ -101,8 +112,7 @@ module.exports = ({ responses, db }) => {
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         Promise.all([
-          db.equiposPuestos.BorrarPorEquipos({ id }),
-          db.equiposAreas.BorrarPorEquipos({ id })
+          db.equiposPuestos.BorrarPorEquipos({ id })
         ])
           .then((values) => {
             db.equipos.Borrar({ id }).then((resp) => {

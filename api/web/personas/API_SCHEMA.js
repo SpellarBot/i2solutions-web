@@ -4,7 +4,7 @@ module.exports = {
       'minProperties': 9,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 }, // , pattern: '/^[a-zA-Z ]+$/'
+        'nombres': { 'type': 'string', minLength: 2 },
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
@@ -12,7 +12,8 @@ module.exports = {
         'fechaNacimiento': { 'fecha': true },
         'perfilOcupacional': { 'type': 'string', minLength: 2 },
         'usuario': { 'type': 'string', minLength: 2 },
-        'rol': { 'type': 'string', 'enum': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] }
+        'rol': { 'type': 'string', 'enum': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] },
+        'puestosId': { 'type': 'number', minimum: 1 }
       }
     }
   },
@@ -21,7 +22,7 @@ module.exports = {
       'minProperties': 4,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 }, // , pattern: '/^[a-zA-Z ]+$/'
+        'nombres': { 'type': 'string', minLength: 2 },
         'apellidos': { 'type': 'string', minLength: 2 },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },

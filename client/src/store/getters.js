@@ -91,5 +91,8 @@ export default {
   },
   accidenteCreado (state) {
     return state.accidenteCreado
+  },
+  equipoCreado (state) {
+    return state.equipoCreado
   }
 }

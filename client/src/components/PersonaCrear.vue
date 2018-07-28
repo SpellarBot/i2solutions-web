@@ -3,26 +3,59 @@
   <app-navbar></app-navbar>
   <div class="crearPersona">
     <v-layout>
-      <v-flex xs12 sm4 offset-sm4>
-        <v-card>
-          <h2 class="titulo">Ingreso datos de las personas</h2>
-          <v-form ref="form" v-model="valid" lazy-validation>
+      <v-flex xs12 sm8 offset-sm2 >
+        <v-stepper v-model="stepper" class="mt-3">
+          <v-stepper-header>
+              <v-stepper-step :complete="stepper > 1" step="1">Datos de la persona</v-stepper-step>
+
+              <v-divider></v-divider>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-i2solutions'" :complete="stepper > 2" step="2">Empresa</v-stepper-step>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-empresa'" :complete="stepper > 2" step="2">Establecimiento</v-stepper-step>
+
+              <v-divider></v-divider>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-i2solutions'" :complete="stepper > 3" step="3">Establecimiento</v-stepper-step>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-empresa'" :complete="stepper > 3" step="3">Área de trabajo</v-stepper-step>
+
+              <v-divider></v-divider>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-i2solutions'" :complete="stepper > 4" step="4">Área de trabajo</v-stepper-step>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-empresa'" step="4">Puesto de Trabajo</v-stepper-step>
+
+              <v-divider v-if="$store.getters.usuario.rol === 'admin-i2solutions'"></v-divider>
+
+              <v-stepper-step v-if="$store.getters.usuario.rol === 'admin-i2solutions'" step="5">Puesto de trabajo</v-stepper-step>
+            </v-stepper-header>
+            <v-stepper-items>
+              <v-stepper-content step="1">
+                <v-flex xs12 sm8 offset-sm2 >
+                <v-card>
+          <h2>Ingreso datos de la persona</h2>
+          <v-form ref="form" v-model="valid">
             <!--nombre inicio-->
           <v-container class="contenedor" grid-list-md>
             <v-text-field
               v-model="nombre"
-              label="Nombre"
+              label="Nombres"
               prepend-icon="account_circle"
               required
               :rules="[rules.required]"
+              maxlength=30
+                  :counter=30
             ></v-text-field>
             <!--Fin-->
             <v-text-field
               v-model="apellido"
-              label="Apellido"
+              label="Apellidos"
               prepend-icon="account_circle"
               required
               :rules="[rules.required]"
+              maxlength=30
+                  :counter=30
             ></v-text-field>
               <!--Fin-->
             <v-text-field
@@ -42,14 +75,15 @@
               prepend-icon="vpn_key"
               required
               :counter=10
+              mask="##########"
             ></v-text-field>
-            <v-text-field
+            <!--v-text-field
               v-model="clave"
               label="Clave"
               prepend-icon="vpn_key"
               required
               :rules="[rules.required]"
-            ></v-text-field>
+            ></v-text-field-->
 
             <v-text-field
               v-model="telefono"
@@ -62,6 +96,7 @@
               :nudge-right="40"
               required
               counter="10"
+              mask="##########"
             ></v-text-field>
               <v-menu
                 ref="menu"
@@ -86,8 +121,8 @@
                 <v-date-picker
                   ref="picker"
                   v-model="date"
-                  :max="new Date().toISOString().substr(0, 10)"
-                  min="1950-01-01"
+                  :max="maxDate"
+                  min="1940-01-01"
                   @change="save"
                   :rules="[rules.required]"
                 ></v-date-picker>
@@ -100,6 +135,8 @@
               hint="Ingrese perfil Ocupacional"
               required
               :rules="[rules.required]"
+              maxlength=40
+              :counter=40
             ></v-text-field>
             <v-text-field
               v-model="usuario"
@@ -108,24 +145,204 @@
               hint="Ingrese el usuario"
               required
               :rules="[rules.required]"
+              maxlength=15
+              :counter=15
             ></v-text-field>
             <v-select
               :items="roles"
               v-model="rol"
-              prepend-icon="vpn_key"
               label="Rol"
-              required=""
+              required
               :rules="[rules.required]"
             ></v-select>
           </v-container>
           </v-form>
-          <v-btn
+        </v-card>
+        <v-btn
+            color="blue darken-1"
             :disabled="!valid"
+            @click="continuar"
+          >
+            Continuar
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            flat
+            @click="salir"
+          >
+            Salir
+          </v-btn>
+        </v-flex>
+      </v-stepper-content>
+      <v-stepper-content step="2">
+        <v-card>
+            <v-card-title>
+              <span v-if="$store.getters.usuario.rol === 'admin-i2solutions'" class="headline">Seleccione la empresa</span>
+              <span v-if="$store.getters.usuario.rol === 'admin-empresa'" class="headline">Seleccione el establecimiento</span>
+            </v-card-title>
+            <v-card-text>
+              <v-form ref="form1" v-model="valid1">
+              <v-select
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
+                :items="empresas"
+                label="Empresa"
+                v-model = "newEmpresa"
+                :rules="[rules.required]"
+                item-text="nombre"
+                ></v-select>
+                <v-select
+                v-if="$store.getters.usuario.rol === 'admin-empresa'"
+                :items="establecimientos"
+                label="Establecimiento"
+                v-model = "newEstablecimiento"
+                :rules="[rules.required]"
+                item-text="nombres"
+                ></v-select>
+              </v-form>
+            </v-card-text>
+          </v-card>
+          <v-btn
+            color="blue darken-1"
+            :disabled="!valid1"
+            @click="continuar1"
+          >
+            Continuar
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            flat
+            @click="stepper=1"
+          >
+            Regresar
+          </v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="3">
+        <v-card>
+            <v-card-title>
+              <span v-if="$store.getters.usuario.rol === 'admin-i2solutions'" class="headline">Seleccione el establecimiento</span>
+              <span v-if="$store.getters.usuario.rol === 'admin-empresa'" class="headline">Seleccione el área de trabajo</span>
+            </v-card-title>
+            <v-card-text>
+              <v-form ref="form2" v-model="valid2">
+              <v-select
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
+                :items="establecimientos"
+                label="Establecimiento"
+                v-model = "newEstablecimiento"
+                :rules="[rules.required]"
+                item-text="nombres"
+                ></v-select>
+                <v-select
+                v-if="$store.getters.usuario.rol === 'admin-empresa'"
+                :items="areas"
+                label="Área"
+                v-model = "newArea"
+                :rules="[rules.required]"
+                item-text="nombre"
+                ></v-select>
+              </v-form>
+            </v-card-text>
+          </v-card>
+          <v-btn
+            color="blue darken-1"
+            :disabled="!valid2"
+            @click="continuar2"
+          >
+            Continuar
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            flat
+            @click="stepper=2"
+          >
+            Regresar
+          </v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="4">
+        <v-card>
+            <v-card-title>
+              <span v-if="$store.getters.usuario.rol === 'admin-i2solutions'" class="headline">Seleccione el área de trabajo</span>
+              <span v-if="$store.getters.usuario.rol === 'admin-empresa'" class="headline">Seleccione el puesto de trabajo</span>
+            </v-card-title>
+            <v-card-text>
+              <v-form ref="form3" v-model="valid3">
+              <v-select
+              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
+                :items="areas"
+                label="Área"
+                v-model = "newArea"
+                :rules="[rules.required]"
+                item-text="nombre"
+                ></v-select>
+                <v-select
+                v-if="$store.getters.usuario.rol === 'admin-empresa'"
+                :items="puestos"
+                label="Puesto"
+                v-model = "newPuesto"
+                :rules="[rules.required]"
+                item-text="nombre"
+                ></v-select>
+              </v-form>
+            </v-card-text>
+          </v-card>
+          <v-btn
+          v-if="$store.getters.usuario.rol === 'admin-empresa'"
+            color="blue darken-1"
+            :disabled="!valid3"
+            @click="continuar3"
+          >
+            Agregar
+          </v-btn>
+          <v-btn
+          v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
+            color="blue darken-1"
+            :disabled="!valid3"
+            @click="continuar3"
+          >
+            Continuar
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            flat
+            @click="stepper=3"
+          >
+            Regresar
+          </v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="5">
+        <v-card>
+            <v-card-title>
+              <span class="headline">Seleccione el puesto de trabajo</span>
+            </v-card-title>
+            <v-card-text>
+              <v-form ref="form4" v-model="valid4">
+                <v-select
+                :items="puestos"
+                label="Puesto"
+                v-model = "newPuesto"
+                :rules="[rules.required]"
+                item-text="nombre"
+                ></v-select>
+              </v-form>
+            </v-card-text>
+          </v-card>
+          <v-btn
+            color="blue darken-1"
+            :disabled="!valid4"
             @click="enviar"
           >
-            Crear Persona
+            Agregar
           </v-btn>
-        </v-card>
+          <v-btn
+            color="blue darken-1"
+            flat
+            @click="stepper=4"
+          >
+            Regresar
+          </v-btn>
+      </v-stepper-content>
+            </v-stepper-items>
+          </v-stepper>
       </v-flex>
     </v-layout>
     <v-snackbar
@@ -149,6 +366,10 @@ export default {
   data () {
     return {
       valid: false,
+      valid1: false,
+      valid2: false,
+      valid3: false,
+      valid4: false,
       nombre: '',
       usuario: '',
       apellido: '',
@@ -158,21 +379,34 @@ export default {
       date: null,
       menu: false,
       perfilOcupacional: '',
+      stepper: 1,
+      empresas: [],
+      establecimientos: [],
+      areas: [],
+      puestos: [],
+      newEmpresa: null,
+      newEstablecimiento: null,
+      newArea: null,
+      newPuesto: null,
       rol: '',
       color: '',
       snackbar: false,
       mensajeSnackbar: '',
       roles: [{
-        value: 'Jefe de Seguridad',
+        value: 'jefe-seguridad',
         text: 'Jefe de Seguridad'
       },
       {
-        value: 'Inspector de Seuridad',
+        value: 'inspector-seguridad',
         text: 'Inspector de Seguridad'
       },
       {
-        value: 'Empleado',
+        value: 'empleado',
         text: 'Empleado'
+      },
+      {
+        value: 'admin-empresa',
+        text: 'Administrador de la empresa'
       }
       ],
       correo: '',
@@ -198,7 +432,17 @@ export default {
   },
   watch: {
     menu (val) {
-      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'Año'))
+      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+    }
+  },
+  computed: {
+    maxDate: {
+      get () {
+        let adult = new Date()
+        adult.setDate(adult.getDate() - 6600)
+        let finalDate = adult.toISOString().substr(0, 10)
+        return finalDate
+      }
     }
   },
   methods: {
@@ -206,37 +450,45 @@ export default {
       this.$refs.menu.save(date)
     },
     enviar () {
-      if (this.$refs.form.validate()) {
-        let nombres = this.$data.nombre
-        let apellidos = this.$data.apellido
-        let correo = this.$data.correo
-        let cedula = this.$data.cedula
-        let clave = this.$data.clave
-        let telefono = this.$data.telefono
-        let fechaNacimiento = this.$data.date
-        let usuario = this.$data.usuario
-        let perfilOcupacional = this.$data.perfilOcupacional
-        let rol = this.$data.rol
-        let re = /^[A-Za-z ]+$/
-        if (!re.test(nombres) || !re.test(apellidos)) {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = 'Nombre o Apellidos Inválidos.'
-        } if (this.validador_ruc_y_cedula(cedula)) {
-          this.$store.dispatch('crearPersona', { nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol })
+      let nombres = this.$data.nombre
+      let apellidos = this.$data.apellido
+      let correo = this.$data.correo
+      let cedula = this.$data.cedula
+      let clave = this.$data.clave
+      let telefono = this.$data.telefono
+      let fechaNacimiento = this.$data.date
+      let usuario = this.$data.usuario
+      let perfilOcupacional = this.$data.perfilOcupacional
+      let puestosId = this.$data.newPuesto.id
+      let rol = this.$data.rol
+      if (this.validador_ruc_y_cedula(cedula)) {
+        this.$store.dispatch('crearPersona', { nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol, puestosId })
+          .then((resp) => {
+            this.snackbar = true
+            this.mensajeSnackbar = 'Persona agregada exitosamente. Regresando a la página principal'
+            this.color = 'success'
+            setTimeout(function () { router.push('/') }, 2000)
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      }
+    },
+    continuar () {
+      let cedula = this.$data.cedula
+      if (!this.validador_ruc_y_cedula(cedula)) {
+      } else {
+        if (this.$store.getters.usuario.rol === 'admin-empresa') {
+          this.establecimientos = this.$store.getters.establecimientos
+          this.stepper = 2
+        } else {
+          this.$store.dispatch('getEmpresas')
             .then((resp) => {
-              this.snackbar = true
-              this.mensajeSnackbar = 'Persona creada exitosamente.'
-              this.color = 'success'
-              this.$store.dispatch('getPersonas')
-                .then((resp) => {
-                  setTimeout(function () { router.push('personas') }, 2000)
-                })
-                .catch((err) => {
-                  this.color = 'error'
-                  this.snackbar = true
-                  this.mensajeSnackbar = err
-                })
+              console.log('Done')
+              this.empresas = this.$store.getters.empresas
+              this.stepper = 2
             })
             .catch((err) => {
               this.color = 'error'
@@ -244,6 +496,61 @@ export default {
               this.mensajeSnackbar = err
             })
         }
+      }
+    },
+    continuar1 () {
+      if (this.$store.getters.usuario.rol === 'admin-empresa') {
+        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento.id)
+          .then((resp) => {
+            this.areas = this.$store.getters.areasPuestos
+            console.log('Done')
+            this.stepper = 3
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      } else {
+        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa.id)
+          .then((resp) => {
+            console.log('Done')
+            this.establecimientos = this.$store.getters.establecimientos
+            this.stepper = 3
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      }
+    },
+    continuar2 () {
+      if (this.$store.getters.usuario.rol === 'admin-empresa') {
+        this.puestos = this.newArea.puestos
+        console.log('Done')
+        this.stepper = 4
+      } else {
+        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento.id)
+          .then((resp) => {
+            console.log('Done')
+            this.areas = this.$store.getters.areasPuestos
+            this.stepper = 4
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
+      }
+    },
+    continuar3 () {
+      if (this.$store.getters.usuario.rol === 'admin-empresa') {
+        this.enviar()
+      } else {
+        this.puestos = this.newArea.puestos
+        console.log('Done')
+        this.stepper = 5
       }
     },
     validador_ruc_y_cedula (identificacion) {
@@ -400,6 +707,9 @@ export default {
     },
     logout () {
       this.$store.dispatch('logout')
+      router.push('/')
+    },
+    salir () {
       router.push('/')
     }
   }

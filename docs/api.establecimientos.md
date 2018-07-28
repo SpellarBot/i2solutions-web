@@ -238,18 +238,6 @@ __GET__ __/api/web/principal/establecimientos/empresas/:empresasId__
       "cantidadCapacitaciones": 1,
       "cantidadPersonas": 1,
       "cantidadNovadadesSinAtender": 2
-    },
-    {
-      "id": 3,
-      "nombres": "Adame S.L.",
-      "ruc": "2523651369001",
-      "direccion": "1209 Luisa Grupo",
-      "cantidadAreas": 0,
-      "cantidadPuestos": 0,
-      "cantidadAccidentes": 0,
-      "cantidadCapacitaciones": 0,
-      "cantidadPersonas": 0,
-      "cantidadNovadadesSinAtender": 0
     }
   ],
   "codigoEstado": 200

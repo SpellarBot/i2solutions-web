@@ -468,7 +468,7 @@ describe('ESTABLECIMIENTOS', () => {
       empresasId = empresaCreada['id']
       let establecimientosCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
       let establecimientosCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada2['id'] })
-      let establecimientosCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada['id'] })
+      // let establecimientosCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada['id'] })
       let areaCreada = await models.areas.Crear({ ...area, establecimientosId: establecimientosCreada['id'] })
       let areaCreada2 = await models.areas.Crear({ ...area2, establecimientosId: establecimientosCreada2['id'] })
       let puestoCreada = await models.puestos.Crear({ ...puesto })
@@ -476,7 +476,7 @@ describe('ESTABLECIMIENTOS', () => {
       await models.capacitaciones.Crear({ areasId: areaCreada['id'], ...capacitacion })
       await models.accidentes.Crear({ puestosId: puestoCreada['id'], ...accidente })
       let personaCreada = await models.personas.Crear({ ...persona })
-      await models.personasPuestos.Crear({ puestosId: personaCreada['id'], puestosId: puestoCreada['id'] })
+      await models.personasPuestos.Crear({ puestosId: puestoCreada['id'], personasId: personaCreada['id'] })
       await models.novedades.Crear({ ...novedad, puestosId: puestoCreada['id'] })
       await models.novedades.Crear({ ...novedad, puestosId: puestoCreada['id'] })
     })

@@ -13,7 +13,8 @@ module.exports = {
       { nombre: 'telefono', tipo: 'String', descripcion: ' 0931823448, 2988383 ' },
       { nombre: 'fechaNacimiento', tipo: 'ISOdate', descripcion: ' --- ' },
       { nombre: 'usuario', tipo: 'String', descripcion: ' ?, por definir ' },
-      { nombre: 'rol', tipo: 'String', descripcion: '\'admin-i2solutions\', \'inspector-seguridad\', \'jefe-seguridad\', \'admin-empresa\', \'empleado\'' }
+      { nombre: 'rol', tipo: 'String', descripcion: '\'admin-i2solutions\', \'inspector-seguridad\', \'jefe-seguridad\', \'admin-empresa\', \'empleado\'' },
+      { nombre: 'personasId', tipo: 'Number', descripcion: ' ' }
     ],
     errors: []
   },

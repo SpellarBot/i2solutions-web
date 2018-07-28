@@ -1,22 +1,9 @@
 'use strict'
-// let knex = {}
-// if (process.env.NODE_ENV === 'testing') {
-//   knex = require('knex')({
-//     client: 'sqlite',
-//     useNullAsDefault: true
-//   })
-// } else {
-//   knex = require('knex')({
-//     client: 'mysql',
-//     useNullAsDefault: true
-//   })
-// }
 module.exports = (sequelize, DataTypes) => {
   let singular = 'empresas'
   let plural = 'empresas'
   let tableName = 'empresas'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombre: { type: DataTypes.STRING },
     actividadComercial: { type: DataTypes.STRING },
     razonSocial: { type: DataTypes.STRING },

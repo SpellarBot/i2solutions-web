@@ -33,6 +33,13 @@ module.exports = {
           { codigo: 'C32', descripcion: '\'type\': !\'number\'', valido: false },
           { codigo: 'C33', descripcion: 'minimum: !1 ', valido: false }
         ]
+      },
+      { nombre: 'puestosId',
+        casos: [
+          { codigo: 'C41', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C42', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C43', descripcion: 'minimum: !1 ', valido: false }
+        ]
       }
     ],
     intersecciones: {
@@ -43,7 +50,8 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C21' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '2': {
@@ -53,7 +61,8 @@ module.exports = {
           'nombre': { codigo: 'C02' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C21' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '3': {
@@ -63,7 +72,8 @@ module.exports = {
           'nombre': { codigo: 'C03' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C21' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '4': {
@@ -73,7 +83,8 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C12' },
           'fotoUrl': { codigo: 'C21' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '5': {
@@ -83,7 +94,8 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C13' },
           'fotoUrl': { codigo: 'C21' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '6': {
@@ -93,7 +105,8 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C22' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '7': {
@@ -103,7 +116,8 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C23' },
-          'cantidad': { codigo: 'C31' }
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '8': {
@@ -113,7 +127,8 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C22' },
-          'cantidad': { codigo: 'C32' }
+          'cantidad': { codigo: 'C32' },
+          'puestosId': { codigo: 'C41' }
         }
       },
       '9': {
@@ -123,7 +138,38 @@ module.exports = {
           'nombre': { codigo: 'C01' },
           'descripcion': { codigo: 'C11' },
           'fotoUrl': { codigo: 'C23' },
-          'cantidad': { codigo: 'C33' }
+          'cantidad': { codigo: 'C33' },
+          'puestosId': { codigo: 'C41' }
+        }
+      },
+      '10': {
+        descripcion: 'puestosId tipo no valido',
+        body: {
+          'nombre': { codigo: 'C01' },
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C21' },
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C42' }
+        }
+      },
+      '11': {
+        descripcion: 'puestosId tamano no valido',
+        body: {
+          'nombre': { codigo: 'C01' },
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C21' },
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C43' }
+        }
+      },
+      '12': {
+        descripcion: 'puestosId no exite',
+        body: {
+          'nombre': { codigo: 'C01' },
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C21' },
+          'cantidad': { codigo: 'C31' },
+          'puestosId': { codigo: 'C41' }
         }
       }
     }
