@@ -57,6 +57,7 @@ export default {
           if (this.$store.getters.usuario.rol === 'admin-i2solutions') {
             router.push('dashboard')
           } else {
+            console.log(this.$store.getters.usuario)
             let empId = this.$store.getters.usuario.empresasId
             router.push('/dashboard/' + empId)
           }
