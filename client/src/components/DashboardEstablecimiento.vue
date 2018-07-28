@@ -184,6 +184,21 @@
   </v-container>
   </template>
     <footer>
+    <v-btn
+      top
+      right
+      relative
+      fab
+      @click.native="agregarDialog=true"
+      >
+      <v-icon>add</v-icon>
+    </v-btn>
+    <agregarEstablecimientoDialog
+    :visible="agregarDialog"
+    :idEmpresa="$route.params.empresaId"
+    @close="agregarDialog=false"
+    >  
+    </agregarEstablecimientoDialog>
     <DialogPuestosFromEstablecimientos
     :visible="visiblePuestos"
     :establecimientoId="establecimientoId"
@@ -254,7 +269,7 @@ import DialogNovedadesFromEstablecimientos from './Novedades/DialogNovedadesFrom
 import DialogAreas from './Areas/verAreasDialog'
 import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 import DialogEditarEstablecimientos from './Editar/DialogEditarEstablecimientos'
-import agregarArea from './Agregar/agregarArea'
+import agregarEstablecimientoDialog from './Agregar/agregarEstablecimientoDialog'
 export default {
   components: {
     DialogPuestosFromEstablecimientos,
@@ -264,7 +279,8 @@ export default {
     DialogNovedadesFromEstablecimientos,
     DialogAreas,
     DialogEditarEmpresas,
-    DialogEditarEstablecimientos
+    DialogEditarEstablecimientos,
+    agregarEstablecimientoDialog
   },
   data () {
     return {
@@ -285,9 +301,8 @@ export default {
       visibleNovedades: false,
       eliminarDialog: false,
       eliminarDialog2: false,
-
+      agregarDialog: false,
       agregarArea: false,
-
       empresaNombre: '',
       empresaActividadComercial: '',
       empresaRazonSocial: '',

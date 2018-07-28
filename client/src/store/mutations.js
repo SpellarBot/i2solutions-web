@@ -72,6 +72,12 @@ export default {
   setVerified (state, payload) {
     state.verified = payload
   },
+  setCreated (state, payload) {
+    state.created = payload
+  },
+  setFinalAreaCrear (state, payload) {
+    state.setFinalAreaCrear = payload
+  },
   setEquiposPuestos (state, equipoPuesto) {
     state.equipoAreas = equipoPuesto
   },

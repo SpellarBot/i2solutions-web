@@ -165,7 +165,7 @@ export default {
       let empresasId = Number(this.establecimiento.empresaId)
       return new Promise((resolve, reject) => {
         Vue.http.post('/api/web/establecimientos', {nombres, direccion, ruc, empresasId})
-          .then((resp) => {
+          .then(async (resp) => {
             if (resp.body.estado) {
               this.instanciasAreas.forEach(function (area) {
                 area.crear(resp.body.datos.id)

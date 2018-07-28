@@ -59,8 +59,14 @@ export default {
   equipos (state) {
     return state.equipos
   },
-  verified () {
+  verified (state) {
     return this.verified
+  },
+  created (state) {
+    return this.created
+  },
+  finalAreaCrear () {
+    return this.finalAreaCrear
   },
   equipoPuesto (state) {
     return state.equipoPuesto

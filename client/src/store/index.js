@@ -30,7 +30,11 @@ export const store = new Vuex.Store({
     novedadesAreas: null,
     novedadesPuestos: null,
     equipos: null,
+
     verified: true,
+    created: false,
+    finalAreaCrear: false,
+
     equipoPuesto: null,
     equipoAreas: null,
     riesgoPuesto: null,

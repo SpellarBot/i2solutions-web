@@ -190,6 +190,12 @@ export default {
         puesto.verify()
       })
     },
+    async asyncForEachCreator (instanciaArray, id) {
+      console.log(id)
+      for (let index = 0; index < instanciaArray.length; index++) {
+          await instanciaArray[index].crear(Number(id))
+      }
+    },
     crear (idEstablecimiento) {
       this.area.establecimientoId = idEstablecimiento
       this.agregar()
@@ -203,18 +209,20 @@ export default {
       let image = this.imageUrl.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
       return new Promise((resolve, reject) => {
         Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
-          .then((resp) => {
+          .then(async (resp) => {
             let fotoUrl = resp.body.data.link
             return fotoUrl
           })
           .then((fotoUrl) => {
-            Vue.http.post('/api/web/areas', {actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId})
+            return Vue.http.post('/api/web/areas', {actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId})
           })
-          .then((resp) => {
+          .then(async (resp) => {
             if (resp.body.estado) {
-              this.instanciasPuesto.forEach(function (puesto) {
-                puesto.crear(resp.body.datos.id)
-              })
+              const startPuestos = async () => {
+                this.asyncForEachCreator(this.instanciasPuesto, resp.body.datos.id)
+                console.log('agregando puestos')
+              }
+              startPuestos()
               return resolve()
             } else {
               this.$store.commit('setError', resp.body.datos)
