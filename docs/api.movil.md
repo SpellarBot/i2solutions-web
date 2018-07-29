@@ -145,8 +145,8 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
             "nombres": "Carlos",
             "apellidos": "Andres",
             "correo": "ca@hotmail.com",
-            "cedula": "0931823449",
-            "telefono": "1031823447"
+            "cedula": "0931823447",
+            "telefono": "0986901270"
           },
           {
             "nombres": "Elsa",

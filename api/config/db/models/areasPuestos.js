@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'areasPuestos'
   let tableName = 'areasPuestos'
   let define = sequelize.define(singular, {
-    // id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true }
   }, {
     name: {
       singular,

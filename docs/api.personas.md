@@ -24,19 +24,21 @@ La clave se genera en el back y enviar el correo dependiendo del rol
 {
   "estado": true,
   "datos": {
+    "claveCreada": false,
+    "creadaDump": false,
     "id": 1,
-    "nombres": "Elsa",
-    "apellidos": "Vega",
-    "correo": "vctor_daz@hotmail.com",
+    "nombres": "Carlos",
+    "apellidos": "Andres",
+    "correo": "joelerll@gmail.com",
     "cedula": "0931823447",
     "telefono": "0986901270",
-    "fechaNacimiento": "2014-05-21T19:27:28.576Z",
-    "perfilOcupacional": "admin",
-    "usuario": "elsa",
-    "rol": "admin-i2solutions",
-    "clave": "$2b$05$OTCzBEy1medCs7ONJ3L9k.tpxfpvU8xrk23KGDK23hBF0YTj5V8jO",
-    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+    "perfilOcupacional": "Inspector",
+    "usuario": "carlos",
+    "rol": "inspector-seguridad",
+    "resetClaveToken": "f5aee24bb9669340ad51ba3747039851effa6594",
+    "fechaActualizacion": "2018-08-01T05:00:00.000Z",
+    "fechaCreacion": "2018-08-01T05:00:00.000Z",
     "puestosId": 1
   },
   "codigoEstado": 200
@@ -79,8 +81,8 @@ __PUT__ __/api/web/personas/:personasId__
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -150,13 +152,18 @@ __GET__ __/api/web/personas/:personasId__
     "apellidos": "Vega",
     "correo": "vctor_daz@hotmail.com",
     "cedula": "0931823447",
+    "clave": null,
     "telefono": "0986901270",
-    "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+    "fechaNacimiento": "1995-05-21T19:27:28.576Z",
     "perfilOcupacional": "admin",
     "usuario": "elsa",
     "rol": "admin-i2solutions",
-    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
-    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
+    "claveCreada": 0,
+    "creadaDump": 0,
+    "resetClaveToken": null,
+    "resetClaveExpires": null,
+    "fechaCreacion": "2018-08-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2018-08-01 05:00:00.000 +00:00"
   },
   "codigoEstado": 200
 }
@@ -191,7 +198,7 @@ __GET__ __/api/web/personas/establecimientos/:establecimientosId__
       "correo": "vctor_daz@hotmail.com",
       "cedula": "0931823447",
       "telefono": "0986901270",
-      "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
       "perfilOcupacional": "admin",
       "usuario": "elsa",
       "rol": "admin-i2solutions",
@@ -236,7 +243,7 @@ __GET__ __/api/web/personas/areas/:areasId__
       "correo": "vctor_daz@hotmail.com",
       "cedula": "0931823447",
       "telefono": "0986901270",
-      "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
       "perfilOcupacional": "admin",
       "usuario": "elsa",
       "rol": "admin-i2solutions",
@@ -281,7 +288,7 @@ __GET__ __/api/web/personas/puestos/:puestosId__
       "correo": "vctor_daz@hotmail.com",
       "cedula": "0931823447",
       "telefono": "0986901270",
-      "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
       "perfilOcupacional": "admin",
       "puestosNombre": "Oficina de gerente general",
       "usuario": "elsa",
@@ -318,8 +325,8 @@ __GET__ __/api/web/personas/:personasId/puestos/:puestosId__
   "datos": {
     "puestosId": "1",
     "personasId": "1",
-    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaActualizacion": "2018-08-01T05:00:00.000Z",
+    "fechaCreacion": "2018-08-01T05:00:00.000Z"
   },
   "codigoEstado": 200
 }

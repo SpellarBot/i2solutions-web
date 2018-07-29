@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   let define = sequelize.define(singular, {
     nombres: { type: DataTypes.STRING },
     direccion: { type: DataTypes.STRING },
-    ruc: { type: DataTypes.STRING } // , unique: true
+    ruc: { type: DataTypes.STRING, unique: true }
   }, {
     name: {
       singular,

@@ -186,4 +186,35 @@ module.exports = (app) => {
         })
       }
     })
+
+  // identificador: API_9
+  // crear clave
+  app.route('/personas/crear_clave/:token')
+    .post((req, res) => {
+      let { BODY } = schema.API_9_SCHEMA
+      let [err, mensaje] = validar(BODY, req.body)
+      if (err) {
+        let resp = responses.NO_OK({ ...mensaje })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        let token = req.params['token']
+        Controller.CrearClave({ ...req.body, token }).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  app.route('/personas/enviarCorreoCambioClave/:personasId')
+    .put((req, res) => {
+      // clave
+    })
+
+//  claveCreada
+// resetClaveToken
+// resetClaveExpires
 }

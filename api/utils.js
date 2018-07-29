@@ -5,8 +5,22 @@ const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
 // require('ajv-errors')(ajv)
 const bcrypt = require('bcrypt')
-const saltos = 5
+const saltos = 5 || process.env.SALT
+
 const responses = require('./responses')
+
+function verificarNombres (nombres) {
+  let noValido = /[`~,.<>*;'¡?!-@^%:"/[\]|{}()=_+~#-\d]/.test(nombres)
+  if (noValido) {
+    return [false, 'tiene caracteres no validos']
+  } else if (nombres.length > 30) {
+    return [false, 'tamaño muy grande']
+  } else if (nombres.length < 2) {
+    return [false, 'tamaño muy pequeño']
+  } else {
+    return [true, '']
+  }
+}
 
 function verificadorCedulaRuc (identificacion, tipo) {
   if (tipo === 'cedula' && identificacion.length !== 10) {
@@ -142,6 +156,26 @@ function verificadorCedulaRuc (identificacion, tipo) {
   return [false, '']
 }
 
+function fechaNacimiento (fecha) {
+  let isValid = false
+  try {
+    isValid = moment(fecha).isValid()
+  } catch (e) {
+    return [false, 'La fecha tiene formato no valido']
+  }
+  if (!isValid) {
+    return [false, 'La fecha tiene formato no valido']
+  }
+  let years = moment().diff(fecha, 'years')
+  let year = moment(fecha).year()
+  if (years < 18) {
+    return [false, 'La edad mínima es 18 años']
+  } else if (year <= 1940) {
+    return [false, 'Tiene que ser fecha mayores a 1900']
+  }
+  return [isValid, '']
+}
+
 ajv.addKeyword('cedula', {
   validate: function xyz (schema, data) {
     xyz.errors = []
@@ -182,6 +216,42 @@ ajv.addKeyword('fecha', {
   errors: true
 })
 
+ajv.addKeyword('fechaNacimiento', {
+  validate: function xyz (schema, data) {
+    xyz.errors = []
+    let [esValido, mensaje] = fechaNacimiento(data)
+    if (!esValido) {
+      xyz.errors.push({
+        keyword: 'fecha',
+        message: mensaje,
+        params: {
+          keyword: 'fecha'
+        }
+      })
+    }
+    return esValido
+  },
+  errors: true
+})
+
+ajv.addKeyword('nombres', {
+  validate: function xyz (schema, data) {
+    xyz.errors = []
+    let [esValido, mensaje] = verificarNombres(data)
+    if (!esValido) {
+      xyz.errors.push({
+        keyword: 'nombres',
+        message: mensaje,
+        params: {
+          keyword: 'nombres'
+        }
+      })
+    }
+    return esValido
+  },
+  errors: true
+})
+
 module.exports = {
   genHash (clave) {
     return new Promise((resolve, reject) => {
@@ -197,6 +267,7 @@ module.exports = {
   verificarClave (clave, hashDB) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(clave, hashDB, function (err, res) {
+        console.log(res)
         if (err) {
           reject(err)
         } else {
@@ -268,8 +339,6 @@ module.exports = {
     // 0931823447 2938373
     return [false, 'mensaje']
   },
-  verificarNombres (nombres) {
-    // Joel Eduardo Rodriguez Llamuca , solo letras con especios
-    return [false, 'mensaje']
-  }
+  verificarNombres,
+  fechaNacimiento
 }

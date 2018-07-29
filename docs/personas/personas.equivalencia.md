@@ -19,37 +19,49 @@
 			<tr style='background-color: #82E0AA' >
 				<td> nombres</td>
 				<td> <a id='CE_API_1[C01]'>CE_API_1[C01]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> valido: Carlos Ñandí</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> nombres</td>
 				<td> <a id='CE_API_1[C02]'>CE_API_1[C02]</a> </td>
-				<td> 'type': !'string'</td>
+				<td> contiene algun caracter no valido o numero</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> nombres</td>
 				<td> <a id='CE_API_1[C03]'>CE_API_1[C03]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano mayor a 30</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> nombres</td>
+				<td> <a id='CE_API_1[C04]'>CE_API_1[C04]</a> </td>
+				<td> tamano menor a 2</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
 				<td> apellidos</td>
 				<td> <a id='CE_API_1[C11]'>CE_API_1[C11]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> valido: Carlos Ñandí</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> apellidos</td>
 				<td> <a id='CE_API_1[C12]'>CE_API_1[C12]</a> </td>
-				<td> 'type': !'string'</td>
+				<td> contiene algun caracter no valido o numero</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> apellidos</td>
 				<td> <a id='CE_API_1[C13]'>CE_API_1[C13]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano mayor a 30</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> apellidos</td>
+				<td> <a id='CE_API_1[C14]'>CE_API_1[C14]</a> </td>
+				<td> tamano menor a 2</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
@@ -79,13 +91,19 @@
 			<tr style='background-color: #82E0AA' >
 				<td> telefono</td>
 				<td> <a id='CE_API_1[C41]'>CE_API_1[C41]</a> </td>
-				<td> { 'type': 'boolean' }</td>
+				<td> { 'type': 'string', minLength: 10, maxLength: 10 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> telefono</td>
 				<td> <a id='CE_API_1[C42]'>CE_API_1[C42]</a> </td>
-				<td> 'type': !'boolean'</td>
+				<td> 'type': !'string'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> telefono</td>
+				<td> <a id='CE_API_1[C43]'>CE_API_1[C43]</a> </td>
+				<td> tamano != 10 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
@@ -103,7 +121,7 @@
 			<tr style='background-color: #82E0AA' >
 				<td> perfilOcupacional</td>
 				<td> <a id='CE_API_1[C61]'>CE_API_1[C61]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> { 'type': 'string', minLength: 2, maxLength: 50 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
@@ -115,13 +133,19 @@
 			<tr style='background-color: #EC7063' >
 				<td> perfilOcupacional</td>
 				<td> <a id='CE_API_1[C63]'>CE_API_1[C63]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano < 2 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> perfilOcupacional</td>
+				<td> <a id='CE_API_1[C64]'>CE_API_1[C64]</a> </td>
+				<td> tamano > 50 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
 				<td> usuario</td>
 				<td> <a id='CE_API_1[C71]'>CE_API_1[C71]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> { 'type': 'string', minLength: 2, maxLength: 25 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
@@ -133,7 +157,13 @@
 			<tr style='background-color: #EC7063' >
 				<td> usuario</td>
 				<td> <a id='CE_API_1[C73]'>CE_API_1[C73]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano < 2 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> usuario</td>
+				<td> <a id='CE_API_1[C74]'>CE_API_1[C74]</a> </td>
+				<td> tamano > 25 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
@@ -178,19 +208,21 @@ _response_
 {
   "estado": true,
   "datos": {
+    "claveCreada": false,
+    "creadaDump": false,
     "id": 1,
-    "nombres": "Elsa",
-    "apellidos": "Vega",
-    "correo": "vctor_daz@hotmail.com",
+    "nombres": "Carlos",
+    "apellidos": "Andres",
+    "correo": "joelerll@gmail.com",
     "cedula": "0931823447",
     "telefono": "0986901270",
-    "fechaNacimiento": "2014-05-21T19:27:28.576Z",
-    "perfilOcupacional": "admin",
-    "usuario": "elsa",
-    "rol": "admin-i2solutions",
-    "clave": "$2b$05$OTCzBEy1medCs7ONJ3L9k.tpxfpvU8xrk23KGDK23hBF0YTj5V8jO",
-    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "fechaNacimiento": "1995-05-21T19:27:28.576Z",
+    "perfilOcupacional": "Inspector",
+    "usuario": "carlos",
+    "rol": "inspector-seguridad",
+    "resetClaveToken": "f5aee24bb9669340ad51ba3747039851effa6594",
+    "fechaActualizacion": "2018-08-01T05:00:00.000Z",
+    "fechaCreacion": "2018-08-01T05:00:00.000Z",
     "puestosId": 1
   },
   "codigoEstado": 200
@@ -223,7 +255,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "nombres": "debe ser string"
+    "nombres": "tiene caracteres no validos"
   },
   "codigoEstado": 200
 }
@@ -255,7 +287,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "nombres": "no debe contener menos de 2 caracteres"
+    "nombres": "tamaño muy pequeño"
   },
   "codigoEstado": 200
 }
@@ -287,7 +319,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "apellidos": "debe ser string"
+    "apellidos": "tiene caracteres no validos"
   },
   "codigoEstado": 200
 }
@@ -319,7 +351,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "apellidos": "no debe contener menos de 2 caracteres"
+    "apellidos": "tamaño muy pequeño"
   },
   "codigoEstado": 200
 }
@@ -447,7 +479,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaNacimiento": "La fecha no es valida"
+    "fechaNacimiento": "La fecha tiene formato no valido"
   },
   "codigoEstado": 200
 }
@@ -637,37 +669,49 @@ ___
 			<tr style='background-color: #82E0AA' >
 				<td> nombres</td>
 				<td> <a id='CE_API_1[C01]'>CE_API_1[C01]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> valido: Carlos Ñandí</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> nombres</td>
 				<td> <a id='CE_API_1[C02]'>CE_API_1[C02]</a> </td>
-				<td> 'type': !'string'</td>
+				<td> contiene algun caracter no valido o numero</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> nombres</td>
 				<td> <a id='CE_API_1[C03]'>CE_API_1[C03]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano mayor a 30</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> nombres</td>
+				<td> <a id='CE_API_1[C04]'>CE_API_1[C04]</a> </td>
+				<td> tamano menor a 2</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
 				<td> apellidos</td>
 				<td> <a id='CE_API_1[C11]'>CE_API_1[C11]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> valido: Carlos Ñandí</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> apellidos</td>
 				<td> <a id='CE_API_1[C12]'>CE_API_1[C12]</a> </td>
-				<td> 'type': !'string'</td>
+				<td> contiene algun caracter no valido o numero</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> apellidos</td>
 				<td> <a id='CE_API_1[C13]'>CE_API_1[C13]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano mayor a 30</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> apellidos</td>
+				<td> <a id='CE_API_1[C14]'>CE_API_1[C14]</a> </td>
+				<td> tamano menor a 2</td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
@@ -697,13 +741,19 @@ ___
 			<tr style='background-color: #82E0AA' >
 				<td> telefono</td>
 				<td> <a id='CE_API_1[C41]'>CE_API_1[C41]</a> </td>
-				<td> { 'type': 'boolean' }</td>
+				<td> { 'type': 'string', minLength: 10, maxLength: 10 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
 				<td> telefono</td>
 				<td> <a id='CE_API_1[C42]'>CE_API_1[C42]</a> </td>
-				<td> 'type': !'boolean'</td>
+				<td> 'type': !'string'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> telefono</td>
+				<td> <a id='CE_API_1[C43]'>CE_API_1[C43]</a> </td>
+				<td> tamano != 10 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
@@ -721,7 +771,7 @@ ___
 			<tr style='background-color: #82E0AA' >
 				<td> perfilOcupacional</td>
 				<td> <a id='CE_API_1[C61]'>CE_API_1[C61]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> { 'type': 'string', minLength: 2, maxLength: 50 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
@@ -733,13 +783,19 @@ ___
 			<tr style='background-color: #EC7063' >
 				<td> perfilOcupacional</td>
 				<td> <a id='CE_API_1[C63]'>CE_API_1[C63]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano < 2 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> perfilOcupacional</td>
+				<td> <a id='CE_API_1[C64]'>CE_API_1[C64]</a> </td>
+				<td> tamano > 50 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
 				<td> usuario</td>
 				<td> <a id='CE_API_1[C71]'>CE_API_1[C71]</a> </td>
-				<td> { 'type': 'string', minLength: 2 }</td>
+				<td> { 'type': 'string', minLength: 2, maxLength: 25 }</td>
 				<td> válido </td>
 			</tr>
 			<tr style='background-color: #EC7063' >
@@ -751,7 +807,13 @@ ___
 			<tr style='background-color: #EC7063' >
 				<td> usuario</td>
 				<td> <a id='CE_API_1[C73]'>CE_API_1[C73]</a> </td>
-				<td> minLength: !2 </td>
+				<td> tamano < 2 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> usuario</td>
+				<td> <a id='CE_API_1[C74]'>CE_API_1[C74]</a> </td>
+				<td> tamano > 25 </td>
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
@@ -822,12 +884,12 @@ Crear una persona de forma correcta
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -866,8 +928,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -920,12 +982,12 @@ nombres tipo no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -964,8 +1026,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -980,7 +1042,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "nombres": "debe ser string"
+    "nombres": "tiene caracteres no validos"
   },
   "codigoEstado": 200
 }
@@ -1020,12 +1082,12 @@ nombres tamano no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1064,8 +1126,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1080,7 +1142,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "nombres": "no debe contener menos de 2 caracteres"
+    "nombres": "tamaño muy pequeño"
   },
   "codigoEstado": 200
 }
@@ -1120,12 +1182,12 @@ apellidos tipo no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1164,8 +1226,8 @@ _request o body_
   "apellidos": 1,
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1180,7 +1242,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "apellidos": "debe ser string"
+    "apellidos": "tiene caracteres no validos"
   },
   "codigoEstado": 200
 }
@@ -1220,12 +1282,12 @@ apellidos tamano no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1264,8 +1326,8 @@ _request o body_
   "apellidos": "",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1280,7 +1342,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "apellidos": "no debe contener menos de 2 caracteres"
+    "apellidos": "tamaño muy pequeño"
   },
   "codigoEstado": 200
 }
@@ -1320,12 +1382,12 @@ cedula no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1364,8 +1426,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "093213",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1420,12 +1482,12 @@ correo no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1464,8 +1526,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "joelerll@",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1525,7 +1587,7 @@ telefono no valido
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1565,7 +1627,7 @@ _request o body_
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
   "telefono": 1,
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1620,12 +1682,12 @@ fechaNacimiento no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C52]"> CE_API_1[C52]</a></td>
-    <td>2013-13-05</td>
+    <td>2017-13-05</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1664,8 +1726,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2013-13-05",
+  "telefono": "0986901270",
+  "fechaNacimiento": "2017-13-05",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -1680,7 +1742,7 @@ _response_
 {
   "estado": false,
   "datos": {
-    "fechaNacimiento": "La fecha no es valida"
+    "fechaNacimiento": "La fecha tiene formato no valido"
   },
   "codigoEstado": 200
 }
@@ -1720,12 +1782,12 @@ perfilOcupacional tipo no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1764,8 +1826,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": 1,
   "usuario": "irene",
   "rol": "empleado"
@@ -1820,12 +1882,12 @@ perfilOcupacional tamano no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1864,8 +1926,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "a",
   "usuario": "irene",
   "rol": "empleado"
@@ -1920,12 +1982,12 @@ usuario tipo no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -1964,8 +2026,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": 1,
   "rol": "empleado"
@@ -2020,12 +2082,12 @@ usuario tamano no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -2064,8 +2126,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "",
   "rol": "empleado"
@@ -2120,12 +2182,12 @@ rol no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -2164,8 +2226,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "otro rol"
@@ -2220,12 +2282,12 @@ personasId tipo no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -2264,8 +2326,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -2320,12 +2382,12 @@ personasId tamano no valido
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -2364,8 +2426,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -2420,12 +2482,12 @@ personasId no existe
   <tr>
     <td>telefono</td>
     <td><a href="#CE_API_1[C41]"> CE_API_1[C41]</a></td>
-    <td>2948373</td>
+    <td>0986901270</td>
   </tr>
   <tr>
     <td>fechaNacimiento</td>
     <td><a href="#CE_API_1[C51]"> CE_API_1[C51]</a></td>
-    <td>2014-05-21T19:27:28.576Z</td>
+    <td>1995-05-21T19:27:28.576Z</td>
   </tr>
   <tr>
     <td>perfilOcupacional</td>
@@ -2464,8 +2526,8 @@ _request o body_
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
   "cedula": "0931823447",
-  "telefono": "2948373",
-  "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+  "telefono": "0986901270",
+  "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
   "usuario": "irene",
   "rol": "empleado"
@@ -2725,13 +2787,18 @@ _response_
     "apellidos": "Vega",
     "correo": "vctor_daz@hotmail.com",
     "cedula": "0931823447",
+    "clave": null,
     "telefono": "0986901270",
-    "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+    "fechaNacimiento": "1995-05-21T19:27:28.576Z",
     "perfilOcupacional": "admin",
     "usuario": "elsa",
     "rol": "admin-i2solutions",
-    "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
-    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
+    "claveCreada": 0,
+    "creadaDump": 0,
+    "resetClaveToken": null,
+    "resetClaveExpires": null,
+    "fechaCreacion": "2018-08-01 05:00:00.000 +00:00",
+    "fechaActualizacion": "2018-08-01 05:00:00.000 +00:00"
   },
   "codigoEstado": 200
 }
@@ -2907,7 +2974,7 @@ _response_
       "correo": "vctor_daz@hotmail.com",
       "cedula": "0931823447",
       "telefono": "0986901270",
-      "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
       "perfilOcupacional": "admin",
       "usuario": "elsa",
       "rol": "admin-i2solutions",
@@ -3093,7 +3160,7 @@ _response_
       "correo": "vctor_daz@hotmail.com",
       "cedula": "0931823447",
       "telefono": "0986901270",
-      "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
       "perfilOcupacional": "admin",
       "usuario": "elsa",
       "rol": "admin-i2solutions",
@@ -3279,7 +3346,7 @@ _response_
       "correo": "vctor_daz@hotmail.com",
       "cedula": "0931823447",
       "telefono": "0986901270",
-      "fechaNacimiento": "2014-05-21T19:27:28.576Z",
+      "fechaNacimiento": "1995-05-21T19:27:28.576Z",
       "perfilOcupacional": "admin",
       "puestosNombre": "Oficina de gerente general",
       "usuario": "elsa",
@@ -3473,8 +3540,8 @@ _response_
   "datos": {
     "puestosId": "1",
     "personasId": "1",
-    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaActualizacion": "2018-08-01T05:00:00.000Z",
+    "fechaCreacion": "2018-08-01T05:00:00.000Z"
   },
   "codigoEstado": 200
 }

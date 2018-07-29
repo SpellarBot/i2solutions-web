@@ -4,16 +4,16 @@ module.exports = {
       'minProperties': 9,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 },
-        'apellidos': { 'type': 'string', minLength: 2 },
+        'nombres': { 'nombres': 'string' },
+        'apellidos': { 'nombres': 'string' },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
-        'telefono': { 'type': 'string', minLength: 7 }, // max:0931823447 min: 2938373
-        'fechaNacimiento': { 'fecha': true },
-        'perfilOcupacional': { 'type': 'string', minLength: 2 },
-        'usuario': { 'type': 'string', minLength: 2 },
+        'telefono': { 'type': 'string', minLength: 10, maxLength: 10 },
+        'fechaNacimiento': { 'fechaNacimiento': true },
+        'perfilOcupacional': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'usuario': { 'type': 'string', minLength: 2, maxLength: 25 },
         'rol': { 'type': 'string', 'enum': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] },
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -22,14 +22,14 @@ module.exports = {
       'minProperties': 4,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 },
-        'apellidos': { 'type': 'string', minLength: 2 },
+        'nombres': { 'nombres': 'string' },
+        'apellidos': { 'nombres': 'string' },
         'correo': { 'type': 'string', 'format': 'email' },
         'cedula': { 'cedula': true },
-        'telefono': { 'type': 'string', minLength: 2 },
-        'fechaNacimiento': { 'fecha': true },
-        'perfilOcupacional': { 'type': 'string', minLength: 2 },
-        'usuario': { 'type': 'string', minLength: 2 },
+        'telefono': { 'type': 'string', minLength: 7, maxLength: 10 },
+        'fechaNacimiento': { 'fechaNacimiento': true },
+        'perfilOcupacional': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'usuario': { 'type': 'string', minLength: 2, maxLength: 25 },
         'rol': { 'type': 'string', 'enum': ['admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado'] }
       }
     },
@@ -38,7 +38,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'personasId': { 'type': 'number', minimum: 1 }
+        'personasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -48,7 +48,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'personasId': { 'type': 'number', minimum: 1 }
+        'personasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -58,7 +58,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'personasId': { 'type': 'number', minimum: 1 }
+        'personasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -68,7 +68,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'establecimientosId': { 'type': 'number', minimum: 1 }
+        'establecimientosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -78,7 +78,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'areasId': { 'type': 'number', minimum: 1 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -88,7 +88,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -98,8 +98,18 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'personasId': { 'type': 'number', minimum: 1 },
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'personasId': { 'type': 'number', minimum: 1, maximun: 500000 },
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
+      }
+    }
+  },
+  API_9_SCHEMA: { // editar una persona
+    BODY: {
+      'minProperties': 1,
+      'additionalProperties': false,
+      'type': 'object',
+      'properties': {
+        'clave': { 'type': 'string', minLength: 5, maxLength: 20 }
       }
     }
   }
