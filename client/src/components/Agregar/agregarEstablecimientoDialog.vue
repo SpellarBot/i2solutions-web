@@ -196,7 +196,7 @@ export default {
             this.$store.commit('setError', err)
             return reject(err)
           })
-      }) 
+      })
       if (!this.somethingWrong) {
         this.instanciasEstablecimientos.forEach(function (establecimiento) {
           establecimiento.crear(Number(empresaId))
@@ -209,7 +209,6 @@ export default {
       }
     },
     RUCbd (objectRuc, arrayRuc) {
-      let prueba = objectRuc
       for (let ruc in objectRuc) {
         if (objectRuc[ruc]) {
           this.$store.commit('setVerified', false)
@@ -230,24 +229,24 @@ export default {
       return false
     },
     agregar () {
-      let id =  this.idEmpresa
+      let id = this.idEmpresa
       const startEstablecimientos = async (instanciaArray, id) => {
-            for (let index = 0; index < instanciaArray.length; index++) {
-            await instanciaArray[index].crear(Number(id))
-          }
+        for (let index = 0; index < instanciaArray.length; index++) {
+          await instanciaArray[index].crear(Number(id))
+        }
       }
-      return new Promise( async (resolve,reject) => {
-        return await startEstablecimientos(this.instanciasEstablecimientos, id)
-        .then(async (resp) => {
-          this.created = true
-          this.loading = false
-          return resolve()
-        })
-        .catch((err) => {
-          this.$store.commit('setError', err)
-          return reject(err)
-        })
-      })      
+      return new Promise(async (resolve, reject) => {
+        return (startEstablecimientos(this.instanciasEstablecimientos, id))
+          .then(async (resp) => {
+            this.created = true
+            this.loading = false
+            return resolve()
+          })
+          .catch((err) => {
+            this.$store.commit('setError', err)
+            return reject(err)
+          })
+      })
     }
   },
   data () {
@@ -272,3 +271,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
+}
+</style>

@@ -107,6 +107,13 @@
     </v-snackbar>
 
     <footer>
+      <v-btn
+        fab
+        @click.native="agregarDialog=true"
+        class = "bottom-right-corner"
+        >
+        <v-icon>add</v-icon>
+      </v-btn>
     <DialogNovedadesFromAreas
     :areaId="areaId"
     :nombre="nombre"
@@ -312,3 +319,13 @@ export default{
   }
 }
 </script>
+
+<style>
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
+}
+</style>

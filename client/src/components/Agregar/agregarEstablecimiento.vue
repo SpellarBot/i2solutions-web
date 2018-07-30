@@ -65,8 +65,6 @@
 import Vue from 'vue'
 import agregarArea from './agregarArea'
 import MyModule from '../MyModule.js'
-import Vuex from 'vuex'
-import { store } from './../../store'
 export default {
   name: 'agregarEstablecimiento',
   props: ['index', 'empresaId'],

@@ -272,10 +272,8 @@ export default {
       instanceArea = null
     },
     guardar () {
-      let empresaId = this.empresaId
       let arrayRuc = []
       let arrayBool = {}
-      let rucRepetido = false
       let rucActual = ''
       if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
@@ -288,7 +286,7 @@ export default {
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
         rucActual = establecimiento.getRuc()
-        rucRepetido = this.rucIngresado(rucActual, arrayRuc)
+        this.rucIngresado(rucActual, arrayRuc)
         arrayRuc.push(establecimiento.getRuc())
       }.bind(this))
       // Ahora verificaremos cada uno de los RUC ingresados. Estos no deberían existir en la bd
@@ -316,7 +314,7 @@ export default {
             this.$store.commit('setError', err)
             return reject(err)
           })
-      })      
+      })
     },
     // Esta función regresa verdadero si el RUC ya ha sido ingresado en el formulario
     rucIngresado (ruc, arrayRuc) {
@@ -353,7 +351,6 @@ export default {
       }
     },
     RUCbd (objectRuc, arrayRuc) {
-      let prueba = objectRuc
       for (let ruc in objectRuc) {
         if (objectRuc[ruc]) {
           this.$store.commit('setVerified', false)
@@ -371,7 +368,6 @@ export default {
       let ruc = this.empresa.RUC
       let empresaId = 0
       let matrizId = 0
-      let doneCreate = false
       let image = urlFoto.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
       return new Promise((resolve, reject) => {
         Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
@@ -383,19 +379,16 @@ export default {
             return Vue.http.post('/api/web/empresas', {nombre, actividadComercial, razonSocial, urlFoto, direccion, ruc})
           })
           .then((resp) => {
-            console.log("entrar aquí")
             if (resp.body.estado) {
               empresaId = resp.body.datos.id
               matrizId = resp.body.datos.establecimiento.id
               const startArea = async () => {
-                this.asyncForEachCreator(this.instanciasAreas, matrizId, async(num) => {
-                  console.log("agregando...")
+                this.asyncForEachCreator(this.instanciasAreas, matrizId, async (num) => {
                 })
               }
               startArea()
-              const startEstablecimientos = async() => {
-                this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId, async(num) => {
-                  console.log("agregando establecimiento...")
+              const startEstablecimientos = async () => {
+                this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId, async (num) => {
                 })
               }
               startEstablecimientos()
@@ -403,10 +396,9 @@ export default {
             } else {
               this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
-            }            
+            }
           })
-          .then((resp) => { 
-            console.log("antes que aquí")
+          .then((resp) => {
             this.loading = false
             this.created = true
           })
