@@ -1,5 +1,4 @@
 const co = require('co')
-const utils = require('../../utils')
 let URL = process.env.NODE_ENV === 'production' ? 'https://i2s-app.herokuapp.com/' : 'http://localhost:3002/'
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
@@ -17,39 +16,39 @@ function genCrypto () {
   })
 }
 
-function enviarCorreoTest (correo, url, usuario) {
-  return new Promise((resolve, reject) => {
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    secure: false,
-    port: 587,
-    auth: {
-        user: 'yrphn3hb4fi3ovmh@ethereal.email',
-        pass: 'SxZM6GXzM52QMSqfUD'
-    }
-  })
-  let mailOptions = {
-      from: 'Enviado de <i2solutions.ec@gmail.com>',
-      to: correo,
-      subject: 'Creación de usuario para I2Solutions',
-      text: 'Creación de la clave',
-      html: `
-        <h1> Cambio o Creación de clave </h1>
-        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
-        <a href="${url}">${url}</a>
-      `
-    }
-    transporter.sendMail(mailOptions, function(error, info) {
-      if(error){
-          return resolve([true, error])
-      } else {
-        console.log('Message sent: %s', info.messageId)
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
-        return resolve([false, info])
-      }
-    })
-  })
-}
+// function enviarCorreoTest (correo, url, usuario) {
+//   return new Promise((resolve, reject) => {
+//     let transporter = nodemailer.createTransport({
+//       host: 'smtp.ethereal.email',
+//       secure: false,
+//       port: 587,
+//       auth: {
+//         user: 'yrphn3hb4fi3ovmh@ethereal.email',
+//         pass: 'SxZM6GXzM52QMSqfUD'
+//       }
+//     })
+//     let mailOptions = {
+//       from: 'Enviado de <i2solutions.ec@gmail.com>',
+//       to: correo,
+//       subject: 'Creación de usuario para I2Solutions',
+//       text: 'Creación de la clave',
+//       html: `
+//         <h1> Cambio o Creación de clave </h1>
+//         <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+//         <a href="${url}">${url}</a>
+//       `
+//     }
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         return resolve([true, error])
+//       } else {
+//         console.log('Message sent: %s', info.messageId)
+//         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+//         return resolve([false, info])
+//       }
+//     })
+//   })
+// }
 
 function enviarCorreoNodemailer (correo, url, usuario) {
   return new Promise((resolve, reject) => {
@@ -61,11 +60,11 @@ function enviarCorreoNodemailer (correo, url, usuario) {
     //     }
     // })
     let transporter = nodemailer.createTransport({
-     service: 'gmail',
-     auth: {
-            user: 'i2solutionsapp30',
-            pass: 'i2solutionsapp30@'
-        }
+      service: 'gmail',
+      auth: {
+        user: 'i2solutionsapp30',
+        pass: 'i2solutionsapp30@'
+      }
     })
     // i2solutionsapp30@
     // i2solutionsapp30
@@ -95,9 +94,9 @@ function enviarCorreoNodemailer (correo, url, usuario) {
         <a href="${url}">${url}</a>
       `
     }
-    transporter.sendMail(mailOptions, function(error, info) {
-      if(error){
-          return resolve([true, error])
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        return resolve([true, error])
       } else {
         console.log('Message sent: %s', info.messageId)
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
@@ -125,7 +124,8 @@ module.exports = ({ responses, db }) => {
             let token = yield genCrypto()
             let correo = datos['correo']
             let url = `${URL}#/crearClave/${token}`
-            let err = false, mensaje = ''
+            let err = false
+            let mensaje = ''
             if (enviarCorreoProduction) {
               [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
             } else if (enviarCorreoDevelop) {

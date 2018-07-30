@@ -259,8 +259,8 @@ module.exports = {
       secure: false,
       port: 587,
       auth: {
-          user: 'yrphn3hb4fi3ovmh@ethereal.email',
-          pass: 'SxZM6GXzM52QMSqfUD'
+        user: 'yrphn3hb4fi3ovmh@ethereal.email',
+        pass: 'SxZM6GXzM52QMSqfUD'
       }
     })
     let mailOptions = {
@@ -276,7 +276,7 @@ module.exports = {
     }
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-          return console.log(error)
+        return console.log(error)
       }
       console.log('Message sent: %s', info.messageId)
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
