@@ -1,6 +1,4 @@
 import decode from 'jwt-decode'
-import Vue from 'vue'
-import Vuex from 'vuex'
 
 export default {
   setError (state, payload) {
@@ -72,6 +70,12 @@ export default {
   setVerified (state, payload) {
     state.verified = payload
   },
+  setCreated (state, payload) {
+    state.created = payload
+  },
+  setFinalAreaCrear (state, payload) {
+    state.setFinalAreaCrear = payload
+  },
   setEquiposPuestos (state, equipoPuesto) {
     state.equipoAreas = equipoPuesto
   },
@@ -86,5 +90,14 @@ export default {
   },
   setAccidentes (state, accidentes) {
     state.accidentes = accidentes
+  },
+  setCapacitacionCreada (state, capacitacion) {
+    state.capacitacionCreada = capacitacion
+  },
+  setAccidenteCreado (state, accidente) {
+    state.accidenteCreado = accidente
+  },
+  setEquipoCreado (state, equipo) {
+    state.equipoCreado = equipo
   }
 }

@@ -8,16 +8,18 @@ module.exports = {
     body: [
       { nombre: 'nombres',
         casos: [
-          { codigo: 'C01', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
-          { codigo: 'C02', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C03', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C01', descripcion: 'valido: Carlos Ñandí', valido: true },
+          { codigo: 'C02', descripcion: 'contiene algun caracter no valido o numero', valido: false },
+          { codigo: 'C03', descripcion: 'tamano mayor a 30', valido: false },
+          { codigo: 'C04', descripcion: 'tamano menor a 2', valido: false }
         ]
       },
       { nombre: 'apellidos',
         casos: [
-          { codigo: 'C11', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
-          { codigo: 'C12', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C13', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C11', descripcion: 'valido: Carlos Ñandí', valido: true },
+          { codigo: 'C12', descripcion: 'contiene algun caracter no valido o numero', valido: false },
+          { codigo: 'C13', descripcion: 'tamano mayor a 30', valido: false },
+          { codigo: 'C14', descripcion: 'tamano menor a 2', valido: false }
         ]
       },
       { nombre: 'correo',
@@ -34,8 +36,9 @@ module.exports = {
       },
       { nombre: 'telefono',
         casos: [
-          { codigo: 'C41', descripcion: '{ \'type\': \'boolean\' }', valido: true },
-          { codigo: 'C42', descripcion: '\'type\': !\'boolean\'', valido: false }
+          { codigo: 'C41', descripcion: '{ \'type\': \'string\', minLength: 10, maxLength: 10 }', valido: true },
+          { codigo: 'C42', descripcion: '\'type\': !\'string\'', valido: false },
+          { codigo: 'C43', descripcion: 'tamano != 10 ', valido: false }
         ]
       },
       { nombre: 'fechaNacimiento',
@@ -46,16 +49,18 @@ module.exports = {
       },
       { nombre: 'perfilOcupacional',
         casos: [
-          { codigo: 'C61', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
+          { codigo: 'C61', descripcion: '{ \'type\': \'string\', minLength: 2, maxLength: 50 }', valido: true },
           { codigo: 'C62', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C63', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C63', descripcion: 'tamano < 2 ', valido: false },
+          { codigo: 'C64', descripcion: 'tamano > 50 ', valido: false }
         ]
       },
       { nombre: 'usuario',
         casos: [
-          { codigo: 'C71', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
+          { codigo: 'C71', descripcion: '{ \'type\': \'string\', minLength: 2, maxLength: 25 }', valido: true },
           { codigo: 'C72', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C73', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C73', descripcion: 'tamano < 2 ', valido: false },
+          { codigo: 'C74', descripcion: 'tamano > 25 ', valido: false }
         ]
       },
       { nombre: 'rol',
@@ -287,16 +292,18 @@ module.exports = {
     body: [
       { nombre: 'nombres',
         casos: [
-          { codigo: 'C01', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
-          { codigo: 'C02', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C03', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C01', descripcion: 'valido: Carlos Ñandí', valido: true },
+          { codigo: 'C02', descripcion: 'contiene algun caracter no valido o numero', valido: false },
+          { codigo: 'C03', descripcion: 'tamano mayor a 30', valido: false },
+          { codigo: 'C04', descripcion: 'tamano menor a 2', valido: false }
         ]
       },
       { nombre: 'apellidos',
         casos: [
-          { codigo: 'C11', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
-          { codigo: 'C12', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C13', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C11', descripcion: 'valido: Carlos Ñandí', valido: true },
+          { codigo: 'C12', descripcion: 'contiene algun caracter no valido o numero', valido: false },
+          { codigo: 'C13', descripcion: 'tamano mayor a 30', valido: false },
+          { codigo: 'C14', descripcion: 'tamano menor a 2', valido: false }
         ]
       },
       { nombre: 'correo',
@@ -313,8 +320,9 @@ module.exports = {
       },
       { nombre: 'telefono',
         casos: [
-          { codigo: 'C41', descripcion: '{ \'type\': \'boolean\' }', valido: true },
-          { codigo: 'C42', descripcion: '\'type\': !\'boolean\'', valido: false }
+          { codigo: 'C41', descripcion: '{ \'type\': \'string\', minLength: 10, maxLength: 10 }', valido: true },
+          { codigo: 'C42', descripcion: '\'type\': !\'string\'', valido: false },
+          { codigo: 'C43', descripcion: 'tamano != 10 ', valido: false }
         ]
       },
       { nombre: 'fechaNacimiento',
@@ -325,16 +333,18 @@ module.exports = {
       },
       { nombre: 'perfilOcupacional',
         casos: [
-          { codigo: 'C61', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
+          { codigo: 'C61', descripcion: '{ \'type\': \'string\', minLength: 2, maxLength: 50 }', valido: true },
           { codigo: 'C62', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C63', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C63', descripcion: 'tamano < 2 ', valido: false },
+          { codigo: 'C64', descripcion: 'tamano > 50 ', valido: false }
         ]
       },
       { nombre: 'usuario',
         casos: [
-          { codigo: 'C71', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
+          { codigo: 'C71', descripcion: '{ \'type\': \'string\', minLength: 2, maxLength: 25 }', valido: true },
           { codigo: 'C72', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C73', descripcion: 'minLength: !2 ', valido: false }
+          { codigo: 'C73', descripcion: 'tamano < 2 ', valido: false },
+          { codigo: 'C74', descripcion: 'tamano > 25 ', valido: false }
         ]
       },
       { nombre: 'rol',

@@ -12,6 +12,7 @@ __POST__ __/api/web/equipos__
 |  descripcion  | string  |   minLength: 2   | 
 |  fotoUrl  | string  |   url   | 
 |  cantidad  | number  |   minimum: 1   | 
+|  puestosId  | number  |   minimum: 1   | 
 
 #### Response:
 
@@ -25,7 +26,8 @@ __POST__ __/api/web/equipos__
     "fotoUrl": "http://jwmeletrica.com.br/Eshop.Admin/Imagens/jwmeletrica/CO2%20(1)%202.jpg",
     "cantidad": 1,
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "puestosId": 1
   },
   "codigoEstado": 200
 }
@@ -126,43 +128,8 @@ __GET__ __/api/web/equipos/:equiposId/puestos/:puestosId__
 {
   "estado": true,
   "datos": {
-    "id": 1,
     "equiposId": "1",
     "puestosId": "1",
-    "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
-  },
-  "codigoEstado": 200
-}
-```
-
-
-___
-
-
-
-## ANADIR EQUIPO A UN AREA
-
-__GET__ __/api/web/equipos/:equiposId/areas/:areasId__
-
-
-#### Params:
-| Name       | Type    | Desc |
-| :--------- | :------ | :-------|
-| equiposId | Number |   ---   |
-	
-| areasId | Number |   ---   |
-	
-
-#### Response:
-
-```json
-{
-  "estado": true,
-  "datos": {
-    "id": 1,
-    "equiposId": "1",
-    "areasId": "1",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },

@@ -7,6 +7,10 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn v-if="$store.getters.usuario.rol === 'admin-empresa' || $store.getters.usuario.rol === 'admin-i2solutions'" flat color="white"
+      @click="crearPersona" >
+        Agregar Persona
+      </v-btn>
       <v-btn flat color="white"
       @click="logout" >
         <v-icon>exit_to_app</v-icon>
@@ -42,6 +46,9 @@ export default {
     },
     crearArea () {
       router.push('/crearArea')
+    },
+    crearPersona () {
+      router.push('/crearPersona')
     },
     ToDashboard () {
       if (this.$store.getters.usuario.rol === 'admin-i2solutions') {

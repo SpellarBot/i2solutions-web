@@ -136,9 +136,10 @@ __GET__ __/api/web/novedades/:novedadesId__
     "fecha": "2011-10-01 05:00:00.000 +00:00",
     "fotoUrl": "https://imagen.png",
     "fueAtendida": "0",
-    "puestosId": 1,
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
-    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
+    "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
+    "puestosId": 1,
+    "inspeccionesId": null
   },
   "codigoEstado": 200
 }

@@ -65,8 +65,6 @@
 import Vue from 'vue'
 import agregarArea from './agregarArea'
 import MyModule from '../MyModule.js'
-import Vuex from 'vuex'
-import { store } from './../../store'
 export default {
   name: 'agregarEstablecimiento',
   props: ['index', 'empresaId'],
@@ -165,7 +163,7 @@ export default {
       let empresasId = Number(this.establecimiento.empresaId)
       return new Promise((resolve, reject) => {
         Vue.http.post('/api/web/establecimientos', {nombres, direccion, ruc, empresasId})
-          .then((resp) => {
+          .then(async (resp) => {
             if (resp.body.estado) {
               this.instanciasAreas.forEach(function (area) {
                 area.crear(resp.body.datos.id)

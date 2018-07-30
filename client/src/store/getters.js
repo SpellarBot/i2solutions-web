@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
 export default {
   usuario (state) {
     return state.usuario
@@ -59,8 +56,14 @@ export default {
   equipos (state) {
     return state.equipos
   },
-  verified () {
+  verified (state) {
     return this.verified
+  },
+  created (state) {
+    return this.created
+  },
+  finalAreaCrear () {
+    return this.finalAreaCrear
   },
   equipoPuesto (state) {
     return state.equipoPuesto
@@ -79,5 +82,14 @@ export default {
   },
   accidentes (state) {
     return state.accidentes
+  },
+  capacitacionCreada (state) {
+    return state.capacitacionCreada
+  },
+  accidenteCreado (state) {
+    return state.accidenteCreado
+  },
+  equipoCreado (state) {
+    return state.equipoCreado
   }
 }

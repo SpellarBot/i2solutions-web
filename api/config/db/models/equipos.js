@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.areas, { through: 'equiposAreas', foreignKey: 'equiposId' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.puestos, { through: 'equiposPuestos', foreignKey: 'equiposId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsToMany(models.areas, { through: 'equiposAreas', foreignKey: 'equiposId' }) // , { through: 'equiposAreas', foreignKey: 'equiposId' }, {onDelete: 'CASCADE', hooks: true}
+    define.belongsToMany(models.puestos, { through: 'equiposPuestos', foreignKey: 'equiposId' }) // , { through: 'equiposPuestos', foreignKey: 'equiposId' }, {onDelete: 'CASCADE', hooks: true}
   }
 
   define.Crear = function ({ descripcion, nombre, fotoUrl, cantidad }) {

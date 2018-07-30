@@ -228,8 +228,20 @@ export default {
       if (this.puestos.cantidadEquipos > 0) {
         this.puestoId = puestoId
         this.puestoNombre = puestoNombre
-        this.visibleEquipos = true
+        this.verEquiposFromPuestos()
       }
+    },
+    verEquiposFromPuestos () {
+      this.$store.dispatch('getEquiposFromPuestos', this.puestoId)
+        .then((resp) => {
+          this.visibleEquipos = true
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarEditar (puesto, areaId) {
       console.log(this.editModes)

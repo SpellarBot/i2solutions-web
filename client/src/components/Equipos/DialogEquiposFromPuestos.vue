@@ -58,6 +58,15 @@
             </v-layout>
           </v-container>
         </v-card>
+        <v-btn
+        top
+        right
+        relative
+        fab
+        @click="visibleAgregar = true"
+        >
+        <v-icon>add</v-icon>
+      </v-btn>
       </v-flex>
     </v-layout>
     </v-card>
@@ -88,6 +97,82 @@
       {{mensajeSnackbar}}
     </v-snackbar>
     <footer>
+      <v-layout row justify-center>
+        <v-dialog v-model="visibleAgregar" @keydown.esc="visibleAgregar=false" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Nuevo Equipo</span>
+        </v-card-title>
+        <v-card-text>
+              <v-form ref="form" v-model="valid">
+                <v-text-field
+                :class="'nombreEquipo' + this.equipoId"
+                  v-model = "newNombre"
+                  label="Nombre" required
+                  :rules="[rules.required]"
+                  maxlength=30
+                  :counter=30
+                ></v-text-field>
+                <v-text-field
+                :class="'descripcionEquipo' + this.equipoId"
+                  v-model = "newDescripcion"
+                  label="Descripcion" required
+                  :rules="[rules.required]"
+                  maxlength=50
+                  :counter=50
+                ></v-text-field>
+                <v-text-field
+                :class="'cantidadEquipo' + this.equipoId"
+                  v-model = "newCantidad"
+                  label="Cantidad" required
+                  :rules="[rules.required]"
+                  mask="###"
+                ></v-text-field>
+                <img :src="imageUrl" height="150" v-if="imageUrl"/>
+                <v-btn v-if="imageUrl"
+                @click="emptyImage"
+                fab
+                dark
+                small
+                color="blue"
+                >
+                <v-icon>delete</v-icon>
+              </v-btn>
+          <v-text-field label="Imagen" hint="Máximo 10 MB" :rules="[rules.required]" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+          <input
+          class="imagen"
+            type="file"
+            style="display: none"
+            ref="image"
+            accept="image/*"
+            @change="onFilePicked"
+          >
+            </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn :class="'editEquipo' + this.equipoId" color="blue darken-1" flat :disabled="!valid" @click = "crear ()">Crear</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="visibleAgregar = false">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="cargando" persistent max-width="700px">
+        <v-card>
+        <v-card-text>Creando el equipo, por favor espere...</v-card-text>
+      <div class="container">
+  <svg class="bag" height="100" width="100">
+    <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
+    </circle>
+  </svg>
+  <svg class="over" height="100" width="100">
+    <circle  cx="50" cy="50" r="40" stroke="#2196f3" stroke-width="3" fill="none" >
+      <animate attributeType="CSS" attributeName="stroke-dasharray" from="1,254" to="247,56" dur="5s" repeatCount="indefinite" />
+    </circle>
+  </svg>
+</div>
+</v-card>
+    </v-dialog>
+      </v-layout>
       <DialogEditarEquipos
       :visible="visibleEdicion"
       :equipoId="equipoId"
@@ -110,6 +195,15 @@ export default {
   }, */
   data () {
     return {
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
+      cargando: false,
+      newDescripcion: '',
+      newCantidad: '',
+      newNombre: '',
+      valid: false,
+      visibleAgregar: false,
       size: 'sm',
       equipoId: '',
       equipoNombre: '',
@@ -121,6 +215,10 @@ export default {
       snackbar: false,
       visibleEdicion: false,
       eliminarDialogEquipo: false,
+      rules: {
+        required: (value) => !!value || 'Campo Requerido.',
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+      },
       indice: -1
     }
   },
@@ -152,25 +250,82 @@ export default {
     }
   },
   methods: {
-    cargarData () {
-      this.valid = null
-      this.loading = true
-      this.verEquiposFromPuestos()
-      this.loading = false
-      this.valid = true
-      console.log('LOG')
+    emptyImage () {
+      this.imageName = ''
+      this.imageFile = ''
+      this.imageUrl = ''
     },
-    verEquiposFromPuestos () {
+    pickFile () {
+      this.$refs.image.click()
+    },
+    onFilePicked (e) {
+      const files = e.target.files
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = ''
+        this.imageFile = ''
+        this.imageUrl = ''
+      }
+    },
+    crear () {
+      let nombre = this.$data.newNombre
+      let descripcion = this.$data.newDescripcion
+      let cantidad = Number(this.$data.newCantidad)
+      let fotoUrl = ''
+      let logo = false
+      if (this.imageUrl === '') {
+        fotoUrl = this.equipoFotoUrl
+        console.log(fotoUrl)
+      } else {
+        fotoUrl = this.imageUrl
+        logo = true
+      }
       let puestosId = this.puestoId
-      this.$store.dispatch('getEquiposFromPuestos', puestosId)
+      this.cargando = true
+      this.$store.dispatch('crearEquipos', { nombre, descripcion, fotoUrl, cantidad, puestosId, logo })
         .then((resp) => {
-          console.log('Done')
+          let equipo = this.$store.getters.equipoCreado
+          this.$store.getters.equipoAreas.push(equipo)
+          this.cargando = false
+          this.snackbar = true
+          this.mensajeSnackbar = 'Equipo creado exitosamente.'
+          this.color = 'success'
+          this.reiniciar()
+          this.visibleAgregar = false
         })
         .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
+          if (err.ok === false) {
+            this.cargando = false
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = 'No se pudo subir la imagen. Inténtelo de nuevo más tarde.'
+          } else {
+            this.cargando = false
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          }
         })
+    },
+    reiniciar () {
+      this.$data.valid = false
+      this.$refs.form.reset()
+    },
+    cargarData () {
+      this.loading = true
+      // this.verEquiposFromPuestos()
+      this.loading = false
+      console.log('LOG')
     },
     visualizarEditar (equipo) {
       this.equipoNombre = equipo.nombre

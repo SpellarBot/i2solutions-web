@@ -16,20 +16,27 @@ app.route('/login')
   .post((req, res) => {
     const usuario = req.body
     co(function * () {
-      let usuarioEncontrado = yield db.personas.Login(usuario)
-      if (usuarioEncontrado) {
-        let empresasId = yield db.personas.ObtenerEmpresa({ id: usuarioEncontrado['id'] })
-        let token = ''
-        if (empresasId) {
-          token = createAccessToken({ ...usuarioEncontrado, empresasId })
+      let [err, usuarioEncontrado] = yield db.personas.Login(usuario)
+      if (!err) {
+        let tienePermisoDeLoggearse = usuarioEncontrado['creadaDump'] || usuarioEncontrado['claveCreada']
+        if (tienePermisoDeLoggearse) {
+          let empresasId = yield db.personas.ObtenerEmpresa({ id: usuarioEncontrado['id'] })
+          let token = ''
+          if (empresasId) {
+            token = createAccessToken({ ...usuarioEncontrado, empresasId })
+          } else {
+            token = createAccessToken({ ...usuarioEncontrado })
+          }
+          let resp = responses.OK({ token })
+          res.status(resp.codigoEstado)
+          res.json(resp)
         } else {
-          token = createAccessToken({ ...usuarioEncontrado })
+          let resp = responses.NO_OK('El usuario no ha creado su clave')
+          res.status(resp.codigoEstado)
+          res.json(resp)
         }
-        let resp = responses.OK({ token })
-        res.status(resp.codigoEstado)
-        res.json(resp)
       } else {
-        let resp = responses.NO_OK(messages.AUTH.AUTH_1.ERROR)
+        let resp = responses.NO_OK(usuarioEncontrado)
         res.status(resp.codigoEstado)
         res.json(resp)
       }

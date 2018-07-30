@@ -107,6 +107,13 @@
     </v-snackbar>
 
     <footer>
+      <v-btn
+        fab
+        @click.native="agregarDialog=true"
+        class = "bottom-right-corner"
+        >
+        <v-icon>add</v-icon>
+      </v-btn>
     <DialogNovedadesFromAreas
     :areaId="areaId"
     :nombre="nombre"
@@ -206,7 +213,19 @@ export default{
     visualizarEquipos () {
       this.areaId = this.id
       this.areaNombre = this.nombre
-      this.visibleEquipos = true
+      this.verEquiposFromAreas()
+    },
+    verEquiposFromAreas () {
+      this.$store.dispatch('getEquiposFromAreas', this.areaId)
+        .then((resp) => {
+          console.log('Done')
+          this.visibleEquipos = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     visualizarRiesgos () {
       this.visibleRiesgos = true
@@ -300,3 +319,13 @@ export default{
   }
 }
 </script>
+
+<style>
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
+}
+</style>

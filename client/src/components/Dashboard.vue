@@ -26,78 +26,46 @@
             :class="'empresa' + empresa.id"
             height="100%"
             raised
-            hover
-            @click.native="dashboardEstablecimientos(empresa.id)"
+            hover            
             >
-            <div v-if="empresa.tieneNovedades">
-              <v-btn
-                absolute
-                top
-                right
-                icon
-                depressed
-                class = "btn--plain"
+            <v-flex xs12>
+              <div v-if="empresa.tieneNovedades">
+                <v-btn
+                  absolute
+                  top
+                  right
+                  icon
+                  flat
+                  color="orange darken-1" 
+                  class = "btn--plain rotate-25 notification"
+                  >
+                  <v-icon>priority_high</v-icon>
+                </v-btn>
+              </div>
+            </v-flex>
+            <div>
+              <v-card-title  class="justify-center">
+                <p class="headline">{{empresa.nombre}}</p>
+              </v-card-title>
+              <v-card-media class="white--text"
+                :src=empresa.urlFoto
+                height="180px"
+                contain
+                style="padding: 20px"
+                @click.native="dashboardEstablecimientos(empresa.id)"
                 >
-                <v-icon color="orange darken-1">priority_high</v-icon>
-              </v-btn>
-            </div>
-            <v-card-title  class="justify-center">
-              <p class="headline" >{{empresa.nombre}}</p>
-            </v-card-title>
-            <v-card-media class="white--text"
-              :src=empresa.urlFoto
-              height="180px"
-              contain
-              style="padding: 20px"
-              >
-            </v-card-media>
+              </v-card-media>
+          </div>
           </v-card>
         </v-flex>
     </v-layout>
   </v-container>
-    <!--v-btn
-      @click=" crearEmpresa"
-    >
-      Crear Empresa
-    </v-btn>
-    <v-btn
-      @click=" verEmpresas"
-    >
-      Ver Empresas
-    </v-btn>
-    <v-btn
-      @click="crearEstablecimiento"
-    >
-      Agregar Establecimiento
-    </v-btn>
-
-    <v-btn
-      @click=" verPersonas"
-    >
-      Ver Personas
-    </v-btn>
-
-    <v-btn
-      @click=" crearPersona"
-    >
-      Crear Personas
-    </v-btn>
-    <v-snackbar
-      :timeout="3000"
-      :multi-line="true"
-      :color="color"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{mensajeSnackbar}}
-    </v-snackbar-->
     <footer class="clearer">
       <v-btn
-        top
-        right
         relative
         fab
         @click.native="agregarDialog=true"
+        class = "bottom-right-corner"
         >
         <v-icon>add</v-icon>
       </v-btn>
@@ -199,24 +167,47 @@ export default {
 .clearer {
   clear: both;
 }
-.btn--plain {
+.rotate-25 {
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.3);
+  -webkit-transform: rotate(25deg);
+  -moz-transform: rotate(25deg);
+  -ms-transform: rotate(25deg);
+  -o-transform: rotate(25deg);
+  transform: rotate(25deg);
+  display: inline-block;
+}
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
+}
+.btn--plain:not(.btn--plain):hover {
   height: auto;
   width: auto;
   margin: 0;
   padding: 6px;
   min-width: 0;
+  z-index: 5;
   > .btn__content {
     padding: 0;
-    opacity: 0.75;
-    &:before {
-      background-color: transparent !important;
-      transition: none !important;
-    }
+    opacity: 0;
   }
   &:hover {
+    background-color: transparent;
+    opacity: 0;
     > .btn__content {
-      opacity: 1;
+      opacity: 0;
     }
   }
+}
+.notification {
+  margin-top: 5%;
+  margin-left: 10%;
+  background-color: transparent;
+}
+.notification:hover {
+  background-color: transparent;
 }
 </style>

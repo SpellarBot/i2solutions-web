@@ -1,24 +1,27 @@
 'use strict'
-const { random } = require('../../../utils')
 const { genHash } = require('../../../utils')
 const { verificarClave } = require('../../../utils')
+const co = require('co')
 
 module.exports = (sequelize, DataTypes) => {
   let singular = 'personas'
   let plural = 'personas'
   let tableName = 'personas'
   let define = sequelize.define(singular, {
-    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true, allowNull: false },
     nombres: { type: DataTypes.STRING },
     apellidos: { type: DataTypes.STRING },
-    correo: { type: DataTypes.STRING, unique: true },
+    correo: { type: DataTypes.STRING },
     cedula: { type: DataTypes.STRING },
     clave: { type: DataTypes.STRING },
     telefono: { type: DataTypes.STRING },
     fechaNacimiento: { type: DataTypes.STRING },
     perfilOcupacional: { type: DataTypes.STRING },
     usuario: { type: DataTypes.STRING, unique: true },
-    rol: { type: DataTypes.ENUM('admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado') }
+    rol: { type: DataTypes.ENUM('admin-i2solutions', 'inspector-seguridad', 'jefe-seguridad', 'admin-empresa', 'empleado') },
+    claveCreada: { type: DataTypes.BOOLEAN, defaultValue: false },
+    creadaDump: { type: DataTypes.BOOLEAN, defaultValue: false },
+    resetClaveToken: { type: DataTypes.STRING },
+    resetClaveExpires: { type: DataTypes.DATE }
   }, {
     name: {
       singular,
@@ -32,29 +35,25 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
-    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' }, {onDelete: 'CASCADE', hooks: true})
+    define.belongsToMany(models.puestos, { through: 'personasPuestos', foreignKey: 'personasId' })
+    define.belongsToMany(models.establecimientos, { through: 'personasEstablecimientos', foreignKey: 'personasId' })
+    define.belongsToMany(models.capacitaciones, { through: 'personasCapacitaciones', foreignKey: 'personasId' })
   }
 
   define.Crear = function (d) {
     let datos = arguments['0']
     let self = this
-    datos['clave'] = random(5)
     return new Promise((resolve, reject) => {
-      genHash(datos['clave']).then(hash => {
-        datos['clave'] = hash
-        self.create(datos)
-          .then((resp) => {
-            if (resp && resp['clave']) {
-              delete resp['clave']
-            }
-            return resolve(resp.get({ plain: true }))
-          })
-          .catch((err) => {
-            return reject(err)
-          })
-      })
+      self.create(datos)
+        .then((resp) => {
+          if (resp && resp['clave']) {
+            delete resp['clave']
+          }
+          return resolve(resp.get({ plain: true }))
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
   }
 
@@ -64,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise((resolve, reject) => {
       genHash(datos['clave']).then(hash => {
         datos['clave'] = hash
+        datos['creadaDump'] = true
         self.create(datos)
           .then((resp) => {
             return resolve(resp.get({ plain: true }))
@@ -77,21 +77,30 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Login = function ({ usuario, clave }) {
     return new Promise((resolve, reject) => {
-      return this.findOne({
-        raw: true,
-        where: {
-          usuario
-        },
-        attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol', 'clave']
-      })
-        .then((resp) => {
-          if (resp && resp['clave'] && verificarClave(clave, resp['clave'])) {
-            delete resp['clave']
-            return resolve(resp)
-          } else {
-            return resolve(null)
-          }
+      let self = this
+      co(function * () {
+        let resp = yield self.findOne({
+          raw: true,
+          where: {
+            usuario
+          },
+          attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol', 'clave', 'creadaDump', 'claveCreada']
         })
+        let validaClave = false
+        if (resp && resp['clave']) {
+          validaClave = yield verificarClave(clave, resp['clave'])
+        }
+        if (!resp) {
+          return resolve([true, 'el usuario no existe'])
+        } else if (!resp['clave']) {
+          return resolve([true, 'el usuario no ha creado su clave'])
+        } else if (!validaClave) {
+          return resolve([true, 'el usuario no ha creado su clavei'])
+        } else {
+          delete resp['clave']
+          return resolve([false, resp])
+        }
+      })
         .catch((err) => {
           return reject(err)
         })
@@ -133,9 +142,58 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.CambiarClave = function () {
+    let datos = JSON.parse(JSON.stringify(arguments['0']))
+    let { clave } = datos
+    let { id } = datos
+    let self = this
+    return new Promise((resolve, reject) => {
+      genHash(clave).then(hash => {
+        self.update(
+          { 'clave': hash, claveCreada: true, resetClaveToken: null },
+          { where: { id } })
+          .then((resp) => {
+            if (resp[0].toString() === '1') {
+              return resolve(true)
+            } else {
+              return resolve(false)
+            }
+          })
+          .catch((err) => {
+            return reject(err)
+          })
+      })
+    })
+  }
+
   define.Obtener = function ({ id }) {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { id }, raw: true })
+        .then((project) => {
+          if (project && project['clave']) {
+            delete project['clave']
+          }
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodo = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findOne({ where: { id }, raw: true })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorToken = function ({ token }) {
+    return new Promise((resolve, reject) => {
+      this.findOne({ where: { resetClaveToken: token }, raw: true })
         .then((project) => {
           if (project && project['clave']) {
             delete project['clave']
@@ -224,7 +282,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerEmpresa = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select pp.personasId as personasId, em.id as empresasId from personasPuestos pp inner join areasPuestos ap on ap.puestosId = pp.puestosId inner join establecimientos es on es.id = ap.areasId inner join empresas em on em.id = es.empresasId where pp.personasId = ${id}`
+      let query = `select pp.personasId as personasId, em.id as empresasId from personasPuestos pp inner join areasPuestos ap on ap.puestosId = pp.puestosId inner join areas a on a.id = ap.areasId inner join establecimientos es on es.id = a.establecimientosId inner join empresas em on em.id = es.empresasId where pp.personasId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(persona => {
           if (persona && persona.length > 0) {

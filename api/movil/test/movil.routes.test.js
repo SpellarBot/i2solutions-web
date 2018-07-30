@@ -11,7 +11,8 @@ const models = db.db
 let docs = []
 
 describe('MOVIL TEST', () => {
-  let { areas, puestos, novedades, personas, establecimientos, accidentes, riesgos, capacitaciones, equipos } = dump
+  let { areas, puestos, novedades, personas, establecimientos, accidentes, riesgos, capacitaciones, equipos, empresas } = dump
+  let empresa = empresas.VALIDOS[0]
   let area = areas.VALIDOS[0]
   let area2 = areas.VALIDOS[1]
   let puesto = puestos.VALIDOS[0]
@@ -20,12 +21,14 @@ describe('MOVIL TEST', () => {
   let novedad2 = novedades.VALIDOS[1]
   let novedad3 = novedades.VALIDOS[2]
   let establecimiento = establecimientos.VALIDOS[0]
+  let establecimiento2 = establecimientos.VALIDOS[1]
   let accidente = accidentes.VALIDOS[0]
   let riesgo = riesgos.VALIDOS[0]
   let equipo = equipos.VALIDOS[0]
   let persona = personas.INSPECTOR_SEGURIDAD
   let persona2 = personas.ADMIN_I2SOLUTIONS
   let capacitacion = capacitaciones.VALIDOS[0]
+  let capacitacion2 = capacitaciones.VALIDOS[1]
   before('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
@@ -66,56 +69,61 @@ describe('MOVIL TEST', () => {
   //   })
   // })
 
-  // describe('@API_3 Obtener un puesto de trabajo dada un area y establecimiento', () => {
-  //   let { API_3 } = API
-  //   it('@CP3 OK', async () => {
-  //     let establecimientoCreada = await models.establecimientos.Crear(establecimiento)
-  //     let establecimientoId = establecimientoCreada['id']
-  //     let areaCreada = await models.areas.Crear(area)
-  //     let areasId = areaCreada['id']
-  //     let puestoCreada = await models.puestos.Crear(puesto)
-  //     let puestosId = puestoCreada['id']
-  //     await models.areasPuestos.Crear({
-  //       areasId,
-  //       puestosId
-  //     })
-  //     // riesgos
-  //     await models.riesgos.Crear({ ...riesgo, puestosId })
+  describe('@API_3 Obtener un puesto de trabajo dada un area y establecimiento', () => {
+    let { API_3 } = API
+    let areasId = -1
+    let puestosId = -1
+    let establecimientosId = -1
+    beforeEach(async () => {
+      let empresaCreada = await models.empresas.Crear(empresa)
+      let empresasId = empresaCreada['id']
+      let establecimientosCreada = await models.establecimientos.Crear(establecimiento)
+      establecimientosId = establecimientosCreada['id']
+      let establecimientosCreada2 = await models.establecimientos.Crear(establecimiento2)
+      establecimientosId2 = establecimientosCreada2['id']
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      areasId = areaCreada['id']
+      let puestoCreada = await models.puestos.Crear(puesto)
+      puestosId = puestoCreada['id']
+      await models.areasPuestos.Crear({ areasId, puestosId })
 
-  //     // accidentes
-  //     await models.accidentes.Crear({ ...accidente, puestosId })
 
-  //     // equipos
-  //     let equipoCreada = await models.equipos.Crear({ ...equipo, puestosId })
-  //     await models.equiposPuestos.Crear({ puestosId, equiposId: equipoCreada['id'], cantidad: 1 })
+      // // riesgos
+      await models.riesgos.Crear({ ...riesgo, puestosId })
+      // // accidentes
+      await models.accidentes.Crear({ ...accidente, puestosId })
+      // // equipos
+      let equipoCreada = await models.equipos.Crear({ ...equipo, puestosId })
+      await models.equiposPuestos.Crear({ puestosId, equiposId: equipoCreada['id'] })
+      // // personas
+      let personaCreada = await models.personas.Crear(persona)
+      let personaCreada2 = await models.personas.Crear(persona2)
+      let pp = await models.personasPuestos.Crear({ personasId: personaCreada['id'], puestosId })
 
-  //     // personas
-  //     let personaCreada = await models.personas.Crear(persona)
-  //     let personaCreada2 = await models.personas.Crear(persona2)
-  //     await models.personasEstablecimientos.Crear({ personasId: personaCreada['id'], establecimientosId: establecimientoId })
-  //     await models.personasEstablecimientos.Crear({ personasId: personaCreada2['id'], establecimientosId: establecimientoId })
-
-  //     // capacitaciones
-  //     await models.capacitaciones.Crear({ ...capacitacion, areasId: areasId })
-
-  //     // novedades
-  //     let novedadCreada = await models.novedades.Crear({ ...novedad, puestosId, inspeccionId: 1 })
-  //     let novedadCreada2 = await models.novedades.Crear({ ...novedad2, puestosId, inspeccionId: 1 })
-  //     let novedadCreada3 = await models.novedades.Crear({ ...novedad3, puestosId: 2, inspeccionId: 1 })
-  //     await models.novedades.Atender({ id: novedadCreada['id'], atendida: true, descripcionAtendida: 'Fue atendida' })
-  //     let res = await request(app).get(`/api/movil/area/${areasId}/puesto/${puestosId}/${establecimientoId}`)
-  //     expect(res.body.codigoEstado).to.equal(200)
-  //     expect(res.body.estado).to.equal(true)
-  //     expect(res.body.datos['novedadesSinAtender'].length).to.equal(1)
-  //     expect(res.body.datos['novedadesAtendidas'].length).to.equal(1)
-  //     expect(res.body.datos['riesgos'].length).to.equal(1)
-  //     expect(res.body.datos['cantidadEmpleados']).to.equal(2)
-  //     expect(res.body.datos['detallesAccidentes'].length).to.equal(1)
-  //     expect(res.body.datos['detallesCapacitaciones'].length).to.equal(1)
-  //     expect(res.body.datos['equiposProteccion'].length).to.equal(1)
-  //     generatorDocs.OK({ docs, doc: API_3, res })
-  //   })
-  // })
+      // capacitaciones
+      let capacitacionCreada = await models.capacitaciones.Crear({ ...capacitacion, areasId })
+      let capacitacionCreada2 = await models.capacitaciones.Crear({ ...capacitacion2, areasId })
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada['id'], capacitacionesId: capacitacionCreada['id'] })
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada2['id'], capacitacionesId: capacitacionCreada['id'] })
+      let novedadCreada = await models.novedades.Crear({ ...novedad, puestosId })
+      let novedadCreada2 = await models.novedades.Crear({ ...novedad2, puestosId })
+      await models.novedades.Atender({ id: novedadCreada['id'], atendida: true, descripcionAtendida: 'aaa' })
+    })
+    it('@ICE_API_3_01 OK', async () => {
+      let res = await request(app).get(`/api/movil/area/${areasId}/puesto/${puestosId}/${establecimientosId}`)
+      // console.log(JSON.stringify(res.body, null, 2))
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.datos['novedadesSinAtender'].length).to.equal(1)
+      expect(res.body.datos['novedadesAtendidas'].length).to.equal(1)
+      expect(res.body.datos['riesgos'].length).to.equal(1)
+      expect(res.body.datos['cantidadEmpleados']).to.equal(1)
+      expect(res.body.datos['detallesAccidentes'].length).to.equal(1)
+      expect(res.body.datos['detallesCapacitaciones'].length).to.equal(2)
+      expect(res.body.datos['equiposProteccion'].length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_3, res })
+    })
+  })
 
   describe('@API_4 Atender una novedad', () => {
     let { API_4 } = API

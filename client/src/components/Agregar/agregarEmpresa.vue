@@ -119,7 +119,7 @@
                     fab
                     small
                     @click.native="removeEstablecimiento()"
-                    v-if="indice>2"
+                    v-if="indice>1"
                   >
                   <v-icon>delete</v-icon>
                   </v-btn>
@@ -132,7 +132,7 @@
                   </v-btn>
                 </v-flex>
               </v-layout>
-              <v-btn @click.native="guardar()" :disabled="!valid">submit</v-btn>
+              <v-btn @click.native="guardar()" :disabled="!valid">Crear empresa</v-btn>
             </v-flex>
           </v-layout>
         </v-container>
@@ -272,10 +272,8 @@ export default {
       instanceArea = null
     },
     guardar () {
-      let empresaId = this.empresaId
       let arrayRuc = []
       let arrayBool = {}
-      let rucRepetido = false
       let rucActual = ''
       if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
@@ -283,20 +281,12 @@ export default {
       this.instanciasAreas.forEach(function (area) {
         area.verify()
       })
-      // En este punto, está todo verificado si es que algo no está llenado
-      /*      if (!this.$store.state.verified) {
-        this.error.message = "Por favor, llene todos los campos"
-        this.error.trigger = true
-        this.$store.commit('setVerified', true)
-        return
-      }
-*/
       // Agregamos el ruc del establecimiento matriz
       arrayRuc.push(this.empresa.RUC)
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.verify()
         rucActual = establecimiento.getRuc()
-        rucRepetido = this.rucIngresado(rucActual, arrayRuc)
+        this.rucIngresado(rucActual, arrayRuc)
         arrayRuc.push(establecimiento.getRuc())
       }.bind(this))
       // Ahora verificaremos cada uno de los RUC ingresados. Estos no deberían existir en la bd
@@ -325,7 +315,6 @@ export default {
             return reject(err)
           })
       })
-      this.loading = false
     },
     // Esta función regresa verdadero si el RUC ya ha sido ingresado en el formulario
     rucIngresado (ruc, arrayRuc) {
@@ -362,7 +351,6 @@ export default {
       }
     },
     RUCbd (objectRuc, arrayRuc) {
-      let prueba = objectRuc
       for (let ruc in objectRuc) {
         if (objectRuc[ruc]) {
           this.$store.commit('setVerified', false)
@@ -394,23 +382,36 @@ export default {
             if (resp.body.estado) {
               empresaId = resp.body.datos.id
               matrizId = resp.body.datos.establecimiento.id
-              this.instanciasAreas.forEach(function (area) {
-                area.crear(Number(matrizId))
-              })
-              this.instanciasEstablecimientos.forEach(function (establecimiento) {
-                establecimiento.crear(Number(empresaId))
-              })
-              this.created = true
+              const startArea = async () => {
+                this.asyncForEachCreator(this.instanciasAreas, matrizId, async (num) => {
+                })
+              }
+              startArea()
+              const startEstablecimientos = async () => {
+                this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId, async (num) => {
+                })
+              }
+              startEstablecimientos()
               return resolve()
             } else {
-              this.$Store.commit('setError', resp.body.datos)
+              this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
             }
-          }).catch((err) => {
+          })
+          .then((resp) => {
+            this.loading = false
+            this.created = true
+          })
+          .catch((err) => {
             this.$store.commit('setError', err)
             return reject(err)
           })
       })
+    },
+    async asyncForEachCreator (instanciaArray, id, callback) {
+      for (let index = 0; index < instanciaArray.length; index++) {
+        await instanciaArray[index].crear(Number(id))
+      }
     },
     cleaner () {
       this.imageName = ''

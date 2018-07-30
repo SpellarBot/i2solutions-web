@@ -18,6 +18,7 @@ import VerPuestos from '@/components/VerPuestos'
 import PuestoEditar from '@/components/PuestoEditar'
 import PuestoCrear from '@/components/PuestoCrear'
 import DashboardEstablecimiento from '@/components/DashboardEstablecimiento'
+import ResetClave from '@/components/ResetClave'
 import AuthAdmin from './authAdmin'
 
 Vue.use(Router)
@@ -104,6 +105,10 @@ export default new Router({
       name: 'DashboardEstablecimiento',
       component: DashboardEstablecimiento,
       beforeEnter: AuthGuard
+    }, {
+      path: '/crearClave/:token',
+      name: 'ResetClave',
+      component: ResetClave
     }
   ]
 })

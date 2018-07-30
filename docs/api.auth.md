@@ -26,7 +26,7 @@ __POST__ __/api/auth/login__
 {
   "estado": true,
   "datos": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzdWFyaW8iOiJlbHNhIiwiY29ycmVvIjoidmN0b3JfZGF6QGhvdG1haWwuY29tIiwibm9tYnJlcyI6IkVsc2EiLCJhcGVsbGlkb3MiOiJWZWdhIiwiaWQiOjEsInJvbCI6ImFkbWluLWkyc29sdXRpb25zIiwiZW1wcmVzYXNJZCI6MX0sImlhdCI6MTMxNzQ0NTIwMH0.XP37W3iEvRKQVJ82j-xR2ODPLGSzlERWiqgtauTzj2Y"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzdWFyaW8iOiJlbHNhIiwiY29ycmVvIjoidmN0b3JfZGF6QGhvdG1haWwuY29tIiwibm9tYnJlcyI6IkVsc2EiLCJhcGVsbGlkb3MiOiJWZWdhIiwiaWQiOjEsInJvbCI6ImFkbWluLWkyc29sdXRpb25zIiwiY3JlYWRhRHVtcCI6MSwiY2xhdmVDcmVhZGEiOjAsImVtcHJlc2FzSWQiOjF9LCJpYXQiOjEzMTc0NDUyMDB9.l47qQTftuRThXlJfC-oZnxyXpOwM3MgHncvZuCQui60"
   },
   "codigoEstado": 200
 }
@@ -52,7 +52,7 @@ _response_
 ```js
 {
   "estado": false,
-  "datos": "El usuario no existe. Clave o usuario mal ingresado",
+  "datos": "el usuario no existe",
   "codigoEstado": 200
 }
 ```

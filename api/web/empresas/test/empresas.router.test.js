@@ -410,10 +410,17 @@ describe('EMPRESAS', () => {
     let { API_4_EQUI } = EQUI
     const codigoApi = 'API_4'
 
+
+
     it(`@ICE_API_4_01 eliminar una empresa`, async () => {
       let empresaCreada = await models.empresas.Crear(empresa)
+      let establecimientoCreada = await models.establecimientos.Crear({ ...establecimiento, empresasId: empresaCreada['id'] })
+      let establecimientoCreada2 = await models.establecimientos.Crear({ ...establecimiento2, empresasId: empresaCreada['id'] })
+      let empresaCreada2 = await models.empresas.Crear(empresa2)
+      let establecimientoCreada3 = await models.establecimientos.Crear({ ...establecimiento3, empresasId: empresaCreada2['id'] })
       let params = { empresasId: empresaCreada['id'] }
       let url = `/api/web/empresas/${params['empresasId']}`
+      let estC = await models.establecimientos.ObtenerPorEmpresas({ empresasId: empresaCreada['id'] })
       let res = await request(app).delete(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)

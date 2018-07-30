@@ -5,7 +5,7 @@ module.exports = {
     'correo': 'vctor_daz@hotmail.com',
     'cedula': '0931823447',
     'telefono': '0986901270',
-    'fechaNacimiento': '2014-05-21T19:27:28.576Z',
+    'fechaNacimiento': '1995-05-21T19:27:28.576Z',
     'perfilOcupacional': 'admin',
     'usuario': 'elsa',
     'rol': 'admin-i2solutions'
@@ -14,9 +14,9 @@ module.exports = {
     'nombres': 'Carlos',
     'apellidos': 'Andres',
     'correo': 'ca@hotmail.com',
-    'cedula': '0931823449',
-    'telefono': '1031823447',
-    'fechaNacimiento': '2014-05-21T19:27:28.576Z',
+    'cedula': '0931823447',
+    'telefono': '0986901270',
+    'fechaNacimiento': '1995-05-21T19:27:28.576Z',
     'perfilOcupacional': 'Inspector',
     'usuario': 'carlos',
     'rol': 'inspector-seguridad'
@@ -25,9 +25,9 @@ module.exports = {
     'nombres': 'Benjamín',
     'apellidos': 'Esquibel',
     'correo': 'cristina.ferrer@yahoo.com',
-    'cedula': '0931825449',
+    'cedula': '0931825446',
     'telefono': '2938373',
-    'fechaNacimiento': '2014-05-21T19:27:28.576Z',
+    'fechaNacimiento': '1995-05-21T19:27:28.576Z',
     'perfilOcupacional': 'jefe',
     'usuario': 'benjamin',
     'rol': 'jefe-seguridad'
@@ -38,7 +38,7 @@ module.exports = {
     'correo': 'and.quim@yahoo.com',
     'cedula': '0931825449',
     'telefono': '2938373',
-    'fechaNacimiento': '2014-05-21T19:27:28.576Z',
+    'fechaNacimiento': '1995-05-21T19:27:28.576Z',
     'perfilOcupacional': 'admin empresa',
     'usuario': 'andres',
     'rol': 'jefe-seguridad'
@@ -48,8 +48,8 @@ module.exports = {
     'apellidos': 'Espinosa',
     'correo': 'irenesp@yahoo.com',
     'cedula': '0931823447',
-    'telefono': '2948373',
-    'fechaNacimiento': '2014-05-21T19:27:28.576Z',
+    'telefono': '0986901270',
+    'fechaNacimiento': '1995-05-21T19:27:28.576Z',
     'perfilOcupacional': 'torno',
     'usuario': 'irene',
     'rol': 'empleado'

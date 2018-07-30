@@ -26,33 +26,56 @@ module.exports = ({ responses, db }) => {
     CargarDatos ({ puestosId, establecimientosId, areasId }) {
       return new Promise((resolve, reject) => {
         Promise.all([
-          db.puestos.obtenerPorId({ id: puestosId }),
+          db.puestos.Obtener({ id: puestosId }),
           db.novedades.ObtenerPorPuesto({ id: puestosId }),
           db.riesgos.ObtenerPorPuesto({ id: puestosId }),
-          db.puestos.obtenerEquipos({ id: puestosId }),
+          db.establecimientos.CantidadEmpleados({ id: establecimientosId }),
+          db.puestos.obtenerEquiposPorPuestos({ id: puestosId }),
           db.accidentes.obtenerPorPuestoTrabajo({ id: puestosId }),
-          db.capacitaciones.ObtenerPorAreas({ id: areasId }),
-          db.personasEstablecimientos.CantidaPersonasEstablecimiento({ establecimientosId })
+          db.capacitaciones.ObtenerPorPersonas({ id: areasId }),
+          db.capacitaciones.ObtenerPorArea({ id: areasId })
         ])
           .then((datos) => {
-            let puesto = datos[0]
-            let novedades = datos[1]
-            let riesgos = datos[2]
-            let detallesAccidentes = datos[4]
-            let detallesCapacitaciones = datos[5] // personas que vieron esa capacitacion
-            let cantidadEmpleados = datos[6]
-            let equiposProteccion = datos[3].map((equipo) => {
-              if (equipo['equipos.descripcion'] || equipo['equipos.nombre']) {
-                return {
-                  descripcion: equipo['equipos.descripcion'],
-                  nombre: equipo['equipos.nombre'],
-                  fotoUrl: equipo['equipos.fotoUrl'],
-                  cantidad: equipo['equipos.equiposPuestos.cantidad']
-                }
+            let [ puesto, novedades, riesgos, cantidadEmpleados, equiposProteccion, detallesAccidentes, capacitacionesPersonas, capacitaciones ] = datos
+            let capacitacionesPersonasTmp = {}
+            for (let capacitacion of capacitacionesPersonas) {
+              let id = capacitacion['capacitacionId']
+              if (capacitacionesPersonasTmp[id]) {
+                capacitacionesPersonasTmp[id]['personas'].push({
+                  nombres: capacitacion['nombres'],
+                  apellidos: capacitacion['apellidos'],
+                  correo: capacitacion['correo'],
+                  cedula: capacitacion['cedula'],
+                  telefono: capacitacion['telefono']
+                })
               } else {
-                return {}
+                capacitacionesPersonasTmp[id] = {}
+                capacitacionesPersonasTmp[id]['id'] = capacitacion['capacitacionId']
+                capacitacionesPersonasTmp[id]['personas'] = []
+                capacitacionesPersonasTmp[id]['personas'].push({
+                  id: capacitacion['id'],
+                  nombres: capacitacion['nombres'],
+                  apellidos: capacitacion['apellidos'],
+                  correo: capacitacion['correo'],
+                  cedula: capacitacion['cedula'],
+                  telefono: capacitacion['telefono']
+                })
               }
-            })
+            }
+            let detallesCapacitaciones = []
+            for (let capacitacion of capacitaciones) {
+              let id = capacitacion['id']
+              let existe = capacitacionesPersonasTmp[id]
+              if (existe) {
+                capacitacion['capacitados'] = []
+                capacitacion['capacitados'] = capacitacionesPersonasTmp[id]['personas']
+                detallesCapacitaciones.push(capacitacion)
+              } else {
+                capacitacion['capacitados'] = []
+                detallesCapacitaciones.push(capacitacion)
+              }
+            }
+            // separar novedades
             let novedadesSinAtender = novedades.filter((novedad) => {
               if (novedad['fueAtendida'] === '0') {
                 novedad['fueAtendida'] = false
@@ -65,27 +88,17 @@ module.exports = ({ responses, db }) => {
                 return novedad
               }
             })
-            let puestoFiltrado = {}
-            if (puesto.length !== 0) {
-              let puestoTmp = puesto[0]
-              puestoFiltrado = {
-                id: puestoTmp['id'],
-                nombre: puestoTmp['nombre'],
-                descripcion: puestoTmp['descripcion'],
-                areaId: puestoTmp['areas.id']
-              }
-            }
-            let d = {
-              ...puestoFiltrado,
-              cantidadEmpleados,
+            resolve(responses.OK({
+              ...puesto,
+              areasId: parseInt(areasId),
               novedadesSinAtender,
               novedadesAtendidas,
               riesgos,
+              cantidadEmpleados,
               equiposProteccion,
               detallesAccidentes,
               detallesCapacitaciones
-            }
-            resolve(responses.OK(d))
+            }))
           })
           .catch(err => {
             console.error(err)

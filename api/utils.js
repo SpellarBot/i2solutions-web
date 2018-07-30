@@ -3,10 +3,24 @@ const moment = require('moment')
 let localize = require('ajv-i18n')
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, jsonPointers: true })
-require('ajv-errors')(ajv)
+// require('ajv-errors')(ajv)
 const bcrypt = require('bcrypt')
-const saltos = 5
+const saltos = 5 || process.env.SALT
+
 const responses = require('./responses')
+
+function verificarNombres (nombres) {
+  let noValido = /[`~,.<>*;'¡?!-@^%:"/[\]|{}()=_+~#-\d]/.test(nombres)
+  if (noValido) {
+    return [false, 'tiene caracteres no validos']
+  } else if (nombres.length > 30) {
+    return [false, 'tamaño muy grande']
+  } else if (nombres.length < 2) {
+    return [false, 'tamaño muy pequeño']
+  } else {
+    return [true, '']
+  }
+}
 
 function verificadorCedulaRuc (identificacion, tipo) {
   if (tipo === 'cedula' && identificacion.length !== 10) {
@@ -142,6 +156,26 @@ function verificadorCedulaRuc (identificacion, tipo) {
   return [false, '']
 }
 
+function fechaNacimiento (fecha) {
+  let isValid = false
+  try {
+    isValid = moment(fecha).isValid()
+  } catch (e) {
+    return [false, 'La fecha tiene formato no valido']
+  }
+  if (!isValid) {
+    return [false, 'La fecha tiene formato no valido']
+  }
+  let years = moment().diff(fecha, 'years')
+  let year = moment(fecha).year()
+  if (years < 18) {
+    return [false, 'La edad mínima es 18 años']
+  } else if (year <= 1940) {
+    return [false, 'Tiene que ser fecha mayores a 1900']
+  }
+  return [isValid, '']
+}
+
 ajv.addKeyword('cedula', {
   validate: function xyz (schema, data) {
     xyz.errors = []
@@ -182,7 +216,73 @@ ajv.addKeyword('fecha', {
   errors: true
 })
 
+ajv.addKeyword('fechaNacimiento', {
+  validate: function xyz (schema, data) {
+    xyz.errors = []
+    let [esValido, mensaje] = fechaNacimiento(data)
+    if (!esValido) {
+      xyz.errors.push({
+        keyword: 'fecha',
+        message: mensaje,
+        params: {
+          keyword: 'fecha'
+        }
+      })
+    }
+    return esValido
+  },
+  errors: true
+})
+
+ajv.addKeyword('nombres', {
+  validate: function xyz (schema, data) {
+    xyz.errors = []
+    let [esValido, mensaje] = verificarNombres(data)
+    if (!esValido) {
+      xyz.errors.push({
+        keyword: 'nombres',
+        message: mensaje,
+        params: {
+          keyword: 'nombres'
+        }
+      })
+    }
+    return esValido
+  },
+  errors: true
+})
+const nodemailer = require('nodemailer')
 module.exports = {
+  enviarCorreo (correo, url, usuario, fn) {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      secure: false,
+      port: 587,
+      auth: {
+        user: 'yrphn3hb4fi3ovmh@ethereal.email',
+        pass: 'SxZM6GXzM52QMSqfUD'
+      }
+    })
+    let mailOptions = {
+      from: 'Enviado de <i2solutions.ec@gmail.com>',
+      to: correo,
+      subject: 'Creación de usuario para I2Solutions',
+      text: 'Creación de la clave',
+      html: `
+        <h1> Cambio o Creación de clave </h1>
+        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <a href="${url}">${url}</a>
+      `
+    }
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error)
+      }
+      console.log('Message sent: %s', info.messageId)
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+      fn(true)
+    })
+  },
   genHash (clave) {
     return new Promise((resolve, reject) => {
       bcrypt.hash(clave, saltos, function (err, hash) {
@@ -197,6 +297,7 @@ module.exports = {
   verificarClave (clave, hashDB) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(clave, hashDB, function (err, res) {
+        console.log(res)
         if (err) {
           reject(err)
         } else {
@@ -268,8 +369,6 @@ module.exports = {
     // 0931823447 2938373
     return [false, 'mensaje']
   },
-  verificarNombres (nombres) {
-    // Joel Eduardo Rodriguez Llamuca , solo letras con especios
-    return [false, 'mensaje']
-  }
+  verificarNombres,
+  fechaNacimiento
 }

@@ -184,6 +184,19 @@
   </v-container>
   </template>
     <footer>
+    <v-btn
+      fab
+      @click.native="agregarDialog=true"
+      class = "bottom-right-corner"
+      >
+      <v-icon>add</v-icon>
+    </v-btn>
+    <agregarEstablecimientoDialog
+    :visible="agregarDialog"
+    :idEmpresa="$route.params.empresaId"
+    @close="agregarDialog=false"
+    >  
+    </agregarEstablecimientoDialog>
     <DialogPuestosFromEstablecimientos
     :visible="visiblePuestos"
     :establecimientoId="establecimientoId"
@@ -254,7 +267,7 @@ import DialogNovedadesFromEstablecimientos from './Novedades/DialogNovedadesFrom
 import DialogAreas from './Areas/verAreasDialog'
 import DialogEditarEmpresas from './Editar/DialogEditarEmpresas'
 import DialogEditarEstablecimientos from './Editar/DialogEditarEstablecimientos'
-import agregarArea from './Agregar/agregarArea'
+import agregarEstablecimientoDialog from './Agregar/agregarEstablecimientoDialog'
 export default {
   components: {
     DialogPuestosFromEstablecimientos,
@@ -264,7 +277,8 @@ export default {
     DialogNovedadesFromEstablecimientos,
     DialogAreas,
     DialogEditarEmpresas,
-    DialogEditarEstablecimientos
+    DialogEditarEstablecimientos,
+    agregarEstablecimientoDialog
   },
   data () {
     return {
@@ -285,9 +299,8 @@ export default {
       visibleNovedades: false,
       eliminarDialog: false,
       eliminarDialog2: false,
-
+      agregarDialog: false,
       agregarArea: false,
-
       empresaNombre: '',
       empresaActividadComercial: '',
       empresaRazonSocial: '',
@@ -410,7 +423,7 @@ export default {
       this.$store.dispatch('deleteEmpresa', empresaId)
         .then((resp) => {
           this.snackbar = true
-          this.mensajeSnackbar = 'establecimiento borrado con exito.'
+          this.mensajeSnackbar = 'Empresa eliminada con exito.'
           this.color = 'success'
           this.reloadEmpresas()
         })
@@ -564,5 +577,12 @@ export default {
 }
 .offseted {
   top: 7em;
+}
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
 }
 </style>

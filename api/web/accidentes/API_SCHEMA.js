@@ -5,13 +5,13 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'descripcion': { 'type': 'string', minLength: 2 },
-        'heridos': { 'type': 'number', minimum: 0 },
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 100 },
+        'heridos': { 'type': 'number', minimum: 0, maximun: 50 },
         'atendidoEnEmpresa': { 'type': 'boolean' },
-        'muertos': { 'type': 'number', minimum: 0 },
+        'muertos': { 'type': 'number', minimum: 0, maximun: 50 },
         'fecha': { 'fecha': true },
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -20,13 +20,13 @@ module.exports = {
       'minProperties': 4,
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'descripcion': { 'type': 'string', minLength: 2 },
-        'heridos': { 'type': 'number', minimum: 0 },
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 100 },
+        'heridos': { 'type': 'number', minimum: 0, maximun: 50 },
         'atendidoEnEmpresa': { 'type': 'boolean' },
-        'muertos': { 'type': 'number', minimum: 0 },
+        'muertos': { 'type': 'number', minimum: 0, maximun: 50 },
         'fecha': { 'fecha': true },
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     },
     PARAMS: {
@@ -34,7 +34,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'accidentesId': { 'type': 'number', minimum: 1 }
+        'accidentesId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -44,7 +44,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'accidentesId': { 'type': 'number', minimum: 1 }
+        'accidentesId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -54,7 +54,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'accidentesId': { 'type': 'number', minimum: 1 }
+        'accidentesId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -64,7 +64,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'establecimientosId': { 'type': 'number', minimum: 1 }
+        'establecimientosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -74,7 +74,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'areasId': { 'type': 'number', minimum: 1 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -84,7 +84,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   }

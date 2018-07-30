@@ -247,7 +247,8 @@ async function crearPersonas ({ db }) {
     fechaNacimiento: `${faker.date.past()}`,
     perfilOcupacional: perfilesOcupacionales[ri(0, perfilesOcupacionales.length - 1)],
     usuario: faker.internet.userName(),
-    rol: roles[ri(0, roles.length - 1)]
+    rol: roles[ri(0, roles.length - 1)],
+    creadaDump: true
   }
   try {
     let personaCreada = await db.personas.CrearConClave(persona)
@@ -292,7 +293,8 @@ conexion.Conectar().then(async (db) => {
     fechaNacimiento: `${faker.date.past()}`,
     perfilOcupacional: 'admin',
     usuario: 'admin',
-    rol: 'admin-i2solutions'
+    rol: 'admin-i2solutions',
+    creadaDump: true
   })
   const cantidadEmpresas = 5
   const cantidadEstablecimientosMaximo = 4
@@ -336,7 +338,7 @@ conexion.Conectar().then(async (db) => {
               let personasId = await crearPersonas({ db })
               if (personasId) {
                 // personasCapacitaciones
-                if (i === 1) {
+                if (ri(1, 2) === 1) {
                   await crearPersonasCapacitaciones({ db, personasId, capacitacionesId })
                 }
                 // personasPuestos
