@@ -5,11 +5,11 @@ module.exports = {
       // 'additionalProperties': false, // porque el urlFoto no se enviara si la empresa no tiene logo
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'actividadComercial': { 'type': 'string', minLength: 2 },
-        'razonSocial': { 'type': 'string', minLength: 2 },
-        'direccion': { 'type': 'string', minLength: 2 },
-        'urlFoto': { 'type': 'string', 'format': 'url' },
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'actividadComercial': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'razonSocial': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'direccion': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'urlFoto': { 'type': 'string', 'format': 'url', maxLength: 100 },
         'ruc': { 'cedula': false } // validar que sean solo numero y http://www.sri.gob.ec/web/guest/RUC
       }
     }
@@ -20,10 +20,10 @@ module.exports = {
       // 'additionalProperties': false,  // porque el urlFoto no se enviara si la empresa no tiene logo
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'actividadComercial': { 'type': 'string', minLength: 2 },
-        'urlFoto': { 'type': 'string', 'format': 'url' },
-        'razonSocial': { 'type': 'string', minLength: 2 }
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'actividadComercial': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'urlFoto': { 'type': 'string', 'format': 'url', maxLength: 100 },
+        'razonSocial': { 'type': 'string', minLength: 2, maxLength: 50 }
       }
     },
     PARAMS: {
@@ -31,7 +31,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'empresasId': { 'type': 'number', minimum: 1 }
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -41,7 +41,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'empresasId': { 'type': 'number', minimum: 1 }
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -51,7 +51,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'empresasId': { 'type': 'number', minimum: 1 }
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },

@@ -5,7 +5,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'areasId': { 'type': 'number', minimum: 1 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -15,9 +15,9 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'descripcion': { 'type': 'string', minLength: 2 },
-        'areasId': { 'type': 'number', minimum: 1 }
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -27,8 +27,8 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'descripcion': { 'type': 'string', minLength: 2 }
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 50 }
       }
     },
     PARAMS: {
@@ -36,7 +36,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -46,7 +46,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -56,7 +56,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   }

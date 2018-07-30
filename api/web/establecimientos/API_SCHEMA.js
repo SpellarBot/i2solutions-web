@@ -5,7 +5,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'empresasId': { 'type': 'number', minimum: 1 }
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -15,9 +15,9 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 },
-        'direccion': { 'type': 'string', minLength: 2 },
-        'empresasId': { 'type': 'number', minimum: 1 },
+        'nombres': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'direccion': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 },
         'ruc': { 'cedula': false }
       }
     }
@@ -28,9 +28,9 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombres': { 'type': 'string', minLength: 2 },
-        'direccion': { 'type': 'string', minLength: 2 },
-        'empresasId': { 'type': 'number', minimum: 1 },
+        'nombres': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'direccion': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 },
         'ruc': { 'cedula': false }
       }
     },
@@ -39,7 +39,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'establecimientosId': { 'type': 'number', minimum: 1 }
+        'establecimientosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -49,7 +49,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'establecimientosId': { 'type': 'number', minimum: 1 }
+        'establecimientosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -59,7 +59,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'empresasId': { 'type': 'number', minimum: 1 }
+        'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     },
     REQUEST: {

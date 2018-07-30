@@ -5,11 +5,11 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'descripcion': { 'type': 'string', minLength: 2 },
-        'tema': { 'type': 'string', minLength: 2 },
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 100 },
+        'tema': { 'type': 'string', minLength: 2, maxLength: 50 },
         'fechaCapacitacion': { 'fecha': true },
-        'areasId': { 'type': 'number', minimum: 1 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -19,9 +19,9 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'nombre': { 'type': 'string', minLength: 2 },
-        'descripcion': { 'type': 'string', minLength: 2 },
-        'tema': { 'type': 'string', minLength: 2 },
+        'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 100 },
+        'tema': { 'type': 'string', minLength: 2, maxLength: 50 },
         'fechaCapacitacion': { 'fecha': true }
       }
     },
@@ -30,7 +30,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'capacitacionesId': { 'type': 'number', minimum: 1 }
+        'capacitacionesId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -40,7 +40,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'capacitacionesId': { 'type': 'number', minimum: 1 }
+        'capacitacionesId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -51,7 +51,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'establecimientosId': { 'type': 'number', minimum: 1 }
+        'establecimientosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -62,7 +62,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'areasId': { 'type': 'number', minimum: 1 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -73,7 +73,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'capacitacionesId': { 'type': 'number', minimum: 1 }
+        'capacitacionesId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   }

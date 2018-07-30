@@ -1,8 +1,7 @@
 const co = require('co')
+const utils = require('../../utils')
 let URL = process.env.NODE_ENV === 'production' ? 'https://i2s-app.herokuapp.com/' : 'http://localhost:3002/'
-let domain = process.env.DOMAIN
-let apiKey = process.env.APIKEY
-const mailgun = require('mailgun-js')({ apiKey: apiKey, domain: domain })
+const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 
 function genCrypto () {
@@ -13,6 +12,96 @@ function genCrypto () {
       } else {
         var token = buf.toString('hex')
         resolve(token)
+      }
+    })
+  })
+}
+
+function enviarCorreoTest (correo, url, usuario) {
+  return new Promise((resolve, reject) => {
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    secure: false,
+    port: 587,
+    auth: {
+        user: 'yrphn3hb4fi3ovmh@ethereal.email',
+        pass: 'SxZM6GXzM52QMSqfUD'
+    }
+  })
+  let mailOptions = {
+      from: 'Enviado de <i2solutions.ec@gmail.com>',
+      to: correo,
+      subject: 'Creación de usuario para I2Solutions',
+      text: 'Creación de la clave',
+      html: `
+        <h1> Cambio o Creación de clave </h1>
+        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <a href="${url}">${url}</a>
+      `
+    }
+    transporter.sendMail(mailOptions, function(error, info) {
+      if(error){
+          return resolve([true, error])
+      } else {
+        console.log('Message sent: %s', info.messageId)
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+        return resolve([false, info])
+      }
+    })
+  })
+}
+
+function enviarCorreoNodemailer (correo, url, usuario) {
+  return new Promise((resolve, reject) => {
+    // let transporter = nodemailer.createTransport({
+    //  service: 'gmail',
+    //  auth: {
+    //         user: process.env.MAILCORREO,
+    //         pass: process.env.MAILPASS
+    //     }
+    // })
+    let transporter = nodemailer.createTransport({
+     service: 'gmail',
+     auth: {
+            user: 'i2solutionsapp30',
+            pass: 'i2solutionsapp30@'
+        }
+    })
+    // i2solutionsapp30@
+    // i2solutionsapp30
+    // let transporter = nodemailer.createTransport({
+    //     host: 'smtp.gmail.com',
+    //     port: 465,
+    //     secure: true, // secure:true for port 465, secure:false for port 587
+    //     auth: {
+    //         type: 'OAuth2',
+    //         user: 'procarewebapp@gmail.com',
+    //         clientId: '636471246614-f425frovl75hc6971hpq0hbh77iq4dta.apps.googleusercontent.com',
+    //         clientSecret: "pJBQIxcaEN9BAALMKowo6zld",
+    //         refreshToken: "1/D0LJMDXjVy3JCB5Wcr7069jLs1-lmtlh2GF-EfqUwVXnCHDk0NJ4sUXqeQuhKk4l"
+    //     },
+    //     tls: {
+    //         rejectUnauthorized: false
+    //     }
+    // })
+    let mailOptions = {
+      from: 'Enviado de <i2solutions.ec@gmail.com>',
+      to: correo,
+      subject: 'Creación de usuario para I2Solutions',
+      text: 'Creación de la clave',
+      html: `
+        <h1> Cambio o Creación de clave </h1>
+        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <a href="${url}">${url}</a>
+      `
+    }
+    transporter.sendMail(mailOptions, function(error, info) {
+      if(error){
+          return resolve([true, error])
+      } else {
+        console.log('Message sent: %s', info.messageId)
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+        return resolve([false, info])
       }
     })
   })
@@ -30,54 +119,32 @@ module.exports = ({ responses, db }) => {
           } else {
             let rol = datos['rol']
             let valido = rol === 'admin-empresa' | rol === 'inspector-seguridad' | rol === 'jefe-seguridad'
-            if (valido) {
-              let token = yield genCrypto()
-              datos['resetClaveToken'] = token
-              // datos['resetClaveExpires'] = Date.now() + 3600000; // 1 hour
+            let usuario = datos['usuario']
+            let enviarCorreoDevelop = valido && process.env.NODE_ENV === 'development'
+            let enviarCorreoProduction = valido && process.env.NODE_ENV === 'production'
+            let token = yield genCrypto()
+            let correo = datos['correo']
+            let url = `${URL}#/crearClave/${token}`
+            let err = false, mensaje = ''
+            if (enviarCorreoProduction) {
+              [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
+            } else if (enviarCorreoDevelop) {
+              [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
             }
-            let personaCreada = yield db.personas.Crear(datos)
-            let relacionCreada = yield db.personasPuestos.Crear({ personasId: personaCreada['id'], puestosId })
-            if (personaCreada && relacionCreada) {
-              let usuario = personaCreada['usuario']
-              let enviarCorreo = valido && process.env.NODE_ENV !== 'testing'
-              let [err, mensaje] = [false, '']
-              if (enviarCorreo) {
-                let token = personaCreada['resetClaveToken']
-                let correo = personaCreada['correo']
-                let url = `${URL}#/crearClave/${token}`
-                const enviarCorreo = (correo, url, usuario) => {
-                  return new Promise((resolve, reject) => {
-                    let data = {
-                      from: 'Enviado de <i2solutions.ec@gmail.com>',
-                      to: correo,
-                      subject: 'Creación de usuario para I2Solutions',
-                      text: 'Creación de la clave',
-                      html: `
-                        <h1> Cambio o Creación de clave </h1>
-                        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
-                        <a href="${url}">${url}</a>
-                      `
-                    }
-                    mailgun.messages().send(data, function (error, body) {
-                      if (error) {
-                        resolve([true, error])
-                      } else {
-                        resolve([false, body])
-                      }
-                    })
-                  })
-                }
-                [err, mensaje] = yield enviarCorreo(correo, url, usuario)
-                if (err) {
-                  console.error(mensaje)
-                  resolve(responses.NO_OK('El correo no existe'))
-                }
-              }
-              let tmp = JSON.parse(JSON.stringify(personaCreada))
-              tmp['puestosId'] = puestosId
-              resolve(responses.OK(tmp))
+            if (err) {
+              console.log(mensaje)
+              resolve(responses.NO_OK('El correo no existe'))
             } else {
-              resolve(responses.NO_OK('Ocurrio un error al crearse'))
+              datos['resetClaveToken'] = token
+              let personaCreada = yield db.personas.Crear(datos)
+              let relacionCreada = yield db.personasPuestos.Crear({ personasId: personaCreada['id'], puestosId })
+              if (personaCreada && relacionCreada) {
+                let tmp = JSON.parse(JSON.stringify(personaCreada))
+                tmp['puestosId'] = puestosId
+                resolve(responses.OK(tmp))
+              } else {
+                resolve(responses.NO_OK('Ocurrio un error al crearse'))
+              }
             }
           }
         }).catch((err) => {
