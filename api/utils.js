@@ -251,8 +251,38 @@ ajv.addKeyword('nombres', {
   },
   errors: true
 })
-
+const nodemailer = require('nodemailer')
 module.exports = {
+  enviarCorreo (correo, url, usuario, fn) {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      secure: false,
+      port: 587,
+      auth: {
+        user: 'yrphn3hb4fi3ovmh@ethereal.email',
+        pass: 'SxZM6GXzM52QMSqfUD'
+      }
+    })
+    let mailOptions = {
+      from: 'Enviado de <i2solutions.ec@gmail.com>',
+      to: correo,
+      subject: 'Creación de usuario para I2Solutions',
+      text: 'Creación de la clave',
+      html: `
+        <h1> Cambio o Creación de clave </h1>
+        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <a href="${url}">${url}</a>
+      `
+    }
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error)
+      }
+      console.log('Message sent: %s', info.messageId)
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+      fn(true)
+    })
+  },
   genHash (clave) {
     return new Promise((resolve, reject) => {
       bcrypt.hash(clave, saltos, function (err, hash) {

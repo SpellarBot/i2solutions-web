@@ -749,16 +749,17 @@ describe('PERSONAS', () => {
 
     it('@ICE_API_9_01 Crear correctamente', async () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_INSPECTOR_SEGURIDAD
-      let req = { nombres, apellidos, correo: 'josassaselerll@gmail.com', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
+      let req = { nombres, apellidos, correo: 'joelerll@gmail.com', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
+      console.log(res.body)
       let personaCreada = await models.personas.Obtener({ id: res.body.datos['id'] })
       expect(personaCreada).to.not.equal(null)
       let relacion = await models.personasPuestos.ObtenerPorPersona({ id: personaCreada['id'] })
       expect(relacion).to.not.equal(null)
-      let token = personaCreada['resetClaveToken']
-      let req2 = { clave: 'abcdefghi' }
-      let res2 = await request(app).post(`/api/web/personas/crear_clave/${token}`).send(req2)
-      let personaCambioClave = await models.personas.ObtenerTodo({ id: res.body.datos['id'] })
+      // let token = personaCreada['resetClaveToken']
+      // let req2 = { clave: 'abcdefghi' }
+      // let res2 = await request(app).post(`/api/web/personas/crear_clave/${token}`).send(req2)
+      // let personaCambioClave = await models.personas.ObtenerTodo({ id: res.body.datos['id'] })
       // console.log(personaCambioClave)
 
       // let personaCreada = await models.personas.Obtener({ id: res.body.datos['id'] })

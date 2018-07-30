@@ -12,3 +12,4 @@ _book
 coverage
 yarn.lock
 package-lock.json
+.gitignore

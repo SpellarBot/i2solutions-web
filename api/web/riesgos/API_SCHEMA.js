@@ -5,13 +5,13 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'tipoRiesgo': { 'type': 'string', minLength: 2 },
-        'personasExpuestas': { 'type': 'number', minimum: 0 },
-        'valoracion': { 'type': 'string', minLength: 2 },
-        'valoracionLiteral': { 'type': 'string', minLength: 2 },
-        'porcentajeRiesgo': { 'type': 'number', minimum: 0 },
+        'tipoRiesgo': { 'type': 'string', minLength: 2, maxLength: 20 },
+        'personasExpuestas': { 'type': 'number', minimum: 0, maximun: 100 },
+        'valoracion': { 'type': 'string', minLength: 2, maxLength: 30 },
+        'valoracionLiteral': { 'type': 'string', minLength: 2, maxLength: 30 },
+        'porcentajeRiesgo': { 'type': 'number', minimum: 0, maximun: 100 },
         'fecha': { 'fecha': true },
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -21,13 +21,13 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'tipoRiesgo': { 'type': 'string', minLength: 2 },
-        'personasExpuestas': { 'type': 'number', minimum: 0 },
-        'valoracion': { 'type': 'string', minLength: 2 },
-        'valoracionLiteral': { 'type': 'string', minLength: 2 },
-        'porcentajeRiesgo': { 'type': 'number', minimum: 0 },
+        'tipoRiesgo': { 'type': 'string', minLength: 2, maxLength: 20 },
+        'personasExpuestas': { 'type': 'number', minimum: 0, maximun: 100 },
+        'valoracion': { 'type': 'string', minLength: 2, maxLength: 30 },
+        'valoracionLiteral': { 'type': 'string', minLength: 2, maxLength: 30 },
+        'porcentajeRiesgo': { 'type': 'number', minimum: 0, maximun: 100 },
         'fecha': { 'fecha': true },
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     },
     PARAMS: {
@@ -35,7 +35,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'riesgosId': { 'type': 'number', minimum: 1 }
+        'riesgosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -45,7 +45,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'riesgosId': { 'type': 'number', minimum: 1 }
+        'riesgosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -55,7 +55,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'riesgosId': { 'type': 'number', minimum: 1 }
+        'riesgosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -65,7 +65,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'areasId': { 'type': 'number', minimum: 1 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   },
@@ -75,7 +75,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'puestosId': { 'type': 'number', minimum: 1 }
+        'puestosId': { 'type': 'number', minimum: 1, maximun: 500000 }
       }
     }
   }
