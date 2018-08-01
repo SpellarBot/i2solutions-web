@@ -53,6 +53,17 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
 {
   "estado": true,
   "datos": {
+    "area": {
+      "id": 1,
+      "actividad": "gerencia",
+      "nombre": "Gerente General",
+      "fotoUrl": "http://lorempixel.com/640/480",
+      "metrosCuadrados": "20x20",
+      "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
+      "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
+      "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
+      "establecimientosId": 1
+    },
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
