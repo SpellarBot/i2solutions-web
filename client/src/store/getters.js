@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
 export default {
   usuario (state) {
     return state.usuario

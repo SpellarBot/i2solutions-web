@@ -32,7 +32,6 @@
     </v-snackbar>
     </div>
 </template>
-
 <script>
 import Vue from 'vue'
 export default {
@@ -65,7 +64,7 @@ export default {
             this.snackbar = true
             this.mensajeSnackbar = 'Creada clave correctamente, sera redirigido a pagina principal'
             this.color = 'success'
-            setTimeout(function(){ window.location.href = '/' }, 4000)
+            setTimeout(function () { window.location.href = '/' }, 4000)
           } else {
             this.snackbar = true
             this.mensajeSnackbar = resp.body.datos

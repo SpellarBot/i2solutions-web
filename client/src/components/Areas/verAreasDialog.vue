@@ -31,7 +31,7 @@
         </v-layout>
       </v-container>
     </v-card>
-    </v-dialog>
+    </v-dialog>    
   </main>
 </template>
 <script>
@@ -63,5 +63,12 @@ export default {
 <style>
 .izq {
   text-align: left;
+}
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
 }
 </style>

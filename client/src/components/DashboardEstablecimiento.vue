@@ -185,11 +185,9 @@
   </template>
     <footer>
     <v-btn
-      top
-      right
-      relative
       fab
       @click.native="agregarDialog=true"
+      class = "bottom-right-corner"
       >
       <v-icon>add</v-icon>
     </v-btn>
@@ -579,5 +577,12 @@ export default {
 }
 .offseted {
   top: 7em;
+}
+.bottom-right-corner {
+  position: absolute;
+  right:    0;
+  bottom:   0;
+  margin-right: 3%;
+  margin-bottom: 2%;
 }
 </style>
