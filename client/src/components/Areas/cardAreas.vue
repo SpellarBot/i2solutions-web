@@ -29,7 +29,7 @@
               fab
               dark
               small
-              color="blue"
+              color="red"
               :class="'eliminarArea' + id"
               @click="eliminarArea()"
               v-if="$store.getters.usuario.rol === 'admin-i2solutions'"

@@ -30,17 +30,19 @@
         <td class="text-xs-left">{{ props.item.nombres }}</td>
         <td class="text-xs-left">{{ props.item.apellidos }}</td>
         <td class="text-xs-left">{{ props.item.correo }}</td>
+        <!--Inicio roles-->
+        <td class="text-xs-left" v-if="props.item.rol === 'admin-i2solutions'">Administrador de i2solutions</td>
+        <td class="text-xs-left" v-if="props.item.rol === 'jefe-seguridad'">Jefe de Seguridad</td>
+        <td class="text-xs-left" v-if="props.item.rol === 'inspector-seguridad'">Inspector de Seguridad</td>
+        <td class="text-xs-left" v-if="props.item.rol === 'admin-empresa'">Administrador de la empresa</td>
+        <td class="text-xs-left" v-if="props.item.rol === 'empleado'">Empleado</td>
+        <!--Fin roles-->
         <td class="text-xs-left">{{ props.item.telefono }}</td>
         <td class="text-xs-left">{{ props.item.usuario }}</td>
           </tr>
         </template>
         <template slot="expand" slot-scope="props">
       <v-card flat>
-        <v-card-text class="text-xs pa-0" v-if="props.item.rol === 'admin-i2solutions'"><b>Rol:</b> Administrador de i2solutions</v-card-text>
-        <v-card-text class="text-xs pa-0" v-if="props.item.rol === 'inspector-seguridad'"><b>Rol:</b> Inspector de Seguridad</v-card-text>
-        <v-card-text class="text-xs pa-0" v-if="props.item.rol === 'jefe-seguridad'"><b>Rol:</b> Jefe de Seguridad</v-card-text>
-        <v-card-text class="text-xs pa-0" v-if="props.item.rol === 'admin-empresa'"><b>Rol:</b> Administrador de la empresa</v-card-text>
-        <v-card-text class="text-xs pa-0" v-if="props.item.rol === 'empleado'"><b>Rol:</b> Empleado</v-card-text>
         <v-card-text class="text-xs pa-0"><b>Cédula:</b> {{ props.item.cedula }}</v-card-text>
         <v-card-text class="text-xs pa-0"><b>Fecha de nacimiento:</b> {{ fecha(props.item.fechaNacimiento) }}</v-card-text>
         <v-card-text class="text-xs pa-0"><b>Perfil Ocupacional:</b> {{ props.item.perfilOcupacional }}</v-card-text>
@@ -49,6 +51,7 @@
           icon
             small
             left
+            color="blue"
             v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             @click="visualizarEditar(props.item, fecha(props.item.fechaNacimiento))"
           >
@@ -57,6 +60,7 @@
           <v-btn flat
           icon
             small
+            color="red"
             v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             @click="eliminarPersona(props.item)"
           >
@@ -136,6 +140,7 @@ export default {
         },
         { text: 'Apellidos', value: 'apellidos', sortable: true },
         { text: 'Correo', value: 'correo', sortable: false },
+        { text: 'Rol', value: 'rol', sortable: false },
         { text: 'Teléfono', value: 'telefono', sortable: false },
         { text: 'Usuario', value: 'usuario', sortable: false }
       ]

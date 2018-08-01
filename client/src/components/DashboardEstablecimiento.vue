@@ -38,7 +38,7 @@
             <v-btn
               dark
               fab
-              color="blue"
+              color="red"
               small
               class="eliminarEmpresa"
               @click="eliminarEmpresa()"
@@ -83,7 +83,7 @@
             <v-btn
               dark
               fab
-              color="blue"
+              color="red"
               small
               :class="'eliminarEstablecimiento' + establecimiento.id"
               @click="eliminarEstablecimiento(establecimiento)"
@@ -195,7 +195,7 @@
     :visible="agregarDialog"
     :idEmpresa="$route.params.empresaId"
     @close="agregarDialog=false; cargarDatos()"
-    >  
+    >
     </agregarEstablecimientoDialog>
     <DialogPuestosFromEstablecimientos
     :visible="visiblePuestos"

@@ -13,7 +13,7 @@
 <template v-if="done">
     <v-container grid-list-md>
       <br>
-      <h2 class="text-md-left">Empresas</h2>
+      <h2>Empresas</h2>
       <br>
       <v-layout row wrap>
         <v-flex
@@ -26,7 +26,7 @@
             :class="'empresa' + empresa.id"
             height="100%"
             raised
-            hover            
+            hover
             >
             <v-flex xs12>
               <div v-if="empresa.tieneNovedades">
@@ -36,7 +36,7 @@
                   right
                   icon
                   flat
-                  color="orange darken-1" 
+                  color="orange darken-1"
                   class = "btn--plain rotate-25 notification"
                   >
                   <v-icon>priority_high</v-icon>
