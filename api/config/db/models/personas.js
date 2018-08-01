@@ -285,8 +285,11 @@ module.exports = (sequelize, DataTypes) => {
       let query = `select count(*) from personas pe inner join personasPuestos pp on pp.personasId = pe.id where pp.puestosId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(puestos => {
-          if (puestos.length)
+          if (puestos.length) {
             resolve(puestos[0]['count(*)'])
+          } else {
+            resolve(0)
+          }
         }).catch((err) => {
           return reject(err)
         })
