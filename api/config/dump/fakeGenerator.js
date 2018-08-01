@@ -296,6 +296,48 @@ conexion.Conectar().then(async (db) => {
     rol: 'admin-i2solutions',
     creadaDump: true
   })
+
+  await db.personas.CrearConClave({
+    nombres: 'Joel',
+    apellidos: 'Rodriguez',
+    correo: 'joelerll@gmail.com',
+    cedula: '0931823447',
+    clave: '1234',
+    telefono: '259956326',
+    fechaNacimiento: `${faker.date.past()}`,
+    perfilOcupacional: 'admin',
+    usuario: 'joelerll',
+    rol: 'inspector-seguridad',
+    creadaDump: true
+  })
+
+  await db.personas.CrearConClave({
+    nombres: 'Eduardo',
+    apellidos: 'Llamuca',
+    correo: 'joelerll@gmail.com',
+    cedula: '0931823447',
+    clave: '1234',
+    telefono: '259956326',
+    fechaNacimiento: `${faker.date.past()}`,
+    perfilOcupacional: 'admin',
+    usuario: 'joeedrod',
+    rol: 'jefe-seguridad',
+    creadaDump: true
+  })
+
+  await db.personas.CrearConClave({
+    nombres: 'Xavier',
+    apellidos: 'Idrovo',
+    correo: 'xidrovo@gmail.com',
+    cedula: '0931823447',
+    clave: '1234',
+    telefono: '259956326',
+    fechaNacimiento: `${faker.date.past()}`,
+    perfilOcupacional: 'No hace nada',
+    usuario: 'xidrovo',
+    rol: 'empleado',
+    creadaDump: true
+  })
   const cantidadEmpresas = 5
   const cantidadEstablecimientosMaximo = 4
   const cantidadAreasMaximo = 6

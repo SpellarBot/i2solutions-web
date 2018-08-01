@@ -280,6 +280,19 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerCantidadPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      let query = `select count(*) from personas pe inner join personasPuestos pp on pp.personasId = pe.id where pp.puestosId = ${id}`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(puestos => {
+          if (puestos.length)
+            resolve(puestos[0]['count(*)'])
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.ObtenerEmpresa = function ({ id }) {
     return new Promise((resolve, reject) => {
       let query = `select pp.personasId as personasId, em.id as empresasId from personasPuestos pp inner join areasPuestos ap on ap.puestosId = pp.puestosId inner join areas a on a.id = ap.areasId inner join establecimientos es on es.id = a.establecimientosId inner join empresas em on em.id = es.empresasId where pp.personasId = ${id}`

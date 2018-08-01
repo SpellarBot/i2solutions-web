@@ -26,17 +26,18 @@ module.exports = ({ responses, db }) => {
     CargarDatos ({ puestosId, establecimientosId, areasId }) {
       return new Promise((resolve, reject) => {
         Promise.all([
+          db.areas.Obtener({ id: areasId }),
           db.puestos.Obtener({ id: puestosId }),
           db.novedades.ObtenerPorPuesto({ id: puestosId }),
           db.riesgos.ObtenerPorPuesto({ id: puestosId }),
-          db.establecimientos.CantidadEmpleados({ id: establecimientosId }),
+          db.personas.ObtenerCantidadPorPuestos({ id: puestosId }),
           db.puestos.obtenerEquiposPorPuestos({ id: puestosId }),
           db.accidentes.obtenerPorPuestoTrabajo({ id: puestosId }),
           db.capacitaciones.ObtenerPorPersonas({ id: areasId }),
           db.capacitaciones.ObtenerPorArea({ id: areasId })
         ])
           .then((datos) => {
-            let [ puesto, novedades, riesgos, cantidadEmpleados, equiposProteccion, detallesAccidentes, capacitacionesPersonas, capacitaciones ] = datos
+            let [ area, puesto, novedades, riesgos, cantidadEmpleados, equiposProteccion, detallesAccidentes, capacitacionesPersonas, capacitaciones ] = datos
             let capacitacionesPersonasTmp = {}
             for (let capacitacion of capacitacionesPersonas) {
               let id = capacitacion['capacitacionId']
@@ -89,6 +90,7 @@ module.exports = ({ responses, db }) => {
               }
             })
             resolve(responses.OK({
+              area,
               ...puesto,
               areasId: parseInt(areasId),
               novedadesSinAtender,
