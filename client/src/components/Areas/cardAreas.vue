@@ -81,7 +81,7 @@
                       </v-layout>
                     </v-container>
                 </v-card-text>
-            </v-card>
+            </v-card>            
     <!--Para Eliminar Puestos-->
     <v-layout row justify-center>
       <v-dialog v-model="eliminarDialogAreas" persistent max-width="290">
@@ -95,7 +95,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>
+    </v-layout>    
     <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -107,56 +107,64 @@
     </v-snackbar>
 
     <footer>
+      <div ref="areas">
+      </div>
       <v-btn
         fab
-        @click.native="agregarDialog=true"
+        @click.native="agregarArea=true"
         class = "bottom-right-corner"
         >
         <v-icon>add</v-icon>
       </v-btn>
+    <agregarAreaDialog
+      :visible="agregarArea"
+      :establecimientoId="establecimientoId"
+      @close="agregarArea=false"
+    >
+    </agregarAreaDialog>
     <DialogNovedadesFromAreas
-    :areaId="areaId"
-    :nombre="nombre"
-    :visible ="visibleNovedades"
-    @close ="visibleNovedades=false">
+      :areaId="areaId"
+      :nombre="nombre"
+      :visible ="visibleNovedades"
+      @close ="visibleNovedades=false">
     </DialogNovedadesFromAreas>
     <DialogEquiposFromAreas
-    :areaId="areaId"
-    :nombre="nombre"
-    :visible ="visibleEquipos"
-    @close ="visibleEquipos=false">
+      :areaId="areaId"
+      :nombre="nombre"
+      :visible ="visibleEquipos"
+      @close ="visibleEquipos=false">
     </DialogEquiposFromAreas>
     <DialogRiesgosFromPuestos
-    :visible ="visibleRiesgos"
-    @close ="visibleRiesgos=false">
+      :visible ="visibleRiesgos"
+      @close ="visibleRiesgos=false">
     </DialogRiesgosFromPuestos>
     <DialogPuestosFromAreas
-    :visible="visiblePuestos"
-    :areaId="areaId"
-    :areaNombre="areaNombre"
-    @close="visiblePuestos=false">
+      :visible="visiblePuestos"
+      :areaId="areaId"
+      :areaNombre="areaNombre"
+      @close="visiblePuestos=false">
   </DialogPuestosFromAreas>
   <DialogEditarAreas
-  :visible="visibleEdicion"
-  :areaId="areaId"
-  :areaNombre="areaNombre"
-  :areaActividad="areaActividad"
-  :areaDescripcion="areaDescripcion"
-  :areaMetrosCuadrados="metrosCuadrados"
-  :areaFotoUrl="areaFotoUrl"
-  @close="visibleEdicion=false">
+    :visible="visibleEdicion"
+    :areaId="areaId"
+    :areaNombre="areaNombre"
+    :areaActividad="areaActividad"
+    :areaDescripcion="areaDescripcion"
+    :areaMetrosCuadrados="metrosCuadrados"
+    :areaFotoUrl="areaFotoUrl"
+    @close="visibleEdicion=false">
 </DialogEditarAreas>
 <DialogCapacitacionesFromAreas
-:visible="visibleCapacitaciones"
-:areaId="areaId"
-:areaNombre="areaNombre"
-@close="visibleCapacitaciones=false">
+  :visible="visibleCapacitaciones"
+  :areaId="areaId"
+  :areaNombre="areaNombre"
+  @close="visibleCapacitaciones=false">
 </DialogCapacitacionesFromAreas>
 <DialogPersonasFromAreas
-:visible="visiblePersonas"
-:areaId="areaId"
-:areaNombre="areaNombre"
-@close="visiblePersonas=false">
+  :visible="visiblePersonas"
+  :areaId="areaId"
+  :areaNombre="areaNombre"
+  @close="visiblePersonas=false">
 </DialogPersonasFromAreas>
   </footer>
 
@@ -171,10 +179,11 @@ import DialogPuestosFromAreas from '../DialogPuestosFromAreas'
 import DialogEditarAreas from '../Editar/DialogEditarAreas'
 import DialogCapacitacionesFromAreas from '../DialogCapacitacionesFromAreas'
 import DialogPersonasFromAreas from '../DialogPersonasFromAreas'
+import agregarAreaDialog from '../agregar/agregarAreaDialog'
 export default{
-  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas, DialogPersonasFromAreas},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas, DialogPersonasFromAreas, agregarAreaDialog},
   name: 'puestosPorArea',
-  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index'],
+  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index', 'establecimientoId'],
   data () {
     return {
       dumb: false,
@@ -183,6 +192,7 @@ export default{
       visibleRiesgos: false,
       visiblePuestos: false,
       visibleCapacitaciones: false,
+      agregarArea: false,
       eliminarDialogAreas: false,
       visiblePersonas: false,
       areaId: '',
