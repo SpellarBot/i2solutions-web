@@ -194,7 +194,7 @@
     <agregarEstablecimientoDialog
     :visible="agregarDialog"
     :idEmpresa="$route.params.empresaId"
-    @close="agregarDialog=false"
+    @close="agregarDialog=false; cargarDatos()"
     >  
     </agregarEstablecimientoDialog>
     <DialogPuestosFromEstablecimientos
@@ -332,7 +332,7 @@ export default {
       this.valid = true
     },
     verEmpresaSelected () {
-      this.$store.dispatch('getEmpresaSola', this.id)
+      this.$store.dispatch('getEmpresaSola', Number(this.id))
         .then((resp) => {
           console.log('Done')
         })
@@ -343,7 +343,7 @@ export default {
         })
     },
     verEstablecimientos () {
-      this.$store.dispatch('getEstablecimientosFront', this.id)
+      this.$store.dispatch('getEstablecimientosFront', Number(this.id))
         .then((resp) => {
           console.log('Done')
         })

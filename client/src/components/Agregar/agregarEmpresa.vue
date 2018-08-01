@@ -370,7 +370,7 @@ export default {
       let matrizId = 0
       let image = urlFoto.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
       return new Promise((resolve, reject) => {
-        Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
+        Vue.http.post('https://api.imgur.com/3/image', { image, image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
           .then((resp) => {
             let urlFoto = resp.body.data.link
             return urlFoto
@@ -381,22 +381,15 @@ export default {
           .then((resp) => {
             if (resp.body.estado) {
               empresaId = resp.body.datos.id
-              matrizId = resp.body.datos.establecimiento.id
-              const startArea = async () => {
-                this.asyncForEachCreator(this.instanciasAreas, matrizId, async (num) => {
-                })
-              }
-              startArea()
-              const startEstablecimientos = async () => {
-                this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId, async (num) => {
-                })
-              }
-              startEstablecimientos()
-              return resolve()
+              matrizId = resp.body.datos.establecimiento.id                            
+              return resolve( this.asyncForEachCreator(this.instanciasAreas, matrizId ) )
             } else {
               this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
             }
+          })
+          .then((restp)  => {
+            return resolve ( this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId ))
           })
           .then((resp) => {
             this.loading = false
@@ -404,14 +397,18 @@ export default {
           })
           .catch((err) => {
             this.$store.commit('setError', err)
+            this.error.message = '¡ha ocurrido un error con la imagen!'
+            this.error.trigger = true
+            this.$store.commit('setVerified', false) // La imagen ingresada es erronea.
             return reject(err)
           })
       })
     },
-    async asyncForEachCreator (instanciaArray, id, callback) {
+    asyncForEachCreator (instanciaArray, id) {
       for (let index = 0; index < instanciaArray.length; index++) {
-        await instanciaArray[index].crear(Number(id))
+        instanciaArray[index].crear(Number(id))
       }
+      return id
     },
     cleaner () {
       this.imageName = ''

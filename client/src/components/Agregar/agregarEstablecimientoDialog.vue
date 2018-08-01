@@ -236,7 +236,7 @@ export default {
         }
       }
       return new Promise(async (resolve, reject) => {
-        return (startEstablecimientos(this.instanciasEstablecimientos, id))
+        return (startEstablecimientos(this.instanciasEstablecimientos, Number(id)))
           .then(async (resp) => {
             this.created = true
             this.loading = false
