@@ -33,5 +33,40 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPorCapacitaciones = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      return this.findAll({
+        raw: true,
+        where: {
+          capacitacionesId: id
+        }
+      })
+        .then((puesto) => {
+          return resolve(puesto)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.CrearBulk = function (ids) {
+    return new Promise((resolve, reject) => {
+      this.bulkCreate(ids)
+        .then((datos) => {
+          return this.findAll({ raw: true })
+        })
+        .then((datos) => {
+          if (datos.length === ids.length) {
+            return resolve(true)
+          } else {
+            return resolve(false)
+          }
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   return define
 }

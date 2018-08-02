@@ -53,7 +53,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '2': {
@@ -64,7 +65,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '3': {
@@ -75,7 +77,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '4': {
@@ -86,7 +89,8 @@ module.exports = {
           'descripcion': { codigo: 'C12' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '5': {
@@ -97,7 +101,8 @@ module.exports = {
           'descripcion': { codigo: 'C13' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '6': {
@@ -108,7 +113,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C22' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '7': {
@@ -119,7 +125,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C23' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '8': {
@@ -130,7 +137,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C32' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '9': {
@@ -141,7 +149,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C33' },
-          'areasId': { codigo: 'C41' }
+          'areasId': { codigo: 'C41' },
+          'personas': { codigo: 'C51' }
         }
       },
       '10': {
@@ -152,7 +161,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C42' }
+          'areasId': { codigo: 'C42' },
+          'personas': { codigo: 'C51' }
         }
       },
       '11': {
@@ -163,7 +173,8 @@ module.exports = {
           'descripcion': { codigo: 'C11' },
           'tema': { codigo: 'C21' },
           'fechaCapacitacion': { codigo: 'C31' },
-          'areasId': { codigo: 'C43' }
+          'areasId': { codigo: 'C43' },
+          'personas': { codigo: 'C51' }
         }
       }
     }

@@ -1,15 +1,25 @@
-// const co = require('co')
+const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
       return new Promise((resolve, reject) => {
-        db.capacitaciones.Crear(datos)
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+        co(function * () {
+          let capacitacionCreada = yield db.capacitaciones.Crear(datos)
+          let personas = datos['personas']
+          let personasArea = []
+          for (let persona of personas) {
+            personasArea.push({ personasId: persona, capacitacionesId: capacitacionCreada['id'] })
+          }
+          let personasAnadidas = yield db.personasCapacitaciones.CrearBulk(personasArea)
+          if (personasAnadidas) {
+            resolve(responses.OK({ ...capacitacionCreada, personas: personas }))
+          } else {
+            resolve(responses.NO_OK('Ocurrio un error y no se crearon todas las personas'))
+          }
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     ObtenerTodos ({ empresasId }) {

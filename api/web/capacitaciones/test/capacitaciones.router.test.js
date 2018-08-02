@@ -19,8 +19,10 @@ let docs = []
 let equivalencias = {}
 
 describe('CAPACITACIONES', () => {
-  let { areas, capacitaciones, establecimientos, empresas } = dump
+  let { areas, capacitaciones, establecimientos, empresas, personas } = dump
   let area = areas.VALIDOS[0]
+  let persona = personas.ADMIN_I2SOLUTIONS
+  let persona2 = personas.INSPECTOR_SEGURIDAD
   let empresa = empresas.VALIDOS[0]
   let establecimiento = establecimientos.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
@@ -60,10 +62,16 @@ describe('CAPACITACIONES', () => {
       areasId = areaCreada['id']
     })
 
-    it('@ICE_API_1_1 Crear un capacitacion de forma correcta', async () => {
+    it('@ICE_API_1_01 Crear un capacitacion de forma correcta', async () => {
+      let personaCreada = await models.personas.Crear(persona)
+      let personaCreada2 = await models.personas.Crear(persona2)
       let { nombre, descripcion, tema, fechaCapacitacion } = capacitacion
-      let req = { nombre, descripcion, tema, fechaCapacitacion, areasId }
+      let personas = [ personaCreada['id'], personaCreada2['id'] ]
+      let req = { nombre, descripcion, tema, fechaCapacitacion, areasId,  personas }
       let res = await request(app).post(`/api/web/capacitaciones`).send(req)
+      let capacitacionesId = res.body.datos['id']
+      let capacitados = await models.personasCapacitaciones.ObtenerPorCapacitaciones({ id: capacitacionesId })
+      expect(capacitados.length).to.equal(2)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.OK({ docs, doc: API_1, res })

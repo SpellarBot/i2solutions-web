@@ -26,7 +26,11 @@ __POST__ __/api/web/capacitaciones__
     "fechaCapacitacion": "2018-04-25T04:27:34.000Z",
     "areasId": 1,
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
-    "fechaCreacion": "2011-10-01T05:00:00.000Z"
+    "fechaCreacion": "2011-10-01T05:00:00.000Z",
+    "personas": [
+      1,
+      2
+    ]
   },
   "codigoEstado": 200
 }
