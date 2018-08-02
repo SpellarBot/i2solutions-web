@@ -108,6 +108,7 @@
                   label="Capacitador" required
                   :rules="[rules.required]"
                 ></v-text-field>
+                <v-btn color="primary" dark @click="verDialogCapacitados">Agregar Capacitados</v-btn>
             </v-form>
         </v-card-text>
         <v-card-actions>
@@ -127,6 +128,31 @@
                     <v-spacer></v-spacer>
                     <v-btn color="blue" flat @click.native="eliminarDialogCapacitaciones = false">No</v-btn>
                     <v-btn :class="'boraarCapacitacion' + this.capacitacionSelected" color="blue darken-1" flat @click = "borrarCapacitacion()">Sí</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-layout>
+              <v-layout row justify-center>
+              <v-dialog v-model="agregarPersonasDialog" persistent max-width="700">
+                <v-card>
+                  <v-card-title class="headline">Capacitados</v-card-title>
+                  <v-card-text><b>Lista de capacitados.</b></v-card-text>
+                  <v-card-text v-if="this.personasNombres.length===0">No ha ingresado capacitados</v-card-text>
+                  <div v-if="this.personasNombres.length > 0">
+                    <v-card-text v-for="persona in this.personasNombres">
+                      {{ persona }}
+                    </v-card-text>
+                  </div>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-select
+                    :items="personasEstablecimiento"
+                label="Personas"
+                v-model = "personaToAdd"
+                item-text="nombres"
+                ></v-select>
+                <v-btn color="blue" flat @click.native="agregarCapacitado">Agregar</v-btn>
+                <v-btn color="blue" flat @click.native="agregarPersonasDialog = false">Salir</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -154,6 +180,12 @@ export default {
       eliminarDialogCapacitaciones: false,
       indexEliminar: 0,
       capacitaciones: [],
+      personasEstablecimiento: [],
+      personaToAdd: null,
+      personasNombres: [],
+      personas: [],
+      alreadyLoaded: false,
+      agregarPersonasDialog: false,
       capacitacionSelected: null,
       visibleAgregar: false,
       rules: {
@@ -213,6 +245,12 @@ export default {
       this.$refs.menu.save(newDate)
     },
     crear () {
+      if (personas.length === 0) {
+        this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = 'No ha agregado capacitados.'
+      }
+      else {
       let tema = this.$data.newTema
       let descripcion = this.$data.newDescripcion
       let fechaCapacitacion = moment(this.$data.newDate).format()
@@ -237,15 +275,66 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
+      }
     },
     cargarData () {
       this.loading = true
       this.capacitaciones = this.$store.getters.capacitaciones
       this.loading = false
     },
+    agregarCapacitado () {
+      let personaId = this.personaToAdd.id
+      let personaNombre = this.personaToAdd.nombres + ' ' + this.personaToAdd.apellidos
+      this.personas.push(personaId)
+      console.log(this.personas)
+      this.personasNombres.push(personaNombre)
+      console.log(this.personasNombres)
+      let indexBorrar = this.personasEstablecimiento.indexOf(this.personaToAdd)
+      this.personasEstablecimiento.splice(indexBorrar,1)
+      this.personaToAdd = null
+      this.snackbar = true
+      this.mensajeSnackbar = 'Capacitado agregado con éxito.'
+      this.color = 'success'
+    },
+    verDialogCapacitados () {
+      if(this.alreadyLoaded === true){
+        this.agregarPersonasDialog = true
+      }
+      else{
+        this.getPersonasFromEstablecimiento()
+      }
+    },
+    getPersonasFromEstablecimiento () {
+      this.$store.dispatch('getAreaSola', this.areaId)
+        .then((resp) => {
+          console.log('Done1')
+          let establecimientosId = this.$store.getters.areaSelected.establecimientosId
+          console.log(establecimientosId)
+          this.$store.dispatch('getPersonasFromEstablecimiento', establecimientosId)
+            .then((resp) => {
+              console.log('Done2')
+              this.personasEstablecimiento = this.$store.getters.personas
+              this.agregarPersonasDialog = true
+              this.alreadyLoaded = true
+            })
+            .catch((err) => {
+              this.color = 'error'
+              this.snackbar = true
+              this.mensajeSnackbar = err
+            })
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     closing () {
       this.$store.dispatch('emptyCapacitaciones')
       this.show = false
+      this.alreadyLoaded = false
+      this.personasNombres.length = 0
+      this.personas.length = 0
     },
     borrarCapacitacion () {
       this.eliminarDialogCapacitaciones = false
