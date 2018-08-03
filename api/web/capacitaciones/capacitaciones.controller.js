@@ -1,4 +1,27 @@
 const co = require('co')
+
+function agregarPersonasACapacitaciones (personas, capacitaciones) {
+  let personasAgrupadas = {}
+  for (let persona of personas) {
+    let capacitacionesId = persona['capacitacionesId']
+    if (personasAgrupadas[capacitacionesId]) {
+      personasAgrupadas[capacitacionesId].push(persona)
+    } else {
+      personasAgrupadas[capacitacionesId] = [persona]
+    }
+  }
+  let respuestaAgrupadaPorPersonas = []
+  for (let capacitacion of capacitaciones) {
+    let id = capacitacion['id']
+    let personas = []
+    if (personasAgrupadas[id]) {
+      personas = personasAgrupadas[id]
+    }
+    respuestaAgrupadaPorPersonas.push({ ...capacitacion, personas: personas })
+  }
+  return respuestaAgrupadaPorPersonas
+}
+
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
@@ -77,24 +100,36 @@ module.exports = ({ responses, db }) => {
     },
     ObtenerPorEstablecimiento ({ id }) {
       return new Promise((resolve, reject) => {
-        db.capacitaciones.ObtenerPorEstablecimiento({ id })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+        co(function * () {
+          let resp = yield db.capacitaciones.ObtenerPorEstablecimiento({ id })
+          let idsCapacitaciones = resp.reduce(function (anterior, actual) {
+            anterior.push(actual['id'])
+            return anterior
+          }, [])
+          let personas = yield db.capacitaciones.ObtenerPersonasCapacitaciones(idsCapacitaciones)
+          let ret = agregarPersonasACapacitaciones(personas, resp)
+          resolve(responses.OK(ret))
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     },
     ObtenerPorArea ({ id }) {
       return new Promise((resolve, reject) => {
-        db.capacitaciones.ObtenerPorArea({ id })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
+        co(function * () {
+          let resp = yield db.capacitaciones.ObtenerPorArea({ id })
+          let idsCapacitaciones = resp.reduce(function (anterior, actual) {
+            anterior.push(actual['id'])
+            return anterior
+          }, [])
+          let personas = yield db.capacitaciones.ObtenerPersonasCapacitaciones(idsCapacitaciones)
+          let ret = agregarPersonasACapacitaciones(personas, resp)
+          resolve(responses.OK(ret))
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
       })
     }
   }
