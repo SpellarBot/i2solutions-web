@@ -180,6 +180,17 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerVarias = function (ids) {
+    return new Promise((resolve, reject) => {
+      this.findAll({ where: { id: ids }, raw: true, attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol', 'cedula'] })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.ObtenerTodo = function ({ id }) {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { id }, raw: true })

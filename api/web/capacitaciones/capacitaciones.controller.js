@@ -6,13 +6,14 @@ module.exports = ({ responses, db }) => {
         co(function * () {
           let capacitacionCreada = yield db.capacitaciones.Crear(datos)
           let personas = datos['personas']
+          let personasEncontradas = yield db.personas.ObtenerVarias(personas)
           let personasArea = []
           for (let persona of personas) {
             personasArea.push({ personasId: persona, capacitacionesId: capacitacionCreada['id'] })
           }
           let personasAnadidas = yield db.personasCapacitaciones.CrearBulk(personasArea)
           if (personasAnadidas) {
-            resolve(responses.OK({ ...capacitacionCreada, personas: personas }))
+            resolve(responses.OK({ ...capacitacionCreada, personas: personasEncontradas }))
           } else {
             resolve(responses.NO_OK('Ocurrio un error y no se crearon todas las personas'))
           }

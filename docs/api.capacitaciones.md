@@ -28,8 +28,24 @@ __POST__ __/api/web/capacitaciones__
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z",
     "personas": [
-      1,
-      2
+      {
+        "usuario": "elsa",
+        "correo": "vctor_daz@hotmail.com",
+        "nombres": "Elsa",
+        "apellidos": "Vega",
+        "id": 1,
+        "rol": "admin-i2solutions",
+        "cedula": "0931823447"
+      },
+      {
+        "usuario": "carlos",
+        "correo": "ca@hotmail.com",
+        "nombres": "Carlos",
+        "apellidos": "Andres",
+        "id": 2,
+        "rol": "inspector-seguridad",
+        "cedula": "0931823447"
+      }
     ]
   },
   "codigoEstado": 200
