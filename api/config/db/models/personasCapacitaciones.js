@@ -57,11 +57,12 @@ module.exports = (sequelize, DataTypes) => {
           return this.findAll({ raw: true })
         })
         .then((datos) => {
-          if (datos.length === ids.length) {
-            return resolve(true)
-          } else {
-            return resolve(false)
-          }
+          return resolve(true)
+          // if (datos.length === ids.length) {
+          //   return resolve(true)
+          // } else {
+          //   return resolve(false)
+          // }
         }).catch((err) => {
           return reject(err)
         })
