@@ -73,6 +73,19 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerPersonasCapacitaciones = function (ids) {
+    return new Promise((resolve, reject) => {
+      let idsQuery = ids.join(',')
+      let query = `select pc.capacitacionesId, p.usuario as usuario, p.correo as correo, p.nombres as nombres, p.apellidos as apellidos, p.id as id, p.rol as rol, p.cedula as cedula from personasCapacitaciones pc inner join personas p on p.id = pc.personasId where pc.capacitacionesId in (${idsQuery})`
+      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+        .then(capacitaciones => {
+          resolve(capacitaciones)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
     let { nombre, descripcion, tema, fechaCapacitacion } = datos

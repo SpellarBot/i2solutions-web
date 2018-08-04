@@ -7,6 +7,10 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn v-if="$store.getters.usuario.rol === 'admin-i2solutions'" flat color="white"
+      @click="matrizRiesgoMenu" >
+        Matriz de Riesgos
+      </v-btn>
       <v-btn v-if="$store.getters.usuario.rol === 'admin-empresa' || $store.getters.usuario.rol === 'admin-i2solutions'" flat color="white"
       @click="crearPersona" >
         Agregar Persona
@@ -46,6 +50,9 @@ export default {
     },
     crearArea () {
       router.push('/crearArea')
+    },
+    matrizRiesgoMenu () {
+      router.push('/matrizRiesgo')
     },
     crearPersona () {
       router.push('/crearPersona')

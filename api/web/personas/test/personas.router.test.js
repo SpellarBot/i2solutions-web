@@ -745,9 +745,9 @@ describe('PERSONAS', () => {
 
   })
 
-  describe('API_9 CAMBIO DE CLAVE O GENERAR', () => {
-
+  describe('API_9 GENERAR CLAVE', () => {
     it('@ICE_API_9_01 Crear correctamente', async () => {
+      clock.restore()
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_INSPECTOR_SEGURIDAD
       let req = { nombres, apellidos, correo: 'joelerll@gmail.com', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
@@ -756,22 +756,33 @@ describe('PERSONAS', () => {
       expect(personaCreada).to.not.equal(null)
       let relacion = await models.personasPuestos.ObtenerPorPersona({ id: personaCreada['id'] })
       expect(relacion).to.not.equal(null)
-      // let token = personaCreada['resetClaveToken']
-      // let req2 = { clave: 'abcdefghi' }
-      // let res2 = await request(app).post(`/api/web/personas/crear_clave/${token}`).send(req2)
-      // let personaCambioClave = await models.personas.ObtenerTodo({ id: res.body.datos['id'] })
-      // console.log(personaCambioClave)
+    })
+  })
 
+  describe('API_10 CAMBIO CLAVE', () => {
+    let personasId = -1
+    let correo = ''
+
+    beforeEach(async () => {
+      let personaCreada = await models.personas.Crear(persona_ADMIN_I2SOLUTIONS)
+      await models.personasPuestos.Crear({ personasId: personaCreada['id'], puestosId })
+      personasId = personaCreada['id']
+      correo = personaCreada['correo']
+    })
+    it('@ICE_API_10_01 Crear correctamente', async () => {
+      clock.restore()
+      let req = { correo }
+      let res = await request(app).put(`/api/web/personas/CambioClave/enviarToken`).send(req)
+      // console.log(res.body)
+      // let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_INSPECTOR_SEGURIDAD
+      // let req = { nombres, apellidos, correo: 'joelerll@gmail.com', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
+      // let res = await request(app).post(`/api/web/personas`).send(req)
+      // console.log(res.body)
       // let personaCreada = await models.personas.Obtener({ id: res.body.datos['id'] })
       // expect(personaCreada).to.not.equal(null)
       // let relacion = await models.personasPuestos.ObtenerPorPersona({ id: personaCreada['id'] })
       // expect(relacion).to.not.equal(null)
-      // expect(res.body.estado).to.equal(true)
-      // expect(res.body.codigoEstado).to.equal(200)
-      // generatorDocs.OK({ docs, doc: API_1, res })
-      // generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, res, codigoApi })
     })
-
   })
 
 })

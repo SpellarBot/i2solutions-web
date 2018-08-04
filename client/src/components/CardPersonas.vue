@@ -28,7 +28,7 @@
               fab
               dark
               small
-              color="blue"
+              color="red"
               @click="eliminarPersona()"
               v-if="$store.getters.usuario.rol === 'admin-i2solutions' || $store.getters.usuario.rol === 'admin-empresa'"
             >

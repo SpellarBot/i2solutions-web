@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   let define = sequelize.define(singular, {
     nombres: { type: DataTypes.STRING },
     apellidos: { type: DataTypes.STRING },
-    correo: { type: DataTypes.STRING },
+    correo: { type: DataTypes.STRING, unique: true },
     cedula: { type: DataTypes.STRING },
     clave: { type: DataTypes.STRING },
     telefono: { type: DataTypes.STRING },
@@ -142,6 +142,23 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.CambioClave = function ({ token, id }) {
+    return new Promise((resolve, reject) => {
+      return this.update(
+        { resetClaveToken: token },
+        { where: { id } })
+        .then((resp) => {
+          if (resp['clave']) {
+            delete resp['clave']
+          }
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.CambiarClave = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
     let { clave } = datos
@@ -180,6 +197,17 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.ObtenerVarias = function (ids) {
+    return new Promise((resolve, reject) => {
+      this.findAll({ where: { id: ids }, raw: true, attributes: ['usuario', 'correo', 'nombres', 'apellidos', 'id', 'rol', 'cedula'] })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.ObtenerTodo = function ({ id }) {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { id }, raw: true })
@@ -194,6 +222,34 @@ module.exports = (sequelize, DataTypes) => {
   define.ObtenerPorToken = function ({ token }) {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { resetClaveToken: token }, raw: true })
+        .then((project) => {
+          if (project && project['clave']) {
+            delete project['clave']
+          }
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerCorreo = function ({ correo }) {
+    return new Promise((resolve, reject) => {
+      this.findOne({ where: { correo }, raw: true })
+        .then((project) => {
+          if (project && project['clave']) {
+            delete project['clave']
+          }
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerUsuario = function ({ usuario }) {
+    return new Promise((resolve, reject) => {
+      this.findOne({ where: { usuario }, raw: true })
         .then((project) => {
           if (project && project['clave']) {
             delete project['clave']

@@ -20,6 +20,9 @@ import PuestoCrear from '@/components/PuestoCrear'
 import DashboardEstablecimiento from '@/components/DashboardEstablecimiento'
 import ResetClave from '@/components/ResetClave'
 import AuthAdmin from './authAdmin'
+import MatrizRiesgoMenu from '@/components/MatrizRiesgo/MatrizRiesgoMenu'
+import MatrizRiesgoVer from '@/components/MatrizRiesgo/MatrizRiesgoVer'
+import MatrizRiesgoAgregar from '@/components/MatrizRiesgo/MatrizRiesgoAgregar'
 
 Vue.use(Router)
 
@@ -109,6 +112,21 @@ export default new Router({
       path: '/crearClave/:token',
       name: 'ResetClave',
       component: ResetClave
+    }, {
+      path: '/matrizRiesgo',
+      name: 'MatrizRiesgoMenu',
+      component: MatrizRiesgoMenu,
+      beforeEnter: AuthAdmin
+    }, {
+      path: '/matrizRiesgo/ver',
+      name: 'MatrizRiesgoVer',
+      component: MatrizRiesgoVer,
+      beforeEnter: AuthAdmin
+    }, {
+      path: '/matrizRiesgo/agregar',
+      name: 'MatrizRiesgoAgregar',
+      component: MatrizRiesgoAgregar,
+      beforeEnter: AuthAdmin
     }
   ]
 })

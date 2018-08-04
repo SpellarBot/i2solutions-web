@@ -19,8 +19,11 @@ let docs = []
 let equivalencias = {}
 
 describe('CAPACITACIONES', () => {
-  let { areas, capacitaciones, establecimientos, empresas } = dump
+  let { areas, capacitaciones, establecimientos, empresas, personas } = dump
   let area = areas.VALIDOS[0]
+  let persona = personas.ADMIN_I2SOLUTIONS
+  let persona2 = personas.INSPECTOR_SEGURIDAD
+  let persona3 = personas.EMPLEADO
   let empresa = empresas.VALIDOS[0]
   let establecimiento = establecimientos.VALIDOS[0]
   let establecimiento2 = establecimientos.VALIDOS[1]
@@ -60,10 +63,16 @@ describe('CAPACITACIONES', () => {
       areasId = areaCreada['id']
     })
 
-    it('@ICE_API_1_1 Crear un capacitacion de forma correcta', async () => {
+    it('@ICE_API_1_01 Crear un capacitacion de forma correcta', async () => {
+      let personaCreada = await models.personas.Crear(persona)
+      let personaCreada2 = await models.personas.Crear(persona2)
       let { nombre, descripcion, tema, fechaCapacitacion } = capacitacion
-      let req = { nombre, descripcion, tema, fechaCapacitacion, areasId }
+      let personas = [ personaCreada['id'], personaCreada2['id'] ]
+      let req = { nombre, descripcion, tema, fechaCapacitacion, areasId,  personas }
       let res = await request(app).post(`/api/web/capacitaciones`).send(req)
+      let capacitacionesId = res.body.datos['id']
+      let capacitados = await models.personasCapacitaciones.ObtenerPorCapacitaciones({ id: capacitacionesId })
+      expect(capacitados.length).to.equal(2)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.OK({ docs, doc: API_1, res })
@@ -412,9 +421,17 @@ describe('CAPACITACIONES', () => {
 
     beforeEach(async () => {
       let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areaCreada2 = await models.areas.Crear({ ...area, establecimientosId })
       areasId = areaCreada['id']
       let capacitacionCreada = await models.capacitaciones.Crear({ ...capacitacion, areasId })
-      let capacitacionCreada2 = await models.capacitaciones.Crear({ ...capacitacion2, areasId })
+      let capacitacionCreada2 = await models.capacitaciones.Crear({ ...capacitacion2, areasId: areaCreada2['id'] })
+      let capacitacionCreada3 = await models.capacitaciones.Crear({ ...capacitacion, areasId })
+      let personaCreada = await models.personas.Crear(persona)
+      let personaCreada2 = await models.personas.Crear(persona2)
+      let personaCreada3 = await models.personas.Crear(persona3)
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada['id'], capacitacionesId: capacitacionCreada['id'] })
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada2['id'], capacitacionesId: capacitacionCreada['id'] })
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada3['id'], capacitacionesId: capacitacionCreada3['id'] })
       capacitacionesId = capacitacionCreada['id']
     })
 
@@ -422,9 +439,10 @@ describe('CAPACITACIONES', () => {
       let params = { establecimientosId }
       let url = `/api/web/capacitaciones/establecimientos/${params['establecimientosId']}`
       let res = await request(app).get(url)
+      // console.log(JSON.stringify(res.body, null, 2))
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.datos.length).to.equal(2)
+      expect(res.body.datos.length).to.equal(3)
       generatorDocs.OK({ docs, doc: API_5, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_5_EQUI, res, codigoApi, url, params })
     })
@@ -471,6 +489,13 @@ describe('CAPACITACIONES', () => {
       areasId = areaCreada['id']
       let capacitacionCreada = await models.capacitaciones.Crear({ ...capacitacion, areasId })
       let capacitacionCreada2 = await models.capacitaciones.Crear({ ...capacitacion2, areasId: areaCreada2['id'] })
+      let capacitacionCreada3 = await models.capacitaciones.Crear({ ...capacitacion, areasId })
+      let personaCreada = await models.personas.Crear(persona)
+      let personaCreada2 = await models.personas.Crear(persona2)
+      let personaCreada3 = await models.personas.Crear(persona3)
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada['id'], capacitacionesId: capacitacionCreada['id'] })
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada2['id'], capacitacionesId: capacitacionCreada['id'] })
+      await models.personasCapacitaciones.Crear({ personasId: personaCreada3['id'], capacitacionesId: capacitacionCreada3['id'] })
       capacitacionesId = capacitacionCreada['id']
     })
 
@@ -480,7 +505,7 @@ describe('CAPACITACIONES', () => {
       let res = await request(app).get(url)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.datos.length).to.equal(1)
+      expect(res.body.datos.length).to.equal(2)
       generatorDocs.OK({ docs, doc: API_6, res })
       generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_6_EQUI, res, codigoApi, url, params })
     })

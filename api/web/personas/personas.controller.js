@@ -16,39 +16,39 @@ function genCrypto () {
   })
 }
 
-// function enviarCorreoTest (correo, url, usuario) {
-//   return new Promise((resolve, reject) => {
-//     let transporter = nodemailer.createTransport({
-//       host: 'smtp.ethereal.email',
-//       secure: false,
-//       port: 587,
-//       auth: {
-//         user: 'yrphn3hb4fi3ovmh@ethereal.email',
-//         pass: 'SxZM6GXzM52QMSqfUD'
-//       }
-//     })
-//     let mailOptions = {
-//       from: 'Enviado de <i2solutions.ec@gmail.com>',
-//       to: correo,
-//       subject: 'Creación de usuario para I2Solutions',
-//       text: 'Creación de la clave',
-//       html: `
-//         <h1> Cambio o Creación de clave </h1>
-//         <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
-//         <a href="${url}">${url}</a>
-//       `
-//     }
-//     transporter.sendMail(mailOptions, function (error, info) {
-//       if (error) {
-//         return resolve([true, error])
-//       } else {
-//         console.log('Message sent: %s', info.messageId)
-//         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
-//         return resolve([false, info])
-//       }
-//     })
-//   })
-// }
+function enviarCorreoTest (correo, url, usuario) {
+  return new Promise((resolve, reject) => {
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      secure: false,
+      port: 587,
+      auth: {
+        user: 'yrphn3hb4fi3ovmh@ethereal.email',
+        pass: 'SxZM6GXzM52QMSqfUD'
+      }
+    })
+    let mailOptions = {
+      from: 'Enviado de <i2solutions.ec@gmail.com>',
+      to: correo,
+      subject: 'Creación de usuario para I2Solutions',
+      text: 'Creación de la clave',
+      html: `
+        <h1> Cambio o Creación de clave </h1>
+        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <a href="${url}">${url}</a>
+      `
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        return resolve([true, error])
+      } else {
+        console.log('Message sent: %s', info.messageId)
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+        return resolve([false, info])
+      }
+    })
+  })
+}
 
 function enviarCorreoNodemailer (correo, url, usuario) {
   return new Promise((resolve, reject) => {
@@ -126,9 +126,9 @@ module.exports = ({ responses, db }) => {
             let url = `${URL}#/crearClave/${token}`
             let err = false
             let mensaje = ''
-            if (enviarCorreoProduction) {
-              [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
-            } else if (enviarCorreoDevelop) {
+            if (enviarCorreoDevelop) {
+              [err, mensaje] = yield enviarCorreoTest(correo, url, usuario)
+            } else if (enviarCorreoProduction) {
               [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
             }
             if (err) {
@@ -281,6 +281,51 @@ module.exports = ({ responses, db }) => {
           return reject(responses.ERROR_SERVIDOR)
         })
       })
+    },
+    CambioClave ({ usuario, correo }) {
+      console.log({ usuario, correo })
+      return new Promise((resolve, reject) => {
+        co(function * () {
+          let personasExiste = false
+          if (usuario) {
+            personasExiste = yield db.personas.ObtenerUsuario({ usuario })
+          } else {
+            personasExiste = yield db.personas.ObtenerCorreo({ correo })
+          }
+          if (personasExiste) {
+            let token = yield genCrypto()
+            let id = personasExiste['id']
+            let tokenGuardado = yield db.personas.CambioClave({ token, id })
+            let enviarCorreoDevelop = process.env.NODE_ENV === 'development' && tokenGuardado
+            let enviarCorreoProduction = process.env.NODE_ENV === 'production' && tokenGuardado
+            let correo = personasExiste['correo']
+            let usuario = personasExiste['usuario']
+            let url = `${URL}#/crearClave/${token}`
+            let err = false
+            let mensaje = ''
+            if (enviarCorreoDevelop) {
+              [err, mensaje] = yield enviarCorreoTest(correo, url, usuario)
+            } else if (enviarCorreoProduction) {
+              [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
+            }
+            if (err) {
+              console.log(mensaje)
+              resolve(responses.NO_OK('El correo no existe'))
+            } else {
+              resolve(responses.OK('Revise el correo, se envio el url donde podra hacer el cambio de clave'))
+            }
+          } else {
+            resolve(responses.NO_OK('No existe el correo o el usuario'))
+          }
+        }).catch((err) => {
+          console.log(err)
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
+      })
+    },
+    VerificadorUsuarioYCedula ({ usuarios, cedulas }) {
+
     }
   }
   return Object.assign(Object.create(proto), {})

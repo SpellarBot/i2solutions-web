@@ -2,14 +2,19 @@ module.exports = {
   API_1_SCHEMA: {
     BODY: {
       'minProperties': 5,
-      'additionalProperties': false,
       'type': 'object',
       'properties': {
         'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
         'descripcion': { 'type': 'string', minLength: 2, maxLength: 100 },
         'tema': { 'type': 'string', minLength: 2, maxLength: 50 },
         'fechaCapacitacion': { 'fecha': true },
-        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 }
+        'areasId': { 'type': 'number', minimum: 1, maximun: 500000 },
+        'personas': {
+          'type': 'array',
+          'items': {
+            'type': 'number'
+          }
+        }
       }
     }
   },

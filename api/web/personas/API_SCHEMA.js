@@ -103,13 +103,23 @@ module.exports = {
       }
     }
   },
-  API_9_SCHEMA: { // editar una persona
+  API_9_SCHEMA: { // clave crear token
     BODY: {
       'minProperties': 1,
       'additionalProperties': false,
       'type': 'object',
       'properties': {
         'clave': { 'type': 'string', minLength: 5, maxLength: 20 }
+      }
+    }
+  },
+  API_10_SCHEMA: { // clave crear token
+    QUERY: {
+      'minProperties': 1,
+      'type': 'object',
+      'properties': {
+        'correo': { 'type': 'string', 'format': 'email' },
+        'usuario': { 'type': 'string', minLength: 2, maxLength: 25 }
       }
     }
   }

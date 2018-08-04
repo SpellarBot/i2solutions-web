@@ -21,7 +21,7 @@
               fab
               dark
               small
-              color="blue"
+              color="red"
               :class="'eliminarPuesto' + puestos.id"
               @click="eliminarPuesto(puestos)"
               v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
