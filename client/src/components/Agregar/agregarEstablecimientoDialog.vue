@@ -39,7 +39,7 @@
           </v-flex>
         </v-layout>
         <v-btn @click.native="guardar()" :disabled="!valid">Crear establecimientos</v-btn>
-        </v-card>        
+        </v-card>
     </v-dialog>
     <footer>
       <v-dialog v-model="confirm.open" max-width="500px" @keydown.esc="confirm.open=false">
@@ -121,7 +121,7 @@ export default {
   },
   mounted () {
     this.insertarEstablecimiento()
-    console.log("----> " + this.idEmpresa + "<----")
+    console.log('----> ' + this.idEmpresa + '<----')
   },
   methods: {
     insertarEstablecimiento () {
@@ -200,7 +200,7 @@ export default {
       if (!this.somethingWrong) {
         this.instanciasEstablecimientos.forEach(function (establecimiento) {
           establecimiento.crear(Number(empresaId))
-        }.bind(this))
+        })
       }
     },
     async asyncForEachCreator (instanciaArray, id) {

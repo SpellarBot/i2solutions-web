@@ -81,7 +81,7 @@
                       </v-layout>
                     </v-container>
                 </v-card-text>
-            </v-card>            
+            </v-card>
     <!--Para Eliminar Puestos-->
     <v-layout row justify-center>
       <v-dialog v-model="eliminarDialogAreas" persistent max-width="290">
@@ -95,7 +95,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>    
+    </v-layout>
     <v-snackbar
       :timeout="3000"
       :multi-line="true"

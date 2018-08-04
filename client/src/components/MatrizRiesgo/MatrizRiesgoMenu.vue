@@ -52,21 +52,21 @@
   </main>
 </template>
 <script>
-  import router from '../../router'
-  export default {
-    data () {
+import router from '../../router'
+export default {
+  data () {
     return {
       mensajeSnackbar: '',
       color: '',
-      snackbar: false,
+      snackbar: false
     }
   },
-    methods: {
-      crearMatriz () {
-        this.verEmpresas()
-        router.push('/matrizRiesgo/agregar')
-      },
-      verEmpresas () {
+  methods: {
+    crearMatriz () {
+      this.verEmpresas()
+      router.push('/matrizRiesgo/agregar')
+    },
+    verEmpresas () {
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
           console.log('Done')
@@ -77,9 +77,9 @@
           this.mensajeSnackbar = err
         })
     },
-      verMatriz () {
-        router.push('/matrizRiesgo/ver')
-      }
+    verMatriz () {
+      router.push('/matrizRiesgo/ver')
     }
   }
+}
 </script>

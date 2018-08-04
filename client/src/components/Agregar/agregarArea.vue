@@ -193,7 +193,7 @@ export default {
     async asyncForEachCreator (instanciaArray, id) {
       console.log(id)
       for (let index = 0; index < instanciaArray.length; index++) {
-          await instanciaArray[index].crear(Number(id))
+        await instanciaArray[index].crear(Number(id))
       }
     },
     crear (idEstablecimiento) {

@@ -71,9 +71,9 @@ export default {
   data () {
     return {
       instanciasAreas: [],
-      indiceArea: 1 ,
+      indiceArea: 1,
       loading: false,
-      created: false  
+      created: false
     }
   },
   methods: {
@@ -90,7 +90,7 @@ export default {
     },
     guardar () {
       let somethingWrong = false
-      let Promise = require("bluebird");
+      let Promise = require('bluebird')
       this.instanciasAreas.forEach(function (area) {
         if (!area.verify()) {
           somethingWrong = true
@@ -102,13 +102,13 @@ export default {
         }.bind(this))
       }
       this.loading = true
-      Promise.delay(1000).then(function() {
-          return "Hello world";
-      }.bind(this)).delay(500).then(function(helloWorldString) {
-          this.loading = false
-          this.created = true
-      }.bind(this));
+      Promise.delay(1000).then(function () {
+        return 'Hello world'
+      }).delay(500).then(function (helloWorldString) {
+        this.loading = false
+        this.created = true
+      }.bind(this))
     }
-  }  
+  }
 }
 </script>

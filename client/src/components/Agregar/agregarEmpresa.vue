@@ -381,15 +381,15 @@ export default {
           .then((resp) => {
             if (resp.body.estado) {
               empresaId = resp.body.datos.id
-              matrizId = resp.body.datos.establecimiento.id                            
-              return resolve( this.asyncForEachCreator(this.instanciasAreas, matrizId ) )
+              matrizId = resp.body.datos.establecimiento.id
+              return resolve(this.asyncForEachCreator(this.instanciasAreas, matrizId))
             } else {
               this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
             }
           })
-          .then((restp)  => {
-            return resolve ( this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId ))
+          .then((restp) => {
+            return resolve(this.asyncForEachCreator(this.instanciasEstablecimientos, empresaId))
           })
           .then((resp) => {
             this.loading = false

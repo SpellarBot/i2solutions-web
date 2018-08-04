@@ -40,6 +40,10 @@
           <v-card flat>
             <v-card-text class="text-xs pa-0"><b>Descripción:</b> {{ props.item.descripcion }}</v-card-text>
             <v-card-text class="text-xs pa-0"><b>Capacitador:</b> {{ props.item.nombre }}</v-card-text>
+            <v-card-text class="text-xs pa-0"><b>Personas Capacitadas:</b></v-card-text>
+            <v-card-text class="text-xs pa-0" v-for="persona in props.item.personas">
+              {{ persona.nombres }}  {{ persona.apellidos }}
+            </v-card-text>
           </v-card>
         </template>
       </v-data-table>
@@ -245,36 +249,36 @@ export default {
       this.$refs.menu.save(newDate)
     },
     crear () {
-      if (personas.length === 0) {
+      if (this.personas.length === 0) {
         this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = 'No ha agregado capacitados.'
-      }
-      else {
-      let tema = this.$data.newTema
-      let descripcion = this.$data.newDescripcion
-      let fechaCapacitacion = moment(this.$data.newDate).format()
-      let nombre = this.$data.newCapacitador
-      let areasId = this.areaId
-      console.log(fechaCapacitacion)
-      this.$store.dispatch('crearCapacitacion', { nombre, descripcion, tema, fechaCapacitacion, areasId })
-        .then((resp) => {
-          console.log('Here')
-          let id = this.$store.getters.capacitacionCreada.id
-          let capacitacion = { id, nombre, tema, descripcion, fechaCapacitacion, areasId }
-          console.log(capacitacion)
-          this.capacitaciones.push(capacitacion)
-          this.snackbar = true
-          this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
-          this.color = 'success'
-          this.reiniciar()
-          this.visibleAgregar = false
-        })
-        .catch((err) => {
-          this.color = 'error'
-          this.snackbar = true
-          this.mensajeSnackbar = err
-        })
+        this.snackbar = true
+        this.mensajeSnackbar = 'No ha agregado capacitados.'
+      } else {
+        let tema = this.$data.newTema
+        let descripcion = this.$data.newDescripcion
+        let fechaCapacitacion = moment(this.$data.newDate).format()
+        let nombre = this.$data.newCapacitador
+        let areasId = this.areaId
+        let personas = this.$data.personas
+        console.log(fechaCapacitacion)
+        this.$store.dispatch('crearCapacitacion', { nombre, descripcion, tema, fechaCapacitacion, areasId, personas })
+          .then((resp) => {
+            console.log('Here')
+            let id = this.$store.getters.capacitacionCreada.id
+            let capacitacion = { id, nombre, tema, descripcion, fechaCapacitacion, areasId }
+            console.log(capacitacion)
+            this.capacitaciones.push(capacitacion)
+            this.snackbar = true
+            this.mensajeSnackbar = 'Capacitacion editada exitosamente.'
+            this.color = 'success'
+            this.reiniciar()
+            this.visibleAgregar = false
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       }
     },
     cargarData () {
@@ -290,17 +294,16 @@ export default {
       this.personasNombres.push(personaNombre)
       console.log(this.personasNombres)
       let indexBorrar = this.personasEstablecimiento.indexOf(this.personaToAdd)
-      this.personasEstablecimiento.splice(indexBorrar,1)
+      this.personasEstablecimiento.splice(indexBorrar, 1)
       this.personaToAdd = null
       this.snackbar = true
       this.mensajeSnackbar = 'Capacitado agregado con éxito.'
       this.color = 'success'
     },
     verDialogCapacitados () {
-      if(this.alreadyLoaded === true){
+      if (this.alreadyLoaded === true) {
         this.agregarPersonasDialog = true
-      }
-      else{
+      } else {
         this.getPersonasFromEstablecimiento()
       }
     },
