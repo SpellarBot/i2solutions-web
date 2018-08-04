@@ -283,7 +283,6 @@ module.exports = ({ responses, db }) => {
       })
     },
     CambioClave ({ usuario, correo }) {
-      console.log({ usuario, correo })
       return new Promise((resolve, reject) => {
         co(function * () {
           let personasExiste = false
@@ -324,8 +323,29 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
-    VerificadorUsuarioYCedula ({ usuarios, cedulas }) {
-
+    ExistenciaDe ({ usuario, cedula, correo }) {
+      return new Promise((resolve, reject) => {
+        co(function * () {
+          let existeUsuario = yield db.personas.ObtenerExistenciaDe(usuario)
+          let existeCedula = yield db.personas.ObtenerExistenciaDe(cedula)
+          let existeCorreo = yield db.personas.ObtenerExistenciaDe(correo)
+          let mensaje = { cedula: false, usuario: false, correo: false }
+          if (existeUsuario) {
+            mensaje['usuario'] = true
+          }
+          if (existeCedula) {
+            mensaje['cedula'] = true
+          }
+          if (existeCorreo) {
+            mensaje['correo'] = true
+          }
+          resolve(responses.OK(mensaje))
+        }).catch((err) => {
+          console.log(err)
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

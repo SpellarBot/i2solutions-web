@@ -23,7 +23,9 @@ describe('PERSONAS', () => {
   let persona_ADMIN_I2SOLUTIONS = personas.ADMIN_I2SOLUTIONS
   let persona_EMPLEADO = personas.EMPLEADO
   let persona_INSPECTOR_SEGURIDAD = personas.INSPECTOR_SEGURIDAD
-  let persona2 = personas[1]
+  let persona = personas.ADMIN_I2SOLUTIONS
+  let persona2 = personas.INSPECTOR_SEGURIDAD
+  let persona3 = personas.EMPLEADO
   let puesto = puestos.VALIDOS[0]
   let puesto2 = puestos.VALIDOS[1]
   let establecimiento = establecimientos.VALIDOS[0]
@@ -751,7 +753,6 @@ describe('PERSONAS', () => {
       let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_INSPECTOR_SEGURIDAD
       let req = { nombres, apellidos, correo: 'joelerll@gmail.com', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
       let res = await request(app).post(`/api/web/personas`).send(req)
-      console.log(res.body)
       let personaCreada = await models.personas.Obtener({ id: res.body.datos['id'] })
       expect(personaCreada).to.not.equal(null)
       let relacion = await models.personasPuestos.ObtenerPorPersona({ id: personaCreada['id'] })
@@ -760,6 +761,7 @@ describe('PERSONAS', () => {
   })
 
   describe('API_10 CAMBIO CLAVE', () => {
+    const { API_10 } = API
     let personasId = -1
     let correo = ''
 
@@ -773,15 +775,32 @@ describe('PERSONAS', () => {
       clock.restore()
       let req = { correo }
       let res = await request(app).put(`/api/web/personas/CambioClave/enviarToken`).send(req)
-      // console.log(res.body)
-      // let { nombres, apellidos, correo, cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol } = persona_INSPECTOR_SEGURIDAD
-      // let req = { nombres, apellidos, correo: 'joelerll@gmail.com', cedula, telefono, fechaNacimiento, perfilOcupacional, usuario, rol, puestosId }
-      // let res = await request(app).post(`/api/web/personas`).send(req)
-      // console.log(res.body)
-      // let personaCreada = await models.personas.Obtener({ id: res.body.datos['id'] })
-      // expect(personaCreada).to.not.equal(null)
-      // let relacion = await models.personasPuestos.ObtenerPorPersona({ id: personaCreada['id'] })
-      // expect(relacion).to.not.equal(null)
+      generatorDocs.OK({ docs, doc: API_10, res })
+    })
+  })
+
+  describe('API_11 EXISTENCIA DE CLAVE O CORREO', () => {
+    const { API_11 } = API
+    let personasId = -1
+    let correo = ''
+    let cedula = ''
+    let personaCreada = {}, personaCreada2 = {}, personaCreada3 = {}
+
+    beforeEach(async () => {
+      personaCreada = await models.personas.Crear(persona_ADMIN_I2SOLUTIONS)
+      await models.personasPuestos.Crear({ personasId: personaCreada['id'], puestosId })
+      personaCreada2 = await models.personas.Crear(persona2)
+      personaCreada3 = await models.personas.Crear(persona3)
+      personasId = personaCreada['id']
+      correo = personaCreada['correo']
+      cedula = personaCreada['cedula']
+    })
+    it('@ICE_API_11_01 Encontrado correctamente', async () => {
+      let query = { cedula, correo: personaCreada2['correo'], usuario: personaCreada3['usuario'] }
+      let res = await request(app).get(`/api/web/personas/buscar/existenciaDe?cedula=${query['cedula']}&correo=${query['correo']}&usuario=${query['usuario']}`)
+      generatorDocs.OK({ docs, doc: API_11, res })
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
     })
   })
 

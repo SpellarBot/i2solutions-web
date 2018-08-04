@@ -113,13 +113,24 @@ module.exports = {
       }
     }
   },
-  API_10_SCHEMA: { // clave crear token
+  API_10_SCHEMA: { // cambio crear token
     QUERY: {
       'minProperties': 1,
       'type': 'object',
       'properties': {
         'correo': { 'type': 'string', 'format': 'email' },
         'usuario': { 'type': 'string', minLength: 2, maxLength: 25 }
+      }
+    }
+  },
+  API_11_SCHEMA: { // clave crear token
+    QUERY: {
+      'minProperties': 1,
+      'type': 'object',
+      'properties': {
+        'correo': { 'type': 'string', 'format': 'email' },
+        'usuario': { 'type': 'string', minLength: 2, maxLength: 25 },
+        'cedula': { 'type': 'string', minLength: 2, maxLength: 25 }
       }
     }
   }

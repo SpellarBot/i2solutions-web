@@ -30,13 +30,13 @@ La clave se genera en el back y enviar el correo dependiendo del rol
     "nombres": "Carlos",
     "apellidos": "Andres",
     "correo": "joelerll@gmail.com",
-    "cedula": "0931823447",
+    "cedula": "0100967652",
     "telefono": "0986901270",
     "fechaNacimiento": "1995-05-21T19:27:28.576Z",
     "perfilOcupacional": "Inspector",
     "usuario": "carlos",
     "rol": "inspector-seguridad",
-    "resetClaveToken": "c0ff68acfc625342be648bd6619c098ff2e98cab",
+    "resetClaveToken": "e6c6c83a35756671e3e2646d38ec75e09c0e4681",
     "fechaActualizacion": "2018-08-01T05:00:00.000Z",
     "fechaCreacion": "2018-08-01T05:00:00.000Z",
     "puestosId": 1
@@ -80,7 +80,7 @@ __PUT__ __/api/web/personas/:personasId__
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -327,6 +327,56 @@ __GET__ __/api/web/personas/:personasId/puestos/:puestosId__
     "personasId": "1",
     "fechaActualizacion": "2018-08-01T05:00:00.000Z",
     "fechaCreacion": "2018-08-01T05:00:00.000Z"
+  },
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Cambiar clave
+
+__PUT__ __/api/web/personas/CambioClave/enviarToken__
+
+Puedo enviar el correo o  el usuario en el body, me acepta cualquiera de los dos para el cambio de clave
+#### Body:
+| Name       | Type    | Desc |
+| :--------- | :------ | :-------| 
+|  correo  | string  |   ---   | 
+|  usuario  | string  |   ---   | 
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": "Revise el correo, se envio el url donde podra hacer el cambio de clave",
+  "codigoEstado": 200
+}
+```
+
+
+___
+
+
+
+## Verificador exitencia correo, cedula, usuario
+
+__GET__ __/api/web/personas/buscar/existenciaDe?cedula=0987654321&correo=joel@gmail.com&usuario=joel__
+
+
+#### Response:
+
+```json
+{
+  "estado": true,
+  "datos": {
+    "cedula": true,
+    "usuario": true,
+    "correo": true
   },
   "codigoEstado": 200
 }

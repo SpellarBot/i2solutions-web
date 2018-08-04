@@ -171,7 +171,7 @@ _response_
         "apellidos": "Andres",
         "id": 2,
         "rol": "inspector-seguridad",
-        "cedula": "0931823447"
+        "cedula": "0100967652"
       }
     ]
   },
@@ -1883,7 +1883,7 @@ _response_
           "apellidos": "Andres",
           "id": 2,
           "rol": "inspector-seguridad",
-          "cedula": "0931823447"
+          "cedula": "0100967652"
         }
       ]
     },
@@ -1918,7 +1918,7 @@ _response_
           "apellidos": "Espinosa",
           "id": 3,
           "rol": "empleado",
-          "cedula": "0931823447"
+          "cedula": "0102051349"
         }
       ]
     }
@@ -2116,7 +2116,7 @@ _response_
           "apellidos": "Andres",
           "id": 2,
           "rol": "inspector-seguridad",
-          "cedula": "0931823447"
+          "cedula": "0100967652"
         }
       ]
     },
@@ -2136,7 +2136,7 @@ _response_
           "apellidos": "Espinosa",
           "id": 3,
           "rol": "empleado",
-          "cedula": "0931823447"
+          "cedula": "0102051349"
         }
       ]
     }

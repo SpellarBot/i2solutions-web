@@ -2,7 +2,8 @@
 const { genHash } = require('../../../utils')
 const { verificarClave } = require('../../../utils')
 const co = require('co')
-
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 module.exports = (sequelize, DataTypes) => {
   let singular = 'personas'
   let plural = 'personas'
@@ -186,6 +187,23 @@ module.exports = (sequelize, DataTypes) => {
   define.Obtener = function ({ id }) {
     return new Promise((resolve, reject) => {
       this.findOne({ where: { id }, raw: true })
+        .then((project) => {
+          if (project && project['clave']) {
+            delete project['clave']
+          }
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerExistenciaDe = function (campo) {
+    return new Promise((resolve, reject) => {
+      this.find({
+        where: { [Op.or]: [{ usuario: campo }, { cedula: campo }, { correo: campo }] },
+        raw: true
+      })
         .then((project) => {
           if (project && project['clave']) {
             delete project['clave']
