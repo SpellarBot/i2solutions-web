@@ -14,7 +14,7 @@
     "test:a": "cross-env NODE_ENV=testing mocha api/test/auth.test.js --slow 5000",
     "test:web": "cross-env NODE_ENV=testing nyc mocha api/web/**/test/*.test.js --recursive --slow 5000",
     "test:local": "cross-env NODE_ENV=testing nyc --reporter=html mocha api/web/**/test/*.test.js api/movil/test/movil.routes.test.js api/test/auth.test.js --recursive --slow 5000",
-    "test:all": "cross-env NODE_ENV=testing env-cmd .env nyc mocha api/web/**/test/*.test.js api/movil/test/*.test.js api/test/auth.test.js --recursive --slow 5000",
+    "test:all": "cross-env NODE_ENV=testing env-cmd .env nyc mocha api/web/**/test/*.test.js api/movil/test/*.test.js api/test/auth.test.js --recursive --slow 5000 --timeout 100000",
     "test": "npm-run-all lint test:all",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coverage:codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",

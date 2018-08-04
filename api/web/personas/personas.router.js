@@ -209,9 +209,23 @@ module.exports = (app) => {
       }
     })
 
-  app.route('/personas/enviarCorreoCambioClave/:personasId')
+  app.route('/personas/CambioClave/enviarToken')
     .put((req, res) => {
-      // clave
+      let { QUERY } = schema.API_10_SCHEMA
+      let [err, mensaje] = validar(QUERY, req.body)
+      if (err) {
+        let resp = responses.NO_OK({ ...mensaje })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        Controller.CambioClave(req.body).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
     })
 
 //  claveCreada

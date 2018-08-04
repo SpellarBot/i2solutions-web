@@ -74,6 +74,11 @@ let equiposDatos = [
     'descripcion': '',
     'nombre': 'Protector Ruido',
     'fotoUrl': 'https://thumbs.dreamstime.com/z/protectores-contra-el-ruido-20939463.jpg'
+  },
+  {
+    'descripcion': '',
+    'nombre': 'Casco',
+    'fotoUrl': 'https://www.bricomart.es/mediap/478/3/c/e/0/10571183_fo_02_web.jpg'
   }
 ]
 
@@ -109,9 +114,9 @@ async function crearEstablecimientos ({ db, empresasId }, tipo) {
 }
 
 async function crearAreas ({ establecimientosId, db }) {
-  let areasIndex = ri(0, equiposDatos.length - 1)
+  let areasIndex = ri(0, areasDatos.length - 1)
   let area = {
-    actividad: areasDatos[areasIndex]['actareasIndexvidad'],
+    actividad: areasDatos[areasIndex]['actividad'],
     nombre: areasDatos[areasIndex]['nombre'],
     fotoUrl: faker.image.imageUrl(),
     metrosCuadrados: '20x20',
@@ -311,10 +316,10 @@ conexion.Conectar().then(async (db) => {
     creadaDump: true
   })
 
-  await db.personas.CrearConClave({
+  let jefe = await db.personas.CrearConClave({
     nombres: 'Eduardo',
     apellidos: 'Llamuca',
-    correo: 'joelerll@gmail.com',
+    correo: 'joelerll95@gmail.com',
     cedula: '0931823447',
     clave: '1234',
     telefono: '259956326',
@@ -345,11 +350,11 @@ conexion.Conectar().then(async (db) => {
   const cantidadEquiposMaximo = 5
   const cantidadCapacitacionesMaximo = 4
   const cantidadPersonasMaximo = 20
-  const cantidadAccidentesMaximo = 3
+  const cantidadAccidentesMaximo = 5
   const cantidadInspeccionesMaximo = 2
   const cantidadNovedadesSinAtenderMaximo = 10
   const cantidadNovedadesAtendidasMaximo = 10
-  const cantidadRiesgosMaximo = 3
+  const cantidadRiesgosMaximo = 6
   for (let i = 1; i <= cantidadEmpresas; i++) {
     console.log(`Creada empresa ${i}`)
     // empresa
@@ -418,6 +423,7 @@ conexion.Conectar().then(async (db) => {
       }
     }
   }
+  await crearPersonasPuestos({ db, personasId: jefe['id'], puestosId: 1 })
   Promise.all(promesas).then(resp => {
     conexion.Desconectar()
   })

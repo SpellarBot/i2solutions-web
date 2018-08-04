@@ -220,7 +220,7 @@ _response_
     "perfilOcupacional": "Inspector",
     "usuario": "carlos",
     "rol": "inspector-seguridad",
-    "resetClaveToken": "1979c58487fb1561d2c36e99f950aa454e7c974e",
+    "resetClaveToken": "c0ff68acfc625342be648bd6619c098ff2e98cab",
     "fechaActualizacion": "2018-08-01T05:00:00.000Z",
     "fechaCreacion": "2018-08-01T05:00:00.000Z",
     "puestosId": 1
