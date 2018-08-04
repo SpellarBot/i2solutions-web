@@ -21,6 +21,7 @@ __GET__ __/api/web/puestos/areas/:areasId__
       "id": 1,
       "descripcion": "AA",
       "nombre": "Oficina de gerente general",
+      "fotoUrl": "http://lorempixel.com/640/480",
       "cantidadPersonas": 0,
       "cantidadAccidentes": 0,
       "cantidadNovedadesSinAtender": 0,
@@ -31,6 +32,7 @@ __GET__ __/api/web/puestos/areas/:areasId__
       "id": 2,
       "descripcion": "AA",
       "nombre": "Oficina de jefe de TTHH",
+      "fotoUrl": "http://lorempixel.com/640/480",
       "cantidadPersonas": 0,
       "cantidadAccidentes": 0,
       "cantidadNovedadesSinAtender": 0,
@@ -57,6 +59,7 @@ __POST__ __/api/web/puestos__
 | :--------- | :------ | :-------| 
 |  nombres  | String  |   ---   | 
 |  descripcion  | String  |   ---   | 
+|  fotoUrl  | String  |   ---   | 
 |  areasId  | Number  |   ---   | 
 
 #### Request:
@@ -65,6 +68,7 @@ __POST__ __/api/web/puestos__
 {
   "nombre": "Oficina de gerente general",
   "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 1
 }
 ```
@@ -78,6 +82,7 @@ __POST__ __/api/web/puestos__
     "id": 4,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
+    "fotoUrl": "http://lorempixel.com/640/480",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
@@ -105,6 +110,7 @@ __PUT__ __/api/web/puestos/:puestosId__
 | Name       | Type    | Desc |
 | :--------- | :------ | :-------| 
 |  nombres  | String  |   ---   | 
+|  fotoUrl  | String  |   ---   | 
 |  descripcion  | String  |   ---   | 
 
 #### Request:
@@ -112,7 +118,8 @@ __PUT__ __/api/web/puestos/:puestosId__
 ```json
 {
   "nombre": "AAA",
-  "descripcion": "AAA"
+  "descripcion": "AAA",
+  "fotoUrl": "http://imagen.png"
 }
 ```
 
@@ -137,7 +144,8 @@ _request_
 ```js
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": "AA"
+  "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -204,6 +212,7 @@ __GET__ __/api/web/puestos/:puestosId__
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
+    "fotoUrl": "http://lorempixel.com/640/480",
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
     "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
   },

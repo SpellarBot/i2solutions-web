@@ -20,6 +20,7 @@ module.exports = {
     body: [
       { nombre: 'nombres', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'descripcion', tipo: 'String', descripcion: ' --- ' },
+      { nombre: 'fotoUrl', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
     ],
     errors: []
@@ -34,6 +35,7 @@ module.exports = {
     ],
     body: [
       { nombre: 'nombres', tipo: 'String', descripcion: ' --- ' },
+      { nombre: 'fotoUrl', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'descripcion', tipo: 'String', descripcion: ' --- ' }
     ],
     errors: []

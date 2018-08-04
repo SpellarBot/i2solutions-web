@@ -63,6 +63,14 @@ module.exports = {
           { codigo: 'C22', descripcion: '\'type\': !\'number\'', valido: false },
           { codigo: 'C23', descripcion: 'minimum: !1 ', valido: false }
         ]
+      },
+      {
+        nombre: 'fotoUrl',
+        casos: [
+          { codigo: 'C31', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C32', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C33', descripcion: 'minimum: !1 ', valido: false }
+        ]
       }
     ],
     intersecciones: {
@@ -72,7 +80,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C1' },
           'descripcion': { codigo: 'C11' },
-          'areasId': { codigo: 'C21' }
+          'areasId': { codigo: 'C21' },
+          'fotoUrl': { codigo: 'C21' }
         }
       },
       '2': {
@@ -81,7 +90,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C2' },
           'descripcion': { codigo: 'C11' },
-          'areasId': { codigo: 'C21' }
+          'areasId': { codigo: 'C21' },
+          'fotoUrl': { codigo: 'C31' }
         }
       },
       '3': {
@@ -90,7 +100,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C3' },
           'descripcion': { codigo: 'C11' },
-          'areasId': { codigo: 'C21' }
+          'areasId': { codigo: 'C21' },
+          'fotoUrl': { codigo: 'C31' }
         }
       },
       '4': {
@@ -99,7 +110,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C1' },
           'descripcion': { codigo: 'C12' },
-          'areasId': { codigo: 'C21' }
+          'areasId': { codigo: 'C21' },
+          'fotoUrl': { codigo: 'C31' }
         }
       },
       '5': {
@@ -108,7 +120,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C1' },
           'descripcion': { codigo: 'C13' },
-          'areasId': { codigo: 'C21' }
+          'areasId': { codigo: 'C21' },
+          'fotoUrl': { codigo: 'C31' }
         }
       },
       '6': {
@@ -117,7 +130,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C1' },
           'descripcion': { codigo: 'C11' },
-          'areasId': { codigo: 'C22' }
+          'areasId': { codigo: 'C22' },
+          'fotoUrl': { codigo: 'C31' }
         }
       },
       '7': {
@@ -126,7 +140,8 @@ module.exports = {
         body: {
           'nombre': { codigo: 'C1' },
           'descripcion': { codigo: 'C11' },
-          'areasId': { codigo: 'C23' }
+          'areasId': { codigo: 'C23' },
+          'fotoUrl': { codigo: 'C31' }
         }
       }
     }
@@ -151,6 +166,14 @@ module.exports = {
           { codigo: 'C12', descripcion: '\'type\': !\'string\'', valido: false },
           { codigo: 'C13', descripcion: 'minLength: !2 ', valido: false }
         ]
+      },
+      {
+        nombre: 'fotoUrl',
+        casos: [
+          { codigo: 'C31', descripcion: '{ \'type\': \'number\', minimum: 1 }', valido: true },
+          { codigo: 'C32', descripcion: '\'type\': !\'number\'', valido: false },
+          { codigo: 'C33', descripcion: 'minimum: !1 ', valido: false }
+        ]
       }
     ],
     params: [
@@ -168,7 +191,8 @@ module.exports = {
         descripcion: 'Crear un puesto de forma correcta',
         body: {
           'nombre': { codigo: 'C1' },
-          'descripcion': { codigo: 'C11' }
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C21' }
@@ -178,7 +202,8 @@ module.exports = {
         descripcion: 'nombre tipo no valido',
         body: {
           'nombre': { codigo: 'C2' },
-          'descripcion': { codigo: 'C11' }
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C21' }
@@ -188,7 +213,8 @@ module.exports = {
         descripcion: 'nombre tamano no valido',
         body: {
           'nombre': { codigo: 'C3' },
-          'descripcion': { codigo: 'C11' }
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C21' }
@@ -198,7 +224,8 @@ module.exports = {
         descripcion: 'descripcion tipo no valido',
         body: {
           'nombre': { codigo: 'C1' },
-          'descripcion': { codigo: 'C12' }
+          'descripcion': { codigo: 'C12' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C21' }
@@ -208,7 +235,8 @@ module.exports = {
         descripcion: 'descripcion tamano no valido',
         body: {
           'nombre': { codigo: 'C1' },
-          'descripcion': { codigo: 'C13' }
+          'descripcion': { codigo: 'C13' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C21' }
@@ -218,7 +246,8 @@ module.exports = {
         descripcion: 'puestosId tipo no valido',
         body: {
           'nombre': { codigo: 'C1' },
-          'descripcion': { codigo: 'C11' }
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C22' }
@@ -228,7 +257,8 @@ module.exports = {
         descripcion: 'puestosId tamano no valido',
         body: {
           'nombre': { codigo: 'C1' },
-          'descripcion': { codigo: 'C11' }
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C23' }
@@ -238,7 +268,8 @@ module.exports = {
         descripcion: 'puesto id no existe',
         body: {
           'nombre': { codigo: 'C1' },
-          'descripcion': { codigo: 'C11' }
+          'descripcion': { codigo: 'C11' },
+          'fotoUrl': { codigo: 'C31' }
         },
         params: {
           'puestosId': { codigo: 'C21' }

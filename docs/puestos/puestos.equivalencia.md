@@ -68,6 +68,7 @@ _response_
       "id": 1,
       "descripcion": "AA",
       "nombre": "Oficina de gerente general",
+      "fotoUrl": "http://lorempixel.com/640/480",
       "cantidadPersonas": 0,
       "cantidadAccidentes": 0,
       "cantidadNovedadesSinAtender": 0,
@@ -78,6 +79,7 @@ _response_
       "id": 2,
       "descripcion": "AA",
       "nombre": "Oficina de jefe de TTHH",
+      "fotoUrl": "http://lorempixel.com/640/480",
       "cantidadPersonas": 0,
       "cantidadAccidentes": 0,
       "cantidadNovedadesSinAtender": 0,
@@ -228,6 +230,24 @@ ___
 				<td> minimum: !1 </td>
 				<td> invalido </td>
 			</tr>
+			<tr style='background-color: #82E0AA' >
+				<td> fotoUrl</td>
+				<td> <a id='CE_API_2[C31]'>CE_API_2[C31]</a> </td>
+				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> fotoUrl</td>
+				<td> <a id='CE_API_2[C32]'>CE_API_2[C32]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> fotoUrl</td>
+				<td> <a id='CE_API_2[C33]'>CE_API_2[C33]</a> </td>
+				<td> minimum: !1 </td>
+				<td> invalido </td>
+			</tr>
 </table>
 
 
@@ -250,6 +270,7 @@ _request o body_
 {
   "nombre": "Oficina de gerente general",
   "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 1
 }
 ```
@@ -265,6 +286,7 @@ _response_
     "id": 4,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
+    "fotoUrl": "http://lorempixel.com/640/480",
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
@@ -290,6 +312,7 @@ _request o body_
 {
   "nombre": 1,
   "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 1
 }
 ```
@@ -326,6 +349,7 @@ _request o body_
 {
   "nombre": "",
   "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 1
 }
 ```
@@ -362,6 +386,7 @@ _request o body_
 {
   "nombre": "Oficina de gerente general",
   "descripcion": 2,
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 1
 }
 ```
@@ -398,6 +423,7 @@ _request o body_
 {
   "nombre": "Oficina de gerente general",
   "descripcion": "",
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 1
 }
 ```
@@ -470,6 +496,7 @@ _request o body_
 {
   "nombre": "Oficina de gerente general",
   "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480",
   "areasId": 0
 }
 ```
@@ -546,6 +573,24 @@ ___
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
+				<td> fotoUrl</td>
+				<td> <a id='CE_API_3[C31]'>CE_API_3[C31]</a> </td>
+				<td> { 'type': 'number', minimum: 1 }</td>
+				<td> válido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> fotoUrl</td>
+				<td> <a id='CE_API_3[C32]'>CE_API_3[C32]</a> </td>
+				<td> 'type': !'number'</td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #EC7063' >
+				<td> fotoUrl</td>
+				<td> <a id='CE_API_3[C33]'>CE_API_3[C33]</a> </td>
+				<td> minimum: !1 </td>
+				<td> invalido </td>
+			</tr>
+			<tr style='background-color: #82E0AA' >
 				<td>  puestosId </td>
 				<td> <a id='CE_API_3[C21]'>CE_API_3[C21]</a> </td>
 				<td>{ 'type': 'number', minimum: 1 }</td>
@@ -589,6 +634,11 @@ Crear un puesto de forma correcta
     <td>AAA</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://imagen.png</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
     <td>1</td>
@@ -607,7 +657,8 @@ _request o body_
 ```js
 {
   "nombre": "AAA",
-  "descripcion": "AAA"
+  "descripcion": "AAA",
+  "fotoUrl": "http://imagen.png"
 }
 ```
 
@@ -645,6 +696,11 @@ nombre tipo no valido
     <td>AA</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
     <td>1</td>
@@ -663,7 +719,8 @@ _request o body_
 ```js
 {
   "nombre": 1,
-  "descripcion": "AA"
+  "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -703,6 +760,11 @@ nombre tamano no valido
     <td>AA</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
     <td>1</td>
@@ -721,7 +783,8 @@ _request o body_
 ```js
 {
   "nombre": "",
-  "descripcion": "AA"
+  "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -761,6 +824,11 @@ descripcion tipo no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
     <td>1</td>
@@ -779,7 +847,8 @@ _request o body_
 ```js
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": 1
+  "descripcion": 1,
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -819,6 +888,11 @@ descripcion tamano no valido
     <td></td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
     <td>1</td>
@@ -837,7 +911,8 @@ _request o body_
 ```js
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": ""
+  "descripcion": "",
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -877,6 +952,11 @@ puestosId tipo no valido
     <td>a</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C22]</a></td>
     <td>1</td>
@@ -895,7 +975,8 @@ _request o body_
 ```js
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": "a"
+  "descripcion": "a",
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -935,6 +1016,11 @@ puestosId tamano no valido
     <td>0</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C23]</a></td>
     <td>1</td>
@@ -953,7 +1039,8 @@ _request o body_
 ```js
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": 0
+  "descripcion": 0,
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -993,6 +1080,11 @@ puesto id no existe
     <td>AA</td>
   </tr>
   <tr>
+    <td>fotoUrl</td>
+    <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
+    <td>http://lorempixel.com/640/480</td>
+  </tr>
+  <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
     <td>50</td>
@@ -1011,7 +1103,8 @@ _request o body_
 ```js
 {
   "nombre": "Oficina de gerente general",
-  "descripcion": "AA"
+  "descripcion": "AA",
+  "fotoUrl": "http://lorempixel.com/640/480"
 }
 ```
 
@@ -1266,6 +1359,7 @@ _response_
     "id": 1,
     "nombre": "Oficina de gerente general",
     "descripcion": "AA",
+    "fotoUrl": "http://lorempixel.com/640/480",
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
     "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
   },

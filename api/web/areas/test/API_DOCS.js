@@ -19,7 +19,6 @@ module.exports = {
     body: [
       { nombre: 'actividad', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'nombre', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'fotoUrl', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'metrosCuadrados', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'descripcionLugar', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'establecimientosId', tipo: 'Number', descripcion: ' --- ' }
@@ -37,7 +36,6 @@ module.exports = {
     body: [
       { nombre: 'actividad', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'nombre', tipo: 'String', descripcion: ' --- ' },
-      { nombre: 'fotoUrl', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'metrosCuadrados', tipo: 'String', descripcion: ' --- ' },
       { nombre: 'descripcionLugar', tipo: 'String', descripcion: ' --- ' }
     ],

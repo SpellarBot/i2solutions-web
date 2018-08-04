@@ -11,12 +11,11 @@ module.exports = {
   },
   API_2_SCHEMA: {
     BODY: {
-      'minProperties': 5, // por la fotoUrl
+      'minProperties': 4,
       'type': 'object',
       'properties': {
         'actividad': { 'type': 'string', minLength: 2, maxLength: 25 },
         'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
-        'fotoUrl': { 'type': 'string', 'format': 'url', maxLength: 100 },
         'metrosCuadrados': { 'type': 'string', minLength: 2 }, // cambiar a int
         'descripcionLugar': { 'type': 'string', minLength: 2, maxLength: 100 },
         'establecimientosId': { 'type': 'number', minimum: 1, maximun: 500000 }
@@ -30,7 +29,6 @@ module.exports = {
       'properties': {
         'actividad': { 'type': 'string', minLength: 2, maxLength: 25 },
         'nombre': { 'type': 'string', minLength: 2, maxLength: 50 },
-        'fotoUrl': { 'type': 'string', 'format': 'url', maxLength: 100 },
         'metrosCuadrados': { 'type': 'string', minLength: 2 },
         'descripcionLugar': { 'type': 'string', minLength: 2, maxLength: 100 }
       }

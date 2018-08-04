@@ -21,7 +21,6 @@ __GET__ __/api/web/areas/establecimientos/:establecimientosId__
       "id": 1,
       "actividad": "gerencia",
       "nombre": "Gerente General",
-      "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
       "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
@@ -48,7 +47,6 @@ __POST__ __/api/web/areas__
 | :--------- | :------ | :-------| 
 |  actividad  | String  |   ---   | 
 |  nombre  | String  |   ---   | 
-|  fotoUrl  | String  |   ---   | 
 |  metrosCuadrados  | String  |   ---   | 
 |  descripcionLugar  | String  |   ---   | 
 |  establecimientosId  | Number  |   ---   | 
@@ -59,7 +57,6 @@ __POST__ __/api/web/areas__
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
   "establecimientosId": 1
@@ -75,7 +72,6 @@ __POST__ __/api/web/areas__
     "id": 1,
     "actividad": "gerencia",
     "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
@@ -107,7 +103,6 @@ __PUT__ __/api/web/areas/:areasId__
 | :--------- | :------ | :-------| 
 |  actividad  | String  |   ---   | 
 |  nombre  | String  |   ---   | 
-|  fotoUrl  | String  |   ---   | 
 |  metrosCuadrados  | String  |   ---   | 
 |  descripcionLugar  | String  |   ---   | 
 
@@ -117,7 +112,6 @@ __PUT__ __/api/web/areas/:areasId__
 {
   "actividad": "Venta de productos",
   "nombre": "Mi nombre editado",
-  "fotoUrl": "https://image.png",
   "metrosCuadrados": "50x50",
   "descripcionLugar": "Ventas"
 }
@@ -184,7 +178,6 @@ __GET__ __/api/web/areas/:areasId__
     "id": 1,
     "actividad": "gerencia",
     "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
@@ -294,7 +287,6 @@ __GET__ __/api/areasDetalle/establecimientos/:establecimientosId__
       "id": 1,
       "areaNombre": "Gerente General",
       "areaMetrosCuadrados": "20x20",
-      "areaFotoUrl": "http://lorempixel.com/640/480",
       "areaActividad": "gerencia",
       "areaDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
       "cantidadPuestos": 2,
@@ -307,7 +299,6 @@ __GET__ __/api/areasDetalle/establecimientos/:establecimientosId__
       "id": 2,
       "areaNombre": "Jefe TTHH",
       "areaMetrosCuadrados": "20x20",
-      "areaFotoUrl": "http://lorempixel.com/640/480",
       "areaActividad": "recursos humanos",
       "areaDescripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
       "cantidadPuestos": 1,
