@@ -960,9 +960,9 @@ export default {
         })
     })
   },
-  crearCapacitacion ({commit}, {nombre, descripcion, tema, fechaCapacitacion, areasId}) {
+  crearCapacitacion ({commit}, {nombre, descripcion, tema, fechaCapacitacion, areasId, personas}) {
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/web/capacitaciones', {nombre, descripcion, tema, fechaCapacitacion, areasId})
+      Vue.http.post('/api/web/capacitaciones', {nombre, descripcion, tema, fechaCapacitacion, areasId, personas})
         .then((resp) => {
           if (resp.body.estado) {
             commit('setCapacitacionCreada', resp.body.datos)
