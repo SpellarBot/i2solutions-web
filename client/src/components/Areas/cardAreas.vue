@@ -325,7 +325,7 @@ export default{
         propsData: {text: '' + this.QrId}
       })
       this.qrInstance = qrInstance
-      qrInstance.$mount()      
+      qrInstance.$mount()
       this.$refs.qr.appendChild(qrInstance.$el)
       this.qrCode = id
     },

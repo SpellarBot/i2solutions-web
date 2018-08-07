@@ -3,6 +3,13 @@
     <v-card>
 
       <h2>{{ puestos.nombre }}</h2>
+      <v-card-media
+                    :src= puestos.fotoUrl
+                    height="200px"
+                    width="120px"
+                    contain
+                  >
+      </v-card-media>
 
       <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <v-btn
