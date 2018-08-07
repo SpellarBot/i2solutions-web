@@ -209,6 +209,9 @@ module.exports = (app) => {
       }
     })
 
+  // identificador: API_10
+  // cambio de clave token
+  // aqui se puede enviar la clave o el correo para que se cambie el token
   app.route('/personas/CambioClave/enviarToken')
     .put((req, res) => {
       let { QUERY } = schema.API_10_SCHEMA
@@ -219,6 +222,27 @@ module.exports = (app) => {
         res.json(resp)
       } else {
         Controller.CambioClave(req.body).then((resp) => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        }).catch(resp => {
+          res.status(resp.codigoEstado)
+          res.json(resp)
+        })
+      }
+    })
+
+  // identificador: API_11
+  // obtener establecimientos por ruc
+  app.route('/personas/buscar/existenciaDe')
+    .get((req, res) => {
+      let { QUERY } = schema.API_11_SCHEMA
+      let [errParams, mensajeParams] = validar(QUERY, req.query)
+      if (errParams) {
+        let resp = responses.NO_OK({ ...mensajeParams })
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      } else {
+        Controller.ExistenciaDe(req.query).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {

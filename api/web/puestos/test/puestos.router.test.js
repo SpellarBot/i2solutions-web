@@ -120,8 +120,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_2_01 Crear un puesto de forma correcta', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion, areasId }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion, fotoUrl, areasId }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(true)
@@ -131,8 +131,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_2_02 nombre tipo no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre: 1, descripcion, areasId }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre: 1, descripcion, fotoUrl, areasId }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -140,8 +140,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_2_03 nombre tamano no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre: '', descripcion, areasId }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre: '', descripcion, fotoUrl, areasId }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -149,8 +149,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_2_04 descripcion tipo no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion: 2, areasId }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion: 2, fotoUrl, areasId }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -158,8 +158,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_2_05 descripcion tamano no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion: '', areasId }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion: '', fotoUrl, areasId }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -176,8 +176,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_2_07 areasId tamano no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion, areasId: 0 }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion, fotoUrl, areasId: 0 }
       let res = await request(app).post(`/api/web/puestos`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -204,8 +204,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_01 Crear un puesto de forma correcta', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre: 'AAA', descripcion: 'AAA' }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre: 'AAA', descripcion: 'AAA', fotoUrl: 'http://imagen.png' }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -217,8 +217,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_02 nombre tipo no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre: 1, descripcion }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre: 1, descripcion, fotoUrl }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -228,8 +228,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_03 nombre tamano no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre: '', descripcion }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre: '', descripcion, fotoUrl }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -239,8 +239,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_04 descripcion tipo no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion: 1 }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion: 1, fotoUrl }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -250,8 +250,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_05 descripcion tamano no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion: '' }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion: '', fotoUrl }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -261,8 +261,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_06 puestosId tipo no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion: 'a' }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion: 'a', fotoUrl }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -272,8 +272,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_07 puestosId tamano no valido', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion: 0 }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion: 0, fotoUrl }
       let params = { puestosId }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)
@@ -283,8 +283,8 @@ describe('PUESTOS', () => {
     })
 
     it('@ICE_API_3_08 puesto no existe', async () => {
-      let { nombre, descripcion } = puesto
-      let req = { nombre, descripcion }
+      let { nombre, descripcion, fotoUrl } = puesto
+      let req = { nombre, descripcion, fotoUrl }
       let params = { puestosId: 50 }
       let url = `/api/web/puestos/${params['puestosId']}`
       let res = await request(app).put(url).send(req)

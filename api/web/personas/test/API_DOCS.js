@@ -104,5 +104,39 @@ module.exports = {
     ],
     body: [],
     errors: []
+  },
+  API_09: {
+    nombre: 'Crear clave enviando el token',
+    metodo: 'POST',
+    descripcion: '',
+    url: '/api/web/personas/crear_clave/:token',
+    params: [
+      { nombre: 'token', tipo: 'string', descripcion: ' --- ' }
+    ],
+    body: [],
+    errors: []
+  },
+  API_10: {
+    nombre: 'Cambiar clave',
+    metodo: 'PUT',
+    descripcion: 'Puedo enviar el correo o  el usuario en el body, me acepta cualquiera de los dos para el cambio de clave',
+    url: '/api/web/personas/CambioClave/enviarToken',
+    params: [
+    ],
+    body: [
+      { nombre: 'correo', tipo: 'string', descripcion: ' --- ' },
+      { nombre: 'usuario', tipo: 'string', descripcion: ' --- ' }
+    ],
+    errors: []
+  },
+  API_11: {
+    nombre: 'Verificador exitencia correo, cedula, usuario',
+    metodo: 'GET',
+    descripcion: '',
+    url: '/api/web/personas/buscar/existenciaDe?cedula=0987654321&correo=joel@gmail.com&usuario=joel',
+    params: [
+    ],
+    body: [],
+    errors: []
   }
 }

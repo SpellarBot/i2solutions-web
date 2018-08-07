@@ -10,33 +10,33 @@
                   </v-flex>
                 </v-card-title>
                 <v-card-text>
-                    <div>
-                      <span><b>Actividad:</b> {{actividad}}</span><br>
-                      <b>Descripción:</b> {{descripcion}} <br>
-                      <b>Metros Cuadrados:</b> {{areaMetrosCuadrados}} <br>
-                      <v-btn
-                      :class="'editarArea' + id"
-              fab
-              dark
-              small
-              color="blue"
-              @click="visualizarEditar()"
-              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
-            <v-btn
-              fab
-              dark
-              small
-              color="red"
-              :class="'eliminarArea' + id"
-              @click="eliminarArea()"
-              v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
-            >
-              <v-icon>delete</v-icon>
-            </v-btn>
-                    </div>
+                  <div>
+                    <span><b>Actividad:</b> {{actividad}}</span><br>
+                    <b>Descripción:</b> {{descripcion}} <br>
+                    <b>Metros Cuadrados:</b> {{areaMetrosCuadrados}} <br>
+                    <v-btn
+                    :class="'editarArea' + id"
+                    fab
+                    dark
+                    small
+                    color="blue"
+                    @click="visualizarEditar()"
+                    v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
+                    >
+                      <v-icon>edit</v-icon>
+                    </v-btn>
+                    <v-btn
+                      fab
+                      dark
+                      small
+                      color="red"
+                      :class="'eliminarArea' + id"
+                      @click="eliminarArea()"
+                      v-if="$store.getters.usuario.rol === 'admin-i2solutions'"
+                    >
+                      <v-icon>delete</v-icon>
+                    </v-btn>
+                  </div>
                     <v-container fluid>
                       <v-layout row wrap>
                         <v-flex xs6 md6>
@@ -79,6 +79,7 @@
                         </div>
                         </v-flex>
                       </v-layout>
+                      <a v-on:click="verQR(id)">Ver código</a>
                     </v-container>
                 </v-card-text>
             </v-card>
@@ -96,6 +97,14 @@
         </v-card>
       </v-dialog>
     </v-layout>
+    <v-dialog v-model="showQr" width="500px" @keydown.esc="close()" persistent >
+      <v-card>
+        <div ref="qr"></div>
+        <v-card-actions>
+          <v-btn @click.native="close()">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-snackbar
       :timeout="3000"
       :multi-line="true"
@@ -172,6 +181,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import DialogNovedadesFromAreas from '../Novedades/DialogNovedadesFromAreas'
 import DialogEquiposFromAreas from '../Equipos/DialogEquiposFromAreas'
 import DialogRiesgosFromPuestos from '../Riesgos/DialogRiesgosFromPuestos'
@@ -180,8 +190,10 @@ import DialogEditarAreas from '../Editar/DialogEditarAreas'
 import DialogCapacitacionesFromAreas from '../DialogCapacitacionesFromAreas'
 import DialogPersonasFromAreas from '../DialogPersonasFromAreas'
 import agregarAreaDialog from '../Agregar/agregarAreaDialog'
+import VueQr from 'vue-qr'
+
 export default{
-  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas, DialogPersonasFromAreas, agregarAreaDialog},
+  components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas, DialogPersonasFromAreas, agregarAreaDialog, VueQr},
   name: 'puestosPorArea',
   props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index', 'establecimientoId'],
   data () {
@@ -204,7 +216,10 @@ export default{
       visibleEdicion: false,
       mensajeSnackbar: '',
       color: '',
-      snackbar: false
+      snackbar: false,
+      showQr: false,
+      QrId: '',
+      qrInstance: {}
     }
   },
   methods: {
@@ -297,11 +312,30 @@ export default{
           this.mensajeSnackbar = err
         })
     },
-
     eliminarArea () {
       this.areaId = this.id
       console.log('areaId', this.areaId)
       this.eliminarDialogAreas = true
+    },
+    verQR (id) {
+      this.showQr = true
+      this.QrId = id
+      var qrClass = Vue.extend(VueQr)
+      var qrInstance = new qrClass({
+        propsData: {text: '' + this.QrId}
+      })
+      this.qrInstance = qrInstance
+      qrInstance.$mount()      
+      this.$refs.qr.appendChild(qrInstance.$el)
+      this.qrCode = id
+    },
+    close () {
+      this.showQr=false
+      var instance = this.qrInstance
+      // c-elimina
+      instance.$destroy()
+      instance.$el.remove()
+      instance = null
     },
     borrarArea () {
       this.eliminarDialogAreas = false

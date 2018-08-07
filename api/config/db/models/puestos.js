@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
   let tableName = 'puestos'
   let define = sequelize.define(singular, {
     nombre: { type: DataTypes.STRING },
-    descripcion: { type: DataTypes.STRING }
+    descripcion: { type: DataTypes.STRING },
+    fotoUrl: { type: DataTypes.STRING }
   }, {
     name: {
       singular,
@@ -24,11 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     define.belongsToMany(models.equipos, { through: 'equiposPuestos', foreignKey: 'puestosId' })
   }
 
-  define.Crear = function ({ nombre, descripcion }) {
+  define.Crear = function ({ nombre, descripcion, fotoUrl }) {
     return new Promise((resolve, reject) => {
       return this.create({
         nombre,
-        descripcion
+        descripcion,
+        fotoUrl
       })
         .then((areas) => {
           return resolve(areas.get({ plain: true }))
@@ -140,7 +142,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorAreas = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select p.id as id, p.descripcion as descripcion, p.nombre as nombre, (select count(*) from personasPuestos where puestosId = ap.puestosId) as cantidadPersonas, (select count(*) from accidentes where puestosId = ap.puestosId) as cantidadAccidentes, (select count(*) from novedades where puestosId = ap.puestosId and fueAtendida = 0) as cantidadNovedadesSinAtender, (select count(*) from equiposPuestos where puestosId = ap.puestosId) as cantidadEquipos, (select count(*) from riesgos where puestosId = ap.puestosId) as cantidadRiesgos from areasPuestos ap inner join puestos p on p.id = ap.puestosId where ap.areasId = ${id}`
+      let query = `select p.id as id, p.descripcion as descripcion, p.nombre as nombre, p.fotoUrl as fotoUrl, (select count(*) from personasPuestos where puestosId = ap.puestosId) as cantidadPersonas, (select count(*) from accidentes where puestosId = ap.puestosId) as cantidadAccidentes, (select count(*) from novedades where puestosId = ap.puestosId and fueAtendida = 0) as cantidadNovedadesSinAtender, (select count(*) from equiposPuestos where puestosId = ap.puestosId) as cantidadEquipos, (select count(*) from riesgos where puestosId = ap.puestosId) as cantidadRiesgos from areasPuestos ap inner join puestos p on p.id = ap.puestosId where ap.areasId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(puestos => {
           resolve(puestos)

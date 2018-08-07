@@ -68,7 +68,6 @@ _response_
       "id": 1,
       "actividad": "gerencia",
       "nombre": "Gerente General",
-      "fotoUrl": "http://lorempixel.com/640/480",
       "metrosCuadrados": "20x20",
       "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
       "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
@@ -202,24 +201,6 @@ ___
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C21]'>CE_API_2[C21]</a> </td>
-				<td> 'type': 'string', 'format': 'url'</td>
-				<td> válido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C22]'>CE_API_2[C22]</a> </td>
-				<td> 'type': !'string'</td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C23]'>CE_API_2[C23]</a> </td>
-				<td> format: !url </td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #82E0AA' >
 				<td> metrosCuadrados</td>
 				<td> <a id='CE_API_2[C31]'>CE_API_2[C31]</a> </td>
 				<td> { 'type': 'string', minLength: 2 }</td>
@@ -295,7 +276,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
   "establecimientosId": 1
@@ -313,7 +293,6 @@ _response_
     "id": 1,
     "actividad": "gerencia",
     "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "establecimientosId": 1,
@@ -342,7 +321,6 @@ _request o body_
 {
   "actividad": 1,
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
   "establecimientosId": 1
@@ -381,7 +359,6 @@ _request o body_
 {
   "actividad": "",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
   "establecimientosId": 1
@@ -420,7 +397,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": 1,
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
   "establecimientosId": 1
@@ -459,7 +435,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": 0,
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
   "establecimientosId": 1
@@ -495,14 +470,7 @@ POST /api/web/areas
 
 _request o body_
 ```js
-{
-  "actividad": "gerencia",
-  "nombre": "Gerente General",
-  "fotoUrl": 1,
-  "metrosCuadrados": "20x20",
-  "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-  "establecimientosId": 1
-}
+
 ```
 
 __Resultados__
@@ -510,13 +478,7 @@ __Resultados__
 _response_
 
 ```js
-{
-  "estado": false,
-  "datos": {
-    "fotoUrl": "debe ser string"
-  },
-  "codigoEstado": 200
-}
+
 ```
 
 
@@ -534,14 +496,7 @@ POST /api/web/areas
 
 _request o body_
 ```js
-{
-  "actividad": "gerencia",
-  "nombre": "Gerente General",
-  "fotoUrl": "https//",
-  "metrosCuadrados": "20x20",
-  "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
-  "establecimientosId": 1
-}
+
 ```
 
 __Resultados__
@@ -549,13 +504,7 @@ __Resultados__
 _response_
 
 ```js
-{
-  "estado": false,
-  "datos": {
-    "fotoUrl": "debe coincidir con el formato \"url\""
-  },
-  "codigoEstado": 200
-}
+
 ```
 
 
@@ -844,24 +793,6 @@ ___
 				<td> invalido </td>
 			</tr>
 			<tr style='background-color: #82E0AA' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C21]'>CE_API_2[C21]</a> </td>
-				<td> 'type': 'string', 'format': 'url'</td>
-				<td> válido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C22]'>CE_API_2[C22]</a> </td>
-				<td> 'type': !'string'</td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #EC7063' >
-				<td> fotoUrl</td>
-				<td> <a id='CE_API_2[C23]'>CE_API_2[C23]</a> </td>
-				<td> format: !url </td>
-				<td> invalido </td>
-			</tr>
-			<tr style='background-color: #82E0AA' >
 				<td> metrosCuadrados</td>
 				<td> <a id='CE_API_2[C31]'>CE_API_2[C31]</a> </td>
 				<td> { 'type': 'string', minLength: 2 }</td>
@@ -941,11 +872,6 @@ Crear un area de forma correcta
     <td>Mi nombre editado</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>https://image.png</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>50x50</td>
@@ -975,7 +901,6 @@ _request o body_
 {
   "actividad": "Venta de productos",
   "nombre": "Mi nombre editado",
-  "fotoUrl": "https://image.png",
   "metrosCuadrados": "50x50",
   "descripcionLugar": "Ventas"
 }
@@ -1015,11 +940,6 @@ actividad tipo no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1049,7 +969,6 @@ _request o body_
 {
   "actividad": 1,
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -1091,11 +1010,6 @@ actividad tamano no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1125,7 +1039,6 @@ _request o body_
 {
   "actividad": "",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -1167,11 +1080,6 @@ nombre tipo no valido
     <td>1</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1201,7 +1109,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": 1,
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -1243,11 +1150,6 @@ nombre tamano no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>1</td>
@@ -1277,7 +1179,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": 1,
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -1311,32 +1212,27 @@ fotoUrl tipo no valido
   <tr>
     <td>actividad</td>
     <td><a href="#CE_API_2[C1]"> CE_API_2[C1]</a></td>
-    <td>gerencia</td>
+    <td></td>
   </tr>
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>Gerente General</td>
-  </tr>
-  <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C22]"> CE_API_2[C22]</a></td>
-    <td>1</td>
+    <td></td>
   </tr>
   <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>20x20</td>
+    <td></td>
   </tr>
   <tr>
     <td>descripcionLugar</td>
     <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
-    <td>Neque incidunt earum quia sint dolorem dolores ut amet.</td>
+    <td></td>
   </tr>
   <tr>
     <td>areasId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
-    <td>1</td>
+    <td></td>
   </tr>
 </table>
 
@@ -1346,17 +1242,11 @@ _url_
 
 > /api/web/areas/:areasId
 
-PUT /api/web/areas/1
+PUT /api/web/areas
 
 _request o body_
 ```js
-{
-  "actividad": "gerencia",
-  "nombre": "Gerente General",
-  "fotoUrl": 1,
-  "metrosCuadrados": "20x20",
-  "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
-}
+
 ```
 
 __Resultados__
@@ -1364,13 +1254,7 @@ __Resultados__
 _response_
 
 ```js
-{
-  "estado": false,
-  "datos": {
-    "fotoUrl": "debe ser string"
-  },
-  "codigoEstado": 200
-}
+
 ```
 
 
@@ -1387,32 +1271,27 @@ fotoUrl formato no valido
   <tr>
     <td>actividad</td>
     <td><a href="#CE_API_2[C1]"> CE_API_2[C1]</a></td>
-    <td>gerencia</td>
+    <td></td>
   </tr>
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td>Gerente General</td>
-  </tr>
-  <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C23]"> CE_API_2[C23]</a></td>
-    <td>https://</td>
+    <td></td>
   </tr>
   <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
-    <td>20x20</td>
+    <td></td>
   </tr>
   <tr>
     <td>descripcionLugar</td>
     <td><a href="#CE_API_2[C41]"> CE_API_2[C41]</a></td>
-    <td>Neque incidunt earum quia sint dolorem dolores ut amet.</td>
+    <td></td>
   </tr>
   <tr>
     <td>areasId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C51]</a></td>
-    <td>1</td>
+    <td></td>
   </tr>
 </table>
 
@@ -1422,17 +1301,11 @@ _url_
 
 > /api/web/areas/:areasId
 
-PUT /api/web/areas/1
+PUT /api/web/areas
 
 _request o body_
 ```js
-{
-  "actividad": "gerencia",
-  "nombre": "Gerente General",
-  "fotoUrl": "https://",
-  "metrosCuadrados": "20x20",
-  "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
-}
+
 ```
 
 __Resultados__
@@ -1440,13 +1313,7 @@ __Resultados__
 _response_
 
 ```js
-{
-  "estado": false,
-  "datos": {
-    "fotoUrl": "debe coincidir con el formato \"url\""
-  },
-  "codigoEstado": 200
-}
+
 ```
 
 
@@ -1468,11 +1335,6 @@ metrosCuadrados tipo no valido
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_2[C11]"> CE_API_2[C11]</a></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
     <td></td>
   </tr>
   <tr>
@@ -1535,11 +1397,6 @@ metrosCuadrados tamano no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C33]"> CE_API_2[C33]</a></td>
     <td></td>
@@ -1569,7 +1426,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -1611,11 +1467,6 @@ descripcionLugar tipo no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1645,7 +1496,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": 1
 }
@@ -1687,11 +1537,6 @@ descripcionLugar tamano no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1721,7 +1566,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": ""
 }
@@ -1763,11 +1607,6 @@ areasId tipo no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1797,7 +1636,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -1839,11 +1677,6 @@ areasId tamano no valido
     <td>Gerente General</td>
   </tr>
   <tr>
-    <td>fotoUrl</td>
-    <td><a href="#CE_API_2[C21]"> CE_API_2[C21]</a></td>
-    <td>http://lorempixel.com/640/480</td>
-  </tr>
-  <tr>
     <td>metrosCuadrados</td>
     <td><a href="#CE_API_2[C31]"> CE_API_2[C31]</a></td>
     <td>20x20</td>
@@ -1873,7 +1706,6 @@ _request o body_
 {
   "actividad": "gerencia",
   "nombre": "Gerente General",
-  "fotoUrl": "http://lorempixel.com/640/480",
   "metrosCuadrados": "20x20",
   "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet."
 }
@@ -2132,7 +1964,6 @@ _response_
     "id": 1,
     "actividad": "gerencia",
     "nombre": "Gerente General",
-    "fotoUrl": "http://lorempixel.com/640/480",
     "metrosCuadrados": "20x20",
     "descripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
@@ -2464,7 +2295,6 @@ _response_
       "id": 1,
       "areaNombre": "Gerente General",
       "areaMetrosCuadrados": "20x20",
-      "areaFotoUrl": "http://lorempixel.com/640/480",
       "areaActividad": "gerencia",
       "areaDescripcionLugar": "Neque incidunt earum quia sint dolorem dolores ut amet.",
       "cantidadPuestos": 2,
@@ -2477,7 +2307,6 @@ _response_
       "id": 2,
       "areaNombre": "Jefe TTHH",
       "areaMetrosCuadrados": "20x20",
-      "areaFotoUrl": "http://lorempixel.com/640/480",
       "areaActividad": "recursos humanos",
       "areaDescripcionLugar": "Facilis nemo accusamus ipsa nesciunt nobis.",
       "cantidadPuestos": 1,

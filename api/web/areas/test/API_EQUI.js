@@ -56,13 +56,6 @@ module.exports = {
           { codigo: 'C13', descripcion: 'minLength: !2 ', valido: false }
         ]
       },
-      { nombre: 'fotoUrl',
-        casos: [
-          { codigo: 'C21', descripcion: '\'type\': \'string\', \'format\': \'url\'', valido: true },
-          { codigo: 'C22', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C23', descripcion: 'format: !url ', valido: false }
-        ]
-      },
       { nombre: 'metrosCuadrados',
         casos: [
           { codigo: 'C31', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
@@ -93,7 +86,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -105,7 +97,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C2' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -117,7 +108,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C3' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -129,7 +119,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C12' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -141,7 +130,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C13' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -153,7 +141,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C22' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -165,7 +152,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C23' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -177,7 +163,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C32' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -189,7 +174,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C33' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -201,7 +185,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C42' },
           'establecimientosId': { codigo: 'C51' }
@@ -213,7 +196,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C43' },
           'establecimientosId': { codigo: 'C51' }
@@ -225,7 +207,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' },
           'establecimientosId': { codigo: 'C51' }
@@ -237,7 +218,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C42' },
           'establecimientosId': { codigo: 'C51' }
@@ -264,13 +244,6 @@ module.exports = {
           { codigo: 'C11', descripcion: '{ \'type\': \'string\', minLength: 2 }', valido: true },
           { codigo: 'C12', descripcion: '\'type\': !\'string\'', valido: false },
           { codigo: 'C13', descripcion: 'minLength: !2 ', valido: false }
-        ]
-      },
-      { nombre: 'fotoUrl',
-        casos: [
-          { codigo: 'C21', descripcion: '\'type\': \'string\', \'format\': \'url\'', valido: true },
-          { codigo: 'C22', descripcion: '\'type\': !\'string\'', valido: false },
-          { codigo: 'C23', descripcion: 'format: !url ', valido: false }
         ]
       },
       { nombre: 'metrosCuadrados',
@@ -304,7 +277,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -318,7 +290,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C2' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -332,7 +303,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C3' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -346,7 +316,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C12' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -360,7 +329,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C13' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -374,7 +342,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C22' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -388,7 +355,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C23' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -402,7 +368,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C32' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -416,7 +381,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C33' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -430,7 +394,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C42' }
         },
@@ -444,7 +407,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C43' }
         },
@@ -458,7 +420,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C41' }
         },
@@ -472,7 +433,6 @@ module.exports = {
         body: {
           'actividad': { codigo: 'C1' },
           'nombre': { codigo: 'C11' },
-          'fotoUrl': { codigo: 'C21' },
           'metrosCuadrados': { codigo: 'C31' },
           'descripcionLugar': { codigo: 'C42' }
         },

@@ -116,8 +116,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_02 actividad tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad: 1, nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad: 1, nombre, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -125,8 +125,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_03 actividad tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad: '', nombre, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad: '', nombre, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -134,8 +134,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_04 nombre tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre: 1, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre: 1, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
@@ -143,34 +143,16 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_05 nombre tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre: 0, fotoUrl, metrosCuadrados, descripcionLugar, establecimientosId }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let req = { actividad, nombre: 0, metrosCuadrados, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
       expect(res.body.estado).to.equal(false)
       generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
     })
 
-    it('@ICE_API_2_06 fotoUrl tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, fotoUrl: 1, metrosCuadrados, descripcionLugar, establecimientosId }
-      let res = await request(app).post(`/api/web/areas`).send(req)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(false)
-      generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
-    })
-
-    it('@ICE_API_2_07 fotoUrl formato no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let req = { actividad, nombre, fotoUrl: 'https//', metrosCuadrados, descripcionLugar, establecimientosId }
-      let res = await request(app).post(`/api/web/areas`).send(req)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(false)
-      generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_2_EQUI, req, res, codigoApi })
-    })
-
     it('@ICE_API_2_08 metrosCuadrados tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
       let req = { actividad, nombre, metrosCuadrados: 1, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
@@ -179,7 +161,7 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_09 metrosCuadrados tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
       let req = { actividad, nombre, metrosCuadrados: 0, descripcionLugar, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
@@ -188,7 +170,7 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_10 descripcionLugar tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
       let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 1, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
@@ -197,7 +179,7 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_11 descripcionLugar tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
       let req = { actividad, nombre, metrosCuadrados, descripcionLugar: 0, establecimientosId }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
@@ -206,7 +188,7 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_12 establecimientosId tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
       let req = { actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId: 'a' }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
@@ -215,7 +197,7 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_2_13 establecimientosId tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
       let req = { actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId: 0 }
       let res = await request(app).post(`/api/web/areas`).send(req)
       expect(res.body.codigoEstado).to.equal(200)
@@ -236,8 +218,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_01 area actualizada existosamente', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad: 'Venta de productos', nombre: 'Mi nombre editado', fotoUrl: 'https://image.png', metrosCuadrados: '50x50', descripcionLugar: 'Ventas' }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad: 'Venta de productos', nombre: 'Mi nombre editado', metrosCuadrados: '50x50', descripcionLugar: 'Ventas' }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -250,8 +232,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_02 actividad tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad: 1, nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad: 1, nombre, metrosCuadrados, descripcionLugar }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -262,8 +244,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_03 actividad tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad: '', nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad: '', nombre, metrosCuadrados, descripcionLugar }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -274,8 +256,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_04 nombre tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre: 1, fotoUrl, metrosCuadrados, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre: 1, metrosCuadrados, descripcionLugar }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -286,8 +268,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_05 nombre tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre: '', fotoUrl, metrosCuadrados, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre: '', metrosCuadrados, descripcionLugar }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -297,33 +279,9 @@ describe('AREAS', () => {
       generatorDocs.ADDINTER({ codigo: '5', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
     })
 
-    it('@ICE_API_3_06 fotoUrl tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl: 1, metrosCuadrados, descripcionLugar }
-      let req = areaEditada
-      let params = { areasId }
-      let url = `/api/web/areas/${areasId}`
-      let res = await request(app).put(url).send(req)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(false)
-      generatorDocs.ADDINTER({ codigo: '6', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
-    })
-
-    it('@ICE_API_3_07 fotoUrl formato no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl: 'https://', metrosCuadrados, descripcionLugar }
-      let req = areaEditada
-      let params = { areasId }
-      let url = `/api/web/areas/${areasId}`
-      let res = await request(app).put(url).send(req)
-      expect(res.body.codigoEstado).to.equal(200)
-      expect(res.body.estado).to.equal(false)
-      generatorDocs.ADDINTER({ codigo: '7', equivalencias, equi: API_3_EQUI, req, res, codigoApi, params, url })
-    })
-
     it('@ICE_API_3_08 metrosCuadrados tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados: 1, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, metrosCuadrados: 1, descripcionLugar }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -334,8 +292,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_09 metrosCuadrados tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados: '', descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, metrosCuadrados: '', descripcionLugar }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -346,8 +304,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_10 descripcionLugar tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar: 1 }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, metrosCuadrados, descripcionLugar: 1 }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -358,8 +316,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_11 descripcionLugar tamano no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar: '' }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, metrosCuadrados, descripcionLugar: '' }
       let req = areaEditada
       let params = { areasId }
       let url = `/api/web/areas/${areasId}`
@@ -370,8 +328,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_12 areasId tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, metrosCuadrados, descripcionLugar }
       let req = areaEditada
       let params = { areasId: 'a' }
       let url = `/api/web/areas/${params['areasId']}`
@@ -382,8 +340,8 @@ describe('AREAS', () => {
     })
 
     it('@ICE_API_3_13 areasId tipo no valido', async () => {
-      let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = area
-      let areaEditada = { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar }
+      let { actividad, nombre, metrosCuadrados, descripcionLugar } = area
+      let areaEditada = { actividad, nombre, metrosCuadrados, descripcionLugar }
       let req = areaEditada
       let params = { areasId: 0 }
       let url = `/api/web/areas/${params['areasId']}`

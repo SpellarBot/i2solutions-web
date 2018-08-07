@@ -66,8 +66,8 @@ module.exports = (app) => {
       } else {
         let { areasId } = req.params
         let id = areasId
-        let { actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar } = req.body
-        Controller.Actualizar({ actividad, nombre, fotoUrl, metrosCuadrados, descripcionLugar, id }).then((resp) => {
+        let { actividad, nombre, metrosCuadrados, descripcionLugar } = req.body
+        Controller.Actualizar({ actividad, nombre, metrosCuadrados, descripcionLugar, id }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {

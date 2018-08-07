@@ -214,13 +214,13 @@ _response_
     "nombres": "Carlos",
     "apellidos": "Andres",
     "correo": "joelerll@gmail.com",
-    "cedula": "0931823447",
+    "cedula": "0100967652",
     "telefono": "0986901270",
     "fechaNacimiento": "1995-05-21T19:27:28.576Z",
     "perfilOcupacional": "Inspector",
     "usuario": "carlos",
     "rol": "inspector-seguridad",
-    "resetClaveToken": "c0ff68acfc625342be648bd6619c098ff2e98cab",
+    "resetClaveToken": "02bf2dbc08459bb143ac8d858bfff911f3b95391",
     "fechaActualizacion": "2018-08-01T05:00:00.000Z",
     "fechaCreacion": "2018-08-01T05:00:00.000Z",
     "puestosId": 1
@@ -874,7 +874,7 @@ Crear una persona de forma correcta
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -927,7 +927,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -972,7 +972,7 @@ nombres tipo no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1025,7 +1025,7 @@ _request o body_
   "nombres": 1,
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -1072,7 +1072,7 @@ nombres tamano no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1125,7 +1125,7 @@ _request o body_
   "nombres": "",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -1172,7 +1172,7 @@ apellidos tipo no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1225,7 +1225,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": 1,
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -1272,7 +1272,7 @@ apellidos tamano no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1325,7 +1325,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -1472,7 +1472,7 @@ correo no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1525,7 +1525,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "joelerll@",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -1572,7 +1572,7 @@ telefono no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1625,7 +1625,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": 1,
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -1672,7 +1672,7 @@ fechaNacimiento no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1725,7 +1725,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "2017-13-05",
   "perfilOcupacional": "torno",
@@ -1772,7 +1772,7 @@ perfilOcupacional tipo no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1825,7 +1825,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": 1,
@@ -1872,7 +1872,7 @@ perfilOcupacional tamano no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -1925,7 +1925,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "a",
@@ -1972,7 +1972,7 @@ usuario tipo no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -2025,7 +2025,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -2072,7 +2072,7 @@ usuario tamano no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -2125,7 +2125,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -2172,7 +2172,7 @@ rol no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -2225,7 +2225,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -2272,7 +2272,7 @@ personasId tipo no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -2325,7 +2325,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -2372,7 +2372,7 @@ personasId tamano no valido
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -2425,7 +2425,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
@@ -2472,7 +2472,7 @@ personasId no existe
   <tr>
     <td>cedula</td>
     <td><a href="#CE_API_1[C21]"> CE_API_1[C21]</a></td>
-    <td>0931823447</td>
+    <td>0102051349</td>
   </tr>
   <tr>
     <td>correo</td>
@@ -2525,7 +2525,7 @@ _request o body_
   "nombres": "Irene",
   "apellidos": "Espinosa",
   "correo": "irenesp@yahoo.com",
-  "cedula": "0931823447",
+  "cedula": "0102051349",
   "telefono": "0986901270",
   "fechaNacimiento": "1995-05-21T19:27:28.576Z",
   "perfilOcupacional": "torno",
