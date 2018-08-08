@@ -13,13 +13,17 @@
                   v-model="area.nombre"
                   required
                   :rules="[rules.required, rules.nameMin]"
+                  maxlength=50
+                  :counter=50
             ></v-text-field>
             <v-text-field
               label="Actividad"
               v-model="area.actividad"
               required
               :rules="[rules.required, rules.nameMin]"
-            ></v-text-field>            
+              maxlength=25
+              :counter=25
+            ></v-text-field>
             <v-text-field
               label="Metros cuadrados"
               hint="ejemplo(22x02)"
@@ -27,6 +31,7 @@
               required
               mask="##x##"
               :rules="[rules.required, rules.nameMin]"
+
             ></v-text-field>
             <v-text-field
               label="descripción"
@@ -34,6 +39,8 @@
               required
               :rules="[rules.required, rules.nameMin]"
               multi-line
+              maxlength=100
+              :counter=100
             ></v-text-field>
               </v-form>
               <div ref="CompAreas">
@@ -79,7 +86,7 @@ export default {
       instanciasPuesto: [],
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',        
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
       },
       area: {
         nombre: '',
@@ -116,7 +123,7 @@ export default {
       instancePuesto.$destroy()
       instancePuesto.$el.remove()
       instancePuesto = null
-    },    
+    },
     cleaner () {
       this.$refs.form.reset()
       this.instanciasPuesto.forEach(function (puestos) {
@@ -154,10 +161,10 @@ export default {
       let actividad = this.area.actividad
       let metrosCuadrados = this.area.metros2
       let descripcionLugar = this.area.descripcion
-      let establecimientosId = Number(this.area.establecimientoId)      
+      let establecimientosId = Number(this.area.establecimientoId)
       return new Promise((resolve, reject) => {
             Vue.http.post('/api/web/areas', {actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId})
-          .then(async (resp) => {            
+          .then(async (resp) => {
             if (resp.body.estado) {
               const startPuestos = async () => {
                 this.asyncForEachCreator(this.instanciasPuesto, resp.body.datos.id)
@@ -170,7 +177,7 @@ export default {
               return reject(resp.body.datos)
             }
           })
-          .catch((err) => {            
+          .catch((err) => {
             this.$store.commit('setError', err)
             return reject(err)
           })

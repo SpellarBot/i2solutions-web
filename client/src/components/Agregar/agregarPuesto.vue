@@ -13,6 +13,8 @@
                   v-model="nombre"
                   required
                   :rules="[rules.required, rules.nameMin]"
+                  maxlength=50
+                  :counter=50
                 >
             </v-text-field>
                   <v-text-field
@@ -21,6 +23,8 @@
                     v-model='imageName'
                     :rules="[rules.required]"
                     prepend-icon='attach_file'
+                    maxlength=100
+                    :counter=100
                     >
                     </v-text-field>
                   <input
@@ -37,6 +41,8 @@
                   required
                   :rules="[rules.required, rules.nameMin]"
                   multi-line
+                  maxlength=100
+                  :counter=100
             >
             </v-text-field>
               </v-form>

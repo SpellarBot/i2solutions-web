@@ -12,16 +12,16 @@
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
-                  maxlength=30
-                  :counter=30
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 :class="'actividadArea' + this.areaId"
                   v-model = "newActividad"
                   label="Actividad" required
                   :rules="[rules.required]"
-                  maxlength=30
-                  :counter=30
+                  maxlength=25
+                  :counter=25
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionArea' + this.areaId"
@@ -29,8 +29,8 @@
                   label="Descripcion" required
                   :rules="[rules.required]"
                   multi-line
-                  maxlength=150
-                  :counter=150
+                  maxlength=100
+                  :counter=100
                 ></v-text-field>
                 <v-text-field
                 :class="'metrosCuadradosArea' + this.areaId"

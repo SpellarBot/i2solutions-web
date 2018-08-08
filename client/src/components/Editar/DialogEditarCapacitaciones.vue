@@ -11,13 +11,19 @@
                 :class="'temaCapacitacion' + this.capacitacionId"
                   v-model = "newTema"
                   label="Tema" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  minlength=2
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionCapacitacion' + this.capacitacionId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=100
+                  minlength=2
+                  :counter=100
                 ></v-text-field>
                 <v-menu
                 :class="'fechaCapacitacion' + this.capacitacionId"
@@ -52,7 +58,10 @@
                 :class="'capacitadorCapacitacion' + this.capacitacionId"
                   v-model = "newCapacitador"
                   label="Capacitador" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  minlength=2
+                  :counter=50
                 ></v-text-field>
             </v-form>
         </v-card-text>
@@ -91,6 +100,9 @@ export default {
       snackbar: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
+        min: (v) => v.length > 2 || 'Mímimo se requieres 2 letras',
+        max: (v) => v.length > 50 || 'Máximo se requieres 50 letras',
+        maxDes: (v) => v.length < 2 || 'Máximo se requieres 100 letras',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
     }

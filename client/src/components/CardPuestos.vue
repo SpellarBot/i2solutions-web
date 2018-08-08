@@ -1,7 +1,6 @@
 <template>
   <main id="CardPuestos">
     <v-card>
-
       <h2>{{ puestos.nombre }}</h2>
       <v-card-media
                     :src= puestos.fotoUrl

@@ -13,18 +13,23 @@
                   required
                   v-model="establecimiento.nombre"
                   :rules="[rules.required, rules.nameMin]"
+                  maxlength=50
+                  :counter=50
             ></v-text-field>
             <v-text-field
               label="Dirección"
               required
               v-model="establecimiento.direccion"
               :rules="[rules.required, rules.nameMin]"
+              :counter=50
+              maxlength=50
             ></v-text-field>
             <v-text-field
               label="RUC"
               required
               v-model="establecimiento.RUC"
               :rules="[rules.required, rules.RUCvalidate, rules.rucMin]"
+              maxlength=13
               :counter="13"
               mask="#############"
             ></v-text-field>

@@ -37,6 +37,8 @@
               label="Correo"
               :rules="emailRules"
               required
+              maxlength=100
+              :counter=100
             ></v-text-field>
             <!--v-text-field
               v-model="newCedula"
@@ -97,8 +99,8 @@
               label="Perfil Ocupacional"
               required
               :rules="[rules.required]"
-              maxlength=40
-              :counter=40
+              maxlength=50
+              :counter=50
             ></v-text-field>
             <!--v-text-field
             :class="'usuarioPersona' + this.personaId"

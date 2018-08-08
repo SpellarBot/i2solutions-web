@@ -11,33 +11,43 @@
                 :class="'tipoRiesgo' + this.riesgoId"
                   v-model = "newTipo"
                   label="Tipo de riesgo" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=20
+                  :counter=20
                 ></v-text-field>
                 <v-text-field
                 :class="'porcentajeRiesgo' + this.riesgoId"
                   v-model = "newPorcentaje"
                   label="Porcentaje" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.maxCant, rules.max]"
+                  :counter=3
+                  maxlength=3
                   hint="El número en porcentaje, sin incluir el símbolo de porcentaje"
-                  mask="##"
+                  mask="###"
                 ></v-text-field>
                 <v-text-field
                 :class="'valoracionRiesgo' + this.riesgoId"
                   v-model = "newValoracion"
                   label="Valoración" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                 :class="'valoracionLiteralRiesgo' + this.riesgoId"
                   v-model = "newValoracionLiteral"
                   label="ValoracionLiteral" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=30
+                  :counter=30
                 ></v-text-field>
                 <v-text-field
                 :class="'personasExpuestasRiesgo' + this.riesgoId"
                   v-model = "newPersonasExpuestas"
                   label="Personas Expuestas" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.max, rules.maxCant]"
+                  maxlength=3
+                  :counter=3
                 ></v-text-field>
             </v-form>
         </v-card-text>
@@ -74,6 +84,9 @@ export default {
       snackbar: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=100) ) || 'Debe ser un número y menor o igual a 100',
+        min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
+        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v)>=0) ) || 'Debe ser un número mayor o igual a 0',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
     }
