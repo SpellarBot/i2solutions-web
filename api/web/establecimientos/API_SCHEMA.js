@@ -16,7 +16,7 @@ module.exports = {
       'type': 'object',
       'properties': {
         'nombres': { 'type': 'string', minLength: 2, maxLength: 50 },
-        'direccion': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'direccion': { 'type': 'string', minLength: 2, maxLength: 150 },
         'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 },
         'ruc': { 'cedula': false }
       }
@@ -29,7 +29,7 @@ module.exports = {
       'type': 'object',
       'properties': {
         'nombres': { 'type': 'string', minLength: 2, maxLength: 50 },
-        'direccion': { 'type': 'string', minLength: 2, maxLength: 50 },
+        'direccion': { 'type': 'string', minLength: 2, maxLength: 150 },
         'empresasId': { 'type': 'number', minimum: 1, maximun: 500000 },
         'ruc': { 'cedula': false }
       }

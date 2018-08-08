@@ -11,6 +11,7 @@ require('./equipos/equipos.router')(app)
 require('./accidentes/accidentes.router')(app)
 require('./novedades/novedades.router')(app)
 require('./riesgos/riesgos.router')(app)
+require('./controles/controles.router')(app)
 app.route('*')
   .get((req, res) => {
     res.json({ mensaje: 'Esta ruta no existe' })

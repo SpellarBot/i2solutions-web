@@ -15,6 +15,11 @@ module.exports = {
       'valoracionLiteral': 'aa',
       'porcentajeRiesgo': 2,
       'fecha': '2014-05-21T19:27:28.576Z'
+    },
+    {
+      'clasificacion': 'Químico',
+      'descripcion': 'Error en datos',
+      'fecha': '2014-05-21T19:27:28.576Z'
     }
   ]
 }

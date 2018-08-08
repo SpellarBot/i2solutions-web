@@ -6,7 +6,7 @@ module.exports = {
       'properties': {
         'nombres': { 'nombres': 'string' },
         'apellidos': { 'nombres': 'string' },
-        'correo': { 'type': 'string', 'format': 'email' },
+        'correo': { 'type': 'string', 'format': 'email', maxLength: 100 },
         'cedula': { 'cedula': true },
         'telefono': { 'type': 'string', minLength: 10, maxLength: 10 },
         'fechaNacimiento': { 'fechaNacimiento': true },
@@ -109,7 +109,7 @@ module.exports = {
       'additionalProperties': false,
       'type': 'object',
       'properties': {
-        'clave': { 'type': 'string', minLength: 5, maxLength: 20 }
+        'clave': { 'type': 'string', minLength: 5, maxLength: 40 }
       }
     }
   },
@@ -118,7 +118,7 @@ module.exports = {
       'minProperties': 1,
       'type': 'object',
       'properties': {
-        'correo': { 'type': 'string', 'format': 'email' },
+        'correo': { 'type': 'string', 'format': 'email', maxLength: 100 },
         'usuario': { 'type': 'string', minLength: 2, maxLength: 25 }
       }
     }
@@ -128,9 +128,9 @@ module.exports = {
       'minProperties': 1,
       'type': 'object',
       'properties': {
-        'correo': { 'type': 'string', 'format': 'email' },
+        'correo': { 'type': 'string', 'format': 'email', maxLength: 100 },
         'usuario': { 'type': 'string', minLength: 2, maxLength: 25 },
-        'cedula': { 'type': 'string', minLength: 2, maxLength: 25 }
+        'cedula': { 'type': 'string', minLength: 2, maxLength: 10 }
       }
     }
   }
