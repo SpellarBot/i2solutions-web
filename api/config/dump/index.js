@@ -12,5 +12,6 @@ module.exports = {
   personas: require('./personas'),
   puestos: require('./puestos'),
   riesgos: require('./riesgos'),
-  controles: require('./controles')
+  controles: require('./controles'),
+  matriz: require('./matriz')
 }

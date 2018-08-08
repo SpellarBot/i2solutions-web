@@ -1,12 +1,10 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
-  let singular = 'controles'
-  let plural = 'controles'
-  let tableName = 'controles'
+  let singular = 'matrices'
+  let plural = 'matrices'
+  let tableName = 'matrices'
   let define = sequelize.define(singular, {
-    descripcion: { type: DataTypes.STRING },
-    estaImplementado: { type: DataTypes.STRING, defaultValue: false },
-    tipo: { type: DataTypes.ENUM('fuente', 'medio', 'individuo') }
+    datos: { type: DataTypes.TEXT }
   }, {
     name: {
       singular,
@@ -20,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.riesgos, { onDelete: 'CASCADE', hooks: true })
-    define.belongsTo(models.puestos, { onDelete: 'CASCADE', hooks: true })
+    define.belongsTo(models.establecimientos, { onDelete: 'CASCADE', hooks: true })
   }
 
   define.Crear = function (crearDatos) {
@@ -37,14 +34,28 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.CrearBulk = function (ids) {
+  define.ObtenerPorEstablecimiento = function ({ id }) {
     return new Promise((resolve, reject) => {
-      this.bulkCreate(ids)
-        .then((datos) => {
-          return this.findAll({ raw: true })
+      return this.findAll({
+        raw: true,
+        where: {
+          establecimientosId: id
+        }
+      })
+        .then((respo) => {
+          return resolve(respo)
         })
-        .then((datos) => {
-          return resolve(datos)
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Obtener = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findOne({ where: { id }, raw: true })
+        .then((project) => {
+          resolve(project)
         }).catch((err) => {
           return reject(err)
         })

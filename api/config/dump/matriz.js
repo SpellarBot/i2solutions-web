@@ -1,9 +1,10 @@
+// 2 riesgos, 6 puestos, 2 areas
 module.exports = {
   'establecimientoId': 2,
   'datos': [
     {
-      'areaId': 4,
-      'puestoId': 6,
+      'areaId': 1,
+      'puestoId': 1,
       'riesgoId': 1,
       'riesgo': 'Postura prolongada',
       'riesgoDescripcion': 'ddd',
@@ -26,8 +27,8 @@ module.exports = {
       'controlesIndividuo': 'rr'
     },
     {
-      'areaId': 4,
-      'puestoId': 7,
+      'areaId': 1,
+      'puestoId': 2,
       'riesgoId': 2,
       'riesgo': 'Exposición a gases y vapores',
       'riesgoDescripcion': 'ddd',
@@ -50,8 +51,8 @@ module.exports = {
       'controlesIndividuo': 'eee'
     },
     {
-      'areaId': 4,
-      'puestoId': 8,
+      'areaId': 1,
+      'puestoId': 3,
       'riesgoId': 1,
       'riesgo': 'Postura prolongada',
       'riesgoDescripcion': 'sss',
@@ -74,8 +75,8 @@ module.exports = {
       'controlesIndividuo': 'ss'
     },
     {
-      'areaId': 5,
-      'puestoId': 10,
+      'areaId': 2,
+      'puestoId': 4,
       'riesgoId': 2,
       'riesgo': 'Exposición a gases y vapores',
       'riesgoDescripcion': 'rrr',
@@ -98,8 +99,8 @@ module.exports = {
       'controlesIndividuo': 'FFF'
     },
     {
-      'areaId': 5,
-      'puestoId': 11,
+      'areaId': 2,
+      'puestoId': 5,
       'riesgoId': 2,
       'riesgo': 'Exposición a gases y vapores',
       'riesgoDescripcion': 'S',
@@ -122,8 +123,8 @@ module.exports = {
       'controlesIndividuo': 'DD. MM. MMM'
     },
     {
-      'areaId': 5,
-      'puestoId': 12,
+      'areaId': 2,
+      'puestoId': 6,
       'riesgoId': 1,
       'riesgo': 'Postura prolongada',
       'riesgoDescripcion': 'DDD',

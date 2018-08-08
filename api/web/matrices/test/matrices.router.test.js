@@ -18,8 +18,8 @@ const models = db.db
 let docs = []
 let equivalencias = {}
 
-describe('CONTROLES', () => {
-  let { areas, puestos, equipos, empresas, establecimientos, riesgos, controles } = dump
+describe('MATRIZ', () => {
+  let { areas, puestos, equipos, empresas, establecimientos, riesgos, controles, matriz } = dump
   let area = areas.VALIDOS[0]
   let empresa = empresas.VALIDOS[0]
   let control = controles.VALIDOS[0]
@@ -55,24 +55,11 @@ describe('CONTROLES', () => {
   })
 
   describe('API_1 CREAR', () => {
-    // const { API_1 } = API
-    // let { API_1_EQUI } = EQUI
-    let codigoApi = 'API_1'
-    let puestosId = -1, riesgosId = -1
-    beforeEach(async () => {
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
-      let areasId = areaCreada['id']
-      let puestosCreada = await models.puestos.Crear({ ...puesto })
-      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
-      puestosId = puestosCreada['id']
-      let riesgosCreada = await models.riesgos.Crear({ ...riesgos,  puestosId })
-      riesgosId = riesgosCreada['id']
-    })
 
     it('@ICE_API_1_01 Crear de forma correcta', async () => {
-      let { descripcion, tipo, estaImplementado } = control
-      let req = { descripcion, tipo, estaImplementado, puestosId, riesgosId }
-      let res = await request(app).post(`/api/web/controles`).send(req)
+      let req = matriz
+      let res = await request(app).post(`/api/web/matrices`).send(req)
+      console.log(res.body)
       // expect(res.body.estado).to.equal(true)
       // expect(res.body.codigoEstado).to.equal(200)
       // let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
@@ -84,27 +71,42 @@ describe('CONTROLES', () => {
     })
   })
 
-  describe('API_2 CREAR BULK', () => {
-    // const { API_1 } = API
-    // let { API_1_EQUI } = EQUI
-    // let codigoApi = 'API_1'
-    let puestosId = -1, riesgosId = -1
-    beforeEach(async () => {
-      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
-      let areasId = areaCreada['id']
-      let puestosCreada = await models.puestos.Crear({ ...puesto })
-      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
-      puestosId = puestosCreada['id']
-      let riesgosCreada = await models.riesgos.Crear({ ...riesgos,  puestosId })
-      riesgosId = riesgosCreada['id']
-    })
+  describe('API_2 OBTENER', () => {
 
-    it('@ICE_API_2_01 Crear de forma correcta', async () => {
-      let { descripcion, tipo, estaImplementado } = control
-      let req1 = { ...control, puestosId, riesgosId }
-      let req2 = { ...control2, puestosId, riesgosId }
-      let res = await request(app).post(`/api/web/controles/bulk`).send([req1,req2])
-      console.log(res.body)
+    it('@ICE_API_2_01 Obtener por establecimientos', async () => {
+      let matrizA = await models.matrices.Crear({ datos: JSON.stringify(matriz['datos']), establecimientosId })
+      let params = { establecimientosId }
+      let res = await request(app).get(`/api/web/matrices/establecimientos/${params['establecimientosId']}`)
+      // console.log(res.body)
+      // expect(res.body.estado).to.equal(true)
+      // expect(res.body.codigoEstado).to.equal(200)
+      // let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
+      // expect(equipoGuardado).to.not.equal(null)
+      // let relacionGuardada = await models.equiposPuestos.ObtenerPorPuestos({ id: puestosId })
+      // expect(relacionGuardada.length).to.equal(1)
+      // generatorDocs.OK({ docs, doc: API_1, res })
+      // generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
+    })
+  })
+
+  describe('API_3 DESCARGAR EXCEL', () => {
+    // let atob = require('atob')
+    // let Blob = require('blob')
+    it('@ICE_API_3_01 Existoso', async () => {
+      let matrizA = await models.matrices.Crear({ datos: JSON.stringify(matriz['datos']), establecimientosId })
+      let params = { matricesId: matrizA['id'] }
+      let res = await request(app).get(`/api/web/matrices/descargar/${params['matricesId']}`)
+      // let byteCharacters = atob(res.body.datos)
+      // let byteNumbers = new Array(byteCharacters.length)
+      // for (let i = 0; i < byteCharacters.length; i++) {
+      //     byteNumbers[i] = byteCharacters.charCodeAt(i)
+      // }
+      // let byteArray = new Uint8Array(byteNumbers);
+      // let blob = new Blob([byteArray], {type: 'application/octet-stream'})
+      require("fs").writeFile("out.xlsx", res.body.datos, 'base64', function(err) {
+        console.log(err);
+      })
+      // console.log(res.body)
       // expect(res.body.estado).to.equal(true)
       // expect(res.body.codigoEstado).to.equal(200)
       // let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
