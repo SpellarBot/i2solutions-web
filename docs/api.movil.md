@@ -103,15 +103,11 @@ __PUT__ __/api/movil/area/:areasId/puesto/:puestosId/:establecimientosId__
     "riesgos": [
       {
         "id": 1,
-        "tipoRiesgo": "Caida de objetos",
-        "personasExpuestas": 15,
-        "valoracion": "1524",
-        "valoracionLiteral": "aa",
+        "clasificacion": "Caida de objetos",
+        "descripcion": "aa",
         "fecha": "2014-05-21 19:27:28.576 +00:00",
-        "porcentajeRiesgo": 2,
         "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
-        "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
-        "puestosId": 1
+        "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00"
       }
     ],
     "cantidadEmpleados": 1,

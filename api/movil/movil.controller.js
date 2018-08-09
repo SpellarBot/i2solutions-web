@@ -29,7 +29,7 @@ module.exports = ({ responses, db }) => {
           db.areas.Obtener({ id: areasId }),
           db.puestos.Obtener({ id: puestosId }),
           db.novedades.ObtenerPorPuesto({ id: puestosId }),
-          db.riesgos.ObtenerPorPuesto({ id: puestosId }),
+          db.riesgos.ObtenerTodos(),
           db.personas.ObtenerCantidadPorPuestos({ id: puestosId }),
           db.puestos.obtenerEquiposPorPuestos({ id: puestosId }),
           db.accidentes.obtenerPorPuestoTrabajo({ id: puestosId }),

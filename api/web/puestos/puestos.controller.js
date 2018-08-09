@@ -60,15 +60,14 @@ module.exports = ({ responses, db }) => {
       return new Promise((resolve, reject) => {
         Promise.all([
           db.novedades.BorrarPorPuestos({ id }),
-          db.riesgos.BorrarPorPuestos({ id }),
           db.accidentes.BorrarPorPuestos({ id }),
           db.puestos.Borrar({ id })
         ])
           .then((resp) => {
-            if (!resp[3]) {
+            if (!resp[2]) {
               resolve(responses.NO_OK('puesto con es id no existe'))
             } else {
-              resolve(responses.OK(resp[3]))
+              resolve(responses.OK(resp[2]))
             }
           }).catch((err) => {
             console.error(err)

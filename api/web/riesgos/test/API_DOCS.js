@@ -4,7 +4,11 @@ module.exports = {
     metodo: 'POST',
     descripcion: '',
     url: '/api/web/riesgos',
-    params: [],
+    params: [
+      { nombre: 'clasificacion', tipo: 'string', descripcion: ' --- ' },
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' --- ' },
+      { nombre: 'fecha', tipo: 'Date', descripcion: ' --- ' }
+    ],
     body: [],
     errors: []
   },
@@ -14,7 +18,9 @@ module.exports = {
     descripcion: '',
     url: '/api/web/riesgos/:riesgosId',
     params: [
-      { nombre: 'riesgosId', tipo: 'Number', descripcion: ' --- ' }
+      { nombre: 'clasificacion', tipo: 'string', descripcion: ' --- ' },
+      { nombre: 'descripcion', tipo: 'string', descripcion: ' --- ' },
+      { nombre: 'fecha', tipo: 'Date', descripcion: ' --- ' }
     ],
     body: [],
     errors: []
@@ -42,25 +48,35 @@ module.exports = {
     errors: []
   },
   API_5: {
-    nombre: 'Obtener riesgos por area',
+    nombre: 'Obtener todos',
     metodo: 'GET',
     descripcion: '',
-    url: '/api/web/riesgos/areas/:areasId',
+    url: '/api/web/riesgos',
     params: [
-      { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
-    ],
-    body: [],
-    errors: []
-  },
-  API_6: {
-    nombre: 'Obtener riesgos por puestos',
-    metodo: 'GET',
-    descripcion: '',
-    url: '/api/web/riesgos/puestos/:puestosId',
-    params: [
-      { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
     ],
     body: [],
     errors: []
   }
+  // API_5: {
+  //   nombre: 'Obtener riesgos por area',
+  //   metodo: 'GET',
+  //   descripcion: '',
+  //   url: '/api/web/riesgos/areas/:areasId',
+  //   params: [
+  //     { nombre: 'areasId', tipo: 'Number', descripcion: ' --- ' }
+  //   ],
+  //   body: [],
+  //   errors: []
+  // },
+  // API_6: {
+  //   nombre: 'Obtener riesgos por puestos',
+  //   metodo: 'GET',
+  //   descripcion: '',
+  //   url: '/api/web/riesgos/puestos/:puestosId',
+  //   params: [
+  //     { nombre: 'puestosId', tipo: 'Number', descripcion: ' --- ' }
+  //   ],
+  //   body: [],
+  //   errors: []
+  // }
 }
