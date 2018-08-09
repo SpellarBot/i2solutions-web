@@ -96,6 +96,14 @@
                   </v-card-title>
                   <v-card-text>
                     <v-form ref="form" v-model="valid">
+                      <v-text-field
+                        v-model = "actividad"
+                        label="Actividad a evaluar" required
+                        :rules="[rules.required]"
+                        multi-line
+                        maxlength=150
+                        :counter=150
+                      ></v-text-field>
                       <v-select
                         :items="riesgos"
                         label="Riesgo"
@@ -392,6 +400,7 @@ export default {
       establecimientoSelected: null,
       empresaValid: false,
       establecimientoValid: false,
+      actividad: null,
       areasYPuestos: [],
       validaciones: [],
       valoraciones: [],
@@ -409,6 +418,10 @@ export default {
       verificar: false,
       riesgoValoracion: null,
       descripcionRiesgoValoracion: null,
+      toServer: {
+        establecimientosId: null,
+        datos: null
+      },
       riesgos: [
         {
           clasificacion: 'Biomecánico',
@@ -522,6 +535,7 @@ export default {
   },
   methods: {
     changedValueEmpresa: function (value) {
+      this.validaciones.length = 0
       this.obtenerEstablecimientos(value)
     },
     obtenerEstablecimientos (value) {
@@ -540,6 +554,7 @@ export default {
         })
     },
     changedValueEstablecimiento: function (value) {
+      this.validaciones.length = 0
       this.obtenerAreasPuestos(value)
     },
     obtenerAreasPuestos (value) {
@@ -712,9 +727,11 @@ export default {
       this.stepper = 4
     },
     crearValoracion () {
-      let areaId = this.areaValoracion.id
+      let areaNombre = this.areaValoracion.nombre
       let puestoId = this.puestoValoracion.id
       let riesgoId = this.riesgoValoracion.id
+      let puestoNombre = this.puestoValoracion.nombre
+      let actividad = this.actividad
       let riesgo = this.riesgoValoracion.descripcion
       let riesgoDescripcion = this.descripcionRiesgoValoracion
       let controlesExistentesFuente = this.controlesElegidos.fuente
@@ -735,9 +752,10 @@ export default {
       let controlesMedio = this.controlesMedio
       let controlesIndividuo = this.controlesIndividuo
       let valoracion = {
-        areaId,
+        areaNombre,
+        puestoNombre,
         puestoId,
-        riesgoId,
+        actividad,
         riesgo,
         riesgoDescripcion,
         controlesExistentesFuente,
@@ -840,9 +858,23 @@ export default {
         this.snackbar = true
         this.mensajeSnackbar = 'Tiene que agregar al menos una valoración de riesgo por cada puesto.'
       } else {
-        this.color = 'success'
-        this.snackbar = true
-        this.mensajeSnackbar = 'Matriz creada con éxito.'
+        this.toServer.establecimientosId = this.establecimientoSelected.id
+        this.toServer.datos = this.valoraciones
+        let establecimientosId = this.toServer.establecimientosId
+        let datos = this.toServer.datos
+        let controlesData = JSON.stringify(this.controles)
+        this.$store.dispatch('crearMatrizRiesgo', { establecimientosId, datos })
+          .then((resp) => {
+            this.color = 'success'
+            this.snackbar = true
+            this.mensajeSnackbar = 'Matriz creada con éxito. Regresando al menú principal.'
+            setTimeout(function () { router.push('/') }, 2000)
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       }
     },
     verValoraciónInicial (area, puesto) {

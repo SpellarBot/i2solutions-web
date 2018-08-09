@@ -142,7 +142,15 @@
               maxlength=50
               :counter=50
             ></v-text-field>
+            <v-select
+              :items="roles"
+              v-model="rol"
+              label="Rol"
+              required
+              :rules="[rules.required]"
+            ></v-select>
             <v-text-field
+              v-if="rol !== 'empleado'"
               v-model="usuario"
               label="Usuario"
               prepend-icon="account_circle"
@@ -152,13 +160,6 @@
               maxlength=25
               :counter=25
             ></v-text-field>
-            <v-select
-              :items="roles"
-              v-model="rol"
-              label="Rol"
-              required
-              :rules="[rules.required]"
-            ></v-select>
           </v-container>
           </v-form>
         </v-card>
@@ -437,7 +438,7 @@ export default {
         v => !!v || 'telefono es requerido',
         v => (v && v.length >= 10) || 'Teléfono debe tener 10 caracteres',
         v => (!Number.isNaN(parseInt(v))) || 'célular no valido'
-      ],
+      ]
     }
   },
   watch: {

@@ -330,7 +330,7 @@ export default{
       this.qrCode = id
     },
     close () {
-      this.showQr=false
+      this.showQr = false
       var instance = this.qrInstance
       // c-elimina
       instance.$destroy()

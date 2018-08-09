@@ -113,7 +113,7 @@ export default {
       color: '',
       snackbar: false,
       rules: {
-        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=50) ) || 'Debe ser un número y menor o igual a 50',
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v) <= 50)) || 'Debe ser un número y menor o igual a 50',
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
