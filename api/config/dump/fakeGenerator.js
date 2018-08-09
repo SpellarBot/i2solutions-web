@@ -83,7 +83,7 @@ let equiposDatos = [
 ]
 
 let prioridades = ['alta', 'media', 'baja']
-let tiposRiesgos = ['Alza de cosas', 'Caida de objetos']
+// let tiposRiesgos = ['Alza de cosas', 'Caida de objetos']
 
 async function crearEmpresas ({ db }) {
   let empresa = {

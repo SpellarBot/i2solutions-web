@@ -1,25 +1,21 @@
 module.exports = {
   API_1_SCHEMA: { // crear riesgo
     BODY: {
-      'minProperties': 3,
-      'additionalProperties': false,
+      'minProperties': 2,
       'type': 'object',
       'properties': {
         'clasificacion': { 'type': 'string', minLength: 2, maxLength: 100 },
-        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 },
-        'fecha': { 'fecha': true }
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 }
       }
     }
   },
   API_2_SCHEMA: { // actualizar un riesgo
     BODY: {
-      'minProperties': 3,
-      'additionalProperties': false,
+      'minProperties': 2,
       'type': 'object',
       'properties': {
         'clasificacion': { 'type': 'string', minLength: 2, maxLength: 100 },
-        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 },
-        'fecha': { 'fecha': true }
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 }
       }
     },
     PARAMS: {
