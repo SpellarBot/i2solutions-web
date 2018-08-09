@@ -97,5 +97,11 @@ export default {
   },
   riesgoCreado (state) {
     return state.riesgoCreado
+  },
+  matricesRiesgo (state) {
+    return state.matricesRiesgo
+  },
+  matrizDescarga (state) {
+    return state.matrizDescarga
   }
 }

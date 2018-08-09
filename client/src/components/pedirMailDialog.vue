@@ -108,7 +108,7 @@ export default {
               return resolve()
             } else {
               this.$store.commit('setError', resp.body.datos)
-              this.titleDialog = "¡oh no!"
+              this.titleDialog = '¡oh no!'
               this.msgDialog = resp.body.datos
               this.showDialog = true
               this.loading = false
@@ -121,7 +121,7 @@ export default {
       })
     },
     cerrar () {
-      this.$refs.form.reset();
+      this.$refs.form.reset()
       this.show = false
     }
   }

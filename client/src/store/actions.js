@@ -1104,5 +1104,39 @@ export default {
   },
   emptyRiesgoCreado ({commit}) {
     commit('setRiesgoCreado', null)
+  },
+  getMatricesRiesgo ({commit}, establecimientoId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/matrices/establecimientos/' + establecimientoId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setMatricesRiesgo', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  descargarMatrizRiesgo ({commit}, matricesId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/matrices/descargar/' + matricesId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setMatrizDescarga', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
   }
 }

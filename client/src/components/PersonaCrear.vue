@@ -512,27 +512,26 @@ export default {
           })
       }
     },
-    verificarUserMailCedula(user, mail, cedula) {    
+    verificarUserMailCedula (user, mail, cedula) {
       return new Promise((resolve, reject) => {
-        let url = '/api/web/personas/buscar/existenciaDe?cedula=' + cedula + '&correo=' + mail + '&usuario='+user
+        let url = '/api/web/personas/buscar/existenciaDe?cedula=' + cedula + '&correo=' + mail + '&usuario=' + user
         Vue.http.get(url)
           .then((resp) => {
             console.log(resp.body.datos)
             if (resp.body.estado) {
-              //Quiere decir que existe este dato ya en la bd
+              // Quiere decir que existe este dato ya en la bd
               if (resp.body.datos.cedula || resp.body.datos.usuario || resp.body.datos.correo) {
                 this.usuarioExiste = true
                 if (resp.body.datos.cedula) {
-                  this.duplicateMessage = this.duplicateMessage + "cedula "
+                  this.duplicateMessage = this.duplicateMessage + 'cedula '
                 }
                 if (resp.body.datos.usuario) {
-                  this.duplicateMessage = this.duplicateMessage + "usuario "
+                  this.duplicateMessage = this.duplicateMessage + 'usuario '
                 }
                 if (resp.body.datos.correo) {
-                  this.duplicateMessage = this.duplicateMessage + "correo "
+                  this.duplicateMessage = this.duplicateMessage + 'correo '
                 }
-              }
-              else {
+              } else {
                 this.usuarioExiste = false
               }
               resolve()
@@ -551,8 +550,8 @@ export default {
       let usuario = this.$data.usuario
       let correo = this.$data.correo
       this.loading = true
-      return new Promise(async (resolve,reject) => {
-        await this.verificarUserMailCedula(usuario,correo,cedula)
+      return new Promise(async (resolve, reject) => {
+        await this.verificarUserMailCedula(usuario, correo, cedula)
         return resolve()
       }).then(async (resp) => {
         this.loading = false
@@ -560,14 +559,13 @@ export default {
           this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = this.duplicateMessage
-          this.duplicateMessage = 'Los siguientes campos ya existen: ' 
-        } 
-        else {
+          this.duplicateMessage = 'Los siguientes campos ya existen: '
+        } else {
           if (this.$store.getters.usuario.rol === 'admin-empresa') {
             this.establecimientos = this.$store.getters.establecimientos
             this.stepper = 2
           } else {
-              this.$store.dispatch('getEmpresas')
+            this.$store.dispatch('getEmpresas')
               .then((resp) => {
                 console.log('Done')
                 this.empresas = this.$store.getters.empresas
@@ -578,7 +576,7 @@ export default {
                 this.snackbar = true
                 this.mensajeSnackbar = err
               })
-            }
+          }
         }
       })
     },
