@@ -118,8 +118,7 @@ module.exports = {
       'minProperties': 1,
       'type': 'object',
       'properties': {
-        'correo': { 'type': 'string', 'format': 'email', maxLength: 100 },
-        'usuario': { 'type': 'string', minLength: 2, maxLength: 25 }
+        'correo': { 'type': 'string', 'format': 'email', maxLength: 100 }
       }
     }
   },

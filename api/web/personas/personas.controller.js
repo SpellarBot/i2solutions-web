@@ -16,7 +16,7 @@ function genCrypto () {
   })
 }
 
-function enviarCorreoTest (correo, url, usuario) {
+function enviarCorreoTest (correo, url) {
   return new Promise((resolve, reject) => {
     let transporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
@@ -34,7 +34,7 @@ function enviarCorreoTest (correo, url, usuario) {
       text: 'Creación de la clave',
       html: `
         <h1> Cambio o Creación de clave </h1>
-        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <p>Use el siguiente link para crear o cambiar la clave </p>
         <a href="${url}">${url}</a>
       `
     }
@@ -50,7 +50,7 @@ function enviarCorreoTest (correo, url, usuario) {
   })
 }
 
-function enviarCorreoNodemailer (correo, url, usuario) {
+function enviarCorreoNodemailer (correo, url) {
   return new Promise((resolve, reject) => {
     // let transporter = nodemailer.createTransport({
     //  service: 'gmail',
@@ -90,7 +90,7 @@ function enviarCorreoNodemailer (correo, url, usuario) {
       text: 'Creación de la clave',
       html: `
         <h1> Cambio o Creación de clave </h1>
-        <p>Use el siguiente link para crear o cambiar la clave, solo tiene un intento con el usuario: ${usuario}</p>
+        <p>Use el siguiente link para crear </p>
         <a href="${url}">${url}</a>
       `
     }
@@ -127,9 +127,9 @@ module.exports = ({ responses, db }) => {
             let err = false
             let mensaje = ''
             if (enviarCorreoDevelop) {
-              [err, mensaje] = yield enviarCorreoTest(correo, url, usuario)
+              [err, mensaje] = yield enviarCorreoTest(correo, url)
             } else if (enviarCorreoProduction) {
-              [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
+              [err, mensaje] = yield enviarCorreoNodemailer(correo, url)
             }
             if (err) {
               console.log(mensaje)
@@ -282,15 +282,12 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
-    CambioClave ({ usuario, correo }) {
+    CambioClave ({ correo }) {
+      console.log({ correo })
       return new Promise((resolve, reject) => {
         co(function * () {
           let personasExiste = false
-          if (usuario) {
-            personasExiste = yield db.personas.ObtenerUsuario({ usuario })
-          } else {
-            personasExiste = yield db.personas.ObtenerCorreo({ correo })
-          }
+          personasExiste = yield db.personas.ObtenerCorreo({ correo })
           if (personasExiste) {
             let token = yield genCrypto()
             let id = personasExiste['id']
@@ -298,14 +295,13 @@ module.exports = ({ responses, db }) => {
             let enviarCorreoDevelop = process.env.NODE_ENV === 'development' && tokenGuardado
             let enviarCorreoProduction = process.env.NODE_ENV === 'production' && tokenGuardado
             let correo = personasExiste['correo']
-            let usuario = personasExiste['usuario']
             let url = `${URL}#/crearClave/${token}`
             let err = false
             let mensaje = ''
             if (enviarCorreoDevelop) {
-              [err, mensaje] = yield enviarCorreoTest(correo, url, usuario)
+              [err, mensaje] = yield enviarCorreoTest(correo, url)
             } else if (enviarCorreoProduction) {
-              [err, mensaje] = yield enviarCorreoNodemailer(correo, url, usuario)
+              [err, mensaje] = yield enviarCorreoNodemailer(correo, url)
             }
             if (err) {
               console.log(mensaje)
