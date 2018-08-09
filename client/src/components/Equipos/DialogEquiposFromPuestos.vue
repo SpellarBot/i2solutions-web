@@ -80,8 +80,8 @@
           <v-card-text>¿Está seguro que quiere eliminar este Equipo?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
             <v-btn :class="'borrarEquipo' + this.equipoId" color="blue darken-1" flat @click = "borrarEquipo()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialogEquipo = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -109,15 +109,15 @@
                 :class="'nombreEquipo' + this.equipoId"
                   v-model = "newNombre"
                   label="Nombre" required
-                  :rules="[rules.required]"
-                  maxlength=30
-                  :counter=30
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionEquipo' + this.equipoId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
                   maxlength=50
                   :counter=50
                 ></v-text-field>
@@ -125,7 +125,9 @@
                 :class="'cantidadEquipo' + this.equipoId"
                   v-model = "newCantidad"
                   label="Cantidad" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.maxCant, rules.max]"
+                  maxlength=3
+                  :counter=3
                   mask="###"
                 ></v-text-field>
                 <img :src="imageUrl" height="150" v-if="imageUrl"/>
@@ -138,7 +140,7 @@
                 >
                 <v-icon>delete</v-icon>
               </v-btn>
-          <v-text-field label="Imagen" hint="Máximo 10 MB" :rules="[rules.required]" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+          <v-text-field maxlength=100 label="Imagen" hint="Máximo 10 MB" :rules="[rules.required]" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
           <input
           class="imagen"
             type="file"
@@ -217,6 +219,9 @@ export default {
       eliminarDialogEquipo: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=150) ) || 'Debe ser un número y menor o igual a 150',
+        min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
+        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v)>=1) ) || 'Debe ser un número mayor o igual a 1',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       },
       indice: -1

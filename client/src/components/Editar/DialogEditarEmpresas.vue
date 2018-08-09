@@ -11,17 +11,17 @@
                 class="nombre"
                   v-model = "newNombre"
                   label="Nombre" required
-                  :rules="[rules.required]"
-                  maxlength=30
-                  :counter=30
+                  :rules="[rules.required, rules.nameMin, rules.nameMax]"
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 class="actividadComercial"
                   v-model = "newActividadComercial"
                   label="Actividad Comercial" required
                   :rules="[rules.required]"
-                  maxlength=40
-                  :counter=40
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 class="razonSocial"
@@ -105,8 +105,25 @@ export default {
       imageFile: '',
       cargando: false,
       rules: {
-        required: (value) => !!value || 'Campo Requerido.',
-        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+        required: v => !!v || 'Campo requerido',
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        nameMax: v => (v && v.length <= 50) || 'Debe tener máximo 50 letras',
+        rucMin: v => (v && v.length === 13) || 'Debe tener 13 letras',
+        imageMax: v => (v && v.length <= 100) || 'Debe contener maximo 100 letras',
+        RUCvalidate: v => {
+          if (MyModule(v)[0]) {
+            return true
+          }
+          return MyModule(v)[1]
+        },
+        isUrl: v => {
+          let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/
+          if (regexp.test(v)) {
+            return true
+          } else {
+            return 'Url no válida'
+          }
+        }
       }
     }
   },

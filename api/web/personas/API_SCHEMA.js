@@ -22,10 +22,10 @@ module.exports = {
       'minProperties': 4,
       'type': 'object',
       'properties': {
-        'nombres': { 'nombres': 'string' },
-        'apellidos': { 'nombres': 'string' },
+        'nombres': { 'nombres': 'string', minLength: 2, maxLength: 30 },
+        'apellidos': { 'nombres': 'string', minLength: 2, maxLength: 30 },
         'correo': { 'type': 'string', 'format': 'email' },
-        'cedula': { 'cedula': true },
+        'cedula': { 'cedula': true, minLength: 10, maxLength: 10 },
         'telefono': { 'type': 'string', minLength: 7, maxLength: 10 },
         'fechaNacimiento': { 'fechaNacimiento': true },
         'perfilOcupacional': { 'type': 'string', minLength: 2, maxLength: 50 },

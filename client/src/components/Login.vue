@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height @keydown.enter="submit" style="margin-top: 20%;">
+  <v-container fluid fill-height @keydown.enter="submit">
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12">
@@ -17,6 +17,9 @@
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="submit" type="submit">Iniciar Sesión</v-btn>
           </v-card-actions>
+          <v-card-text>
+            <a href="" class="text-xs-right">¿Ha olvidado su contraseña?</a>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>

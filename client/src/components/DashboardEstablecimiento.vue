@@ -151,8 +151,8 @@
           <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialog = false">No</v-btn>
             <v-btn class="eliminarEstablecimiento" color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialog = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -165,8 +165,8 @@
           <v-card-text>¿Está seguro que quiere eliminar esta Empresa?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue" flat @click.native="eliminarDialog2 = false">No</v-btn>
             <v-btn class="eliminar" color="blue darken-1" flat @click = "borrarEmpresa()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialog2 = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

@@ -72,13 +72,18 @@
                 <v-text-field
                   v-model = "newTema"
                   label="Tema" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  minlength=2
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                   v-model = "newDescripcion"
                   label="Descripcion" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
                   multi-line
+                  maxlength=100
+                  :counter=100
                 ></v-text-field>
                 <v-menu
                 ref="menu"
@@ -111,14 +116,17 @@
                 <v-text-field
                   v-model = "newCapacitador"
                   label="Capacitador" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  minlength=2
+                  :counter=50
                 ></v-text-field>
                 <v-select
                 :items="areasExistentes"
                 label="Área"
                 v-model = "newAreaId"
                 item-text="areaNombre"
-                :rules="[rules.required]"
+                :rules="[rules.required, rules.min]"
                 ></v-select>
                 <v-btn color="primary" dark @click="verDialogCapacitados">Agregar Capacitados</v-btn>
             </v-form>
@@ -204,6 +212,7 @@ export default {
       newAreaId: null,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
+        min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       },
       headers: [

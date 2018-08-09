@@ -12,16 +12,16 @@
                   v-model = "newNombres"
                   label="Nombre" required
                   :rules="[rules.required]"
-                  maxlength=25
-                  :counter=25
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 class="direccion"
                   v-model = "newDireccion"
                   label="Direccion" required
                   :rules="[rules.required]"
-                  maxlength=70
-                  :counter=70
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 class="ruc"

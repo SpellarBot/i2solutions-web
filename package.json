@@ -23,10 +23,12 @@
     "docs:s": "gitbook serve . "
   },
   "dependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-rc.10",
     "ajv": "^6.5.0",
     "ajv-errors": "^1.0.0",
     "ajv-i18n": "^3.3.0",
     "bcrypt": "^3.0.0",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "co": "^4.6.0",
     "cors": "^2.8.4",
@@ -51,6 +53,9 @@
     "tv4": "^1.3.0",
     "unstream": "^2.0.0",
     "validator": "^10.4.0",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-qr": "^1.3.8",
+    "vue-qrcode": "^0.0.2",
     "vue-resource": "^1.5.1",
     "vuetify": "^1.0.18",
     "vuex": "^3.0.1",

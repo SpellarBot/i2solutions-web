@@ -76,13 +76,17 @@
                 <v-text-field
                   v-model = "newNombre"
                   label="Nombre" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                   v-model = "newDescripcion"
                   label="Descripcion" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
                   multi-line
+                  maxlength=100
+                  :counter=100
                 ></v-text-field>
                 <v-menu
                 ref="menu"
@@ -115,13 +119,17 @@
                 <v-text-field
                   v-model = "newHeridos"
                   label="Número Heridos" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.max]"
+                  maxlength=2
+                  :counter=2
                   mask="#######"
                 ></v-text-field>
                 <v-text-field
                   v-model = "newMuertos"
                   label="Número Fallecidos" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.max]"
+                  maxlength=2
+                  :counter=2
                   mask="#######"
                 ></v-text-field>
                 <v-checkbox
@@ -238,7 +246,9 @@ export default {
       areasYPuestos: [],
       puestosDelArea: [],
       rules: {
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=50) ) || 'Debe ser un número y menor o igual a 50',
         required: (value) => !!value || 'Campo Requerido.',
+        min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       },
       headers: [

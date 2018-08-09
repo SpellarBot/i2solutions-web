@@ -45,7 +45,7 @@
               required
               :rules="[rules.required]"
               maxlength=30
-                  :counter=30
+              :counter=30
             ></v-text-field>
             <!--Fin-->
             <v-text-field
@@ -55,7 +55,7 @@
               required
               :rules="[rules.required]"
               maxlength=30
-                  :counter=30
+              :counter=30
             ></v-text-field>
               <!--Fin-->
             <v-text-field
@@ -64,11 +64,14 @@
               :rules="emailRules"
               prepend-icon="contact_mail"
               required
+              maxlength=100
+              :counter=100
             ></v-text-field>
             <v-text-field
               v-model="cedula"
               label="Cédula"
               maxlength=10
+              minlength=10
               :rules="cedulaRules"
               :error-messages="errors.collect('cedula')"
               v-validate="'required | max:10'"
@@ -89,6 +92,7 @@
               v-model="telefono"
               label="Télefono"
               maxlength=10
+              minlength=10
               :rules="telefonoRules"
               prepend-icon="contact_phone"
               :error-messages="errors.collect('telefono')"
@@ -135,8 +139,8 @@
               hint="Ingrese perfil Ocupacional"
               required
               :rules="[rules.required]"
-              maxlength=40
-              :counter=40
+              maxlength=50
+              :counter=50
             ></v-text-field>
             <v-text-field
               v-model="usuario"
@@ -145,8 +149,8 @@
               hint="Ingrese el usuario"
               required
               :rules="[rules.required]"
-              maxlength=15
-              :counter=15
+              maxlength=25
+              :counter=25
             ></v-text-field>
             <v-select
               :items="roles"
@@ -360,7 +364,7 @@
 
 <script>
 import router from '../router'
-
+import MyModule from './MyModule.js'
 // import { throws } from 'assert'
 export default {
   data () {
@@ -421,13 +425,19 @@ export default {
       cedulaRules: [
         v => !!v || 'cédula es requerido',
         v => (v && v.length >= 10) || 'La cédula debe tener 10 caracteres',
-        v => (!Number.isNaN(parseInt(v))) || 'cédula no valida'
+        v => (!Number.isNaN(parseInt(v))) || 'cédula no valida',
+        v => {
+          if (MyModule(v)[0]) {
+            return true
+          }
+          return MyModule(v)[1]
+        }
       ],
       telefonoRules: [
         v => !!v || 'telefono es requerido',
         v => (v && v.length >= 10) || 'Teléfono debe tener 10 caracteres',
         v => (!Number.isNaN(parseInt(v))) || 'célular no valido'
-      ]
+      ],
     }
   },
   watch: {

@@ -11,15 +11,15 @@
                 :class="'nombreEquipo' + this.equipoId"
                   v-model = "newNombre"
                   label="Nombre" required
-                  :rules="[rules.required]"
-                  maxlength=30
-                  :counter=30
+                  :rules="[rules.required, rules.min]"
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionEquipo' + this.equipoId"
                   v-model = "newDescripcion"
                   label="Descripcion" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.min]"
                   maxlength=50
                   :counter=50
                 ></v-text-field>
@@ -27,7 +27,9 @@
                 :class="'cantidadEquipo' + this.equipoId"
                   v-model = "newCantidad"
                   label="Cantidad" required
-                  :rules="[rules.required]"
+                  :rules="[rules.required, rules.maxCant, rules.max]"
+                  maxlength=3
+                  :counter=3
                   mask="###"
                 ></v-text-field>
                 <img :src="imageUrl" height="150" v-if="imageUrl"/>
@@ -103,6 +105,9 @@ export default {
       snackbar: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=150) ) || 'Debe ser un número y menor o igual a 150',
+        min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
+        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v)>=1) ) || 'Debe ser un número mayor o igual a 1',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
     }

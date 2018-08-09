@@ -17,7 +17,9 @@
                     label="Nombre"
                     v-model="empresa.nombre"
                     required
-                    :rules="[rules.required, rules.nameMin]"
+                    :rules="[rules.required, rules.nameMin, rules.nameMax]"
+                    maxlength=50
+                    :counter=50
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg4>
@@ -25,7 +27,9 @@
                     label="Actividad Comercial"
                     v-model="empresa.actividad"
                     required
-                    :rules="[rules.required, rules.nameMin]"
+                    :rules="[rules.required, rules.nameMin, rules.nameMax]"
+                    maxlength=50
+                    :counter=50
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg4>
@@ -36,7 +40,9 @@
                     label="Seleccione Imagen"
                     @click='pickFile'
                     v-model='imageName'
-                    :rules="[rules.required]"
+                    :rules="[rules.required, rules.imageMax]"
+                    :counter=100
+                    maxlength=100
                     prepend-icon='attach_file'
                     >
                     </v-text-field>
@@ -55,7 +61,9 @@
                       v-model="empresa.razon"
                       label="Razon Social"
                       required
-                      :rules="[rules.required, rules.nameMin]"
+                      :rules="[rules.required, rules.nameMin, rules.nameMax]"
+                      :counter=50
+                      maxlength=50
                     ></v-text-field>
                 </v-flex>
                   <v-text-field
@@ -63,7 +71,8 @@
                     label="Dirección"
                     v-model="empresa.direccion"
                     required
-                    :rules="[rules.required, rules.nameMin]"
+                    :rules="[rules.required, rules.nameMin, rules.nameMax]"
+                    counter=50
                   ></v-text-field>
                   <v-text-field
                   class="ruc"
@@ -73,6 +82,7 @@
                     mask="#############"
                     :rules="[rules.RUCvalidate, rules.required, rules.rucMin]"
                     :counter="13"
+                    maxlength=13
                   ></v-text-field>
               </v-form>
               <br><br>
@@ -477,7 +487,9 @@ export default {
       rules: {
         required: v => !!v || 'Campo requerido',
         nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        nameMax: v => (v && v.length <= 50) || 'Debe tener máximo 50 letras',
         rucMin: v => (v && v.length === 13) || 'Debe tener 13 letras',
+        imageMax: v => (v && v.length <= 100) || 'Debe contener maximo 100 letras',
         RUCvalidate: v => {
           if (MyModule(v)[0]) {
             return true
