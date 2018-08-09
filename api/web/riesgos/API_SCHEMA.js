@@ -5,8 +5,7 @@ module.exports = {
       'type': 'object',
       'properties': {
         'clasificacion': { 'type': 'string', minLength: 2, maxLength: 100 },
-        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 },
-        'fecha': { 'fecha': true }
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 }
       }
     }
   },
@@ -16,8 +15,7 @@ module.exports = {
       'type': 'object',
       'properties': {
         'clasificacion': { 'type': 'string', minLength: 2, maxLength: 100 },
-        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 },
-        'fecha': { 'fecha': true }
+        'descripcion': { 'type': 'string', minLength: 2, maxLength: 200 }
       }
     },
     PARAMS: {
