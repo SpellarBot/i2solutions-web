@@ -98,48 +98,61 @@ module.exports = (app) => {
     })
 
   // identificador: API_5
-  // obtener riesgos por areas
-  app.route('/riesgos/areas/:areasId')
+  // obtener todos
+  app.route('/riesgos')
     .get((req, res) => {
-      let params = utils.jsonToInt(req.params, ['areasId'])
-      let { PARAMS } = schema.API_5_SCHEMA
-      let [errParams, mensajeParams] = validar(PARAMS, params)
-      if (errParams) {
-        let resp = responses.NO_OK({ ...mensajeParams })
+      Controller.ObtenerTodos().then((resp) => {
         res.status(resp.codigoEstado)
         res.json(resp)
-      } else {
-        let { areasId } = req.params
-        Controller.ObtenerPorAreas({ id: areasId }).then((resp) => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        }).catch(resp => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        })
-      }
+      }).catch(resp => {
+        res.status(resp.codigoEstado)
+        res.json(resp)
+      })
     })
 
-  // identificador: API_6
-  // obtener riesgos por puestos
-  app.route('/riesgos/puestos/:puestosId')
-    .get((req, res) => {
-      let params = utils.jsonToInt(req.params, ['puestosId'])
-      let { PARAMS } = schema.API_6_SCHEMA
-      let [errParams, mensajeParams] = validar(PARAMS, params)
-      if (errParams) {
-        let resp = responses.NO_OK({ ...mensajeParams })
-        res.status(resp.codigoEstado)
-        res.json(resp)
-      } else {
-        let { puestosId } = req.params
-        Controller.ObtenerPorPuestos({ id: puestosId }).then((resp) => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        }).catch(resp => {
-          res.status(resp.codigoEstado)
-          res.json(resp)
-        })
-      }
-    })
+  // // identificador: API_5
+  // // obtener riesgos por areas
+  // app.route('/riesgos/areas/:areasId')
+  //   .get((req, res) => {
+  //     let params = utils.jsonToInt(req.params, ['areasId'])
+  //     let { PARAMS } = schema.API_5_SCHEMA
+  //     let [errParams, mensajeParams] = validar(PARAMS, params)
+  //     if (errParams) {
+  //       let resp = responses.NO_OK({ ...mensajeParams })
+  //       res.status(resp.codigoEstado)
+  //       res.json(resp)
+  //     } else {
+  //       let { areasId } = req.params
+  //       Controller.ObtenerPorAreas({ id: areasId }).then((resp) => {
+  //         res.status(resp.codigoEstado)
+  //         res.json(resp)
+  //       }).catch(resp => {
+  //         res.status(resp.codigoEstado)
+  //         res.json(resp)
+  //       })
+  //     }
+  //   })
+
+  // // identificador: API_6
+  // // obtener riesgos por puestos
+  // app.route('/riesgos/puestos/:puestosId')
+  //   .get((req, res) => {
+  //     let params = utils.jsonToInt(req.params, ['puestosId'])
+  //     let { PARAMS } = schema.API_6_SCHEMA
+  //     let [errParams, mensajeParams] = validar(PARAMS, params)
+  //     if (errParams) {
+  //       let resp = responses.NO_OK({ ...mensajeParams })
+  //       res.status(resp.codigoEstado)
+  //       res.json(resp)
+  //     } else {
+  //       let { puestosId } = req.params
+  //       Controller.ObtenerPorPuestos({ id: puestosId }).then((resp) => {
+  //         res.status(resp.codigoEstado)
+  //         res.json(resp)
+  //       }).catch(resp => {
+  //         res.status(resp.codigoEstado)
+  //         res.json(resp)
+  //       })
+  //     }
+  //   })
 }

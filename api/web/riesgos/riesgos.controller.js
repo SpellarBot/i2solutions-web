@@ -3,16 +3,10 @@ module.exports = ({ responses, db }) => {
   const proto = {
     Crear (json) {
       let datos = arguments['0']
-      let { puestosId } = datos
       return new Promise((resolve, reject) => {
         co(function * () {
-          let puesto = yield db.puestos.Obtener({ id: puestosId })
-          if (!puesto) {
-            resolve(responses.NO_OK('El puesto no existe'))
-          } else {
-            let riesgoCreada = yield db.riesgos.Crear(datos)
-            resolve(responses.OK(riesgoCreada))
-          }
+          let riesgoCreada = yield db.riesgos.Crear(datos)
+          resolve(responses.OK(riesgoCreada))
         }).catch((err) => {
           console.error(err)
           return reject(responses.ERROR_SERVIDOR)
@@ -31,19 +25,13 @@ module.exports = ({ responses, db }) => {
       })
     },
     Actualizar (datos) {
-      let { puestosId } = datos
       return new Promise((resolve, reject) => {
         co(function * () {
-          let puesto = yield db.puestos.Obtener({ id: puestosId })
-          if (!puesto) {
-            resolve(responses.NO_OK('El puesto no existe'))
+          let riesgosCreada = yield db.riesgos.Actualizar(datos)
+          if (riesgosCreada[0].toString() === '1') {
+            resolve(responses.OK(true))
           } else {
-            let riesgosCreada = yield db.riesgos.Actualizar(datos)
-            if (riesgosCreada[0].toString() === '1') {
-              resolve(responses.OK(true))
-            } else {
-              resolve(responses.NO_OK('Error en actualizar el riesgo'))
-            }
+            resolve(responses.NO_OK('Error en actualizar el riesgo'))
           }
         }).catch((err) => {
           console.error(err)
@@ -66,20 +54,9 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    ObtenerPorAreas ({ id }) {
+    ObtenerTodos () {
       return new Promise((resolve, reject) => {
-        db.riesgos.ObtenerPorAreas({ id })
-          .then((resp) => {
-            resolve(responses.OK(resp))
-          }).catch((err) => {
-            console.error(err)
-            return reject(responses.ERROR_SERVIDOR)
-          })
-      })
-    },
-    ObtenerPorPuestos ({ id }) {
-      return new Promise((resolve, reject) => {
-        db.riesgos.ObtenerPorPuestos({ id })
+        db.riesgos.ObtenerTodos()
           .then((resp) => {
             resolve(responses.OK(resp))
           }).catch((err) => {
@@ -88,6 +65,28 @@ module.exports = ({ responses, db }) => {
           })
       })
     }
+    // ObtenerPorAreas ({ id }) {
+    //   return new Promise((resolve, reject) => {
+    //     db.riesgos.ObtenerPorAreas({ id })
+    //       .then((resp) => {
+    //         resolve(responses.OK(resp))
+    //       }).catch((err) => {
+    //         console.error(err)
+    //         return reject(responses.ERROR_SERVIDOR)
+    //       })
+    //   })
+    // },
+    // ObtenerPorPuestos ({ id }) {
+    //   return new Promise((resolve, reject) => {
+    //     db.riesgos.ObtenerPorPuestos({ id })
+    //       .then((resp) => {
+    //         resolve(responses.OK(resp))
+    //       }).catch((err) => {
+    //         console.error(err)
+    //         return reject(responses.ERROR_SERVIDOR)
+    //       })
+    //   })
+    // }
   }
   return Object.assign(Object.create(proto), {})
 }

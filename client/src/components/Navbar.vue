@@ -11,6 +11,10 @@
       @click="matrizRiesgoMenu" >
         Matriz de Riesgos
       </v-btn>
+      <v-btn v-if="$store.getters.usuario.rol === 'admin-i2solutions'" flat color="white"
+      @click="administrarRiesgos" >
+        Administrar Riesgos
+      </v-btn>
       <v-btn v-if="$store.getters.usuario.rol === 'admin-empresa' || $store.getters.usuario.rol === 'admin-i2solutions'" flat color="white"
       @click="crearPersona" >
         Agregar Persona
@@ -53,6 +57,17 @@ export default {
     },
     matrizRiesgoMenu () {
       router.push('/matrizRiesgo')
+    },
+    administrarRiesgos () {
+      this.$store.dispatch('getRiesgos')
+        .then((resp) => {
+          router.push('/riesgos')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     },
     crearPersona () {
       router.push('/crearPersona')

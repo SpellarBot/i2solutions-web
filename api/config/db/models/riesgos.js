@@ -4,12 +4,9 @@ module.exports = (sequelize, DataTypes) => {
   let plural = 'riesgos'
   let tableName = 'riesgos'
   let define = sequelize.define(singular, {
-    tipoRiesgo: { type: DataTypes.STRING },
-    personasExpuestas: { type: DataTypes.INTEGER },
-    valoracion: { type: DataTypes.STRING },
-    valoracionLiteral: { type: DataTypes.STRING },
-    fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    porcentajeRiesgo: { type: DataTypes.INTEGER }
+    clasificacion: { type: DataTypes.STRING },
+    descripcion: { type: DataTypes.STRING },
+    fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, {
     name: {
       singular,
@@ -23,17 +20,12 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   define.associate = function (models) {
-    define.belongsTo(models.puestos, { onDelete: 'CASCADE', hooks: true })
   }
 
   define.Crear = function ({
-    tipoRiesgo,
-    personasExpuestas,
-    valoracion,
-    valoracionLiteral,
-    fecha,
-    porcentajeRiesgo,
-    puestosId
+    clasificacion,
+    descripcion,
+    fecha
   }) {
     let datos = arguments['0']
     return new Promise((resolve, reject) => {
@@ -47,16 +39,13 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.ObtenerPorPuesto = function ({ id }) {
+  define.ObtenerTodos = function () {
     return new Promise((resolve, reject) => {
       return this.findAll({
-        raw: true,
-        where: {
-          puestosId: id
-        }
+        raw: true
       })
-        .then((res) => {
-          return resolve(res)
+        .then((resp) => {
+          return resolve(resp)
         })
         .catch((err) => {
           return reject(err)
@@ -64,23 +53,40 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.BorrarPorPuestos = function ({ id }) {
-    return new Promise((resolve, reject) => {
-      this.destroy({
-        where: {
-          puestosId: id
-        }})
-        .then((rowDeleted) => {
-          if (rowDeleted > 0) {
-            resolve(true)
-          } else {
-            resolve(false)
-          }
-        }).catch((err) => {
-          return reject(err)
-        })
-    })
-  }
+  // define.ObtenerPorPuesto = function ({ id }) {
+  //   return new Promise((resolve, reject) => {
+  //     return this.findAll({
+  //       raw: true,
+  //       where: {
+  //         puestosId: id
+  //       }
+  //     })
+  //       .then((res) => {
+  //         return resolve(res)
+  //       })
+  //       .catch((err) => {
+  //         return reject(err)
+  //       })
+  //   })
+  // }
+
+  // define.BorrarPorPuestos = function ({ id }) {
+  //   return new Promise((resolve, reject) => {
+  //     this.destroy({
+  //       where: {
+  //         puestosId: id
+  //       }})
+  //       .then((rowDeleted) => {
+  //         if (rowDeleted > 0) {
+  //           resolve(true)
+  //         } else {
+  //           resolve(false)
+  //         }
+  //       }).catch((err) => {
+  //         return reject(err)
+  //       })
+  //   })
+  // }
 
   define.Obtener = function ({ id }) {
     return new Promise((resolve, reject) => {
@@ -128,29 +134,29 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  define.ObtenerPorAreas = function ({ id }) {
-    return new Promise((resolve, reject) => {
-      let query = `select r.id as id, r.tipoRiesgo as tipoRiesgo, r.personasExpuestas as personasExpuestas, r.valoracion as valoracion, r.valoracionLiteral as valoracionLiteral, r.fecha as fecha, r.porcentajeRiesgo as porcentajeRiesgo, r.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre, a.id as areasId, a.nombre as areasNombre from areas a inner join areasPuestos ap on ap.areasId = a.id inner join riesgos r on r.puestosId = ap.puestosId where a.id = ${id}`
-      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
-        .then(riesgos => {
-          resolve(riesgos)
-        }).catch((err) => {
-          return reject(err)
-        })
-    })
-  }
+  // define.ObtenerPorAreas = function ({ id }) {
+  //   return new Promise((resolve, reject) => {
+  //     let query = `select r.id as id, r.tipoRiesgo as tipoRiesgo, r.personasExpuestas as personasExpuestas, r.valoracion as valoracion, r.valoracionLiteral as valoracionLiteral, r.fecha as fecha, r.porcentajeRiesgo as porcentajeRiesgo, r.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre, a.id as areasId, a.nombre as areasNombre from areas a inner join areasPuestos ap on ap.areasId = a.id inner join riesgos r on r.puestosId = ap.puestosId where a.id = ${id}`
+  //     sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+  //       .then(riesgos => {
+  //         resolve(riesgos)
+  //       }).catch((err) => {
+  //         return reject(err)
+  //       })
+  //   })
+  // }
 
-  define.ObtenerPorPuestos = function ({ id }) {
-    return new Promise((resolve, reject) => {
-      let query = `select r.id as id, r.tipoRiesgo as tipoRiesgo, r.personasExpuestas as personasExpuestas, r.valoracion as valoracion, r.valoracionLiteral as valoracionLiteral, r.fecha as fecha, r.porcentajeRiesgo as porcentajeRiesgo, r.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from areasPuestos ap join riesgos r on r.puestosId = ap.puestosId where ap.puestosId = ${id}`
-      sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
-        .then(riesgos => {
-          resolve(riesgos)
-        }).catch((err) => {
-          return reject(err)
-        })
-    })
-  }
+  // define.ObtenerPorPuestos = function ({ id }) {
+  //   return new Promise((resolve, reject) => {
+  //     let query = `select r.id as id, r.tipoRiesgo as tipoRiesgo, r.personasExpuestas as personasExpuestas, r.valoracion as valoracion, r.valoracionLiteral as valoracionLiteral, r.fecha as fecha, r.porcentajeRiesgo as porcentajeRiesgo, r.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from areasPuestos ap join riesgos r on r.puestosId = ap.puestosId where ap.puestosId = ${id}`
+  //     sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+  //       .then(riesgos => {
+  //         resolve(riesgos)
+  //       }).catch((err) => {
+  //         return reject(err)
+  //       })
+  //   })
+  // }
 
   return define
 }
