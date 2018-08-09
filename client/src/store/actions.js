@@ -1049,6 +1049,22 @@ export default {
           })
       })
     }
+  },
+  crearMatrizRiesgo ({commit}, {establecimientosId, datos}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/matrices', {establecimientosId, datos})
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
   }
-
 }

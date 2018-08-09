@@ -12,8 +12,8 @@
                   v-model = "newNombre"
                   label="Nombre" required
                   :rules="[rules.required]"
-                  maxlength=30
-                  :counter=30
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
                 <v-text-field
                 :class="'descripcionPuesto' + this.puestoId"
@@ -21,8 +21,8 @@
                   label="Descripción" required
                   :rules="[rules.required]"
                   multi-line
-                  maxlength=150
-                  :counter=150
+                  maxlength=50
+                  :counter=50
                 ></v-text-field>
             </v-form>
         </v-card-text>
@@ -108,7 +108,7 @@ export default {
       let descripcion = this.$data.newDescripcion
       let puestoId = this.puestoId
       let areaId = this.areaId
-      console.log(this.editModes)
+      console.log(this.puestoId)
       this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
         .then((resp) => {
           if (this.editModes === 0) {

@@ -36,7 +36,7 @@ La clave se genera en el back y enviar el correo dependiendo del rol
     "perfilOcupacional": "Inspector",
     "usuario": "carlos",
     "rol": "inspector-seguridad",
-    "resetClaveToken": "02bf2dbc08459bb143ac8d858bfff911f3b95391",
+    "resetClaveToken": "1f469184953abf800d970d8a4f47618847ac2222",
     "fechaActualizacion": "2018-08-01T05:00:00.000Z",
     "fechaCreacion": "2018-08-01T05:00:00.000Z",
     "puestosId": 1

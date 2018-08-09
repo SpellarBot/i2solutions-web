@@ -1,0 +1,56 @@
+// 2 riesgos, 6 puestos, 2 areas
+module.exports = {
+  'establecimientoId': 2,
+  'datos': [
+    {
+      'areaNombre': 'Subgerente',
+      'puestoNombre': 'Jefe de MatriceríaWWW',
+      'puestoId': 1,
+      'actividad': 'DDD',
+      'riesgo': 'Postura prolongada',
+      'riesgoDescripcion': 'DDDD',
+      'controlesExistentesFuente': 'Programa de pausas activas',
+      'controlesExistentesMedio': 'N.A.',
+      'controlesExistentesIndividuo': 'Capacitación al personal en autocuidado. Capacitación en higiene postural',
+      'ND': 2,
+      'NE': 3,
+      'NP': 6,
+      'interpretacionNP': 'Medio',
+      'NC': 25,
+      'NR': 150,
+      'interpretacionNR': 'II',
+      'aceptabilidad': 'Aceptable con control específico',
+      'numeroExpuestos': 2,
+      'peorConsecuencia': 'DDDD',
+      'requisitoLegal': false,
+      'controlesFuente': 'DD',
+      'controlesMedio': 'DD',
+      'controlesIndividuo': 'DD'
+    },
+    {
+      'areaNombre': 'Gerente General',
+      'puestoNombre': 'Oficina de gerente general',
+      'puestoId': 4,
+      'actividad': 'SSS',
+      'riesgo': 'Postura prolongada',
+      'riesgoDescripcion': 'SSSS',
+      'controlesExistentesFuente': 'Programa de pausas activas',
+      'controlesExistentesMedio': 'N.A.',
+      'controlesExistentesIndividuo': 'Capacitación al personal en autocuidado. Capacitación en higiene postural',
+      'ND': 2,
+      'NE': 3,
+      'NP': 6,
+      'interpretacionNP': 'Medio',
+      'NC': 100,
+      'NR': 600,
+      'interpretacionNR': 'I',
+      'aceptabilidad': ' No aceptable',
+      'numeroExpuestos': 1,
+      'peorConsecuencia': 'ZZZZZ',
+      'requisitoLegal': null,
+      'controlesFuente': 'DD',
+      'controlesMedio': 'A',
+      'controlesIndividuo': 'SDSDSD'
+    }
+  ]
+}

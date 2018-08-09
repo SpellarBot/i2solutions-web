@@ -11,5 +11,7 @@ module.exports = {
   novedades: require('./novedades'),
   personas: require('./personas'),
   puestos: require('./puestos'),
-  riesgos: require('./riesgos')
+  riesgos: require('./riesgos'),
+  controles: require('./controles'),
+  matriz: require('./matriz')
 }

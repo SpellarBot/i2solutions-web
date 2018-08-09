@@ -67,8 +67,8 @@
                   <v-card-text>¿Está seguro que quiere eliminar esta Persona?</v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue" flat @click.native="eliminarDialogPersona = false">No</v-btn>
                     <v-btn :class="'borrarPersona' + this.personaId" color="blue darken-1" flat @click = "borrarPersona()">Sí</v-btn>
+                    <v-btn color="blue" flat @click.native="eliminarDialogPersona = false">No</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>

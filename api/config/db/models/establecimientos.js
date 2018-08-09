@@ -49,6 +49,17 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.Obtener = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findAll({ where: { id }, raw: true })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
     let { nombres, direccion, ruc } = datos

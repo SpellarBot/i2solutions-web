@@ -626,22 +626,22 @@ Crear un puesto de forma correcta
   <tr>
     <td>nombre</td>
     <td><a href="#CE_API_3[C1]"> CE_API_3[C1]</a></td>
-    <td>AAA</td>
+    <td></td>
   </tr>
   <tr>
     <td>descripcion</td>
     <td><a href="#CE_API_3[C11]"> CE_API_3[C11]</a></td>
-    <td>AAA</td>
+    <td></td>
   </tr>
   <tr>
     <td>fotoUrl</td>
     <td><a href="#CE_API_3[C31]"> CE_API_3[C31]</a></td>
-    <td>http://imagen.png</td>
+    <td></td>
   </tr>
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
-    <td>1</td>
+    <td></td>
   </tr>
 </table>
 
@@ -651,15 +651,11 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT 
 
 _request o body_
 ```js
-{
-  "nombre": "AAA",
-  "descripcion": "AAA",
-  "fotoUrl": "http://imagen.png"
-}
+
 ```
 
 __Resultados__
@@ -667,11 +663,7 @@ __Resultados__
 _response_
 
 ```js
-{
-  "estado": true,
-  "datos": true,
-  "codigoEstado": 200
-}
+
 ```
 
 
@@ -703,7 +695,7 @@ nombre tipo no valido
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
-    <td>1</td>
+    <td>2</td>
   </tr>
 </table>
 
@@ -713,7 +705,7 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT /api/web/puestos/2
 
 _request o body_
 ```js
@@ -767,7 +759,7 @@ nombre tamano no valido
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
-    <td>1</td>
+    <td>2</td>
   </tr>
 </table>
 
@@ -777,7 +769,7 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT /api/web/puestos/2
 
 _request o body_
 ```js
@@ -831,7 +823,7 @@ descripcion tipo no valido
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
-    <td>1</td>
+    <td>2</td>
   </tr>
 </table>
 
@@ -841,7 +833,7 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT /api/web/puestos/2
 
 _request o body_
 ```js
@@ -895,7 +887,7 @@ descripcion tamano no valido
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C21]</a></td>
-    <td>1</td>
+    <td>2</td>
   </tr>
 </table>
 
@@ -905,7 +897,7 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT /api/web/puestos/2
 
 _request o body_
 ```js
@@ -959,7 +951,7 @@ puestosId tipo no valido
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C22]</a></td>
-    <td>1</td>
+    <td>2</td>
   </tr>
 </table>
 
@@ -969,7 +961,7 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT /api/web/puestos/2
 
 _request o body_
 ```js
@@ -1023,7 +1015,7 @@ puestosId tamano no valido
   <tr>
     <td>puestosId</td>
     <td><a href="#CE_API_3[]"> CE_API_3[C23]</a></td>
-    <td>1</td>
+    <td>2</td>
   </tr>
 </table>
 
@@ -1033,7 +1025,7 @@ _url_
 
 > /api/web/puestos/:puestosId
 
-PUT /api/web/puestos/1
+PUT /api/web/puestos/2
 
 _request o body_
 ```js

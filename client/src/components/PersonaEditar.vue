@@ -15,6 +15,8 @@
               :rules="emailRules"
               prepend-icon="contact_mail"
               required
+              maxlength=100
+              :counter=100
             ></v-text-field>
 
             <v-text-field
@@ -41,6 +43,8 @@
               prepend-icon="account_circle"
               hint="Ingrese el usuario"
               required
+              maxlength=25
+              :counter=25
             ></v-text-field>
             <v-select
               :items="roles"
