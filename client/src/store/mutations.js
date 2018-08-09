@@ -99,5 +99,11 @@ export default {
   },
   setEquipoCreado (state, equipo) {
     state.equipoCreado = equipo
+  },
+  setRiesgos (state, riesgos) {
+    state.riesgos = riesgos
+  },
+  setRiesgoCreado (state, riesgo) {
+    state.riesgoCreado = riesgo
   }
 }

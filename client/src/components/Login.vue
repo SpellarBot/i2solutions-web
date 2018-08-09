@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height @keydown.enter="submit">
+    <v-container fluid fill-height @keydown.enter="submit">
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12">
@@ -15,10 +15,10 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submit" type="submit">Iniciar Sesión</v-btn>
+            <v-btn color="primary" @click="submit">Iniciar Sesión</v-btn>
           </v-card-actions>
           <v-card-text>
-            <a href="" class="text-xs-right">¿Ha olvidado su contraseña?</a>
+            <a class="text-xs-right" @click="forgot=true">¿Ha olvidado su contraseña?</a>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -32,15 +32,21 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+    <pedirMailDialog
+    :visible="forgot"
+    @close="forgot=false"
+  ></pedirMailDialog>
   </v-container>
 </template>
-
 <script>
 import router from '../router'
+import pedirMailDialog from './pedirMailDialog'
 export default {
+  components: { pedirMailDialog },
   data () {
     return {
       valid: false,
+      forgot: false,
       usuario: '',
       clave: '',
       mensajeSnackbar: '',

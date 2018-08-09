@@ -23,6 +23,7 @@ import AuthAdmin from './authAdmin'
 import MatrizRiesgoMenu from '@/components/MatrizRiesgo/MatrizRiesgoMenu'
 import MatrizRiesgoVer from '@/components/MatrizRiesgo/MatrizRiesgoVer'
 import MatrizRiesgoAgregar from '@/components/MatrizRiesgo/MatrizRiesgoAgregar'
+import administracionRiesgos from '@/components/AdministracionRiesgos/administracionRiesgos'
 
 Vue.use(Router)
 
@@ -126,6 +127,11 @@ export default new Router({
       path: '/matrizRiesgo/agregar',
       name: 'MatrizRiesgoAgregar',
       component: MatrizRiesgoAgregar,
+      beforeEnter: AuthAdmin
+    }, {
+      path: '/riesgos',
+      name: 'AdministracionRiesgos',
+      component: administracionRiesgos,
       beforeEnter: AuthAdmin
     }
   ]

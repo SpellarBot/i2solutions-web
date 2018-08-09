@@ -1066,5 +1066,43 @@ export default {
           return reject(err)
         })
     })
+  },
+  getRiesgos ({commit}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/riesgos')
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setRiesgos', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  crearRiesgo ({commit}, {clasificacion, descripcion}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.post('/api/web/riesgos', {clasificacion, descripcion})
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('done')
+            commit('setRiesgoCreado', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyRiesgoCreado ({commit}) {
+    commit('setRiesgoCreado', null)
   }
 }
