@@ -69,7 +69,7 @@ export default {
       descripcion: '',
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
       }
     }
   },

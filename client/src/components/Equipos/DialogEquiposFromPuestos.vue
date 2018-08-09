@@ -219,9 +219,9 @@ export default {
       eliminarDialogEquipo: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
-        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=150) ) || 'Debe ser un número y menor o igual a 150',
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v) <= 150)) || 'Debe ser un número y menor o igual a 150',
         min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
-        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v)>=1) ) || 'Debe ser un número mayor o igual a 1',
+        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v) >= 1)) || 'Debe ser un número mayor o igual a 1',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       },
       indice: -1

@@ -108,7 +108,7 @@ export default {
       let descripcion = this.$data.newDescripcion
       let puestoId = this.puestoId
       let areaId = this.areaId
-      console.log(this.editModes)
+      console.log(this.puestoId)
       this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
         .then((resp) => {
           if (this.editModes === 0) {

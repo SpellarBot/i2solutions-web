@@ -86,7 +86,7 @@ export default {
       instanciasPuesto: [],
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
       },
       area: {
         nombre: '',
@@ -163,7 +163,7 @@ export default {
       let descripcionLugar = this.area.descripcion
       let establecimientosId = Number(this.area.establecimientoId)
       return new Promise((resolve, reject) => {
-            Vue.http.post('/api/web/areas', {actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId})
+        Vue.http.post('/api/web/areas', {actividad, nombre, metrosCuadrados, descripcionLugar, establecimientosId})
           .then(async (resp) => {
             if (resp.body.estado) {
               const startPuestos = async () => {

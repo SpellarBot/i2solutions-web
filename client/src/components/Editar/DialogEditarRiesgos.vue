@@ -84,9 +84,9 @@ export default {
       snackbar: false,
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
-        max: v => (!Number.isNaN(parseInt(v)) && (Number(v)<=100) ) || 'Debe ser un número y menor o igual a 100',
+        max: v => (!Number.isNaN(parseInt(v)) && (Number(v) <= 100)) || 'Debe ser un número y menor o igual a 100',
         min: (v) => v.length >= 2 || 'Mímimo se requieres 2 letras',
-        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v)>=0) ) || 'Debe ser un número mayor o igual a 0',
+        maxCant: v => (!Number.isNaN(parseInt(v)) && (Number(v) >= 0)) || 'Debe ser un número mayor o igual a 0',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
     }

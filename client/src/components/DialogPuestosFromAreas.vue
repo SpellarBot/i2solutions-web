@@ -41,7 +41,7 @@
     <v-dialog v-model="showPuesto" width="550px" @keydown.esc="showPuesto=false">
         <v-card>
           <v-card-title>
-            <h3>Agregar puesto</h3>          
+            <h3>Agregar puesto</h3>
           </v-card-title>
           <agregarPuesto
               :index="1"
@@ -122,22 +122,22 @@ export default {
       this.valid = true
     },
     agregar () {
-      //En caso de que no tenga problemas al crear esto.
+      // En caso de que no tenga problemas al crear esto.
       if (this.$refs.puesto.verify()) {
         this.loading = true
         return new Promise((resolve, reject) => {
           this.$refs.puesto.crear(this.areaId)
-          .then((resp) => {
-            this.loading = false
-            this.showMessage = true;            
-            return resolve()
-          })
-          .catch((err) => {
-            this.loading = false
-            this.message.title = '¡oh no!'
-            this.message.text = 'Algo ha salido mal'
-            return reject()
-          })
+            .then((resp) => {
+              this.loading = false
+              this.showMessage = true
+              return resolve()
+            })
+            .catch((err) => {
+              this.loading = false
+              this.message.title = '¡oh no!'
+              this.message.text = 'Algo ha salido mal'
+              return reject()
+            })
         })
       }
     },
