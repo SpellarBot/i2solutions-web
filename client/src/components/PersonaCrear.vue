@@ -359,6 +359,22 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+    <v-dialog v-model="loading" persistent max-width="700px">
+      <v-card>
+        <v-card-text>Verificando sus datos...</v-card-text>
+        <div class="container">
+          <svg class="bag" height="100" width="100">
+            <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
+            </circle>
+          </svg>
+          <svg class="over" height="100" width="100">
+            <circle  cx="50" cy="50" r="40" stroke="#2196f3" stroke-width="3" fill="none" >
+              <animate attributeType="CSS" attributeName="stroke-dasharray" from="1,254" to="247,56" dur="5s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </div>
+      </v-card>
+    </v-dialog>
   </div>
 </main>
 </template>
@@ -366,6 +382,7 @@
 <script>
 import router from '../router'
 import MyModule from './MyModule.js'
+import Vue from 'vue'
 // import { throws } from 'assert'
 export default {
   data () {
@@ -375,6 +392,9 @@ export default {
       valid2: false,
       valid3: false,
       valid4: false,
+      loading: false,
+      usuarioExiste: false,
+      duplicateMessage: 'Los siguientes campos ya existen: ',
       nombre: '',
       usuario: '',
       apellido: '',
@@ -487,19 +507,30 @@ export default {
           })
       }
     },
-    verificarUserMailCedula(user, mail, cedula) {      
+    verificarUserMailCedula(user, mail, cedula) {    
       return new Promise((resolve, reject) => {
         let url = '/api/web/personas/buscar/existenciaDe?cedula=' + cedula + '&correo=' + mail + '&usuario='+user
         Vue.http.get(url)
           .then((resp) => {
-            console.log("asdsadsaasds")
-            console.log(url)
+            console.log(resp.body.datos)
             if (resp.body.estado) {
-              //si todos son falsos, significa que no existe el usuario ni mail ni correo... lo cual es bueno!
-              if (!resp.body.datos.cedula && !resp.body.datos.usuario && !resp.body.datos.correo) {
-                alert("yei")
-                return true
+              //Quiere decir que existe este dato ya en la bd
+              if (resp.body.datos.cedula || resp.body.datos.usuario || resp.body.datos.correo) {
+                this.usuarioExiste = true
+                if (resp.body.datos.cedula) {
+                  this.duplicateMessage = this.duplicateMessage + "cedula "
+                }
+                if (resp.body.datos.usuario) {
+                  this.duplicateMessage = this.duplicateMessage + "usuario "
+                }
+                if (resp.body.datos.correo) {
+                  this.duplicateMessage = this.duplicateMessage + "correo "
+                }
               }
+              else {
+                this.usuarioExiste = false
+              }
+              resolve()
             } else {
               this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
@@ -509,29 +540,42 @@ export default {
             return reject(err)
           })
       })
-      return false
     },
     continuar () {
       let cedula = this.$data.cedula
-      if (!this.validador_ruc_y_cedula(cedula) && !this.verificarUserMailCedula(this.usuario,this.correo,this.cedula)) {
-      } else {
-        if (this.$store.getters.usuario.rol === 'admin-empresa') {
-          this.establecimientos = this.$store.getters.establecimientos
-          this.stepper = 2
-        } else {
-          this.$store.dispatch('getEmpresas')
-            .then((resp) => {
-              console.log('Done')
-              this.empresas = this.$store.getters.empresas
-              this.stepper = 2
-            })
-            .catch((err) => {
-              this.color = 'error'
-              this.snackbar = true
-              this.mensajeSnackbar = err
-            })
+      let usuario = this.$data.usuario
+      let correo = this.$data.correo
+      this.loading = true
+      return new Promise(async (resolve,reject) => {
+        await this.verificarUserMailCedula(usuario,correo,cedula)
+        return resolve()
+      }).then(async (resp) => {
+        this.loading = false
+        if (!this.validador_ruc_y_cedula(cedula) || this.usuarioExiste) {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = this.duplicateMessage
+          this.duplicateMessage = 'Los siguientes campos ya existen: ' 
+        } 
+        else {
+          if (this.$store.getters.usuario.rol === 'admin-empresa') {
+            this.establecimientos = this.$store.getters.establecimientos
+            this.stepper = 2
+          } else {
+              this.$store.dispatch('getEmpresas')
+              .then((resp) => {
+                console.log('Done')
+                this.empresas = this.$store.getters.empresas
+                this.stepper = 2
+              })
+              .catch((err) => {
+                this.color = 'error'
+                this.snackbar = true
+                this.mensajeSnackbar = err
+              })
+            }
         }
-      }
+      })
     },
     continuar1 () {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
