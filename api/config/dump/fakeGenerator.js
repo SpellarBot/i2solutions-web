@@ -272,13 +272,9 @@ function crearPersonasPuestos ({ personasId, puestosId, db }) {
 function crearRiesgos ({ puestosId, db }) {
   return new Promise((resolve) => {
     let riesgo = {
-      tipoRiesgo: tiposRiesgos[ri(0, tiposRiesgos.length - 1)],
-      personasExpuestas: ri(0, 5),
-      valoracion: faker.lorem.words(),
-      valoracionLiteral: faker.lorem.sentence(),
-      fecha: `${faker.date.past()}`,
-      porcentajeRiesgo: ri(0, 99),
-      puestosId
+      clasificacion: faker.lorem.words(),
+      descripcion: faker.lorem.sentence(),
+      fecha: `${faker.date.past()}`
     }
     resolve(db.riesgos.Crear(riesgo))
   })
