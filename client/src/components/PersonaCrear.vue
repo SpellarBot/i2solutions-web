@@ -476,9 +476,33 @@ export default {
           })
       }
     },
+    verificarUserMailCedula(user, mail, cedula) {      
+      return new Promise((resolve, reject) => {
+        let url = '/api/web/personas/buscar/existenciaDe?cedula=' + cedula + '&correo=' + mail + '&usuario='+user
+        Vue.http.get(url)
+          .then((resp) => {
+            console.log("asdsadsaasds")
+            console.log(url)
+            if (resp.body.estado) {
+              //si todos son falsos, significa que no existe el usuario ni mail ni correo... lo cual es bueno!
+              if (!resp.body.datos.cedula && !resp.body.datos.usuario && !resp.body.datos.correo) {
+                alert("yei")
+                return true
+              }
+            } else {
+              this.$store.commit('setError', resp.body.datos)
+              return reject(resp.body.datos)
+            }
+          }).catch((err) => {
+            this.$store.commit('setError', err)
+            return reject(err)
+          })
+      })
+      return false
+    },
     continuar () {
       let cedula = this.$data.cedula
-      if (!this.validador_ruc_y_cedula(cedula)) {
+      if (!this.validador_ruc_y_cedula(cedula) && !this.verificarUserMailCedula(this.usuario,this.correo,this.cedula)) {
       } else {
         if (this.$store.getters.usuario.rol === 'admin-empresa') {
           this.establecimientos = this.$store.getters.establecimientos
@@ -512,7 +536,7 @@ export default {
             this.mensajeSnackbar = err
           })
       } else {
-        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa.id)
+        this.$store.dispatch('getEmpresasstablecimientosFront', this.newEmpresa.id)
           .then((resp) => {
             console.log('Done')
             this.establecimientos = this.$store.getters.establecimientos
