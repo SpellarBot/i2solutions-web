@@ -77,7 +77,8 @@ module.exports = ({ responses, db }) => {
               'CRITERIOS PARA ESTABLECER CONTROLES',
               '',
               '',
-              'MEDIDAS DE INTERVENCIÓN',
+              'MEDIDAS DE CONTROL A IMPLEMENTAR',
+              '',
               ''
             ])
             worksheet.addRow([
@@ -100,8 +101,9 @@ module.exports = ({ responses, db }) => {
               'N0 DE EXPUESTOS',
               'PEOR CONSECUENCIA',
               'EXISTENCIA DE REQUISITOS LEGALES ASOCIADOS',
-              'ELIMINACIÓN',
-              'SUSTITUCIÓN'
+              'FUENTE',
+              'MEDIO',
+              'INDIVIDUO'
             ])
 
             let titulos = {
@@ -111,7 +113,7 @@ module.exports = ({ responses, db }) => {
               bold: true
             }
 
-            let celdas = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1']
+            let celdas = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1', 'V1']
             let fill = { type: 'pattern', pattern: 'darkTrellis', fgColor: { argb: '99cc00' }, bgColor: { argb: '99cc00' } }
             let fill2 = { type: 'pattern', pattern: 'darkTrellis', fgColor: { argb: 'FF9900' }, bgColor: { argb: 'FF9900' } }
             worksheet.mergeCells('A1:A2')
@@ -122,7 +124,7 @@ module.exports = ({ responses, db }) => {
             worksheet.mergeCells('F1', 'H1')
             worksheet.mergeCells('I1', 'O1')
             worksheet.mergeCells('Q1', 'S1')
-            worksheet.mergeCells('T1', 'U1')
+            worksheet.mergeCells('T1', 'V1')
             worksheet.getRow(1).height = 100
             worksheet.getRow(2).height = 100
             worksheet.getRow(1).border = {
@@ -147,7 +149,7 @@ module.exports = ({ responses, db }) => {
               // worksheet.getCell(celda).alignment = { wrapText: true }
             }
 
-            for (let celda of ['F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1']) {
+            for (let celda of ['F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1', 'V1']) {
               worksheet.getCell(celda).font = titulos
               // worksheet.getCell(celda).alignment = aligin
               worksheet.getCell(celda).fill = fill2
@@ -155,7 +157,7 @@ module.exports = ({ responses, db }) => {
               // worksheet.getCell(celda).alignment = { wrapText: true }
             }
 
-            for (let celda of ['F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2', 'O2', 'P2', 'Q2', 'R2', 'S2', 'T2', 'U2']) {
+            for (let celda of ['F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2', 'O2', 'P2', 'Q2', 'R2', 'S2', 'T2', 'U2', 'V2']) {
               worksheet.getCell(celda).font = titulos
               worksheet.getCell(celda).size = 16
               // worksheet.getCell(celda).alignment = aligin
@@ -171,9 +173,9 @@ module.exports = ({ responses, db }) => {
 
             for (let columnaMatriz of matrizDatos) {
               worksheet.addRow([
-                columnaMatriz['areaId'],
-                columnaMatriz['puestoId'],
-                columnaMatriz['puestoId'],
+                columnaMatriz['areaNombre'],
+                columnaMatriz['puestoNombre'],
+                columnaMatriz['actividad'],
                 columnaMatriz['riesgo'],
                 columnaMatriz['riesgoDescripcion'],
                 columnaMatriz['controlesExistentesFuente'],
@@ -190,8 +192,9 @@ module.exports = ({ responses, db }) => {
                 columnaMatriz['numeroExpuestos'],
                 columnaMatriz['peorConsecuencia'],
                 columnaMatriz['requisitoLegal'] ? 'SI' : 'NO',
-                'N.A.',
-                'N.A.'
+                columnaMatriz['controlesFuente'],
+                columnaMatriz['controlesMedio'],
+                columnaMatriz['controlesIndividuo']
                 // '22': 'NO LO SE',
                 // '23': 'NO LO SE',
                 // '24': 'NO LO SE',

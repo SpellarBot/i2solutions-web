@@ -6,7 +6,7 @@ const validar = require('../../utils').schemaFormato
 const utils = require('../../utils')
 module.exports = (app) => {
   // identificador: API_1
-  // crear un control
+  // crear una matriz
   app.route('/matrices')
     .post((req, res) => {
       let datos = JSON.stringify(req.body.datos)
@@ -32,7 +32,6 @@ module.exports = (app) => {
   // matrices por establecimiento
   app.route('/matrices/establecimientos/:establecimientosId')
     .get((req, res) => {
-      console.log(req.params)
       let params = utils.jsonToInt(req.params, ['establecimientosId'])
       let { PARAMS } = schema.API_2_SCHEMA
       let [err, mensaje] = validar(PARAMS, params)

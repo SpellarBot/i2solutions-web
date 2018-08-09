@@ -12,7 +12,7 @@ const dump = rfr('api/config/dump')
 const utils = rfr('api/utils')
 
 // const SCHEMA = require('../API_SCHEMA')
-// const API = require('./API_DOCS')
+const API = require('./API_DOCS')
 // const EQUI = require('./API_EQUI')
 const models = db.db
 let docs = []
@@ -48,15 +48,14 @@ describe('CONTROLES', () => {
   after('Desconectar la base de datos', function() {
     clock.restore()
     // generatorDocs.EQUI({ equivalencias, nombre: 'Equipos' })
-    // generatorDocs.generateAPI({ docs, archivo: 'api.equipos.md', nombre: 'Equipos' })
+    generatorDocs.generateAPI({ docs, archivo: 'api.controles.md', nombre: 'Controles' })
   })
   afterEach('Limpiar la base de datos', async () => {
     await db.Limpiar()
   })
 
   describe('API_1 CREAR', () => {
-    // const { API_1 } = API
-    // let { API_1_EQUI } = EQUI
+    const { API_1 } = API
     let codigoApi = 'API_1'
     let puestosId = -1, riesgosId = -1
     beforeEach(async () => {
@@ -73,21 +72,14 @@ describe('CONTROLES', () => {
       let { descripcion, tipo, estaImplementado } = control
       let req = { descripcion, tipo, estaImplementado, puestosId, riesgosId }
       let res = await request(app).post(`/api/web/controles`).send(req)
-      // expect(res.body.estado).to.equal(true)
-      // expect(res.body.codigoEstado).to.equal(200)
-      // let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
-      // expect(equipoGuardado).to.not.equal(null)
-      // let relacionGuardada = await models.equiposPuestos.ObtenerPorPuestos({ id: puestosId })
-      // expect(relacionGuardada.length).to.equal(1)
-      // generatorDocs.OK({ docs, doc: API_1, res })
-      // generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_1, res, req })
     })
   })
 
   describe('API_2 CREAR BULK', () => {
-    // const { API_1 } = API
-    // let { API_1_EQUI } = EQUI
-    // let codigoApi = 'API_1'
+    const { API_2 } = API
     let puestosId = -1, riesgosId = -1
     beforeEach(async () => {
       let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
@@ -104,15 +96,9 @@ describe('CONTROLES', () => {
       let req1 = { ...control, puestosId, riesgosId }
       let req2 = { ...control2, puestosId, riesgosId }
       let res = await request(app).post(`/api/web/controles/bulk`).send([req1,req2])
-      console.log(res.body)
-      // expect(res.body.estado).to.equal(true)
-      // expect(res.body.codigoEstado).to.equal(200)
-      // let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
-      // expect(equipoGuardado).to.not.equal(null)
-      // let relacionGuardada = await models.equiposPuestos.ObtenerPorPuestos({ id: puestosId })
-      // expect(relacionGuardada.length).to.equal(1)
-      // generatorDocs.OK({ docs, doc: API_1, res })
-      // generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      generatorDocs.OK({ docs, doc: API_2, res })
     })
   })
 })
