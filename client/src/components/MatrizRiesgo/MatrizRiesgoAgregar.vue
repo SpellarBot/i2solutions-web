@@ -422,18 +422,7 @@ export default {
         establecimientosId: null,
         datos: null
       },
-      riesgos: [
-        {
-          clasificacion: 'Biomecánico',
-          descripcion: 'Postura prolongada',
-          id: 1
-        },
-        {
-          clasificacion: 'Químico',
-          descripcion: 'Exposición a gases y vapores',
-          id: 2
-        }
-      ],
+      riesgos: [],
       controlesExistentes: [
         {
           riesgoId: 1,
@@ -556,6 +545,7 @@ export default {
     changedValueEstablecimiento: function (value) {
       this.validaciones.length = 0
       this.obtenerAreasPuestos(value)
+      this.obtenerRiesgos()
     },
     obtenerAreasPuestos (value) {
       this.$store.dispatch('getPuestosFromEstablecimiento', value.id)
@@ -573,6 +563,17 @@ export default {
           }
           console.log(this.validaciones)
           this.establecimientoValid = true
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    obtenerRiesgos () {
+      this.$store.dispatch('getRiesgos')
+        .then((resp) => {
+          this.riesgos = this.$store.getters.riesgos
         })
         .catch((err) => {
           this.color = 'error'

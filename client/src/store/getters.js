@@ -91,5 +91,11 @@ export default {
   },
   equipoCreado (state) {
     return state.equipoCreado
+  },
+  riesgos (state) {
+    return state.riesgos
+  },
+  riesgoCreado (state) {
+    return state.riesgoCreado
   }
 }

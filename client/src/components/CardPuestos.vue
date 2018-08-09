@@ -58,12 +58,6 @@
     <div v-if="puestos.cantidadEquipos===0">
       <span  :class="'equiposPuesto' + puestos.id"> Equipos: {{ puestos.cantidadEquipos }}</span>
     </div>
-    <div v-if="puestos.cantidadRiesgos>0">
-      <span :class="'riesgosPuesto' + puestos.id" class="link" v-on:click="visualizarRiesgos(puestos.id,puestos.nombre)"> Riesgos: {{ puestos.cantidadRiesgos }}</span>
-    </div>
-    <div v-if="puestos.cantidadRiesgos===0">
-      <span :class="'riesgosPuesto' + puestos.id"> Riesgos: {{ puestos.cantidadRiesgos }}</span>
-    </div>
     </v-card>
     <footer>
     <DialogPersonasFromPuestos

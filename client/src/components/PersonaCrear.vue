@@ -468,7 +468,12 @@ export default {
       let clave = this.$data.clave
       let telefono = this.$data.telefono
       let fechaNacimiento = this.$data.date
-      let usuario = this.$data.usuario
+      let usuario = ''
+      if (this.$data.usuario === '') {
+        usuario = 'dumbUser'
+      } else {
+        usuario = this.$data.usuario
+      }
       let perfilOcupacional = this.$data.perfilOcupacional
       let puestosId = this.$data.newPuesto.id
       let rol = this.$data.rol
