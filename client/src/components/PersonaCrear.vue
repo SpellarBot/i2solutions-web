@@ -361,7 +361,7 @@
     </v-snackbar>
     <v-dialog v-model="loading" persistent max-width="700px">
       <v-card>
-        <v-card-text>Verificando sus datos...</v-card-text>
+        <v-card-text>{{loadText}}</v-card-text>
         <div class="container">
           <svg class="bag" height="100" width="100">
             <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
@@ -395,6 +395,7 @@ export default {
       loading: false,
       usuarioExiste: false,
       duplicateMessage: 'Los siguientes campos ya existen: ',
+      loadText: 'verificando...',
       nombre: '',
       usuario: '',
       apellido: '',
@@ -490,16 +491,19 @@ export default {
       let fechaNacimiento = this.$data.date
       let usuario = ''
       if (this.$data.usuario === '') {
-        usuario = 'dumbUser'
+        usuario = this.$data.cedula
       } else {
         usuario = this.$data.usuario
       }
       let perfilOcupacional = this.$data.perfilOcupacional
       let puestosId = this.$data.newPuesto.id
       let rol = this.$data.rol
+      this.loadText = 'agregando a la persona...'
+      this.loading = true
       if (this.validador_ruc_y_cedula(cedula)) {
         this.$store.dispatch('crearPersona', { nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol, puestosId })
           .then((resp) => {
+            this.loading = false
             this.snackbar = true
             this.mensajeSnackbar = 'Persona agregada exitosamente. Regresando a la página principal'
             this.color = 'success'
@@ -512,7 +516,10 @@ export default {
           })
       }
     },
-    verificarUserMailCedula (user, mail, cedula) {
+    verificarUserMailCedula (user, mail, cedula, esEmpleado) {
+      if (esEmpleado) {
+        user = cedula
+      }
       return new Promise((resolve, reject) => {
         let url = '/api/web/personas/buscar/existenciaDe?cedula=' + cedula + '&correo=' + mail + '&usuario=' + user
         Vue.http.get(url)
@@ -520,6 +527,10 @@ export default {
             console.log(resp.body.datos)
             if (resp.body.estado) {
               // Quiere decir que existe este dato ya en la bd
+              if (esEmpleado) {
+               resp.body.datos.usuario = false 
+              }
+              console.log(esEmpleado + '<----')
               if (resp.body.datos.cedula || resp.body.datos.usuario || resp.body.datos.correo) {
                 this.usuarioExiste = true
                 if (resp.body.datos.cedula) {
@@ -534,7 +545,7 @@ export default {
               } else {
                 this.usuarioExiste = false
               }
-              resolve()
+              return resolve()
             } else {
               this.$store.commit('setError', resp.body.datos)
               return reject(resp.body.datos)
@@ -547,16 +558,13 @@ export default {
     },
     continuar () {
       let cedula = this.$data.cedula
-      let usuario = ''
-      if (this.$data.usuario === '') {
-        usuario = 'dumbUser'
-      } else {
-        usuario = this.$data.usuario
-      }
+      let usuario = this.$data.usuario
+      let isEmployee = (this.rol === 'empleado')
       let correo = this.$data.correo
+      this.loadText = 'verificando sus datos...'
       this.loading = true
       return new Promise(async (resolve, reject) => {
-        await this.verificarUserMailCedula(usuario, correo, cedula)
+        await this.verificarUserMailCedula(usuario, correo, cedula, isEmployee)
         return resolve()
       }).then(async (resp) => {
         this.loading = false
@@ -603,7 +611,7 @@ export default {
             this.mensajeSnackbar = err
           })
       } else {
-        this.$store.dispatch('getEmpresasstablecimientosFront', this.newEmpresa.id)
+        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa.id)
           .then((resp) => {
             console.log('Done')
             this.establecimientos = this.$store.getters.establecimientos
