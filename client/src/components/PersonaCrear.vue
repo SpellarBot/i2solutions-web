@@ -547,7 +547,12 @@ export default {
     },
     continuar () {
       let cedula = this.$data.cedula
-      let usuario = this.$data.usuario
+      let usuario = ''
+      if (this.$data.usuario === '') {
+        usuario = 'dumbUser'
+      } else {
+        usuario = this.$data.usuario
+      }
       let correo = this.$data.correo
       this.loading = true
       return new Promise(async (resolve, reject) => {
@@ -560,21 +565,25 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = this.duplicateMessage
           this.duplicateMessage = 'Los siguientes campos ya existen: '
+          this.loading = false
         } else {
           if (this.$store.getters.usuario.rol === 'admin-empresa') {
             this.establecimientos = this.$store.getters.establecimientos
             this.stepper = 2
+            this.loading = false
           } else {
             this.$store.dispatch('getEmpresas')
               .then((resp) => {
                 console.log('Done')
                 this.empresas = this.$store.getters.empresas
                 this.stepper = 2
+                this.loading = false
               })
               .catch((err) => {
                 this.color = 'error'
                 this.snackbar = true
                 this.mensajeSnackbar = err
+                this.loading = false
               })
           }
         }
