@@ -72,8 +72,25 @@ module.exports = (sequelize, DataTypes) => {
         ]
       })
         .then((project) => {
-          resolve(project)
+          let limpiado = project.map((currentValue, index, array) => {
+            return {
+              descripcion: currentValue['descripcion'],
+              estaImplementado: currentValue['estaImplementado'],
+              tipo: currentValue['tipo'],
+              fechaCreacion: currentValue['fechaCreacion'],
+              fechaActualizacion: currentValue['fechaActualizacion'],
+              riesgo: {
+                clasificacion: currentValue['riesgos.clasificacion'],
+                descripcion: currentValue['riesgos.descripcion'],
+                fecha: currentValue['riesgos.fecha'],
+                fechaCreacion: currentValue['riesgos.fechaCreacion'],
+                fechaActualizacion: currentValue['riesgos.fechaActualizacion']
+              }
+            }
+          })
+          resolve(limpiado)
         }).catch((err) => {
+          console.log(err)
           return reject(err)
         })
     })
