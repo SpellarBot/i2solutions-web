@@ -94,12 +94,15 @@ __GET__ __/api/web/controles/puestos/:puestosId__
   "estado": true,
   "datos": [
     {
+      "id": 1,
       "descripcion": "zzzz",
       "estaImplementado": "0",
       "tipo": "fuente",
       "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
       "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
+      "puestosId": 1,
       "riesgo": {
+        "id": 1,
         "clasificacion": "Caida de objetos",
         "descripcion": "aa",
         "fecha": "2014-05-21 19:27:28.576 +00:00",

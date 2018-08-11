@@ -74,12 +74,15 @@ module.exports = (sequelize, DataTypes) => {
         .then((project) => {
           let limpiado = project.map((currentValue, index, array) => {
             return {
+              id: currentValue['id'],
               descripcion: currentValue['descripcion'],
               estaImplementado: currentValue['estaImplementado'],
               tipo: currentValue['tipo'],
               fechaCreacion: currentValue['fechaCreacion'],
               fechaActualizacion: currentValue['fechaActualizacion'],
+              puestosId: currentValue['puestosId'],
               riesgo: {
+                id: currentValue['riesgos.id'],
                 clasificacion: currentValue['riesgos.clasificacion'],
                 descripcion: currentValue['riesgos.descripcion'],
                 fecha: currentValue['riesgos.fecha'],
