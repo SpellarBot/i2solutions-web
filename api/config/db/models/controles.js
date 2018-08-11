@@ -64,7 +64,13 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorPuestos = function ({ id }) {
     return new Promise((resolve, reject) => {
-      this.findAll({ where: { puestosId: id }, raw: true })
+      this.findAll({
+        where: { puestosId: id },
+        raw: true,
+        include: [
+          { model: sequelize.models['riesgos'] }
+        ]
+      })
         .then((project) => {
           resolve(project)
         }).catch((err) => {

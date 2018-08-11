@@ -41,7 +41,7 @@ module.exports = {
   },
   API_5: {
     nombre: 'Implementar un control',
-    metodo: 'GET',
+    metodo: 'PUT',
     descripcion: '',
     url: '/api/web/controles/implementar/:controlesId',
     params: [

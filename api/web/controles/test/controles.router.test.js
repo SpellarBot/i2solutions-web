@@ -113,7 +113,7 @@ describe('CONTROLES', () => {
       let puestosCreada = await models.puestos.Crear({ ...puesto })
       await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
       puestosId = puestosCreada['id']
-      let riesgosCreada = await models.riesgos.Crear({ ...riesgos,  puestosId })
+      let riesgosCreada = await models.riesgos.Crear({ ...riesgo,  puestosId })
       riesgosId = riesgosCreada['id']
       await models.controles.Crear({ ...control, puestosId, riesgosId })
     })

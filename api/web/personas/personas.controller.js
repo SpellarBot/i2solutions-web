@@ -118,7 +118,7 @@ module.exports = ({ responses, db }) => {
           } else {
             let rol = datos['rol']
             let valido = rol === 'admin-empresa' | rol === 'inspector-seguridad' | rol === 'jefe-seguridad'
-            let usuario = datos['usuario']
+            // let usuario = datos['usuario']
             let enviarCorreoDevelop = valido && process.env.NODE_ENV === 'development'
             let enviarCorreoProduction = valido && process.env.NODE_ENV === 'production'
             let token = yield genCrypto()
