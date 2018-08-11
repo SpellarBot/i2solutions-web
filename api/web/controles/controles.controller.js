@@ -39,6 +39,43 @@ module.exports = ({ responses, db }) => {
           return reject(responses.ERROR_SERVIDOR)
         })
       })
+    },
+    ObtenerPorPuestos ({ id }) {
+      return new Promise((resolve, reject) => {
+        co(function * () {
+          let puestos = yield db.controles.ObtenerPorPuestos({ id })
+          resolve(responses.OK(puestos))
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
+      })
+    },
+    ObtenerPorPuestosYRiesgos ({ puestosId, riesgosId }) {
+      return new Promise((resolve, reject) => {
+        co(function * () {
+          let puestos = yield db.controles.ObtenerPorPuestosYRiesgos({ puestosId, riesgosId })
+          resolve(responses.OK(puestos))
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
+      })
+    },
+    Implementar ({ controlesId }) {
+      return new Promise((resolve, reject) => {
+        co(function * () {
+          let fueImplementado = yield db.controles.Implementar({ id: controlesId })
+          if (fueImplementado) {
+            resolve(responses.OK(true))
+          } else {
+            resolve(responses.NO_OK('No existe este control'))
+          }
+        }).catch((err) => {
+          console.error(err)
+          return reject(responses.ERROR_SERVIDOR)
+        })
+      })
     }
   }
   return Object.assign(Object.create(proto), {})

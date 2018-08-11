@@ -81,6 +81,7 @@ describe('CONTROLES', () => {
   describe('API_2 CREAR BULK', () => {
     const { API_2 } = API
     let puestosId = -1, riesgosId = -1
+
     beforeEach(async () => {
       let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
       let areasId = areaCreada['id']
@@ -99,6 +100,84 @@ describe('CONTROLES', () => {
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
       generatorDocs.OK({ docs, doc: API_2, res })
+    })
+  })
+
+  describe('API_3 POR PUESTOS', () => {
+    const { API_3 } = API
+    let puestosId = -1, riesgosId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      puestosId = puestosCreada['id']
+      let riesgosCreada = await models.riesgos.Crear({ ...riesgos,  puestosId })
+      riesgosId = riesgosCreada['id']
+      await models.controles.Crear({ ...control, puestosId, riesgosId })
+    })
+
+    it(`@ICE_API_3_01 Obtener exitoso`, async () => {
+      let controlesTodos = await models.controles.ObtenerTodos()
+      let res = await request(app).get(`/api/web/controles/puestos/${puestosId}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_3, res })
+    })
+  })
+
+  describe('API_4 POR PUESTO y RIESGO', () => {
+    const { API_4 } = API
+    let puestosId = -1, riesgosId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      puestosId = puestosCreada['id']
+      let riesgosCreada = await models.riesgos.Crear({ ...riesgos,  puestosId })
+      riesgosId = riesgosCreada['id']
+      await models.controles.Crear({ ...control, puestosId, riesgosId })
+    })
+
+    it(`@ICE_API_4_01 Obtener exitoso`, async () => {
+      let controlesTodos = await models.controles.ObtenerTodos()
+      let res = await request(app).get(`/api/web/controles/puestos/${puestosId}/riesgos/${riesgosId}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      expect(res.body.datos.length).to.equal(1)
+      generatorDocs.OK({ docs, doc: API_4, res })
+    })
+  })
+
+  describe('API_5 Modificar el estado de un control a implementado', () => {
+    const { API_5 } = API
+    let puestosId = -1, riesgosId = -1, controlId = -1
+
+    beforeEach(async () => {
+      let areaCreada = await models.areas.Crear({ ...area, establecimientosId })
+      let areasId = areaCreada['id']
+      let puestosCreada = await models.puestos.Crear({ ...puesto })
+      await models.areasPuestos.Crear({ puestosId: puestosCreada['id'], areasId: areaCreada['id'] })
+      puestosId = puestosCreada['id']
+      let riesgosCreada = await models.riesgos.Crear({ ...riesgos,  puestosId })
+      riesgosId = riesgosCreada['id']
+      let controlCreada = await models.controles.Crear({ ...control, puestosId, riesgosId })
+      controlId = controlCreada['id']
+    })
+
+    it(`@ICE_API_5_01 Exitoso`, async () => {
+      let control = await models.controles.Obtener({ id: controlId })
+      expect(control['estaImplementado']).to.equal('0')
+      let res = await request(app).put(`/api/web/controles/implementar/${controlId}`)
+      expect(res.body.estado).to.equal(true)
+      expect(res.body.codigoEstado).to.equal(200)
+      control = await models.controles.Obtener({ id: controlId })
+      expect(control['estaImplementado']).to.equal('1')
+      generatorDocs.OK({ docs, doc: API_5, res })
     })
   })
 })

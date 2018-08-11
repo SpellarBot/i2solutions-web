@@ -37,6 +37,17 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  define.Obtener = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findOne({ where: { id }, raw: true })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
   define.CrearBulk = function (ids) {
     return new Promise((resolve, reject) => {
       this.bulkCreate(ids)
@@ -46,6 +57,60 @@ module.exports = (sequelize, DataTypes) => {
         .then((datos) => {
           return resolve(datos)
         }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestos = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      this.findAll({ where: { puestosId: id }, raw: true })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerTodos = function () {
+    return new Promise((resolve, reject) => {
+      return this.findAll({
+        raw: true
+      })
+        .then((resp) => {
+          return resolve(resp)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.ObtenerPorPuestosYRiesgos = function ({ puestosId, riesgosId }) {
+    return new Promise((resolve, reject) => {
+      this.findAll({ where: { puestosId, riesgosId }, raw: true })
+        .then((project) => {
+          resolve(project)
+        }).catch((err) => {
+          return reject(err)
+        })
+    })
+  }
+
+  define.Implementar = function ({ id }) {
+    return new Promise((resolve, reject) => {
+      return this.update(
+        { estaImplementado: true },
+        { where: { id } })
+        .then((resp) => {
+          if (resp[0].toString() === '1') {
+            return resolve(true)
+          } else {
+            return resolve(false)
+          }
+        })
+        .catch((err) => {
           return reject(err)
         })
     })
