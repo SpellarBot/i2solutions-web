@@ -105,5 +105,11 @@ export default {
   },
   setRiesgoCreado (state, riesgo) {
     state.riesgoCreado = riesgo
+  },
+  setMatricesRiesgo (state, matrices) {
+    state.matricesRiesgo = matrices
+  },
+  setMatrizDescarga (state, matriz) {
+    state.matrizDescarga = matriz
   }
 }

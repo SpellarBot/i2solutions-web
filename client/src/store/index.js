@@ -45,7 +45,9 @@ export const store = new Vuex.Store({
     accidenteCreado: null,
     equipoCreado: null,
     riesgos: null,
-    riesgoCreado: null
+    riesgoCreado: null,
+    matricesRiesgo: null,
+    matrizDescarga: null
   },
   mutations,
   actions,

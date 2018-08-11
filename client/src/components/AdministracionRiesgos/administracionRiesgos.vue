@@ -162,7 +162,7 @@ export default {
   },
   methods: {
     crear () {
-      let clasificacion = this.$data.newNombre
+      let clasificacion = this.$data.newClasificacion
       let descripcion = this.$data.newDescripcion
       this.$store.dispatch('crearRiesgo', { clasificacion, descripcion })
         .then((resp) => {
