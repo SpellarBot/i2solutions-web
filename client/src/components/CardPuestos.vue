@@ -58,6 +58,9 @@
     <div v-if="puestos.cantidadEquipos===0">
       <span  :class="'equiposPuesto' + puestos.id"> Equipos: {{ puestos.cantidadEquipos }}</span>
     </div>
+    <div>
+      <span class="link" v-on:click="visualizarControles(puestos.id,puestos.nombre)">Ver Controles</span>
+    </div>
     </v-card>
     <footer>
     <DialogPersonasFromPuestos
@@ -108,7 +111,46 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
-
+    <v-layout row justify-center>
+      <v-dialog fullscreen v-model="visibleControles" @keydown.esc="salirControl" hide-overlay transition="dialog-bottom-transition">
+        <v-card>
+          <v-toolbar dark color="primary">
+            <v-btn icon dark @click="salirControl">
+              <v-icon>close</v-icon>
+            </v-btn>
+            <v-toolbar-title>Controles en {{ puestoNombreSelected }}</v-toolbar-title>
+          </v-toolbar>
+          <br>
+          <h1>Controles: </h1>
+          <v-layout align-center justify-center row>
+          <v-data-table
+      :headers="headers"
+      :items="controles"
+      rows-per-page-text="Filas por página"
+      class="elevation-1"
+      :rows-per-page-items="[10,20,30,60]"
+      >
+      <template slot="items" slot-scope="props">
+        <td class="text-xs-left">{{ props.item.descripcion }}</td>
+        <td class="text-xs-left">{{ props.item.riesgo.descripcion }}</td>
+        <td class="text-xs-left">{{ props.item.tipo }}</td>
+        <td v-if="props.item.estaImplementado==='0' || props.item.estaImplementado===false" class="text-xs-left">No implementado</td>
+        <td v-if="props.item.estaImplementado==='1' || props.item.estaImplementado===true" class="text-xs-left">Implementado</td>
+        <td class="justify-center layout px-0">
+          <v-btn
+          :disabled="!(props.item.estaImplementado==='0' || props.item.estaImplementado===false)"
+          color="primary" dark
+            small
+            @click="implementar(props.item)"
+          >Implementar
+          </v-btn>
+          </td>
+        </template>
+      </v-data-table>
+    </v-layout>
+    </v-card>
+  </v-dialog>
+    </v-layout>
     <!--Para Eliminar Puestos-->
     <v-layout row justify-center>
       <v-dialog v-model="eliminarDialogPuestos" persistent max-width="290">
@@ -119,6 +161,19 @@
             <v-spacer></v-spacer>
             <v-btn :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click = "borrarPuesto()">Sí</v-btn>
             <v-btn color="blue" flat @click.native="eliminarDialogPuestos = false">No</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+    <v-layout row justify-center>
+      <v-dialog v-model="confirmarImplementar" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Implementar</v-card-title>
+          <v-card-text>¿Está seguro que quiere implementar este Control?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click = "implementarControl()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="confirmarImplementar = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -140,6 +195,7 @@ export default {
   data () {
     return {
       visiblePersonas: false,
+      visibleControles: false,
       visibleAccidentes: false,
       visibleEdicion: false,
       visibleNovedades: false,
@@ -153,7 +209,23 @@ export default {
       puestoDescripcion: '',
       puestoId: '',
       puestoSelected: 0,
-      areaIdEdit: ''
+      areaIdEdit: '',
+      puestoNombreSelected: '',
+      controles: [],
+      controlAImplementar: null,
+      confirmarImplementar: false,
+      headers: [
+        { text: 'Descripción', value: 'descripcion', sortable: false },
+        {
+          text: 'Riesgo',
+          align: 'left',
+          sortable: false,
+          value: 'riesgo'
+        },
+        { text: 'Tipo', value: 'tipo', sortable: false },
+        { text: 'Está implementado', value: 'estaImplementado', sortable: true },
+        { text: 'Acciones', value: 'name', sortable: false }
+      ]
     }
   },
   computed: {
@@ -243,6 +315,21 @@ export default {
           this.mensajeSnackbar = err
         })
     },
+    visualizarControles (puestosId, puestosNombre) {
+      this.puestoNombreSelected = puestosNombre
+      this.$store.dispatch('getControlesPuesto', puestosId)
+        .then((resp) => {
+          this.controles = this.$store.getters.controles
+          console.log(this.controles)
+          this.visibleControles = true
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
     visualizarEditar (puesto, areaId) {
       console.log(this.editModes)
       this.puestoNombre = puesto.nombre
@@ -276,6 +363,33 @@ export default {
         .catch((err) => {
           this.color = 'error'
           console.log(err)
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
+    },
+    salirControl () {
+      this.visibleControles = false
+      this.controles.length = 0
+      console.log('sali')
+      this.controlAImplementar = null
+    },
+    implementar (control) {
+      this.controlAImplementar = control
+      console.log(this.controlAImplementar)
+      this.confirmarImplementar = true
+    },
+    implementarControl () {
+      this.$store.dispatch('implementarControl', this.controlAImplementar.id)
+        .then((resp) => {
+          this.color = 'success'
+          this.controlAImplementar.estaImplementado = true
+          this.snackbar = true
+          this.mensajeSnackbar = 'Control implementado exitosamente'
+          this.confirmarImplementar = false
+          console.log('Done')
+        })
+        .catch((err) => {
+          this.color = 'error'
           this.snackbar = true
           this.mensajeSnackbar = err
         })

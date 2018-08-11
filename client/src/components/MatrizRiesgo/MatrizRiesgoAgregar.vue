@@ -267,7 +267,7 @@
                     <span class="headline">Controles a implementar</span>
                   </v-card-title>
                   <v-card-text>
-                    <p  class="pb-2">Aquí podrá ingresar los nuevos controles a ser implementados, separándolos por puntos. Se recomienda no poner punto final al último control que ingrese.</p>
+                    <p  class="pb-2">Aquí podrá ingresar los nuevos controles a ser implementados, separándolos por puntos. Se recomienda no poner punto final al último control que ingrese. Si no quiere ingresar ningún control, ingrese "N.A." sin las comillas</p>
                     <v-form ref="form3" v-model="valid3">
                     <v-container grid-list-md>
                       <v-layout row wrap>
@@ -278,8 +278,8 @@
                             required
                             :rules="[rules.required]"
                             multi-line
-                            maxlength=150
-                            :counter=150
+                            maxlength=350
+                            :counter=350
                           ></v-text-field>
                         </v-flex>
                         <v-flex xs12 md4>
@@ -289,8 +289,8 @@
                             required
                             :rules="[rules.required]"
                             multi-line
-                            maxlength=150
-                            :counter=150
+                            maxlength=350
+                            :counter=350
                           ></v-text-field>
                         </v-flex>
                         <v-flex xs12 md4>
@@ -300,8 +300,8 @@
                             required
                             :rules="[rules.required]"
                             multi-line
-                            maxlength=150
-                            :counter=150
+                            maxlength=350
+                            :counter=350
                           ></v-text-field>
                         </v-flex>
                       </v-layout>
@@ -588,41 +588,53 @@ export default {
       this.verDialogValoracion = true
     },
     avanzar () {
-      let riesgoId = this.riesgoValoracion.id
-      // cargar los controles existentes por puesto y riesgo, es decir, uso el id puesto y el id riesgo
-      for (let i = 0; i < this.controlesExistentes.length; i++) {
-        let control = this.controlesExistentes[i]
-        if (control.tipo === 'fuente' && control.riesgoId === riesgoId) {
-          if (this.controlesElegidos.fuente === 'N.A.') {
-            this.controlesElegidos.fuente = this.controlesElegidos.fuente.replace('N.A.', control.descripcion)
-            console.log(this.controlesElegidos.fuente)
-          } else {
-            this.controlesElegidos.fuente += '. ' + control.descripcion
+      this.obtenerControlesExistentes()
+    },
+    obtenerControlesExistentes () {
+      let riesgosId = this.riesgoValoracion.id
+      let puestosId = this.puestoValoracion.id
+      this.$store.dispatch('getControlesPuestoRiesgo', { puestosId, riesgosId })
+        .then((resp) => {
+          for (let i = 0; i < this.$store.getters.controles.length; i++) {
+            let control = this.$store.getters.controles[i]
+            if (control.tipo === 'fuente' && control.estaImplementado === '1') {
+              if (this.controlesElegidos.fuente === 'N.A.') {
+                this.controlesElegidos.fuente = this.controlesElegidos.fuente.replace('N.A.', control.descripcion)
+                console.log(this.controlesElegidos.fuente)
+              } else {
+                this.controlesElegidos.fuente += '. ' + control.descripcion
+              }
+            }
+            if (control.tipo === 'medio' && control.estaImplementado === '1') {
+              if (this.controlesElegidos.medio === 'N.A.') {
+                this.controlesElegidos.medio = this.controlesElegidos.medio.replace('N.A.', control.descripcion)
+                console.log(this.controlesElegidos.medio)
+              } else {
+                this.controlesElegidos.medio += '. ' + control.descripcion
+              }
+            }
+            if (control.tipo === 'individuo' && control.estaImplementado === '1') {
+              if (this.controlesElegidos.individuo === 'N.A.') {
+                this.controlesElegidos.individuo = this.controlesElegidos.individuo.replace('N.A.', control.descripcion)
+                console.log(this.controlesElegidos.individuo)
+              } else {
+                this.controlesElegidos.individuo += '. ' + control.descripcion
+              }
+            }
           }
-        }
-        if (control.tipo === 'medio' && control.riesgoId === riesgoId) {
-          if (this.controlesElegidos.medio === 'N.A.') {
-            this.controlesElegidos.medio = this.controlesElegidos.medio.replace('N.A.', control.descripcion)
-            console.log(this.controlesElegidos.medio)
-          } else {
-            this.controlesElegidos.medio += '. ' + control.descripcion
-          }
-        }
-        if (control.tipo === 'individuo' && control.riesgoId === riesgoId) {
-          if (this.controlesElegidos.individuo === 'N.A.') {
-            this.controlesElegidos.individuo = this.controlesElegidos.individuo.replace('N.A.', control.descripcion)
-            console.log(this.controlesElegidos.individuo)
-          } else {
-            this.controlesElegidos.individuo += '. ' + control.descripcion
-          }
-        }
-      }
-      this.stepper = 2
+          this.stepper = 2
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = 'No se pudieron cargar los controles existentes'
+        })
     },
     regresar () {
       this.controlesElegidos.fuente = 'N.A.'
       this.controlesElegidos.medio = 'N.A.'
       this.controlesElegidos.individuo = 'N.A.'
+      this.$store.dispatch('emptyControles')
       this.stepper = 1
     },
     avanzar1 () {
@@ -729,8 +741,8 @@ export default {
     },
     crearValoracion () {
       let areaNombre = this.areaValoracion.nombre
-      let puestoId = this.puestoValoracion.id
-      let riesgoId = this.riesgoValoracion.id
+      let puestosId = this.puestoValoracion.id
+      let riesgosId = this.riesgoValoracion.id
       let puestoNombre = this.puestoValoracion.nombre
       let actividad = this.actividad
       let riesgo = this.riesgoValoracion.descripcion
@@ -755,7 +767,7 @@ export default {
       let valoracion = {
         areaNombre,
         puestoNombre,
-        puestoId,
+        puestosId,
         actividad,
         riesgo,
         riesgoDescripcion,
@@ -779,47 +791,53 @@ export default {
       }
       this.valoraciones.push(valoracion)
       console.log(this.valoraciones)
-      let listaControlesFuente = controlesFuente.split('. ')
-      for (let i = 0; i < listaControlesFuente.length; i++) {
-        let descripcion = listaControlesFuente[i]
-        let estaImplementado = false
-        let tipo = 'fuente'
-        let control = {
-          puestoId,
-          riesgoId,
-          descripcion,
-          tipo,
-          estaImplementado
+      if (controlesFuente !== 'N.A.') {
+        let listaControlesFuente = controlesFuente.split('. ')
+        for (let i = 0; i < listaControlesFuente.length; i++) {
+          let descripcion = listaControlesFuente[i]
+          let estaImplementado = false
+          let tipo = 'fuente'
+          let control = {
+            puestosId,
+            riesgosId,
+            descripcion,
+            tipo,
+            estaImplementado
+          }
+          this.controles.push(control)
         }
-        this.controles.push(control)
       }
-      let listaControlesMedio = controlesMedio.split('. ')
-      for (let i = 0; i < listaControlesMedio.length; i++) {
-        let descripcion = listaControlesMedio[i]
-        let estaImplementado = false
-        let tipo = 'medio'
-        let control = {
-          puestoId,
-          riesgoId,
-          descripcion,
-          tipo,
-          estaImplementado
+      if (controlesMedio !== 'N.A.') {
+        let listaControlesMedio = controlesMedio.split('. ')
+        for (let i = 0; i < listaControlesMedio.length; i++) {
+          let descripcion = listaControlesMedio[i]
+          let estaImplementado = false
+          let tipo = 'medio'
+          let control = {
+            puestosId,
+            riesgosId,
+            descripcion,
+            tipo,
+            estaImplementado
+          }
+          this.controles.push(control)
         }
-        this.controles.push(control)
       }
-      let listaControlesIndividuo = controlesIndividuo.split('. ')
-      for (let i = 0; i < listaControlesIndividuo.length; i++) {
-        let descripcion = listaControlesIndividuo[i]
-        let estaImplementado = false
-        let tipo = 'individuo'
-        let control = {
-          puestoId,
-          riesgoId,
-          descripcion,
-          tipo,
-          estaImplementado
+      if (controlesIndividuo !== 'N.A.') {
+        let listaControlesIndividuo = controlesIndividuo.split('. ')
+        for (let i = 0; i < listaControlesIndividuo.length; i++) {
+          let descripcion = listaControlesIndividuo[i]
+          let estaImplementado = false
+          let tipo = 'individuo'
+          let control = {
+            puestosId,
+            riesgosId,
+            descripcion,
+            tipo,
+            estaImplementado
+          }
+          this.controles.push(control)
         }
-        this.controles.push(control)
       }
       this.validaciones[this.puestoValoracion.uniqueId] = true
       console.log(this.controles)
@@ -863,13 +881,13 @@ export default {
         this.toServer.datos = this.valoraciones
         let establecimientosId = this.toServer.establecimientosId
         let datos = this.toServer.datos
-        let controlesData = JSON.stringify(this.controles)
-        this.$store.dispatch('crearMatrizRiesgo', { establecimientosId, datos })
+        let controles = this.controles
+        this.$store.dispatch('crearMatrizRiesgo', { establecimientosId, datos, controles })
           .then((resp) => {
             this.color = 'success'
             this.snackbar = true
-            this.mensajeSnackbar = 'Matriz creada con éxito. Regresando al menú principal.'
-            setTimeout(function () { router.push('/') }, 2000)
+            this.mensajeSnackbar = 'Matriz creada con éxito. Regresando al menú de matrices.'
+            setTimeout(function () { router.push('/matrizRiesgo') }, 2000)
           })
           .catch((err) => {
             this.color = 'error'
@@ -882,7 +900,7 @@ export default {
       this.areaValoracion = area
       this.puestoValoracion = puesto
       for (let i = 0; i < this.valoraciones.length; i++) {
-        if (this.valoraciones[i].puestoId === this.puestoValoracion.id) {
+        if (this.valoraciones[i].puestosId === this.puestoValoracion.id) {
           this.valoracionesAMostrar.push(this.valoraciones[i])
         }
       }

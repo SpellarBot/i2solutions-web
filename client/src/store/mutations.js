@@ -111,5 +111,8 @@ export default {
   },
   setMatrizDescarga (state, matriz) {
     state.matrizDescarga = matriz
+  },
+  setControles (state, controles) {
+    state.controles = controles
   }
 }

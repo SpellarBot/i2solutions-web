@@ -25,8 +25,8 @@
         <td class="text-xs-left">{{ fecha(props.item.fecha) }}</td>
         <td class="text-xs-left">{{ props.item.heridos }}</td>
         <td class="text-xs-left">{{ props.item.muertos }}</td>
-        <td v-if="props.item.atendidoEnEmpresa===0 || props.item.atendidoEnEmpresa===false" class="text-xs-left">No fue atendido en la empresa</td>
-        <td v-if="props.item.atendidoEnEmpresa===1 || props.item.atendidoEnEmpresa===true" class="text-xs-left">Fue atendido en la empresa</td>
+        <td v-if="props.item.atendidoEnEmpresa==='0' || props.item.atendidoEnEmpresa===false" class="text-xs-left">No fue atendido en la empresa</td>
+        <td v-if="props.item.atendidoEnEmpresa==='1' || props.item.atendidoEnEmpresa===true" class="text-xs-left">Fue atendido en la empresa</td>
         <td class="justify-center layout px-0">
           <v-btn flat
           icon

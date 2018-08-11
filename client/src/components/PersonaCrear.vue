@@ -528,7 +528,7 @@ export default {
             if (resp.body.estado) {
               // Quiere decir que existe este dato ya en la bd
               if (esEmpleado) {
-               resp.body.datos.usuario = false 
+                resp.body.datos.usuario = false
               }
               console.log(esEmpleado + '<----')
               if (resp.body.datos.cedula || resp.body.datos.usuario || resp.body.datos.correo) {

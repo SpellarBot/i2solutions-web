@@ -1050,18 +1050,30 @@ export default {
       })
     }
   },
-  crearMatrizRiesgo ({commit}, {establecimientosId, datos}) {
+  crearMatrizRiesgo ({commit}, {establecimientosId, datos, controles}) {
+    console.log(controles)
     return new Promise((resolve, reject) => {
       Vue.http.post('/api/web/matrices', {establecimientosId, datos})
         .then((resp) => {
-          if (resp.body.estado) {
-            console.log('done')
-            return resolve()
-          } else {
+          if (!resp.body.estado) {
             commit('setError', resp.body.datos)
             return reject(resp.body.datos)
+          } else if (controles.length > 0) {
+            Vue.http.post('/api/web/controles/bulk', controles)
+              .then((resp) => {
+                if (resp.body.estado) {
+                  console.log('yay')
+                  return resolve()
+                } else {
+                  commit('setError', resp.body.datos)
+                  return reject(resp.body.datos)
+                }
+              })
+          } else {
+            return resolve()
           }
-        }).catch((err) => {
+        })
+        .catch((err) => {
           commit('setError', err)
           return reject(err)
         })
@@ -1128,6 +1140,60 @@ export default {
         .then((resp) => {
           if (resp.body.estado) {
             commit('setMatrizDescarga', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getControlesPuestoRiesgo ({commit}, {puestosId, riesgosId}) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/controles/puestos/' + puestosId + '/riesgos/' + riesgosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setControles', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  getControlesPuesto ({commit}, puestosId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('/api/web/controles/puestos/' + puestosId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            commit('setControles', resp.body.datos)
+            return resolve()
+          } else {
+            commit('setError', resp.body.datos)
+            return reject(resp.body.datos)
+          }
+        }).catch((err) => {
+          commit('setError', err)
+          return reject(err)
+        })
+    })
+  },
+  emptyControles ({commit}) {
+    commit('setControles', null)
+  },
+  implementarControl ({commit}, controlId) {
+    return new Promise((resolve, reject) => {
+      Vue.http.put('/api/web/controles/implementar/' + controlId)
+        .then((resp) => {
+          if (resp.body.estado) {
+            console.log('DONE!')
             return resolve()
           } else {
             commit('setError', resp.body.datos)

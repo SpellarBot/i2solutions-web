@@ -103,5 +103,8 @@ export default {
   },
   matrizDescarga (state) {
     return state.matrizDescarga
+  },
+  controles (state) {
+    return state.controles
   }
 }
