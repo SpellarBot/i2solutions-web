@@ -373,7 +373,11 @@ conexion.Conectar().then(async (db) => {
       for (let i = 1; i <= ri(1, cantidadAreasMaximo); i++) {
         // areas
         let areasId = await crearAreas({ db, establecimientosId })
-        for (let i = 1; i <= ri(1, cantidadPuestosMaximo); i++) {
+        let puestosC = ri(1, cantidadPuestosMaximo)
+        if (i === 1) {
+          puestosC = 2
+        }
+        for (let i = 1; i <= puestosC; i++) {
           // puestos
           let puestosId = await crearPuestos({ db, areasId })
           let cAP = crearAreasPuestos({ areasId, db, puestosId })
