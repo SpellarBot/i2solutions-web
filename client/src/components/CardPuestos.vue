@@ -9,7 +9,6 @@
                     contain
                   >
       </v-card-media>
-
       <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <v-btn
       :class="'editarPuesto' + puestos.id"
@@ -230,8 +229,8 @@ export default {
   },
   computed: {
     puestos: {
-
       get () {
+        console.log('puestos: ',this.puesto)
         return this.puesto
       }
     },
