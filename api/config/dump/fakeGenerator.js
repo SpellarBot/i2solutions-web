@@ -3,6 +3,10 @@ const seedrandom = require('seedrandom')
 var rng = seedrandom('hello.')
 faker.seed(123)
 faker.locale = 'es'
+let fs = require('fs')
+const path = require('path')
+let obj = fs.readFileSync(path.join(__dirname, './cedulas.json'), 'utf8')
+let cedulas = obj.split(',')
 const conexion = require('../db')
 const random = (cantidad) => {
   var text = ''
@@ -35,27 +39,33 @@ let areasDatos = [
 let puestosDatos = [
   {
     'nombre': 'Oficina de gerente general',
-    'descripcion': ''
+    'descripcion': '',
+    'fotoUrl': 'http://img.directindustry.es/images_di/photo-g/puesto-trabajo-25956-2518735.jpg'
   },
   {
     'nombre': 'Oficina de jefe de TTHH',
-    'descripcion': ''
+    'descripcion': '',
+    'fotoUrl': 'https://www.axess-industries.com/plan-de-travail/plan-de-travail-long-3500-mm-p-140012-500x500.jpg'
   },
   {
     'nombre': 'Jefe de Matricería',
-    'descripcion': ''
+    'descripcion': '',
+    'fotoUrl': 'https://ingeso.co/wp-content/uploads/2017/07/ergonomia-analisis-puesto-de-trabajo.png'
   },
   {
     'nombre': 'Maticero',
-    'descripcion': ''
+    'descripcion': '',
+    'fotoUrl': 'https://ingeso.co/wp-content/uploads/2017/07/ergonomia-analisis-puesto-de-trabajo.png'
   },
   {
     'nombre': 'Jefe de Inyección',
-    'descripcion': ''
+    'descripcion': '',
+    'fotoUrl': 'https://ingeso.co/wp-content/uploads/2017/07/ergonomia-analisis-puesto-de-trabajo.png'
   },
   {
     'nombre': 'Operador de máquina de inyección',
-    'descripcion': ''
+    'descripcion': '',
+    'fotoUrl': 'https://ingeso.co/wp-content/uploads/2017/07/ergonomia-analisis-puesto-de-trabajo.png'
   }
 ]
 
@@ -134,7 +144,8 @@ async function crearPuestos ({ db }) {
   let puestosIndex = ri(0, equiposDatos.length - 1)
   let puesto = {
     nombre: puestosDatos[puestosIndex]['nombre'],
-    descripcion: puestosDatos[puestosIndex]['descripcion']
+    descripcion: puestosDatos[puestosIndex]['descripcion'],
+    fotoUrl: puestosDatos[puestosIndex]['fotoUrl']
   }
   let puestoCreada = await db.puestos.Crear(puesto)
   return puestoCreada['id']
@@ -241,12 +252,13 @@ function crearNovedadAtendida ({ puestosId, inspeccionesId, db }) {
   })
 }
 
-async function crearPersonas ({ db }) {
+var contadorPersonas = 4
+async function crearPersonas ({ db, contadorPersonas }) {
   let persona = {
-    nombres: faker.name.firstName(),
-    apellidos: faker.name.lastName(),
+    nombres: `${faker.name.firstName()} ${faker.name.firstName()}`,
+    apellidos: `${faker.name.lastName()} ${faker.name.lastName()}`,
     correo: faker.internet.email().toLowerCase(),
-    cedula: `093${random(5)}47`, // '0931823447'
+    cedula: cedulas[contadorPersonas], // '0931823447'
     clave: '1234',
     telefono: `098${random(5)}70`,
     fechaNacimiento: `${faker.date.past()}`,
@@ -288,9 +300,9 @@ conexion.Conectar().then(async (db) => {
     nombres: 'admin',
     apellidos: 'admin',
     correo: 'admin@gmail.com',
-    cedula: '0931823447',
+    cedula: cedulas[0],
     clave: 'admin',
-    telefono: '259956326',
+    telefono: `098${random(5)}70`,
     fechaNacimiento: `${faker.date.past()}`,
     perfilOcupacional: 'admin',
     usuario: 'admin',
@@ -302,9 +314,9 @@ conexion.Conectar().then(async (db) => {
     nombres: 'Joel',
     apellidos: 'Rodriguez',
     correo: 'joelerll@gmail.com',
-    cedula: '0931823447',
+    cedula: cedulas[1],
     clave: '1234',
-    telefono: '259956326',
+    telefono: `098${random(5)}70`,
     fechaNacimiento: `${faker.date.past()}`,
     perfilOcupacional: 'admin',
     usuario: 'joelerll',
@@ -316,7 +328,7 @@ conexion.Conectar().then(async (db) => {
     nombres: 'Eduardo',
     apellidos: 'Llamuca',
     correo: 'joelerll95@gmail.com',
-    cedula: '0931823447',
+    cedula: cedulas[2],
     clave: '1234',
     telefono: '259956326',
     fechaNacimiento: `${faker.date.past()}`,
@@ -332,25 +344,25 @@ conexion.Conectar().then(async (db) => {
     correo: 'xidrovo@gmail.com',
     cedula: '0931823447',
     clave: '1234',
-    telefono: '259956326',
+    telefono: `098${random(5)}70`,
     fechaNacimiento: `${faker.date.past()}`,
     perfilOcupacional: 'No hace nada',
     usuario: 'xidrovo',
     rol: 'empleado',
     creadaDump: true
   })
-  const cantidadEmpresas = 5
-  const cantidadEstablecimientosMaximo = 4
-  const cantidadAreasMaximo = 6
-  const cantidadPuestosMaximo = 4
-  const cantidadEquiposMaximo = 5
-  const cantidadCapacitacionesMaximo = 4
-  const cantidadPersonasMaximo = 20
+  const cantidadEmpresas = 2
+  const cantidadEstablecimientosMaximo = 2
+  const cantidadAreasMaximo = 2
+  const cantidadPuestosMaximo = 3
+  const cantidadEquiposMaximo = 4
+  const cantidadCapacitacionesMaximo = 2
+  const cantidadPersonasMaximo = 5
   const cantidadAccidentesMaximo = 5
   const cantidadInspeccionesMaximo = 2
   const cantidadNovedadesSinAtenderMaximo = 10
   const cantidadNovedadesAtendidasMaximo = 10
-  const cantidadRiesgosMaximo = 6
+  const cantidadRiesgosMaximo = 4
   for (let i = 1; i <= cantidadEmpresas; i++) {
     console.log(`Creada empresa ${i}`)
     // empresa
@@ -378,7 +390,8 @@ conexion.Conectar().then(async (db) => {
             let capacitacionesId = await crearCapacitaciones({ db, areasId })
             // personas
             for (let i = 1; i <= ri(1, cantidadPersonasMaximo); i++) {
-              let personasId = await crearPersonas({ db })
+              contadorPersonas = contadorPersonas + 1
+              let personasId = await crearPersonas({ db, contadorPersonas })
               if (personasId) {
                 // personasCapacitaciones
                 if (ri(1, 2) === 1) {
