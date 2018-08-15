@@ -24,6 +24,26 @@
                   maxlength=50
                   :counter=50
                 ></v-text-field>
+                <img height="150" v-if="imageUrl"/>
+                  <v-btn v-if="imageUrl"
+                  @click="emptyImage"
+                  fab
+                  dark
+                  small
+                  color="blue"
+                  >
+                  <v-icon>delete</v-icon>
+                </v-btn>
+                <v-text-field label="Logo" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+                <input
+                class="imagen"
+                  type="file"
+                  style="display: none"
+                  ref="image"
+                  accept="image/*"
+                  @change="onFilePicked"
+                >
+                <p>Nota: Si no sube un nuevo logo, se quedará con la imagen previa</p>
             </v-form>
         </v-card-text>
         <v-card-actions>
@@ -54,13 +74,16 @@ export default {
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
         RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
       }
     }
   },
-  props: ['visible', 'puestoNombre', 'puestoDescripcion', 'puestoId', 'areaId', 'editMode'],
+  props: ['visible', 'puestoNombre', 'puestoDescripcion', 'puestoId', 'areaId', 'editMode', 'puestoUrlFoto'],
   watch: {
     nombre () {
       this.newNombre = this.nombre
@@ -103,13 +126,44 @@ export default {
     }
   },
   methods: {
+    emptyImage () {
+      this.imageName = ''
+      this.imageFile = ''
+      this.imageUrl = ''
+    },
+    pickFile () {
+      this.$refs.image.click()
+    },
+    onFilePicked (e) {
+      const files = e.target.files
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = ''
+        this.imageFile = ''
+        this.imageUrl = ''
+      }
+    },
     edit () {
       let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
       let puestoId = this.puestoId
       let areaId = this.areaId
-      console.log(this.puestoId)
-      this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId })
+      let fotoUrl = this.imageUrl
+      if (this.imageUrl === '') {
+        fotoUrl = this.puestoUrlFoto
+      }
+      console.log(fotoUrl)
+      this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId, fotoUrl })
         .then((resp) => {
           if (this.editModes === 0) {
             for (let i = 0; i < this.$store.getters.areasPuestos.length; i++) {

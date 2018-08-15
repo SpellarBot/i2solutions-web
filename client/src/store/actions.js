@@ -345,10 +345,20 @@ export default {
         })
     })
   },
-  updatePuesto ({commit}, {nombre, descripcion, puestoId}) {
+  updatePuesto ({commit}, {nombre, descripcion, puestoId, fotoUrl}) {
+    let image = fotoUrl.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
     return new Promise((resolve, reject) => {
-      Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion})
+      Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
+          .then((resp) => {
+            let fotoUrl = resp.body.data.link
+            return fotoUrl
+          })
+          .then((fotoUrl) => {
+            console.log(fotoUrl)
+            return Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion, fotoUrl})            
+          })      
         .then((resp) => {
+          console.log(resp.body.estado)
           if (resp.body.estado) {
             console.log('done')
             return resolve()
