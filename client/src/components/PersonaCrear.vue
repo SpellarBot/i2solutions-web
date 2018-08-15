@@ -634,9 +634,17 @@ export default {
     },
     continuar2 () {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
-        this.puestos = this.newArea.puestos
-        console.log('Done')
-        this.stepper = 4
+        this.$store.dispatch('getPuestos', this.newArea)
+          .then((resp) => {
+            console.log('Done')
+            this.puestos = this.$store.getters.puestos
+            this.stepper = 4
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       } else {
         this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento)
           .then((resp) => {
@@ -655,9 +663,17 @@ export default {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
         this.enviar()
       } else {
-        this.puestos = this.newArea.puestos
-        console.log('Done')
-        this.stepper = 5
+        this.$store.dispatch('getPuestos', this.newArea)
+          .then((resp) => {
+            console.log('Done')
+            this.puestos = this.$store.getters.puestos
+            this.stepper = 5
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       }
     },
     validador_ruc_y_cedula (identificacion) {
