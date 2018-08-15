@@ -139,8 +139,10 @@ export default {
       this.obtenerMatricesRiesgo(value)
     },
     obtenerMatricesRiesgo (value) {
+      console.log(value)
       this.$store.dispatch('getMatricesRiesgo', value)
         .then((resp) => {
+          console.log(this.$store.getters.matricesRiesgo)
           this.matricesRiesgo = this.$store.getters.matricesRiesgo
           console.log(this.matricesRiesgo)
           this.establecimientoValid = true

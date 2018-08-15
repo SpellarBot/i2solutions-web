@@ -113,6 +113,7 @@
                         required
                         :rules="[rules.required]"
                         item-text="descripcion"
+                        return-object
                       ></v-select>
                       <v-text-field
                         v-model = "descripcionRiesgoValoracion"
@@ -587,6 +588,7 @@ export default {
     },
     agregarValoraciónInicial (area, puesto) {
       console.log(area)
+      console.log(puesto)
       this.areaValoracion = area
       this.puestoValoracion = puesto
       this.verDialogValoracion = true
@@ -848,6 +850,7 @@ export default {
       this.resetAll()
     },
     resetAll () {
+      this.verDialogValoracion = false
       this.$data.valid = false
       this.$data.valid1 = false
       this.$data.valid2 = false
@@ -865,7 +868,6 @@ export default {
       this.interpretacionNR = null
       this.aceptabilidad = null
       this.stepper = 1
-      this.verDialogValoracion = false
       this.verificar = false
     },
     crearMatriz () {
@@ -881,7 +883,7 @@ export default {
         this.snackbar = true
         this.mensajeSnackbar = 'Tiene que agregar al menos una valoración de riesgo por cada puesto.'
       } else {
-        this.toServer.establecimientosId = this.establecimientoSelected.id
+        this.toServer.establecimientosId = this.establecimientoSelected
         this.toServer.datos = this.valoraciones
         let establecimientosId = this.toServer.establecimientosId
         let datos = this.toServer.datos
