@@ -584,6 +584,7 @@ export default {
               .then((resp) => {
                 console.log('Done')
                 this.empresas = this.$store.getters.empresas
+                console.log(this.empresas)
                 this.stepper = 2
                 this.loading = false
               })

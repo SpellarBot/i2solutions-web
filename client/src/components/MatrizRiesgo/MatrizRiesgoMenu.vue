@@ -64,12 +64,12 @@ export default {
   methods: {
     crearMatriz () {
       this.verEmpresas()
-      router.push('/matrizRiesgo/agregar')
     },
     verEmpresas () {
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
           console.log('Done')
+          router.push('/matrizRiesgo/agregar')
         })
         .catch((err) => {
           this.color = 'error'
@@ -78,7 +78,19 @@ export default {
         })
     },
     verMatriz () {
-      router.push('/matrizRiesgo/ver')
+      this.verEmpresas2()
+    },
+    verEmpresas2 () {
+      this.$store.dispatch('getEmpresas')
+        .then((resp) => {
+          console.log('Done')
+          router.push('/matrizRiesgo/ver')
+        })
+        .catch((err) => {
+          this.color = 'error'
+          this.snackbar = true
+          this.mensajeSnackbar = err
+        })
     }
   }
 }
