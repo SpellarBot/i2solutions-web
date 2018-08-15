@@ -30,17 +30,9 @@
             >
             <v-flex xs12>
               <div v-if="empresa.tieneNovedades">
-                <v-btn
-                  absolute
-                  top
-                  right
-                  icon
-                  flat
-                  color="orange darken-1"
-                  class = "btn--plain rotate-25 notification"
-                  >
-                  <v-icon>priority_high</v-icon>
-                </v-btn>
+                  <div class = "btn--plain rotate-25 notification">
+                    <img src="../assets/notification.gif">
+                  </div>
               </div>
             </v-flex>
             <div>
@@ -203,8 +195,9 @@ export default {
   }
 }
 .notification {
-  margin-top: 5%;
-  margin-left: 10%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
   background-color: transparent;
 }
 .notification:hover {
