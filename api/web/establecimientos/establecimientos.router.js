@@ -98,23 +98,18 @@ module.exports = (app) => {
     })
 
   // identificador: API_5
-  // obtener establecimientos de empresa
+  // obtener establecimientos
   app.route('/principal/establecimientos/empresas/:empresasId')
     .get((req, res) => {
-      if (!req.params['empresasId']) {
-        req.params['empresasId'] = '1'
-      }
-      console.log(req.params)
       let params = utils.jsonToInt(req.params, ['empresasId'])
       let { PARAMS } = schema.API_5_SCHEMA
       let [errParams, mensajeParams] = validar(PARAMS, params)
-      errParams = false
       if (errParams) {
         let resp = responses.NO_OK({ ...mensajeParams })
         res.status(resp.codigoEstado)
         res.json(resp)
       } else {
-        let empresasId = 1
+        let { empresasId } = req.params
         Controller.VistaPrincipal({ empresasId }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
