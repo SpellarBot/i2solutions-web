@@ -98,7 +98,7 @@ module.exports = (app) => {
     })
 
   // identificador: API_5
-  // obtener establecimientos
+  // obtener establecimientos de empresa
   app.route('/principal/establecimientos/empresas/:empresasId')
     .get((req, res) => {
       if (!req.params['empresasId']) {
