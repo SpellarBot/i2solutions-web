@@ -521,6 +521,7 @@ export default {
   },
   mounted () {
     this.empresas = this.$store.getters.empresas
+    console.log(this.empresas)
   },
   methods: {
     changedValueEmpresa: function (value) {
