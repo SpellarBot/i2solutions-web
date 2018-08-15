@@ -102,7 +102,7 @@ module.exports = (app) => {
   app.route('/principal/establecimientos/empresas/:empresasId')
     .get((req, res) => {
       if (!req.params['empresasId']) {
-        req.params['empresasId'] = 1
+        req.params['empresasId'] = '1'
       }
       let params = utils.jsonToInt(req.params, ['empresasId'])
       let { PARAMS } = schema.API_5_SCHEMA
