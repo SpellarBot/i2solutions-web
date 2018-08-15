@@ -37,7 +37,7 @@
                     label="Seleccione Imagen"
                     @click='pickFile'
                     v-model='imageName'
-                    :rules="[rules.required, rules.imageMax]"
+                    :rules="[rules.required, rules.imageMax, rules.isImage]"
                     :counter=100
                     maxlength=100
                     prepend-icon='attach_file'
@@ -500,6 +500,14 @@ export default {
           } else {
             return 'Url no válida'
           }
+        },
+        isImage: v => {
+          let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
+          if (regexp.test(v)) {
+            return true;
+          }
+          else
+            return 'debe ser una imagen.'
         }
       }
     }
