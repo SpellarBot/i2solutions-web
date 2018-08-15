@@ -194,6 +194,7 @@
                 v-model = "newEmpresa"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
                 <v-select
                 v-if="$store.getters.usuario.rol === 'admin-empresa'"
@@ -202,6 +203,7 @@
                 v-model = "newEstablecimiento"
                 :rules="[rules.required]"
                 item-text="nombres"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -236,6 +238,7 @@
                 v-model = "newEstablecimiento"
                 :rules="[rules.required]"
                 item-text="nombres"
+                item-value="id"
                 ></v-select>
                 <v-select
                 v-if="$store.getters.usuario.rol === 'admin-empresa'"
@@ -244,6 +247,7 @@
                 v-model = "newArea"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -278,6 +282,7 @@
                 v-model = "newArea"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
                 <v-select
                 v-if="$store.getters.usuario.rol === 'admin-empresa'"
@@ -286,6 +291,7 @@
                 v-model = "newPuesto"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -327,6 +333,7 @@
                 v-model = "newPuesto"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -496,7 +503,7 @@ export default {
         usuario = this.$data.usuario
       }
       let perfilOcupacional = this.$data.perfilOcupacional
-      let puestosId = this.$data.newPuesto.id
+      let puestosId = this.$data.newPuesto
       let rol = this.$data.rol
       this.loadText = 'agregando a la persona...'
       this.loading = true
@@ -600,7 +607,7 @@ export default {
     },
     continuar1 () {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
-        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento.id)
+        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento)
           .then((resp) => {
             this.areas = this.$store.getters.areasPuestos
             console.log('Done')
@@ -612,7 +619,7 @@ export default {
             this.mensajeSnackbar = err
           })
       } else {
-        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa.id)
+        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa)
           .then((resp) => {
             console.log('Done')
             this.establecimientos = this.$store.getters.establecimientos
@@ -631,7 +638,7 @@ export default {
         console.log('Done')
         this.stepper = 4
       } else {
-        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento.id)
+        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento)
           .then((resp) => {
             console.log('Done')
             this.areas = this.$store.getters.areasPuestos
