@@ -24,7 +24,7 @@
                   maxlength=50
                   :counter=50
                 ></v-text-field>
-                <v-text-field label="Logo" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+                <v-text-field label="Logo" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file' :rules="[rules.isImage]"></v-text-field>
                 <input
                 class="imagen"
                   type="file"
@@ -86,7 +86,15 @@ export default {
       imageFile: '',
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
-        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres'
+        RUC: (value) => value.length <= 13 || 'Deben ser 13 caracteres',
+        isImage: v => {
+          let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
+          if (regexp.test(v)) {
+            return true;
+          }
+          else
+            return 'debe ser una imagen.'
+        }
       }
     }
   },
