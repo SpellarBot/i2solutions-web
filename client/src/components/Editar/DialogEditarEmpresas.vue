@@ -31,17 +31,8 @@
                   maxlength=50
                   :counter=50
                 ></v-text-field>
-                <img :src="imageUrl" height="150" v-if="imageUrl"/>
-                <v-btn v-if="imageUrl"
-                @click="emptyImage"
-                fab
-                dark
-                small
-                color="blue"
-                >
-                <v-icon>delete</v-icon>
-              </v-btn>
-          <v-text-field label="Logo" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+                <img height="150" v-if="imageUrl"/>
+          <v-text-field label="Logo" @click='pickFile' v-model='imageName' prepend-icon='attach_file' :rules="[rules.isImage]"></v-text-field>
           <input
           class="imagen"
             type="file"
@@ -117,6 +108,14 @@ export default {
           } else {
             return 'Url no válida'
           }
+        },
+        isImage: v => {
+          let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
+          if (regexp.test(v)) {
+            return true;
+          }
+          else
+            return 'debe ser una imagen.'
         }
       }
     }

@@ -66,8 +66,8 @@ module.exports = (app) => {
       } else {
         let { puestosId } = req.params
         let id = puestosId
-        let { nombre, descripcion } = req.body
-        Controller.Actualizar({ id, nombre, descripcion }).then((resp) => {
+        let { nombre, descripcion, fotoUrl } = req.body
+        Controller.Actualizar({ id, nombre, descripcion, fotoUrl }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
         }).catch(resp => {

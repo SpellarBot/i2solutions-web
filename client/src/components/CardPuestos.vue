@@ -9,7 +9,6 @@
                     contain
                   >
       </v-card-media>
-
       <div class="small-width"><p>{{ puestos.descripcion }}</p></div>
       <v-btn
       :class="'editarPuesto' + puestos.id"
@@ -82,6 +81,7 @@
     :puestoId="puestoId"
     :areaId="areaIdEdit"
     :editMode="editModes"
+    :puestoUrlFoto="puestoUrlFoto"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromPuestos
@@ -208,6 +208,7 @@ export default {
       puestoNombre: '',
       puestoDescripcion: '',
       puestoId: '',
+      puestoUrlFoto: '',
       puestoSelected: 0,
       areaIdEdit: '',
       puestoNombreSelected: '',
@@ -230,8 +231,8 @@ export default {
   },
   computed: {
     puestos: {
-
       get () {
+        console.log('puestos: ',this.puesto)
         return this.puesto
       }
     },
@@ -336,6 +337,7 @@ export default {
       this.puestoDescripcion = puesto.descripcion
       this.puestoId = puesto.id
       this.areaIdEdit = areaId
+      this.puestoUrlFoto = puesto.fotoUrl
       this.visibleEdicion = true
     },
     eliminarPuesto (puesto) {

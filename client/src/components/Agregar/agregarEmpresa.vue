@@ -33,14 +33,11 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg4>
-                  <img :src="imageUrl" height="150" v-if="imageUrl"/>
-                </v-flex>
-                <v-flex xs12 md4 lg4>
                   <v-text-field
                     label="Seleccione Imagen"
                     @click='pickFile'
                     v-model='imageName'
-                    :rules="[rules.required, rules.imageMax]"
+                    :rules="[rules.required, rules.imageMax, rules.isImage]"
                     :counter=100
                     maxlength=100
                     prepend-icon='attach_file'
@@ -404,7 +401,7 @@ export default {
           .then((resp) => {
             this.loading = false
             this.created = true
-          })
+           })
           .catch((err) => {
             this.$store.commit('setError', err)
             this.error.message = '¡ha ocurrido un error con la imagen!'
@@ -503,6 +500,14 @@ export default {
           } else {
             return 'Url no válida'
           }
+        },
+        isImage: v => {
+          let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
+          if (regexp.test(v)) {
+            return true;
+          }
+          else
+            return 'debe ser una imagen.'
         }
       }
     }

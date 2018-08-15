@@ -21,7 +21,7 @@
                     label="Seleccione Imagen"
                     @click='pickFile'
                     v-model='imageName'
-                    :rules="[rules.required]"
+                    :rules="[rules.required, rules.isImage]"
                     prepend-icon='attach_file'
                     maxlength=100
                     :counter=100
@@ -69,7 +69,15 @@ export default {
       descripcion: '',
       rules: {
         required: v => !!v || 'Campo requerido',
-        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras'
+        nameMin: v => (v && v.length >= 2) || 'Debe tener a menos 2 letras',
+        isImage: v => {
+          let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
+          if (regexp.test(v)) {
+            return true;
+          }
+          else
+            return 'debe ser una imagen.'
+        }
       }
     }
   },
