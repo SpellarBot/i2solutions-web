@@ -104,15 +104,17 @@ module.exports = (app) => {
       if (!req.params['empresasId']) {
         req.params['empresasId'] = '1'
       }
+      console.log(req.params)
       let params = utils.jsonToInt(req.params, ['empresasId'])
       let { PARAMS } = schema.API_5_SCHEMA
       let [errParams, mensajeParams] = validar(PARAMS, params)
+      errParams = false
       if (errParams) {
         let resp = responses.NO_OK({ ...mensajeParams })
         res.status(resp.codigoEstado)
         res.json(resp)
       } else {
-        let { empresasId } = req.params
+        let empresasId = 1
         Controller.VistaPrincipal({ empresasId }).then((resp) => {
           res.status(resp.codigoEstado)
           res.json(resp)
