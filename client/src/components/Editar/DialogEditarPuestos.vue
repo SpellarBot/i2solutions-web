@@ -24,16 +24,6 @@
                   maxlength=50
                   :counter=50
                 ></v-text-field>
-                <img height="150" v-if="imageUrl"/>
-                  <v-btn v-if="imageUrl"
-                  @click="emptyImage"
-                  fab
-                  dark
-                  small
-                  color="blue"
-                  >
-                  <v-icon>delete</v-icon>
-                </v-btn>
                 <v-text-field label="Logo" hint="Máximo 10 MB" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
                 <input
                 class="imagen"
@@ -62,6 +52,22 @@
     >
       {{mensajeSnackbar}}
     </v-snackbar>
+    <v-dialog v-model="loading" persistent max-width="700px">
+      <v-card>
+        <v-card-text>Editando puesto, por favor espere...</v-card-text>
+        <div class="container">
+          <svg class="bag" height="100" width="100">
+            <circle  cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="none">
+            </circle>
+          </svg>
+          <svg class="over" height="100" width="100">
+            <circle  cx="50" cy="50" r="40" stroke="#2196f3" stroke-width="3" fill="none" >
+              <animate attributeType="CSS" attributeName="stroke-dasharray" from="1,254" to="247,56" dur="5s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </div>
+      </v-card>
+    </v-dialog>
   </main>
 </template>
 <script>
@@ -76,6 +82,7 @@ export default {
       snackbar: false,
       imageName: '',
       imageUrl: '',
+      loading: false,
       imageFile: '',
       rules: {
         required: (value) => !!value || 'Campo Requerido.',
@@ -162,7 +169,7 @@ export default {
       if (this.imageUrl === '') {
         fotoUrl = this.puestoUrlFoto
       }
-      console.log(fotoUrl)
+      this.loading = true
       this.$store.dispatch('updatePuesto', { nombre, descripcion, puestoId, fotoUrl })
         .then((resp) => {
           if (this.editModes === 0) {
@@ -174,6 +181,7 @@ export default {
                   if (puesto.id === puestoId) {
                     puesto.nombre = nombre
                     puesto.descripcion = descripcion
+                    puesto.fotoUrl = fotoUrl
                     break
                   }
                 }
@@ -189,6 +197,7 @@ export default {
               }
             }
           }
+          this.loading = false
           this.snackbar = true
           this.mensajeSnackbar = 'Puesto de trabajo editado exitosamente.'
           this.color = 'success'
@@ -197,6 +206,7 @@ export default {
         .catch((err) => {
           this.color = 'error'
           this.snackbar = true
+          this.mensajeSnackbar = 'Algo ha ocurrido!.'
           this.mensajeSnackbar = err
         })
     }

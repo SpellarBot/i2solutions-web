@@ -354,7 +354,6 @@ export default {
             return fotoUrl
           })
           .then((fotoUrl) => {
-            console.log(fotoUrl)
             return Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion, fotoUrl})            
           })      
         .then((resp) => {
