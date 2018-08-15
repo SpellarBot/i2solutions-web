@@ -526,6 +526,7 @@ export default {
   methods: {
     changedValueEmpresa: function (value) {
       this.validaciones.length = 0
+      console.log(value)
       this.obtenerEstablecimientos(value)
     },
     obtenerEstablecimientos (value) {
