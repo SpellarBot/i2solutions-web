@@ -15,3 +15,4 @@ cypress/videos
 *.ntvs*
 *.njsproj
 *.sln
+*.archivoUnico
