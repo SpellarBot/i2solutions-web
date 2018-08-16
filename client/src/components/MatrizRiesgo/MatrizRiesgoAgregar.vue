@@ -850,6 +850,7 @@ export default {
       this.resetAll()
     },
     resetAll () {
+      this.riesgoValoracion = null
       this.verDialogValoracion = false
       this.$data.valid = false
       this.$data.valid1 = false

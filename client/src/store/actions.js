@@ -989,9 +989,9 @@ export default {
   emptyCapacitacionCreada ({commit}) {
     commit('setCapacitacionCreada', null)
   },
-  crearAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId}) {
+  crearAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId}) {
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/web/accidentes', {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId})
+      Vue.http.post('/api/web/accidentes', {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId})
         .then((resp) => {
           if (resp.body.estado) {
             commit('setAccidenteCreado', resp.body.datos)

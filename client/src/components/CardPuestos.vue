@@ -261,7 +261,7 @@ export default {
     verPersonas () {
       this.$store.dispatch('getPersonasFromPuesto', this.puestoId)
         .then((resp) => {
-          console.log('Done')
+          console.log('Hecho')
           this.visiblePersonas = true
         })
         .catch((err) => {
@@ -279,7 +279,7 @@ export default {
       console.log(this.puestoId)
       this.$store.dispatch('getAccidentesFromPuesto', this.puestoId)
         .then((resp) => {
-          console.log('Done')
+          console.log('Hecho')
           this.visibleAccidentes = true
         })
         .catch((err) => {
@@ -313,7 +313,7 @@ export default {
       this.$store.dispatch('getEquiposFromPuestos', this.puestoId)
         .then((resp) => {
           this.visibleEquipos = true
-          console.log('Done')
+          console.log('Hecho')
         })
         .catch((err) => {
           this.color = 'error'
@@ -328,7 +328,7 @@ export default {
           this.controles = this.$store.getters.controles
           console.log(this.controles)
           this.visibleControles = true
-          console.log('Done')
+          console.log('Hecho')
         })
         .catch((err) => {
           this.color = 'error'
@@ -393,7 +393,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Control implementado exitosamente'
           this.confirmarImplementar = false
-          console.log('Done')
+          console.log('Hecho')
         })
         .catch((err) => {
           this.color = 'error'
