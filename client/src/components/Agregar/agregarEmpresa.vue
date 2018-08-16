@@ -401,7 +401,7 @@ export default {
           .then((resp) => {
             this.loading = false
             this.created = true
-           })
+          })
           .catch((err) => {
             this.$store.commit('setError', err)
             this.error.message = '¡ha ocurrido un error con la imagen!'
@@ -504,10 +504,8 @@ export default {
         isImage: v => {
           let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
           if (regexp.test(v)) {
-            return true;
-          }
-          else
-            return 'debe ser una imagen.'
+            return true
+          } else { return 'debe ser una imagen.' }
         }
       }
     }

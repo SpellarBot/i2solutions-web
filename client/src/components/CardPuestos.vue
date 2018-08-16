@@ -237,7 +237,7 @@ export default {
   computed: {
     puestos: {
       get () {
-        console.log('puestos: ',this.puesto)
+        console.log('puestos: ', this.puesto)
         return this.puesto
       }
     },
