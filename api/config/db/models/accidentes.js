@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     heridos: { type: DataTypes.STRING },
     atendidoEnEmpresa: { type: DataTypes.BOOLEAN },
     muertos: { type: DataTypes.INTEGER },
-    fecha: { type: DataTypes.DATE }
+    fecha: { type: DataTypes.DATE },
+    diasPerdidos: { type: DataTypes.INTEGER }
   }, {
     name: {
       singular,
@@ -26,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     define.belongsTo(models.puestos)
   }
 
-  define.Crear = function ({ descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId }) {
+  define.Crear = function ({ descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId, diasPerdidos }) {
     let datos = arguments['0']
     return new Promise((resolve, reject) => {
       return this.create(datos)
@@ -69,12 +70,12 @@ module.exports = (sequelize, DataTypes) => {
 
   define.Actualizar = function () {
     let datos = JSON.parse(JSON.stringify(arguments['0']))
-    let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId } = datos
+    let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId, diasPerdidos } = datos
     let id = datos['id']
     delete datos['id']
     return new Promise((resolve, reject) => {
       return this.update(
-        { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId },
+        { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId, diasPerdidos },
         { where: { id } })
         .then((resp) => {
           return resolve(resp)
@@ -123,7 +124,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorEstablecimiento = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select ac.id as id, ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar, (select nombre from puestos where id = ap.puestosId) as puestosNombre from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where e.id = ${id}`
+      let query = `select ac.id as id, ac.nombre as nombre, ac.diasPerdidos as diasPerdidos, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, a.id as areasId, a.actividad as areasActividad, a.nombre as areasNombre, a.descripcionLugar as areasDescripcionLugar, (select nombre from puestos where id = ap.puestosId) as puestosNombre from establecimientos e inner join areas a on a.establecimientosId = e.id inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where e.id = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(accidentes => {
           resolve(accidentes)
@@ -135,7 +136,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorAreas = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select ac.id as id, ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre, a.id as areasId, a.nombre as areasNombre from areas a inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where a.id = ${id}`
+      let query = `select ac.id as id, ac.nombre as nombre, ac.diasPerdidos as diasPerdidos, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre, a.id as areasId, a.nombre as areasNombre from areas a inner join areasPuestos ap on ap.areasId = a.id inner join accidentes ac on ac.puestosId = ap.puestosId where a.id = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(capacitaciones => {
           resolve(capacitaciones)
@@ -147,7 +148,7 @@ module.exports = (sequelize, DataTypes) => {
 
   define.ObtenerPorPuestos = function ({ id }) {
     return new Promise((resolve, reject) => {
-      let query = `select ac.id as id, ac.nombre as nombre, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from areasPuestos ap join accidentes ac on ac.puestosId = ap.puestosId where ap.puestosId = ${id}`
+      let query = `select ac.id as id, ac.nombre as nombre, ac.diasPerdidos as diasPerdidos, ac.descripcion as descripcion, ac.heridos as heridos, ac.atendidoEnEmpresa as atendidoEnEmpresa, ac.muertos as muertos, ac.fecha as fecha, ac.puestosId as puestosId, (select nombre from puestos where id = ap.puestosId) as puestosNombre from areasPuestos ap join accidentes ac on ac.puestosId = ap.puestosId where ap.puestosId = ${id}`
       sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
         .then(capacitaciones => {
           resolve(capacitaciones)

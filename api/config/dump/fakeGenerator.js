@@ -205,6 +205,7 @@ function crearAccidentes ({ db, puestosId }) {
       atendidoEnEmpresa: false,
       muertos: ri(0, 2),
       fecha: `${faker.date.past()}`,
+      diasPerdidos: ri(0, 50),
       puestosId
     }
     resolve(db.accidentes.Crear(accidente))

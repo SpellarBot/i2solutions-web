@@ -156,7 +156,8 @@ _request o body_
   "atendidoEnEmpresa": true,
   "muertos": 0,
   "fecha": "2014-05-21T19:27:28.576Z",
-  "puestosId": 1
+  "puestosId": 1,
+  "diasPerdidos": 2
 }
 ```
 
@@ -176,6 +177,7 @@ _response_
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
+    "diasPerdidos": 2,
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
@@ -905,6 +907,11 @@ Actualizar un accidente de forma correcta
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td>5</td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -922,6 +929,7 @@ PUT /api/web/accidentes/1
 _request o body_
 ```js
 {
+  "diasPerdidos": 5,
   "descripcion": "Caida de objeto",
   "nombre": "Caida de objeto",
   "heridos": 1,
@@ -989,6 +997,11 @@ nombre tipo no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -1079,6 +1092,11 @@ nombre tamano no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -1165,6 +1183,11 @@ descripcion tipo no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -1255,6 +1278,11 @@ descripcion tamano no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -1341,6 +1369,11 @@ heridos tipo no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -1431,6 +1464,11 @@ heridos tamano no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -1517,6 +1555,11 @@ atendidoEnEmpresa tipo no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -1607,6 +1650,11 @@ muertos tipo no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -1693,6 +1741,11 @@ muertos tamano no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -1783,6 +1836,11 @@ fecha no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -1869,6 +1927,11 @@ puestosId tipo no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C62]"> CE_API_2[C62]</a></td>
     <td>a</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -1959,6 +2022,11 @@ puestosId tamano no valido
     <td>0</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -2047,6 +2115,11 @@ puestosId no existe
     <td>50</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C71]</a></td>
     <td>1</td>
@@ -2131,6 +2204,11 @@ accidentesId tipo no valido
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -2221,6 +2299,11 @@ accidentesId tamano no valido
     <td>1</td>
   </tr>
   <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>accidentesId</td>
     <td><a href="#CE_API_2[]"> CE_API_2[C73]</a></td>
     <td>0</td>
@@ -2307,6 +2390,11 @@ accidentesId no existe
     <td>puestosId</td>
     <td><a href="#CE_API_2[C61]"> CE_API_2[C61]</a></td>
     <td>1</td>
+  </tr>
+  <tr>
+    <td>diasPerdidos</td>
+    <td><a href="#CE_API_2[C81]"> CE_API_2[C81]</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>accidentesId</td>
@@ -2591,6 +2679,7 @@ _response_
     "atendidoEnEmpresa": null,
     "muertos": null,
     "fecha": null,
+    "diasPerdidos": null,
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
     "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
     "puestosId": 1
@@ -2765,6 +2854,7 @@ _response_
     {
       "id": 1,
       "nombre": "Caída de instrumentos",
+      "diasPerdidos": 2,
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,
@@ -2948,6 +3038,7 @@ _response_
     {
       "id": 1,
       "nombre": "Caída de instrumentos",
+      "diasPerdidos": 2,
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,
@@ -3129,6 +3220,7 @@ _response_
     {
       "id": 1,
       "nombre": "Caída de instrumentos",
+      "diasPerdidos": 2,
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,

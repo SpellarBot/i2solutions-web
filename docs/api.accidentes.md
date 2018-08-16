@@ -15,6 +15,7 @@ __POST__ __/api/web/accidentes__
 |  muertos  | number  |   minimum: 0   | 
 |  fecha  | fecha  |   ---   | 
 |  puestosId  | number  |   minimum: 1   | 
+|  diasPerdidos  | number  |   minimum: 0, maximun: 360  | 
 
 #### Response:
 
@@ -30,6 +31,7 @@ __POST__ __/api/web/accidentes__
     "muertos": 0,
     "fecha": "2014-05-21T19:27:28.576Z",
     "puestosId": 1,
+    "diasPerdidos": 2,
     "fechaActualizacion": "2011-10-01T05:00:00.000Z",
     "fechaCreacion": "2011-10-01T05:00:00.000Z"
   },
@@ -63,11 +65,13 @@ __PUT__ __/api/web/accidentes/:accidentesId__
 |  muertos  | number  |   minimum: 0   | 
 |  fecha  | fecha  |   ---   | 
 |  puestosId  | number  |   minimum: 1   | 
+|  diasPerdidos  | number  |   minimum: 0, maximun: 360  | 
 
 #### Request:
 
 ```json
 {
+  "diasPerdidos": 5,
   "descripcion": "Caida de objeto",
   "nombre": "Caida de objeto",
   "heridos": 1,
@@ -143,6 +147,7 @@ __GET__ __/api/web/accidentes/:accidentesId__
     "atendidoEnEmpresa": null,
     "muertos": null,
     "fecha": null,
+    "diasPerdidos": null,
     "fechaCreacion": "2011-10-01 05:00:00.000 +00:00",
     "fechaActualizacion": "2011-10-01 05:00:00.000 +00:00",
     "puestosId": 1
@@ -176,6 +181,7 @@ __GET__ __/api/web/accidentes/establecimientos/:establecimientosId__
     {
       "id": 1,
       "nombre": "Caída de instrumentos",
+      "diasPerdidos": 2,
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,
@@ -218,6 +224,7 @@ __GET__ __/api/web/accidentes/areas/:areasId__
     {
       "id": 1,
       "nombre": "Caída de instrumentos",
+      "diasPerdidos": 2,
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,
@@ -258,6 +265,7 @@ __GET__ __/api/web/accidentes/puestos/:puestosId__
     {
       "id": 1,
       "nombre": "Caída de instrumentos",
+      "diasPerdidos": 2,
       "descripcion": "Se cayó la solución",
       "heridos": "1",
       "atendidoEnEmpresa": 1,

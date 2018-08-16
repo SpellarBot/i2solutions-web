@@ -6,7 +6,8 @@ module.exports = {
       'heridos': 1,
       'atendidoEnEmpresa': true,
       'muertos': 0,
-      'fecha': '2014-05-21T19:27:28.576Z'
+      'fecha': '2014-05-21T19:27:28.576Z',
+      'diasPerdidos': 2
     },
     {
       'descripcion': 'Se salto algo',
@@ -14,7 +15,8 @@ module.exports = {
       'heridos': 0,
       'atendidoEnEmpresa': true,
       'muertos': 0,
-      'fecha': '2014-05-21T19:27:28.576Z'
+      'fecha': '2014-05-21T19:27:28.576Z',
+      'diasPerdidos': 2
     },
     {
       'descripcion': 'Se salto algo',
@@ -22,7 +24,8 @@ module.exports = {
       'heridos': 1,
       'atendidoEnEmpresa': false,
       'muertos': 0,
-      'fecha': '2016-05-21T19:27:28.576Z'
+      'fecha': '2016-05-21T19:27:28.576Z',
+      'diasPerdidos': 2
     },
     {
       'descripcion': 'Hubo un error en la casa',
@@ -30,7 +33,8 @@ module.exports = {
       'heridos': 1,
       'atendidoEnEmpresa': false,
       'muertos': 0,
-      'fecha': '2016-05-21T19:27:28.576Z'
+      'fecha': '2016-05-21T19:27:28.576Z',
+      'diasPerdidos': 2
     }
   ]
 }

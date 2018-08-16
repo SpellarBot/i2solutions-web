@@ -67,8 +67,8 @@ describe('ACCIDENTES', () => {
     })
 
     it('@ICE_API_1_01 Crear un accidente de forma correcta', async () => {
-      let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha } = accidente
-      let req = { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId }
+      let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, diasPerdidos } = accidente
+      let req = { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, puestosId, diasPerdidos }
       let res = await request(app).post(`/api/web/accidentes`).send(req)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
@@ -214,8 +214,8 @@ describe('ACCIDENTES', () => {
     })
 
     it('@ICE_API_2_01 Actualizar un accidente de forma correcta', async () => {
-      let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha } = accidente
-      let req = { descripcion: 'Caida de objeto', nombre: 'Caida de objeto', heridos: 1, atendidoEnEmpresa: false, muertos: 0, fecha: '2014-05-21T19:27:28.576Z', puestosId }
+      let { descripcion, nombre, heridos, atendidoEnEmpresa, muertos, fecha, diasPerdidos } = accidente
+      let req = { diasPerdidos: 5, descripcion: 'Caida de objeto', nombre: 'Caida de objeto', heridos: 1, atendidoEnEmpresa: false, muertos: 0, fecha: '2014-05-21T19:27:28.576Z', puestosId }
       let params = { accidentesId }
       let url = `/api/web/accidentes/${params['accidentesId']}`
       let res = await request(app).put(url).send(req)

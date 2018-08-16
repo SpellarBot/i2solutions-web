@@ -224,7 +224,8 @@ __GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
           "cantidadRiesgos": 0,
           "id": 1,
           "nombre": "Oficina de gerente general",
-          "descripcion": "AA"
+          "descripcion": "AA",
+          "fotoUrl": "http://lorempixel.com/640/480"
         },
         {
           "cantidadPersonas": 0,
@@ -234,7 +235,8 @@ __GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
           "cantidadRiesgos": 0,
           "id": 2,
           "nombre": "Oficina de jefe de TTHH",
-          "descripcion": "AA"
+          "descripcion": "AA",
+          "fotoUrl": "http://lorempixel.com/640/480"
         }
       ]
     },
@@ -252,7 +254,8 @@ __GET__ __/api/areas/puestos/establecimientos/:establecimientosId__
           "cantidadRiesgos": 0,
           "id": 3,
           "nombre": "Oficina de jefe de TTHH",
-          "descripcion": "AA"
+          "descripcion": "AA",
+          "fotoUrl": "http://lorempixel.com/640/480"
         }
       ]
     }
