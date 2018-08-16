@@ -146,6 +146,11 @@
           </v-btn>
           </td>
         </template>
+        <template slot="no-data">
+      <v-alert :value="true" color="error" icon="warning">
+        No hay controles ingresados en el sistema para consultar
+      </v-alert>
+    </template>
       </v-data-table>
     </v-layout>
     </v-card>

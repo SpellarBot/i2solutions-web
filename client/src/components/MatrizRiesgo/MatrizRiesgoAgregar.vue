@@ -12,6 +12,7 @@
                 v-model = "empresaSelected"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 @change="changedValueEmpresa"
                 ></v-select>
     <h2 v-if="empresaValid" class="text-md-left">Seleccione el establecimiento</h2>
@@ -22,6 +23,7 @@
                 v-model = "establecimientoSelected"
                 :rules="[rules.required]"
                 item-text="nombres"
+                item-value="id"
                 @change="changedValueEstablecimiento"
                 ></v-select>
                 <div v-if="establecimientoValid">
@@ -111,6 +113,7 @@
                         required
                         :rules="[rules.required]"
                         item-text="descripcion"
+                        return-object
                       ></v-select>
                       <v-text-field
                         v-model = "descripcionRiesgoValoracion"
@@ -521,14 +524,16 @@ export default {
   },
   mounted () {
     this.empresas = this.$store.getters.empresas
+    console.log(this.empresas)
   },
   methods: {
     changedValueEmpresa: function (value) {
       this.validaciones.length = 0
+      console.log(value)
       this.obtenerEstablecimientos(value)
     },
     obtenerEstablecimientos (value) {
-      this.$store.dispatch('getEstablecimientosFront', value.id)
+      this.$store.dispatch('getEstablecimientosFront', value)
         .then((resp) => {
           console.log('Done')
           this.establecimientos = this.$store.getters.establecimientos
@@ -548,7 +553,7 @@ export default {
       this.obtenerRiesgos()
     },
     obtenerAreasPuestos (value) {
-      this.$store.dispatch('getPuestosFromEstablecimiento', value.id)
+      this.$store.dispatch('getPuestosFromEstablecimiento', value)
         .then((resp) => {
           this.areasYPuestos = this.$store.getters.areasPuestos
           let z = 0
@@ -583,6 +588,7 @@ export default {
     },
     agregarValoraciónInicial (area, puesto) {
       console.log(area)
+      console.log(puesto)
       this.areaValoracion = area
       this.puestoValoracion = puesto
       this.verDialogValoracion = true
@@ -844,6 +850,7 @@ export default {
       this.resetAll()
     },
     resetAll () {
+      this.verDialogValoracion = false
       this.$data.valid = false
       this.$data.valid1 = false
       this.$data.valid2 = false
@@ -861,7 +868,6 @@ export default {
       this.interpretacionNR = null
       this.aceptabilidad = null
       this.stepper = 1
-      this.verDialogValoracion = false
       this.verificar = false
     },
     crearMatriz () {
@@ -877,7 +883,7 @@ export default {
         this.snackbar = true
         this.mensajeSnackbar = 'Tiene que agregar al menos una valoración de riesgo por cada puesto.'
       } else {
-        this.toServer.establecimientosId = this.establecimientoSelected.id
+        this.toServer.establecimientosId = this.establecimientoSelected
         this.toServer.datos = this.valoraciones
         let establecimientosId = this.toServer.establecimientosId
         let datos = this.toServer.datos

@@ -194,6 +194,7 @@
                 v-model = "newEmpresa"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
                 <v-select
                 v-if="$store.getters.usuario.rol === 'admin-empresa'"
@@ -202,6 +203,7 @@
                 v-model = "newEstablecimiento"
                 :rules="[rules.required]"
                 item-text="nombres"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -236,6 +238,7 @@
                 v-model = "newEstablecimiento"
                 :rules="[rules.required]"
                 item-text="nombres"
+                item-value="id"
                 ></v-select>
                 <v-select
                 v-if="$store.getters.usuario.rol === 'admin-empresa'"
@@ -244,6 +247,7 @@
                 v-model = "newArea"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -278,6 +282,7 @@
                 v-model = "newArea"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
                 <v-select
                 v-if="$store.getters.usuario.rol === 'admin-empresa'"
@@ -286,6 +291,7 @@
                 v-model = "newPuesto"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -327,6 +333,7 @@
                 v-model = "newPuesto"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 ></v-select>
               </v-form>
             </v-card-text>
@@ -496,7 +503,7 @@ export default {
         usuario = this.$data.usuario
       }
       let perfilOcupacional = this.$data.perfilOcupacional
-      let puestosId = this.$data.newPuesto.id
+      let puestosId = this.$data.newPuesto
       let rol = this.$data.rol
       this.loadText = 'agregando a la persona...'
       this.loading = true
@@ -584,6 +591,7 @@ export default {
               .then((resp) => {
                 console.log('Done')
                 this.empresas = this.$store.getters.empresas
+                console.log(this.empresas)
                 this.stepper = 2
                 this.loading = false
               })
@@ -599,7 +607,7 @@ export default {
     },
     continuar1 () {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
-        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento.id)
+        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento)
           .then((resp) => {
             this.areas = this.$store.getters.areasPuestos
             console.log('Done')
@@ -611,7 +619,7 @@ export default {
             this.mensajeSnackbar = err
           })
       } else {
-        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa.id)
+        this.$store.dispatch('getEstablecimientosFront', this.newEmpresa)
           .then((resp) => {
             console.log('Done')
             this.establecimientos = this.$store.getters.establecimientos
@@ -626,11 +634,19 @@ export default {
     },
     continuar2 () {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
-        this.puestos = this.newArea.puestos
-        console.log('Done')
-        this.stepper = 4
+        this.$store.dispatch('getPuestos', this.newArea)
+          .then((resp) => {
+            console.log('Done')
+            this.puestos = this.$store.getters.puestos
+            this.stepper = 4
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       } else {
-        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento.id)
+        this.$store.dispatch('getPuestosFromEstablecimiento', this.newEstablecimiento)
           .then((resp) => {
             console.log('Done')
             this.areas = this.$store.getters.areasPuestos
@@ -647,9 +663,17 @@ export default {
       if (this.$store.getters.usuario.rol === 'admin-empresa') {
         this.enviar()
       } else {
-        this.puestos = this.newArea.puestos
-        console.log('Done')
-        this.stepper = 5
+        this.$store.dispatch('getPuestos', this.newArea)
+          .then((resp) => {
+            console.log('Done')
+            this.puestos = this.$store.getters.puestos
+            this.stepper = 5
+          })
+          .catch((err) => {
+            this.color = 'error'
+            this.snackbar = true
+            this.mensajeSnackbar = err
+          })
       }
     },
     validador_ruc_y_cedula (identificacion) {

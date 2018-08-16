@@ -12,6 +12,7 @@
                 v-model = "empresaSelected"
                 :rules="[rules.required]"
                 item-text="nombre"
+                item-value="id"
                 @change="changedValueEmpresa"
                 ></v-select>
     <h2 v-if="empresaValid" class="text-md-left">Seleccione el establecimiento</h2>
@@ -22,6 +23,7 @@
                 v-model = "establecimientoSelected"
                 :rules="[rules.required]"
                 item-text="nombres"
+                item-value="id"
                 @change="changedValueEstablecimiento"
                 ></v-select>
                 <div v-if="establecimientoValid">
@@ -117,7 +119,7 @@ export default {
       this.obtenerEstablecimientos(value)
     },
     obtenerEstablecimientos (value) {
-      this.$store.dispatch('getEstablecimientosFront', value.id)
+      this.$store.dispatch('getEstablecimientosFront', value)
         .then((resp) => {
           console.log('Done')
           this.establecimientos = this.$store.getters.establecimientos
@@ -137,8 +139,10 @@ export default {
       this.obtenerMatricesRiesgo(value)
     },
     obtenerMatricesRiesgo (value) {
-      this.$store.dispatch('getMatricesRiesgo', value.id)
+      console.log(value)
+      this.$store.dispatch('getMatricesRiesgo', value)
         .then((resp) => {
+          console.log(this.$store.getters.matricesRiesgo)
           this.matricesRiesgo = this.$store.getters.matricesRiesgo
           console.log(this.matricesRiesgo)
           this.establecimientoValid = true

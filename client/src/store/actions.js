@@ -354,8 +354,8 @@ export default {
             return fotoUrl
           })
           .then((fotoUrl) => {
-            return Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion, fotoUrl})            
-          })      
+            return Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion, fotoUrl})
+          })
         .then((resp) => {
           console.log(resp.body.estado)
           if (resp.body.estado) {
@@ -1127,6 +1127,7 @@ export default {
     commit('setRiesgoCreado', null)
   },
   getMatricesRiesgo ({commit}, establecimientoId) {
+    console.log(establecimientoId)
     return new Promise((resolve, reject) => {
       Vue.http.get('/api/web/matrices/establecimientos/' + establecimientoId)
         .then((resp) => {
