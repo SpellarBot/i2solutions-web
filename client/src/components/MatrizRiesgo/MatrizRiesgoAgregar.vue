@@ -851,24 +851,43 @@ export default {
     },
     resetAll () {
       this.riesgoValoracion = null
+      console.log('here 1')
       this.verDialogValoracion = false
+      console.log('here 2')
       this.$data.valid = false
+      console.log('here 3')
       this.$data.valid1 = false
+      console.log('here 4')
       this.$data.valid2 = false
+      console.log('here 5')
       this.$data.valid3 = false
+      console.log('here 6')
       this.$refs.form.reset()
+      console.log('here 7')
       this.$refs.form1.reset()
+      console.log('here 8')
       this.$refs.form2.reset()
+      console.log('here 9')
       this.$refs.form3.reset()
+      console.log('here 10')
       this.controlesElegidos.fuente = 'N.A.'
+      console.log('here 11')
       this.controlesElegidos.medio = 'N.A.'
+      console.log('here 12')
       this.controlesElegidos.individuo = 'N.A.'
+      console.log('here 13')
       this.NP = null
+      console.log('here 14')
       this.interpretacionNP = null
+      console.log('here 15')
       this.NR = null
+      console.log('here 16')
       this.interpretacionNR = null
+      console.log('here 17')
       this.aceptabilidad = null
+      console.log('here 18')
       this.stepper = 1
+      console.log('here 19')
       this.verificar = false
     },
     crearMatriz () {
