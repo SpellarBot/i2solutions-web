@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     atendidoEnEmpresa: { type: DataTypes.BOOLEAN },
     muertos: { type: DataTypes.INTEGER },
     fecha: { type: DataTypes.DATE },
-    diasPerdidos: { type: DataTypes.INTEGER }
+    diasPerdidos: { type: DataTypes.INTEGER } // MIGRACION
   }, {
     name: {
       singular,

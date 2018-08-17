@@ -7,6 +7,7 @@
     "build": "",
     "heroku-prebuild": "./deploy",
     "heroku-postbuild": "",
+    "db:migrate": "sequelize db:migrate",
     "prueba": "cross-env NODE_ENV=development env-cmd .env  node prueba.js",
     "dev": "cross-env NODE_ENV=development env-cmd .env nodemon server.js --config nodemon.js",
     "db:init": "cross-env NODE_ENV=development env-cmd .env node api/config/dump/fakeGenerator.js",
