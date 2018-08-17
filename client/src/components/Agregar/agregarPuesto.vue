@@ -73,10 +73,8 @@ export default {
         isImage: v => {
           let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
           if (regexp.test(v)) {
-            return true;
-          }
-          else
-            return 'debe ser una imagen.'
+            return true
+          } else { return 'debe ser una imagen.' }
         }
       }
     }

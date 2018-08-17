@@ -349,13 +349,13 @@ export default {
     let image = fotoUrl.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, '')
     return new Promise((resolve, reject) => {
       Vue.http.post('https://api.imgur.com/3/image', { image }, {headers: { 'Authorization': 'Client-ID 32ac2643d018e56' }})
-          .then((resp) => {
-            let fotoUrl = resp.body.data.link
-            return fotoUrl
-          })
-          .then((fotoUrl) => {
-            return Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion, fotoUrl})
-          })
+        .then((resp) => {
+          let fotoUrl = resp.body.data.link
+          return fotoUrl
+        })
+        .then((fotoUrl) => {
+          return Vue.http.put('/api/web/puestos/' + puestoId, {nombre, descripcion, fotoUrl})
+        })
         .then((resp) => {
           console.log(resp.body.estado)
           if (resp.body.estado) {
@@ -989,9 +989,9 @@ export default {
   emptyCapacitacionCreada ({commit}) {
     commit('setCapacitacionCreada', null)
   },
-  crearAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId}) {
+  crearAccidente ({commit}, {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId}) {
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/web/accidentes', {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId})
+      Vue.http.post('/api/web/accidentes', {nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId})
         .then((resp) => {
           if (resp.body.estado) {
             commit('setAccidenteCreado', resp.body.datos)

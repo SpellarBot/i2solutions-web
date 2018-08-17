@@ -42,6 +42,7 @@
         <template slot="expand" slot-scope="props">
           <v-card flat>
             <v-card-text class="text-xs pa-0"><b>Descripción:</b> {{ props.item.descripcion }}</v-card-text>
+            <v-card-text class="text-xs pa-0"><b>Días laborales perdidos:</b> {{ props.item.diasPerdidos }}</v-card-text>
             <v-card-text class="text-xs pa-0"><b>Área:</b> {{ props.item.areasNombre }}</v-card-text>
             <v-card-text class="text-xs pa-0"><b>Puesto:</b> {{ props.item.puestosNombre }}</v-card-text>
           </v-card>
@@ -136,6 +137,14 @@
                   maxlength=2
                   :counter=2
                   mask="#######"
+                ></v-text-field>
+                <v-text-field
+                  v-model = "newDiasPerdidos"
+                  label="Días laborales perdidos por el accidente" required
+                  :rules="[rules.required, rules.max]"
+                  maxlength=3
+                  :counter=3
+                  mask="###"
                 ></v-text-field>
                 <v-checkbox
       label="¿Fue atendido en la empresa?"
@@ -239,6 +248,7 @@ export default {
       newNombre: '',
       newDescripcion: '',
       newDate: '',
+      newDiasPerdidos: '',
       newHeridos: null,
       newMuertos: null,
       newCheckbox: false,
@@ -319,15 +329,16 @@ export default {
       let heridos = Number(this.$data.newHeridos)
       let muertos = Number(this.$data.newMuertos)
       let atendidoEnEmpresa = this.$data.newCheckbox
+      let diasPerdidos = Number(this.$data.newDiasPerdidos)
       let puestosId = Number(this.$data.newPuesto.id)
-      this.$store.dispatch('crearAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId })
+      this.$store.dispatch('crearAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId })
         .then((resp) => {
           console.log('Here')
           let areasNombre = this.$data.newArea.nombre
           let puestosNombre = this.$data.newPuesto.nombre
           let id = this.$store.getters.accidenteCreado.id
           console.log(id)
-          let accidente = { id, nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId, areasNombre, puestosNombre }
+          let accidente = { id, nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId, areasNombre, puestosNombre }
           console.log(accidente)
           this.accidentes.push(accidente)
           for (let i = 0; i < this.$store.getters.establecimientos.length; i++) {
