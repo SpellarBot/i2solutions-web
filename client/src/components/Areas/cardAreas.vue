@@ -40,27 +40,15 @@
                     <v-container fluid>
                       <v-layout row wrap>
                         <v-flex xs6 md6>
-                          <div v-if="numPersonas>0">
                           <span class="link" v-on:click="visualizarPersonas(nombre)">#Personas: {{numPersonas}}</span>
-                        </div>
-                        <div v-if="numPersonas===0">
-                          <span>#Personas: {{numPersonas}}</span>
-                        </div>
                         </v-flex>
                         <v-flex xs6 md6>
                           <span class="link" v-on:click="visualizarPuestosFromAreas(nombre)">#Puestos: {{numPuestos}}</span>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <div v-if="numCapacitaciones>0">
                           <span
                           :class="'capacitacionesArea' + id"
                           class="link" v-on:click="visualizarCapacitaciones(nombre)">#Capacitaciones: {{numCapacitaciones}}</span>
-                        </div>
-                        <div v-if="numCapacitaciones===0">
-                          <span
-                          :class="'capacitacionesArea' + id"
-                          >#Capacitaciones: {{numCapacitaciones}}</span>
-                        </div>
                         </v-flex>
                         <v-flex xs6 md6>
                           <div v-if="novedades>0">
@@ -71,12 +59,7 @@
                         </div>
                         </v-flex>
                         <v-flex xs6 md6>
-                          <div v-if="equipos>0">
                           <span class="link" v-on:click="visualizarEquipos">#Equipos: {{equipos}}</span>
-                        </div>
-                        <div v-if="equipos===0">
-                          <span>#Equipos: {{equipos}}</span>
-                        </div>
                         </v-flex>
                       </v-layout>
                       <a v-on:click="verQR(id)">Ver código</a>

@@ -85,26 +85,9 @@ describe('MATRIZ', () => {
       let res = await request(app).get(`/api/web/matrices/descargar/${params['matricesId']}`)
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
-      generatorDocs.OK({ docs, doc: API_3, res })
-      // let byteCharacters = atob(res.body.datos)
-      // let byteNumbers = new Array(byteCharacters.length)
-      // for (let i = 0; i < byteCharacters.length; i++) {
-      //     byteNumbers[i] = byteCharacters.charCodeAt(i)
-      // }
-      // let byteArray = new Uint8Array(byteNumbers);
-      // let blob = new Blob([byteArray], {type: 'application/octet-stream'})
       // require("fs").writeFile("out.xlsx", res.body.datos, 'base64', function(err) {
       //   console.log(err);
       // })
-      // console.log(res.body)
-      // expect(res.body.estado).to.equal(true)
-      // expect(res.body.codigoEstado).to.equal(200)
-      // let equipoGuardado = await models.equipos.Obtener({ id: res.body.datos['id'] })
-      // expect(equipoGuardado).to.not.equal(null)
-      // let relacionGuardada = await models.equiposPuestos.ObtenerPorPuestos({ id: puestosId })
-      // expect(relacionGuardada.length).to.equal(1)
-      // generatorDocs.OK({ docs, doc: API_1, res })
-      // generatorDocs.ADDINTER({ codigo: '1', equivalencias, equi: API_1_EQUI, req, res, codigoApi })
     })
   })
 })

@@ -33,30 +33,10 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-            <div v-if="puestos.cantidadPersonas>0">
       <span class="link" v-on:click="visualizarPersonas(puestos)"> Número Personas: {{ puestos.cantidadPersonas }}</span>
-    </div>
-    <div v-if="puestos.cantidadPersonas===0">
-      <span> Número Personas: {{ puestos.cantidadPersonas }}</span>
-    </div>
-    <div v-if="puestos.cantidadAccidentes>0">
       <span :class="'accidentesPuesto' + puestos.id" class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
-    </div>
-    <div v-if="puestos.cantidadAccidentes===0">
-      <span :class="'accidentesPuesto' + puestos.id"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
-    </div>
-    <div v-if="puestos.cantidadNovedadesSinAtender>0">
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
-    </div>
-    <div v-if="puestos.cantidadNovedadesSinAtender===0">
-      <span> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
-    </div>
-    <div v-if="puestos.cantidadEquipos>0">
       <span  :class="'equiposPuesto' + puestos.id" class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
-    </div>
-    <div v-if="puestos.cantidadEquipos===0">
-      <span  :class="'equiposPuesto' + puestos.id"> Equipos: {{ puestos.cantidadEquipos }}</span>
-    </div>
     <div>
       <span class="link" v-on:click="visualizarControles(puestos.id,puestos.nombre)">Ver Controles</span>
     </div>
