@@ -51,6 +51,31 @@ module.exports = {
       'controlesFuente': 'DD',
       'controlesMedio': 'A',
       'controlesIndividuo': 'SDSDSD'
+    },
+    {
+      'areaNombre': 'Gerente General',
+      'puestoNombre': 'Oficina de gerente general',
+      'puestoId': 4,
+      'actividad': 'SSS',
+      'riesgo': 'Postura prolongada',
+      'riesgoDescripcion': 'SSSS',
+      'controlesExistentesFuente': 'Programa de pausas activas',
+      'controlesExistentesMedio': 'N.A.',
+      'controlesExistentesIndividuo': 'Capacitación al personal en autocuidado. Capacitación en higiene postural',
+      'ND': 2,
+      'NE': 3,
+      'NP': 6,
+      'interpretacionNP': 'Medio',
+      'NC': 100,
+      'NR': 600,
+      'interpretacionNR': 'I',
+      'aceptabilidad': 'Aceptable',
+      'numeroExpuestos': 1,
+      'peorConsecuencia': 'ZZZZZ',
+      'requisitoLegal': null,
+      'controlesFuente': 'DD',
+      'controlesMedio': 'A',
+      'controlesIndividuo': 'SDSDSD'
     }
   ]
 }

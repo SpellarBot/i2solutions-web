@@ -1,6 +1,7 @@
 const co = require('co')
 const excel = require('exceljs')
 const unstream = require('unstream')
+const _ = require('lodash')
 module.exports = ({ responses, db }) => {
   const proto = {
     Crear (datos) {
@@ -57,6 +58,9 @@ module.exports = ({ responses, db }) => {
               pageSetup: { paperSize: 9, orientation: 'landscape', defaultRowHeight: 15 }
             })
             // worksheet.properties.defaultRowHeight = 15
+            // No aceptable
+            // Aceptable con control específico
+            // Aceptable
             worksheet.addRow([
               'PROCESO',
               'ZONA/LUGAR',
@@ -168,8 +172,15 @@ module.exports = ({ responses, db }) => {
             worksheet.getCell('C1').alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
             worksheet.getCell('D1').alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
             worksheet.getCell('E1').alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
-            // var newArray = documento.slice();
             let matrizDatos = JSON.parse(matriz['datos'])
+            matrizDatos = _.sortBy(matrizDatos, o => {
+              if (o.aceptabilidad.trim() === 'No aceptable') {
+                return 1
+              } else if (o.aceptabilidad.trim() === 'Aceptable con control específico') {
+                return 2
+              }
+              return 3
+            })
 
             for (let columnaMatriz of matrizDatos) {
               worksheet.addRow([
@@ -204,16 +215,23 @@ module.exports = ({ responses, db }) => {
               for (let celda in celdas) {
                 worksheet.getColumn(parseInt(celda) + 1).width = 25
               }
-              // worksheet.getCell('D' + (k + 2)).fill = fill;
-              // console.log(columnaMatriz)
             }
-            // worksheet.getCell('F2').alignment = { wrapText: true }
-            // var dobCol = worksheet.getRow(1)
 
-            // for (var k = 0; k < newArray.length; k++) {
-            //   worksheet.addRow({matricula: parseInt(newArray[k].matricula), nombres: newArray[k].nombres, apellidos: newArray[k].apellidos, grupo: newArray[k].grupo, materia: newArray[k].materia, paralelo: parseInt(newArray[k].paralelo), nombreLeccion: newArray[k].nombreLeccion, tipoLeccion: newArray[k].tipoLeccion, noEntroALeccion: newArray[k].noEntroALeccion, calificacion:  newArray[k].calificacion});
-            //   worksheet.getCell('D' + (k + 2)).fill = fill;
-            // }
+            // anadir colores
+            let noAceptable = { type: 'pattern', pattern: 'darkTrellis', fgColor: { argb: 'FF0000' }, bgColor: { argb: 'FF0000' } } // rojo
+            let acetableConControl = { type: 'pattern', pattern: 'darkTrellis', fgColor: { argb: 'FFA500' }, bgColor: { argb: 'FFA500' } } // anaranjado
+            let aceptable = { type: 'pattern', pattern: 'darkTrellis', fgColor: { argb: '008000' }, bgColor: { argb: '008000' } } // verde
+
+            for (let current = 0; current < matrizDatos.length; current++) {
+              if (matrizDatos[current].aceptabilidad.trim() === 'No aceptable') {
+                worksheet.getCell(`P${current + 3}`).fill = noAceptable
+              } else if (matrizDatos[current].aceptabilidad.trim() === 'Aceptable con control específico') {
+                worksheet.getCell(`P${current + 3}`).fill = acetableConControl
+              } else {
+                console.log('aceptable')
+                worksheet.getCell(`P${current + 3}`).fill = aceptable
+              }
+            }
             workbook.xlsx.write(unstream({}, function (data) {
               resolve(responses.OK(data.toString('base64')))
             }))

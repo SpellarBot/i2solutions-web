@@ -52,13 +52,10 @@ function enviarCorreoTest (correo, url) {
 
 function enviarCorreoNodemailer (correo, url) {
   return new Promise((resolve, reject) => {
-    // let transporter = nodemailer.createTransport({
-    //  service: 'gmail',
-    //  auth: {
-    //         user: process.env.MAILCORREO,
-    //         pass: process.env.MAILPASS
-    //     }
-    // })
+    // http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
+    // https://stackoverflow.com/questions/24098461/nodemailer-gmail-what-exactly-is-a-refresh-token-and-how-do-i-get-one
+    // https://github.com/nodemailer/nodemailer/issues/871
+    // https://nodemailer.com/smtp/oauth2/#oauth-2lo
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -66,8 +63,7 @@ function enviarCorreoNodemailer (correo, url) {
         pass: 'i2solutionsapp30@'
       }
     })
-    // i2solutionsapp30@
-    // i2solutionsapp30
+
     // let transporter = nodemailer.createTransport({
     //     host: 'smtp.gmail.com',
     //     port: 465,
@@ -78,11 +74,36 @@ function enviarCorreoNodemailer (correo, url) {
     //         clientId: '636471246614-f425frovl75hc6971hpq0hbh77iq4dta.apps.googleusercontent.com',
     //         clientSecret: "pJBQIxcaEN9BAALMKowo6zld",
     //         refreshToken: "1/D0LJMDXjVy3JCB5Wcr7069jLs1-lmtlh2GF-EfqUwVXnCHDk0NJ4sUXqeQuhKk4l"
+    //             //accessToken: serverConfig.gmail.access_token,
     //     },
     //     tls: {
     //         rejectUnauthorized: false
     //     }
+    // });
+
+    // let transporter = nodemailer.createTransport({
+    //     host: 'smtp.gmail.com',
+    //     port: 587,
+    //     secure: false,          // Not SSL
+    //     requireTLS: true,
+    //     auth: {
+    //         type: 'OAuth2',
+    //         user: 'i2solutions.ec@gmail.com',
+    //         serviceClient: '115505613573447717224',
+    //         privateKey: '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvFXRqxLAZYgTc\nZRTUOnHvuVwlqFRY75izAH3bdIzL4JWY5F8R7H2sPI8YGQoG8BjrPd8Uh03G31rR\nw2uCyRuo/RX0dKvakLkJ3QzekiIKr633AN4dlGjB2QesWPomf1tsSZNj+TPhy8my\nK78sprjfq2LZBN3mtfaH0EEoKr98PIzE8gogJr3v1v0GLSvnBc0ZidX9d8ejz8eS\nTC/3xGv94ZIvvtVcyKaQvvP9ilNr7K/BlGEIkigrHlmsqik3NTzsn7pq/FvDIpK5\nkuGM9dShiu+6EU752JDU7ammHe/S+Fd3Obbt57/5tjBYY/yUwo50qSlisC7kMZ21\n1D+W4LwfAgMBAAECggEAERjBKvNmvmHuhA4sZ6LITAK+zqiTY4q6qi5CUcOrX9bv\nC7BlBgSZ1gu8ldYQi/92YLgbcD3et3Z4aaCmWwNjmXmDrOf89BO+T7DBf1cG3SnD\n8HJc79ORjC8nZ9EzDja0RHGcex0ycxaeFUIgmSJQ/Rml52v8LEfd2cdwKV2pNMqC\nSlI+i8aBBOAqYXYIWx2llAoybw46G1EC2Jc/u0x1/wTE35ma7GOIeRkutW0nXmnu\nGaUBlFrneBjv7CXrvm3O44FRsGGyMLEXyorqxb1RNWAVaYCpB7x5ntMTkWeqPfER\nA0MqYi2rH5vs7Lk3U8lTkIwoRpP6kwNBkhykNTjDRQKBgQD42AFR5FLTXRm1/xBk\nsJDJMVfgfBkmOTZZaxNfZNfQJwZvjM3DhanXLQmJcbbeSv2pvbHLohfnHqxyiCTk\nlv3wBXtaZSERHZceDU7HAi/+5SrnHn5hOb3IpS0Tyjl6a+qXXCcfpwd3Wv8+76Fj\ngfeB7qGE8fL6NRlexfhO2w3gIwKBgQD19Ziy4R7Kg9EQpEXytqJs4tOtfu4YHTdz\nlTRDZJ56meFJWG8yj55d9BnvzEOBK3XBWPUr0Vor6J22B7bmmN25suHG0O5oCoDp\n//6oef9+kjdLhMOZCF+JDQ3+r3E4G4SP75TWE6mPbRXMJZdOC7z2vC2rxkuT11XU\nudLM7zo11QKBgAq853GtNJXCUrWzx/VQWS8VXgFl2X/4wAujvzZCl713saNmpApn\n3ihW3S59JbL58XA9q0pqODXU8QQQM+dZTKPq2KPR8VdXu4mkcV3NDl0lbnCCtFll\nsHbUCdnsxAYwWfMmGtoWzw+rcZA5rvEoTpHgxj+CYUXCvNGGIWzlrveZAoGBALKt\n+oJo3K+OV0DZth7+4rxrhA+UGG/YOcJz8AXNgPvb8jgQUKfQgeILRRRZteiOo/sU\nHvf4HKOtV3U34X1gLCONekuu2KMojkJwQJYwGpXeruDj0BzKYmzz2Ojel0eFZiYS\njHOA0Ttqqd0mqeZ+zIYKartRUPJUCvyBCkzqtcUJAoGBANSSNTYxrsSaE8xw3ARg\nofsxPDMcT3WdIpM11BvSSsWfmY81++Yey7n22jmmKUs+klLJrEzL2HObShrlP+3H\nAFD9THE35kQhbMataE1U2NDxBFoeMQQa8jYH+F6AWqn0dOWOgA3p6hbtB12BJJe6\ns7xcGAuAOEkYZGg+Geaz8OD0\n-----END PRIVATE KEY-----\n'
+    //         // accessToken: 'ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x'
+    //     }
     // })
+
+    // transporter.set('oauth2_provision_cb', (user, renew, callback)=>{
+    // let accessToken = userTokens[user]
+    //   if(!accessToken) {
+    //     return callback(new Error('Unknown user'))
+    //   } else {
+    //     return callback(null, accessToken)
+    //   }
+    // })
+
     let mailOptions = {
       from: 'Enviado de <i2solutions.ec@gmail.com>',
       to: correo,
