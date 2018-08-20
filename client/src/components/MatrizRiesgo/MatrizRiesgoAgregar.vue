@@ -135,7 +135,7 @@
                     <span class="headline">Controles existentes</span>
                   </v-card-title>
                   <v-card-text v-if="riesgoValoracion !== null">
-                    <p  class="pb-2">Aquí podrá ver los controles existentes para el riesgo: {{ riesgoValoracion.descripcion }}</p>
+                    <p  class="pb-2">Aquí podrá ver los controles existentes para el riesgo seleccionado</p>
                     <v-container grid-list-md>
                       <v-layout row wrap>
                         <v-flex xs12 md4>
@@ -850,6 +850,7 @@ export default {
       this.resetAll()
     },
     resetAll () {
+      this.riesgoValoracion = null
       this.verDialogValoracion = false
       this.$data.valid = false
       this.$data.valid1 = false

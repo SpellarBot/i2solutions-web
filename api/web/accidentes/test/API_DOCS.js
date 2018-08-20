@@ -12,7 +12,8 @@ module.exports = {
       { nombre: 'atendidoEnEmpresa', tipo: 'boolean', descripcion: ' --- ' },
       { nombre: 'muertos', tipo: 'number', descripcion: ' minimum: 0 ' },
       { nombre: 'fecha', tipo: 'fecha', descripcion: ' --- ' },
-      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' }
+      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' },
+      { nombre: 'diasPerdidos', tipo: 'number', descripcion: ' minimum: 0, maximun: 360' }
     ],
     errors: []
   },
@@ -31,7 +32,8 @@ module.exports = {
       { nombre: 'atendidoEnEmpresa', tipo: 'boolean', descripcion: ' --- ' },
       { nombre: 'muertos', tipo: 'number', descripcion: ' minimum: 0 ' },
       { nombre: 'fecha', tipo: 'fecha', descripcion: ' --- ' },
-      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' }
+      { nombre: 'puestosId', tipo: 'number', descripcion: ' minimum: 1 ' },
+      { nombre: 'diasPerdidos', tipo: 'number', descripcion: ' minimum: 0, maximun: 360' }
     ],
     errors: []
   },

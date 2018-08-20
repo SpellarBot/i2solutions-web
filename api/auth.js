@@ -14,9 +14,9 @@ function createAccessToken (user) {
 
 app.route('/login')
   .post((req, res) => {
-    const usuario = req.body
+    const { usuario, clave } = req.body
     co(function * () {
-      let [err, usuarioEncontrado] = yield db.personas.Login(usuario)
+      let [err, usuarioEncontrado] = yield db.personas.Login({ usuario: usuario.trim(), clave })
       if (!err) {
         let tienePermisoDeLoggearse = usuarioEncontrado['creadaDump'] || usuarioEncontrado['claveCreada']
         if (tienePermisoDeLoggearse) {
@@ -41,7 +41,6 @@ app.route('/login')
         res.json(resp)
       }
     }).catch(err => {
-      console.log(err)
       let resp = responses.NO_OK(messages.AUTH.AUTH_1.ERROR)
       res.status(resp.codigoEstado)
       res.json(err)

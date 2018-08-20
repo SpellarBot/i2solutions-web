@@ -33,30 +33,10 @@
             >
               <v-icon>delete</v-icon>
             </v-btn>
-            <div v-if="puestos.cantidadPersonas>0">
       <span class="link" v-on:click="visualizarPersonas(puestos)"> Número Personas: {{ puestos.cantidadPersonas }}</span>
-    </div>
-    <div v-if="puestos.cantidadPersonas===0">
-      <span> Número Personas: {{ puestos.cantidadPersonas }}</span>
-    </div>
-    <div v-if="puestos.cantidadAccidentes>0">
       <span :class="'accidentesPuesto' + puestos.id" class="link" v-on:click="visualizarAccidentes(puestos)"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
-    </div>
-    <div v-if="puestos.cantidadAccidentes===0">
-      <span :class="'accidentesPuesto' + puestos.id"> Número Accidentes: {{ puestos.cantidadAccidentes }}</span>
-    </div>
-    <div v-if="puestos.cantidadNovedadesSinAtender>0">
       <span class="link" v-on:click="visualizarNovedadesFromPuestos(puestos.id,puestos.nombre)"> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
-    </div>
-    <div v-if="puestos.cantidadNovedadesSinAtender===0">
-      <span> Novedades sin arender: {{ puestos.cantidadNovedadesSinAtender }}</span>
-    </div>
-    <div v-if="puestos.cantidadEquipos>0">
       <span  :class="'equiposPuesto' + puestos.id" class="link" v-on:click="visualizarEquipos(puestos.id,puestos.nombre)"> Equipos: {{ puestos.cantidadEquipos }}</span>
-    </div>
-    <div v-if="puestos.cantidadEquipos===0">
-      <span  :class="'equiposPuesto' + puestos.id"> Equipos: {{ puestos.cantidadEquipos }}</span>
-    </div>
     <div>
       <span class="link" v-on:click="visualizarControles(puestos.id,puestos.nombre)">Ver Controles</span>
     </div>
@@ -146,6 +126,11 @@
           </v-btn>
           </td>
         </template>
+        <template slot="no-data">
+      <v-alert :value="true" color="error" icon="warning">
+        No hay controles ingresados en el sistema para consultar
+      </v-alert>
+    </template>
       </v-data-table>
     </v-layout>
     </v-card>
@@ -232,7 +217,7 @@ export default {
   computed: {
     puestos: {
       get () {
-        console.log('puestos: ',this.puesto)
+        console.log('puestos: ', this.puesto)
         return this.puesto
       }
     },
@@ -256,7 +241,7 @@ export default {
     verPersonas () {
       this.$store.dispatch('getPersonasFromPuesto', this.puestoId)
         .then((resp) => {
-          console.log('Done')
+          console.log('Hecho')
           this.visiblePersonas = true
         })
         .catch((err) => {
@@ -274,7 +259,7 @@ export default {
       console.log(this.puestoId)
       this.$store.dispatch('getAccidentesFromPuesto', this.puestoId)
         .then((resp) => {
-          console.log('Done')
+          console.log('Hecho')
           this.visibleAccidentes = true
         })
         .catch((err) => {
@@ -308,7 +293,7 @@ export default {
       this.$store.dispatch('getEquiposFromPuestos', this.puestoId)
         .then((resp) => {
           this.visibleEquipos = true
-          console.log('Done')
+          console.log('Hecho')
         })
         .catch((err) => {
           this.color = 'error'
@@ -323,7 +308,7 @@ export default {
           this.controles = this.$store.getters.controles
           console.log(this.controles)
           this.visibleControles = true
-          console.log('Done')
+          console.log('Hecho')
         })
         .catch((err) => {
           this.color = 'error'
@@ -388,7 +373,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = 'Control implementado exitosamente'
           this.confirmarImplementar = false
-          console.log('Done')
+          console.log('Hecho')
         })
         .catch((err) => {
           this.color = 'error'

@@ -65,7 +65,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '2': {
@@ -78,7 +79,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '3': {
@@ -91,7 +93,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '4': {
@@ -104,7 +107,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '5': {
@@ -117,7 +121,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '6': {
@@ -130,7 +135,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '7': {
@@ -143,7 +149,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '8': {
@@ -156,7 +163,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C32' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '9': {
@@ -169,7 +177,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C42' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '10': {
@@ -182,7 +191,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C43' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '11': {
@@ -195,7 +205,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C52' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '12': {
@@ -207,7 +218,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C62' }
+          'puestosId': { codigo: 'C62' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '13': {
@@ -219,7 +231,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C63' }
+          'puestosId': { codigo: 'C63' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       },
       '14': {
@@ -231,7 +244,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C71' }
         }
       }
     }
@@ -310,7 +324,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -325,7 +340,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -340,7 +356,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -355,7 +372,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -370,7 +388,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -385,7 +404,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -400,7 +420,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -415,7 +436,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C32' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -430,7 +452,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C42' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -445,7 +468,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C43' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -460,7 +484,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C52' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -475,7 +500,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C62' }
+          'puestosId': { codigo: 'C62' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -490,7 +516,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C63' }
+          'puestosId': { codigo: 'C63' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -505,7 +532,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }
@@ -520,7 +548,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C72' }
@@ -535,7 +564,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C73' }
@@ -550,7 +580,8 @@ module.exports = {
           'atendidoEnEmpresa': { codigo: 'C31' },
           'muertos': { codigo: 'C41' },
           'fecha': { codigo: 'C51' },
-          'puestosId': { codigo: 'C61' }
+          'puestosId': { codigo: 'C61' },
+          'diasPerdidos': { codigo: 'C81' }
         },
         params: {
           'accidentesId': { codigo: 'C71' }

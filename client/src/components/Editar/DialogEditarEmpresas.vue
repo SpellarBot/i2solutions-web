@@ -32,7 +32,7 @@
                   :counter=50
                 ></v-text-field>
                 <img height="150" v-if="imageUrl"/>
-          <v-text-field label="Logo" @click='pickFile' v-model='imageName' prepend-icon='attach_file' :rules="[rules.isImage]"></v-text-field>
+          <v-text-field label="Logo" @click='pickFile' v-model='imageName' prepend-icon='attach_file' :rules="[rules.isImage]" readonly></v-text-field>
           <input
           class="imagen"
             type="file"
@@ -112,10 +112,8 @@ export default {
         isImage: v => {
           let regexp = /\.(jpg|svg|jpeg|png|bmp|gif)$/
           if (regexp.test(v)) {
-            return true;
-          }
-          else
-            return 'debe ser una imagen.'
+            return true
+          } else { return 'debe ser una imagen.' }
         }
       }
     }

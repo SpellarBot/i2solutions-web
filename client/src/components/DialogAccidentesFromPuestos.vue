@@ -42,8 +42,14 @@
         <template slot="expand" slot-scope="props">
           <v-card flat>
             <v-card-text class="text-xs pa-0"><b>Descripción:</b> {{ props.item.descripcion }}</v-card-text>
+            <v-card-text class="text-xs pa-0"><b>Días laborales perdidos:</b> {{ props.item.diasPerdidos }}</v-card-text>
           </v-card>
         </template>
+        <template slot="no-data">
+      <v-alert :value="true" color="error" icon="warning">
+        No hay acidentes ingresados en el sistema para consultar
+      </v-alert>
+    </template>
       </v-data-table>
     </v-layout>
     </v-card>
@@ -119,6 +125,14 @@
                   :counter=2
                   mask="#######"
                 ></v-text-field>
+                <v-text-field
+                  v-model = "newDiasPerdidos"
+                  label="Días laborales perdidos por el accidente" required
+                  :rules="[rules.required, rules.max]"
+                  maxlength=3
+                  :counter=3
+                  mask="###"
+                ></v-text-field>
                 <v-checkbox
       label="¿Fue atendido en la empresa?"
       v-model="newCheckbox"
@@ -179,6 +193,7 @@ export default {
       newNombre: '',
       newDescripcion: '',
       newDate: '',
+      newDiasPerdidos: '',
       newHeridos: null,
       newMuertos: null,
       newCheckbox: false,
@@ -255,13 +270,14 @@ export default {
       let heridos = Number(this.$data.newHeridos)
       let muertos = Number(this.$data.newMuertos)
       let atendidoEnEmpresa = this.$data.newCheckbox
+      let diasPerdidos = Number(this.$data.newDiasPerdidos)
       let puestosId = Number(this.puestoId)
-      this.$store.dispatch('crearAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId })
+      this.$store.dispatch('crearAccidente', { nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId })
         .then((resp) => {
           console.log('Here')
           let id = this.$store.getters.accidenteCreado.id
           console.log(id)
-          let accidente = { id, nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, puestosId }
+          let accidente = { id, nombre, descripcion, fecha, heridos, muertos, atendidoEnEmpresa, diasPerdidos, puestosId }
           console.log(accidente)
           this.accidentes.push(accidente)
           this.reiniciar()
