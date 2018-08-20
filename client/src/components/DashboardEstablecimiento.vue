@@ -106,28 +106,13 @@
                        class="link" v-on:click="visualizarPuestos(establecimiento.id, establecimiento.nombres)">#Puestos: {{establecimiento.cantidadPuestos}}</span>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <div v-if="establecimiento.cantidadPersonas>0">
                       <span :class="'personasEstablecimiento' + establecimiento.id" class="link" v-on:click="visualizarPersonas(establecimiento.id, establecimiento.nombres)">#Personas: {{establecimiento.cantidadPersonas}}</span>
-                    </div>
-                    <div v-if="establecimiento.cantidadPersonas===0">
-                      <span :class="'personasEstablecimiento' + establecimiento.id">#Personas: {{establecimiento.cantidadPersonas}}</span>
-                    </div>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <div v-if="establecimiento.cantidadAccidentes>0">
                       <span class="link" v-on:click="visualizarAccidentes(establecimiento.id, establecimiento.nombres)">#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
-                    </div>
-                    <div v-if="establecimiento.cantidadAccidentes===0">
-                      <span>#Accidentes: {{establecimiento.cantidadAccidentes}}</span>
-                    </div>
                     </v-flex>
                     <v-flex xs6 md6>
-                      <div v-if="establecimiento.cantidadCapacitaciones>0">
                       <span class="link" v-on:click="visualizarCapacitaciones(establecimiento.id, establecimiento.nombres)">#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
-                    </div>
-                    <div v-if="establecimiento.cantidadCapacitaciones===0">
-                      <span>#Capacitaciones: {{establecimiento.cantidadCapacitaciones}}</span>
-                    </div>
                     </v-flex>
                     <v-flex xs6 md6>
                       <div v-if="establecimiento.cantidadNovedadesSinAtender>0">
