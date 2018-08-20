@@ -27,6 +27,7 @@
                   :fotoUrl = "area.areaFotoUrl"
                   :index = index
                   :establecimientoId = "establecimientoId"
+                  :estNombre = "establecimientoNombres"
                   >
                 </cardAreas>
             </v-flex>

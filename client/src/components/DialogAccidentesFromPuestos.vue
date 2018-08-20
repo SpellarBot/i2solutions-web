@@ -6,7 +6,7 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Puesto {{ this.puestoNombre }}</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > Puesto {{ this.puestoNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Accidentes: </h1>
       <v-spacer></v-spacer>
@@ -177,7 +177,7 @@
 const moment = require('moment')
 export default {
   name: 'DialogAccidentesFromPuestos',
-  props: ['visible', 'puestoId', 'puestoNombre'],
+  props: ['visible', 'puestoId', 'puestoNombre', 'nombreEstablecimiento'],
   data () {
     return {
       valid: false,

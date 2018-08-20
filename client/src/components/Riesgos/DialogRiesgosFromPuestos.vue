@@ -6,7 +6,7 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Riesgos Por Puestos</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > Riesgos Por Puestos</v-toolbar-title>
       </v-toolbar>
       <br>
       <v-layout>
@@ -103,7 +103,7 @@ import DialogEditarRiesgos from '../Editar/DialogEditarRiesgos'
 export default {
   components: { DialogEditarRiesgos },
   name: 'DialogRiesgosFromPuestos',
-  props: ['visible', 'puestoId', 'puestoNombre'],
+  props: ['visible', 'puestoId', 'puestoNombre', 'nombreEstablecimiento'],
   /* mounted () {
   }, */
   data () {

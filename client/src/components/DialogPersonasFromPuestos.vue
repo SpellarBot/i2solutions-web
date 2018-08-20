@@ -14,7 +14,7 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Puesto {{ this.puestoNombre }}</v-toolbar-title>
+        <v-toolbar-title>nombreEstablecimiento > Puesto {{ this.puestoNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Personas: </h1>
       <v-layout align-center justify-center row>
@@ -216,7 +216,7 @@ export default {
         })
     }
   },
-  props: ['visible', 'puestoId', 'puestoNombre'],
+  props: ['visible', 'puestoId', 'puestoNombre', 'nombreEstablecimiento'],
   computed: {
     show: {
       get () {

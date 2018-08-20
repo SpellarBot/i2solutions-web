@@ -66,12 +66,14 @@
     :visible="visiblePersonas"
     :puestoId="puestoId"
     :puestoNombre="puestoNombre"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visiblePersonas=false"
     ></DialogPersonasFromPuestos>
     <DialogAccidentesFromPuestos
     :visible="visibleAccidentes"
     :puestoId="puestoId"
     :puestoNombre="puestoNombre"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromPuestos>
     <DialogEditarPuestos
@@ -81,12 +83,13 @@
     :puestoId="puestoId"
     :areaId="areaIdEdit"
     :editMode="editModes"
-    :puestoUrlFoto="puestoUrlFoto"
+    :puestoUrlFoto="puestoUrlFoto"    
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromPuestos
     :visible="visibleNovedades"
     :puestoNombre ="puestoNombre"
+    :nombreEstablecimiento = "establecimientoName"
     :puestoId="puestoId"
     @close="visibleNovedades=false">
     </DialogNovedadesFromPuestos>
@@ -94,12 +97,14 @@
     :visible="visibleRiesgos"
     :puestoNombre ="puestoNombre"
     :puestoId="puestoId"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visibleRiesgos=false">
     </DialogRiesgosFromPuestos>
     <DialogEquiposFromPuestos
     :visible="visibleEquipos"
     :puestoNombre ="puestoNombre"
     :puestoId="puestoId"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visibleEquipos=false">
     </DialogEquiposFromPuestos>
     <v-snackbar
@@ -195,7 +200,7 @@ import DialogRiesgosFromPuestos from './Riesgos/DialogRiesgosFromPuestos'
 import DialogEquiposFromPuestos from './Equipos/DialogEquiposFromPuestos'
 // import index from '../router'
 export default {
-  props: [ 'puesto', 'areaId', 'editMode', 'deleteMode', 'index1', 'index2' ],
+  props: [ 'puesto', 'areaId', 'editMode', 'deleteMode', 'index1', 'index2', 'establecimientoName' ],
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },
   data () {
     return {

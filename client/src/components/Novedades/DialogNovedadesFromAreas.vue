@@ -6,7 +6,7 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Novedades Sin Atender</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > {{nombre}} > Novedades Sin Atender</v-toolbar-title>
       </v-toolbar>
       <br>
       <v-layout>
@@ -47,7 +47,7 @@
 const moment = require('moment')
 export default {
   name: 'DialogNovedadesFromAreas',
-  props: ['visible', 'nombre', 'areaId'],
+  props: ['visible', 'nombre', 'areaId', 'nombreEstablecimiento'],
   /* mounted () {
   }, */
   data () {

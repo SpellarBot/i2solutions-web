@@ -6,7 +6,7 @@
         <v-btn icon dark @click.native="show = false">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Equipos Por Puestos</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > Equipos Por Puestos</v-toolbar-title>
       </v-toolbar>
       <br>
       <v-layout>
@@ -192,7 +192,7 @@ import DialogEditarEquipos from '../Editar/DialogEditarEquipos'
 export default {
   components: { DialogEditarEquipos },
   name: 'DialogEquiposFromPuestos',
-  props: ['visible', 'puestoId', 'puestoNombre'],
+  props: ['visible', 'puestoId', 'puestoNombre', 'nombreEstablecimiento'],
   /* mounted () {
   }, */
   data () {

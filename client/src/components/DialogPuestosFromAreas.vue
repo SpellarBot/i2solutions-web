@@ -14,7 +14,7 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Área {{ this.areaNombre }}</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > Área {{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Puestos de trabajo</h1>
       <v-container grid-list-md>
@@ -163,7 +163,7 @@ export default {
       this.cargarData()
     }
   },
-  props: ['visible', 'areaId', 'areaNombre'],
+  props: ['visible', 'areaId', 'areaNombre', 'nombreEstablecimiento'],
   computed: {
     show: {
       get () {
