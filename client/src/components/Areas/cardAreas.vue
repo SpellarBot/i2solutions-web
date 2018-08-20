@@ -75,6 +75,21 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue" flat @click.native="eliminarDialogAreas = false">No</v-btn>
+            <v-btn v-if="novedades>0" :class="'eliminarAreas' + this.areaId" color="blue darken-1" flat @click.native = "dialogNovedad = true">Sí</v-btn>
+            <v-btn v-if="novedades===0" :class="'eliminarAreas' + this.areaId" color="blue darken-1" flat @click.native = "borrarArea()">Sí</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+    <v-layout row justify-center>
+      <v-dialog v-model="dialogNovedad" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">¡Atención!</v-card-title>
+          <v-card-text>Su área tiene {{novedades}} novedad(es) sin atender, si borra el área también se <b>perderá</b> esta información.
+          ¿Está seguro que quiere eliminar el área?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue" flat @click.native="eliminarDialogAreas = false; dialogNovedad = false">No</v-btn>
             <v-btn :class="'eliminarAreas' + this.areaId" color="blue darken-1" flat @click.native = "borrarArea()">Sí</v-btn>
           </v-card-actions>
         </v-card>
@@ -118,12 +133,14 @@
       :areaId="areaId"
       :nombre="nombre"
       :visible ="visibleNovedades"
+      :nombreEstablecimiento="estNombre"
       @close ="visibleNovedades=false">
     </DialogNovedadesFromAreas>
     <DialogEquiposFromAreas
       :areaId="areaId"
       :nombre="nombre"
       :visible ="visibleEquipos"
+      :nombreEstablecimiento="estNombre"
       @close ="visibleEquipos=false">
     </DialogEquiposFromAreas>
     <DialogRiesgosFromPuestos
@@ -134,6 +151,7 @@
       :visible="visiblePuestos"
       :areaId="areaId"
       :areaNombre="areaNombre"
+      :nombreEstablecimiento="estNombre"
       @close="visiblePuestos=false">
   </DialogPuestosFromAreas>
   <DialogEditarAreas
@@ -150,12 +168,14 @@
   :visible="visibleCapacitaciones"
   :areaId="areaId"
   :areaNombre="areaNombre"
+  :nombreEstablecimiento="estNombre"
   @close="visibleCapacitaciones=false">
 </DialogCapacitacionesFromAreas>
 <DialogPersonasFromAreas
   :visible="visiblePersonas"
   :areaId="areaId"
   :areaNombre="areaNombre"
+  :nombreEstablecimiento="estNombre" 
   @close="visiblePersonas=false">
 </DialogPersonasFromAreas>
   </footer>
@@ -178,7 +198,7 @@ import VueQr from 'vue-qr'
 export default{
   components: {DialogNovedadesFromAreas, DialogEquiposFromAreas, DialogRiesgosFromPuestos, DialogPuestosFromAreas, DialogCapacitacionesFromAreas, DialogEditarAreas, DialogPersonasFromAreas, agregarAreaDialog, VueQr},
   name: 'puestosPorArea',
-  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index', 'establecimientoId'],
+  props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index', 'establecimientoId', 'estNombre'],
   data () {
     return {
       dumb: false,
@@ -190,6 +210,7 @@ export default{
       agregarArea: false,
       eliminarDialogAreas: false,
       visiblePersonas: false,
+      dialogNovedad: false,
       areaId: '',
       areaNombre: '',
       areaActividad: '',

@@ -14,7 +14,7 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Área {{ this.areaNombre }}</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > Área {{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Personas: </h1>
       <v-layout align-center justify-center row>
@@ -123,6 +123,7 @@ import DialogEditarPersonas from './Editar/DialogEditarPersonas'
 const moment = require('moment')
 export default {
   components: { DialogEditarPersonas },
+  props: ['visible', 'areaId', 'areaNombre', 'nombreEstablecimiento'],
   data () {
     return {
       loading: false,
@@ -216,8 +217,7 @@ export default {
           this.mensajeSnackbar = err
         })
     }
-  },
-  props: ['visible', 'areaId', 'areaNombre'],
+  },  
   computed: {
     show: {
       get () {

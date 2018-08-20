@@ -136,8 +136,24 @@
           <v-card-text>¿Está seguro que quiere eliminar este establecimiento?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="eliminarEstablecimiento" color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
-            <v-btn color="blue" flat @click.native="eliminarDialog = false">No</v-btn>
+            <v-btn v-if="novedades>0"color="blue darken-1" flat @click="secondChance=true">Sí</v-btn>
+            <v-btn v-if="novedades===0" class="eliminarEstablecimiento" color="blue darken-1" flat @click = "borrarEstablecimiento()">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialog = false; novedades=0">No</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+    <!--Segunda oportunidad-->
+    <v-layout row justify-center>
+      <v-dialog v-model="secondChance" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>Su establecimiento tiene {{novedades}} novedad(es) sin atender, si borra el esteblecimiento también se <b>perderá</b> esta información.
+          ¿Está seguro que quiere eliminar el establecimiento?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn class="eliminarEstablecimiento" color="blue darken-1" flat @click = "borrarEstablecimiento();secondChance=false">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialog = false;secondChance = false; novedades=0">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -271,6 +287,7 @@ export default {
       error: null,
       valid: null,
       id: -1,
+      secondChance: false,
       mensajeSnackbar: '',
       color: '',
       snackbar: false,
@@ -286,6 +303,7 @@ export default {
       eliminarDialog2: false,
       agregarDialog: false,
       agregarArea: false,
+      novedades: 0,
       empresaNombre: '',
       empresaActividadComercial: '',
       empresaRazonSocial: '',
@@ -446,10 +464,11 @@ export default {
     },
     eliminarEstablecimiento (establecimiento) {
       this.establecimientoSelectedId = establecimiento.id
-      console.log('establecimiento: ', this.establecimientoSelectedId)
+      this.novedades = establecimiento.cantidadNovadadesSinAtender
       this.$data.eliminarDialog = true
     },
     borrarEstablecimiento () {
+      this.novedades = 0
       this.eliminarDialog = false
       let establecimientoId = this.establecimientoSelectedId
       let datos = { establecimientoId }

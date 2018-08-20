@@ -29,6 +29,7 @@
             :deleteMode = "deleteMode"
             :index1 = index1
             :index2 = index2
+            :establecimientoName = "establecimientoNombre"
             ></CardPuestos>
           </v-flex>
         </v-layout>

@@ -7,7 +7,7 @@
         <v-btn icon dark @click.native="closing()">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Área {{ this.areaNombre }}</v-toolbar-title>
+        <v-toolbar-title>{{nombreEstablecimiento}} > Área {{ this.areaNombre }}</v-toolbar-title>
       </v-toolbar>
       <h1>Capacitaciones: </h1>
       <v-spacer></v-spacer>
@@ -221,7 +221,7 @@ export default {
     }
   },
   name: 'DialogCapacitaciones',
-  props: ['visible', 'areaId', 'areaNombre'],
+  props: ['visible', 'areaId', 'areaNombre', 'nombreEstablecimiento'],
   computed: {
     show: {
       get () {

@@ -46,12 +46,14 @@
     :visible="visiblePersonas"
     :puestoId="puestoId"
     :puestoNombre="puestoNombre"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visiblePersonas=false"
     ></DialogPersonasFromPuestos>
     <DialogAccidentesFromPuestos
     :visible="visibleAccidentes"
     :puestoId="puestoId"
     :puestoNombre="puestoNombre"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visibleAccidentes=false"
     ></DialogAccidentesFromPuestos>
     <DialogEditarPuestos
@@ -61,12 +63,13 @@
     :puestoId="puestoId"
     :areaId="areaIdEdit"
     :editMode="editModes"
-    :puestoUrlFoto="puestoUrlFoto"
+    :puestoUrlFoto="puestoUrlFoto"    
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromPuestos
     :visible="visibleNovedades"
     :puestoNombre ="puestoNombre"
+    :nombreEstablecimiento = "establecimientoName"
     :puestoId="puestoId"
     @close="visibleNovedades=false">
     </DialogNovedadesFromPuestos>
@@ -74,12 +77,14 @@
     :visible="visibleRiesgos"
     :puestoNombre ="puestoNombre"
     :puestoId="puestoId"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visibleRiesgos=false">
     </DialogRiesgosFromPuestos>
     <DialogEquiposFromPuestos
     :visible="visibleEquipos"
     :puestoNombre ="puestoNombre"
     :puestoId="puestoId"
+    :nombreEstablecimiento = "establecimientoName"
     @close="visibleEquipos=false">
     </DialogEquiposFromPuestos>
     <v-snackbar
@@ -144,8 +149,24 @@
           <v-card-text>¿Está seguro que quiere eliminar este Puesto?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click = "borrarPuesto()">Sí</v-btn>
+            <v-btn v-if="puestos.cantidadNovedadesSinAtender>0" :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click="secondChance=true">Sí</v-btn>
+            <v-btn v-if="puestos.cantidadNovedadesSinAtender===0" :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click = "borrarPuesto()">Sí</v-btn>
             <v-btn color="blue" flat @click.native="eliminarDialogPuestos = false">No</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+    <!--Segunda oportunidad-->
+    <v-layout row justify-center>
+      <v-dialog v-model="secondChance" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Eliminar</v-card-title>
+          <v-card-text>Su puesto tiene {{puestos.cantidadNovedadesSinAtender}} novedad(es) sin atender, si borra el puesto también se <b>perderá</b> esta información.
+          ¿Está seguro que quiere eliminar el puesto?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn :class="'borrarPuesto' + this.puestoSelected" color="blue darken-1" flat @click = "borrarPuesto(); secondChance=false">Sí</v-btn>
+            <v-btn color="blue" flat @click.native="eliminarDialogPuestos = false;secondChance=false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -175,7 +196,7 @@ import DialogRiesgosFromPuestos from './Riesgos/DialogRiesgosFromPuestos'
 import DialogEquiposFromPuestos from './Equipos/DialogEquiposFromPuestos'
 // import index from '../router'
 export default {
-  props: [ 'puesto', 'areaId', 'editMode', 'deleteMode', 'index1', 'index2' ],
+  props: [ 'puesto', 'areaId', 'editMode', 'deleteMode', 'index1', 'index2', 'establecimientoName' ],
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },
   data () {
     return {
@@ -186,6 +207,7 @@ export default {
       visibleNovedades: false,
       visibleRiesgos: false,
       visibleEquipos: false,
+      secondChance: false,
       eliminarDialogPuestos: false,
       mensajeSnackbar: '',
       color: '',
