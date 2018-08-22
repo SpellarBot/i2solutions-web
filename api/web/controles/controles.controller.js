@@ -1,6 +1,13 @@
 const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear un control
+      * @param {json} datos - datos para crear un control
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -25,6 +32,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Crear un gran numero de control
+      * @param {json} datos - datos para crear una control
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     CrearBulk (datos) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -40,6 +54,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener controles por puestos
+      * @param {number} id - id del control
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorPuestos ({ id }) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -51,6 +72,14 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener controles por puesto y por riesgo
+      * @param {number} puestosId - id del puesto
+      * @param {number} riesgosId - id de riesgo
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorPuestosYRiesgos ({ puestosId, riesgosId }) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -62,6 +91,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Implmentar un control
+      * @param {number} controlesId - id del control
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Implementar ({ controlesId }) {
       return new Promise((resolve, reject) => {
         co(function * () {

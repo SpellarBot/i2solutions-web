@@ -1,6 +1,13 @@
 const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear un equipo
+      * @param {json} datos - datos para crear un equipo
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -23,6 +30,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener un equipo
+      * @param {number} id - id del equipo
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.equipos.Obtener({ id })
@@ -34,6 +48,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar un equipo
+      * @param {json} datos - datos de un equipo a actualizar
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.equipos.Actualizar(datos)
@@ -49,6 +70,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Anadir un puesto a un equipo
+      * @param {json} datos - ids de puestos y equipos
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     AnadirAPuesto (datos) {
       let { puestosId, equiposId } = datos
       return new Promise((resolve, reject) => {
@@ -79,6 +107,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Anadir a un area
+      * @param {json} datos - ids de ara y equipos
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     AnadirAArea (datos) {
       let { areasId, equiposId } = datos
       return new Promise((resolve, reject) => {
@@ -109,6 +144,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Borrrar un equipo
+      * @param {number} id - id del equipo
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         Promise.all([
@@ -131,6 +173,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener por areas
+      * @param {number} id - id del equipo
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorAreas ({ id }) {
       return new Promise((resolve, reject) => {
         db.equipos.ObtenerPorAreas({ id })
@@ -142,6 +191,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener accidentes por establecimiento
+      * @param {number} id - id del establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorPuestos ({ id }) {
       return new Promise((resolve, reject) => {
         db.equipos.ObtenerPorPuestos({ id })

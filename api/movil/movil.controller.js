@@ -1,5 +1,12 @@
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Obtener puestos de area de trabajo
+      * @param {number} id - id del puesto
+      * @return {json} respuestas para api
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     PuestosDeAreaTrabajo ({ id }) {
       return new Promise((resolve, reject) => {
         db.areas.ObtenerPuestos({ id })
@@ -11,6 +18,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Crear una novedad
+      * @param {json} json - datos de una novedad
+      * @return {json} respuestas para api
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     CrearNovedad (json) {
       let datos = arguments['0']
       return new Promise((resolve, reject) => {
@@ -23,6 +37,15 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Datos enviados al iniciar sesion en la aplicacion movil
+      * @param {number} puestosId - id del puesto
+      * @param {number} establecimientosId - id del establecimiento
+      * @param {number} areasId - id del area
+      * @return {json} respuestas para api
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     CargarDatos ({ puestosId, establecimientosId, areasId }) {
       return new Promise((resolve, reject) => {
         Promise.all([
@@ -124,6 +147,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener novedades sin atender
+      * @param {number} puestoId - id del puesto
+      * @return {json} respuestas para api
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerNovedadesSinAtender ({ puestoId }) {
       return new Promise((resolve, reject) => {
         db.novedades.ObtenerPorPuesto({ id: puestoId })

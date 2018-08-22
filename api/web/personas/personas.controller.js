@@ -3,6 +3,12 @@ let URL = process.env.NODE_ENV === 'production' ? 'https://i2s-app.herokuapp.com
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 
+/*
+  * Generar string aleatorio para url del cambio de clave
+  * @param {string} random string
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function genCrypto () {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(20, function (err, buf) {
@@ -16,6 +22,13 @@ function genCrypto () {
   })
 }
 
+/*
+  * Para pruebas de correo el development
+  * @param {string} correo - correo de la persona
+  * @param {string} url
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function enviarCorreoTest (correo, url) {
   return new Promise((resolve, reject) => {
     let transporter = nodemailer.createTransport({
@@ -50,6 +63,13 @@ function enviarCorreoTest (correo, url) {
   })
 }
 
+/*
+  * Enviar correo de gmail
+  * @param {string} correo - correo de la persona
+  * @param {string} url
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function enviarCorreoNodemailer (correo, url) {
   return new Promise((resolve, reject) => {
     // http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
@@ -129,6 +149,13 @@ function enviarCorreoNodemailer (correo, url) {
 
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear una persona
+      * @param {json} datos - datos para crear una persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -175,6 +202,12 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener todas las personas
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerTodos () {
       return new Promise((resolve, reject) => {
         db.personas.ObtenerTodos()
@@ -186,6 +219,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener una persona
+      * @param {number} id - id de la persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.personas.Obtener({ id })
@@ -197,6 +237,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar una persona
+      * @param {number} id - id del persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.personas.Actualizar(datos)
@@ -212,6 +259,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Borrrar una persona
+      * @param {number} id - eliminar una persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       // corroborar que se elimine de personasPuestos la tabla
       return new Promise((resolve, reject) => {
@@ -228,6 +282,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Anadir una persona
+      * @param {json} datos - ids de puestos y de persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     AnadirAPuesto (datos) {
       let { puestosId, personasId } = datos
       return new Promise((resolve, reject) => {
@@ -248,6 +309,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener todas la personas que pertenecen a un establecimiento
+      * @param {number} id - id de una persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerTodosPorEstablecimiento ({ id }) {
       return new Promise((resolve, reject) => {
         db.personas.ObtenerTodosPorEstablecimiento({ id })
@@ -259,6 +327,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener todas las personas por areas
+      * @param {number} id - id de la persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerTodosPorAreas ({ id }) {
       return new Promise((resolve, reject) => {
         db.personas.ObtenerTodosPorAreas({ id })
@@ -270,6 +345,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener todas las personas de un puesto
+      * @param {number} id - id del puesto
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerTodosPorPuestos ({ id }) {
       return new Promise((resolve, reject) => {
         db.personas.ObtenerTodosPorPuestos({ id })
@@ -281,6 +363,14 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Crear la clave de una persona
+      * @param {string} clave - clave que desea
+      * @param {string} token - token valido para cambio de clave
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     CrearClave ({ clave, token }) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -303,8 +393,14 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Camviar clave de una persona
+      * @param {string} correo - correo de la persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     CambioClave ({ correo }) {
-      console.log({ correo })
       return new Promise((resolve, reject) => {
         co(function * () {
           let personasExiste = false
@@ -340,6 +436,15 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Buscar por los parametros si estos existen
+      * @param {string} usuario - nombre del usuario
+      * @param {string} cedula -
+      * @param {string} correo -
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ExistenciaDe ({ usuario, cedula, correo }) {
       return new Promise((resolve, reject) => {
         co(function * () {

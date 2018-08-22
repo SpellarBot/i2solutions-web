@@ -4,6 +4,13 @@ if (process.env.NODE_ENV === 'testing') {
 }
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear un accidente
+      * @param {json} datos - datos para crear un accidente
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
@@ -21,6 +28,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener un accidente
+      * @param {number} id - id del accidente
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.accidentes.Obtener({ id })
@@ -32,6 +46,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar un accidente
+      * @param {json} datos - datos de un accidente a actualizar
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
@@ -53,6 +74,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Borrrar un accidente
+      * @param {number} id - eliminar un accidente
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         db.accidentes.Borrar({ id })
@@ -68,6 +96,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener accidentes por establecimiento
+      * @param {number} id - id del establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorEstablecimiento ({ id }) {
       return new Promise((resolve, reject) => {
         db.accidentes.ObtenerPorEstablecimiento({ id })
@@ -79,6 +114,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener accidentes por areas
+      * @param {number} id - id del areas
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorAreas ({ id }) {
       return new Promise((resolve, reject) => {
         db.accidentes.ObtenerPorAreas({ id })
@@ -90,6 +132,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener accidentes por puestos
+      * @param {number} id - id del puesto
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorPuestos ({ id }) {
       return new Promise((resolve, reject) => {
         db.accidentes.ObtenerPorPuestos({ id })

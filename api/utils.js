@@ -9,6 +9,13 @@ const saltos = 5 || process.env.SALT
 
 const responses = require('./responses')
 
+/*
+  * Verificar que los nombres sean validos
+  * @param {string} nombre o apellido de una persona
+  * @return {array} Validez y mensaje de error
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function verificarNombres (nombres) {
   let noValido = /[`~,.<>*;'¡?!-@^%:"/[\]|{}()=_+~#-\d]/.test(nombres)
   if (noValido) {
@@ -22,6 +29,14 @@ function verificarNombres (nombres) {
   }
 }
 
+/*
+  * Verificar ruc o cedula
+  * @param {string} cedula o ruc
+  * @param {string} tipo que puede ser: 'cedula' o 'ruc'
+  * @return {array} Validez y mensaje de error
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function verificadorCedulaRuc (identificacion, tipo) {
   if (tipo === 'cedula' && identificacion.length !== 10) {
     return [true, 'cedula debe ser de tamano debe ser 10']
@@ -156,6 +171,13 @@ function verificadorCedulaRuc (identificacion, tipo) {
   return [false, '']
 }
 
+/*
+  * Validar si una fecha es correcta como fecha de nacimiento
+  * @param {fecha} fecha
+  * @return {array} Validez y mensaje de error
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function fechaNacimiento (fecha) {
   let isValid = false
   try {
@@ -198,6 +220,11 @@ ajv.addKeyword('cedula', {
   errors: true
 })
 
+/*
+  * Crear ajv plugin para validar la fecha
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 ajv.addKeyword('fecha', {
   validate: function xyz (schema, data) {
     xyz.errors = []
@@ -216,6 +243,11 @@ ajv.addKeyword('fecha', {
   errors: true
 })
 
+/*
+  * Plugin ajv para validar fecha de nacimiento
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 ajv.addKeyword('fechaNacimiento', {
   validate: function xyz (schema, data) {
     xyz.errors = []
@@ -234,6 +266,11 @@ ajv.addKeyword('fechaNacimiento', {
   errors: true
 })
 
+/*
+  * Plugin ajv para validar los nombres
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 ajv.addKeyword('nombres', {
   validate: function xyz (schema, data) {
     xyz.errors = []
@@ -253,6 +290,16 @@ ajv.addKeyword('nombres', {
 })
 const nodemailer = require('nodemailer')
 module.exports = {
+  /*
+  * Enviar correo
+  * @param {string} correo
+  * @param {string} url
+  * @param {string} usuario
+  * @param {function} callback
+  * @return {function}
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+  */
   enviarCorreo (correo, url, usuario, fn) {
     const transporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
@@ -283,6 +330,13 @@ module.exports = {
       fn(true)
     })
   },
+  /*
+    * Validar si una fecha es correcta como fecha de nacimiento
+    * @param {string} clave - fecha
+    * @return {array} Validez y mensaje de error
+    * @creator: Joel Rodriguez
+    * @date: 22-08-2018
+  */
   genHash (clave) {
     return new Promise((resolve, reject) => {
       bcrypt.hash(clave, saltos, function (err, hash) {
@@ -294,10 +348,17 @@ module.exports = {
       })
     })
   },
+  /*
+    * Verificar si la clave es correcta
+    * @param {string} clave
+    * @param {string} hashDB - hash de la db
+    * @return {Promise} Verdadero o falses
+    * @creator: Joel Rodriguez
+    * @date: 22-08-2018
+  */
   verificarClave (clave, hashDB) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(clave, hashDB, function (err, res) {
-        console.log(res)
         if (err) {
           reject(err)
         } else {
@@ -306,12 +367,27 @@ module.exports = {
       })
     })
   },
+  /*
+    * Generar clave random
+    * @param {number} tamano - tamano que quiero el string
+    * @return {string}
+    * @creator: Joel Rodriguez
+    * @date: 22-08-2018
+  */
   random (tamano) {
     var text = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxjz'
     for (var i = 0; i < tamano; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
     return text
   },
+  /*
+    * Convertir propiedades json de string a integer
+    * @param {json} propiedades
+    * @param {array} array con las propiedades a ser convertidas
+    * @return {json} json convertido
+    * @creator: Joel Rodriguez
+    * @date: 22-08-2018
+  */
   jsonToInt (json, propiedades) {
     let datos = { }
     for (let propiedad of propiedades) {
@@ -324,6 +400,15 @@ module.exports = {
     }
     return datos
   },
+  /*
+    * Verificar token json
+    * @param {object} req - objeto req de expressjs
+    * @param {object} res - objeto res de expressjs
+    * @param {object} next - objeto next de expressjs
+    * @return {json} json para respuesta
+    * @creator: Joel Rodriguez
+    * @date: 22-08-2018
+  */
   verify (req, res, next) {
     let token = null
     let bits = req.headers.authorization.split(' ')
@@ -349,6 +434,14 @@ module.exports = {
     }
   },
   verificadorCedulaRuc,
+  /*
+    * Crear validador json schema
+    * @param {json} schema - json-schema con los valor validos para datos
+    * @param {json} datos - objeto res de expressjs
+    * @return {array} valido o no valido
+    * @creator: Joel Rodriguez
+    * @date: 22-08-2018
+  */
   schemaFormato (schema, datos) {
     const validate = ajv.compile(schema)
     validate(datos)

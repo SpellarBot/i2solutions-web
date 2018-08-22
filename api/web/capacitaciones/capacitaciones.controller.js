@@ -1,5 +1,13 @@
 const co = require('co')
 
+/*
+  * Anadir personas al json capacitaciones
+  * @param {array} personas - array de personas
+  * @param {array} capacitaciones - array de capacitaciones
+  * @return {array} capacitaciones con las personas
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 function agregarPersonasACapacitaciones (personas, capacitaciones) {
   let personasAgrupadas = {}
   for (let persona of personas) {
@@ -24,6 +32,14 @@ function agregarPersonasACapacitaciones (personas, capacitaciones) {
 
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear una persona
+      * Se enviar un correo para la creacion de la clave al correo cuando se crea
+      * @param {datos} personas - array de personas
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -46,6 +62,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener todas las persona
+      * @param {number} empresasId - id de la empresa
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerTodos ({ empresasId }) {
       return new Promise((resolve, reject) => {
         db.establecimientos.ObtenerPorEmpresas({ empresasId })
@@ -57,6 +80,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar una persona
+      * @param {json} datos - datos para actualizar una persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.capacitaciones.Actualizar(datos)
@@ -72,6 +102,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Borrar una persona
+      * @param {number} id - id de la persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         db.capacitaciones.Borrar({ id })
@@ -87,6 +124,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener una persona
+      * @param {number} id - id de la persona
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.capacitaciones.Obtener({ id })
@@ -98,6 +142,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener personas por establecimiento
+      * @param {number} id - id del establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorEstablecimiento ({ id }) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -115,6 +166,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener personas por area
+      * @param {number} id - id del area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorArea ({ id }) {
       return new Promise((resolve, reject) => {
         co(function * () {

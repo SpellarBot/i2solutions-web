@@ -4,6 +4,13 @@ const unstream = require('unstream')
 const _ = require('lodash')
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear una matriz
+      * @param {json} datos - datos para crear una matriz
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -24,6 +31,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener un establecimiento
+      * @param {number} id - id del establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorEstablecimiento ({ id }) {
       return new Promise((resolve, reject) => {
         co(function * () {
@@ -42,6 +56,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Descargar una matriz
+      * @param {number} id - id del establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Descargar ({ id }) {
       return new Promise((resolve, reject) => {
         co(function * () {

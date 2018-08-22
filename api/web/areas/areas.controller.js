@@ -1,6 +1,13 @@
 // const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear un area
+      * @param {json} datos - datos para crear un area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         db.areas.Crear(datos)
@@ -12,6 +19,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener un area
+      * @param {number} id - id del area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.areas.Obtener({ id })
@@ -23,6 +37,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener area por establecimiento
+      * @param {number} establecimientosId - id del establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorEstablecimiento ({ establecimientosId }) {
       return new Promise((resolve, reject) => {
         db.areas.ObtenerPorEstablecimiento({ establecimientosId })
@@ -34,6 +55,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar un area
+      * @param {json} datos - datos para actualizar de un area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.areas.Actualizar(datos)
@@ -49,6 +77,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Borrar un area
+      * @param {number} id - id del area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         db.areas.Borrar({ id })
@@ -64,6 +99,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener areas con puestos, esta divido por areas
+      * @param {number} id - id del area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerAreasConPuestos ({ id }) {
       return new Promise((resolve, reject) => {
         db.areas.ObtenerAreasConPuestosPorEstablecimiento({ id })
@@ -75,6 +117,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener areas
+      * @param {number} id - id del area
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerAreasDetalle ({ id }) {
       return new Promise((resolve, reject) => {
         db.areas.ObtenerAreasDetalle({ id })

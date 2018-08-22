@@ -1,6 +1,13 @@
 // const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear un establecimiento
+      * @param {json} datos - datos para crear un establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (datos) {
       return new Promise((resolve, reject) => {
         db.establecimientos.Crear(datos)
@@ -12,6 +19,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener todos los establecimientos
+      * @param {number} empresasId - id de la empresa
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerTodos ({ empresasId }) {
       return new Promise((resolve, reject) => {
         db.establecimientos.ObtenerPorEmpresas({ empresasId })
@@ -23,6 +37,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar un establecimiento
+      * @param {json} datos - datos de un establecimiento a actualizar
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       return new Promise((resolve, reject) => {
         db.establecimientos.Actualizar(datos)
@@ -38,6 +59,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Borrrar un establecimiento
+      * @param {number} id - eliminar un establecimiento
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         db.establecimientos.Borrar({ id })
@@ -53,6 +81,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener para vista principal
+      * @param {number} empresasId - id de la empresa
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     VistaPrincipal ({ empresasId }) {
       return new Promise((resolve, reject) => {
         db.establecimientos.VistaPrincipal({ empresasId })
@@ -64,6 +99,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Buscar por rucs
+      * @param {array} rucs - array de rucs
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     BuscarPor ({ rucs }) {
       return new Promise((resolve, reject) => {
         db.establecimientos.BuscarPorRucs({ rucs })

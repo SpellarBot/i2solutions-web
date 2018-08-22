@@ -1,6 +1,13 @@
 const co = require('co')
 module.exports = ({ responses, db }) => {
   const proto = {
+    /*
+      * Crear una novedad
+      * @param {json} datos - datos para crear una novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Crear (json) {
       let datos = arguments['0']
       let { puestosId } = datos
@@ -19,6 +26,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Obtener una novedad
+      * @param {number} id - id de la novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Obtener ({ id }) {
       return new Promise((resolve, reject) => {
         db.novedades.Obtener({ id })
@@ -30,6 +44,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Actualizar una novedad
+      * @param {number} id - id de la novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Actualizar (datos) {
       let { puestosId } = datos
       return new Promise((resolve, reject) => {
@@ -51,6 +72,13 @@ module.exports = ({ responses, db }) => {
         })
       })
     },
+    /*
+      * Borrar una novedad
+      * @param {number} id - id de la novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     Borrar ({ id }) {
       return new Promise((resolve, reject) => {
         db.novedades.Borrar({ id })
@@ -66,22 +94,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
-    // ActualizarEstadoNovedad ({ id, atendida, descripcionAtendida }) {
-    //   return new Promise((resolve, reject) => {
-    //     let datos = arguments['0']
-    //     db.novedades.Atender(datos)
-    //       .then((resp) => {
-    //         if (!resp) {
-    //           resolve(responses.NO_OK('La novedad con ese id no exite'))
-    //         } else {
-    //           resolve(responses.OK(true))
-    //         }
-    //       }).catch(err => {
-    //         console.error(err)
-    //         reject(responses.ERROR_SERVIDOR)
-    //       })
-    //   })
-    // },
+    /*
+      * Obtener una novedad por establecimiento
+      * @param {number} id - id de la novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorEstablecimientos ({ id }) {
       return new Promise((resolve, reject) => {
         db.novedades.ObtenerPorEstablecimiento({ id })
@@ -93,6 +112,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener una novedad por areas
+      * @param {number} id - id de la novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorAreas ({ id }) {
       return new Promise((resolve, reject) => {
         db.novedades.ObtenerPorAreas({ id })
@@ -104,6 +130,13 @@ module.exports = ({ responses, db }) => {
           })
       })
     },
+    /*
+      * Obtener una novedad por puestos
+      * @param {number} id - id de la novedad
+      * @return {json} mensaje de respuesta con formato
+      * @creator: Joel Rodriguez
+      * @date: 22-08-2018
+    */
     ObtenerPorPuestos ({ id }) {
       return new Promise((resolve, reject) => {
         db.novedades.ObtenerPorPuestos({ id })

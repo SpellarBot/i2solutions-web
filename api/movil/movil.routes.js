@@ -8,7 +8,12 @@ const app = express()
 
 const Controller = controller({ responses, db })
 
-// id: API_1
+/*
+  * Obtener los puestos de un area
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+  * @codigo: API_1
+*/
 app.route('/puestosDeUnArea/:areasId')
   .get((req, res) => {
     let { areasId } = req.params
@@ -22,7 +27,12 @@ app.route('/puestosDeUnArea/:areasId')
     })
   })
 
-// id: API_2
+/*
+  * Crear una novedad
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+  * @codigo: API_2
+*/
 app.route('/novedad')
   .post((req, res) => {
     let { descripcion, prioridad, fotoUrl, puestosId, inspeccionId } = req.body
@@ -35,7 +45,12 @@ app.route('/novedad')
     })
   })
 
-// id: API_3
+/*
+  * Obtener una novedad
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+  * @codigo: API_3
+*/
 app.route('/area/:areasId/puesto/:puestosId/:establecimientosId')
   .get((req, res) => {
     let { areasId, puestosId, establecimientosId } = req.params
@@ -48,7 +63,12 @@ app.route('/area/:areasId/puesto/:puestosId/:establecimientosId')
     })
   })
 
-// id: API_4
+/*
+  * Atender una novedad
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+  * @codigo: API_4
+*/
 app.route('/novedad/:novedadId')
   .put((req, res) => {
     const id = req.params['novedadId']
@@ -62,7 +82,12 @@ app.route('/novedad/:novedadId')
     })
   })
 
-// id: API_5
+/*
+  * Obtener novedades sin atender de un puesto
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+  * @codigo: API_5
+*/
 app.route('/novedadesSinAtender/:puestosId')
   .get((req, res) => {
     const { puestosId } = req.params
@@ -75,6 +100,11 @@ app.route('/novedadesSinAtender/:puestosId')
     })
   })
 
+/*
+  * Captar todas la rutas no validas
+  * @creator: Joel Rodriguez
+  * @date: 22-08-2018
+*/
 app.route('*')
   .get((req, res) => {
     res.json({datos: { mensaje: 'Url no valido' }, estado: false})
