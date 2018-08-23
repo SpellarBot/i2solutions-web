@@ -46,6 +46,7 @@ export default {
   components: { CardPuestos },
   data () {
     return {
+      //variables a ser usadas por el componente
       loading: false,
       valid: null,
       mensajeSnackbar: '',

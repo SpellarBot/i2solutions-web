@@ -283,6 +283,7 @@ export default {
   },
   data () {
     return {
+      //variables a usar por el componente
       loading: false,
       error: null,
       valid: null,
@@ -323,6 +324,7 @@ export default {
   },
   methods: {
     cargarDatos () {
+      //funcion para cargar los estableciminetos de la empresa. Recibe el id de la empresa y retorna la lista de establecimientos de la empresa
       console.log(this.$route.params.empresaId)
       this.error = this.valid = null
       this.loading = true
@@ -357,6 +359,7 @@ export default {
         })
     },
     obtenerAccidentes (establecimientosId) {
+      //funcion para ver los accidentes. Recibe el id del establecimiento y retorna la lista de accidentes
       this.$store.dispatch('getAccidentesFromEstablecimiento', establecimientosId)
         .then((resp) => {
           console.log('Done')
@@ -369,6 +372,7 @@ export default {
         })
     },
     verAreasPuestos (establecimientosId) {
+      //fucion para obtener areas y puestos. Recibe el id del establecimineto y retorna la lista de areas + puestos
       this.$store.dispatch('getPuestosFromEstablecimiento', establecimientosId)
         .then((resp) => {
           console.log('Done')
@@ -391,6 +395,7 @@ export default {
       this.verPersonas(establecimientoId)
     },
     verPersonas (establecimientoId) {
+      //funcion para obtener las personas de un establecimiento. Recibe el id del establecimiento y retorna la lista de personas de dicho establecimiento
       this.$store.dispatch('getPersonasFromEstablecimiento', establecimientoId)
         .then((resp) => {
           console.log('Done')

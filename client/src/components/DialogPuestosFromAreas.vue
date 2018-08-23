@@ -95,6 +95,7 @@ export default {
   components: { CardPuestos, agregarPuesto },
   data () {
     return {
+      //variables a ser usadas por el componente
       loading: false,
       valid: null,
       mensajeSnackbar: '',

@@ -126,6 +126,7 @@ export default {
   props: ['visible', 'areaId', 'areaNombre', 'nombreEstablecimiento'],
   data () {
     return {
+      //variables a ser usadas por el componente
       loading: false,
       valid: null,
       mensajeSnackbar: '',
@@ -175,6 +176,7 @@ export default {
       this.show = false
     },
     visualizarEditar (persona, fecha) {
+      //permite visualizar el cuadro de editar la persona seleccionada
       this.personaId = persona.id
       this.personaNombres = persona.nombres
       this.personaApellidos = persona.apellidos
@@ -193,6 +195,7 @@ export default {
       this.eliminarDialogPersona = true
     },
     borrarPersona () {
+      //borra la persona seleccionada del sistema y la quita de la lista
       this.eliminarDialogPersona = false
       let personasId = Number(this.personaId)
       this.$store.dispatch('deletePersona', personasId)
@@ -217,7 +220,7 @@ export default {
           this.mensajeSnackbar = err
         })
     }
-  },  
+  },
   computed: {
     show: {
       get () {

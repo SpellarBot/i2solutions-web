@@ -124,6 +124,7 @@ export default {
   components: { DialogEditarPersonas },
   data () {
     return {
+      //variables a ser usadas por el componente
       loading: false,
       valid: null,
       mensajeSnackbar: '',
@@ -173,6 +174,7 @@ export default {
       this.show = false
     },
     visualizarEditar (persona, fecha) {
+      //permite visualizar el cuadro de edición de personas con los datos de la persona seleccionada
       this.personaId = persona.id
       this.personaNombres = persona.nombres
       this.personaApellidos = persona.apellidos
@@ -191,6 +193,7 @@ export default {
       this.eliminarDialogPersona = true
     },
     borrarPersona () {
+      //borra los datos de la persona seleccionada del sistema y la remueve de la lista
       this.eliminarDialogPersona = false
       let personasId = Number(this.personaId)
       this.$store.dispatch('deletePersona', personasId)

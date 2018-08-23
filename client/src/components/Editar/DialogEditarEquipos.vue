@@ -92,6 +92,7 @@
 export default {
   data () {
     return {
+      //Valores a usar por el componente
       imageName: '',
       imageUrl: '',
       imageFile: '',
@@ -189,6 +190,7 @@ export default {
       }
     },
     edit () {
+      //Editar equipo, recibe el nombre, la descripción, la cantidad y opcionalmente la nueva foto. Al salir exitosamente edita los datos del equipo seleccionado.
       let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
       let cantidad = Number(this.$data.newCantidad)

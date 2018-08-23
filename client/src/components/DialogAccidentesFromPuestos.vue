@@ -180,6 +180,7 @@ export default {
   props: ['visible', 'puestoId', 'puestoNombre', 'nombreEstablecimiento'],
   data () {
     return {
+      //variables a usar por el componente
       valid: false,
       color: '',
       snackbar: false,
@@ -264,6 +265,7 @@ export default {
       this.$refs.menu.save(newDate)
     },
     crear () {
+      //funcion para crear un accidente. Recibe el nombre, descripcion, fecha, numero de heridos, numero de fallecidos, booleano de si el accidente fue atendido en la empresa y cuantos dias laborales se perdieron por culpa del accidente
       let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
       let fecha = moment(this.$data.newDate).format()

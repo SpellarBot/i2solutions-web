@@ -58,6 +58,7 @@ import router from '../../router'
 export default {
   data () {
     return {
+      //valores a manipular por el componente
       color: '',
       snackbar: false,
       mensajeSnackbar: '',
@@ -119,6 +120,7 @@ export default {
       this.obtenerEstablecimientos(value)
     },
     obtenerEstablecimientos (value) {
+      //funcion para obtener establecimientos, recibe como entrada la empresa y retorna la lista de establecimientos de la empresa
       this.$store.dispatch('getEstablecimientosFront', value)
         .then((resp) => {
           console.log('Done')
@@ -139,6 +141,7 @@ export default {
       this.obtenerMatricesRiesgo(value)
     },
     obtenerMatricesRiesgo (value) {
+      //Funcion para obtener las matrices de riesgo. Recibe como entrada un establecimiento, y retorna la lista de matrices de riesgo que se han realizado en ese establecimiento
       console.log(value)
       this.$store.dispatch('getMatricesRiesgo', value)
         .then((resp) => {
@@ -154,6 +157,7 @@ export default {
         })
     },
     descargarMatriz (matriz) {
+      //Funcion para descargar la matriz de riesgo. Recibe el id de la matriz de riesgo a descargar. Genera un excel que se descarga.
       let matricesId = matriz.id
       this.$store.dispatch('descargarMatrizRiesgo', matricesId)
         .then((resp) => {

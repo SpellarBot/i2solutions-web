@@ -40,18 +40,6 @@
               maxlength=100
               :counter=100
             ></v-text-field>
-            <!--v-text-field
-              v-model="newCedula"
-              :class="'cedulaPersona' + this.personaId"
-              label="Cédula"
-              maxlength=10
-              :rules="cedulaRules"
-              :error-messages="errors.collect('cedula')"
-              v-validate="'required | max:10'"
-              required
-              :counter=10
-              mask="#############"
-            ></v-text-field-->
             <v-text-field
             :class="'telefonoPersona' + this.personaId"
               v-model="newTelefono"
@@ -64,35 +52,6 @@
               required
               counter="10"
             ></v-text-field>
-            <!--v-menu
-            :class="'fechaPersona' + this.personaId"
-                ref="menu"
-                :close-on-content-click="false"
-                v-model="menu"
-                :nudge-right="40"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <v-text-field
-                  slot="activator"
-                  v-model="newDate"
-                  label="Fecha de Nacimiento"
-                  readonly
-                  required
-                  :rules="[rules.required]"
-                ></v-text-field>
-                <v-date-picker
-                  ref="picker"
-                  v-model="date"
-                  :max="new Date().toISOString().substr(0, 10)"
-                  min="1950-01-01"
-                  @change="save"
-                  :rules="[rules.required]"
-                ></v-date-picker>
-              </v-menu-->
               <v-text-field
               :class="'perfilPersona' + this.personaId"
               v-model="newPerfilOcupacional"
@@ -102,15 +61,6 @@
               maxlength=50
               :counter=50
             ></v-text-field>
-            <!--v-text-field
-            :class="'usuarioPersona' + this.personaId"
-              v-model="newUsuario"
-              label="Usuario"
-              required
-              :rules="[rules.required]"
-              maxlength=15
-              :counter=15
-            ></v-text-field-->
             </v-form>
         </v-card-text>
         <v-card-actions>
@@ -137,6 +87,7 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      //Variables a ser usadas por el componente
       date: null,
       menu: false,
       valid: false,
@@ -170,7 +121,7 @@ export default {
         v => (v && v.length >= 10) || 'La cédula debe tener 10 caracteres',
         v => (!Number.isNaN(parseInt(v))) || 'cédula no valida'
       ],
-      roles: [{
+      roles: [{ //Roles de los usuarios, por ahora solo puede escogerse 1 rol por usuario.
         value: 'jefe-seguridad',
         text: 'Jefe de Seguridad'
       },
@@ -229,6 +180,7 @@ export default {
       this.$refs.menu.save(date)
     },
     edit () {
+      //Edita la persona, recibe nombres, apellidos, correo, rol, telefono y perfil ocupacional. En caso de exito edita los datos de la persona seleccionada
       let nombres = this.$data.newNombres
       let apellidos = this.$data.newApellidos
       let cedula = this.personaCedula

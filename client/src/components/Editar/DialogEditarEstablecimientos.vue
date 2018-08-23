@@ -57,6 +57,7 @@ export default {
   props: ['visible', 'empresaId', 'establecimientoId', 'establecimientoNombres', 'establecimientoDireccion', 'establecimientoRUC'],
   data () {
     return {
+      //Variables a ser usadas por el componente
       valid: false,
       newNombres: '',
       newDireccion: '',
@@ -96,7 +97,6 @@ export default {
     },
     nombres: {
       get () {
-        // this.$data.newNombre = this.empresaNombre
         return this.establecimientoNombres
       },
       set (value) {
@@ -105,7 +105,6 @@ export default {
     },
     direccion: {
       get () {
-        // this.$data.newActividadComercial = this.empresaActividadComercial
         return this.establecimientoDireccion
       },
       set (value) {
@@ -114,7 +113,6 @@ export default {
     },
     ruc: {
       get () {
-        // this.$data.newRazonSocial = this.empresaRazonSocial
         return this.establecimientoRUC
       },
       set (value) {
@@ -124,12 +122,13 @@ export default {
   },
   methods: {
     edit () {
+      //Editar establecimiento, recibe el nombre, la dirección y el RUC. Al validar los datos, procede a editar la información del establecimiento seleccionado
       let nombres = this.$data.newNombres
       let direccion = this.$data.newDireccion
       let ruc = this.$data.newRUC
       let empresasId = this.empresaId
       let establecimientoId = this.establecimientoId
-      let validacionRuc = MyModule(ruc)
+      let validacionRuc = MyModule(ruc) //MyModule es la clase para validar RUCs y cédulas de ser el caso
       if (validacionRuc[0] === false) {
         this.snackbar = true
         this.mensajeSnackbar = validacionRuc[1]

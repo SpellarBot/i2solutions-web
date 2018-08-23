@@ -80,14 +80,6 @@
               :counter=10
               mask="##########"
             ></v-text-field>
-            <!--v-text-field
-              v-model="clave"
-              label="Clave"
-              prepend-icon="vpn_key"
-              required
-              :rules="[rules.required]"
-            ></v-text-field-->
-
             <v-text-field
               v-model="telefono"
               label="Télefono"
@@ -394,6 +386,7 @@ import Vue from 'vue'
 export default {
   data () {
     return {
+      //variables a ser usadas por el componente
       valid: false,
       valid1: false,
       valid2: false,
@@ -425,7 +418,7 @@ export default {
       color: '',
       snackbar: false,
       mensajeSnackbar: '',
-      roles: [{
+      roles: [{ //rples en el sistema
         value: 'jefe-seguridad',
         text: 'Jefe de Seguridad'
       },
@@ -489,6 +482,7 @@ export default {
       this.$refs.menu.save(date)
     },
     enviar () {
+      //metodo para crear persona. Recibe como entrada los nombre, apellidos, correo, cédula, telefono, fehca de nacimiento, ususario, perfil ocupacional, rol en el sistema y el id del puesto en el cual labora.
       let nombres = this.$data.nombre
       let apellidos = this.$data.apellido
       let correo = this.$data.correo
@@ -507,6 +501,7 @@ export default {
       let rol = this.$data.rol
       this.loadText = 'agregando a la persona...'
       this.loading = true
+      //valida la cedula del individuo
       if (this.validador_ruc_y_cedula(cedula)) {
         this.$store.dispatch('crearPersona', { nombres, apellidos, correo, cedula, clave, fechaNacimiento, telefono, perfilOcupacional, usuario, rol, puestosId })
           .then((resp) => {
@@ -524,6 +519,7 @@ export default {
       }
     },
     verificarUserMailCedula (user, mail, cedula, esEmpleado) {
+      //funcion para verificar el mail, el usuario, y la cédula
       if (esEmpleado) {
         user = cedula
       }
@@ -564,6 +560,7 @@ export default {
       })
     },
     continuar () {
+      //funcion para continuar con la siguiente parte del formulario. Verifica que todo esté correcto antes de proseguir
       let cedula = this.$data.cedula
       let usuario = this.$data.usuario
       let isEmployee = (this.rol === 'empleado')

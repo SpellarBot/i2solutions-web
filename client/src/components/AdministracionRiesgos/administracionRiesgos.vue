@@ -104,6 +104,7 @@
 export default {
   data () {
     return {
+      //Variables a manipular del componente
       valid: false,
       color: '',
       snackbar: false,
@@ -115,7 +116,7 @@ export default {
       visibleAgregar: false,
       newClasificacion: '',
       newDescripcion: '',
-      clasificaciones: [{
+      clasificaciones: [{ //Estas son las clasificaciones de riesgos existentes, se puede agregar si se cree necesario
         value: 'Biológico',
         text: 'Biológico'
       },
@@ -158,10 +159,11 @@ export default {
     }
   },
   mounted () {
-    this.cargarData()
+    this.cargarData() //Cargar los datos
   },
   methods: {
     crear () {
+      //Metodo para crear un nuevo riesgo, recibe la clasificación y la descripción del riesgo y lo agrega al pool de riesgos.
       let clasificacion = this.$data.newClasificacion
       let descripcion = this.$data.newDescripcion
       this.$store.dispatch('crearRiesgo', { clasificacion, descripcion })
@@ -185,6 +187,7 @@ export default {
         })
     },
     borrarRiesgo () {
+      //Funcion para borrar un riesgo del sistema
       this.eliminarDialogRiesgos = false
       let riesgosId = Number(this.riesgoSelected)
       this.$store.dispatch('deleteRiesgo', riesgosId)
@@ -203,14 +206,17 @@ export default {
         })
     },
     cargarData () {
+      //obtengo los datos de los riesgos
       this.riesgos = this.$store.getters.riesgos
     },
     eliminarRiesgo (riesgo) {
+      //funcion para conocer el indice del riesgo a borrar, para poder sacarlo de la tabla
       this.indexEliminar = this.riesgos.indexOf(riesgo)
       this.riesgoSelected = riesgo.id
       this.eliminarDialogRiesgos = true
     },
     reiniciar () {
+      //reinicia los formularios
       this.$data.valid = false
       this.$refs.form.reset()
     }

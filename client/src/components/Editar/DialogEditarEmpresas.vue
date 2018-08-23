@@ -83,6 +83,7 @@ export default {
   props: ['visible', 'empresaId', 'empresaNombre', 'empresaActividadComercial', 'empresaRazonSocial', 'empresaUrlFoto'],
   data () {
     return {
+      //Variables que manipula el componente
       valid: false,
       newNombre: '',
       newActividadComercial: '',
@@ -202,6 +203,7 @@ export default {
       }
     },
     edit () {
+      //metodo de edicion, recibe el nombre, actividad comercial, razon social, y opcionalmente la nueva foto a ingresarse. Al ser exitoso edita los datos de la empresa
       let nombre = this.$data.newNombre
       let actividadComercial = this.$data.newActividadComercial
       let razonSocial = this.$data.newRazonSocial

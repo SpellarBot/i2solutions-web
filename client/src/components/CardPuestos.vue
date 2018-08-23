@@ -63,7 +63,7 @@
     :puestoId="puestoId"
     :areaId="areaIdEdit"
     :editMode="editModes"
-    :puestoUrlFoto="puestoUrlFoto"    
+    :puestoUrlFoto="puestoUrlFoto"
     @close="visibleEdicion=false"
     ></DialogEditarPuestos>
     <DialogNovedadesFromPuestos
@@ -200,6 +200,7 @@ export default {
   components: { DialogPersonasFromPuestos, DialogAccidentesFromPuestos, DialogEditarPuestos, DialogNovedadesFromPuestos, DialogRiesgosFromPuestos, DialogEquiposFromPuestos },
   data () {
     return {
+      //variables a ser usadas por el componente
       visiblePersonas: false,
       visibleControles: false,
       visibleAccidentes: false,
@@ -261,6 +262,7 @@ export default {
       this.verPersonas()
     },
     verPersonas () {
+      //metodo para ver las personas de un puesto. Recibe de entrada el id del puesto y retorna la lista de personas que están laborando en ese puesto
       this.$store.dispatch('getPersonasFromPuesto', this.puestoId)
         .then((resp) => {
           console.log('Hecho')
@@ -278,6 +280,7 @@ export default {
       this.verAccidentes()
     },
     verAccidentes () {
+      //método para ver los accidentes de un puesto. Recibe de entrada el id del puesto y retorna la lista de personas que están laborando en ese puesto
       console.log(this.puestoId)
       this.$store.dispatch('getAccidentesFromPuesto', this.puestoId)
         .then((resp) => {
@@ -312,6 +315,7 @@ export default {
       }
     },
     verEquiposFromPuestos () {
+      //método para ver los equipos de seguridad de un puesto. Recibe el id de un puesto y retorna la lista de equipos para ese puesto
       this.$store.dispatch('getEquiposFromPuestos', this.puestoId)
         .then((resp) => {
           this.visibleEquipos = true
@@ -324,6 +328,7 @@ export default {
         })
     },
     visualizarControles (puestosId, puestosNombre) {
+      //método para ver los controles de un puesto. Recibe el id del puesto y retorna la lista de controles de ese puesto
       this.puestoNombreSelected = puestosNombre
       this.$store.dispatch('getControlesPuesto', puestosId)
         .then((resp) => {
@@ -339,6 +344,7 @@ export default {
         })
     },
     visualizarEditar (puesto, areaId) {
+      //Funcion que muestra el cuadro para editar el puesto seleccionado
       console.log(this.editModes)
       this.puestoNombre = puesto.nombre
       this.puestoDescripcion = puesto.descripcion
@@ -353,6 +359,7 @@ export default {
       this.eliminarDialogPuestos = true
     },
     borrarPuesto () {
+      //función para borrar un puesto. Recibe como entrada el id del puesto al borrar. Al eliminarlo, lo quita de la lista de puestos
       this.eliminarDialogPuestos = false
       let puestosId = Number(this.puestoSelected)
       console.log('idPuesto', puestosId)
@@ -388,6 +395,7 @@ export default {
       this.confirmarImplementar = true
     },
     implementarControl () {
+      //funcion para implementar controles. Recibe como entrada el control a implementar. En caso de éxito cambia el estado del control a implementado
       this.$store.dispatch('implementarControl', this.controlAImplementar.id)
         .then((resp) => {
           this.color = 'success'

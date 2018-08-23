@@ -191,6 +191,7 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      //Variables a ser manipuladas por el componente
       newTema: '',
       newDescripcion: '',
       newDate: null,
@@ -274,6 +275,8 @@ export default {
       this.$refs.menu.save(newDate)
     },
     crear () {
+      //crear capacitaciones.
+      //Recibe como entrada el tema de la capacitación, la descripción, la fecha que se dio, el nombre del capacitador, el área de la capacitación y la lista de personas capacitadas
       if (this.personas.length === 0) {
         this.color = 'error'
         this.snackbar = true

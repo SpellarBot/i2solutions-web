@@ -74,6 +74,7 @@
 export default {
   data () {
     return {
+      //Variables a ser usadas por el componente
       newNombre: '',
       newDescripcion: '',
       valid: false,
@@ -167,6 +168,7 @@ export default {
       }
     },
     edit () {
+      //recibe el nombre, descripcion y foto del puesto. En caso exitoso, edita los datos del puesto seleccionado
       let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
       let puestoId = this.puestoId

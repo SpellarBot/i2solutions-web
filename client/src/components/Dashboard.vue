@@ -110,6 +110,7 @@ export default {
       router.push('crearPersona')
     },
     verEmpresas () {
+      //carga las empresas del sistema. Retorna la lista de empresas
       this.$store.dispatch('getEmpresas')
         .then((resp) => {
           console.log('Done')
@@ -120,7 +121,7 @@ export default {
           this.mensajeSnackbar = err
         })
     },
-    verPersonas () {
+    /*verPersonas () {
       this.$store.dispatch('getPersonas')
         .then((resp) => {
           router.push('personas')
@@ -130,7 +131,7 @@ export default {
           this.snackbar = true
           this.mensajeSnackbar = err
         })
-    },
+    },*/
     crearEstablecimiento () {
       this.$store.dispatch('empresas')
       router.push('/crearEstablecimiento')

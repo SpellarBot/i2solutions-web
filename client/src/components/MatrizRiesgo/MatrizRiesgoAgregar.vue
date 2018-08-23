@@ -394,6 +394,7 @@ import router from '../../router'
 export default {
   data () {
     return {
+      //Variables a ser usadas por el componente
       color: '',
       snackbar: false,
       mensajeSnackbar: '',
@@ -426,23 +427,6 @@ export default {
         datos: null
       },
       riesgos: [],
-      controlesExistentes: [
-        {
-          riesgoId: 1,
-          tipo: 'fuente',
-          descripcion: 'Programa de pausas activas'
-        },
-        {
-          riesgoId: 1,
-          tipo: 'individuo',
-          descripcion: 'Capacitación al personal en autocuidado'
-        },
-        {
-          riesgoId: 1,
-          tipo: 'individuo',
-          descripcion: 'Capacitación en higiene postural'
-        }
-      ],
       controlesElegidos: {
         fuente: 'N.A.',
         medio: 'N.A.',
@@ -456,7 +440,7 @@ export default {
       NR: null,
       interpretacionNR: null,
       aceptabilidad: null,
-      NDList: [
+      NDList: [ //lista de niveles de deficiencia de riesgo, para matriz colombiana
         {
           text: 'Bajo (0)',
           value: 0
@@ -474,7 +458,7 @@ export default {
           value: 10
         }
       ],
-      NEList: [
+      NEList: [ //lista de niveles de exposición al riesgo, para matriz colombiana
         {
           text: 'Esporádica (1)',
           value: 1
@@ -492,7 +476,7 @@ export default {
           value: 4
         }
       ],
-      NCList: [
+      NCList: [ //lista de niveles de consecuencia de riesgo, para matriz colombiana
         {
           text: 'Leve (10)',
           value: 10
@@ -533,6 +517,7 @@ export default {
       this.obtenerEstablecimientos(value)
     },
     obtenerEstablecimientos (value) {
+      //obtener los establecimientos de la empresa seleccionada, recibe de entrada la empresa y de salida la lista de establecimientos de la empresa
       this.$store.dispatch('getEstablecimientosFront', value)
         .then((resp) => {
           console.log('Done')
@@ -553,6 +538,7 @@ export default {
       this.obtenerRiesgos()
     },
     obtenerAreasPuestos (value) {
+      //obtener las áreas y puestos de trabajo, recibe el establecimiento y retorna la lista de áreas y puestos de trabajo del establecimiento
       this.$store.dispatch('getPuestosFromEstablecimiento', value)
         .then((resp) => {
           this.areasYPuestos = this.$store.getters.areasPuestos
@@ -576,6 +562,7 @@ export default {
         })
     },
     obtenerRiesgos () {
+      //obtiene los riesgos que existen en el sistema
       this.$store.dispatch('getRiesgos')
         .then((resp) => {
           this.riesgos = this.$store.getters.riesgos
@@ -587,6 +574,7 @@ export default {
         })
     },
     agregarValoraciónInicial (area, puesto) {
+      //inicializa los datos para agregar valoraciones
       console.log(area)
       console.log(puesto)
       this.areaValoracion = area
@@ -597,6 +585,7 @@ export default {
       this.obtenerControlesExistentes()
     },
     obtenerControlesExistentes () {
+      //obtengo los controles existentes. Recibe de entrada el puesto y el riesgo, y retorna la lista de controles del puesto indicado para el riesgo indicado QUE HAYAN SIDO IMPLEMENTADOS
       let riesgosId = this.riesgoValoracion.id
       let puestosId = this.puestoValoracion.id
       this.$store.dispatch('getControlesPuestoRiesgo', { puestosId, riesgosId })
@@ -637,6 +626,7 @@ export default {
         })
     },
     regresar () {
+      //regresar a la ventana anterior
       this.controlesElegidos.fuente = 'N.A.'
       this.controlesElegidos.medio = 'N.A.'
       this.controlesElegidos.individuo = 'N.A.'
@@ -647,6 +637,7 @@ export default {
       this.stepper = 3
     },
     changeND: function (value) {
+      //funcion para calculo de indicadores de riesgo cuando cambia el nivel de deficiencia (ND)
       if (this.NE !== null) {
         this.NP = this.NE * value
         if (this.NP <= 4) {
@@ -677,6 +668,7 @@ export default {
       }
     },
     changeNE: function (value) {
+      //funcion para calculo de indices de riesgo cuando cambia el nivel de exposición (NE)
       if (this.ND !== null) {
         this.NP = value * this.ND
         if (this.NP <= 4) {
@@ -707,6 +699,7 @@ export default {
       }
     },
     changeNC: function (value) {
+      //funcion para cambiar indices de riesgo cuando cambia el nivel de consecuencia (NC)
       if (this.NP !== null) {
         this.NR = value * this.NP
         if (this.NR <= 20) {
@@ -735,6 +728,7 @@ export default {
     },
     avanzar3 () {
       if (this.numeroExpuestos > this.puestoValoracion.cantidadPersonas) {
+        //no permite que hayan más expuestos al riesgo que el numero de personas que trabaja en ese puesto... esto puede cambiarse/removerse
         this.color = 'error'
         this.snackbar = true
         this.mensajeSnackbar = 'La cantidad de expuestos es mayor a la cantidad de personas existentes en ese puesto.'
@@ -746,6 +740,9 @@ export default {
       this.stepper = 4
     },
     crearValoracion () {
+      //crea la valoracion.
+      //recibe el area, el puesto, el riesgo, los controles existentes, los indicadores de riesgo, los indicadores para nuevas medidas de control, y las nuevas medidas de control.
+      //Esto crea una fila en lo que es la matriz de riesgo.
       let areaNombre = this.areaValoracion.nombre
       let puestosId = this.puestoValoracion.id
       let riesgosId = this.riesgoValoracion.id
@@ -850,6 +847,7 @@ export default {
       this.resetAll()
     },
     resetAll () {
+      //funcion para reiniciar todos los formularios
       this.riesgoValoracion = null
       this.verDialogValoracion = false
       this.$data.valid = false
@@ -872,6 +870,8 @@ export default {
       this.verificar = false
     },
     crearMatriz () {
+      //funcion para crear la matriz de riesgo. Primero valida que haya hecho al menos una valoración de riesgo por cada puesto del establecimiento.
+      //Recibe la lista de valoraciones de riesgo y crea la matriz de riesgo, para poder ser descargada
       let puedoCrear = true
       for (let i = 0; i < this.validaciones.length; i++) {
         if (this.validaciones[i] === false) {
@@ -904,6 +904,7 @@ export default {
       }
     },
     verValoraciónInicial (area, puesto) {
+      //permite ver las valoracion que se han hecho.
       this.areaValoracion = area
       this.puestoValoracion = puesto
       for (let i = 0; i < this.valoraciones.length; i++) {
