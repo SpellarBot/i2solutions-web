@@ -88,6 +88,7 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      //Variables a manipular del componente
       newTema: '',
       newDescripcion: '',
       newDate: null,

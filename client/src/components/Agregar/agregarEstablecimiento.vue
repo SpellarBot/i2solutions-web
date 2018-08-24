@@ -79,6 +79,7 @@ export default {
 
   data () {
     return {
+      //Variables a manipular del componente
       indice: 1,
       instanciasAreas: [],
       establecimiento: {
@@ -145,7 +146,7 @@ export default {
         area.prueba()
       })
     },
-    verify () {
+    verify () { //Verifica si todo está ingresado correctamente en el establecimiento y sus 'hijos'
       if (!this.$refs.form2.validate()) {
         // Al primer error, el valor de verified se hace falso.
         this.$store.commit('setVerified', false)

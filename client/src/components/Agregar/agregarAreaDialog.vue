@@ -66,9 +66,10 @@ export default {
     }
   },
   mounted () {
-    this.insertarArea()
+    this.insertarArea() //Inserta un área
   },
   data () {
+    //Variables a manipular del componente
     return {
       instanciasAreas: [],
       indiceArea: 1,
@@ -77,7 +78,7 @@ export default {
     }
   },
   methods: {
-    insertarArea () {
+    insertarArea () { //Inserta un área en el DOM
       var AreaClass = Vue.extend(agregarArea)
       var instanceArea = new AreaClass({
         parent: this,
@@ -88,7 +89,7 @@ export default {
       instanceArea.$mount()
       this.$refs.areas.appendChild(instanceArea.$el)
     },
-    guardar () {
+    guardar () { //Guarda los valores en la base de datos
       let somethingWrong = false
       let Promise = require('bluebird')
       this.instanciasAreas.forEach(function (area) {

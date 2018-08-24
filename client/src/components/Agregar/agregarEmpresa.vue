@@ -230,10 +230,10 @@ export default {
     }
   },
   mounted () {
-    this.insertarArea()
+    this.insertarArea() //Agrega un área. pues el primer establecimiento es la matriz.
   },
   methods: {
-    insertarEstablecimiento () {
+    insertarEstablecimiento () { //Agrega un establecimiento
       //  Lo que queremos hacer aquí es crear una nueva clase para que luego pueda ser referenciado
       //  Vue.extend me permite crear una clase a partir de un componente
       var EstablecimientoClass = Vue.extend(agregarEstablecimiento)
@@ -251,7 +251,7 @@ export default {
       instanceEstablecimiento.$mount()
       this.$refs.establecimientos.appendChild(instanceEstablecimiento.$el)
     },
-    insertarArea () {
+    insertarArea () { //Agrega un área
       var AreaClass = Vue.extend(agregarArea)
       var instanceArea = new AreaClass({
         parent: this,
@@ -262,7 +262,7 @@ export default {
       instanceArea.$mount()
       this.$refs.areas.appendChild(instanceArea.$el)
     },
-    removeEstablecimiento () {
+    removeEstablecimiento () { //Elimina el último estableicmiento por crear
       this.indice--
       // Cojo el valor de la última instancia agregada
       var instanceEstablecimiento = this.instanciasEstablecimientos.pop()
@@ -271,14 +271,14 @@ export default {
       instanceEstablecimiento.$el.remove()
       instanceEstablecimiento = null
     },
-    removeArea () {
+    removeArea () { //Elimina el último área por crear
       this.indiceArea--
       var instanceArea = this.instanciasAreas.pop()
       instanceArea.$destroy()
       instanceArea.$el.remove()
       instanceArea = null
     },
-    guardar () {
+    guardar () { //Guarda
       let arrayRuc = []
       let arrayBool = {}
       let rucActual = ''
@@ -335,10 +335,10 @@ export default {
       }.bind(this))
       return false
     },
-    pickFile () {
+    pickFile () { //Permite abrr el buscador de la pc para buscaruna imagen
       this.$refs.image.click()
     },
-    onFilePicked (e) {
+    onFilePicked (e) { //Se obtiene la información del file seleccionado
       const files = e.target.files
       if (files[0] !== undefined) {
         this.imageName = files[0].name
@@ -357,6 +357,8 @@ export default {
         this.imageUrl = ''
       }
     },
+    //verifica si el RUC ya existe o no.
+    //objectRuc tiene almacenado True o False de acuerdo a si el RUC ya está agregado o no
     RUCbd (objectRuc, arrayRuc) {
       for (let ruc in objectRuc) {
         if (objectRuc[ruc]) {
@@ -366,7 +368,7 @@ export default {
         }
       }
     },
-    agregar () {
+    agregar () {//Agrega toda la información a la base de datos
       let nombre = this.empresa.nombre
       let actividadComercial = this.empresa.actividad
       let razonSocial = this.empresa.razon
@@ -417,7 +419,7 @@ export default {
       }
       return id
     },
-    cleaner () {
+    cleaner () { //Borra la información escrita
       this.imageName = ''
       this.imageUrl = ''
       this.imageFile = ''
@@ -451,6 +453,7 @@ export default {
   },
   data () {
     return {
+      //Variables a manipular del componente
       valid: true,
       indice: 1,
       indiceArea: 1,

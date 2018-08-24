@@ -1,4 +1,4 @@
-<template>
+  <template>
   <main id="DialogEditarEmpresas">
     <v-dialog v-model="show" @keydown.esc="show=false" persistent max-width="600px">
       <v-card>

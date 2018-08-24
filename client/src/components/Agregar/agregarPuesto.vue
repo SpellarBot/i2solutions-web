@@ -61,6 +61,7 @@ export default {
   props: ['index', 'indiceArea'],
   data () {
     return {
+      //Variables a manipular del componente
       indice: 1,
       nombre: '',
       imageName: '',
@@ -80,14 +81,14 @@ export default {
     }
   },
   methods: {
-    verify () {
+    verify () { //Verifica que todo esté bien escrito en el componente
       if (!this.$refs.form.validate()) {
         this.$store.commit('setVerified', false)
         return false
       }
       return true
     },
-    pickFile () {
+    pickFile () { //Abre para seleccionar lai magen
       this.$refs.image.click()
     },
     onFilePicked (e) {
@@ -109,7 +110,7 @@ export default {
         this.imageUrl = ''
       }
     },
-    crear (areaId) {
+    crear (areaId) { //Agrega la información a la base de datos
       let nombre = this.nombre
       let descripcion = this.descripcion
       let areasId = Number(areaId)

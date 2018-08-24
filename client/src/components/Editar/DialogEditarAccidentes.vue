@@ -99,6 +99,7 @@ const moment = require('moment')
 export default {
   data () {
     return {
+      //Variables a manipular del componente
       newNombre: '',
       newDescripcion: '',
       newDate: '',
@@ -153,7 +154,7 @@ export default {
     save (newDate) {
       this.$refs.menu.save(newDate)
     },
-    edit () {
+    edit () { //Permite editar los valores colocados
       let nombre = this.$data.newNombre
       let descripcion = this.$data.newDescripcion
       let fecha = moment(this.$data.newDate).format()

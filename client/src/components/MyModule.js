@@ -1,5 +1,4 @@
 export default function MyModule (numero) {
-  console.log(numero)
   var suma = 0
   var residuo = 0
   var pri = false
@@ -50,7 +49,6 @@ export default function MyModule (numero) {
   var d8 = numero.substr(7, 1)
   var d9 = numero.substr(8, 1)
   var d10 = numero.substr(9, 1)
-  console.log(d10)
 
   /* El tercer digito es: */
   /* 9 para sociedades privadas y extranjeros   */
@@ -103,11 +101,9 @@ export default function MyModule (numero) {
 
   suma = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9
   residuo = suma % modulo
-  console.log(p9)
   /* Si residuo=0, dig.ver.=0, caso contrario 10 - residuo */
   var digitoVerificador = residuo === 0 ? 0 : modulo - residuo
   /* ahora comparamos el elemento de la posicion 10 con el dig. ver. */
-  console.log(digitoVerificador)
   if (pub === true) {
     if (digitoVerificador !== parseInt(d9)) {
       // alert('El ruc de la empresa del sector público es incorrecto.')
@@ -128,7 +124,6 @@ export default function MyModule (numero) {
       return [false, 'El ruc de la empresa del sector privado debe terminar con 001']
     }
   } else if (nat === true) {
-    console.log({ digitoVerificador, d10 })
     if (digitoVerificador !== parseInt(d10)) {
       // alert('El número de cédula de la persona natural es incorrecto.')
       return [false, 'El número de cédula de la persona natural es incorrecto.']

@@ -82,6 +82,7 @@ export default {
   props: ['index', 'indiceEstablecimiento'],
   data () {
     return {
+      //Variables a manipular del componente
       indice: 1,
       instanciasPuesto: [],
       rules: {
@@ -99,10 +100,10 @@ export default {
     }
   },
   mounted () {
-    this.insertarPuesto()
+    this.insertarPuesto() //Inserta el primer puesto vacío
   },
   methods: {
-    insertarPuesto () {
+    insertarPuesto () { //Función que inserta el componente de puesto en el DOM
       var PuestoClass = Vue.extend(agregarPuesto)
       var instancePuesto = new PuestoClass({
         parent: this,
@@ -115,7 +116,7 @@ export default {
       instancePuesto.$mount()
       this.$refs.CompAreas.appendChild(instancePuesto.$el)
     },
-    removeEstablecimiento () {
+    removeEstablecimiento () { //Elimina el puesto del DOM y de la lista de puestos a agregar
       this.indice--
       // Cojo el valor de la última instancia agregada
       var instancePuesto = this.instanciasPuesto.pop()
@@ -124,7 +125,7 @@ export default {
       instancePuesto.$el.remove()
       instancePuesto = null
     },
-    cleaner () {
+    cleaner () { //Borra la infomrmación agregada por el usuario
       this.$refs.form.reset()
       this.instanciasPuesto.forEach(function (puestos) {
         puestos.$destroy()
@@ -132,15 +133,15 @@ export default {
         puestos = null
       })
     },
-    prueba () {
+    prueba () { //Función de prueba
       console.log('\tArea: ' + this.indiceEstablecimiento + '.' + this.index)
       this.instanciasPuesto.forEach(function (puesto) {
         puesto.prueba()
       })
     },
-    verify () {
+    verify () { //Verifica que toda la información del área y de los puestos haya sido llenado correctamente
       if (!this.$refs.form.validate()) {
-        this.$store.commit('setVerified', false)
+        this.$store.commit('setVerified', false) //Esta variable indicará si existió o no un error
       }
       this.instanciasPuesto.forEach(function (puesto) {
         puesto.verify()
@@ -152,11 +153,11 @@ export default {
         await instanciaArray[index].crear(Number(id))
       }
     },
-    crear (idEstablecimiento) {
+    crear (idEstablecimiento) { //Llama a agregar
       this.area.establecimientoId = idEstablecimiento
       this.agregar()
     },
-    agregar () {
+    agregar () { //agrega en la base de datos todos los valores del área con sus puestos
       let nombre = this.area.nombre
       let actividad = this.area.actividad
       let metrosCuadrados = this.area.metros2
@@ -168,7 +169,6 @@ export default {
             if (resp.body.estado) {
               const startPuestos = async () => {
                 this.asyncForEachCreator(this.instanciasPuesto, resp.body.datos.id)
-                console.log('agregando puestos')
               }
               startPuestos()
               return resolve()

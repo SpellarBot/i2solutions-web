@@ -121,10 +121,9 @@ export default {
   },
   mounted () {
     this.insertarEstablecimiento()
-    console.log('----> ' + this.idEmpresa + '<----')
   },
   methods: {
-    insertarEstablecimiento () {
+    insertarEstablecimiento () { //Agrega establecimiento al DOM
       //  Lo que queremos hacer aquí es crear una nueva clase para que luego pueda ser referenciado
       //  Vue.extend me permite crear una clase a partir de un componente
       var EstablecimientoClass = Vue.extend(agregarEstablecimiento)
@@ -142,7 +141,7 @@ export default {
       instanceEstablecimiento.$mount()
       this.$refs.establecimientos.appendChild(instanceEstablecimiento.$el)
     },
-    removeEstablecimiento () {
+    removeEstablecimiento () { //Elimina el último establecimiento colocado en el DOM
       this.indice--
       // Cojo el valor de la última instancia agregada
       var instanceEstablecimiento = this.instanciasEstablecimientos.pop()
@@ -151,7 +150,7 @@ export default {
       instanceEstablecimiento.$el.remove()
       instanceEstablecimiento = null
     },
-    cleaner () {
+    cleaner () { //Limpia los valores ingresados
       this.instanciasEstablecimientos.forEach(function (establecimiento) {
         establecimiento.$destroy()
         establecimiento.$el.remove()
@@ -160,7 +159,7 @@ export default {
       this.indice = 1
       this.insertarEstablecimiento()
     },
-    guardar () {
+    guardar () { //guarda la información en la base de datos
       let empresaId = this.idEmpresa
       let arrayRuc = []
       let arrayBool = {}
@@ -208,7 +207,7 @@ export default {
         await instanciaArray[index].crear(Number(id))
       }
     },
-    RUCbd (objectRuc, arrayRuc) {
+    RUCbd (objectRuc, arrayRuc) { //Verifica si el RUC ya existía en la base de datos
       for (let ruc in objectRuc) {
         if (objectRuc[ruc]) {
           this.$store.commit('setVerified', false)
@@ -217,7 +216,7 @@ export default {
         }
       }
     },
-    rucIngresado (ruc, arrayRuc) {
+    rucIngresado (ruc, arrayRuc) { //Verifica si el RUC ya ha sido ingresado por el usuario.
       arrayRuc.forEach(function (prueba) {
         if (prueba === ruc) {
           this.error.message = 'el RUC ' + ruc + ' es ingresado más de una vez'
@@ -228,7 +227,7 @@ export default {
       }.bind(this))
       return false
     },
-    agregar () {
+    agregar () { //Agregas el establecimiento a la base de datos.
       let id = this.idEmpresa
       const startEstablecimientos = async (instanciaArray, id) => {
         for (let index = 0; index < instanciaArray.length; index++) {
@@ -251,6 +250,7 @@ export default {
   },
   data () {
     return {
+      //Variables a manipular del componente
       valid: true,
       indice: 1,
       instanciasEstablecimientos: [],

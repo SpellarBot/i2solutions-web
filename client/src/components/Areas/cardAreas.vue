@@ -201,6 +201,7 @@ export default{
   props: ['id', 'nombre', 'actividad', 'descripcion', 'numPuestos', 'numPersonas', 'numCapacitaciones', 'novedades', 'equipos', 'areaMetrosCuadrados', 'fotoUrl', 'index', 'establecimientoId', 'estNombre'],
   data () {
     return {
+      //Variables a manipular del componente
       dumb: false,
       visibleNovedades: false,
       visibleEquipos: false,
@@ -227,7 +228,7 @@ export default{
     }
   },
   methods: {
-    visualizarEditar () {
+    visualizarEditar () { //Permite cargar la información para editar el área
       this.areaId = this.id
       this.areaActividad = this.actividad
       this.areaDescripcion = this.descripcion
@@ -244,10 +245,9 @@ export default{
       this.areaNombre = this.nombre
       this.verEquiposFromAreas()
     },
-    verEquiposFromAreas () {
+    verEquiposFromAreas () { //carga la cantidad de equipos que ay por área
       this.$store.dispatch('getEquiposFromAreas', this.areaId)
         .then((resp) => {
-          console.log('Done')
           this.visibleEquipos = true
         })
         .catch((err) => {
@@ -259,24 +259,23 @@ export default{
     visualizarRiesgos () {
       this.visibleRiesgos = true
     },
-    visualizarNovedadesFromAreas () {
+    visualizarNovedadesFromAreas () { //Carga el número de novedades que tiene el área
       this.areaId = this.id
       this.areaNombre = this.nombre
       this.visibleNovedades = true
     },
-    visualizarPuestosFromAreas (areaNombre) {
-      console.log(areaNombre)
+    visualizarPuestosFromAreas (areaNombre) { //Carga el número de puestos que tiene el área
       this.areaId = this.id
       this.areaNombre = areaNombre
       this.verPuestos(this.id)
       this.visiblePuestos = true
     },
-    visualizarPersonas (areaNombre) {
+    visualizarPersonas (areaNombre) { //Cara el número de personas que tiene le área
       this.areaId = this.id
       this.areaNombre = areaNombre
       this.verPersonas()
     },
-    verPersonas () {
+    verPersonas () { //Carga las personas que se encuentran en el área
       this.$store.dispatch('getPersonasFromArea', this.areaId)
         .then((resp) => {
           console.log('Done')
@@ -293,7 +292,7 @@ export default{
       this.areaNombre = areaNombre
       this.verCapacitaciones()
     },
-    verCapacitaciones () {
+    verCapacitaciones () { //Carga las capacitaciones que hay en esa área
       this.$store.dispatch('getCapacitacionesFromArea', this.areaId)
         .then((resp) => {
           console.log('Done')
@@ -305,7 +304,7 @@ export default{
           this.mensajeSnackbar = err
         })
     },
-    verPuestos (areaId) {
+    verPuestos (areaId) { //Carga los puestos por área.
       this.$store.dispatch('getPuestosFromArea', areaId)
         .then((resp) => {
           console.log('Done')
@@ -316,12 +315,12 @@ export default{
           this.mensajeSnackbar = err
         })
     },
-    eliminarArea () {
+    eliminarArea () { //Elimina el área de la base de datos
       this.areaId = this.id
       console.log('areaId', this.areaId)
       this.eliminarDialogAreas = true
     },
-    verQR (id) {
+    verQR (id) { //Carga un QR de acuerdo al id del área
       this.showQr = true
       this.QrId = id
       var qrClass = Vue.extend(VueQr)
@@ -336,12 +335,11 @@ export default{
     close () {
       this.showQr = false
       var instance = this.qrInstance
-      // c-elimina
       instance.$destroy()
       instance.$el.remove()
       instance = null
     },
-    borrarArea () {
+    borrarArea () { //Elimina el área
       this.eliminarDialogAreas = false
       let areasId = Number(this.id)
       console.log('idArea', areasId)
